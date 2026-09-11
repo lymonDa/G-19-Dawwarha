@@ -6,7 +6,9 @@ import mongoose from "mongoose";
 import app from "../../src/app.js";
 import User from "../../src/models/User.js";
 import Handover from "../../src/models/Handover.js";
+import Contribution from "../../src/models/Contribution.js";
 import handoverService from "../../src/services/handoverService.js";
+import contributionService from "../../src/services/contributionService.js";
 
 const JWT_SECRET = "test-jwt-secret-for-testing-only-12345";
 process.env.JWT_SECRET = JWT_SECRET;
@@ -303,16 +305,17 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
   });
 });
 
-describe("Real handoverService.confirm Integration Logic", () => {
+describe("Engineer 4 Step 3 — Handover Confirmation & Contribution Integration (Tests A - F)", () => {
   const providerId = new mongoose.Types.ObjectId().toString();
   const seekerId = new mongoose.Types.ObjectId().toString();
+  const thirdPartyId = new mongoose.Types.ObjectId().toString();
   const handoverId = new mongoose.Types.ObjectId().toString();
 
   beforeEach(() => {
     mock.restoreAll();
   });
 
-  test("Real Service: provider confirmation updates providerConfirmed without completing handover", async () => {
+  test("Test A — Provider confirmation: provider confirms → provider flag true, seeker flag false, status in_progress, NO Contribution", async () => {
     const fakeHandoverDoc = {
       _id: handoverId,
       providerId,
@@ -328,6 +331,11 @@ describe("Real handoverService.confirm Integration Logic", () => {
 
     mock.method(Handover, "findById", async () => fakeHandoverDoc);
 
+    let contributionRecorded = false;
+    mock.method(contributionService, "recordCompletedTransfer", async () => {
+      contributionRecorded = true;
+    });
+
     const updated = await handoverService.confirm(handoverId, "provider", providerId);
 
     assert.equal(updated.confirmedByProvider, true);
@@ -335,9 +343,10 @@ describe("Real handoverService.confirm Integration Logic", () => {
     assert.equal(updated.confirmedBySeeker, false);
     assert.equal(updated.status, "in_progress");
     assert.equal(updated.completedAt, null);
+    assert.equal(contributionRecorded, false, "Contribution must NOT be recorded when only provider confirms");
   });
 
-  test("Real Service: seeker confirmation subsequently completes the handover if provider confirmed", async () => {
+  test("Test B — Seeker confirmation: seeker confirms after provider → both flags true, status completed, completedAt exists, exactly ONE Contribution", async () => {
     const fakeHandoverDoc = {
       _id: handoverId,
       providerId,
@@ -353,6 +362,14 @@ describe("Real handoverService.confirm Integration Logic", () => {
 
     mock.method(Handover, "findById", async () => fakeHandoverDoc);
 
+    let contributionCalls = 0;
+    let handoverPassedToContribution = null;
+    mock.method(contributionService, "recordCompletedTransfer", async (handover) => {
+      contributionCalls++;
+      handoverPassedToContribution = handover;
+      return { _id: new mongoose.Types.ObjectId(), handoverId: handover._id };
+    });
+
     const updated = await handoverService.confirm(handoverId, "seeker", seekerId);
 
     assert.equal(updated.confirmedByProvider, true);
@@ -360,18 +377,55 @@ describe("Real handoverService.confirm Integration Logic", () => {
     assert.notEqual(updated.seekerConfirmedAt, null);
     assert.equal(updated.status, "completed");
     assert.notEqual(updated.completedAt, null);
+    assert.equal(contributionCalls, 1, "Exactly one Contribution must be recorded upon two-sided completion");
+    assert.equal(handoverPassedToContribution._id, handoverId);
+    assert.equal(handoverPassedToContribution.status, "completed");
   });
 
-  test("Real Service: duplicate confirmation is idempotent and does not overwrite timestamps", async () => {
+  test("Test C — Duplicate confirmation: same side confirms again → no duplicate Contribution, no duplicate stat increment, timestamp unchanged", async () => {
     const originalProviderTime = new Date("2026-09-01T10:00:00Z");
-    const fakeHandoverDoc = {
+    const originalSeekerTime = new Date("2026-09-01T10:05:00Z");
+    const originalCompletedTime = new Date("2026-09-01T10:05:00Z");
+
+    const fakeCompletedDoc = {
       _id: handoverId,
       providerId,
       seekerId,
       confirmedByProvider: true,
-      confirmedBySeeker: false,
+      confirmedBySeeker: true,
       providerConfirmedAt: originalProviderTime,
-      seekerConfirmedAt: null,
+      seekerConfirmedAt: originalSeekerTime,
+      status: "completed",
+      completedAt: originalCompletedTime,
+      async save() { return this; },
+    };
+
+    mock.method(Handover, "findById", async () => fakeCompletedDoc);
+
+    let contributionCalls = 0;
+    mock.method(contributionService, "recordCompletedTransfer", async () => {
+      contributionCalls++;
+    });
+
+    // Seeker confirms again on already-completed handover
+    const updatedSeeker = await handoverService.confirm(handoverId, "seeker", seekerId);
+    assert.equal(updatedSeeker.seekerConfirmedAt.getTime(), originalSeekerTime.getTime(), "Seeker timestamp must not change");
+    assert.equal(updatedSeeker.completedAt.getTime(), originalCompletedTime.getTime(), "completedAt timestamp must not change");
+    assert.equal(contributionCalls, 0, "No duplicate contribution call on re-confirmation");
+
+    // Provider confirms again on already-completed handover
+    const updatedProvider = await handoverService.confirm(handoverId, "provider", providerId);
+    assert.equal(updatedProvider.providerConfirmedAt.getTime(), originalProviderTime.getTime(), "Provider timestamp must not change");
+    assert.equal(contributionCalls, 0, "No duplicate contribution call on re-confirmation");
+  });
+
+  test("Test D — Third-party: third-party confirms → 403, no handover mutation, NO Contribution", async () => {
+    const fakeHandoverDoc = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+      confirmedByProvider: false,
+      confirmedBySeeker: false,
       status: "in_progress",
       completedAt: null,
       async save() { return this; },
@@ -379,14 +433,28 @@ describe("Real handoverService.confirm Integration Logic", () => {
 
     mock.method(Handover, "findById", async () => fakeHandoverDoc);
 
-    const updated = await handoverService.confirm(handoverId, "provider", providerId);
+    let contributionRecorded = false;
+    mock.method(contributionService, "recordCompletedTransfer", async () => {
+      contributionRecorded = true;
+    });
 
-    assert.equal(updated.confirmedByProvider, true);
-    assert.equal(updated.providerConfirmedAt.getTime(), originalProviderTime.getTime());
-    assert.equal(updated.status, "in_progress");
+    await assert.rejects(
+      async () => {
+        await handoverService.confirm(handoverId, "provider", thirdPartyId);
+      },
+      (err) => {
+        assert.equal(err.statusCode, 403);
+        assert.equal(err.code, "FORBIDDEN");
+        return true;
+      }
+    );
+
+    assert.equal(fakeHandoverDoc.confirmedByProvider, false);
+    assert.equal(fakeHandoverDoc.status, "in_progress");
+    assert.equal(contributionRecorded, false);
   });
 
-  test("Real Service: cancelled or no_show handover rejects with 409", async () => {
+  test("Test E — Cancelled: cancelled handover → 409, NO Contribution", async () => {
     const fakeCancelledDoc = {
       _id: handoverId,
       providerId,
@@ -396,6 +464,11 @@ describe("Real handoverService.confirm Integration Logic", () => {
     };
 
     mock.method(Handover, "findById", async () => fakeCancelledDoc);
+
+    let contributionRecorded = false;
+    mock.method(contributionService, "recordCompletedTransfer", async () => {
+      contributionRecorded = true;
+    });
 
     await assert.rejects(
       async () => {
@@ -408,5 +481,181 @@ describe("Real handoverService.confirm Integration Logic", () => {
         return true;
       }
     );
+
+    assert.equal(contributionRecorded, false);
+  });
+
+  test("Test F — No-show: no_show handover → 409, NO Contribution", async () => {
+    const fakeNoShowDoc = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+      status: "no_show",
+      async save() { return this; },
+    };
+
+    mock.method(Handover, "findById", async () => fakeNoShowDoc);
+
+    let contributionRecorded = false;
+    mock.method(contributionService, "recordCompletedTransfer", async () => {
+      contributionRecorded = true;
+    });
+
+    await assert.rejects(
+      async () => {
+        await handoverService.confirm(handoverId, "seeker", seekerId);
+      },
+      (err) => {
+        assert.equal(err.statusCode, 409);
+        assert.equal(err.code, "HANDOVER_INACTIVE");
+        assert.equal(err.message, "This handover is no longer active.");
+        return true;
+      }
+    );
+
+    assert.equal(contributionRecorded, false);
+  });
+});
+
+describe("Engineer 4 — contributionService.recordCompletedTransfer Unit Tests", () => {
+  const providerId = new mongoose.Types.ObjectId().toString();
+  const seekerId = new mongoose.Types.ObjectId().toString();
+  const handoverId = new mongoose.Types.ObjectId().toString();
+  const categoryId = new mongoose.Types.ObjectId().toString();
+
+  beforeEach(() => {
+    mock.restoreAll();
+  });
+
+  test("recordCompletedTransfer: creates Contribution document and increments user stats and reputation", async () => {
+    const fakeHandover = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+      categoryId,
+      quantity: 2,
+    };
+
+    // No existing contribution
+    mock.method(Contribution, "findOne", async () => null);
+
+    let createdData = null;
+    mock.method(Contribution, "create", async (data) => {
+      createdData = data;
+      return { _id: new mongoose.Types.ObjectId(), ...data };
+    });
+
+    const userUpdates = [];
+    mock.method(User, "findByIdAndUpdate", async (userId, update) => {
+      userUpdates.push({ userId, update });
+      return { _id: userId };
+    });
+
+    const result = await contributionService.recordCompletedTransfer(fakeHandover);
+
+    // Contribution record verification
+    assert.equal(createdData.type, "transfer_completed");
+    assert.equal(createdData.handoverId, handoverId);
+    assert.equal(createdData.providerId, providerId);
+    assert.equal(createdData.seekerId, seekerId);
+    assert.equal(createdData.categoryId, categoryId);
+    assert.equal(createdData.quantity, 2);
+
+    // User stat counter and reputation score verification
+    assert.equal(userUpdates.length, 2);
+    assert.equal(userUpdates[0].userId, providerId);
+    assert.deepEqual(userUpdates[0].update, {
+      $inc: {
+        "stats.completedTransfers": 1,
+        reputationScore: 10,
+        "stats.reputationScore": 10,
+      },
+    });
+    assert.equal(userUpdates[1].userId, seekerId);
+    assert.deepEqual(userUpdates[1].update, {
+      $inc: {
+        "stats.completedTransfers": 1,
+        reputationScore: 10,
+        "stats.reputationScore": 10,
+      },
+    });
+
+    assert.equal(result.handoverId, handoverId);
+  });
+
+  test("recordCompletedTransfer: duplicate safety — returns existing Contribution without duplicate insert or stat increment", async () => {
+    const existingContribution = {
+      _id: new mongoose.Types.ObjectId(),
+      type: "transfer_completed",
+      handoverId,
+      providerId,
+      seekerId,
+      quantity: 1,
+    };
+
+    // Contribution already exists for this handover
+    mock.method(Contribution, "findOne", async () => existingContribution);
+
+    let createCalled = false;
+    mock.method(Contribution, "create", async () => {
+      createCalled = true;
+    });
+
+    let userUpdateCalled = false;
+    mock.method(User, "findByIdAndUpdate", async () => {
+      userUpdateCalled = true;
+    });
+
+    const fakeHandover = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+    };
+
+    const result = await contributionService.recordCompletedTransfer(fakeHandover);
+
+    assert.equal(result, existingContribution);
+    assert.equal(createCalled, false, "Contribution.create must NOT be called when contribution already exists");
+    assert.equal(userUpdateCalled, false, "User stats must NOT be incremented when contribution already exists");
+  });
+
+  test("recordCompletedTransfer: handles duplicate key error (code 11000) under concurrent confirmation calls", async () => {
+    let findCount = 0;
+    const existingContribution = {
+      _id: new mongoose.Types.ObjectId(),
+      type: "transfer_completed",
+      handoverId,
+      providerId,
+      seekerId,
+    };
+
+    mock.method(Contribution, "findOne", async () => {
+      findCount++;
+      // Return null on initial check, but return doc on recovery check
+      return findCount === 1 ? null : existingContribution;
+    });
+
+    // Simulate concurrent insert hitting unique index conflict
+    mock.method(Contribution, "create", async () => {
+      const err = new Error("E11000 duplicate key error collection");
+      err.code = 11000;
+      throw err;
+    });
+
+    let userUpdateCalled = false;
+    mock.method(User, "findByIdAndUpdate", async () => {
+      userUpdateCalled = true;
+    });
+
+    const fakeHandover = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+    };
+
+    const result = await contributionService.recordCompletedTransfer(fakeHandover);
+
+    assert.equal(result, existingContribution);
+    assert.equal(userUpdateCalled, false, "User stats must not be incremented on duplicate key recovery");
   });
 });

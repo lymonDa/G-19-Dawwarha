@@ -1,4 +1,5 @@
 import Handover from "../models/Handover.js";
+import contributionService from "./contributionService.js";
 
 const makeError = (statusCode, code, message) =>
   Object.assign(new Error(message), { statusCode, code });
@@ -34,6 +35,8 @@ export async function confirm(handoverId, side, userId) {
     throw makeError(400, "INVALID_SIDE", "Invalid confirmation side.");
   }
 
+  const wasCompletedBefore = handover.status === "completed";
+
   if (handover.confirmedByProvider && handover.confirmedBySeeker) {
     handover.status = "completed";
     if (!handover.completedAt) {
@@ -41,8 +44,15 @@ export async function confirm(handoverId, side, userId) {
     }
   }
 
-  return handover.save();
+  const savedHandover = await handover.save();
+
+  if (savedHandover.status === "completed" && !wasCompletedBefore) {
+    await contributionService.recordCompletedTransfer(savedHandover);
+  }
+
+  return savedHandover;
 }
 
 const handoverService = { confirm };
 export default handoverService;
+
