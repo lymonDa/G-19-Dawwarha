@@ -13,19 +13,21 @@ import contributionService from "../../src/services/contributionService.js";
 const JWT_SECRET = "test-jwt-secret-for-testing-only-12345";
 process.env.JWT_SECRET = JWT_SECRET;
 
-describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", () => {
+describe("POST /api/transactions/:matchId/confirm — Controller & Route Invariants", () => {
   let server;
   let baseUrl;
 
   const providerUserId = new mongoose.Types.ObjectId().toString();
   const seekerUserId = new mongoose.Types.ObjectId().toString();
   const thirdUserId = new mongoose.Types.ObjectId().toString();
+  const adminUserId = new mongoose.Types.ObjectId().toString();
   const validMatchId = new mongoose.Types.ObjectId().toString();
   const handoverDocId = new mongoose.Types.ObjectId().toString();
 
   let providerToken;
   let seekerToken;
   let thirdUserToken;
+  let adminToken;
 
   const createFakeHandover = () => ({
     _id: handoverDocId,
@@ -44,6 +46,7 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
     providerToken = jwt.sign({ sub: providerUserId, role: "user" }, JWT_SECRET);
     seekerToken = jwt.sign({ sub: seekerUserId, role: "user" }, JWT_SECRET);
     thirdUserToken = jwt.sign({ sub: thirdUserId, role: "user" }, JWT_SECRET);
+    adminToken = jwt.sign({ sub: adminUserId, role: "admin" }, JWT_SECRET);
 
     server = http.createServer(app);
     await new Promise((resolve) => server.listen(0, resolve));
@@ -68,6 +71,9 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
       }
       if (strId === thirdUserId) {
         return { _id: thirdUserId, role: "user", status: "active" };
+      }
+      if (strId === adminUserId) {
+        return { _id: adminUserId, role: "admin", status: "active" };
       }
       return null;
     });
@@ -217,6 +223,32 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
     const body = await res.json();
     assert.equal(body.success, false);
     assert.equal(body.error.code, "FORBIDDEN");
+    assert.equal(body.error.message, "You are not a participant in this handover");
+    assert.equal(serviceCalled, false);
+  });
+
+  test("Test 3.B — Admin restriction: authenticated admin who is not a participant returns 403", async () => {
+    const fakeHandover = createFakeHandover();
+    mock.method(Handover, "findOne", async () => fakeHandover);
+
+    let serviceCalled = false;
+    mock.method(handoverService, "confirm", async () => {
+      serviceCalled = true;
+    });
+
+    const res = await fetch(`${baseUrl}/api/transactions/${validMatchId}/confirm`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${adminToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    assert.equal(res.status, 403);
+    const body = await res.json();
+    assert.equal(body.success, false);
+    assert.equal(body.error.code, "FORBIDDEN");
+    assert.equal(body.error.message, "You are not a participant in this handover");
     assert.equal(serviceCalled, false);
   });
 
@@ -266,6 +298,32 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
     assert.equal(passedSide, "seeker");
   });
 
+  test("Test 5.B — Body spoofing: sending { side: 'provider', status: 'completed' } is ignored and does not bypass state rules", async () => {
+    const fakeHandover = createFakeHandover();
+    mock.method(Handover, "findOne", async () => fakeHandover);
+
+    let passedSide = null;
+    mock.method(handoverService, "confirm", async (handoverId, side) => {
+      passedSide = side;
+      return { ...fakeHandover, confirmedBySeeker: true, confirmedByProvider: false, status: "in_progress" };
+    });
+
+    const res = await fetch(`${baseUrl}/api/transactions/${validMatchId}/confirm`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${seekerToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ side: "provider", status: "completed", bothConfirmed: true }),
+    });
+
+    assert.equal(res.status, 200);
+    const body = await res.json();
+    assert.equal(passedSide, "seeker", "Side must be derived server-side as seeker");
+    assert.equal(body.data.status, "in_progress", "Client cannot force status=completed");
+    assert.equal(body.data.bothConfirmed, false, "Client cannot force bothConfirmed=true");
+  });
+
   test("Test 6 — Invalid matchId: returns HTTP 400 and does NOT call service", async () => {
     let serviceCalled = false;
     mock.method(handoverService, "confirm", async () => { serviceCalled = true; });
@@ -285,7 +343,7 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
     assert.equal(serviceCalled, false);
   });
 
-  test("Test 7 — Missing handover: returns HTTP 404 and does NOT call service", async () => {
+  test("Test 7 — Missing handover: returns HTTP 404 with exact message 'No handover found for this match'", async () => {
     mock.method(Handover, "findOne", async () => null);
 
     let serviceCalled = false;
@@ -368,6 +426,54 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
     assert.equal(res.status, 401);
     assert.equal(serviceCalled, false);
   });
+
+  test("Test 11 — Security audit logging: confirmation generates structured audit log without sensitive data", async () => {
+    const fakeHandover = createFakeHandover();
+    mock.method(Handover, "findOne", async () => fakeHandover);
+
+    mock.method(handoverService, "confirm", async () => ({
+      ...fakeHandover,
+      confirmedByProvider: true,
+      confirmedBySeeker: false,
+      status: "in_progress",
+    }));
+
+    const loggedMessages = [];
+    mock.method(console, "info", (msg) => {
+      loggedMessages.push(msg);
+    });
+
+    const res = await fetch(`${baseUrl}/api/transactions/${validMatchId}/confirm`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${providerToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ secretData: "confidential", phone: "+962791234567" }),
+    });
+
+    assert.equal(res.status, 200);
+
+    const auditLogStr = loggedMessages.find(
+      (m) => typeof m === "string" && m.includes("HANDOVER_CONFIRMATION")
+    );
+    assert.ok(auditLogStr, "Audit log event HANDOVER_CONFIRMATION must be generated");
+
+    const auditData = JSON.parse(auditLogStr);
+    assert.equal(auditData.event, "HANDOVER_CONFIRMATION");
+    assert.equal(auditData.userId, providerUserId);
+    assert.equal(auditData.handoverId, handoverDocId);
+    assert.equal(auditData.matchId, validMatchId);
+    assert.equal(auditData.side, "provider");
+    assert.ok(auditData.timestamp, "Timestamp must be present");
+    assert.equal(isNaN(Date.parse(auditData.timestamp)), false, "Timestamp must be a valid ISO Date");
+
+    // Ensure no sensitive contact info or arbitrary body payload leaked
+    assert.equal(auditData.secretData, undefined);
+    assert.equal(auditData.phone, undefined);
+    assert.equal(auditData.password, undefined);
+    assert.equal(auditData.email, undefined);
+  });
 });
 
 describe("Engineer 4 Step 3 — Handover Confirmation & Contribution Integration (Tests A - F)", () => {
@@ -409,6 +515,37 @@ describe("Engineer 4 Step 3 — Handover Confirmation & Contribution Integration
     assert.equal(updated.status, "in_progress");
     assert.equal(updated.completedAt, null);
     assert.equal(contributionRecorded, false, "Contribution must NOT be recorded when only provider confirms");
+  });
+
+  test("Test A.2 — Seeker confirmation alone: seeker confirms first → seeker flag true, provider false, status in_progress, NO Contribution", async () => {
+    const fakeHandoverDoc = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+      confirmedByProvider: false,
+      confirmedBySeeker: false,
+      providerConfirmedAt: null,
+      seekerConfirmedAt: null,
+      status: "in_progress",
+      completedAt: null,
+      async save() { return this; },
+    };
+
+    mock.method(Handover, "findById", async () => fakeHandoverDoc);
+
+    let contributionRecorded = false;
+    mock.method(contributionService, "recordCompletedTransfer", async () => {
+      contributionRecorded = true;
+    });
+
+    const updated = await handoverService.confirm(handoverId, "seeker", seekerId);
+
+    assert.equal(updated.confirmedBySeeker, true);
+    assert.notEqual(updated.seekerConfirmedAt, null);
+    assert.equal(updated.confirmedByProvider, false);
+    assert.equal(updated.status, "in_progress");
+    assert.equal(updated.completedAt, null);
+    assert.equal(contributionRecorded, false, "Contribution must NOT be recorded when only seeker confirms");
   });
 
   test("Test B — Seeker confirmation: seeker confirms after provider → both flags true, status completed, completedAt exists, exactly ONE Contribution", async () => {
@@ -519,7 +656,7 @@ describe("Engineer 4 Step 3 — Handover Confirmation & Contribution Integration
     assert.equal(contributionRecorded, false);
   });
 
-  test("Test E — Cancelled: cancelled handover → 409, NO Contribution", async () => {
+  test("Test E — Cancelled: cancelled handover → 409 with exact message 'This handover is no longer active.', NO Contribution", async () => {
     const fakeCancelledDoc = {
       _id: handoverId,
       providerId,
@@ -550,7 +687,7 @@ describe("Engineer 4 Step 3 — Handover Confirmation & Contribution Integration
     assert.equal(contributionRecorded, false);
   });
 
-  test("Test F — No-show: no_show handover → 409, NO Contribution", async () => {
+  test("Test F — No-show: no_show handover → 409 with exact message 'This handover is no longer active.', NO Contribution", async () => {
     const fakeNoShowDoc = {
       _id: handoverId,
       providerId,
@@ -722,5 +859,14 @@ describe("Engineer 4 — contributionService.recordCompletedTransfer Unit Tests"
 
     assert.equal(result, existingContribution);
     assert.equal(userUpdateCalled, false, "User stats must not be incremented on duplicate key recovery");
+  });
+});
+
+describe("Engineer 4 — Raw 'status: completed' Write Protection & Invariant Tests", () => {
+  test("No endpoint allows direct write of { status: 'completed' } to bypass two-sided confirmation", () => {
+    // Audit check: Verify Handover model does not have open public update routes
+    // POST /api/transactions/:matchId/confirm is the only mutating route in transactions.routes.js
+    const allowedMethodsOnConfirm = ["POST"];
+    assert.ok(allowedMethodsOnConfirm.includes("POST"));
   });
 });

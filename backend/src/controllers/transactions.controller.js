@@ -41,6 +41,17 @@ export async function confirm(req, res, next) {
 
     const updatedHandover = await handoverService.confirm(handover._id, side, req.user._id);
 
+    console.info(
+      JSON.stringify({
+        event: "HANDOVER_CONFIRMATION",
+        userId,
+        handoverId: handover._id,
+        matchId,
+        side,
+        timestamp: new Date().toISOString(),
+      })
+    );
+
     const bothConfirmed = Boolean(
       updatedHandover.confirmedByProvider &&
       updatedHandover.confirmedBySeeker
