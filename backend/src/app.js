@@ -3,6 +3,7 @@ import authRoutes from "./routes/auth.routes.js";
 import organizationRoutes from "./routes/organizations.routes.js";
 import userRoutes from "./routes/users.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
+import transactionRoutes from "./routes/transactions.routes.js";
 import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
@@ -12,5 +13,6 @@ app.use("/api/auth", authRoutes);
 app.use("/api/organizations", organizationRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/transactions", transactionRoutes);
 app.use(errorHandler);
 export default app;
