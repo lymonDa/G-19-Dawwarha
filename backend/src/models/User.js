@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
+      minlength: 2,
+      maxlength: 100,
     },
 
     email: {
@@ -14,6 +16,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
+      match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Email must be a valid email address"],
     },
 
     passwordHash: {
@@ -24,7 +27,7 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["user", "admin"],
+      enum: ["user", "provider", "seeker", "admin"],
       required: true,
       default: "user",
     },
@@ -35,7 +38,7 @@ const userSchema = new mongoose.Schema(
         required: false,
       },
 
-      country: {
+      area: {
         type: String,
         required: false,
       },
@@ -64,20 +67,6 @@ const userSchema = new mongoose.Schema(
         default: 0,
       },
 
-      reputationScore: {
-        type: Number,
-        default: 0,
-      },
-
-      completedTransfers: {
-        type: Number,
-        default: 0,
-      },
-
-      failedTransfers: {
-        type: Number,
-        default: 0,
-      },
     },
 
     reputationScore: {
@@ -90,6 +79,8 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+userSchema.index({ status: 1 });
 
 const User = mongoose.model("User", userSchema);
 

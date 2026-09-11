@@ -5,7 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "node src/seed/seed.js",
+    "test": "node --test test/*.test.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -14,5 +16,8 @@
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.10.0"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^10.2.0"
   }
 }

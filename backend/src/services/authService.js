@@ -29,7 +29,7 @@ export const register = async ({ name, email, password, location }) => {
     name: name.trim(),
     email: normalizedEmail,
     passwordHash: await bcrypt.hash(password, 10),
-    role: "user",
+    role: "seeker",
     status: "active",
     location,
   });

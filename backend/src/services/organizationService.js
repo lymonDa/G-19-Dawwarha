@@ -8,7 +8,7 @@ const transitions = {
   suspended: {},
 };
 
-export async function transitionVerification(id, decision, rejectionReason) {
+export async function transitionVerification(id, decision, rejectionReason, reviewerId) {
   const organization = await Organization.findById(id);
   if (!organization) throw makeError(404, "NOT_FOUND", "Organization not found.");
   if (decision === "rejected" && !rejectionReason?.trim()) {
@@ -18,5 +18,7 @@ export async function transitionVerification(id, decision, rejectionReason) {
   if (!next) throw makeError(409, "INVALID_TRANSITION", "This verification transition is not allowed.");
   organization.verification.status = next;
   organization.verification.rejectionReason = decision === "rejected" ? rejectionReason.trim() : null;
+  organization.verification.reviewedBy = reviewerId;
+  organization.verification.reviewedAt = new Date();
   return organization.save();
 }
