@@ -58,13 +58,17 @@ const reportSchema = new mongoose.Schema(
 reportSchema.pre("save", function (next) {
   if (this.status !== "open") {
     if (!this.reviewedBy) {
-      return next(new Error("reviewedBy is required when report status is not open."));
+      const err = new Error("reviewedBy is required when report status is not open.");
+      if (typeof next === "function") return next(err);
+      throw err;
     }
     if (!this.resolution || typeof this.resolution !== "string" || !this.resolution.trim()) {
-      return next(new Error("resolution is required when report status is not open."));
+      const err = new Error("resolution is required when report status is not open.");
+      if (typeof next === "function") return next(err);
+      throw err;
     }
   }
-  return next();
+  if (typeof next === "function") return next();
 });
 
 reportSchema.index({ status: 1, createdAt: 1 });
