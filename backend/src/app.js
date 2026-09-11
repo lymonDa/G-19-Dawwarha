@@ -5,6 +5,8 @@ import userRoutes from "./routes/users.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
 import transactionRoutes from "./routes/transactions.routes.js";
 import reportRoutes from "./routes/reports.routes.js";
+import requestRoutes from "./routes/requests.routes.js";
+import matchRoutes from "./routes/matches.routes.js";
 import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
@@ -16,5 +18,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/reports", reportRoutes);
+app.use("/api/requests", requestRoutes);
+app.use("/api/matches", matchRoutes);
 app.use(errorHandler);
 export default app;
