@@ -1,4 +1,5 @@
 import Handover from "../models/Handover.js";
+import handoverService from "../services/handoverService.js";
 import { isValidObjectId } from "../utils/objectId.js";
 
 export async function confirm(req, res, next) {
@@ -21,7 +22,29 @@ export async function confirm(req, res, next) {
       });
     }
 
-    return res.json({ success: true, data: handover });
+    const userId = req.user?._id ? String(req.user._id) : null;
+    let side;
+
+    if (userId && String(handover.providerId) === userId) {
+      side = "provider";
+    } else if (userId && String(handover.seekerId) === userId) {
+      side = "seeker";
+    } else {
+      return res.status(403).json({
+        success: false,
+        error: {
+          code: "FORBIDDEN",
+          message: "You are not a participant in this handover",
+        },
+      });
+    }
+
+    const result = await handoverService.confirm(handover._id, side, req.user._id);
+
+    return res.json({
+      success: true,
+      data: result,
+    });
   } catch (error) {
     return next(error);
   }
