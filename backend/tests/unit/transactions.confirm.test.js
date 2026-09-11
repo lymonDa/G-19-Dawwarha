@@ -73,14 +73,14 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
     });
   });
 
-  test("Test 1 — Provider confirmation: calls handoverService.confirm with (handover._id, 'provider', userId)", async () => {
+  test("Test 1 — Provider confirmation response: returns HTTP 200 with status='in_progress' and bothConfirmed=false", async () => {
     const fakeHandover = createFakeHandover();
     mock.method(Handover, "findOne", async () => fakeHandover);
 
     let confirmArgs = null;
     mock.method(handoverService, "confirm", async (handoverId, side, userId) => {
       confirmArgs = { handoverId, side, userId };
-      return { ...fakeHandover, confirmedByProvider: true };
+      return { ...fakeHandover, confirmedByProvider: true, confirmedBySeeker: false, status: "in_progress" };
     });
 
     const res = await fetch(`${baseUrl}/api/transactions/${validMatchId}/confirm`, {
@@ -94,7 +94,8 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
     assert.equal(res.status, 200);
     const body = await res.json();
     assert.equal(body.success, true);
-    assert.equal(body.data.confirmedByProvider, true);
+    assert.equal(body.data.status, "in_progress");
+    assert.equal(body.data.bothConfirmed, false);
     assert.deepEqual(confirmArgs, {
       handoverId: handoverDocId,
       side: "provider",
@@ -102,14 +103,14 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
     });
   });
 
-  test("Test 2 — Seeker confirmation: calls handoverService.confirm with (handover._id, 'seeker', userId)", async () => {
+  test("Test 2 — Completion response: returns HTTP 200 with status='completed' and bothConfirmed=true", async () => {
     const fakeHandover = createFakeHandover();
     mock.method(Handover, "findOne", async () => fakeHandover);
 
     let confirmArgs = null;
     mock.method(handoverService, "confirm", async (handoverId, side, userId) => {
       confirmArgs = { handoverId, side, userId };
-      return { ...fakeHandover, confirmedBySeeker: true };
+      return { ...fakeHandover, confirmedByProvider: true, confirmedBySeeker: true, status: "completed", completedAt: new Date() };
     });
 
     const res = await fetch(`${baseUrl}/api/transactions/${validMatchId}/confirm`, {
@@ -123,12 +124,76 @@ describe("POST /api/transactions/:matchId/confirm (Step 1, Step 2, & Step 3)", (
     assert.equal(res.status, 200);
     const body = await res.json();
     assert.equal(body.success, true);
-    assert.equal(body.data.confirmedBySeeker, true);
+    assert.equal(body.data.status, "completed");
+    assert.equal(body.data.bothConfirmed, true);
     assert.deepEqual(confirmArgs, {
       handoverId: handoverDocId,
       side: "seeker",
       userId: seekerUserId,
     });
+  });
+
+  test("Test 2.B — Duplicate completed confirmation response: returns HTTP 200 with status='completed' and bothConfirmed=true", async () => {
+    const fakeHandover = {
+      ...createFakeHandover(),
+      status: "completed",
+      confirmedByProvider: true,
+      confirmedBySeeker: true,
+      completedAt: new Date(),
+    };
+    mock.method(Handover, "findOne", async () => fakeHandover);
+
+    mock.method(handoverService, "confirm", async () => ({
+      ...fakeHandover,
+      status: "completed",
+      confirmedByProvider: true,
+      confirmedBySeeker: true,
+    }));
+
+    const res = await fetch(`${baseUrl}/api/transactions/${validMatchId}/confirm`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${providerToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    assert.equal(res.status, 200);
+    const body = await res.json();
+    assert.equal(body.success, true);
+    assert.equal(body.data.status, "completed");
+    assert.equal(body.data.bothConfirmed, true);
+  });
+
+  test("Test 2.C — Service returned updated handover: controller derives response from service result, not initial lookup", async () => {
+    const initialLookup = {
+      ...createFakeHandover(),
+      status: "in_progress",
+      confirmedByProvider: true,
+      confirmedBySeeker: false,
+    };
+    mock.method(Handover, "findOne", async () => initialLookup);
+
+    mock.method(handoverService, "confirm", async () => ({
+      ...initialLookup,
+      status: "completed",
+      confirmedByProvider: true,
+      confirmedBySeeker: true,
+      completedAt: new Date(),
+    }));
+
+    const res = await fetch(`${baseUrl}/api/transactions/${validMatchId}/confirm`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${seekerToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    assert.equal(res.status, 200);
+    const body = await res.json();
+    assert.equal(body.data.status, "completed");
+    assert.equal(body.data.bothConfirmed, true);
   });
 
   test("Test 3 — Non-party: returns 403 and does NOT call handoverService.confirm", async () => {

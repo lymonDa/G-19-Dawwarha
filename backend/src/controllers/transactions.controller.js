@@ -39,11 +39,19 @@ export async function confirm(req, res, next) {
       });
     }
 
-    const result = await handoverService.confirm(handover._id, side, req.user._id);
+    const updatedHandover = await handoverService.confirm(handover._id, side, req.user._id);
+
+    const bothConfirmed = Boolean(
+      updatedHandover.confirmedByProvider &&
+      updatedHandover.confirmedBySeeker
+    );
 
     return res.json({
       success: true,
-      data: result,
+      data: {
+        status: updatedHandover.status,
+        bothConfirmed,
+      },
     });
   } catch (error) {
     return next(error);
