@@ -1,19 +1,13 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import dotenv from "dotenv";
 import mongoose from "mongoose";
 import dns from "dns";
 
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.resolve(__dirname, "../../.env") });
-
 const connectDB = async () => {
-  const mongoURI = process.env.MONGODB_URI || process.env.DATABASE_URL;
+  const mongoURI = process.env.MONGODB_URI;
 
   if (!mongoURI) {
-    throw new Error("MONGODB_URI or DATABASE_URL is not configured");
+    throw new Error("MONGODB_URI is not configured");
   }
 
   try {
