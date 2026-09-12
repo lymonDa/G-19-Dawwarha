@@ -126,4 +126,27 @@ describe("MongoDB foundation", () => {
     ]);
     assert.ok(User.schema.indexes().some(([fields]) => fields.status === 1));
   });
+
+  it("persists organization contactInfo with physical address", async () => {
+    const owner = await User.create({ name: "Contact Owner", email: "contact-owner@example.com", passwordHash: "hash" });
+    const org = await Organization.create({
+      name: "Address Org",
+      ownerUserId: owner._id,
+      contactInfo: {
+        email: "org@example.com",
+        phone: "+9626123456",
+        address: {
+          street: "Al-Madina St",
+          city: "Amman",
+          state: "Amman",
+          postalCode: "11180",
+          country: "Jordan",
+        },
+      },
+    });
+    assert.equal(org.contactInfo.email, "org@example.com");
+    assert.equal(org.contactInfo.phone, "+9626123456");
+    assert.equal(org.contactInfo.address.city, "Amman");
+    assert.equal(org.contactInfo.address.country, "Jordan");
+  });
 });
