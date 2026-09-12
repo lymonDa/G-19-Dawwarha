@@ -1,6 +1,8 @@
 import express from "express";
 import authRoutes from "./routes/auth.routes.js";
 import organizationRoutes from "./routes/organizations.routes.js";
+import resourceRoutes from "./routes/resources.routes.js";
+import categoryRoutes from "./routes/categories.routes.js";
 import userRoutes from "./routes/users.routes.js";
 import contributionRoutes from "./routes/contributions.routes.js";
 import adminAnalyticsRoutes from "./routes/admin.analytics.routes.js";
@@ -16,6 +18,8 @@ app.use(express.json());
 app.get("/health", (req, res) => res.json({ success: true, data: { status: "ok" } }));
 app.use("/api/auth", authRoutes);
 app.use("/api/organizations", organizationRoutes);
+app.use("/api/resources", resourceRoutes);
+app.use("/api/categories", categoryRoutes);
 app.use("/api/users", contributionRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/admin/analytics", adminAnalyticsRoutes);

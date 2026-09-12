@@ -31,7 +31,17 @@ const seed = async () => {
         name: "Dawwarha Demo Organization",
         description: "Pre-approved organization for local development.",
         ownerUserId: seededUsers.user._id,
-        contactInfo: { email: "contact@dawwarha.example" },
+        contactInfo: {
+          email: "contact@dawwarha.example",
+          phone: "+9626000000",
+          address: {
+            street: "King Hussein St",
+            city: "Amman",
+            state: "Amman",
+            postalCode: "11118",
+            country: "Jordan",
+          },
+        },
         verification: { status: "approved", reviewedBy: seededUsers.admin._id, reviewedAt: new Date() },
       },
     },

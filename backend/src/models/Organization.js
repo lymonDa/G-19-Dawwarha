@@ -34,6 +34,13 @@ const organizationSchema = new mongoose.Schema(
       },
       phone: { type: String, trim: true, maxlength: 30 },
       website: { type: String, trim: true, maxlength: URL_MAX_LENGTH },
+      address: {
+        street: { type: String, trim: true },
+        city: { type: String, trim: true },
+        state: { type: String, trim: true },
+        postalCode: { type: String, trim: true },
+        country: { type: String, trim: true, default: "Jordan" },
+      },
     },
 
     verification: {
@@ -42,13 +49,6 @@ const organizationSchema = new mongoose.Schema(
         enum: ["pending", "approved", "rejected", "suspended"],
         required: true,
         default: "pending",
-      },
-      address: {
-        street: { type: String, trim: true },
-        city: { type: String, trim: true },
-        state: { type: String, trim: true },
-        postalCode: { type: String, trim: true },
-        country: { type: String, trim: true, default: "Jordan" },
       },
       rejectionReason: {
         type: String,
