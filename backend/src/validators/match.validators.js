@@ -1,18 +1,16 @@
 import { param } from "express-validator";
 
-export const resourceIdValidator = [
-  param("resourceId")
-    .isMongoId()
-    .withMessage("Invalid resource id"),
-];
-
-export const matchIdValidator = [
+export const matchIdValidation = [
   param("id")
     .isMongoId()
-    .withMessage("Invalid match id"),
+    .withMessage("Invalid match ID")
 ];
 
-
+export const resourceIdValidation = [
+  param("resourceId")
+    .isMongoId()
+    .withMessage("Invalid resource ID")
+];
 
 
 

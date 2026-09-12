@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-import { matchModel } from "../models/Match.js";
-import { requestModel } from "../models/Request.js";
+import  matchModel  from "../models/Match.js";
+import  requestModel  from "../models/Request.js";
 
 // Weights
 const W1 = 0.30; // category
