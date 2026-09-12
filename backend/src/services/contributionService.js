@@ -13,13 +13,17 @@ import { isValidObjectId } from "../utils/objectId.js";
  * @param {Object} handover - The completed Handover document
  * @returns {Promise<Object>} The created or existing Contribution document
  */
-export async function recordCompletedTransfer(handover) {
+export async function recordCompletedTransfer(handover, options = {}) {
   if (!handover || !handover._id) {
     throw new Error("Handover is required to record completed transfer.");
   }
 
+  const session = options?.session || (options && options.startTransaction ? options : null);
+  const sessionOpt = session ? { session } : {};
+
   // 1. Idempotency check: prevent duplicate Contribution for same handover
-  const existing = await Contribution.findOne({ handoverId: handover._id });
+  const existingQuery = Contribution.findOne({ handoverId: handover._id });
+  const existing = session ? await existingQuery.session(session) : await existingQuery;
   if (existing) {
     return existing;
   }
@@ -32,7 +36,15 @@ export async function recordCompletedTransfer(handover) {
     if (typeof handover.resourceId === "object" && handover.resourceId.categoryId) {
       categoryId = handover.resourceId.categoryId;
       quantity = handover.resourceId.quantity || quantity;
-    } else {
+    } else if (mongoose.models.Resource) {
+      try {
+        const resource = await mongoose.models.Resource.findById(handover.resourceId);
+        if (resource) {
+          categoryId = resource.categoryId;
+          quantity = resource.quantity || quantity;
+        }
+      } catch {}
+    } else if (mongoose.connection.readyState === 1) {
       try {
         const resource = await mongoose.connection.collection("resources").findOne({
           _id: new mongoose.Types.ObjectId(String(handover.resourceId)),
@@ -54,19 +66,36 @@ export async function recordCompletedTransfer(handover) {
 
   let contribution;
   try {
-    contribution = await Contribution.create({
-      type: "transfer_completed",
-      handoverId: handover._id,
-      providerId: handover.providerId,
-      seekerId: handover.seekerId,
-      categoryId,
-      quantity,
-      createdAt: new Date(),
-    });
+    if (session) {
+      const created = await Contribution.create(
+        [{
+          type: "transfer_completed",
+          handoverId: handover._id,
+          providerId: handover.providerId,
+          seekerId: handover.seekerId,
+          categoryId,
+          quantity,
+          createdAt: new Date(),
+        }],
+        sessionOpt
+      );
+      contribution = Array.isArray(created) ? created[0] : created;
+    } else {
+      contribution = await Contribution.create({
+        type: "transfer_completed",
+        handoverId: handover._id,
+        providerId: handover.providerId,
+        seekerId: handover.seekerId,
+        categoryId,
+        quantity,
+        createdAt: new Date(),
+      });
+    }
   } catch (err) {
     // Gracefully handle duplicate key error (E11000) under concurrent confirmation calls
     if (err.code === 11000) {
-      return await Contribution.findOne({ handoverId: handover._id });
+      const recoveryQuery = Contribution.findOne({ handoverId: handover._id });
+      return session ? await recoveryQuery.session(session) : await recoveryQuery;
     }
     throw err;
   }
@@ -75,13 +104,17 @@ export async function recordCompletedTransfer(handover) {
   const participantIds = [handover.providerId, handover.seekerId].filter(Boolean);
   for (const uid of participantIds) {
     try {
-      await User.findByIdAndUpdate(uid, {
-        $inc: {
-          "stats.completedTransfers": 1,
-          reputationScore: 10,
-          "stats.reputationScore": 10,
+      await User.findByIdAndUpdate(
+        uid,
+        {
+          $inc: {
+            "stats.completedTransfers": 1,
+            reputationScore: 10,
+            "stats.reputationScore": 10,
+          },
         },
-      });
+        session ? { session } : {}
+      );
     } catch {
       // Ignore user update errors in unit test mock environments
     }

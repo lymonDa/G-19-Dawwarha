@@ -7,6 +7,8 @@ import app from "../../src/app.js";
 import User from "../../src/models/User.js";
 import Handover from "../../src/models/Handover.js";
 import Contribution from "../../src/models/Contribution.js";
+import Resource from "../../src/models/Resource.js";
+import requestModel from "../../src/models/Request.js";
 import handoverService from "../../src/services/handoverService.js";
 import contributionService from "../../src/services/contributionService.js";
 
@@ -1066,5 +1068,199 @@ describe("Engineer 4 — Raw 'status: completed' Write Protection & Invariant Te
     // POST /api/transactions/:matchId/confirm is the only mutating route in transactions.routes.js
     const allowedMethodsOnConfirm = ["POST"];
     assert.ok(allowedMethodsOnConfirm.includes("POST"));
+  });
+});
+
+describe("BLK-01 — Handover Completion Lifecycle Cascade", () => {
+  const providerId = new mongoose.Types.ObjectId().toString();
+  const seekerId = new mongoose.Types.ObjectId().toString();
+  const handoverId = new mongoose.Types.ObjectId().toString();
+  const resourceId = new mongoose.Types.ObjectId().toString();
+  const requestId = new mongoose.Types.ObjectId().toString();
+
+  beforeEach(() => {
+    mock.restoreAll();
+  });
+
+  test("Happy path: Handover completion cascades to Resource (impact_recorded), Request (fulfilled), and records Contribution", async () => {
+    const fakeHandover = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+      resourceId,
+      requestId,
+      confirmedByProvider: true,
+      confirmedBySeeker: false,
+      providerConfirmedAt: new Date(),
+      seekerConfirmedAt: null,
+      status: "in_progress",
+      completedAt: null,
+      async save() { return this; },
+    };
+
+    const fakeResource = {
+      _id: resourceId,
+      status: "in_handover",
+      providerId,
+      async save() { return this; },
+    };
+
+    const fakeRequest = {
+      _id: requestId,
+      status: "accepted",
+      requesterId: seekerId,
+      async save() { return this; },
+    };
+
+    mock.method(Handover, "findById", async () => fakeHandover);
+    mock.method(Resource, "findById", async () => fakeResource);
+    mock.method(requestModel, "findById", async () => fakeRequest);
+
+    const contributions = [];
+    mock.method(Contribution, "findOne", async () => null);
+    mock.method(Contribution, "create", async (data) => {
+      const doc = { _id: new mongoose.Types.ObjectId(), ...data };
+      contributions.push(doc);
+      return doc;
+    });
+
+    mock.method(User, "findByIdAndUpdate", async () => ({}));
+
+    // Seeker confirms -> completes handover
+    const result = await handoverService.confirm(handoverId, "seeker", seekerId);
+
+    assert.equal(result.status, "completed");
+    assert.notEqual(result.completedAt, null);
+    assert.equal(fakeResource.status, "impact_recorded");
+    assert.equal(fakeRequest.status, "fulfilled");
+    assert.equal(contributions.length, 1);
+  });
+
+  test("Happy path: Resource starting in 'accepted' cascades through in_handover -> completed -> impact_recorded", async () => {
+    const fakeHandover = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+      resourceId,
+      requestId,
+      confirmedByProvider: true,
+      confirmedBySeeker: false,
+      status: "in_progress",
+      async save() { return this; },
+    };
+
+    const fakeResource = {
+      _id: resourceId,
+      status: "accepted",
+      providerId,
+      async save() { return this; },
+    };
+
+    const fakeRequest = {
+      _id: requestId,
+      status: "accepted",
+      requesterId: seekerId,
+      async save() { return this; },
+    };
+
+    mock.method(Handover, "findById", async () => fakeHandover);
+    mock.method(Resource, "findById", async () => fakeResource);
+    mock.method(requestModel, "findById", async () => fakeRequest);
+    mock.method(Contribution, "findOne", async () => null);
+    mock.method(Contribution, "create", async (data) => ({ _id: new mongoose.Types.ObjectId(), ...data }));
+    mock.method(User, "findByIdAndUpdate", async () => ({}));
+
+    await handoverService.confirm(handoverId, "seeker", seekerId);
+
+    assert.equal(fakeResource.status, "impact_recorded");
+    assert.equal(fakeRequest.status, "fulfilled");
+  });
+
+  test("Failure path: If Resource transition throws, Handover does not remain completed and error propagates", async () => {
+    const fakeHandover = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+      resourceId,
+      requestId,
+      confirmedByProvider: true,
+      confirmedBySeeker: false,
+      status: "in_progress",
+      async save() { return this; },
+    };
+
+    const fakeResource = {
+      _id: resourceId,
+      status: "cancelled", // Terminal state, transition will throw 409
+      providerId,
+      async save() { return this; },
+    };
+
+    mock.method(Handover, "findById", async () => fakeHandover);
+    mock.method(Resource, "findById", async () => fakeResource);
+    mock.method(Contribution, "findOne", async () => null);
+    mock.method(Contribution, "create", async (data) => ({ _id: new mongoose.Types.ObjectId(), ...data }));
+    mock.method(User, "findByIdAndUpdate", async () => ({}));
+
+    await assert.rejects(
+      async () => {
+        await handoverService.confirm(handoverId, "seeker", seekerId);
+      },
+      (err) => {
+        assert.equal(err.code, "INVALID_TRANSITION");
+        return true;
+      }
+    );
+
+    assert.equal(fakeHandover.status, "in_progress", "Handover must not remain completed on cascade failure");
+    assert.equal(fakeHandover.completedAt, null);
+  });
+
+  test("Failure path: If Request transition throws, Handover does not remain completed and error propagates", async () => {
+    const fakeHandover = {
+      _id: handoverId,
+      providerId,
+      seekerId,
+      resourceId,
+      requestId,
+      confirmedByProvider: true,
+      confirmedBySeeker: false,
+      status: "in_progress",
+      async save() { return this; },
+    };
+
+    const fakeResource = {
+      _id: resourceId,
+      status: "in_handover",
+      providerId,
+      async save() { return this; },
+    };
+
+    const fakeRequest = {
+      _id: requestId,
+      status: "cancelled", // Terminal state, transition will throw 409
+      requesterId: seekerId,
+      async save() { return this; },
+    };
+
+    mock.method(Handover, "findById", async () => fakeHandover);
+    mock.method(Resource, "findById", async () => fakeResource);
+    mock.method(requestModel, "findById", async () => fakeRequest);
+    mock.method(Contribution, "findOne", async () => null);
+    mock.method(Contribution, "create", async (data) => ({ _id: new mongoose.Types.ObjectId(), ...data }));
+    mock.method(User, "findByIdAndUpdate", async () => ({}));
+
+    await assert.rejects(
+      async () => {
+        await handoverService.confirm(handoverId, "seeker", seekerId);
+      },
+      (err) => {
+        assert.equal(err.code, "INVALID_TRANSITION");
+        return true;
+      }
+    );
+
+    assert.equal(fakeHandover.status, "in_progress", "Handover must not remain completed on cascade failure");
+    assert.equal(fakeHandover.completedAt, null);
   });
 });

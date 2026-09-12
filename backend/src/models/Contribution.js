@@ -13,7 +13,6 @@ const contributionSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Handover",
       required: true,
-      unique: true,
     },
 
     providerId: {

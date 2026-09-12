@@ -11,6 +11,7 @@ import transactionRoutes from "./routes/transactions.routes.js";
 import reportRoutes from "./routes/reports.routes.js";
 import requestRoutes from "./routes/requests.routes.js";
 import matchRoutes from "./routes/matches.routes.js";
+import notificationRoutes from "./routes/notifications.routes.js";
 import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
@@ -28,5 +29,6 @@ app.use("/api/transactions", transactionRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/requests", requestRoutes);
 app.use("/api/matches", matchRoutes);
+app.use("/api/notifications", notificationRoutes);
 app.use(errorHandler);
 export default app;

@@ -102,7 +102,10 @@ export async function transitionResource(resource, action, actor, options = {}) 
       );
     }
   } else if (actor) {
-    const isAdmin = actor.role === "admin";
+    const isSystem = Boolean(
+      actor.role === "system" || actor === "system" || actor.isSystem === true
+    );
+    const isAdmin = actor.role === "admin" || isSystem;
     const isOwner = resource.providerId && String(resource.providerId) === String(actor._id);
 
     if (!isAdmin && !isOwner) {

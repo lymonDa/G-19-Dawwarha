@@ -11,6 +11,7 @@ import Contribution from "../../src/models/Contribution.js";
 import Organization from "../../src/models/Organization.js";
 import { matchModel } from "../../src/models/Match.js";
 import { requestModel } from "../../src/models/Request.js";
+import Resource from "../../src/models/Resource.js";
 import adminAnalyticsService from "../../src/services/adminAnalyticsService.js";
 
 const JWT_SECRET = "test-jwt-secret-for-testing-only-12345";
@@ -45,6 +46,16 @@ describe("Task 4.E — Admin Analytics Service & Endpoint Test Suite", () => {
 
   beforeEach(() => {
     mock.restoreAll();
+
+    // Default mocks for admin analytics models to prevent buffer timeouts on unconnected mongoose
+    mock.method(Resource, "countDocuments", async () => 0);
+    mock.method(Resource, "aggregate", async () => []);
+    mock.method(requestModel, "countDocuments", async () => 0);
+    mock.method(Handover, "countDocuments", async () => 0);
+    mock.method(Report, "countDocuments", async () => 0);
+    mock.method(Organization, "countDocuments", async () => 0);
+    mock.method(Contribution, "aggregate", async () => []);
+    mock.method(matchModel, "aggregate", async () => []);
 
     // Default User.findById mock for authentication
     mock.method(User, "findById", (id) => {
@@ -219,6 +230,7 @@ describe("Task 4.E — Admin Analytics Service & Endpoint Test Suite", () => {
       mock.method(Organization, "countDocuments", async () => 3);
       mock.method(Contribution, "aggregate", async () => []);
       mock.method(matchModel, "aggregate", async () => []);
+      mock.method(Resource, "countDocuments", async () => 12);
       mock.method(mongoose.connection, "collection", () => ({
         aggregate: () => ({ toArray: async () => [] }),
         countDocuments: async () => 12, // published resources
@@ -271,6 +283,8 @@ describe("Task 4.E — Admin Analytics Service & Endpoint Test Suite", () => {
       mock.method(Organization, "countDocuments", async () => 0);
       mock.method(Contribution, "aggregate", async () => []);
       mock.method(matchModel, "aggregate", async () => []);
+      mock.method(Resource, "aggregate", async () => mockResourceAggregation);
+      mock.method(Resource, "countDocuments", async () => 10);
       mock.method(mongoose.connection, "collection", (name) => {
         if (name === "resources") {
           return {
@@ -449,6 +463,7 @@ describe("Task 4.E — Admin Analytics Service & Endpoint Test Suite", () => {
       mock.method(Organization, "countDocuments", async () => 1);
       mock.method(Contribution, "aggregate", async () => []);
       mock.method(matchModel, "aggregate", async () => []);
+      mock.method(Resource, "countDocuments", async () => 3);
       mock.method(mongoose.connection, "collection", () => ({
         aggregate: () => ({ toArray: async () => [] }),
         countDocuments: async () => 3,

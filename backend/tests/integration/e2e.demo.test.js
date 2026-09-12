@@ -9,13 +9,16 @@ import app from "../../src/app.js";
 
 import User from "../../src/models/User.js";
 import Organization from "../../src/models/Organization.js";
+import Category from "../../src/models/Category.js";
+import Resource from "../../src/models/Resource.js";
 import Handover from "../../src/models/Handover.js";
 import Contribution from "../../src/models/Contribution.js";
 import Report from "../../src/models/Report.js";
+import Notification from "../../src/models/Notification.js";
 import { requestModel } from "../../src/models/Request.js";
 import { matchModel } from "../../src/models/Match.js";
 
-describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", () => {
+describe("TASK 4.F / Section 21 — Cross-Cutting E2E Demo Journey Integration Test Suite", () => {
   let server;
   let baseUrl;
 
@@ -23,11 +26,14 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
   const createdIds = {
     users: [],
     organizations: [],
+    categories: [],
+    resources: [],
     requests: [],
     matches: [],
     handovers: [],
     contributions: [],
     reports: [],
+    notifications: [],
   };
 
   // Test actor credentials & tokens
@@ -43,13 +49,15 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
   let adminUser;
   let adminToken;
 
+  let testCategory;
   let approvedOrg;
+  let publishedResource;
   let publishedRequest;
   let liveMatch;
   let liveHandover;
 
   before(async () => {
-    // 1. Connect to MongoDB Atlas test database
+    // 1. Connect to MongoDB test database
     await connectDB();
 
     // 2. Start Express application on ephemeral port
@@ -60,7 +68,7 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
   });
 
   after(async () => {
-    // Isolated cleanup of ONLY the documents created during this test run
+    // Isolated cleanup of documents created during this test run
     try {
       if (createdIds.reports.length > 0) {
         await Report.deleteMany({ _id: { $in: createdIds.reports } });
@@ -77,8 +85,17 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
       if (createdIds.requests.length > 0) {
         await requestModel.deleteMany({ _id: { $in: createdIds.requests } });
       }
+      if (createdIds.resources.length > 0) {
+        await Resource.deleteMany({ _id: { $in: createdIds.resources } });
+      }
+      if (createdIds.categories.length > 0) {
+        await Category.deleteMany({ _id: { $in: createdIds.categories } });
+      }
       if (createdIds.organizations.length > 0) {
         await Organization.deleteMany({ _id: { $in: createdIds.organizations } });
+      }
+      if (createdIds.notifications.length > 0) {
+        await Notification.deleteMany({ _id: { $in: createdIds.notifications } });
       }
       if (createdIds.users.length > 0) {
         await User.deleteMany({ _id: { $in: createdIds.users } });
@@ -268,10 +285,31 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
   });
 
   // =========================================================================
-  // STEP 3 — Supply Domain Verification & Blocker Identification (Engineer 2)
+  // STEP 3 — Categories & Resource Creation (Engineer 2)
   // =========================================================================
-  describe("Step 3: Supply / Resource Flow Probe (Engineer 2)", () => {
-    test("3.1 Probe POST /api/resources — captures Engineer 2 unmounted route blocker", async () => {
+  describe("Step 3: Categories & Resource Management (FR-004–FR-006, Eng 2)", () => {
+    test("3.1 Admin creates category via POST /api/categories", async () => {
+      const res = await fetch(`${baseUrl}/api/categories`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${adminToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: `Produce & Bakery ${runId}`,
+          slug: `produce-bakery-${runId}`,
+          description: "Fresh surplus meals, bread and bakery items.",
+        }),
+      });
+
+      const body = await res.json();
+      assert.equal(res.status, 201, JSON.stringify(body));
+      assert.equal(body.success, true);
+      testCategory = body.data;
+      createdIds.categories.push(new mongoose.Types.ObjectId(testCategory._id));
+    });
+
+    test("3.2 Provider creates a draft Resource via POST /api/resources", async () => {
       const res = await fetch(`${baseUrl}/api/resources`, {
         method: "POST",
         headers: {
@@ -279,14 +317,40 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: "Surplus Canned Goods",
+          title: `Surplus Bakery Goods ${runId}`,
+          categoryId: testCategory._id,
           quantity: 20,
+          location: { city: "Cairo", area: "Maadi" },
+          description: "Fresh bread packages from morning bake.",
+          availabilityWindow: {
+            start: new Date().toISOString(),
+            end: new Date(Date.now() + 86400000 * 3).toISOString(),
+          },
         }),
       });
 
-      // Engineer 2 has 0-byte placeholder files for resources.routes.js and Resource.js
-      // Express returns 404 because the route is unimplemented and not mounted in app.js
-      assert.equal(res.status, 404, "Unmounted /api/resources should return 404");
+      const body = await res.json();
+      assert.equal(res.status, 201, JSON.stringify(body));
+      assert.equal(body.success, true);
+      assert.equal(body.data.status, "draft");
+      publishedResource = body.data;
+      createdIds.resources.push(new mongoose.Types.ObjectId(publishedResource._id));
+    });
+
+    test("3.3 Provider publishes Resource via PUT /api/resources/:id/status", async () => {
+      const res = await fetch(`${baseUrl}/api/resources/${publishedResource._id}/status`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${providerToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action: "publish" }),
+      });
+
+      const body = await res.json();
+      assert.equal(res.status, 200, JSON.stringify(body));
+      assert.equal(body.success, true);
+      assert.ok(["published", "available"].includes(body.data.status));
     });
   });
 
@@ -295,8 +359,6 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
   // =========================================================================
   describe("Step 4: Demand / Request Creation & Publishing (FR-007–FR-008, Eng 3)", () => {
     test("4.1 Seeker creates a draft Request via POST /api/requests", async () => {
-      const dummyCategoryId = new mongoose.Types.ObjectId();
-
       const res = await fetch(`${baseUrl}/api/requests`, {
         method: "POST",
         headers: {
@@ -304,12 +366,12 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: "Urgent winter clothing",
-          categoryId: dummyCategoryId.toString(),
-          quantity: 10,
+          title: `Urgent Food Supplies ${runId}`,
+          categoryId: testCategory._id,
+          quantity: 15,
           urgency: "high",
           location: { city: "Cairo", area: "Maadi" },
-          description: "Need urgent clothing supplies for community center",
+          description: "Need urgent bread supplies for community center",
         }),
       });
 
@@ -317,7 +379,6 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
       assert.equal(res.status, 201, JSON.stringify(body));
       assert.equal(body.success, true);
       assert.equal(body.data.status, "draft");
-      assert.equal(body.data.quantity, 10);
       publishedRequest = body.data;
       createdIds.requests.push(new mongoose.Types.ObjectId(publishedRequest._id));
     });
@@ -340,59 +401,63 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
   });
 
   // =========================================================================
-  // STEP 5 — Matching Domain Probe & Blocker Identification (Engineer 3)
+  // STEP 5 — Matching & Acceptance Flow (Engineer 3)
   // =========================================================================
-  describe("Step 5: Matching Flow Probe (Engineer 3)", () => {
-    test("5.1 Probe POST /api/matches/:resourceId/generate — captures Engineer 3 missing Resource schema blocker", async () => {
-      const fakeResourceId = new mongoose.Types.ObjectId();
-      const res = await fetch(`${baseUrl}/api/matches/${fakeResourceId}/generate`, {
+  describe("Step 5: Matching Generation & Transactional Acceptance (FR-009–FR-012, Eng 3)", () => {
+    test("5.1 Provider triggers match generation via POST /api/matches/:resourceId/generate", async () => {
+      const res = await fetch(`${baseUrl}/api/matches/${publishedResource._id}/generate`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${providerToken}`,
         },
       });
 
-      // matchingService.js calls mongoose.model("resources") synchronously which throws MissingSchemaError
-      // caught by Express errorHandler as HTTP 500
-      assert.ok(res.status === 500 || res.status === 409);
       const body = await res.json();
-      assert.equal(body.success, false);
+      assert.equal(res.status, 200, JSON.stringify(body));
+      assert.equal(body.success, true);
+      assert.ok(Array.isArray(body.data));
+      assert.ok(body.data.length >= 1, "Expected at least 1 match proposed");
+
+      liveMatch = body.data[0];
+      assert.equal(String(liveMatch.resourceId), String(publishedResource._id));
+      assert.equal(String(liveMatch.requestId), String(publishedRequest._id));
+      assert.equal(liveMatch.status, "proposed");
+      assert.ok(liveMatch.score >= 0.50);
+      createdIds.matches.push(new mongoose.Types.ObjectId(liveMatch._id));
+    });
+
+    test("5.2 Seeker accepts the proposed match via PUT /api/matches/:matchId/accept", async () => {
+      const res = await fetch(`${baseUrl}/api/matches/${liveMatch._id}/accept`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${seekerToken}`,
+        },
+      });
+
+      const body = await res.json();
+      assert.equal(res.status, 200, JSON.stringify(body));
+      assert.equal(body.success, true);
+      assert.ok(body.data.handoverId);
+
+      // Verify connected Handover was created
+      liveHandover = await Handover.findById(body.data.handoverId);
+      assert.ok(liveHandover);
+      assert.equal(liveHandover.status, "in_progress");
+      assert.equal(String(liveHandover.matchId), String(liveMatch._id));
+      assert.equal(String(liveHandover.resourceId), String(publishedResource._id));
+      assert.equal(String(liveHandover.requestId), String(publishedRequest._id));
+      createdIds.handovers.push(liveHandover._id);
+
+      // Verify Match status in DB
+      const dbMatch = await matchModel.findById(liveMatch._id);
+      assert.equal(dbMatch.status, "accepted");
     });
   });
 
   // =========================================================================
   // STEP 6 — Handover & Two-Sided Confirmation Flow (FR-013, Engineer 4)
   // =========================================================================
-  describe("Step 6: Handover Confirmation Flow (FR-013 Structural Guarantee, Eng 4)", () => {
-    before(async () => {
-      // Establish valid match and handover documents per DB Plan Section 15 contract
-      const dummyResourceId = new mongoose.Types.ObjectId();
-      const reqId = publishedRequest?._id ? new mongoose.Types.ObjectId(publishedRequest._id) : new mongoose.Types.ObjectId();
-
-      liveMatch = await matchModel.create({
-        resourceId: dummyResourceId,
-        requestId: reqId,
-        providerId: new mongoose.Types.ObjectId(providerUser._id),
-        requesterId: new mongoose.Types.ObjectId(seekerUser._id),
-        score: 0.90,
-        scoreBreakdown: { category: 1, location: 1, quantity: 1, urgency: 1, availability: 1 },
-        status: "accepted",
-      });
-      createdIds.matches.push(liveMatch._id);
-
-      liveHandover = await Handover.create({
-        matchId: liveMatch._id,
-        resourceId: dummyResourceId,
-        requestId: reqId,
-        providerId: new mongoose.Types.ObjectId(providerUser._id),
-        seekerId: new mongoose.Types.ObjectId(seekerUser._id),
-        status: "in_progress",
-        confirmedByProvider: false,
-        confirmedBySeeker: false,
-      });
-      createdIds.handovers.push(liveHandover._id);
-    });
-
+  describe("Step 6: Handover Confirmation & Lifecycle Cascade (FR-013, Eng 4)", () => {
     test("6.1 Unauthenticated POST /api/transactions/:matchId/confirm returns HTTP 401", async () => {
       const res = await fetch(`${baseUrl}/api/transactions/${liveMatch._id}/confirm`, {
         method: "POST",
@@ -438,7 +503,7 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
       assert.equal(contribCount, 0);
     });
 
-    test("6.4 Seeker then confirms: completes handover, status='completed', bothConfirmed=true", async () => {
+    test("6.4 Seeker then confirms: completes handover and triggers lifecycle cascades", async () => {
       const res = await fetch(`${baseUrl}/api/transactions/${liveMatch._id}/confirm`, {
         method: "POST",
         headers: { Authorization: `Bearer ${seekerToken}` },
@@ -450,12 +515,20 @@ describe("TASK 4.F — Cross-Cutting E2E Demo Journey Integration Test Suite", (
       assert.equal(body.data.status, "completed");
       assert.equal(body.data.bothConfirmed, true);
 
-      // Verify DB state: completedAt set
+      // Verify DB Handover state
       const dbHandover = await Handover.findById(liveHandover._id);
       assert.equal(dbHandover.confirmedByProvider, true);
       assert.equal(dbHandover.confirmedBySeeker, true);
       assert.equal(dbHandover.status, "completed");
       assert.ok(dbHandover.completedAt instanceof Date);
+
+      // Verify BLK-01 Cascade: Resource must be transitioned to final state impact_recorded
+      const dbResource = await Resource.findById(publishedResource._id);
+      assert.equal(dbResource.status, "impact_recorded");
+
+      // Verify BLK-01 Cascade: Request must be transitioned to fulfilled
+      const dbRequest = await requestModel.findById(publishedRequest._id);
+      assert.equal(dbRequest.status, "fulfilled");
     });
 
     test("6.5 Duplicate confirmation by Provider is idempotent and preserves 'completed' state", async () => {

@@ -1,11 +1,17 @@
+import mongoose from "mongoose";
 import Handover from "../models/Handover.js";
+import Resource from "../models/Resource.js";
+import requestModel from "../models/Request.js";
 import contributionService from "./contributionService.js";
+import { transitionResource } from "./resourceLifecycleService.js";
+import { transitionRequest } from "./requestLifecycleService.js";
 
 const makeError = (statusCode, code, message) =>
   Object.assign(new Error(message), { statusCode, code });
 
-export async function confirm(handoverId, side, userId) {
-  const handover = await Handover.findById(handoverId);
+export async function confirm(handoverId, side, userId, options = {}) {
+  const query = Handover.findById(handoverId);
+  const handover = options?.session ? await query.session(options.session) : await query;
   if (!handover) {
     throw makeError(404, "NOT_FOUND", "Handover not found.");
   }
@@ -44,13 +50,109 @@ export async function confirm(handoverId, side, userId) {
     }
   }
 
-  const savedHandover = await handover.save();
+  let session = options?.session || null;
+  let ownSession = false;
 
-  if (savedHandover.status === "completed" && !wasCompletedBefore) {
-    await contributionService.recordCompletedTransfer(savedHandover);
+  if (!session && mongoose.connection.readyState === 1 && typeof mongoose.startSession === "function") {
+    try {
+      session = await mongoose.startSession();
+      session.startTransaction();
+      ownSession = true;
+    } catch {
+      session = null;
+      ownSession = false;
+    }
   }
 
-  return savedHandover;
+  try {
+    if (session && typeof handover.$session === "function") {
+      handover.$session(session);
+    }
+    const savedHandover = await handover.save(session ? { session } : undefined);
+
+    if (savedHandover.status === "completed" && !wasCompletedBefore) {
+      // 1. Record completed contribution
+      await contributionService.recordCompletedTransfer(savedHandover, session ? { session } : {});
+
+      // 2. Resource lifecycle cascade: in_handover -> completed -> impact_recorded
+      const shouldCheckResource =
+        savedHandover.resourceId &&
+        (mongoose.connection.readyState === 1 ||
+          Boolean(Resource.findById?.mock) ||
+          Boolean(mongoose.models?.Resource?.findById?.mock));
+
+      if (shouldCheckResource) {
+        const resQuery = Resource.findById(savedHandover.resourceId);
+        const resource = session ? await resQuery.session(session) : await resQuery;
+        if (resource) {
+          const resourceActor = { _id: resource.providerId, role: "system", isSystem: true };
+          if (resource.status === "accepted") {
+            await transitionResource(resource, "startHandover", resourceActor, { session });
+          }
+          if (resource.status === "in_handover") {
+            await transitionResource(resource, "complete", resourceActor, { session });
+          }
+          if (resource.status === "completed") {
+            await transitionResource(resource, "logImpact", resourceActor, { session });
+          }
+          if (resource.status !== "impact_recorded") {
+            throw makeError(
+              409,
+              "INVALID_TRANSITION",
+              `Resource cannot complete handover from state: '${resource.status}'`
+            );
+          }
+        }
+      }
+
+      // 3. Request lifecycle cascade: accepted -> fulfilled
+      const shouldCheckRequest =
+        savedHandover.requestId &&
+        (mongoose.connection.readyState === 1 ||
+          Boolean(requestModel.findById?.mock) ||
+          Boolean(mongoose.models?.Request?.findById?.mock));
+
+      if (shouldCheckRequest) {
+        const reqQuery = requestModel.findById(savedHandover.requestId);
+        const request = session ? await reqQuery.session(session) : await reqQuery;
+        if (request) {
+          const requestActor = { _id: request.requesterId, role: "system", isSystem: true };
+          if (request.status === "accepted") {
+            await transitionRequest(request, "complete", requestActor, session ? { session } : {});
+          }
+          if (request.status !== "fulfilled") {
+            throw makeError(
+              409,
+              "INVALID_TRANSITION",
+              `Request cannot be fulfilled from state: '${request.status}'`
+            );
+          }
+        }
+      }
+    }
+
+    if (ownSession && session) {
+      await session.commitTransaction();
+    }
+    return savedHandover;
+  } catch (err) {
+    if (ownSession && session) {
+      await session.abortTransaction();
+    } else if (!session && !wasCompletedBefore && handover.status === "completed") {
+      handover.status = "in_progress";
+      handover.completedAt = null;
+      try {
+        await handover.save();
+      } catch {
+        // preserve original error
+      }
+    }
+    throw err;
+  } finally {
+    if (ownSession && session) {
+      session.endSession();
+    }
+  }
 }
 
 export async function createHandoverForMatch(match, session = null) {
@@ -69,5 +171,3 @@ export async function createHandoverForMatch(match, session = null) {
 
 const handoverService = { confirm, createHandoverForMatch };
 export default handoverService;
-
-

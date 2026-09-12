@@ -1,0 +1,612 @@
+{
+  "info": {
+    "name": "DAWWARHA — Identity & Admin API Collection",
+    "description": "Authoritative Postman Collection for Engineer 1 in the DAWWARHA platform. Covers Authentication, User Profile Management, Organization Registration & Verification, and Admin User Management according to Section 14 and Section 23 of the Backend Implementation Plan.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000", "type": "string" },
+    { "key": "admin_token", "value": "", "type": "string" },
+    { "key": "user_token", "value": "", "type": "string" },
+    { "key": "user_id", "value": "", "type": "string" },
+    { "key": "organization_id", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication",
+      "item": [
+        {
+          "name": "Register User (POST /api/auth/register)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Returns user and token in envelope', function () {",
+                  "  pm.expect(json.success).to.be.true;",
+                  "  pm.expect(json.data.token).to.be.a('string');",
+                  "  pm.expect(json.data.user).to.be.an('object');",
+                  "});",
+                  "if (json.data && json.data.token) {",
+                  "  pm.collectionVariables.set('user_token', json.data.token);",
+                  "  pm.collectionVariables.set('user_id', json.data.user._id || json.data.user.id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ahmad Provider\",\n  \"email\": \"ahmad.provider@example.com\",\n  \"password\": \"Password123!\",\n  \"role\": \"user\",\n  \"location\": {\n    \"address\": \"Amman, Jordan\",\n    \"coordinates\": [35.9284, 31.9454]\n  }\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/auth/register", "host": ["{{base_url}}"], "path": ["api", "auth", "register"] },
+            "description": "Register a new user account. Returns 201 with standard response envelope containing user profile and JWT."
+          }
+        },
+        {
+          "name": "Register Duplicate Email - 409 Conflict",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 409 Conflict', function () { pm.response.to.have.status(409); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Error envelope has code DUPLICATE_KEY', function () {",
+                  "  pm.expect(json.success).to.be.false;",
+                  "  pm.expect(json.error.code).to.equal('DUPLICATE_KEY');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ahmad Duplicate\",\n  \"email\": \"ahmad.provider@example.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/auth/register", "host": ["{{base_url}}"], "path": ["api", "auth", "register"] },
+            "description": "Negative case: Attempting to register with an already existing email returns 409 DUPLICATE_KEY."
+          }
+        },
+        {
+          "name": "Register Invalid Payload - 400 Bad Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 400 Bad Request', function () { pm.response.to.have.status(400); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Validation error formatted correctly', function () {",
+                  "  pm.expect(json.success).to.be.false;",
+                  "  pm.expect(json.error.code).to.equal('VALIDATION_ERROR');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"email\": \"not-an-email\",\n  \"password\": \"short\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/auth/register", "host": ["{{base_url}}"], "path": ["api", "auth", "register"] },
+            "description": "Negative case: Malformed body fails express-validator with 400 VALIDATION_ERROR."
+          }
+        },
+        {
+          "name": "Login User (POST /api/auth/login)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "if (json.data && json.data.token) {",
+                  "  pm.collectionVariables.set('user_token', json.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ahmad.provider@example.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/auth/login", "host": ["{{base_url}}"], "path": ["api", "auth", "login"] },
+            "description": "Authenticate an active user and obtain a JWT bearer token."
+          }
+        },
+        {
+          "name": "Login Admin (POST /api/auth/login)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "if (json.data && json.data.token) {",
+                  "  pm.collectionVariables.set('admin_token', json.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@dawwarha.com\",\n  \"password\": \"AdminPassword123!\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/auth/login", "host": ["{{base_url}}"], "path": ["api", "auth", "login"] },
+            "description": "Authenticate as platform administrator to obtain admin bearer token."
+          }
+        },
+        {
+          "name": "Login Wrong Password - 401 Unauthorized",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 401 Unauthorized', function () { pm.response.to.have.status(401); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Returns AUTH_FAILED', function () {",
+                  "  pm.expect(json.error.code).to.equal('AUTH_FAILED');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@dawwarha.com\",\n  \"password\": \"WrongPassword!\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/auth/login", "host": ["{{base_url}}"], "path": ["api", "auth", "login"] },
+            "description": "Negative case: Invalid credentials rejected with 401 AUTH_FAILED."
+          }
+        },
+        {
+          "name": "Logout (POST /api/auth/logout)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{user_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/auth/logout", "host": ["{{base_url}}"], "path": ["api", "auth", "logout"] },
+            "description": "Clear session / invalidate client token."
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Users Profile",
+      "item": [
+        {
+          "name": "Get Current User Profile (GET /api/users/me)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Password hash is never exposed', function () {",
+                  "  pm.expect(json.data.password).to.be.undefined;",
+                  "  pm.expect(json.data.email).to.be.a('string');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{user_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/users/me", "host": ["{{base_url}}"], "path": ["api", "users", "me"] },
+            "description": "Fetch the authenticated user's own profile."
+          }
+        },
+        {
+          "name": "Get Profile Unauthenticated - 401",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 401', function () { pm.response.to.have.status(401); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/users/me", "host": ["{{base_url}}"], "path": ["api", "users", "me"] },
+            "description": "Negative case: Missing bearer token rejected with 401 AUTH_REQUIRED."
+          }
+        },
+        {
+          "name": "Update User Profile (PUT /api/users/me)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Name is updated', function () {",
+                  "  pm.expect(json.data.name).to.equal('Ahmad Provider Updated');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{user_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ahmad Provider Updated\",\n  \"phone\": \"+962791234567\",\n  \"bio\": \"Active community surplus donor in Amman\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/users/me", "host": ["{{base_url}}"], "path": ["api", "users", "me"] },
+            "description": "Update allowed profile fields for authenticated user."
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Organizations",
+      "item": [
+        {
+          "name": "Create Organization (POST /api/organizations)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Initial verification status is pending', function () {",
+                  "  pm.expect(json.data.verificationStatus).to.equal('pending');",
+                  "});",
+                  "if (json.data && json.data._id) {",
+                  "  pm.collectionVariables.set('organization_id', json.data._id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{user_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jordan Green Food Bank\",\n  \"registrationNumber\": \"REG-JO-9921\",\n  \"description\": \"Nonprofit redistributing surplus organic food to community kitchens.\",\n  \"contactEmail\": \"info@greenfoodbank.org\",\n  \"contactPhone\": \"+96265001234\",\n  \"address\": {\n    \"address\": \"7th Circle, Zahran St, Amman\",\n    \"coordinates\": [35.8690, 31.9540]\n  }\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/organizations", "host": ["{{base_url}}"], "path": ["api", "organizations"] },
+            "description": "Submit a new organization for verification. Automatically links authenticated user as ownerUserId."
+          }
+        },
+        {
+          "name": "Get Organization by ID (GET /api/organizations/:id - Public)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Organization returned', function () {",
+                  "  pm.expect(json.data._id).to.equal(pm.collectionVariables.get('organization_id'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/organizations/{{organization_id}}", "host": ["{{base_url}}"], "path": ["api", "organizations", "{{organization_id}}"] },
+            "description": "Public endpoint to inspect public organization details."
+          }
+        },
+        {
+          "name": "Get Organization - Invalid ID 400",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/organizations/invalid-id", "host": ["{{base_url}}"], "path": ["api", "organizations", "invalid-id"] },
+            "description": "Negative case: Malformed ObjectId returns 400 VALIDATION_ERROR."
+          }
+        },
+        {
+          "name": "Update Organization as Owner (PUT /api/organizations/:id)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Description updated', function () {",
+                  "  pm.expect(json.data.description).to.include('Updated');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{user_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Updated nonprofit details: expanded refrigerated redistribution hub.\",\n  \"contactPhone\": \"+96265005678\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/organizations/{{organization_id}}", "host": ["{{base_url}}"], "path": ["api", "organizations", "{{organization_id}}"] },
+            "description": "Update organization profile as its owner."
+          }
+        },
+        {
+          "name": "Admin Verify Organization - Approve (POST /api/organizations/:id/verify)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Verification status is now approved', function () {",
+                  "  pm.expect(json.data.verification.status).to.equal('approved');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"approved\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/organizations/{{organization_id}}/verify", "host": ["{{base_url}}"], "path": ["api", "organizations", "{{organization_id}}", "verify"] },
+            "description": "Admin approval of organization credentials. Triggers org_verification_decided notification to owner."
+          }
+        },
+        {
+          "name": "Admin Verify Organization - Reject without Reason - 400",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"rejected\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/organizations/{{organization_id}}/verify", "host": ["{{base_url}}"], "path": ["api", "organizations", "{{organization_id}}", "verify"] },
+            "description": "Negative case: Rejecting without required reason returns 400 validation error."
+          }
+        },
+        {
+          "name": "Verify Organization - Non-Admin Forbidden - 403",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 403', function () { pm.response.to.have.status(403); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{user_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"approved\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/organizations/{{organization_id}}/verify", "host": ["{{base_url}}"], "path": ["api", "organizations", "{{organization_id}}", "verify"] },
+            "description": "Negative case: Regular user attempting to verify an organization receives 403 Forbidden."
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Admin User Management",
+      "item": [
+        {
+          "name": "List All Users (GET /api/admin/users)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Standard pagination structure present', function () {",
+                  "  pm.expect(json.data.users).to.be.an('array');",
+                  "  pm.expect(json.data.pagination).to.be.an('object');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/admin/users?page=1&limit=10",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "users"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "10" }
+              ]
+            },
+            "description": "Admin endpoint to list all platform users with pagination."
+          }
+        },
+        {
+          "name": "List Users Non-Admin - 403 Forbidden",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 403', function () { pm.response.to.have.status(403); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{user_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/admin/users", "host": ["{{base_url}}"], "path": ["api", "admin", "users"] },
+            "description": "Negative case: Non-admin user access is rejected with 403."
+          }
+        },
+        {
+          "name": "Suspend User (PUT /api/admin/users/:id/suspend)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('User status is suspended', function () {",
+                  "  pm.expect(json.data.user.status).to.equal('suspended');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/admin/users/{{user_id}}/suspend", "host": ["{{base_url}}"], "path": ["api", "admin", "users", "{{user_id}}", "suspend"] },
+            "description": "Admin suspends a user. Suspended users cannot authenticate or perform write actions."
+          }
+        },
+        {
+          "name": "Reactivate User (PUT /api/admin/users/:id/reactivate)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('User status is active', function () {",
+                  "  pm.expect(json.data.user.status).to.equal('active');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/admin/users/{{user_id}}/reactivate", "host": ["{{base_url}}"], "path": ["api", "admin", "users", "{{user_id}}", "reactivate"] },
+            "description": "Admin reactivates a suspended user back to active status."
+          }
+        }
+      ]
+    }
+  ]
+}

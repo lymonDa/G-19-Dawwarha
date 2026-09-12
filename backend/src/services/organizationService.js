@@ -1,4 +1,5 @@
 import Organization from "../models/Organization.js";
+import notificationService from "./notificationService.js";
 
 const makeError = (statusCode, code, message) => Object.assign(new Error(message), { statusCode, code });
 const transitions = {
@@ -20,5 +21,24 @@ export async function transitionVerification(id, decision, rejectionReason, revi
   organization.verification.rejectionReason = decision === "rejected" ? rejectionReason.trim() : null;
   organization.verification.reviewedBy = reviewerId;
   organization.verification.reviewedAt = new Date();
-  return organization.save();
+  const savedOrg = await organization.save();
+
+  if (savedOrg.ownerUserId) {
+    try {
+      await notificationService.notify({
+        recipientId: savedOrg.ownerUserId,
+        type: "org_verification_decided",
+        title: `Organization Verification: ${next.toUpperCase()}`,
+        message:
+          decision === "rejected"
+            ? `Your organization verification was rejected: ${rejectionReason.trim()}`
+            : `Your organization verification status is now ${next}.`,
+        relatedEntity: { type: "organization", id: savedOrg._id },
+      });
+    } catch {
+      // Non-fatal notification error
+    }
+  }
+
+  return savedOrg;
 }

@@ -7,6 +7,8 @@ import app from "../../src/app.js";
 import User from "../../src/models/User.js";
 import Report from "../../src/models/Report.js";
 import Notification from "../../src/models/Notification.js";
+import Resource from "../../src/models/Resource.js";
+import requestModel from "../../src/models/Request.js";
 import reportService from "../../src/services/reportService.js";
 
 const JWT_SECRET = "test-jwt-secret-for-testing-only-12345";
@@ -44,6 +46,26 @@ describe("Task 4.B — Reports Service & Endpoints Test Suite", () => {
 
   beforeEach(() => {
     mock.restoreAll();
+
+    // Mock Resource.findById
+    mock.method(Resource, "findById", (id) => {
+      const strId = String(id);
+      const doc = strId === existingResourceId ? { _id: existingResourceId, title: "Mock Resource" } : null;
+      return {
+        ...doc,
+        lean: async () => doc,
+      };
+    });
+
+    // Mock requestModel.findById
+    mock.method(requestModel, "findById", (id) => {
+      const strId = String(id);
+      const doc = strId === existingRequestId ? { _id: existingRequestId, title: "Mock Request" } : null;
+      return {
+        ...doc,
+        lean: async () => doc,
+      };
+    });
 
     // Default collection mock for un-modeled collections (resources, requests)
     mock.method(mongoose.connection, "collection", (name) => {
@@ -104,14 +126,9 @@ describe("Task 4.B — Reports Service & Endpoints Test Suite", () => {
     });
 
     test("validateReportTarget: returns true for existing resource target in collection", async () => {
-      mock.method(mongoose.connection, "collection", (name) => {
-        if (name === "resources") {
-          return {
-            findOne: async ({ _id }) =>
-              String(_id) === existingResourceId ? { _id, title: "Drill" } : null,
-          };
-        }
-        return { findOne: async () => null };
+      mock.method(Resource, "findById", (id) => {
+        const doc = String(id) === existingResourceId ? { _id: id, title: "Drill" } : null;
+        return { lean: async () => doc };
       });
 
       const exists = await reportService.validateReportTarget("resource", existingResourceId);
@@ -119,14 +136,9 @@ describe("Task 4.B — Reports Service & Endpoints Test Suite", () => {
     });
 
     test("validateReportTarget: returns false for non-existent resource target in collection", async () => {
-      mock.method(mongoose.connection, "collection", (name) => {
-        if (name === "resources") {
-          return {
-            findOne: async ({ _id }) =>
-              String(_id) === existingResourceId ? { _id, title: "Drill" } : null,
-          };
-        }
-        return { findOne: async () => null };
+      mock.method(Resource, "findById", (id) => {
+        const doc = String(id) === existingResourceId ? { _id: id, title: "Drill" } : null;
+        return { lean: async () => doc };
       });
 
       const exists = await reportService.validateReportTarget("resource", missingTargetId);
@@ -134,14 +146,9 @@ describe("Task 4.B — Reports Service & Endpoints Test Suite", () => {
     });
 
     test("validateReportTarget: returns true for existing request target in collection", async () => {
-      mock.method(mongoose.connection, "collection", (name) => {
-        if (name === "requests") {
-          return {
-            findOne: async ({ _id }) =>
-              String(_id) === existingRequestId ? { _id, title: "Need ladder" } : null,
-          };
-        }
-        return { findOne: async () => null };
+      mock.method(requestModel, "findById", (id) => {
+        const doc = String(id) === existingRequestId ? { _id: id, title: "Need ladder" } : null;
+        return { lean: async () => doc };
       });
 
       const exists = await reportService.validateReportTarget("request", existingRequestId);
@@ -149,14 +156,9 @@ describe("Task 4.B — Reports Service & Endpoints Test Suite", () => {
     });
 
     test("validateReportTarget: returns false for non-existent request target in collection", async () => {
-      mock.method(mongoose.connection, "collection", (name) => {
-        if (name === "requests") {
-          return {
-            findOne: async ({ _id }) =>
-              String(_id) === existingRequestId ? { _id, title: "Need ladder" } : null,
-          };
-        }
-        return { findOne: async () => null };
+      mock.method(requestModel, "findById", (id) => {
+        const doc = String(id) === existingRequestId ? { _id: id, title: "Need ladder" } : null;
+        return { lean: async () => doc };
       });
 
       const exists = await reportService.validateReportTarget("request", missingTargetId);

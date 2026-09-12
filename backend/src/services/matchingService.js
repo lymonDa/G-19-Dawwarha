@@ -7,6 +7,7 @@ import { buildResourceQuery } from "../utils/resourceQueryBuilder.js";
 import { transitionResource } from "./resourceLifecycleService.js";
 import { transitionRequest } from "./requestLifecycleService.js";
 import { createHandoverForMatch } from "./handoverService.js";
+import notificationService from "./notificationService.js";
 import isValidObjectId from "../utils/objectId.js";
 
 const makeError = (statusCode, code, message) =>
@@ -184,9 +185,23 @@ const generateMatches = async (resourceId) => {
     )
   );
 
-  return savedMatches
-    .filter((match) => match !== null)
-    .sort((a, b) => b.score - a.score);
+  const newlyCreated = savedMatches.filter((match) => match !== null);
+
+  for (const match of newlyCreated) {
+    try {
+      await notificationService.notify({
+        recipientId: match.requesterId,
+        type: "match_created",
+        title: "New Match Found",
+        message: `A potential match has been proposed for your request with a score of ${Math.round(match.score * 100)}%.`,
+        relatedEntity: { type: "match", id: match._id },
+      });
+    } catch {
+      // Non-fatal notification error
+    }
+  }
+
+  return newlyCreated.sort((a, b) => b.score - a.score);
 };
 
 /**
@@ -256,6 +271,24 @@ const acceptMatch = async (matchId, actingUser) => {
     const handover = await createHandoverForMatch(match, session);
 
     await session.commitTransaction();
+
+    // Emit match_accepted notification to the counter-party after successful transaction commit
+    const otherParticipantId =
+      String(actingUser._id) === String(match.providerId)
+        ? match.requesterId
+        : match.providerId;
+
+    try {
+      await notificationService.notify({
+        recipientId: otherParticipantId,
+        type: "match_accepted",
+        title: "Match Accepted",
+        message: "Your match has been accepted and handover transfer is now in progress.",
+        relatedEntity: { type: "match", id: match._id },
+      });
+    } catch {
+      // Non-fatal notification error
+    }
 
     return {
       match,
