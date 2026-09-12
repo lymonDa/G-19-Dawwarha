@@ -3,8 +3,8 @@
     "mongodb": "^7.6.0",
     "nodemon": "^3.1.14"
   }
-}
-  },
+
+  ,
   "scripts": {
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
