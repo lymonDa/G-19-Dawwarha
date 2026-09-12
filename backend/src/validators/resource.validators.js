@@ -34,8 +34,11 @@ export const createResourceValidator = [
     .withMessage("Quantity must be greater than 0"),
 
   body("categoryId")
+    .notEmpty()
+    .withMessage("Category not found or inactive")
+    .bail()
     .isMongoId()
-    .withMessage("Invalid category ID format")
+    .withMessage("Category not found or inactive")
     .bail()
     .custom(async (value) => {
       const category = await Category.findById(value);
@@ -94,6 +97,11 @@ export const createResourceValidator = [
     .isMongoId()
     .withMessage("Invalid organization ID format"),
 
+  body("organizationId")
+    .optional({ nullable: true })
+    .isMongoId()
+    .withMessage("Invalid organization ID format"),
+
   body("safetyDisclosure")
     .optional({ nullable: true })
     .isString()
@@ -128,7 +136,7 @@ export const updateResourceValidator = [
   body("categoryId")
     .optional()
     .isMongoId()
-    .withMessage("Invalid category ID format")
+    .withMessage("Category not found or inactive")
     .bail()
     .custom(async (value) => {
       const category = await Category.findById(value);
@@ -195,7 +203,5 @@ export const updateResourceStatusValidator = [
     .bail()
     .isString()
     .withMessage("Action must be a string")
-    .bail()
-    .isIn(["publish", "markAvailable", "markUnavailable", "cancel", "reopen"])
-    .withMessage("Invalid action"),
+    .trim(),
 ];

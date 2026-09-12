@@ -43,7 +43,16 @@ const transitions = {
   expired: {},
 };
 
-const TERMINAL_STATES = ["completed", "impact_recorded", "cancelled", "expired"];
+const SYSTEM_ONLY_ACTIONS = [
+  "expire",
+  "match",
+  "logImpact",
+  "markAvailable",
+  "release",
+  "startHandover",
+];
+
+const TERMINAL_STATES = ["impact_recorded", "cancelled", "expired"];
 
 const makeError = (statusCode, code, message) =>
   Object.assign(new Error(message), { statusCode, code });
@@ -69,7 +78,30 @@ export async function transitionResource(resource, action, actor, options = {}) 
     );
   }
 
-  if (actor) {
+  const allowedActions = transitions[currentStatus];
+  const nextStatus = allowedActions ? allowedActions[action] : undefined;
+
+  if (!nextStatus) {
+    throw makeError(
+      409,
+      "INVALID_TRANSITION",
+      `Invalid transition: ${currentStatus} -> ${action}`
+    );
+  }
+
+  // System-only actions enforcement (cannot be manually triggered by regular users or admins)
+  if (SYSTEM_ONLY_ACTIONS.includes(action)) {
+    const isSystem = Boolean(
+      actor && (actor.role === "system" || actor === "system" || actor.isSystem === true)
+    );
+    if (!isSystem) {
+      throw makeError(
+        403,
+        "FORBIDDEN",
+        `Action '${action}' can only be triggered by the system.`
+      );
+    }
+  } else if (actor) {
     const isAdmin = actor.role === "admin";
     const isOwner = resource.providerId && String(resource.providerId) === String(actor._id);
 
@@ -80,17 +112,6 @@ export async function transitionResource(resource, action, actor, options = {}) 
         "You don't have permission to transition this resource."
       );
     }
-  }
-
-  const allowedActions = transitions[currentStatus];
-  const nextStatus = allowedActions ? allowedActions[action] : undefined;
-
-  if (!nextStatus) {
-    throw makeError(
-      409,
-      "INVALID_TRANSITION",
-      `Invalid transition: ${currentStatus} -> ${action}`
-    );
   }
 
   resource.status = nextStatus;

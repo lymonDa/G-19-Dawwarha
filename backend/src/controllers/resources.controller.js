@@ -2,6 +2,7 @@ import Resource from "../models/Resource.js";
 import Organization from "../models/Organization.js";
 import { transitionResource } from "../services/resourceLifecycleService.js";
 import { getPagination, buildPagination } from "../utils/pagination.js";
+import isValidObjectId from "../utils/objectId.js";
 
 const makeError = (statusCode, code, message) =>
   Object.assign(new Error(message), { statusCode, code });
@@ -11,6 +12,13 @@ const makeError = (statusCode, code, message) =>
  */
 export async function loadResource(req, res, next) {
   try {
+    if (!isValidObjectId(req.params.id)) {
+      return res.status(400).json({
+        success: false,
+        error: { code: "INVALID_ID", message: "Invalid resource ID format." },
+      });
+    }
+
     const resource = await Resource.findById(req.params.id);
     if (!resource) {
       return res.status(404).json({
@@ -27,16 +35,59 @@ export async function loadResource(req, res, next) {
 
 /**
  * STEP 1: GET /api/resources (Public)
- * Filter and list browseable resources
+ * Filter and list browseable resources with query sanitization
  */
 export async function getResources(req, res, next) {
   try {
     const { category, city, area, status } = req.query;
     const filter = {};
 
+    const allowedQueryKeys = ["category", "city", "area", "status", "page", "limit"];
+
+    // Whitelist supported query keys and disallow operators / nested injection
+    for (const [key, val] of Object.entries(req.query)) {
+      if (!allowedQueryKeys.includes(key) || key.includes("$") || key.includes("[") || key.includes("]")) {
+        return res.status(400).json({
+          success: false,
+          error: { code: "INVALID_QUERY", message: `Invalid or unsupported query parameter '${key}'.` },
+        });
+      }
+      if (typeof val === "object" && val !== null) {
+        return res.status(400).json({
+          success: false,
+          error: { code: "INVALID_QUERY", message: `Invalid query parameter for '${key}'.` },
+        });
+      }
+      if (typeof val === "string" && (val.includes("$") || val.includes("{") || val.includes("}"))) {
+        return res.status(400).json({
+          success: false,
+          error: { code: "INVALID_QUERY", message: "Query parameter contains invalid operators." },
+        });
+      }
+    }
+
     // Status filter - default to browsable statuses
     if (status) {
       if (typeof status !== "string") {
+        return res.status(400).json({
+          success: false,
+          error: { code: "INVALID_STATUS", message: "Invalid status parameter" },
+        });
+      }
+      const allowedStatuses = [
+        "draft",
+        "published",
+        "available",
+        "matched",
+        "accepted",
+        "in_handover",
+        "completed",
+        "impact_recorded",
+        "expired",
+        "cancelled",
+        "unavailable",
+      ];
+      if (!allowedStatuses.includes(status)) {
         return res.status(400).json({
           success: false,
           error: { code: "INVALID_STATUS", message: "Invalid status parameter" },
@@ -48,15 +99,21 @@ export async function getResources(req, res, next) {
     }
 
     if (category) {
+      if (!isValidObjectId(category)) {
+        return res.status(400).json({
+          success: false,
+          error: { code: "INVALID_CATEGORY", message: "Category not found or inactive" },
+        });
+      }
       filter.categoryId = category;
     }
 
     if (city) {
-      filter["location.city"] = city.trim();
+      filter["location.city"] = String(city).trim();
     }
 
     if (area) {
-      filter["location.area"] = area.trim();
+      filter["location.area"] = String(area).trim();
     }
 
     const { page, limit, skip } = getPagination(req.query);
@@ -97,8 +154,16 @@ export function getResource(req, res) {
 export async function createResource(req, res, next) {
   try {
     // If published on behalf of an organization, verify ownership and approved status
-    if (req.body.providerOrgId) {
-      const org = await Organization.findById(req.body.providerOrgId);
+    const orgId = req.body.providerOrgId || req.body.organizationId;
+    if (orgId) {
+      if (!isValidObjectId(orgId)) {
+        return res.status(400).json({
+          success: false,
+          error: { code: "INVALID_ID", message: "Invalid organization ID format." },
+        });
+      }
+
+      const org = await Organization.findById(orgId);
       if (!org) {
         return res.status(404).json({
           success: false,
@@ -107,14 +172,18 @@ export async function createResource(req, res, next) {
       }
 
       const isOrgOwner = String(org.ownerUserId) === String(req.user._id);
-      const isApproved = org.verification?.status === "approved";
+      const isApproved =
+        org.verification?.status === "approved" ||
+        org.status === "approved" ||
+        org.status === "verified";
 
       if (!isOrgOwner || !isApproved) {
         return res.status(403).json({
           success: false,
           error: {
             code: "FORBIDDEN",
-            message: "Cannot publish on behalf of an unverified organization or an organization you do not own.",
+            message:
+              "Cannot publish on behalf of an unverified organization or an organization you do not own.",
           },
         });
       }
@@ -122,7 +191,7 @@ export async function createResource(req, res, next) {
 
     const resource = await Resource.create({
       providerId: req.user._id,
-      providerOrgId: req.body.providerOrgId || null,
+      providerOrgId: orgId || null,
       categoryId: req.body.categoryId,
       title: req.body.title.trim(),
       description: req.body.description.trim(),
@@ -156,7 +225,17 @@ export async function updateResource(req, res, next) {
   try {
     const resource = req.resource;
 
-    const terminalStates = ["completed", "impact_recorded", "cancelled"];
+    if (req.body.status !== undefined) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: "DIRECT_STATUS_UPDATE_FORBIDDEN",
+          message: "Status cannot be updated directly. Use lifecycle transition endpoints.",
+        },
+      });
+    }
+
+    const terminalStates = ["completed", "impact_recorded", "cancelled", "expired"];
     if (terminalStates.includes(resource.status)) {
       return res.status(409).json({
         success: false,

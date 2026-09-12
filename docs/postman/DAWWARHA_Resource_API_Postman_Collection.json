@@ -1,139 +1,226 @@
 {
   "info": {
-    "name": "DAWWARHA — Resource API Collection",
-    "description": "Postman API collection for DAWWARHA Resource Supply Endpoints (Engineer 2), including soft-cancellation via DELETE /api/resources/:id.",
+    "name": "DAWWARHA — Resource Lifecycle & Management API Collection",
+    "description": "Comprehensive Postman API collection for Engineer 2 Resource Management in DAWWARHA. Follows the authoritative 10-step manual lifecycle walkthrough: Create -> Read/List -> Transition -> Update Fields -> Reject Direct Status -> Reject Invalid Transition -> Reject Non-Owner -> Soft Cancel via DELETE -> Reject Terminal Edit -> Verify Document Still Exists.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
-      "name": "DELETE /api/resources/:id (Soft Cancellation)",
+      "name": "Step 1: Create Resource (POST /api/resources)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+              "const jsonData = pm.response.json();",
+              "if (jsonData && jsonData.data && jsonData.data._id) {",
+              "    pm.collectionVariables.set('resource_id', jsonData.data._id);",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Industrial Surplus Wood Beams\",\n  \"description\": \"Clean seasoned pine beams for sustainable building.\",\n  \"quantity\": 50,\n  \"categoryId\": \"{{category_id}}\",\n  \"location\": {\n    \"city\": \"Amman\",\n    \"area\": \"Shmeisani\"\n  },\n  \"availabilityWindow\": {\n    \"start\": \"2026-10-01T08:00:00.000Z\",\n    \"end\": \"2026-10-31T18:00:00.000Z\"\n  }\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/resources",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources"]
+        },
+        "description": "Authenticated provider creates a new resource. Returns 201 Created with initial status='draft'."
+      }
+    },
+    {
+      "name": "Step 2.a: List Resources (Public GET /api/resources)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/resources?city=Amman",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources"],
+          "query": [
+            { "key": "city", "value": "Amman" }
+          ]
+        },
+        "description": "Public unauthenticated endpoint to browse available and published resources."
+      }
+    },
+    {
+      "name": "Step 2.b: Get Single Resource (Public GET /api/resources/:id)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/resources/{{resource_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources", "{{resource_id}}"]
+        },
+        "description": "Public unauthenticated lookup of single resource by ID."
+      }
+    },
+    {
+      "name": "Step 3: Valid Lifecycle Transition (PUT /api/resources/:id/status - publish)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"action\": \"publish\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/resources/{{resource_id}}/status",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources", "{{resource_id}}", "status"]
+        },
+        "description": "Executes state transition 'publish' via resourceLifecycleService. Status changes from 'draft' to 'published'."
+      }
+    },
+    {
+      "name": "Step 4: Update Allowed Fields (PUT /api/resources/:id)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Updated Seasoned Pine Beams (50 units)\",\n  \"quantity\": 60\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/resources/{{resource_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources", "{{resource_id}}"]
+        },
+        "description": "Owner updates permitted resource fields (title, description, quantity, location, availabilityWindow). Status cannot be changed here."
+      }
+    },
+    {
+      "name": "Step 5: Direct Status Update Attack (PUT /api/resources/:id - status: completed)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"completed\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/resources/{{resource_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources", "{{resource_id}}"]
+        },
+        "description": "CRITICAL INVARIANT TEST: Attempting to directly modify status via CRUD PUT is rejected with HTTP 400 DIRECT_STATUS_UPDATE_FORBIDDEN."
+      }
+    },
+    {
+      "name": "Step 6: Invalid Lifecycle Transition (PUT /api/resources/:id/status - action: complete on published)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"action\": \"complete\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/resources/{{resource_id}}/status",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources", "{{resource_id}}", "status"]
+        },
+        "description": "Attempts invalid transition 'published -> complete'. Rejected with HTTP 409 INVALID_TRANSITION and specific lifecycle service message."
+      }
+    },
+    {
+      "name": "Step 7: Ownership Authorization Rejection (PUT /api/resources/:id with non-owner)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{non_owner_token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Malicious Tamper Title\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/resources/{{resource_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources", "{{resource_id}}"]
+        },
+        "description": "Non-owner regular user attempts to edit resource. Rejected with HTTP 403 FORBIDDEN."
+      }
+    },
+    {
+      "name": "Step 8: Cancel Resource (DELETE /api/resources/:id - Soft Cancellation)",
       "request": {
         "method": "DELETE",
         "header": [
-          {
-            "key": "Authorization",
-            "value": "Bearer {{jwt_token}}",
-            "type": "text"
-          }
+          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" }
         ],
         "url": {
-          "raw": "{{base_url}}/api/resources/:id",
+          "raw": "{{base_url}}/api/resources/{{resource_id}}",
           "host": ["{{base_url}}"],
-          "path": ["api", "resources", ":id"],
-          "variable": [
-            {
-              "key": "id",
-              "value": "660000000000000000000010",
-              "description": "MongoDB ObjectId of the resource to cancel"
-            }
-          ]
+          "path": ["api", "resources", "{{resource_id}}"]
         },
-        "description": "CRITICAL: This endpoint performs a SOFT CANCELLATION, NOT a hard delete. The resource document remains in MongoDB with status='cancelled'. Internally invokes resourceLifecycleService.transitionResource with action='cancel'. Allowed for resource owner or admin. Rejects completed/impact_recorded/already-cancelled resources with 409 Conflict."
-      },
-      "response": [
-        {
-          "name": "200 OK — Cancelled Successfully",
-          "originalRequest": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{jwt_token}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/resources/:id",
-              "host": ["{{base_url}}"],
-              "path": ["api", "resources", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "660000000000000000000010"
-                }
-              ]
-            }
-          },
-          "status": "OK",
-          "code": 200,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "body": "{\n  \"success\": true,\n  \"message\": \"Resource cancelled successfully\",\n  \"data\": {\n    \"_id\": \"660000000000000000000010\",\n    \"providerId\": \"660000000000000000000001\",\n    \"categoryId\": \"660000000000000000000005\",\n    \"title\": \"Industrial Surplus Wood Pallets\",\n    \"description\": \"50 clean wooden pallets available for repurposing\",\n    \"quantity\": 50,\n    \"location\": {\n      \"city\": \"Amman\",\n      \"area\": \"Al-Bayader\"\n    },\n    \"availabilityWindow\": {\n      \"start\": \"2026-10-01T08:00:00.000Z\",\n      \"end\": \"2026-10-31T18:00:00.000Z\"\n    },\n    \"status\": \"cancelled\",\n    \"createdAt\": \"2026-09-12T10:00:00.000Z\",\n    \"updatedAt\": \"2026-09-12T16:30:00.000Z\"\n  }\n}"
+        "description": "CRITICAL: Soft-cancellation! Does NOT physically delete the document from MongoDB. Invokes transitionResource(resource, 'cancel', req.user). Status becomes 'cancelled'."
+      }
+    },
+    {
+      "name": "Step 9: Terminal-State Edit Rejection (PUT /api/resources/:id on cancelled)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+          { "key": "Content-Type", "value": "application/json", "type": "text" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Edit After Cancellation\"\n}"
         },
-        {
-          "name": "409 Conflict — Already Cancelled / Terminal State",
-          "originalRequest": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{jwt_token}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/resources/:id",
-              "host": ["{{base_url}}"],
-              "path": ["api", "resources", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "660000000000000000000010"
-                }
-              ]
-            }
-          },
-          "status": "Conflict",
-          "code": 409,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"INVALID_TRANSITION\",\n    \"message\": \"Cannot transition resource in terminal state: 'cancelled'.\"\n  }\n}"
+        "url": {
+          "raw": "{{base_url}}/api/resources/{{resource_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources", "{{resource_id}}"]
         },
-        {
-          "name": "403 Forbidden — Non-Owner User",
-          "originalRequest": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{jwt_token}}",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/api/resources/:id",
-              "host": ["{{base_url}}"],
-              "path": ["api", "resources", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "660000000000000000000010"
-                }
-              ]
-            }
-          },
-          "status": "Forbidden",
-          "code": 403,
-          "_postman_previewlanguage": "json",
-          "header": [
-            {
-              "key": "Content-Type",
-              "value": "application/json"
-            }
-          ],
-          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"FORBIDDEN\",\n    \"message\": \"You don't have permission to do that.\"\n  }\n}"
-        }
-      ]
+        "description": "Attempts to edit a terminal-state resource ('cancelled'). Rejected with HTTP 409 INVALID_STATUS ('This listing can no longer be edited')."
+      }
+    },
+    {
+      "name": "Step 10: Verify Cancelled Document Still Exists (GET /api/resources/:id)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/resources/{{resource_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources", "{{resource_id}}"]
+        },
+        "description": "VERIFY DOCUMENT PERSISTENCE: Fetches the cancelled resource. Returns HTTP 200 with status='cancelled'. Proves DELETE was a soft cancellation, not a hard delete!"
+      }
     }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000", "type": "string" },
+    { "key": "provider_token", "value": "", "type": "string" },
+    { "key": "non_owner_token", "value": "", "type": "string" },
+    { "key": "admin_token", "value": "", "type": "string" },
+    { "key": "category_id", "value": "660000000000000000000005", "type": "string" },
+    { "key": "resource_id", "value": "660000000000000000000010", "type": "string" }
   ]
 }
