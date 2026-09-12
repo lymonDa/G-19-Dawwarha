@@ -53,6 +53,21 @@ export async function confirm(handoverId, side, userId) {
   return savedHandover;
 }
 
-const handoverService = { confirm };
+export async function createHandoverForMatch(match, session = null) {
+  const handoverData = {
+    matchId: match._id,
+    resourceId: match.resourceId,
+    requestId: match.requestId,
+    providerId: match.providerId,
+    seekerId: match.requesterId,
+    status: "in_progress",
+  };
+  const options = session ? { session } : {};
+  const [handover] = await Handover.create([handoverData], options);
+  return handover;
+}
+
+const handoverService = { confirm, createHandoverForMatch };
 export default handoverService;
+
 

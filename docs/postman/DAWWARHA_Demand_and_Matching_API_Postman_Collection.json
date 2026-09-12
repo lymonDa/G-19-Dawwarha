@@ -1,0 +1,440 @@
+{
+  "info": {
+    "name": "DAWWARHA — Demand & Matching API Collection",
+    "description": "Authoritative Postman Collection for Engineer 3 in the DAWWARHA platform. Covers Demand Management (Task 3.A — Request CRUD, lifecycle, category verification, organization verification, soft-delete), Matching Engine (Task 3.B — Candidate generation with weighted scoring, user inbox isolation, admin override), and Atomic Match Coordination (Task 3.B — Multi-document transaction across match, resource, request, and handover).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000", "type": "string" },
+    { "key": "donor_token", "value": "", "type": "string" },
+    { "key": "requester_token", "value": "", "type": "string" },
+    { "key": "admin_token", "value": "", "type": "string" },
+    { "key": "category_id", "value": "", "type": "string" },
+    { "key": "resource_id", "value": "", "type": "string" },
+    { "key": "request_id", "value": "", "type": "string" },
+    { "key": "match_id", "value": "", "type": "string" },
+    { "key": "handover_id", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "1. Authentication & Setup",
+      "item": [
+        {
+          "name": "Login as Donor / Provider",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('donor_token', jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"donor@dawwarha.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/auth/login", "host": ["{{base_url}}"], "path": ["api", "auth", "login"] },
+            "description": "Authenticate as a donor/provider to obtain JWT for resource and match operations."
+          }
+        },
+        {
+          "name": "Login as Beneficiary / Requester",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('requester_token', jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ngo@dawwarha.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/auth/login", "host": ["{{base_url}}"], "path": ["api", "auth", "login"] },
+            "description": "Authenticate as a beneficiary/requester to create requests and accept matches."
+          }
+        },
+        {
+          "name": "Login as Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.data && jsonData.data.token) {",
+                  "    pm.collectionVariables.set('admin_token', jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@dawwarha.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/auth/login", "host": ["{{base_url}}"], "path": ["api", "auth", "login"] },
+            "description": "Authenticate as an admin for system-wide viewing and cross-tenant actions."
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Demand Management — Requests (Task 3.A)",
+      "item": [
+        {
+          "name": "POST /api/requests (Create Request - Draft)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "    pm.collectionVariables.set('request_id', jsonData.data._id);",
+                  "}",
+                  "pm.test('Defaults status to draft (no mass assignment)', function () {",
+                  "    pm.expect(jsonData.data.status).to.eql('draft');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{requester_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Urgent Need: Commercial Food Containers\",\n  \"description\": \"Clean containers needed for food bank daily distribution center.\",\n  \"categoryId\": \"{{category_id}}\",\n  \"quantity\": 50,\n  \"urgency\": \"high\",\n  \"location\": {\n    \"city\": \"Amman\",\n    \"area\": \"Downtown\"\n  }\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/requests", "host": ["{{base_url}}"], "path": ["api", "requests"] },
+            "description": "Create a new demand request. Server validates category active status, assigns requesterId from JWT, and sets status to draft."
+          }
+        },
+        {
+          "name": "POST /api/requests (Negative Test: Inactive Category)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 400', function () { pm.response.to.have.status(400); });",
+                  "const jsonData = pm.response.json();",
+                  "pm.test('Error indicates inactive or not found category', function () {",
+                  "    pm.expect(jsonData.success).to.be.false;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{requester_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Invalid Request\",\n  \"description\": \"Request referencing inactive category\",\n  \"categoryId\": \"660000000000000000000099\",\n  \"quantity\": 10,\n  \"location\": { \"city\": \"Amman\" }\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/requests", "host": ["{{base_url}}"], "path": ["api", "requests"] },
+            "description": "Verifies that submitting a non-existent or inactive category returns a 400 validation error."
+          }
+        },
+        {
+          "name": "GET /api/requests (List with Filters & Pagination)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{requester_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/requests?page=1&limit=20&city=Amman",
+              "host": ["{{base_url}}"],
+              "path": ["api", "requests"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "city", "value": "Amman" }
+              ]
+            },
+            "description": "List published demand requests with query filtering by city, category, or status, returning standardized pagination metadata."
+          }
+        },
+        {
+          "name": "GET /api/requests/:id (Fetch Single Request)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{requester_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/requests/{{request_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "requests", "{{request_id}}"]
+            },
+            "description": "Fetch a specific request by its ObjectId."
+          }
+        },
+        {
+          "name": "PUT /api/requests/:id (Update Request Details)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{requester_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Food Containers Request\",\n  \"description\": \"Updated description with specific volume requirements.\",\n  \"quantity\": 75,\n  \"urgency\": \"critical\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/requests/{{request_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "requests", "{{request_id}}"]
+            },
+            "description": "Allows the request owner or an admin to update non-lifecycle fields. Protected against IDOR and terminal state mutations."
+          }
+        },
+        {
+          "name": "DELETE /api/requests/:id (Soft Cancel Request)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const jsonData = pm.response.json();",
+                  "pm.test('Request is soft-cancelled', function () {",
+                  "    pm.expect(jsonData.data.status).to.eql('cancelled');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{requester_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/requests/{{request_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "requests", "{{request_id}}"]
+            },
+            "description": "Performs soft cancellation of a request. Changes status to 'cancelled' without hard-deleting the MongoDB document."
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Matching Engine & Inbox (Task 3.B)",
+      "item": [
+        {
+          "name": "POST /api/matches/:resourceId/generate (Generate Matches)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.data && jsonData.data.length > 0) {",
+                  "    pm.collectionVariables.set('match_id', jsonData.data[0]._id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{donor_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/matches/{{resource_id}}/generate",
+              "host": ["{{base_url}}"],
+              "path": ["api", "matches", "{{resource_id}}", "generate"]
+            },
+            "description": "Trigger the matching engine on a supply resource. Computes 5-dimension weighted match scores against eligible published requests and saves matches with status 'proposed'."
+          }
+        },
+        {
+          "name": "GET /api/matches (User Inbox Isolation)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{donor_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/matches?page=1&limit=20",
+              "host": ["{{base_url}}"],
+              "path": ["api", "matches"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" }
+              ]
+            },
+            "description": "Fetches only matches where the authenticated user is either providerId or requesterId. Ensures multi-tenant inbox isolation."
+          }
+        },
+        {
+          "name": "GET /api/matches?all=true (Admin Full Overview)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{admin_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/matches?all=true&limit=50",
+              "host": ["{{base_url}}"],
+              "path": ["api", "matches"],
+              "query": [
+                { "key": "all", "value": "true" },
+                { "key": "limit", "value": "50" }
+              ]
+            },
+            "description": "Admin override to view all matches across all platform users and organizations."
+          }
+        },
+        {
+          "name": "PUT /api/matches/:id/accept (Atomic Acceptance & Handover Creation)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.data && jsonData.data.handoverId) {",
+                  "    pm.collectionVariables.set('handover_id', jsonData.data.handoverId);",
+                  "}",
+                  "pm.test('Match status transitions to accepted', function () {",
+                  "    pm.expect(jsonData.data.match.status).to.eql('accepted');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{donor_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/matches/{{match_id}}/accept",
+              "host": ["{{base_url}}"],
+              "path": ["api", "matches", "{{match_id}}", "accept"]
+            },
+            "description": "Atomically accepts a proposed match inside a MongoDB multi-document transaction. Transitions match -> accepted, resource -> accepted, request -> accepted, and creates a handover document with status 'in_progress'."
+          }
+        },
+        {
+          "name": "PUT /api/matches/:id/accept (Negative Test: Duplicate Accept)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 409', function () { pm.response.to.have.status(409); });",
+                  "const jsonData = pm.response.json();",
+                  "pm.test('Error code is INVALID_STATUS', function () {",
+                  "    pm.expect(jsonData.error.code).to.eql('INVALID_STATUS');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{donor_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/matches/{{match_id}}/accept",
+              "host": ["{{base_url}}"],
+              "path": ["api", "matches", "{{match_id}}", "accept"]
+            },
+            "description": "Verifies that attempting to re-accept an already accepted match returns 409 Conflict."
+          }
+        },
+        {
+          "name": "PUT /api/matches/:id/reject (Reject & Release Entities)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const jsonData = pm.response.json();",
+                  "pm.test('Match status transitions to rejected', function () {",
+                  "    pm.expect(jsonData.data.status).to.eql('rejected');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{requester_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/matches/{{match_id}}/reject",
+              "host": ["{{base_url}}"],
+              "path": ["api", "matches", "{{match_id}}", "reject"]
+            },
+            "description": "Rejects a proposed match. Releases any matched resource back to available and request back to published."
+          }
+        },
+        {
+          "name": "PUT /api/matches/:id/reject (Negative Test: Unauthorized Third Party)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 403', function () { pm.response.to.have.status(403); });",
+                  "const jsonData = pm.response.json();",
+                  "pm.test('Error code is FORBIDDEN', function () {",
+                  "    pm.expect(jsonData.error.code).to.eql('FORBIDDEN');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Authorization", "value": "Bearer {{requester_token}}" }],
+            "url": {
+              "raw": "{{base_url}}/api/matches/{{match_id}}/reject",
+              "host": ["{{base_url}}"],
+              "path": ["api", "matches", "{{match_id}}", "reject"]
+            },
+            "description": "Verifies that a user not party to the match (neither provider nor requester nor admin) receives 403 Forbidden."
+          }
+        }
+      ]
+    }
+  ]
+}

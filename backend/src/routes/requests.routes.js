@@ -4,6 +4,7 @@ import validate from "../middleware/validate.js";
 
 import {
   createRequestValidation,
+  updateRequestValidation,
   requestIdValidation,
 } from "../validators/request.validators.js";
 
@@ -40,9 +41,11 @@ requestRouter.put(
   "/:id",
   authenticate,
   requestIdValidation,
+  updateRequestValidation,
   validate,
   updateRequest
 );
+
 
 requestRouter.put(
   "/:id/status",

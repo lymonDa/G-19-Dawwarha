@@ -3,8 +3,8 @@ import authenticate from "../middleware/authenticate.js";
 import validate from "../middleware/validate.js";
 
 import {
-  resourceIdValidator,
-  matchIdValidator,
+  resourceIdValidation,
+  matchIdValidation,
 } from "../validators/match.validators.js";
 
 import {
@@ -19,28 +19,28 @@ matchRouter.use(authenticate);
 
 matchRouter.post(
   "/:resourceId/generate",
-  validate(resourceIdValidator),
+  resourceIdValidation,
+  validate,
   generateResourceMatches
 );
 
 matchRouter.get(
   "/",
- getMatches
+  getMatches
 );
 
 matchRouter.put(
   "/:id/accept",
- validate(matchIdValidator),
+  matchIdValidation,
+  validate,
   acceptMatch
 );
 
 matchRouter.put(
   "/:id/reject",
- validate(matchIdValidator),
+  matchIdValidation,
+  validate,
   rejectMatch
 );
 
 export default matchRouter;
-
-
-

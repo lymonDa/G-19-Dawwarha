@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { calculateScore } from "../../src/services/matchingService.js";
+import { calculateScore, findCandidateResources } from "../../src/services/matchingService.js";
 
 test("calculateScore - same category, same city and area", () => {
   const resource = {
@@ -11,6 +11,10 @@ test("calculateScore - same category, same city and area", () => {
     location: {
       city: "Qena",
       area: "Qena City",
+    },
+    availabilityWindow: {
+      start: new Date(Date.now() - 3600000),
+      end: new Date(Date.now() + 86400000),
     },
   };
 
@@ -84,4 +88,71 @@ test("calculateScore - different category", () => {
   const result = calculateScore(resource, request);
 
   assert.equal(result.scoreBreakdown.category, 0);
+});
+
+test("calculateScore - expired availability window evaluates to 0", () => {
+  const resource = {
+    categoryId: "cat1",
+    quantity: 10,
+    status: "available",
+    location: { city: "Amman", area: "Abdali" },
+    availabilityWindow: {
+      start: new Date(Date.now() - 200000),
+      end: new Date(Date.now() - 100000), // in the past
+    },
+  };
+
+  const request = {
+    categoryId: "cat1",
+    quantity: 5,
+    urgency: "high",
+    location: { city: "Amman", area: "Abdali" },
+  };
+
+  const result = calculateScore(resource, request);
+  assert.equal(result.scoreBreakdown.availability, 0);
+  assert.equal(result.score < 1, true);
+});
+
+test("calculateScore - medium and low urgency scores", () => {
+  const resource = {
+    categoryId: "cat1",
+    quantity: 10,
+    status: "available",
+    location: { city: "Amman", area: "Abdali" },
+  };
+
+  const medRequest = {
+    categoryId: "cat1",
+    quantity: 5,
+    urgency: "medium",
+    location: { city: "Amman", area: "Abdali" },
+  };
+  assert.equal(calculateScore(resource, medRequest).scoreBreakdown.urgency, 0.7);
+
+  const lowRequest = {
+    categoryId: "cat1",
+    quantity: 5,
+    urgency: "low",
+    location: { city: "Amman", area: "Abdali" },
+  };
+  assert.equal(calculateScore(resource, lowRequest).scoreBreakdown.urgency, 0.4);
+});
+
+test("calculateScore - insufficient quantity yields 0 for quantity", () => {
+  const resource = {
+    categoryId: "cat1",
+    quantity: 3,
+    status: "available",
+    location: { city: "Amman", area: "Abdali" },
+  };
+
+  const request = {
+    categoryId: "cat1",
+    quantity: 10, // exceeds available
+    urgency: "high",
+    location: { city: "Amman", area: "Abdali" },
+  };
+
+  assert.equal(calculateScore(resource, request).scoreBreakdown.quantity, 0);
 });

@@ -12,6 +12,10 @@ export const resourceIdValidation = [
     .withMessage("Invalid resource ID")
 ];
 
+// Aliases for compatibility
+export const matchIdValidator = matchIdValidation;
+export const resourceIdValidator = resourceIdValidation;
+
 
 
 
