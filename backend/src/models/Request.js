@@ -89,4 +89,5 @@ requestSchema.index({
 
 const requestModel = mongoose.model("Request", requestSchema);
 
-export default requestModel ;
+export  {requestModel} ;
+export default requestModel;
