@@ -47,6 +47,28 @@ describe("MongoDB foundation", () => {
     assert.ok(error.errors.role);
     assert.ok(error.errors.status);
     assert.equal(invalid.location.area, undefined);
+
+    const legacyRole = new User({
+      name: "Legacy Role",
+      email: "legacy-role@example.com",
+      passwordHash: "hash",
+      role: "provider",
+    });
+    assert.ok(legacyRole.validateSync()?.errors.role);
+  });
+
+  it("provides the shared user stats counters", () => {
+    const user = new User({
+      name: "Stats User",
+      email: "stats@example.com",
+      passwordHash: "hash",
+    });
+    assert.equal(user.role, "user");
+    assert.equal(user.stats.requests, 0);
+    assert.equal(user.stats.completed, 0);
+    assert.equal(user.stats.completedTransfers, 0);
+    assert.equal(user.stats.failedTransfers, 0);
+    assert.equal(user.stats.reputationScore, 0);
   });
 
   it("rejects duplicate email addresses", async () => {
@@ -77,6 +99,23 @@ describe("MongoDB foundation", () => {
     const updated = await transitionVerification(organization._id, "approved", undefined, reviewer._id);
     assert.equal(String(updated.verification.reviewedBy), String(reviewer._id));
     assert.ok(updated.verification.reviewedAt instanceof Date);
+  });
+
+  it("allows approved organizations to be suspended and rejects invalid transitions", async () => {
+    const owner = await User.create({ name: "Lifecycle Owner", email: "lifecycle-owner@example.com", passwordHash: "hash" });
+    const reviewer = await User.create({ name: "Lifecycle Reviewer", email: "lifecycle-reviewer@example.com", passwordHash: "hash", role: "admin" });
+    const organization = await Organization.create({
+      name: "Lifecycle Org",
+      ownerUserId: owner._id,
+      verification: { status: "approved" },
+    });
+
+    const suspended = await transitionVerification(organization._id, "suspended", undefined, reviewer._id);
+    assert.equal(suspended.verification.status, "suspended");
+    await assert.rejects(
+      transitionVerification(organization._id, "approved", undefined, reviewer._id),
+      (error) => error.code === "INVALID_TRANSITION" && error.statusCode === 409,
+    );
   });
 
   it("defines the verification queue and ownership indexes", () => {

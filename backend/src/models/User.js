@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["user", "provider", "seeker", "admin"],
+      enum: ["user", "admin"],
       required: true,
       default: "user",
     },
@@ -53,6 +53,12 @@ const userSchema = new mongoose.Schema(
 
     contactInfo: {
       phone: { type: String, trim: true, maxlength: 30 },
+      email: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Contact email must be valid"],
+      },
       alternateEmail: {
         type: String,
         trim: true,
@@ -88,6 +94,10 @@ const userSchema = new mongoose.Schema(
         default: 0,
       },
       failedTransfers: {
+        type: Number,
+        default: 0,
+      },
+      reputationScore: {
         type: Number,
         default: 0,
       },

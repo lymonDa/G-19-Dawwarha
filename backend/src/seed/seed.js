@@ -7,7 +7,7 @@ import User from "../models/User.js";
 
 const users = [
   { name: "Dawwarha Admin", email: "admin@dawwarha.example", role: "admin" },
-  { name: "Demo Provider", email: "provider@dawwarha.example", role: "provider" },
+  { name: "Demo User", email: "provider@dawwarha.example", role: "user" },
   { name: "Demo User", email: "user@dawwarha.example", role: "user" },
 ];
 
@@ -30,7 +30,7 @@ const seed = async () => {
       $setOnInsert: {
         name: "Dawwarha Demo Organization",
         description: "Pre-approved organization for local development.",
-        ownerUserId: seededUsers.provider._id,
+        ownerUserId: seededUsers.user._id,
         contactInfo: { email: "contact@dawwarha.example" },
         verification: { status: "approved", reviewedBy: seededUsers.admin._id, reviewedAt: new Date() },
       },
