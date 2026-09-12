@@ -44,6 +44,23 @@ const userSchema = new mongoose.Schema(
       },
     },
 
+    address: {
+      street: { type: String, trim: true, maxlength: 200 },
+      city: { type: String, trim: true, maxlength: 100 },
+      area: { type: String, trim: true, maxlength: 100 },
+      country: { type: String, trim: true, maxlength: 100 },
+    },
+
+    contactInfo: {
+      phone: { type: String, trim: true, maxlength: 30 },
+      alternateEmail: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Alternate email must be valid"],
+      },
+    },
+
     status: {
       type: String,
       enum: ["active", "suspended"],
@@ -66,7 +83,14 @@ const userSchema = new mongoose.Schema(
         type: Number,
         default: 0,
       },
-
+      completedTransfers: {
+        type: Number,
+        default: 0,
+      },
+      failedTransfers: {
+        type: Number,
+        default: 0,
+      },
     },
 
     reputationScore: {

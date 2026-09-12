@@ -4,7 +4,7 @@ const makeError = (statusCode, code, message) => Object.assign(new Error(message
 const transitions = {
   pending: { approved: "approved", rejected: "rejected" },
   rejected: { approved: "approved", rejected: "rejected" },
-  approved: {},
+  approved: { suspended: "suspended" },
   suspended: {},
 };
 

@@ -2,9 +2,9 @@ import assert from "node:assert/strict";
 import { after, before, describe, it } from "node:test";
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
-import Organization from "../src/models/Organization.js";
-import { transitionVerification } from "../src/services/organizationService.js";
-import User from "../src/models/User.js";
+import Organization from "../../src/models/Organization.js";
+import { transitionVerification } from "../../src/services/organizationService.js";
+import User from "../../src/models/User.js";
 
 let mongo;
 

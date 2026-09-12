@@ -25,6 +25,10 @@ export const registerValidator = [
     .withMessage("Password is required")
     .isLength({ min: MIN_PASSWORD_LENGTH })
     .withMessage(`Password must be at least ${MIN_PASSWORD_LENGTH} characters`),
+
+  body("location").optional().isObject().withMessage("Location must be an object"),
+  body("address").optional().isObject().withMessage("Address must be an object"),
+  body("contactInfo").optional().isObject().withMessage("Contact info must be an object"),
 ];
 
 export const loginValidator = [

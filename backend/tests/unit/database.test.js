@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import mongoose from "mongoose";
-import connectDB from "../src/config/database.js";
+import connectDB from "../../src/config/database.js";
 
 afterEach(async () => {
   delete process.env.MONGODB_URI;

@@ -4,11 +4,11 @@ import Organization from "../models/Organization.js";
 import authenticate from "../middleware/authenticate.js";
 import { requireOwnership, requireRole } from "../middleware/authorize.js";
 import validate from "../middleware/validate.js";
-import { createOrganizationValidator, updateOrganizationValidator, verifyOrganizationValidator } from "../validators/organization.validators.js";
+import { createOrganizationValidator, organizationIdValidator, updateOrganizationValidator, verifyOrganizationValidator } from "../validators/organization.validators.js";
 
 const router = Router();
 router.post("/", authenticate, createOrganizationValidator, validate, controller.create);
-router.get("/:id", controller.getById);
-router.put("/:id", authenticate, requireOwnership(async (req) => (await Organization.findById(req.params.id))?.ownerUserId), updateOrganizationValidator, validate, controller.update);
-router.post("/:id/verify", authenticate, requireRole("admin"), verifyOrganizationValidator, validate, controller.verify);
+router.get("/:id", organizationIdValidator, validate, controller.getById);
+router.put("/:id", authenticate, organizationIdValidator, validate, requireOwnership(async (req) => (await Organization.findById(req.params.id))?.ownerUserId), updateOrganizationValidator, validate, controller.update);
+router.post("/:id/verify", authenticate, requireRole("admin"), organizationIdValidator, validate, verifyOrganizationValidator, validate, controller.verify);
 export default router;
