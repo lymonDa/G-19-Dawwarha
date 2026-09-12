@@ -126,8 +126,6 @@ matchSchema.index(
   }
 );
 
-const matchModel = mongoose.model("matches", matchSchema);
+const matchModel = mongoose.model("Match", matchSchema);
 
-export  {
-  matchModel,
-};
+export  default matchModel;

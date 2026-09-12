@@ -1,12 +1,11 @@
 import mongoose from "mongoose";
-import { matchModel } from "../models/Match.js";
-import { requestModel } from "../models/Request.js";
+import matchModel from "../models/Match.js";
+import requestModel from "../models/Request.js";
+//import  Resource from "../models/Resource.js";
 import Handover from "../models/Handover.js";
 import { generateMatches } from "../services/matchingService.js";
 
 const generateResourceMatches = (req, res) => {
-  const Resource = mongoose.model("resources");
-
   Resource.findById(req.params.resourceId)
     .then((resource) => {
       if (!resource) {
@@ -126,8 +125,6 @@ const acceptMatch = (req, res) => {
                 .then(() => match);
             })
             .then((match) => {
-              const Resource = mongoose.model("resources");
-
               return Resource.findById(match.resourceId)
                 .session(session)
                 .then((resource) => {
@@ -304,40 +301,3 @@ export {
   acceptMatch,
   rejectMatch,
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

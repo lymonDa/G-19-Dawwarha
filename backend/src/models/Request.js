@@ -87,6 +87,6 @@ requestSchema.index({
   status: 1,
 });
 
-const requestModel = mongoose.model("requests", requestSchema);
+const requestModel = mongoose.model("Request", requestSchema);
 
-export { requestModel };
+export default requestModel ;

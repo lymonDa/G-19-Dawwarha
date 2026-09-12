@@ -2,10 +2,10 @@ import express from "express";
 import authenticate from "../middleware/authenticate.js";
 import validate from "../middleware/validate.js";
 
-import {
+/*import {
   resourceIdValidator,
   matchIdValidator,
-} from "../validators/match.validators.js";
+} from "../validators/match.validators.js";*/
 
 import {
   generateResourceMatches,
@@ -15,34 +15,28 @@ import {
 } from "../controllers/matches.controller.js";
 
 const matchRouter = express.Router();
+matchRouter.use(authenticate);
 
 matchRouter.post(
   "/:resourceId/generate",
-  authenticate,
-  resourceIdValidator,
-  validate,
+  //validate(resourceIdValidator),
   generateResourceMatches
 );
 
 matchRouter.get(
   "/",
-  authenticate,
-  getMatches
+ getMatches
 );
 
 matchRouter.put(
   "/:id/accept",
-  authenticate,
-  matchIdValidator,
-  validate,
+ // validate(matchIdValidator),
   acceptMatch
 );
 
 matchRouter.put(
   "/:id/reject",
-  authenticate,
-  matchIdValidator,
-  validate,
+ // validate(matchIdValidator),
   rejectMatch
 );
 
