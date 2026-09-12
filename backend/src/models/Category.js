@@ -32,6 +32,22 @@ const categorySchema = new mongoose.Schema(
   }
 );
 
+categorySchema.pre("validate", function () {
+  if (this.name && !this.slug) {
+    this.slug = this.name
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  } else if (this.slug) {
+    this.slug = this.slug
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+});
+
 categorySchema.index({ isActive: 1 });
 
 const Category = mongoose.model("Category", categorySchema);

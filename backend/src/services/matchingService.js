@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 import  matchModel  from "../models/Match.js";
 import  requestModel  from "../models/Request.js";
+import { buildResourceQuery } from "../utils/resourceQueryBuilder.js";
 
 // Weights
 const W1 = 0.30; // category
@@ -106,10 +107,12 @@ const generateMatches = (resourceId) => {
         throw new Error("Resource is not available");
       }
 
-      return requestModel.find({
-        status: "published",
+      const candidateFilter = buildResourceQuery({
         categoryId: resource.categoryId,
-      }).then((requests) => {
+        status: "published",
+      });
+
+      return requestModel.find(candidateFilter).then((requests) => {
         const matches = [];
 
         requests.forEach((request) => {

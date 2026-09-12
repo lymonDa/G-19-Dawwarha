@@ -99,6 +99,11 @@ resourceSchema.index({ "location.city": 1, "location.area": 1, status: 1 });
 resourceSchema.index({ "availabilityWindow.end": 1 });
 
 const Resource = mongoose.model("Resource", resourceSchema);
+try {
+  mongoose.model("resources", resourceSchema);
+} catch (e) {
+  // Alias already registered
+}
 
 export default Resource;
 export { Resource, Resource as resourceModel };

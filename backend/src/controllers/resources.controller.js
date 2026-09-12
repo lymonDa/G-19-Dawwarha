@@ -3,6 +3,7 @@ import Organization from "../models/Organization.js";
 import { transitionResource } from "../services/resourceLifecycleService.js";
 import { getPagination, buildPagination } from "../utils/pagination.js";
 import isValidObjectId from "../utils/objectId.js";
+import { buildResourceQuery } from "../utils/resourceQueryBuilder.js";
 
 const makeError = (statusCode, code, message) =>
   Object.assign(new Error(message), { statusCode, code });
@@ -35,87 +36,11 @@ export async function loadResource(req, res, next) {
 
 /**
  * STEP 1: GET /api/resources (Public)
- * Filter and list browseable resources with query sanitization
+ * Filter and list browseable resources using the shared query builder
  */
 export async function getResources(req, res, next) {
   try {
-    const { category, city, area, status } = req.query;
-    const filter = {};
-
-    const allowedQueryKeys = ["category", "city", "area", "status", "page", "limit"];
-
-    // Whitelist supported query keys and disallow operators / nested injection
-    for (const [key, val] of Object.entries(req.query)) {
-      if (!allowedQueryKeys.includes(key) || key.includes("$") || key.includes("[") || key.includes("]")) {
-        return res.status(400).json({
-          success: false,
-          error: { code: "INVALID_QUERY", message: `Invalid or unsupported query parameter '${key}'.` },
-        });
-      }
-      if (typeof val === "object" && val !== null) {
-        return res.status(400).json({
-          success: false,
-          error: { code: "INVALID_QUERY", message: `Invalid query parameter for '${key}'.` },
-        });
-      }
-      if (typeof val === "string" && (val.includes("$") || val.includes("{") || val.includes("}"))) {
-        return res.status(400).json({
-          success: false,
-          error: { code: "INVALID_QUERY", message: "Query parameter contains invalid operators." },
-        });
-      }
-    }
-
-    // Status filter - default to browsable statuses
-    if (status) {
-      if (typeof status !== "string") {
-        return res.status(400).json({
-          success: false,
-          error: { code: "INVALID_STATUS", message: "Invalid status parameter" },
-        });
-      }
-      const allowedStatuses = [
-        "draft",
-        "published",
-        "available",
-        "matched",
-        "accepted",
-        "in_handover",
-        "completed",
-        "impact_recorded",
-        "expired",
-        "cancelled",
-        "unavailable",
-      ];
-      if (!allowedStatuses.includes(status)) {
-        return res.status(400).json({
-          success: false,
-          error: { code: "INVALID_STATUS", message: "Invalid status parameter" },
-        });
-      }
-      filter.status = status;
-    } else {
-      filter.status = { $in: ["published", "available"] };
-    }
-
-    if (category) {
-      if (!isValidObjectId(category)) {
-        return res.status(400).json({
-          success: false,
-          error: { code: "INVALID_CATEGORY", message: "Category not found or inactive" },
-        });
-      }
-      filter.categoryId = category;
-    }
-
-    if (city) {
-      filter["location.city"] = String(city).trim();
-    }
-
-    if (area) {
-      filter["location.area"] = String(area).trim();
-    }
-
+    const filter = buildResourceQuery(req.query);
     const { page, limit, skip } = getPagination(req.query);
 
     const [resources, total] = await Promise.all([

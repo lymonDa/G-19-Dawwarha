@@ -1,218 +1,375 @@
 {
   "info": {
-    "name": "DAWWARHA — Resource Lifecycle & Management API Collection",
-    "description": "Comprehensive Postman API collection for Engineer 2 Resource Management in DAWWARHA. Follows the authoritative 10-step manual lifecycle walkthrough: Create -> Read/List -> Transition -> Update Fields -> Reject Direct Status -> Reject Invalid Transition -> Reject Non-Owner -> Soft Cancel via DELETE -> Reject Terminal Edit -> Verify Document Still Exists.",
+    "name": "DAWWARHA — Resource & Categories API Collection",
+    "description": "Comprehensive Postman API collection for Engineer 2 (Supply Domain) in DAWWARHA. Includes Task 2.B (Categories CRUD with soft delete), Task 2.C (Shared Search/Filter Query Builder), and the 10-step Resource Lifecycle Walkthrough.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
-      "name": "Step 1: Create Resource (POST /api/resources)",
-      "event": [
+      "name": "Categories (Task 2.B)",
+      "item": [
         {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "exec": [
-              "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
-              "const jsonData = pm.response.json();",
-              "if (jsonData && jsonData.data && jsonData.data._id) {",
-              "    pm.collectionVariables.set('resource_id', jsonData.data._id);",
-              "}"
-            ]
+          "name": "GET /api/categories (Public List)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"]
+            },
+            "description": "Public unauthenticated endpoint to list active taxonomy categories. Defaults to isActive=true. Supports ?isActive=false and ?isActive=all."
+          }
+        },
+        {
+          "name": "GET /api/categories/:id (Public Single)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/categories/{{category_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "{{category_id}}"]
+            },
+            "description": "Public unauthenticated endpoint to fetch a single category by ObjectId."
+          }
+        },
+        {
+          "name": "POST /api/categories (Admin Create)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "    pm.collectionVariables.set('category_id', jsonData.data._id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Recycled Metals & Hardware\",\n  \"description\": \"Scrap metal, copper wiring, steel beams, fasteners.\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories"]
+            },
+            "description": "Admin-only category creation. Automatically generates lowercase slug from name. Enforces uniqueness (returns 409 on duplicate). Rejects non-admin with 403."
+          }
+        },
+        {
+          "name": "PUT /api/categories/:id (Admin Update)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Industrial Surplus Metals\",\n  \"description\": \"Updated description: steel, aluminum, copper.\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/categories/{{category_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "{{category_id}}"]
+            },
+            "description": "Admin-only category update. Allows updating name, description, and isActive reactivation. Rejects non-admin with 403."
+          }
+        },
+        {
+          "name": "DELETE /api/categories/:id (Admin Soft Delete)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/categories/{{category_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categories", "{{category_id}}"]
+            },
+            "description": "CRITICAL: Admin-only SOFT DELETE. Sets isActive=false. Never hard-deletes the category from MongoDB, preserving historical resource/request references. Rejects non-admin with 403."
           }
         }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [
-          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
-          { "key": "Content-Type", "value": "application/json", "type": "text" }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"title\": \"Industrial Surplus Wood Beams\",\n  \"description\": \"Clean seasoned pine beams for sustainable building.\",\n  \"quantity\": 50,\n  \"categoryId\": \"{{category_id}}\",\n  \"location\": {\n    \"city\": \"Amman\",\n    \"area\": \"Shmeisani\"\n  },\n  \"availabilityWindow\": {\n    \"start\": \"2026-10-01T08:00:00.000Z\",\n    \"end\": \"2026-10-31T18:00:00.000Z\"\n  }\n}"
-        },
-        "url": {
-          "raw": "{{base_url}}/api/resources",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources"]
-        },
-        "description": "Authenticated provider creates a new resource. Returns 201 Created with initial status='draft'."
-      }
+      ]
     },
     {
-      "name": "Step 2.a: List Resources (Public GET /api/resources)",
-      "request": {
-        "method": "GET",
-        "url": {
-          "raw": "{{base_url}}/api/resources?city=Amman",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources"],
-          "query": [
-            { "key": "city", "value": "Amman" }
-          ]
+      "name": "Resource Search & Filters (Task 2.C)",
+      "item": [
+        {
+          "name": "GET /api/resources (Category Filter)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/resources?category={{category_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources"],
+              "query": [
+                { "key": "category", "value": "{{category_id}}" }
+              ]
+            },
+            "description": "Filtered search using shared buildResourceQuery. Validates category ObjectId and default status in ['published', 'available']."
+          }
         },
-        "description": "Public unauthenticated endpoint to browse available and published resources."
-      }
+        {
+          "name": "GET /api/resources (Location Filter: City & Area)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/resources?city=Amman&area=Shmeisani",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources"],
+              "query": [
+                { "key": "city", "value": "Amman" },
+                { "key": "area", "value": "Shmeisani" }
+              ]
+            },
+            "description": "Filtered search using compound index on location.city and location.area."
+          }
+        },
+        {
+          "name": "GET /api/resources (Combined Category + Location + Status)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/resources?category={{category_id}}&city=Amman&status=available",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources"],
+              "query": [
+                { "key": "category", "value": "{{category_id}}" },
+                { "key": "city", "value": "Amman" },
+                { "key": "status", "value": "available" }
+              ]
+            },
+            "description": "Combined query demonstrating AND filter construction by buildResourceQuery."
+          }
+        },
+        {
+          "name": "GET /api/resources (Injection Attack Attempt - Rejection)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/resources?category[$ne]=null",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources"],
+              "query": [
+                { "key": "category[$ne]", "value": "null" }
+              ]
+            },
+            "description": "Security verification: Attempting MongoDB $ operator injection is rejected with HTTP 400 INVALID_QUERY."
+          }
+        }
+      ]
     },
     {
-      "name": "Step 2.b: Get Single Resource (Public GET /api/resources/:id)",
-      "request": {
-        "method": "GET",
-        "url": {
-          "raw": "{{base_url}}/api/resources/{{resource_id}}",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources", "{{resource_id}}"]
+      "name": "Resource Lifecycle Walkthrough",
+      "item": [
+        {
+          "name": "Step 1: Create Resource (POST /api/resources)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "const jsonData = pm.response.json();",
+                  "if (jsonData && jsonData.data && jsonData.data._id) {",
+                  "    pm.collectionVariables.set('resource_id', jsonData.data._id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Industrial Surplus Wood Beams\",\n  \"description\": \"Clean seasoned pine beams for sustainable building.\",\n  \"quantity\": 50,\n  \"categoryId\": \"{{category_id}}\",\n  \"location\": {\n    \"city\": \"Amman\",\n    \"area\": \"Shmeisani\"\n  },\n  \"availabilityWindow\": {\n    \"start\": \"2026-10-01T08:00:00.000Z\",\n    \"end\": \"2026-10-31T18:00:00.000Z\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/resources",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources"]
+            },
+            "description": "Authenticated provider creates a new resource. Returns 201 Created with initial status='draft'."
+          }
         },
-        "description": "Public unauthenticated lookup of single resource by ID."
-      }
-    },
-    {
-      "name": "Step 3: Valid Lifecycle Transition (PUT /api/resources/:id/status - publish)",
-      "request": {
-        "method": "PUT",
-        "header": [
-          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
-          { "key": "Content-Type", "value": "application/json", "type": "text" }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"action\": \"publish\"\n}"
+        {
+          "name": "Step 2: Get Single Resource (Public GET /api/resources/:id)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/resources/{{resource_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", "{{resource_id}}"]
+            },
+            "description": "Public unauthenticated lookup of single resource by ID."
+          }
         },
-        "url": {
-          "raw": "{{base_url}}/api/resources/{{resource_id}}/status",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources", "{{resource_id}}", "status"]
+        {
+          "name": "Step 3: Valid Lifecycle Transition (PUT /api/resources/:id/status - publish)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"publish\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/resources/{{resource_id}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", "{{resource_id}}", "status"]
+            },
+            "description": "Executes state transition 'publish' via resourceLifecycleService. Status changes from 'draft' to 'published'."
+          }
         },
-        "description": "Executes state transition 'publish' via resourceLifecycleService. Status changes from 'draft' to 'published'."
-      }
-    },
-    {
-      "name": "Step 4: Update Allowed Fields (PUT /api/resources/:id)",
-      "request": {
-        "method": "PUT",
-        "header": [
-          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
-          { "key": "Content-Type", "value": "application/json", "type": "text" }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"title\": \"Updated Seasoned Pine Beams (50 units)\",\n  \"quantity\": 60\n}"
+        {
+          "name": "Step 4: Update Allowed Fields (PUT /api/resources/:id)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated Seasoned Pine Beams (50 units)\",\n  \"quantity\": 60\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/resources/{{resource_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", "{{resource_id}}"]
+            },
+            "description": "Owner updates permitted resource fields (title, description, quantity, location, availabilityWindow). Status cannot be changed here."
+          }
         },
-        "url": {
-          "raw": "{{base_url}}/api/resources/{{resource_id}}",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources", "{{resource_id}}"]
+        {
+          "name": "Step 5: Direct Status Update Attack (PUT /api/resources/:id - status: completed)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"completed\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/resources/{{resource_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", "{{resource_id}}"]
+            },
+            "description": "CRITICAL INVARIANT TEST: Attempting to directly modify status via CRUD PUT is rejected with HTTP 400 DIRECT_STATUS_UPDATE_FORBIDDEN."
+          }
         },
-        "description": "Owner updates permitted resource fields (title, description, quantity, location, availabilityWindow). Status cannot be changed here."
-      }
-    },
-    {
-      "name": "Step 5: Direct Status Update Attack (PUT /api/resources/:id - status: completed)",
-      "request": {
-        "method": "PUT",
-        "header": [
-          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
-          { "key": "Content-Type", "value": "application/json", "type": "text" }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"status\": \"completed\"\n}"
+        {
+          "name": "Step 6: Invalid Lifecycle Transition (PUT /api/resources/:id/status - action: complete on published)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"complete\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/resources/{{resource_id}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", "{{resource_id}}", "status"]
+            },
+            "description": "Attempts invalid transition 'published -> complete'. Rejected with HTTP 409 INVALID_TRANSITION and specific lifecycle service message."
+          }
         },
-        "url": {
-          "raw": "{{base_url}}/api/resources/{{resource_id}}",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources", "{{resource_id}}"]
+        {
+          "name": "Step 7: Ownership Authorization Rejection (PUT /api/resources/:id with non-owner)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{non_owner_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Malicious Tamper Title\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/resources/{{resource_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", "{{resource_id}}"]
+            },
+            "description": "Non-owner regular user attempts to edit resource. Rejected with HTTP 403 FORBIDDEN."
+          }
         },
-        "description": "CRITICAL INVARIANT TEST: Attempting to directly modify status via CRUD PUT is rejected with HTTP 400 DIRECT_STATUS_UPDATE_FORBIDDEN."
-      }
-    },
-    {
-      "name": "Step 6: Invalid Lifecycle Transition (PUT /api/resources/:id/status - action: complete on published)",
-      "request": {
-        "method": "PUT",
-        "header": [
-          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
-          { "key": "Content-Type", "value": "application/json", "type": "text" }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"action\": \"complete\"\n}"
+        {
+          "name": "Step 8: Cancel Resource (DELETE /api/resources/:id - Soft Cancellation)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/resources/{{resource_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", "{{resource_id}}"]
+            },
+            "description": "CRITICAL: Soft-cancellation! Does NOT physically delete the document from MongoDB. Invokes transitionResource(resource, 'cancel', req.user). Status becomes 'cancelled'."
+          }
         },
-        "url": {
-          "raw": "{{base_url}}/api/resources/{{resource_id}}/status",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources", "{{resource_id}}", "status"]
+        {
+          "name": "Step 9: Terminal-State Edit Rejection (PUT /api/resources/:id on cancelled)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Edit After Cancellation\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/resources/{{resource_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", "{{resource_id}}"]
+            },
+            "description": "Attempts to edit a terminal-state resource ('cancelled'). Rejected with HTTP 409 INVALID_STATUS ('This listing can no longer be edited')."
+          }
         },
-        "description": "Attempts invalid transition 'published -> complete'. Rejected with HTTP 409 INVALID_TRANSITION and specific lifecycle service message."
-      }
-    },
-    {
-      "name": "Step 7: Ownership Authorization Rejection (PUT /api/resources/:id with non-owner)",
-      "request": {
-        "method": "PUT",
-        "header": [
-          { "key": "Authorization", "value": "Bearer {{non_owner_token}}", "type": "text" },
-          { "key": "Content-Type", "value": "application/json", "type": "text" }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"title\": \"Malicious Tamper Title\"\n}"
-        },
-        "url": {
-          "raw": "{{base_url}}/api/resources/{{resource_id}}",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources", "{{resource_id}}"]
-        },
-        "description": "Non-owner regular user attempts to edit resource. Rejected with HTTP 403 FORBIDDEN."
-      }
-    },
-    {
-      "name": "Step 8: Cancel Resource (DELETE /api/resources/:id - Soft Cancellation)",
-      "request": {
-        "method": "DELETE",
-        "header": [
-          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" }
-        ],
-        "url": {
-          "raw": "{{base_url}}/api/resources/{{resource_id}}",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources", "{{resource_id}}"]
-        },
-        "description": "CRITICAL: Soft-cancellation! Does NOT physically delete the document from MongoDB. Invokes transitionResource(resource, 'cancel', req.user). Status becomes 'cancelled'."
-      }
-    },
-    {
-      "name": "Step 9: Terminal-State Edit Rejection (PUT /api/resources/:id on cancelled)",
-      "request": {
-        "method": "PUT",
-        "header": [
-          { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" },
-          { "key": "Content-Type", "value": "application/json", "type": "text" }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"title\": \"Edit After Cancellation\"\n}"
-        },
-        "url": {
-          "raw": "{{base_url}}/api/resources/{{resource_id}}",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources", "{{resource_id}}"]
-        },
-        "description": "Attempts to edit a terminal-state resource ('cancelled'). Rejected with HTTP 409 INVALID_STATUS ('This listing can no longer be edited')."
-      }
-    },
-    {
-      "name": "Step 10: Verify Cancelled Document Still Exists (GET /api/resources/:id)",
-      "request": {
-        "method": "GET",
-        "url": {
-          "raw": "{{base_url}}/api/resources/{{resource_id}}",
-          "host": ["{{base_url}}"],
-          "path": ["api", "resources", "{{resource_id}}"]
-        },
-        "description": "VERIFY DOCUMENT PERSISTENCE: Fetches the cancelled resource. Returns HTTP 200 with status='cancelled'. Proves DELETE was a soft cancellation, not a hard delete!"
-      }
+        {
+          "name": "Step 10: Verify Cancelled Document Still Exists (GET /api/resources/:id)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/resources/{{resource_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", "{{resource_id}}"]
+            },
+            "description": "VERIFY DOCUMENT PERSISTENCE: Fetches the cancelled resource. Returns HTTP 200 with status='cancelled'. Proves DELETE was a soft cancellation, not a hard delete!"
+          }
+        }
+      ]
     }
   ],
   "variable": [
