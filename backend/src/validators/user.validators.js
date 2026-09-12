@@ -9,5 +9,6 @@ export const updateUserValidator = [
   ...addressFields.map((field) => body(`address.${field}`).optional().isString().withMessage(`Address ${field} must be a string`)),
   body("contactInfo").optional().isObject().withMessage("Contact info must be an object"),
   body("contactInfo.phone").optional().isString().isLength({ max: 30 }).withMessage("Phone must be at most 30 characters"),
+  body("contactInfo.email").optional().isEmail().withMessage("Contact email must be valid"),
   body("contactInfo.alternateEmail").optional().isEmail().withMessage("Alternate email must be valid"),
 ];
