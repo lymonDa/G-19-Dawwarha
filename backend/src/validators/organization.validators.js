@@ -1,4 +1,8 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
+
+export const organizationIdValidator = [
+  param("id").isMongoId().withMessage("Invalid organization ID format"),
+];
 
 export const createOrganizationValidator = [
   body("name")
@@ -7,11 +11,16 @@ export const createOrganizationValidator = [
     .bail()
     .trim()
     .notEmpty()
-    .withMessage("Name is required"),
+    .withMessage("Name is required")
+    .isLength({ min: 2, max: 100 })
+    .withMessage("Name must be between 2 and 100 characters"),
   body("description")
     .optional()
     .isString()
-    .withMessage("Description must be a string"),
+    .withMessage("Description must be a string")
+    .isLength({ max: 1000 })
+    .withMessage("Description must be at most 1000 characters"),
+  body("contactInfo").optional().isObject().withMessage("Contact info must be an object"),
   body("submittedDocuments")
     .optional()
     .isArray({ max: 10 })
@@ -30,11 +39,16 @@ export const updateOrganizationValidator = [
     .bail()
     .trim()
     .notEmpty()
-    .withMessage("Name cannot be empty"),
+    .withMessage("Name cannot be empty")
+    .isLength({ min: 2, max: 100 })
+    .withMessage("Name must be between 2 and 100 characters"),
   body("description")
     .optional()
     .isString()
-    .withMessage("Description must be a string"),
+    .withMessage("Description must be a string")
+    .isLength({ max: 1000 })
+    .withMessage("Description must be at most 1000 characters"),
+  body("contactInfo").optional().isObject().withMessage("Contact info must be an object"),
   body("submittedDocuments")
     .optional()
     .isArray({ max: 10 })
@@ -47,8 +61,8 @@ export const updateOrganizationValidator = [
 
 export const verifyOrganizationValidator = [
   body("decision")
-    .isIn(["approved", "rejected"])
-    .withMessage("Decision must be approved or rejected"),
+    .isIn(["approved", "rejected", "suspended"])
+    .withMessage("Decision must be approved, rejected, or suspended"),
   body("rejectionReason")
     .optional()
     .isString()

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Report from "../models/Report.js";
 import User from "../models/User.js";
+import notificationService from "./notificationService.js";
 import { isValidObjectId } from "../utils/objectId.js";
 
 const makeError = (statusCode, code, message) =>
@@ -160,6 +161,19 @@ export async function resolveReport(reportId, { status = "resolved", resolution,
   report.reviewedBy = adminId;
 
   await report.save();
+
+  // Task 4.C: Create notification for the reporter upon report resolution
+  await notificationService.notify({
+    recipientId: report.reporterId,
+    type: "report_resolved",
+    title: "Report Resolved",
+    message: `Your report has been resolved with resolution: ${report.resolution}`,
+    relatedEntity: {
+      type: "report",
+      id: report._id,
+    },
+  });
+
   return report;
 }
 

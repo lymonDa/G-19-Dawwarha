@@ -4,7 +4,7 @@ import { transitionVerification } from "../services/organizationService.js";
 export async function create(req, res, next) {
   try {
     const organization = await Organization.create({
-      name: req.body.name, description: req.body.description, ownerUserId: req.user._id,
+      name: req.body.name, description: req.body.description, contactInfo: req.body.contactInfo, ownerUserId: req.user._id,
       verification: { status: "pending", submittedDocuments: req.body.submittedDocuments || [] },
     });
     return res.status(201).json({ success: true, data: organization });
@@ -20,7 +20,7 @@ export async function getById(req, res, next) {
 export async function update(req, res, next) {
   try {
     const changes = {};
-    for (const field of ["name", "description"]) {
+    for (const field of ["name", "description", "contactInfo"]) {
       if (req.body[field] !== undefined) changes[field] = req.body[field];
     }
     if (req.body.submittedDocuments !== undefined) {
@@ -33,7 +33,7 @@ export async function update(req, res, next) {
 }
 export async function verify(req, res, next) {
   try {
-    const organization = await transitionVerification(req.params.id, req.body.decision, req.body.rejectionReason);
+    const organization = await transitionVerification(req.params.id, req.body.decision, req.body.rejectionReason, req.user._id);
     return res.json({ success: true, data: organization });
   } catch (error) { return next(error); }
 }

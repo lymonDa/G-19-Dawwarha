@@ -20,7 +20,7 @@ export const signToken = (user) =>
   });
 export const verifyToken = (token) => jwt.verify(token, getJwtSecret());
 
-export const register = async ({ name, email, password, location }) => {
+export const register = async ({ name, email, password, location, address, contactInfo }) => {
   const normalizedEmail = email.trim().toLowerCase();
   if (await User.findOne({ email: normalizedEmail })) {
     throw serviceError(409, "DUPLICATE_EMAIL", "An account with this email already exists.");
@@ -32,6 +32,8 @@ export const register = async ({ name, email, password, location }) => {
     role: "user",
     status: "active",
     location,
+    address,
+    contactInfo,
   });
   return { user: withoutPassword(user), token: signToken(user) };
 };

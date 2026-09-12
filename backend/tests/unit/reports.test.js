@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import app from "../../src/app.js";
 import User from "../../src/models/User.js";
 import Report from "../../src/models/Report.js";
+import Notification from "../../src/models/Notification.js";
 import reportService from "../../src/services/reportService.js";
 
 const JWT_SECRET = "test-jwt-secret-for-testing-only-12345";
@@ -78,6 +79,14 @@ describe("Task 4.B — Reports Service & Endpoints Test Suite", () => {
         lean: async () => foundUser,
       };
     });
+
+    // Default Notification.create mock
+    mock.method(Notification, "create", async (data) => ({
+      _id: new mongoose.Types.ObjectId().toString(),
+      ...data,
+      readAt: null,
+      createdAt: new Date(),
+    }));
   });
 
   // =========================================================================

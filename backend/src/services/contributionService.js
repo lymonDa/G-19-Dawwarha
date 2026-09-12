@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Contribution from "../models/Contribution.js";
 import User from "../models/User.js";
+import { isValidObjectId } from "../utils/objectId.js";
 
 /**
  * Records a completed transfer in the append-only Contribution ledger,
@@ -89,8 +90,113 @@ export async function recordCompletedTransfer(handover) {
   return contribution;
 }
 
+/**
+ * Retrieves the contribution history for a given user.
+ * Reads from the append-only contributions ledger as the source of truth (FR-018).
+ *
+ * @param {string|mongoose.Types.ObjectId} userId
+ * @param {Object} [options]
+ * @param {number|string} [options.page=1]
+ * @param {number|string} [options.limit=20]
+ * @returns {Promise<{ contributions: Array, pagination: Object }>}
+ */
+export async function getContributionHistory(userId, { page = 1, limit = 20 } = {}) {
+  if (!userId || !isValidObjectId(userId)) {
+    throw Object.assign(new Error("Invalid or missing user ID."), {
+      statusCode: 400,
+      code: "VALIDATION_ERROR",
+    });
+  }
+
+  const objectId = new mongoose.Types.ObjectId(String(userId));
+  const query = {
+    $or: [{ providerId: objectId }, { seekerId: objectId }],
+  };
+
+  const pageNum = Math.max(1, parseInt(page, 10) || 1);
+  const limitNum = Math.min(100, Math.max(1, parseInt(limit, 10) || 20));
+  const skip = (pageNum - 1) * limitNum;
+
+  const [contributions, total] = await Promise.all([
+    Contribution.find(query).sort({ createdAt: -1 }).skip(skip).limit(limitNum),
+    Contribution.countDocuments(query),
+  ]);
+
+  return {
+    contributions,
+    pagination: {
+      total,
+      page: pageNum,
+      limit: limitNum,
+      totalPages: Math.ceil(total / limitNum) || 1,
+    },
+  };
+}
+
+/**
+ * Rebuilds user cached impact statistics from the contributions ledger (Section 6.10 & Task 4.4).
+ * Fully deterministic and idempotent: recalculates from the source-of-truth ledger and reconciles cache.
+ *
+ * @param {string|mongoose.Types.ObjectId} [userId]
+ * @returns {Promise<Object|Array>} Rebuilt statistics
+ */
+export async function rebuildStatsCache(userId) {
+  if (userId) {
+    if (!isValidObjectId(userId)) {
+      throw Object.assign(new Error("Invalid or missing user ID."), {
+        statusCode: 400,
+        code: "VALIDATION_ERROR",
+      });
+    }
+
+    const objectId = new mongoose.Types.ObjectId(String(userId));
+    const count = await Contribution.countDocuments({
+      type: "transfer_completed",
+      $or: [{ providerId: objectId }, { seekerId: objectId }],
+    });
+
+    const calculatedStats = {
+      completedTransfers: count,
+      completed: count,
+      reputationScore: count * 10,
+    };
+
+    const updatedUser = await User.findByIdAndUpdate(
+      objectId,
+      {
+        $set: {
+          "stats.completedTransfers": calculatedStats.completedTransfers,
+          "stats.completed": calculatedStats.completed,
+          "stats.reputationScore": calculatedStats.reputationScore,
+          reputationScore: calculatedStats.reputationScore,
+        },
+      },
+      { new: true }
+    );
+
+    return {
+      userId: objectId,
+      stats: calculatedStats,
+      user: updatedUser,
+    };
+  }
+
+  // System-wide rebuild for all distinct users found in contributions
+  const distinctProviders = await Contribution.distinct("providerId");
+  const distinctSeekers = await Contribution.distinct("seekerId");
+  const allUserIds = [...new Set([...distinctProviders.map(String), ...distinctSeekers.map(String)])];
+
+  const results = [];
+  for (const uid of allUserIds) {
+    results.push(await rebuildStatsCache(uid));
+  }
+  return results;
+}
+
 const contributionService = {
   recordCompletedTransfer,
+  getContributionHistory,
+  rebuildStatsCache,
 };
 
 export default contributionService;
