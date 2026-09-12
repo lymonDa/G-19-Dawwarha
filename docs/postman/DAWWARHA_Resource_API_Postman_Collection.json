@@ -1,0 +1,139 @@
+{
+  "info": {
+    "name": "DAWWARHA — Resource API Collection",
+    "description": "Postman API collection for DAWWARHA Resource Supply Endpoints (Engineer 2), including soft-cancellation via DELETE /api/resources/:id.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "DELETE /api/resources/:id (Soft Cancellation)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{jwt_token}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/resources/:id",
+          "host": ["{{base_url}}"],
+          "path": ["api", "resources", ":id"],
+          "variable": [
+            {
+              "key": "id",
+              "value": "660000000000000000000010",
+              "description": "MongoDB ObjectId of the resource to cancel"
+            }
+          ]
+        },
+        "description": "CRITICAL: This endpoint performs a SOFT CANCELLATION, NOT a hard delete. The resource document remains in MongoDB with status='cancelled'. Internally invokes resourceLifecycleService.transitionResource with action='cancel'. Allowed for resource owner or admin. Rejects completed/impact_recorded/already-cancelled resources with 409 Conflict."
+      },
+      "response": [
+        {
+          "name": "200 OK — Cancelled Successfully",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/resources/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "660000000000000000000010"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Resource cancelled successfully\",\n  \"data\": {\n    \"_id\": \"660000000000000000000010\",\n    \"providerId\": \"660000000000000000000001\",\n    \"categoryId\": \"660000000000000000000005\",\n    \"title\": \"Industrial Surplus Wood Pallets\",\n    \"description\": \"50 clean wooden pallets available for repurposing\",\n    \"quantity\": 50,\n    \"location\": {\n      \"city\": \"Amman\",\n      \"area\": \"Al-Bayader\"\n    },\n    \"availabilityWindow\": {\n      \"start\": \"2026-10-01T08:00:00.000Z\",\n      \"end\": \"2026-10-31T18:00:00.000Z\"\n    },\n    \"status\": \"cancelled\",\n    \"createdAt\": \"2026-09-12T10:00:00.000Z\",\n    \"updatedAt\": \"2026-09-12T16:30:00.000Z\"\n  }\n}"
+        },
+        {
+          "name": "409 Conflict — Already Cancelled / Terminal State",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/resources/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "660000000000000000000010"
+                }
+              ]
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"INVALID_TRANSITION\",\n    \"message\": \"Cannot transition resource in terminal state: 'cancelled'.\"\n  }\n}"
+        },
+        {
+          "name": "403 Forbidden — Non-Owner User",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{jwt_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/resources/:id",
+              "host": ["{{base_url}}"],
+              "path": ["api", "resources", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "660000000000000000000010"
+                }
+              ]
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"success\": false,\n  \"error\": {\n    \"code\": \"FORBIDDEN\",\n    \"message\": \"You don't have permission to do that.\"\n  }\n}"
+        }
+      ]
+    }
+  ]
+}
