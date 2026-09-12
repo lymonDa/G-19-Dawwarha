@@ -1,4 +1,8 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
+
+export const organizationIdValidator = [
+  param("id").isMongoId().withMessage("Invalid organization ID format"),
+];
 
 export const createOrganizationValidator = [
   body("name")
@@ -57,8 +61,8 @@ export const updateOrganizationValidator = [
 
 export const verifyOrganizationValidator = [
   body("decision")
-    .isIn(["approved", "rejected"])
-    .withMessage("Decision must be approved or rejected"),
+    .isIn(["approved", "rejected", "suspended"])
+    .withMessage("Decision must be approved, rejected, or suspended"),
   body("rejectionReason")
     .optional()
     .isString()

@@ -8,7 +8,7 @@ import User from "../models/User.js";
 const users = [
   { name: "Dawwarha Admin", email: "admin@dawwarha.example", role: "admin" },
   { name: "Demo Provider", email: "provider@dawwarha.example", role: "provider" },
-  { name: "Demo Seeker", email: "seeker@dawwarha.example", role: "seeker" },
+  { name: "Demo User", email: "user@dawwarha.example", role: "user" },
 ];
 
 const seed = async () => {

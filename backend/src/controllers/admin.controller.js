@@ -1,9 +1,14 @@
 import User from "../models/User.js";
+import { buildPagination, getPagination } from "../utils/pagination.js";
 
 export async function listUsers(req, res, next) {
   try {
-    const users = await User.find().sort({ createdAt: -1 });
-    return res.json({ success: true, data: users });
+    const { page, limit, skip } = getPagination(req.query);
+    const [users, total] = await Promise.all([
+      User.find().sort({ createdAt: -1 }).skip(skip).limit(limit),
+      User.countDocuments(),
+    ]);
+    return res.json({ success: true, data: users, pagination: buildPagination({ page, limit, total }) });
   } catch (error) { return next(error); }
 }
 
