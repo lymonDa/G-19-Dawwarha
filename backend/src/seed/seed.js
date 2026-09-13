@@ -53,7 +53,7 @@ export const seed = async () => {
           reputationScore: 100,
         },
       },
-      { upsert: true, new: true, setDefaultsOnInsert: true }
+      { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
     );
   }
 
@@ -83,7 +83,7 @@ export const seed = async () => {
         },
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   // 3. Seed 7 Taxonomy Categories
@@ -99,7 +99,7 @@ export const seed = async () => {
           isActive: true,
         },
       },
-      { upsert: true, new: true, setDefaultsOnInsert: true }
+      { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
     );
   }
 
@@ -124,7 +124,7 @@ export const seed = async () => {
         status: "available",
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   const demoRequest = await requestModel.findOneAndUpdate(
@@ -142,7 +142,7 @@ export const seed = async () => {
         status: "published",
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   await matchModel.findOneAndUpdate(
@@ -164,7 +164,7 @@ export const seed = async () => {
         status: "proposed",
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   // 5. Seed Pre-Completed Transfer (Resource: impact_recorded, Request: fulfilled, Handover: completed, Contribution: transfer_completed)
@@ -182,7 +182,7 @@ export const seed = async () => {
         status: "impact_recorded",
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   const completedRequest = await requestModel.findOneAndUpdate(
@@ -200,7 +200,7 @@ export const seed = async () => {
         status: "fulfilled",
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   const completedMatch = await matchModel.findOneAndUpdate(
@@ -216,7 +216,7 @@ export const seed = async () => {
         status: "accepted",
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   const completedHandover = await Handover.findOneAndUpdate(
@@ -236,7 +236,7 @@ export const seed = async () => {
         completedAt: new Date(Date.now() - 3600000),
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   await Contribution.findOneAndUpdate(
@@ -252,7 +252,7 @@ export const seed = async () => {
         createdAt: new Date(Date.now() - 3600000),
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   // Update user stats for the completed transfer
@@ -277,7 +277,7 @@ export const seed = async () => {
         createdAt: new Date(Date.now() - 7200000),
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   await Notification.findOneAndUpdate(
@@ -293,7 +293,7 @@ export const seed = async () => {
         createdAt: new Date(Date.now() - 1800000),
       },
     },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
   return {

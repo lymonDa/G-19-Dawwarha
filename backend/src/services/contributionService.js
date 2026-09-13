@@ -204,7 +204,7 @@ export async function rebuildStatsCache(userId) {
           reputationScore: calculatedStats.reputationScore,
         },
       },
-      { new: true }
+      { returnDocument: "after" }
     );
 
     return {

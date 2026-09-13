@@ -9,7 +9,7 @@ export async function updateMe(req, res, next) {
     for (const field of ["name", "location", "address", "contactInfo"]) {
       if (req.body[field] !== undefined) changes[field] = req.body[field];
     }
-    const user = await User.findByIdAndUpdate(req.user._id, { $set: changes }, { new: true, runValidators: true });
+    const user = await User.findByIdAndUpdate(req.user._id, { $set: changes }, { returnDocument: "after", runValidators: true });
     return res.json({ success: true, data: user });
   } catch (error) { return next(error); }
 }

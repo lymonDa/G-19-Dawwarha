@@ -380,6 +380,35 @@ describe("Task 4.C — Notifications Service & Integration Test Suite", () => {
       assert.equal(String(notification.relatedEntity.id), matchId);
     });
 
+    test("13. Verify notificationService.notify accepts match_accepted payload for match acceptance", async () => {
+      let createdDoc = null;
+      mock.method(Notification, "create", async (data) => {
+        createdDoc = { _id: new mongoose.Types.ObjectId().toString(), ...data };
+        return createdDoc;
+      });
+
+      const providerId = new mongoose.Types.ObjectId().toString();
+      const matchId = new mongoose.Types.ObjectId().toString();
+
+      const notification = await notificationService.notify({
+        recipientId: providerId,
+        type: "match_accepted",
+        title: "Match Accepted",
+        message: "Your match has been accepted and handover transfer is now in progress.",
+        relatedEntity: {
+          type: "match",
+          id: matchId,
+        },
+      });
+
+      assert.ok(notification);
+      assert.equal(String(notification.recipientId), providerId);
+      assert.equal(notification.type, "match_accepted");
+      assert.equal(notification.title, "Match Accepted");
+      assert.match(notification.message, /handover transfer/i);
+      assert.equal(String(notification.relatedEntity.id), matchId);
+    });
+
     test("Documented notification types completeness: all 4 documented types are permitted", () => {
       const expectedTypes = [
         "match_created",

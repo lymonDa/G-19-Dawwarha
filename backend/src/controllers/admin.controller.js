@@ -14,7 +14,7 @@ export async function listUsers(req, res, next) {
 
 async function setStatus(req, res, next, status) {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, { $set: { status } }, { new: true });
+    const user = await User.findByIdAndUpdate(req.params.id, { $set: { status } }, { returnDocument: "after" });
     if (!user) return res.status(404).json({ success: false, error: { code: "NOT_FOUND", message: "User not found." } });
     return res.json({ success: true, data: user });
   } catch (error) { return next(error); }

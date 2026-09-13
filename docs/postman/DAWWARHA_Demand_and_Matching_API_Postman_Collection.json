@@ -225,6 +225,41 @@
           }
         },
         {
+          "name": "PUT /api/requests/:id/status (Transition Request Status - publish)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const jsonData = pm.response.json();",
+                  "pm.test('Request status transitioned to published', function () {",
+                  "    pm.expect(jsonData.data.status).to.eql('published');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{requester_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"action\": \"publish\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/requests/{{request_id}}/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "requests", "{{request_id}}", "status"]
+            },
+            "description": "Explicit status lifecycle transition for requests. Allows the requester or admin to publish a draft request or cancel it via action enum."
+          }
+        },
+        {
           "name": "DELETE /api/requests/:id (Soft Cancel Request)",
           "event": [
             {

@@ -26,7 +26,7 @@ export async function update(req, res, next) {
     if (req.body.submittedDocuments !== undefined) {
       changes["verification.submittedDocuments"] = req.body.submittedDocuments;
     }
-    const organization = await Organization.findByIdAndUpdate(req.params.id, { $set: changes }, { new: true, runValidators: true });
+    const organization = await Organization.findByIdAndUpdate(req.params.id, { $set: changes }, { returnDocument: "after", runValidators: true });
     if (!organization) return res.status(404).json({ success: false, error: { code: "NOT_FOUND", message: "Organization not found." } });
     return res.json({ success: true, data: organization });
   } catch (error) { return next(error); }
