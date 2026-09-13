@@ -1,0 +1,886 @@
+openapi: 3.0.3
+info:
+  title: DAWWARHA Backend API Specification
+  description: >
+    Comprehensive REST API specification for DAWWARHA (دَوَّرها), a circular economy
+    and community surplus redistribution platform. Covers Identity, Supply (Categories & Resources),
+    Demand & Matching, and Trust & Impact (Handovers, Reports, Notifications, Contributions & Analytics)
+    according to Section 14 of the Backend Implementation Plan.
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/api
+    description: Local development server
+tags:
+  - name: Auth & Identity
+    description: Registration, authentication, user profiles, and organization verification (Engineer 1)
+  - name: Admin Management
+    description: User suspension and platform administrative controls (Engineer 1)
+  - name: Categories
+    description: Taxonomy category management (Engineer 2)
+  - name: Resources (Supply)
+    description: Surplus resource listings and lifecycle state management (Engineer 2)
+  - name: Requests (Demand)
+    description: Community demand requests and lifecycle management (Engineer 3)
+  - name: Matching
+    description: Explainable rule-based scoring and atomic match acceptance (Engineer 3)
+  - name: Transactions & Handovers
+    description: Two-sided handover confirmation and atomic transfer execution (Engineer 4)
+  - name: Moderation & Reports
+    description: Polymorphic content moderation and admin resolution (Engineer 4)
+  - name: Contributions & Impact
+    description: Completed transfers history and reputation ledger (Engineer 4)
+  - name: Admin Analytics
+    description: Aggregated real-time platform metrics and impact reporting (Engineer 4)
+  - name: Notifications
+    description: Recipient-isolated user notification delivery and read status (Engineer 4)
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth & Identity]
+      summary: Register a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name: { type: string, example: "Jane Doe" }
+                email: { type: string, format: email, example: "jane@dawwarha.example" }
+                password: { type: string, minLength: 8, example: "Password123!" }
+                role: { type: string, enum: [user, admin], default: user }
+      responses:
+        '201':
+          description: User registered successfully
+        '400':
+          description: Validation error
+        '409':
+          description: Email already registered
+
+  /auth/login:
+    post:
+      tags: [Auth & Identity]
+      summary: Authenticate and obtain JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email: { type: string, format: email, example: "provider@dawwarha.example" }
+                password: { type: string, example: "DawwarhaDemo123!" }
+      responses:
+        '200':
+          description: Login successful, returns user and JWT token
+        '401':
+          description: Invalid credentials
+        '403':
+          description: Account suspended
+
+  /auth/logout:
+    post:
+      tags: [Auth & Identity]
+      summary: Invalidate user session
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: Logged out successfully
+        '401':
+          description: Unauthenticated
+
+  /users/me:
+    get:
+      tags: [Auth & Identity]
+      summary: Retrieve authenticated user profile
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: Profile retrieved successfully
+        '401':
+          description: Unauthenticated
+    put:
+      tags: [Auth & Identity]
+      summary: Update authenticated user profile
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                location:
+                  type: object
+                  properties:
+                    city: { type: string }
+                    area: { type: string }
+                contactInfo:
+                  type: object
+                  properties:
+                    phone: { type: string }
+      responses:
+        '200':
+          description: Profile updated
+        '400':
+          description: Validation error
+
+  /organizations:
+    post:
+      tags: [Auth & Identity]
+      summary: Register a new community organization
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, example: "Amman Community Food Bank" }
+                description: { type: string }
+                contactInfo:
+                  type: object
+                  properties:
+                    phone: { type: string }
+                    email: { type: string }
+                    address: { type: object }
+      responses:
+        '201':
+          description: Organization created in pending verification state
+        '400':
+          description: Validation error
+        '401':
+          description: Unauthenticated
+
+  /organizations/{id}:
+    get:
+      tags: [Auth & Identity]
+      summary: Fetch public organization profile
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Organization details
+        '400':
+          description: Invalid ID
+        '404':
+          description: Organization not found
+    put:
+      tags: [Auth & Identity]
+      summary: Update organization profile as owner or admin
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                description: { type: string }
+      responses:
+        '200':
+          description: Organization updated
+        '403':
+          description: Non-owner caller
+        '404':
+          description: Not found
+
+  /organizations/{id}/verify:
+    post:
+      tags: [Auth & Identity]
+      summary: Admin decision to approve or reject organization
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [decision]
+              properties:
+                decision: { type: string, enum: [approved, rejected] }
+                rejectionReason: { type: string }
+      responses:
+        '200':
+          description: Organization verification updated
+        '400':
+          description: Validation error
+        '403':
+          description: Non-admin caller
+
+  /admin/users:
+    get:
+      tags: [Admin Management]
+      summary: List all users with pagination
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+      responses:
+        '200':
+          description: Paginated user list
+        '403':
+          description: Non-admin caller
+
+  /admin/users/{id}/suspend:
+    put:
+      tags: [Admin Management]
+      summary: Suspend user account
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: User suspended
+        '403':
+          description: Non-admin caller
+        '404':
+          description: User not found
+
+  /admin/users/{id}/reactivate:
+    put:
+      tags: [Admin Management]
+      summary: Reactivate suspended user account
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: User reactivated
+        '403':
+          description: Non-admin caller
+        '404':
+          description: User not found
+
+  /categories:
+    get:
+      tags: [Categories]
+      summary: List active categories
+      responses:
+        '200':
+          description: List of categories
+    post:
+      tags: [Categories]
+      summary: Create new category (Admin only)
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, slug]
+              properties:
+                name: { type: string }
+                slug: { type: string }
+                description: { type: string }
+      responses:
+        '201':
+          description: Category created
+        '403':
+          description: Non-admin caller
+        '409':
+          description: Category slug already exists
+
+  /categories/{id}:
+    get:
+      tags: [Categories]
+      summary: Fetch single category
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Category details
+        '404':
+          description: Not found
+    put:
+      tags: [Categories]
+      summary: Update category (Admin only)
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string }
+                description: { type: string }
+      responses:
+        '200':
+          description: Category updated
+        '403':
+          description: Non-admin caller
+    delete:
+      tags: [Categories]
+      summary: Soft-delete category (Admin only)
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Category deactivated
+        '403':
+          description: Non-admin caller
+
+  /resources:
+    get:
+      tags: [Resources (Supply)]
+      summary: Search and list resources with filters
+      parameters:
+        - name: category
+          in: query
+          schema: { type: string }
+        - name: city
+          in: query
+          schema: { type: string }
+        - name: area
+          in: query
+          schema: { type: string }
+        - name: status
+          in: query
+          schema: { type: string, default: available }
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+      responses:
+        '200':
+          description: Paginated resource listings
+        '400':
+          description: Invalid filter parameter
+    post:
+      tags: [Resources (Supply)]
+      summary: Create new surplus resource (Draft)
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, description, categoryId, quantity, location, availabilityWindow]
+              properties:
+                title: { type: string, example: "Surplus Fresh Bread" }
+                description: { type: string, example: "Fresh bakery loaves" }
+                categoryId: { type: string }
+                quantity: { type: integer, minimum: 1, example: 20 }
+                unit: { type: string, example: "packages" }
+                location:
+                  type: object
+                  required: [city, address]
+                  properties:
+                    city: { type: string, example: "Amman" }
+                    address: { type: string, example: "Rainbow St" }
+                    area: { type: string, example: "Jabal Amman" }
+                availabilityWindow:
+                  type: object
+                  required: [start, end]
+                  properties:
+                    start: { type: string, format: date-time }
+                    end: { type: string, format: date-time }
+      responses:
+        '201':
+          description: Resource created in draft state
+        '400':
+          description: Validation error
+        '401':
+          description: Unauthenticated
+
+  /resources/{id}:
+    get:
+      tags: [Resources (Supply)]
+      summary: Fetch single resource details
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Resource details
+        '404':
+          description: Resource not found
+    put:
+      tags: [Resources (Supply)]
+      summary: Update resource details as owner or admin
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                description: { type: string }
+                quantity: { type: integer }
+      responses:
+        '200':
+          description: Resource updated
+        '403':
+          description: Non-owner caller
+        '409':
+          description: Terminal state edit forbidden
+    delete:
+      tags: [Resources (Supply)]
+      summary: Soft cancel resource
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Resource status transitioned to cancelled
+        '403':
+          description: Non-owner caller
+
+  /resources/{id}/status:
+    put:
+      tags: [Resources (Supply)]
+      summary: Transition resource lifecycle status (e.g. publish or cancel)
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action: { type: string, enum: [publish, cancel] }
+      responses:
+        '200':
+          description: Status transitioned
+        '400':
+          description: Invalid action
+        '403':
+          description: Non-owner caller
+        '409':
+          description: Invalid transition
+
+  /requests:
+    get:
+      tags: [Requests (Demand)]
+      summary: List demand requests
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: category
+          in: query
+          schema: { type: string }
+        - name: city
+          in: query
+          schema: { type: string }
+        - name: urgency
+          in: query
+          schema: { type: string, enum: [low, medium, high, urgent] }
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+      responses:
+        '200':
+          description: Paginated request listings
+        '401':
+          description: Unauthenticated
+    post:
+      tags: [Requests (Demand)]
+      summary: Create new demand request (Draft)
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, categoryId, quantity, urgency, location]
+              properties:
+                title: { type: string, example: "Community Bakery Supplies" }
+                description: { type: string }
+                categoryId: { type: string }
+                quantity: { type: integer, minimum: 1, example: 10 }
+                urgency: { type: string, enum: [low, medium, high, urgent], example: high }
+                location:
+                  type: object
+                  required: [city]
+                  properties:
+                    city: { type: string, example: "Amman" }
+                    area: { type: string, example: "Abdali" }
+      responses:
+        '201':
+          description: Request created in draft state
+        '400':
+          description: Validation error
+        '401':
+          description: Unauthenticated
+
+  /requests/{id}:
+    get:
+      tags: [Requests (Demand)]
+      summary: Fetch single request
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Request details
+        '404':
+          description: Request not found
+    put:
+      tags: [Requests (Demand)]
+      summary: Update request details as owner or admin
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: { type: string }
+                quantity: { type: integer }
+                urgency: { type: string }
+      responses:
+        '200':
+          description: Request updated
+        '403':
+          description: Non-owner caller
+    delete:
+      tags: [Requests (Demand)]
+      summary: Soft cancel request
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Request cancelled
+        '403':
+          description: Non-owner caller
+
+  /requests/{id}/status:
+    put:
+      tags: [Requests (Demand)]
+      summary: Transition request lifecycle status
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action]
+              properties:
+                action: { type: string, enum: [publish, cancel] }
+      responses:
+        '200':
+          description: Request status transitioned
+        '403':
+          description: Non-owner caller
+        '409':
+          description: Invalid transition
+
+  /matches:
+    get:
+      tags: [Matching]
+      summary: List user match inbox
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+        - name: all
+          in: query
+          schema: { type: boolean, default: false }
+          description: Admin overview flag
+      responses:
+        '200':
+          description: Paginated match inbox
+        '401':
+          description: Unauthenticated
+
+  /matches/{resourceId}/generate:
+    post:
+      tags: [Matching]
+      summary: Run explainable scoring engine against candidate requests
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: resourceId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Generated matches sorted by compatibility score
+        '403':
+          description: Non-owner caller
+        '404':
+          description: Resource not found
+        '409':
+          description: Resource not in available state
+
+  /matches/{id}/accept:
+    put:
+      tags: [Matching]
+      summary: Accept proposed match in atomic multi-document transaction
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Match accepted, Handover created, entities transitioned
+        '403':
+          description: Caller is not a match participant
+        '409':
+          description: Match already accepted or entities unavailable
+
+  /matches/{id}/reject:
+    put:
+      tags: [Matching]
+      summary: Reject proposed match and release entities
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Match rejected
+        '403':
+          description: Non-party caller
+        '409':
+          description: Cannot reject accepted match
+
+  /transactions/{matchId}/confirm:
+    post:
+      tags: [Transactions & Handovers]
+      summary: Confirm handover transfer side (Provider or Seeker)
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: matchId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Confirmation recorded; completed if both parties confirmed
+        '403':
+          description: Non-participant caller
+        '404':
+          description: Handover not found
+        '409':
+          description: Handover inactive or cancelled
+
+  /reports:
+    post:
+      tags: [Moderation & Reports]
+      summary: Submit a moderation report
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [targetType, targetId, reason]
+              properties:
+                targetType: { type: string, enum: [user, resource, request] }
+                targetId: { type: string }
+                reason: { type: string, enum: [inappropriate_content, fraud, harassment, safety_hazard, other] }
+                description: { type: string }
+      responses:
+        '201':
+          description: Report created
+        '400':
+          description: Target not found or invalid type
+        '401':
+          description: Unauthenticated
+    get:
+      tags: [Moderation & Reports]
+      summary: List moderation reports (Admin only)
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: status
+          in: query
+          schema: { type: string, enum: [open, reviewed, resolved] }
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+      responses:
+        '200':
+          description: Paginated report list
+        '403':
+          description: Non-admin caller
+
+  /reports/{id}/resolve:
+    put:
+      tags: [Moderation & Reports]
+      summary: Admin resolves report with resolution notes
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [resolution]
+              properties:
+                resolution: { type: string }
+                status: { type: string, enum: [reviewed, resolved], default: resolved }
+      responses:
+        '200':
+          description: Report resolved and notification emitted
+        '400':
+          description: Missing resolution notes
+        '403':
+          description: Non-admin caller
+        '404':
+          description: Report not found
+
+  /users/me/contributions:
+    get:
+      tags: [Contributions & Impact]
+      summary: Retrieve authenticated user's completed contributions ledger
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: Contribution history and impact statistics
+        '401':
+          description: Unauthenticated
+
+  /admin/analytics:
+    get:
+      tags: [Admin Analytics]
+      summary: Real-time platform impact and operational analytics (Admin only)
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: Aggregated 4 Section 14 pipelines (summary, resourcesByCategory, categoryImpact, matchAcceptance)
+        '403':
+          description: Non-admin caller
+
+  /notifications:
+    get:
+      tags: [Notifications]
+      summary: List notifications for authenticated user
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+        - name: unreadOnly
+          in: query
+          schema: { type: boolean, default: false }
+      responses:
+        '200':
+          description: Recipient-isolated notifications
+        '401':
+          description: Unauthenticated
+
+  /notifications/{id}/read:
+    patch:
+      tags: [Notifications]
+      summary: Mark notification as read
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Notification marked read
+        '404':
+          description: Notification not found or not owned by user
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

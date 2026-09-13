@@ -11,6 +11,7 @@ import Contribution from "../models/Contribution.js";
 import Notification from "../models/Notification.js";
 import requestModel from "../models/Request.js";
 import matchModel from "../models/Match.js";
+import Report from "../models/Report.js";
 
 // Production Safety Guard per Section 16/19
 if (process.env.NODE_ENV === "production") {
@@ -105,6 +106,8 @@ export const seed = async () => {
 
   const foodCategory = seededCategories["food-produce"];
   const clothingCategory = seededCategories["clothing-textiles"];
+  const furnitureCategory = seededCategories["furniture"];
+  const booksCategory = seededCategories["books-media"];
 
   // 4. Seed Live Demo Pair (Surplus Bread & Bread Request - Proposed Match)
   const demoResource = await Resource.findOneAndUpdate(
@@ -296,16 +299,112 @@ export const seed = async () => {
     { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
   );
 
+  // 7. Seed Background Catalog Items (Section 16: realistic browse/search screens)
+  await Resource.findOneAndUpdate(
+    { title: "Ergonomic Office Desks" },
+    {
+      $setOnInsert: {
+        title: "Ergonomic Office Desks",
+        description: "Set of 5 gently used sturdy office desks for study or workspace use.",
+        providerId: seededUsers.provider._id,
+        categoryId: furnitureCategory._id,
+        quantity: 5,
+        location: { city: "Amman", area: "Shmeisani" },
+        availabilityWindow: {
+          start: new Date(),
+          end: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
+        },
+        status: "available",
+      },
+    },
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
+  );
+
+  await requestModel.findOneAndUpdate(
+    { description: "Study desks needed for educational community center" },
+    {
+      $setOnInsert: {
+        title: "Study Desks for Community Education",
+        requesterId: seededUsers.seeker._id,
+        requesterOrgId: org._id,
+        categoryId: furnitureCategory._id,
+        quantity: 4,
+        urgency: "medium",
+        location: { city: "Amman", area: "Shmeisani" },
+        description: "Study desks needed for educational community center",
+        status: "published",
+      },
+    },
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
+  );
+
+  await Resource.findOneAndUpdate(
+    { title: "Children Educational Book Collection" },
+    {
+      $setOnInsert: {
+        title: "Children Educational Book Collection",
+        description: "Illustrated science and reading storybooks for elementary ages.",
+        providerId: seededUsers.provider._id,
+        categoryId: booksCategory._id,
+        quantity: 30,
+        location: { city: "Amman", area: "Jabal Amman" },
+        availabilityWindow: {
+          start: new Date(),
+          end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        },
+        status: "available",
+      },
+    },
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
+  );
+
+  await requestModel.findOneAndUpdate(
+    { description: "Children storybooks and educational materials for local library" },
+    {
+      $setOnInsert: {
+        title: "Books for After-School Literacy Program",
+        requesterId: seededUsers.seeker._id,
+        requesterOrgId: org._id,
+        categoryId: booksCategory._id,
+        quantity: 20,
+        urgency: "medium",
+        location: { city: "Amman", area: "Jabal Amman" },
+        description: "Children storybooks and educational materials for local library",
+        status: "published",
+      },
+    },
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
+  );
+
+  // 8. Seed Demo Moderation Report (so openReports > 0 and moderation can be demonstrated)
+  await Report.findOneAndUpdate(
+    { description: "Demo report: Please verify contact details for provider listing." },
+    {
+      $setOnInsert: {
+        reporterId: seededUsers.seeker._id,
+        targetType: "resource",
+        targetId: demoResource._id,
+        reason: "other",
+        description: "Demo report: Please verify contact details for provider listing.",
+        status: "open",
+        reviewedBy: null,
+        resolution: null,
+      },
+    },
+    { upsert: true, returnDocument: "after", setDefaultsOnInsert: true }
+  );
+
   return {
     users: Object.keys(seededUsers).length,
     organizations: 1,
     categories: Object.keys(seededCategories).length,
-    resources: 2,
-    requests: 2,
+    resources: 4,
+    requests: 4,
     matches: 2,
     handovers: 1,
     contributions: 1,
     notifications: 2,
+    reports: 1,
   };
 };
 
