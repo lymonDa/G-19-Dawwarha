@@ -83,7 +83,10 @@ export async function confirm(handoverId, side, userId, options = {}) {
 
       if (shouldCheckResource) {
         const resQuery = Resource.findById(savedHandover.resourceId);
-        const resource = session ? await resQuery.session(session) : await resQuery;
+        const resource =
+          session && typeof resQuery?.session === "function"
+            ? await resQuery.session(session)
+            : await resQuery;
         if (resource) {
           const resourceActor = { _id: resource.providerId, role: "system", isSystem: true };
           if (resource.status === "accepted") {
@@ -114,7 +117,10 @@ export async function confirm(handoverId, side, userId, options = {}) {
 
       if (shouldCheckRequest) {
         const reqQuery = requestModel.findById(savedHandover.requestId);
-        const request = session ? await reqQuery.session(session) : await reqQuery;
+        const request =
+          session && typeof reqQuery?.session === "function"
+            ? await reqQuery.session(session)
+            : await reqQuery;
         if (request) {
           const requestActor = { _id: request.requesterId, role: "system", isSystem: true };
           if (request.status === "accepted") {

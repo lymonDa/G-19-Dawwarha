@@ -11,6 +11,8 @@ let mongo;
 before(async () => {
   mongo = await MongoMemoryServer.create();
   await mongoose.connect(mongo.getUri());
+  await User.init();
+  await Organization.init();
 });
 
 after(async () => {

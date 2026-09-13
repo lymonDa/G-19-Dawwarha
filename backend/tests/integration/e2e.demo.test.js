@@ -282,6 +282,19 @@ describe("TASK 4.F / Section 21 — Cross-Cutting E2E Demo Journey Integration T
       assert.equal(body.success, true);
       assert.equal(body.data.verification.status, "approved");
     });
+
+    test("2.3 Seeker receives org_verification_decided notification via GET /api/notifications", async () => {
+      const res = await fetch(`${baseUrl}/api/notifications`, {
+        headers: { Authorization: `Bearer ${seekerToken}` },
+      });
+      assert.equal(res.status, 200);
+      const body = await res.json();
+      assert.equal(body.success, true);
+      assert.ok(Array.isArray(body.data.notifications));
+      const notif = body.data.notifications.find((n) => n.type === "org_verification_decided");
+      assert.ok(notif, "Expected org_verification_decided notification in seeker inbox");
+      createdIds.notifications.push(new mongoose.Types.ObjectId(notif._id));
+    });
   });
 
   // =========================================================================
@@ -451,6 +464,58 @@ describe("TASK 4.F / Section 21 — Cross-Cutting E2E Demo Journey Integration T
       // Verify Match status in DB
       const dbMatch = await matchModel.findById(liveMatch._id);
       assert.equal(dbMatch.status, "accepted");
+    });
+
+    test("5.3 Seeker receives match_created notification via GET /api/notifications", async () => {
+      const res = await fetch(`${baseUrl}/api/notifications`, {
+        headers: { Authorization: `Bearer ${seekerToken}` },
+      });
+      assert.equal(res.status, 200);
+      const body = await res.json();
+      assert.equal(body.success, true);
+      const matchCreatedNotif = body.data.notifications.find((n) => n.type === "match_created");
+      assert.ok(matchCreatedNotif, "Expected match_created notification for seeker");
+      createdIds.notifications.push(new mongoose.Types.ObjectId(matchCreatedNotif._id));
+    });
+
+    test("5.4 Provider receives match_accepted notification via GET /api/notifications", async () => {
+      const res = await fetch(`${baseUrl}/api/notifications`, {
+        headers: { Authorization: `Bearer ${providerToken}` },
+      });
+      assert.equal(res.status, 200);
+      const body = await res.json();
+      assert.equal(body.success, true);
+      const matchAcceptedNotif = body.data.notifications.find((n) => n.type === "match_accepted");
+      assert.ok(matchAcceptedNotif, "Expected match_accepted notification for provider");
+      createdIds.notifications.push(new mongoose.Types.ObjectId(matchAcceptedNotif._id));
+    });
+
+    test("5.5 Notification isolation: third-party user has zero notifications", async () => {
+      const res = await fetch(`${baseUrl}/api/notifications`, {
+        headers: { Authorization: `Bearer ${thirdPartyToken}` },
+      });
+      assert.equal(res.status, 200);
+      const body = await res.json();
+      assert.equal(body.success, true);
+      assert.equal(body.data.notifications.length, 0);
+    });
+
+    test("5.6 Seeker marks notification as read via PATCH /api/notifications/:id/read", async () => {
+      const listRes = await fetch(`${baseUrl}/api/notifications`, {
+        headers: { Authorization: `Bearer ${seekerToken}` },
+      });
+      const listBody = await listRes.json();
+      assert.ok(listBody.data.notifications.length > 0);
+      const targetNotif = listBody.data.notifications[0];
+
+      const readRes = await fetch(`${baseUrl}/api/notifications/${targetNotif._id}/read`, {
+        method: "PATCH",
+        headers: { Authorization: `Bearer ${seekerToken}` },
+      });
+      assert.equal(readRes.status, 200);
+      const readBody = await readRes.json();
+      assert.equal(readBody.success, true);
+      assert.ok(readBody.data.readAt);
     });
   });
 
@@ -663,6 +728,18 @@ describe("TASK 4.F / Section 21 — Cross-Cutting E2E Demo Journey Integration T
       assert.equal(body.success, true);
       assert.equal(body.data.status, "resolved");
       assert.equal(String(body.data.reviewedBy), String(adminUser._id));
+    });
+
+    test("8.5 Seeker receives report_resolved notification via GET /api/notifications", async () => {
+      const res = await fetch(`${baseUrl}/api/notifications`, {
+        headers: { Authorization: `Bearer ${seekerToken}` },
+      });
+      assert.equal(res.status, 200);
+      const body = await res.json();
+      assert.equal(body.success, true);
+      const reportResolvedNotif = body.data.notifications.find((n) => n.type === "report_resolved");
+      assert.ok(reportResolvedNotif, "Expected report_resolved notification for seeker");
+      createdIds.notifications.push(new mongoose.Types.ObjectId(reportResolvedNotif._id));
     });
   });
 
