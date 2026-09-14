@@ -4,27 +4,28 @@ This document records the step-by-step walkthrough and API verification of all e
 
 ---
 
-## Domain Verification Checklist
+## Domain Verification Checklist 
 
-- [x] **[PASS] Auth**: Registration, login, logout, credential validation, account suspension enforcement.
-- [x] **[PASS] Users**: Profile retrieval, profile update, ownership restrictions.
-- [x] **[PASS] Organizations**: Registration, public lookup, owner profile update, admin verification decision.
-- [x] **[PASS] Admin**: User listing with pagination, account suspension, account reactivation.
-- [x] **[PASS] Categories**: Public listing, public lookup, admin creation, admin update, admin soft-deletion.
-- [x] **[PASS] Resources**: Public catalog filtering, draft creation, public details, owner updates, publish transition, cancellation.
-- [x] **[PASS] Requests**: Demand creation, authenticated listing, single lookup, owner updates, publish transition, cancellation.
-- [x] **[PASS] Matches**: Algorithmic scoring generation, inbox listing, atomic transaction acceptance, rejection.
-- [x] **[PASS] Handover / Transactions**: Provider confirmation, seeker confirmation, duplicate safety, status cascade.
-- [x] **[PASS] Reports**: Content reporting, target existence validation, admin listing, admin resolution notes.
-- [x] **[PASS] Notifications**: Recipient-isolated delivery, list with unread filtering, mark-as-read.
-- [x] **[PASS] Contributions**: Completed transfer impact ledger, reputation score points, user statistics.
-- [x] **[PASS] Analytics**: 4 real-time aggregation pipelines (summary, category breakdown, category impact, match rate).
+- [X] **[PASS] Auth**: Registration, login, logout, credential validation, account suspension enforcement.
+- [X] **[PASS] Users**: Profile retrieval, profile update, ownership restrictions.
+- [X] **[PASS] Organizations**: Registration, public lookup, owner profile update, admin verification decision.
+- [X] **[PASS] Admin**: User listing with pagination, account suspension, account reactivation.
+- [X] **[PASS] Categories**: Public listing, public lookup, admin creation, admin update, admin soft-deletion.
+- [X] **[PASS] Resources**: Public catalog filtering, draft creation, public details, owner updates, publish transition, cancellation.
+- [X] **[PASS] Requests**: Demand creation, authenticated listing, single lookup, owner updates, publish transition, cancellation.
+- [X] **[PASS] Matches**: Algorithmic scoring generation, inbox listing, atomic transaction acceptance, rejection.
+- [X] **[PASS] Handover / Transactions**: Provider confirmation, seeker confirmation, duplicate safety, status cascade.
+- [X] **[PASS] Reports**: Content reporting, target existence validation, admin listing, admin resolution notes.
+- [X] **[PASS] Notifications**: Recipient-isolated delivery, list with unread filtering, mark-as-read.
+- [X] **[PASS] Contributions**: Completed transfer impact ledger, reputation score points, user statistics.
+- [X] **[PASS] Analytics**: 4 real-time aggregation pipelines (summary, category breakdown, category impact, match rate).
 
 ---
 
 ## Detailed Step-by-Step Walkthrough
 
 ### 1. Auth & Identity (`DAWWARHA_Identity_and_Admin_API_Postman_Collection.json`)
+
 1. **Register User (`POST /api/auth/register`)**:
    - Status: `201 Created`
    - Verified: Returns JWT token and sanitized user object without password hash.
@@ -57,6 +58,7 @@ This document records the step-by-step walkthrough and API verification of all e
 ---
 
 ### 2. Supply & Categories (`DAWWARHA_Resource_API_Postman_Collection.json`)
+
 1. **List Categories (`GET /api/categories`)**:
    - Status: `200 OK`
    - Verified: Returns 7 active taxonomy categories.
@@ -78,6 +80,7 @@ This document records the step-by-step walkthrough and API verification of all e
 ---
 
 ### 3. Demand & Matching (`DAWWARHA_Demand_and_Matching_API_Postman_Collection.json`)
+
 1. **Create Request (`POST /api/requests`)**:
    - Status: `201 Created`
    - Verified: Created in `"draft"` status with urgency and category.
@@ -98,6 +101,7 @@ This document records the step-by-step walkthrough and API verification of all e
 ---
 
 ### 4. Trust, Impact & Moderation (`DAWWARHA_Trust_and_Impact_API_Postman_Collection.json`)
+
 1. **Provider Confirms Handover (`POST /api/transactions/:matchId/confirm`)**:
    - Status: `200 OK`
    - Verified: `confirmedByProvider: true`, status remains `"in_progress"`.
