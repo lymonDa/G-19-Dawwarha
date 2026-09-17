@@ -1,4 +1,4 @@
-# DAWWARHA (دَوَّرها) &mdash; Backend Platform
+# DAWWARHA (دَوَّرها) &mdash; Circular Economy & Community Redistribution Platform
 
 > **Graduation Project** | NTI MEAN Stack Track  
 > **Platform Mission**: A community surplus redistribution and circular economy platform connecting donors, community organizations, and beneficiaries through explainable matching, transparent handover tracking, and verified social impact.
@@ -7,30 +7,48 @@
 
 ## 1. Project Overview
 
-DAWWARHA provides a robust, multi-tenant backend built on Node.js, Express, and MongoDB. The system enforces strict domain boundaries across four engineering roles to deliver an end-to-end circular economy workflow:
+**DAWWARHA (دَوَّرها)** is an end-to-end MEAN stack platform comprising a high-performance **Node.js/Express/MongoDB** REST API backend and a modern **Angular 19 + Tailwind CSS** single-page application (SPA) frontend.
+
+The platform coordinates an end-to-end circular economy lifecycle across four engineering domains:
 
 ```text
-Resource (Supply) ───► Request (Demand) ───► Algorithmic Match ───► Atomic Acceptance
-                                                                           │
-                                                                           ▼
+Resource (Supply) ───► Request (Demand) ───► Explainable Match (5-Signal) ───► Atomic Acceptance
+                                                                                       │
+                                                                                       ▼
 Contribution & Stats ◄─── Completed Transfer ◄─── Two-Sided Handover (Provider & Seeker)
 ```
 
 ### Domain Architecture & Engineering Ownership
-- **Engineer 1 &mdash; Identity & Organizations**: User registration, JWT authentication, RBAC authorization, user profile management, organization onboarding & admin verification, user suspension.
-- **Engineer 2 &mdash; Categories & Resources (Supply)**: Taxonomy category catalog, surplus resource listings, query filtering with NoSQL injection protection, resource lifecycle state-machine.
-- **Engineer 3 &mdash; Requests & Matching (Demand)**: Community demand requests, rule-based explainable scoring engine (5 weighted factors), ranked inbox delivery, cross-domain atomic match-acceptance transaction.
-- **Engineer 4 &mdash; Trust, Impact & Admin (Lead)**: Two-sided handover confirmation protocol, content moderation & polymorphic reports, user contribution ledger & reputation scores, recipient-isolated notifications, and real-time platform analytics aggregation.
+
+The platform is structured into four clearly separated engineering domains across both backend services and frontend feature modules:
+
+| Domain | Scope & Responsibilities | Core Models / Features |
+| :--- | :--- | :--- |
+| **Engineer 1 &mdash; Shared Foundation & Identity** | User registration, JWT authentication, RBAC authorization, user profile management, organization onboarding & admin verification, user suspension, UI primitive components (`Button`, `Input`, `Dialog`, `Toast`, etc.), design tokens, and core guards/interceptors. | `User`, `Organization`, `AuthService`, Primitive UI |
+| **Engineer 2 &mdash; Categories & Resources (Supply)** | Taxonomy category catalog, surplus resource publishing and lifecycle state-machine (`AVAILABLE`, `MATCHED`, `IN_TRANSFER`, `COMPLETED`, `EXPIRED`, `CANCELLED`), category navigation, and provider inventory views. | `Category`, `Resource`, `ResourceCard`, Supply Feature |
+| **Engineer 3 &mdash; Requests & Matching (Demand)** | Community demand requests, rule-based explainable matching engine (5 weighted scoring signals: category, urgency, location, capacity, timing), ranked inbox, atomic match acceptance transaction. | `Request`, `Match`, `MatchScore`, `MatchCard`, Demand Feature |
+| **Engineer 4 &mdash; Trust, Impact & Admin (Lead)** | Two-sided handover confirmation protocol (`PENDING_CONFIRMATION` &rarr; `CONFIRMED`), content moderation & polymorphic reports, user contribution ledger, reputation scores, recipient-isolated notifications, and real-time platform analytics aggregation. | `Handover`, `Contribution`, `Report`, `Notification`, Admin Feature |
 
 ---
 
 ## 2. Technology Stack
 
+### Frontend (Angular SPA)
+- **Framework**: Angular 19 (`@angular/core` 19.2+) with standalone components (no `NgModule` boilerplate)
+- **Language**: TypeScript 5.7+ in strict mode (`"strict": true`)
+- **Styling**: Tailwind CSS v3 with PostCSS and Autoprefixer, configured with design tokens from `DAWWARHA-DESIGN-SYSTEM.md`
+- **Reactivity & State**: Angular Signals for local/UI state & RxJS for HTTP streams and router events
+- **Routing & Navigation**: Angular Router with route-level lazy loading (`loadComponent`/`loadChildren`)
+- **HTTP & Security**: Angular `HttpClient` with functional interceptors (`authInterceptor`, `errorInterceptor`) and functional guards (`authGuard`, `roleGuard`, `orgVerifiedGuard`)
+- **Forms**: Angular Reactive Forms with strong validation
+- **Icons**: Lucide Icons via `lucide-angular`
+
+### Backend (REST API)
 - **Runtime**: Node.js (v20+ supported; ESM Native modules)
 - **Framework**: Express.js (v5)
 - **Database**: MongoDB (v7+) with Mongoose (v9+)
-- **Security & Validation**: JSON Web Tokens (`jsonwebtoken`), `bcrypt` password hashing, `express-validator`, NoSQL operator query sanitization.
-- **Testing**: Node Native Test Runner (`node --test`), `mongodb-memory-server` for isolated replica set integration tests.
+- **Security & Validation**: JSON Web Tokens (`jsonwebtoken`), `bcrypt` password hashing, `express-validator`, NoSQL operator query sanitization
+- **Testing**: Node Native Test Runner (`node --test`), `mongodb-memory-server` for isolated replica set integration tests
 
 ---
 
@@ -54,18 +72,53 @@ G-19-Dawarhaa/
 │   │   ├── unit/            # 16 unit test suites (331 tests)
 │   │   └── integration/     # 4 integration & E2E test suites (97 tests)
 │   ├── server.js            # Main HTTP server entry point
-│   ├── package.json         # Scripts, dependencies, and test commands
+│   ├── package.json         # Backend dependencies and test scripts
 │   └── .env.example         # Backend environment template
-├── docs/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── core/        # Singleton services, guards, interceptors, models, config
+│   │   │   │   ├── auth/         # AuthService and session contracts
+│   │   │   │   ├── config/       # Application configuration & provider setup
+│   │   │   │   ├── guards/       # Functional guards (auth, role, org-verified)
+│   │   │   │   ├── interceptors/ # Functional interceptors (JWT auth, error handler)
+│   │   │   │   ├── models/       # Shared domain TypeScript contracts
+│   │   │   │   └── services/     # Toast and API base client services
+│   │   │   ├── shared/      # Reusable primitives, domain components, pipes, directives
+│   │   │   │   ├── ui/           # 24 headless/styled primitives (button, input, dialog, etc.)
+│   │   │   │   ├── components/   # 13 domain composites (ResourceCard, MatchScore, etc.)
+│   │   │   │   ├── directives/   # Shared UI directives
+│   │   │   │   ├── pipes/        # Shared presentation pipes
+│   │   │   │   └── utils/        # Frontend utility functions
+│   │   │   ├── layout/      # AppShell layouts (public, app, admin)
+│   │   │   └── features/    # 12 domain feature routes (lazy-loaded)
+│   │   ├── design-tokens/   # Tailwind tokens shared with TypeScript constants
+│   │   ├── environments/    # Environment configurations (development & production)
+│   │   ├── index.html       # HTML entry point with accessibility attributes
+│   │   ├── main.ts          # Angular standalone bootstrap entry
+│   │   └── styles.css       # Tailwind base, components, and utilities
+│   ├── angular.json         # Angular workspace and build configuration
+│   ├── tailwind.config.js   # Tailwind theme and content scanning
+│   ├── proxy.conf.json      # Dev proxy forwarding /api to backend port 5000
+│   ├── tsconfig.json        # Strict TypeScript compiler options
+│   └── package.json         # Frontend dependencies and scripts
+│
+├── docs/                    # Technical documentation and specifications
 │   ├── API_DOCUMENTATION.md # Comprehensive 41-endpoint specification
 │   ├── openapi.yaml         # OpenAPI 3.0.3 specification
 │   ├── DEMO_GUIDE.md        # 5–7 minute graduation demo script
 │   ├── FINAL_DEMO_CHECKLIST.md # Operational pre-flight checklist
 │   ├── POSTMAN_WALKTHROUGH.md  # Postman verification report
 │   └── postman/             # 4 domain Postman collections & runner guide
-├── .env.example             # Root environment template
-├── .gitignore               # Ignored files (node_modules, .env)
-└── README.md                # Project documentation
+│
+├── documentation/           # Project architectural plans and design specifications
+│   ├── DAWWARHA-DESIGN-SYSTEM.md           # Authoritative UI/UX design system & tokens
+│   ├── DESIGN.md                          # Design principles and component contracts
+│   └── Dawwarha-Frontend-Implementation-Plan.pdf # 54-page Angular implementation guide
+│
+├── .gitignore               # Root git ignore rules
+└── README.md                # Main repository documentation
 ```
 
 ---
@@ -73,92 +126,129 @@ G-19-Dawarhaa/
 ## 4. Getting Started & Installation
 
 ### Prerequisites
-- Node.js &ge; 20.x
-- MongoDB &ge; 7.x (Local instance or MongoDB Atlas URI)
-
-### Setup Instructions
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/lymon/G-19-Dawarhaa.git
-   cd G-19-Dawarhaa
-   ```
-
-2. **Install backend dependencies**:
-   ```bash
-   npm run install-backend
-   # Or directly:
-   cd backend && npm install
-   ```
-
-3. **Configure Environment Variables**:
-   ```bash
-   cp backend/.env.example backend/.env
-   ```
-   Edit `backend/.env` with your MongoDB URI and secret key:
-   ```env
-   PORT=5000
-   MONGODB_URI=mongodb://127.0.0.1:27017/dawwarha
-   JWT_SECRET=your_jwt_secret_key_minimum_32_characters_long
-   JWT_EXPIRES_IN=7d
-   NODE_ENV=development
-   ```
-
-4. **Seed the Database for Demo / Development**:
-   ```bash
-   cd backend && npm run seed
-   ```
-   *Populates the 3 core accounts (Admin, Provider, Seeker), 1 verified organization, 7 taxonomy categories, demo resources and requests, a baseline completed transfer, notifications, and an open moderation report.*
-
-5. **Start the Application**:
-   ```bash
-   # Development mode with hot-reload:
-   npm run dev
-
-   # Production mode:
-   npm start
-   ```
-   Server listens on `http://localhost:5000` (Health check: `GET /health`).
+- **Node.js**: &ge; 20.x (Recommended: Node 20 or Node 24 LTS)
+- **npm**: &ge; 10.x
+- **MongoDB**: &ge; 7.x (Local instance or MongoDB Atlas cluster URI)
 
 ---
 
-## 5. Running the Test Suite
+### Step-by-Step Setup
 
-The test suite uses Node's native test runner (`node --test`) and executes 428 automated tests with **zero warnings, zero skips, and 100% green status**:
-
+#### 1. Clone the repository
 ```bash
-cd backend
+git clone https://github.com/lymon/G-19-Dawarhaa.git
+cd G-19-Dawarhaa
+```
 
-# Run the complete test suite (Unit + Integration)
-npm test
+#### 2. Backend Setup
+```bash
+# Install backend dependencies
+npm run install-backend
 
-# Run unit tests only (~4 seconds)
-npm run test:unit
+# Configure environment
+cp backend/.env.example backend/.env
+```
 
-# Run integration & E2E demo tests (~48 seconds)
-npm run test:integration
+Edit `backend/.env` with your MongoDB connection string and secret:
+```env
+PORT=5000
+MONGODB_URI=mongodb://127.0.0.1:27017/dawwarha
+JWT_SECRET=your_jwt_secret_key_minimum_32_characters_long
+JWT_EXPIRES_IN=7d
+NODE_ENV=development
+```
+
+Seed the database with baseline accounts and demonstration data:
+```bash
+cd backend && npm run seed
+```
+
+Start the backend API:
+```bash
+# Development mode with live restart:
+npm run dev
+
+# Or from the backend directory:
+cd backend && npm run dev
+```
+Backend API will listen on `http://localhost:5000` (Health check: `GET http://localhost:5000/health`).
+
+---
+
+#### 3. Frontend Setup
+```bash
+# Install frontend dependencies
+npm run install-frontend
+
+# Or directly:
+cd frontend && npm install
+```
+
+Start the Angular development server:
+```bash
+cd frontend && npm start
+```
+The application will be served at `http://localhost:4200/`. API requests sent to `/api` are automatically proxied to `http://localhost:5000` via [frontend/proxy.conf.json](file:///home/lymon/G-19-Dawarhaa/frontend/proxy.conf.json).
+
+To verify the production build:
+```bash
+cd frontend && npm run build
 ```
 
 ---
 
-## 6. Pre-Seeded Accounts (Demo & Testing)
+## 5. Testing & Verification
 
-All seeded accounts use password: `DawwarhaDemo123!`
+### Backend Automated Tests
+The backend test suite runs with Node's native test runner (`node --test`) using in-memory MongoDB replica sets:
 
-| Role | Name | Email | Password | Purpose |
-| :--- | :--- | :--- | :--- | :--- |
-| **Admin** | Dawwarha Admin | `admin@dawwarha.example` | `DawwarhaDemo123!` | Moderation, platform analytics, organization verification. |
-| **Provider** | Demo Provider | `provider@dawwarha.example` | `DawwarhaDemo123!` | Donor; creates and publishes surplus resources. |
-| **Seeker** | Demo Seeker | `user@dawwarha.example` | `DawwarhaDemo123!` | Beneficiary / Org Owner; requests supplies, accepts matches. |
+```bash
+cd backend
 
-See [`backend/src/seed/README.md`](./backend/src/seed/README.md) for full seed schema details.
+# Run the complete test suite (Unit + Integration: 428 passing tests)
+npm test
+
+# Run unit tests only
+npm run test:unit
+
+# Run integration & E2E lifecycle tests
+npm run test:integration
+```
+
+### Frontend Build Validation
+```bash
+cd frontend
+
+# Production build (esbuild application builder)
+npm run build
+
+# Development build with source maps
+npm run watch
+```
 
 ---
 
-## 7. Documentation & Demo Resources
+## 6. Pre-Seeded Accounts (Demo & Development)
 
-- [**API Specification**](./docs/API_DOCUMENTATION.md): Complete reference for all 41 Section 14 endpoints with request bodies, status codes, and security rules.
-- [**OpenAPI 3.0.3 Specification**](./docs/openapi.yaml): Standalone OpenAPI definition for Swagger UI / Redoc / Postman.
-- [**Graduation Demo Guide**](./docs/DEMO_GUIDE.md): 5–7 minute script walking through the complete circular economy loop on stage.
-- [**Postman Collections**](./docs/postman/README.md): 4 domain-specific collections covering all endpoints with automated token capture and validation scripts.
-- [**Final Demo Checklist**](./docs/FINAL_DEMO_CHECKLIST.md): Operational pre-flight checklist for evaluation day.
+All seeded test accounts use the password: `DawwarhaDemo123!`
+
+| Role | Name | Email | Password | Primary Platform Purpose |
+| :--- | :--- | :--- | :--- | :--- |
+| **Admin** | Dawwarha Admin | `admin@dawwarha.example` | `DawwarhaDemo123!` | Moderation reports resolution, platform analytics, organization verification. |
+| **Provider** | Demo Provider | `provider@dawwarha.example` | `DawwarhaDemo123!` | Donating surplus resources, scheduling handovers. |
+| **Seeker** | Demo Seeker | `user@dawwarha.example` | `DawwarhaDemo123!` | Requesting needed supplies, reviewing matches, accepting handovers. |
+
+*See [`backend/src/seed/README.md`](./backend/src/seed/README.md) for complete seed schema details.*
+
+---
+
+## 7. Documentation & Architecture Specifications
+
+- [**API Documentation**](./docs/API_DOCUMENTATION.md): Complete reference for all 41 backend REST endpoints with request/response schemas and status codes.
+- [**OpenAPI 3.0.3 Specification**](./docs/openapi.yaml): Swagger / OpenAPI interactive definition.
+- [**UI/UX Design System**](./documentation/DAWWARHA-DESIGN-SYSTEM.md): Complete design tokens, color palettes, spacing, typography, and component specs.
+- [**Design Architecture Guide**](./documentation/DESIGN.md): Frontend design principles, primitive vs. domain component contracts.
+- [**Frontend Implementation Plan**](./documentation/Dawwarha-Frontend-Implementation-Plan.pdf): Comprehensive 54-page execution roadmap for the 4 engineering roles.
+- [**Graduation Demo Guide**](./docs/DEMO_GUIDE.md): 5–7 minute script demonstrating the circular economy loop end-to-end.
+- [**Postman Collections**](./docs/postman/README.md): Postman collections with automated token capture for all 4 domains.
+- [**Final Demo Checklist**](./docs/FINAL_DEMO_CHECKLIST.md): Operational pre-flight checklist.
