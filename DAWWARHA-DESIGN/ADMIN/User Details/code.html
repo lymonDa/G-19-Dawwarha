@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"error":"#ba1a1a","surface-dim":"#d3dcd7","on-error":"#ffffff","surface-container-highest":"#dbe5e0","secondary-fixed":"#b6eedc","tertiary":"#834f14","on-primary":"#ffffff","surface-container-low":"#edf6f1","primary-fixed-dim":"#87d5c1","inverse-on-surface":"#eaf3ee","on-background":"#151d1a","on-primary-container":"#ebfff7","inverse-primary":"#87d5c1","on-tertiary-fixed":"#2d1600","primary-container":"#2f806f","outline-variant":"#bec9c4","outline":"#6f7975","on-secondary-container":"#396e5f","on-surface":"#151d1a","surface-container":"#e7f0eb","surface":"#f2fbf6","surface-tint":"#106a5a","surface-container-high":"#e1eae5","secondary-container":"#b6eedc","on-tertiary":"#ffffff","on-tertiary-fixed-variant":"#6a3b00","tertiary-container":"#9f672b","on-secondary-fixed":"#002019","secondary":"#33685a","primary-fixed":"#a3f2dd","on-primary-fixed-variant":"#005143","tertiary-fixed-dim":"#feb874","on-surface-variant":"#3f4946","inverse-surface":"#2a322f","on-error-container":"#93000a","surface-bright":"#f2fbf6","secondary-fixed-dim":"#9bd2c0","primary":"#076757","surface-container-lowest":"#ffffff","background":"#f2fbf6","tertiary-fixed":"#ffdcbf","on-tertiary-container":"#fffaf8","on-secondary":"#ffffff","surface-variant":"#dbe5e0","error-container":"#ffdad6","on-primary-fixed":"#00201a","on-secondary-fixed-variant":"#184f42"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-sm":"0.5rem","space-xl":"2.5rem","space-xs":"0.25rem","margin":"2rem","gutter":"1.5rem","gutter-mobile":"1rem","space-lg":"1.5rem","margin-mobile":"1rem","space-md":"1rem"},"fontFamily":{"display-lg-mobile":["Inter"],"headline-lg-mobile":["Inter"],"label-md":["Inter"],"code-sm":["Inter"],"display-lg":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"body-lg":["Inter"],"label-sm":["Inter"],"body-md":["Inter"],"headline-lg":["Inter"]},"fontSize":{"display-lg-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg-mobile":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"500"}],"code-sm":["0.8125rem",{"lineHeight":"1.125rem","fontWeight":"400"}],"display-lg":["3.5rem",{"lineHeight":"4rem","letterSpacing":"-0.02em","fontWeight":"600"}],"headline-sm":["1.125rem",{"lineHeight":"1.5rem","fontWeight":"500"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-sm":["0.8125rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","fontWeight":"400"}],"label-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}],"body-md":["0.9375rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"headline-lg":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.015em","fontWeight":"600"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 h-16 bg-surface-container-lowest border-b border-surface-variant z-50 flex items-center justify-between px-margin"><div class="flex items-center gap-space-md"><img alt="Brand logo. - Primary color: #2f806f
+- Font: inter
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UF3eZN9ykWZnSQyxFrz5DF0sre37execbFQJ_vdOQK-qiWAqzr1zbbltQ-wBaxlDMj-gxy7HrIZ7vu8RBvegsjS_z2Dqi82uhgx06Xr6IJ2ggM86b4D7OSule6dlnt9bUMK_L_vwcnh-xMRT9EvcoFvxWjlvskYCxx6PKq-Ucu8VbY7kaEeHu5pSryJ8SPzR1z5rdmVUQSSCZHAAn-nutc5S0DXeLSAs0LHd4TR1ZgQAw-dhFpAWIs039D"/><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">Dawwarha</span><span class="px-space-xs py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider font-semibold">ADMIN</span></div><div class="hidden xl:flex items-center gap-space-md pl-space-md border-l border-surface-variant font-code-sm text-code-sm text-on-surface-variant"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span>System Health: <strong class="text-on-surface font-medium">100% Normal</strong></span></div><span class="text-outline-variant">•</span><span>Latency: <strong class="text-on-surface font-medium">24ms</strong></span><span class="text-outline-variant">•</span><div class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-primary">verified_user</span><span>Merkle Sync: <strong class="text-primary font-medium">OK</strong></span></div></div></div><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container rounded-lg p-0.5 border border-surface-variant font-label-sm text-label-sm"><button class="px-space-sm py-1 rounded bg-surface-container-lowest text-primary font-semibold" type="button">EN</button><button class="px-space-sm py-1 rounded text-on-surface-variant hover:text-on-surface transition-colors font-medium" type="button">العربية</button></div><div class="h-6 w-px bg-surface-variant"></div><div class="flex items-center gap-space-sm"><div class="text-right hidden sm:block"><div class="font-label-md text-label-md font-semibold text-on-surface">Eng. Reham M.</div><div class="font-label-sm text-label-sm text-on-surface-variant">Platform Admin / Super Admin</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-lowest border-r border-surface-variant z-40 flex flex-col justify-between overflow-y-auto"><div class="py-space-md px-space-md"><nav class="space-y-space-md" data-active-classes="bg-primary-container text-on-primary-container font-semibold"><div class="space-y-1"><div class="px-space-sm py-1 font-label-sm text-label-sm font-semibold tracking-wider uppercase text-outline">Overview</div><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="admin-dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Admin Dashboard</span></div></a></div><div class="space-y-1"><div class="px-space-sm py-1 font-label-sm text-label-sm font-semibold tracking-wider uppercase text-outline">Trust & Moderation</div><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="verification-queue" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">verified</span><span>Verification Queue</span></div><span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">5</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="content-reports-and-flags" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">flag</span><span>Content Reports & Flags</span></div><span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">3</span></a></div><div class="space-y-1"><div class="px-space-sm py-1 font-label-sm text-label-sm font-semibold tracking-wider uppercase text-outline">Operations & Ecosystem</div><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 rounded-lg transition-colors bg-primary-container text-on-primary-container font-semibold" data-path="users-directory" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">group</span><span>Users Directory</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="organizations-directory" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">corporate_fare</span><span>Organizations Directory</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="resources-oversight" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Resources Oversight</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="requests-standing-quotas" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">assignment_turned_in</span><span>Requests Standing Quotas</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="bilateral-matches-and-pairing" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">hub</span><span>Bilateral Matches & Pairing</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="custodial-handovers" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span>Custodial Handovers</span></div></a></div><div class="space-y-1"><div class="px-space-sm py-1 font-label-sm text-label-sm font-semibold tracking-wider uppercase text-outline">Impact & Platform Governance</div><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="category-taxonomy" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">category</span><span>Category Taxonomy</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="platform-analytics-and-ledger" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">monitoring</span><span>Platform Analytics & Ledger</span></div></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="audit-trail-and-logs" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span>Audit Trail & Logs</span></div></a></div></nav></div><div class="p-space-md border-t border-surface-variant bg-surface-container-low"><div class="flex items-start gap-space-xs"><span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">gavel</span><p class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Certified Egyptian Circular Economy Decree 149/2019, Audit Tier A.</p></div></div></aside><div class="pl-72"><main class="w-full min-h-screen pt-16 bg-background px-gutter py-space-lg"><div class="flex flex-col w-full font-body-md text-on-surface antialiased pb-space-xl" id="dossier-root">
+<!-- TOP PROTOTYPE & SIMULATION TOOLBAR (Floating pill bar) -->
+<aside aria-label="Administrative Simulation Controls" class="sticky top-16 z-30 mb-space-md bg-surface-container-lowest/95 backdrop-blur-md rounded-xl p-space-xs shadow-md">
+<div class="flex flex-wrap items-center justify-between gap-space-xs px-space-sm py-1">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">science</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-outline">QA State Simulator:</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5" id="sim-button-group">
+<button class="px-space-sm py-1 rounded-lg font-label-sm text-label-sm font-medium bg-primary text-on-primary transition-all" id="sim-btn-active" onclick="switchState('active')" type="button">
+          1. Active Node Lead (Live)
+        </button>
+<button class="px-space-sm py-1 rounded-lg font-label-sm text-label-sm font-medium bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" id="sim-btn-suspend" onclick="toggleSuspendModal(true)" type="button">
+          2. Suspension Modal
+        </button>
+<button class="px-space-sm py-1 rounded-lg font-label-sm text-label-sm font-medium bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" id="sim-btn-404" onclick="switchState('404')" type="button">
+          3. 404 Fallback
+        </button>
+<button class="px-space-sm py-1 rounded-lg font-label-sm text-label-sm font-medium bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all" id="sim-btn-restricted" onclick="switchState('restricted')" type="button">
+          4. Permission Restricted (Auditor)
+        </button>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1 px-space-sm py-1 rounded-lg font-label-sm text-label-sm font-semibold bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed transition-colors" id="lang-toggle-btn" onclick="toggleRTL()" type="button">
+<span class="material-symbols-outlined text-[16px]">translate</span>
+<span id="lang-label">العربية (RTL)</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- 404 STATE PLACEHOLDER (Hidden by default) -->
+<section class="hidden bg-surface-container-lowest rounded-xl p-space-xl text-center shadow-sm my-space-md" id="state-404">
+<div class="w-16 h-16 rounded-full bg-error-container text-on-error-container mx-auto flex items-center justify-center mb-space-sm">
+<span class="material-symbols-outlined text-[32px]">person_off</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">User Record Not Found (#USR-4040)</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mx-auto mt-2">
+      The specified civic identifier was either scrubbed under GDPR/Decree 149 purge protocols or does not exist in collection <code class="font-code-sm text-code-sm bg-surface-container px-1 rounded">db.users</code>.
+    </p>
+<div class="mt-space-md flex justify-center gap-space-sm">
+<button class="px-space-md py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold" onclick="switchState('active')" type="button">
+        Reload Active User (#USR-2041)
+      </button>
+</div>
+</section>
+<!-- PERMISSION RESTRICTED BANNER (Shown dynamically in restricted mode) -->
+<div class="hidden mb-space-md rounded-xl bg-tertiary-fixed text-on-tertiary-fixed p-space-md shadow-sm" id="restricted-banner">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[24px]">policy</span>
+<div>
+<div class="font-label-md text-label-md font-semibold">Read-Only Auditor Mode Engaged</div>
+<div class="font-body-sm text-body-sm opacity-90">Administrative mutation privileges (role reassignment, manual suspension, credential purge) are restricted to Super Admin level.</div>
+</div>
+</div>
+<button class="px-space-sm py-1 rounded bg-on-tertiary-fixed text-tertiary-fixed font-label-sm text-label-sm font-semibold" onclick="switchState('active')" type="button">
+        Elevate to Super Admin
+      </button>
+</div>
+</div>
+<!-- MAIN DOSSIER WRAPPER -->
+<div class="flex flex-col gap-space-md" id="dossier-main">
+<!-- BREADCRUMBS & CONTEXTUAL NAVIGATION -->
+<nav aria-label="Dossier Context" class="flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant">
+<div class="flex items-center gap-2 font-label-sm text-label-sm flex-wrap">
+<span class="font-medium text-outline">System Administration</span>
+<span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span>
+<span class="font-medium text-outline">Identity & Access Oversight</span>
+<span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span>
+<a class="font-semibold text-primary hover:underline" href="#">Users Directory (/admin/users)</a>
+<span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span>
+<span class="font-semibold text-on-surface bg-surface-container px-2 py-0.5 rounded">User Dossier: Dr. Laila El-Mansouri</span>
+</div>
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm">
+<span class="text-on-surface-variant font-code-sm text-code-sm">Record 1 of 1,428</span>
+<div class="flex items-center gap-1 bg-surface-container rounded-lg p-0.5">
+<button aria-label="Previous user" class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<a class="px-space-sm py-1 rounded text-on-surface hover:bg-surface-container-high transition-colors font-medium flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">arrow_back</span>
+<span>Return to Directory</span>
+</a>
+<button aria-label="Next user" class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- USER DOSSIER HEADER (Primary Identity & Status Card) -->
+<header class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-lg">
+<!-- Left Identity Block -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md">
+<div class="relative shrink-0">
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary via-primary-container to-secondary flex items-center justify-center text-on-primary font-headline-md text-headline-md font-semibold tracking-tight shadow-md">
+              LM
+            </div>
+<span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-primary ring-4 ring-surface-container-lowest" title="Authenticated session active"></span>
+</div>
+<div class="space-y-1">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h1 class="font-headline-lg text-headline-lg font-semibold tracking-tight text-on-surface">Dr. Laila El-Mansouri</h1>
+<span class="font-headline-sm text-headline-sm font-normal text-on-surface-variant" dir="rtl">(د. ليلى المنصوري)</span>
+</div>
+<!-- Attestation Badges -->
+<div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>Accredited Node Lead</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-low text-primary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">shield_person</span>
+<span>Verified Institutional Custodian</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">gavel</span>
+<span>Decree 149/2019 Attestation</span>
+</span>
+</div>
+<!-- Subtitle Metadata -->
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 pt-1 font-code-sm text-code-sm text-on-surface-variant">
+<span>ID: <strong class="text-on-surface font-semibold font-code-sm">USR-2041</strong></span>
+<span class="text-outline-variant">•</span>
+<span>Registered: <strong>14 Aug 2024</strong> (96 days active)</span>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Active 12m ago (Cairo Node IP: <span class="text-on-surface font-mono">197.34.112.5 CAI</span>)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Administrative Action Suite & Quick Badges -->
+<div class="flex flex-col items-start xl:items-end gap-space-sm shrink-0">
+<!-- Status Chips -->
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+<span>Status: Active</span>
+</span>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+              Role: user
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px] text-primary">lock</span>
+<span>2FA Enforced</span>
+</span>
+</div>
+<!-- RBAC Action Buttons -->
+<div class="flex flex-wrap items-center gap-space-xs pt-1" id="admin-actions-bar">
+<button class="admin-only-btn flex items-center gap-1.5 px-space-md py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors" onclick="notifyAction('Edit User Dialog: Loaded #USR-2041')" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+<span>Edit User Data</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors" onclick="exportDossierJSON()" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Export Dossier (JSON)</span>
+</button>
+<!-- Role Selector Trigger -->
+<div class="relative inline-block text-left" id="role-menu-wrapper">
+<button class="admin-only-btn flex items-center gap-1.5 px-space-md py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors" id="role-dropdown-btn" onclick="toggleRoleDropdown()" type="button">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+<span>Role: user</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<div class="hidden absolute right-0 mt-1 w-52 rounded-xl bg-surface-container-lowest shadow-xl py-1 z-50" id="role-dropdown-menu">
+<div class="px-space-sm py-1 font-label-sm text-label-sm font-semibold uppercase text-outline">Reassign Role (§14)</div>
+<button class="w-full text-left px-space-sm py-2 font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center justify-between" onclick="setRole('user')" type="button">
+<span>Regular User</span>
+<span class="material-symbols-outlined text-primary text-[16px]">check</span>
+</button>
+<button class="w-full text-left px-space-sm py-2 font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center justify-between" onclick="setRole('moderator')" type="button">
+<span>Regional Moderator</span>
+</button>
+<button class="w-full text-left px-space-sm py-2 font-label-md text-label-md text-error hover:bg-error-container/20 flex items-center justify-between" onclick="setRole('admin')" type="button">
+<span>Super Administrator</span>
+<span class="material-symbols-outlined text-[16px]">security</span>
+</button>
+</div>
+</div>
+<!-- Destructive Action -->
+<button class="admin-only-btn flex items-center gap-1.5 px-space-md py-2 rounded-lg bg-error text-on-error hover:opacity-90 font-label-md text-label-md font-semibold transition-opacity shadow-sm" onclick="toggleSuspendModal(true)" type="button">
+<span class="material-symbols-outlined text-[18px]">lock_person</span>
+<span>Suspend Account</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- TWO-COLUMN OPERATIONAL WORKBENCH LAYOUT -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-start">
+<!-- ============================================================== -->
+<!-- LEFT COLUMN (65% width on desktop) - CORE PARTICIPATION & LOGS -->
+<!-- ============================================================== -->
+<main class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- A. Civic Asset Footprint & Logistical Metric Cards -->
+<section aria-labelledby="footprint-heading" class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface flex items-center gap-2" id="footprint-heading">
+<span class="material-symbols-outlined text-primary text-[20px]">hub</span>
+<span>Civic Asset Footprint & Logistical Throughput</span>
+</h2>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Audit Period: 2024 YTD</span>
+</div>
+<!-- 4 Quick-Metric Summary Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-sm">
+<!-- Metric 1: Surplus Consigned -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Surplus Consigned</span>
+<span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
+</div>
+<div class="mt-2 font-headline-md text-headline-md font-bold text-on-surface">15 Resources</div>
+<div class="mt-1 font-body-sm text-body-sm text-on-surface-variant">12 fulfilled, 3 active reserve</div>
+</div>
+<a class="mt-space-sm pt-space-xs flex items-center gap-1 font-label-sm text-label-sm font-semibold text-primary hover:underline" href="#">
+<span>Inspect Resources</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Metric 2: Standing Quotas Raised -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Standing Quotas</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">assignment_turned_in</span>
+</div>
+<div class="mt-2 font-headline-md text-headline-md font-bold text-on-surface">4 Requisitions</div>
+<div class="mt-1 font-body-sm text-body-sm text-on-surface-variant">100% matched (Sayeda & Maadi)</div>
+</div>
+<a class="mt-space-sm pt-space-xs flex items-center gap-1 font-label-sm text-label-sm font-semibold text-primary hover:underline" href="#">
+<span>Inspect Requests</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Metric 3: Bilateral Pairings -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Bilateral Matches</span>
+<span class="material-symbols-outlined text-tertiary-container text-[20px]">sync_alt</span>
+</div>
+<div class="mt-2 font-headline-md text-headline-md font-bold text-on-surface">8 Matches</div>
+<div class="mt-1 font-body-sm text-body-sm text-on-surface-variant">6 accepted, 2 in-transit (94% fit)</div>
+</div>
+<a class="mt-space-sm pt-space-xs flex items-center gap-1 font-label-sm text-label-sm font-semibold text-primary hover:underline" href="#">
+<span>Inspect Matches</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Metric 4: Completed Handovers -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Handovers Sealed</span>
+<span class="material-symbols-outlined text-primary text-[20px]">local_shipping</span>
+</div>
+<div class="mt-2 font-headline-md text-headline-md font-bold text-on-surface">19 Transfers</div>
+<div class="mt-1 font-body-sm text-body-sm text-on-surface-variant">142 kg clinical supplies rescued</div>
+</div>
+<a class="mt-space-sm pt-space-xs flex items-center gap-1 font-label-sm text-label-sm font-semibold text-primary hover:underline" href="#">
+<span>Inspect Ledger</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- B. Detailed Participation Tabs & Managed Lots -->
+<section aria-labelledby="tab-section-heading" class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="p-space-md pb-0 flex flex-wrap items-center justify-between gap-space-sm bg-surface-container-low">
+<h2 class="sr-only" id="tab-section-heading">Detailed Participation Tabs</h2>
+<!-- Tab Selector -->
+<div class="flex items-center gap-1 overflow-x-auto" role="tablist">
+<button aria-selected="true" class="px-space-md py-2.5 font-label-md text-label-md font-semibold text-primary bg-surface-container-lowest rounded-t-lg shadow-sm flex items-center gap-1.5 transition-colors" id="tab-btn-resources" onclick="switchDossierTab('resources')" role="tab">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+<span>Active Resources</span>
+<span class="px-1.5 py-0.2 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">3</span>
+</button>
+<button aria-selected="false" class="px-space-md py-2.5 font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface rounded-t-lg flex items-center gap-1.5 transition-colors" id="tab-btn-handovers" onclick="switchDossierTab('handovers')" role="tab">
+<span class="material-symbols-outlined text-[18px]">swap_horiz</span>
+<span>Recent Handovers</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">4</span>
+</button>
+<button aria-selected="false" class="px-space-md py-2.5 font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface rounded-t-lg flex items-center gap-1.5 transition-colors" id="tab-btn-audit" onclick="switchDossierTab('audit')" role="tab">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span>Custodial Audit Log</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">6</span>
+</button>
+<button aria-selected="false" class="px-space-md py-2.5 font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface rounded-t-lg flex items-center gap-1.5 transition-colors" id="tab-btn-moderation" onclick="switchDossierTab('moderation')" role="tab">
+<span class="material-symbols-outlined text-[18px]">flag</span>
+<span>Moderation History</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-outline font-label-sm text-label-sm">0</span>
+</button>
+</div>
+<div class="pb-2 hidden sm:block">
+<span class="font-code-sm text-code-sm text-on-surface-variant">Collection: <code class="font-semibold text-primary">users[usr-2041].resources</code></span>
+</div>
+</div>
+<!-- TAB CONTENT: Active Resources -->
+<div class="p-space-md space-y-space-sm" id="tab-panel-resources">
+<!-- Resource Row 1 -->
+<article class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-lowest shrink-0 flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">medical_services</span>
+</div>
+<div class="space-y-1">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">15x Portable Oxygen Flowmeters & Regulators</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">Matched: Sayeda Zeinab Clinic</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-body-sm text-body-sm text-on-surface-variant">
+<span>Lot Ref: <strong class="font-mono text-on-surface">#RES-MED-8821</strong></span>
+<span>•</span>
+<span>Category: <strong>Biomedical Equipment</strong></span>
+<span>•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">pin_drop</span>
+<span>Maadi Central Depot (Bay 04)</span>
+</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end md:self-center shrink-0">
+<span class="font-code-sm text-code-sm text-on-surface-variant">Δ 0.0% variance</span>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-on-surface font-label-sm text-label-sm font-medium transition-colors shadow-sm" onclick="notifyAction('Inspecting Lot #RES-MED-8821')" type="button">
+                  Inspect Lot
+                </button>
+</div>
+</article>
+<!-- Resource Row 2 -->
+<article class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-lowest shrink-0 flex items-center justify-center text-secondary text-[24px] shadow-sm">
+<span class="material-symbols-outlined">vaccines</span>
+</div>
+<div class="space-y-1">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">50x Thermal Sterile Dressing Kits</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold">Available for Dispatch</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-body-sm text-body-sm text-on-surface-variant">
+<span>Lot Ref: <strong class="font-mono text-on-surface">#RES-MED-7719</strong></span>
+<span>•</span>
+<span>Category: <strong>Clinical Consumables</strong></span>
+<span>•</span>
+<span class="text-tertiary font-medium">Exp: 11/2026 (Compliant)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end md:self-center shrink-0">
+<span class="font-code-sm text-code-sm text-on-surface-variant">Weight: 22.4 kg</span>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-on-surface font-label-sm text-label-sm font-medium transition-colors shadow-sm" onclick="notifyAction('Inspecting Lot #RES-MED-7719')" type="button">
+                  Inspect Lot
+                </button>
+</div>
+</article>
+<!-- Resource Row 3 -->
+<article class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container transition-colors flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container-lowest shrink-0 flex items-center justify-center text-outline text-[24px] shadow-sm">
+<span class="material-symbols-outlined">bed</span>
+</div>
+<div class="space-y-1">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-label-md text-label-md font-semibold text-on-surface">4x Decommissioned Pediatric Hydraulic Beds</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-medium">Handover Completed (Hilal Relief)</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-body-sm text-body-sm text-on-surface-variant">
+<span>Lot Ref: <strong class="font-mono text-on-surface">#RES-MED-6104</strong></span>
+<span>•</span>
+<span>Category: <strong>Hospital Infrastructure</strong></span>
+<span>•</span>
+<span>Merkle Batch #774,901</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end md:self-center shrink-0">
+<span class="font-code-sm text-code-sm text-primary font-medium">Archived to Ledger</span>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-lowest hover:bg-primary hover:text-on-primary text-on-surface font-label-sm text-label-sm font-medium transition-colors shadow-sm" onclick="notifyAction('Archived Manifest #RES-MED-6104')" type="button">
+                  View Receipt
+                </button>
+</div>
+</article>
+</div>
+<!-- TAB CONTENT: Recent Handovers (Alternative Tab View) -->
+<div class="hidden p-space-md space-y-space-sm" id="tab-panel-handovers">
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[28px]">handshake</span>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Handover #HND-8841-CAI (Oxygen Consignment)</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Dual sign-off: Dr. Laila El-Mansouri ↔ Dr. Hisham Kassem (Sayeda Clinic)</div>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">100% Sealed</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[28px]">handshake</span>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Handover #HND-7712-CAI (34x Factory Sterile Gauze)</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Maadi Night Shelter Reception • Geolocation verified (30.0131° N, 31.2089° E)</div>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">100% Sealed</span>
+</div>
+</div>
+<!-- TAB CONTENT: Custodial Audit Log -->
+<div class="hidden p-space-md" id="tab-panel-audit">
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="bg-surface-container text-outline font-label-sm text-label-sm uppercase">
+<tr>
+<th class="py-2 px-3 rounded-l">Timestamp</th>
+<th class="py-2 px-3">Action</th>
+<th class="py-2 px-3">Merkle Root</th>
+<th class="py-2 px-3 rounded-r text-right">Result</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant">
+<tr class="hover:bg-surface-container-low">
+<td class="py-2 px-3 font-mono">2024-11-18 14:22</td>
+<td class="py-2 px-3 font-medium">Handover Signature #8841</td>
+<td class="py-2 px-3 font-mono text-outline">0x819002...d4e9</td>
+<td class="py-2 px-3 text-right text-primary font-semibold">VERIFIED</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="py-2 px-3 font-mono">2024-11-18 13:45</td>
+<td class="py-2 px-3 font-medium">Gate Pass Consent #9402</td>
+<td class="py-2 px-3 font-mono text-outline">0x818940...a1b2</td>
+<td class="py-2 px-3 text-right text-primary font-semibold">VERIFIED</td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="py-2 px-3 font-mono">2024-11-17 16:10</td>
+<td class="py-2 px-3 font-medium">New Lot Consigned #8821</td>
+<td class="py-2 px-3 font-mono text-outline">0x817112...f903</td>
+<td class="py-2 px-3 text-right text-primary font-semibold">VERIFIED</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- TAB CONTENT: Moderation History -->
+<div class="hidden p-space-xl text-center" id="tab-panel-moderation">
+<span class="material-symbols-outlined text-[36px] text-primary">verified_user</span>
+<div class="mt-2 font-headline-sm text-headline-sm font-semibold text-on-surface">Zero Moderation Incidents</div>
+<p class="mt-1 font-body-sm text-body-sm text-on-surface-variant max-w-md mx-auto">
+              Dr. Laila El-Mansouri maintains an unblemished civic standing with 0 open flags, 0 dispute holds, and 100% compliant physical inspections.
+            </p>
+</div>
+</section>
+<!-- C. Chronological Audit & Activity Timeline -->
+<section aria-labelledby="timeline-heading" class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-sm">
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface flex items-center gap-2" id="timeline-heading">
+<span class="material-symbols-outlined text-primary text-[20px]">history_toggle_off</span>
+<span>Auditable Activity Ledger (§14 Compliance)</span>
+</h2>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Immutable SHA-256 chain</span>
+</div>
+<div class="relative pl-6 space-y-space-md before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-highest">
+<!-- Timeline Item 1 -->
+<div class="relative group">
+<span class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Two-sided handover sealed: Lot #RES-MED-8821</span>
+<time class="font-code-sm text-code-sm text-on-surface-variant">Today, 14:22 CLT</time>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Custody transfer confirmed via dual biometric OTP sign-off with Dr. Hisham Kassem (Recipient). Cairo Node Merkle Block <code class="font-code-sm text-code-sm bg-surface-container px-1 rounded text-primary">#819,002</code>.
+              </p>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative group">
+<span class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-secondary ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Bilateral Match Consented (#MTC-MED-9402)</span>
+<time class="font-code-sm text-code-sm text-on-surface-variant">Today, 13:45 CLT</time>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Logistical algorithm match approved by user. Dispatch permit and custodial gate pass generated under Cairo Health Authority protocol.
+              </p>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative group">
+<span class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-tertiary-container ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">New Surplus Consigned: Lot #RES-MED-8821</span>
+<time class="font-code-sm text-code-sm text-on-surface-variant">Yesterday, 16:10 CLT</time>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                15x Oxygen Flowmeters entered into custody pool. Statutory compliance under Egyptian Circular Economy Decree #892-CAI verified.
+              </p>
+</div>
+<!-- Timeline Item 4 -->
+<div class="relative group">
+<span class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-outline ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Handover Sealed: Lot #RES-MED-7712</span>
+<time class="font-code-sm text-code-sm text-on-surface-variant">12 Nov 2024</time>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                34x Factory Sterile Gauze transferred to Maadi Night Shelter. Physical receipt certified by courier dispatch.
+              </p>
+</div>
+<!-- Timeline Item 5 -->
+<div class="relative group">
+<span class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-primary ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Account Onboarding & Institutional Attestation</span>
+<time class="font-code-sm text-code-sm text-on-surface-variant">14 Aug 2024, 11:20 CLT</time>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Identity verified by Super Admin Eng. Reham M. against MoSS Registry #ORG-CAI-MED-02. 2FA mandatory enforcement applied.
+              </p>
+</div>
+</div>
+</section>
+</main>
+<!-- ============================================================== -->
+<!-- RIGHT COLUMN (35% width) - IDENTITY, SECURITY & ORG CONTEXT   -->
+<!-- ============================================================== -->
+<aside aria-label="Account and Organizational Profile" class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- A. Affiliated Organization & Node Custody Card -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-outline">Affiliated Organization</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+<span>Audited</span>
+</span>
+</div>
+<div class="mt-2 space-y-1">
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">Al-Bustan Medical Support Outpost</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant" dir="rtl">مستودع البستان للإغاثة الطبية</p>
+</div>
+<div class="mt-space-md space-y-2.5 font-body-sm text-body-sm">
+<div class="flex justify-between py-1 bg-surface-container-low px-2 rounded">
+<span class="text-on-surface-variant">Node Identifier</span>
+<span class="font-mono font-semibold text-on-surface">#ORG-CAI-MED-02</span>
+</div>
+<div class="flex justify-between py-1 px-2">
+<span class="text-on-surface-variant">Node Class</span>
+<span class="font-medium text-on-surface">Tier 3 Accredited Hospital</span>
+</div>
+<div class="flex justify-between py-1 bg-surface-container-low px-2 rounded">
+<span class="text-on-surface-variant">Designation</span>
+<span class="font-medium text-primary">Owner & Primary Custodian</span>
+</div>
+<div class="flex justify-between py-1 px-2">
+<span class="text-on-surface-variant">MoSS License</span>
+<span class="font-mono text-on-surface">#892-CAI-2024</span>
+</div>
+<div class="flex items-start justify-between py-1 bg-surface-container-low px-2 rounded gap-2">
+<span class="text-on-surface-variant shrink-0">Address</span>
+<span class="text-right text-on-surface font-medium">14 Al-Nasr St, New Maadi, Cairo</span>
+</div>
+</div>
+<a class="mt-space-md w-full py-2 px-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high font-label-md text-label-md font-semibold text-primary flex items-center justify-center gap-1 transition-colors" href="#">
+<span>Open Organization Dossier</span>
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</a>
+</section>
+<!-- B. Masked Identity & PII Profile Details (Audit Compliance) -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-outline">Verified Identity (PII)</span>
+<span class="font-code-sm text-code-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>Masked (§14)</span>
+</span>
+</div>
+<div class="mt-space-sm space-y-3 font-body-sm text-body-sm">
+<div>
+<span class="block font-label-sm text-label-sm text-outline">Official Registered Name</span>
+<span class="font-medium text-on-surface">Dr. Laila El-Mansouri (د. ليلى المنصوري)</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-outline">Primary Contact Email</span>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-mono text-on-surface">laila.mansouri@bustan-med.org</span>
+<span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">Verified</span>
+</div>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-outline">Encrypted Mobile Endpoint</span>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-mono text-on-surface">+20 10 •••• 4891</span>
+<button class="admin-only-btn text-primary font-label-sm text-label-sm hover:underline" onclick="notifyAction('Audit log registered: Super Admin unmasked phone verification token.')" type="button">
+                  Unmask PII
+                </button>
+</div>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-outline">Jurisdiction & Territory</span>
+<span class="font-medium text-on-surface">Cairo Governorate • Maadi West Zone (Node #02)</span>
+</div>
+<div class="p-2 rounded bg-surface-container-low font-code-sm text-code-sm text-on-surface-variant flex items-center justify-between">
+<span>National ID Token:</span>
+<span class="font-mono font-semibold text-on-surface">#EGY-CAI-***-4091</span>
+</div>
+</div>
+</section>
+<!-- C. Security & Authentication Posture -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-outline">Security & Auth Posture</span>
+<span class="w-2.5 h-2.5 rounded-full bg-primary" title="Zero Security Breaches"></span>
+</div>
+<div class="mt-space-sm space-y-2.5 font-body-sm text-body-sm">
+<div class="flex justify-between py-1 bg-surface-container-low px-2 rounded">
+<span class="text-on-surface-variant">Hashing Scheme</span>
+<span class="font-mono font-medium text-on-surface">bcrypt (salt: 10 rounds)</span>
+</div>
+<div class="flex justify-between py-1 px-2">
+<span class="text-on-surface-variant">Active Sessions</span>
+<span class="font-medium text-on-surface">1 JWT active (Exp: 5d 14h)</span>
+</div>
+<div class="flex justify-between py-1 bg-surface-container-low px-2 rounded">
+<span class="text-on-surface-variant">Credentials Rotated</span>
+<span class="font-medium text-on-surface">14 Aug 2024 (Original)</span>
+</div>
+<div class="flex justify-between py-1 px-2">
+<span class="text-on-surface-variant">Two-Factor (2FA)</span>
+<span class="font-medium text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>TOTP Active</span>
+</span>
+</div>
+</div>
+<button class="admin-only-btn mt-space-md w-full py-2 px-space-sm rounded-lg bg-surface-container hover:bg-error-container hover:text-on-error-container font-label-md text-label-md font-semibold text-on-surface-variant transition-colors flex items-center justify-center gap-1" onclick="notifyAction('Revoked all JWT tokens for #USR-2041')" type="button">
+<span class="material-symbols-outlined text-[16px]">key_off</span>
+<span>Force Revoke All JWT Sessions</span>
+</button>
+</section>
+<!-- D. Trust & Moderation Standing -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-outline">Trust & Standing</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+<span>Exemplary</span>
+</span>
+</div>
+<div class="mt-space-sm space-y-3">
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-on-surface-variant">Civic Reliability Index</span>
+<span class="font-bold text-primary font-mono">1.0 / 1.0 (100%)</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="w-full h-full bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 text-center pt-1 font-body-sm text-body-sm">
+<div class="p-2 rounded bg-surface-container-low">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface font-mono">0</div>
+<div class="text-on-surface-variant text-label-sm font-label-sm">Active Flags</div>
+</div>
+<div class="p-2 rounded bg-surface-container-low">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface font-mono">0</div>
+<div class="text-on-surface-variant text-label-sm font-label-sm">Historic Disputes</div>
+</div>
+</div>
+</div>
+</section>
+<!-- E. Administrative Lifecycle & Role Transition Box -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center gap-1.5 text-on-surface font-label-sm text-label-sm font-semibold uppercase tracking-wider pb-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">admin_panel_settings</span>
+<span>Administrative Lifecycle</span>
+</div>
+<p class="mt-2 font-body-sm text-body-sm text-on-surface-variant">
+            Under Egyptian Circular Economy Decree 149/2019 §14, suspension revokes all active JWT tokens, freezes open resource matches, and logs administrative rationale.
+          </p>
+<div class="mt-space-md pt-space-xs flex flex-col gap-2">
+<button class="admin-only-btn w-full py-2.5 px-space-sm rounded-lg bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-md text-label-md font-semibold transition-colors flex items-center justify-center gap-1.5" onclick="toggleSuspendModal(true)" type="button">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Engage Account Suspension...</span>
+</button>
+<div class="font-code-sm text-code-sm text-outline text-center">
+              Super Admin Operator: <strong class="text-on-surface">Eng. Reham M.</strong>
+</div>
+</div>
+</section>
+</aside>
+</div>
+</div>
+<!-- ============================================================== -->
+<!-- SUSPENSION CONFIRMATION MODAL OVERLAY (QA Interactive Component)-->
+<!-- ============================================================== -->
+<dialog class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/60 backdrop-blur-sm p-4 w-full h-full border-0 hidden" id="suspend-modal">
+<div class="relative w-full max-w-lg bg-surface-container-lowest rounded-xl shadow-xl overflow-hidden animate-fadeIn" role="document">
+<!-- Modal Header -->
+<div class="p-space-md bg-error-container text-on-error-container flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[24px]">warning</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold">Statutory Suspension Protocol</h2>
+</div>
+<button aria-label="Close dialog" class="rounded p-1 text-on-error-container hover:bg-error/10 transition-colors" onclick="toggleSuspendModal(false)" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-space-lg space-y-space-md font-body-md text-body-md">
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary font-bold flex items-center justify-center shrink-0">
+            LM
+          </div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Dr. Laila El-Mansouri</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">UID: USR-2041 • Node: Al-Bustan Medical (#ORG-CAI-MED-02)</div>
+</div>
+</div>
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm font-semibold uppercase tracking-wider text-outline" for="suspension-reason-select">
+            Statutory Rationale (Decree 149/2019 §14)
+          </label>
+<select class="w-full h-10 px-3 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:bg-surface-container transition-all" id="suspension-reason-select">
+<option value="commercial">Commercial Solicitation (Violation of Gratis Circular Redistribution)</option>
+<option value="packaging">Packaging / Biological Non-compliance (MoSS Safety Audit Failure)</option>
+<option value="unresponsive">Unresponsive in Confirmed Bilateral Handover (>72h SLA)</option>
+<option value="identity">Identity Misrepresentation or Unauthorized Facility Custody</option>
+<option value="precautionary">Precautionary Freeze Pending Merkle Audit Reconciliation</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm font-semibold uppercase tracking-wider text-outline" for="suspension-notes">
+            Administrative Audit Notes & Evidence Log
+          </label>
+<textarea class="w-full p-space-sm rounded-lg bg-surface-container-lowest text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container transition-all" id="suspension-notes" placeholder="Enter specific field inspection reference, case ticket, or MoSS investigator report number..." rows="3"></textarea>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container text-outline font-code-sm text-code-sm flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-error shrink-0 mt-0.5">report</span>
+<span>Confirmation will immediately terminate 1 active JWT session and place 3 active consigned resource lots on administrative hold.</span>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-end gap-space-sm">
+<button class="px-space-md py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold transition-colors" onclick="toggleSuspendModal(false)" type="button">
+          Cancel
+        </button>
+<button class="px-space-md py-2 rounded-lg bg-error text-on-error hover:opacity-90 font-label-md text-label-md font-semibold transition-opacity flex items-center gap-1.5 shadow-sm" onclick="confirmSuspension()" type="button">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>Confirm Statutory Suspension</span>
+</button>
+</div>
+</div>
+</dialog>
+<!-- TOAST NOTIFICATION CONTAINER -->
+<div class="fixed bottom-6 right-6 z-50 hidden max-w-md p-space-md rounded-xl bg-inverse-surface text-inverse-on-surface shadow-xl flex items-center gap-space-sm transition-all transform duration-200" id="toast">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]" id="toast-icon">info</span>
+<span class="font-body-sm text-body-sm" id="toast-msg">Action processed successfully.</span>
+</div>
+<!-- CLIENT-SIDE SIMULATOR & INTERACTIVITY LOGIC -->
+<script>
+    // State machine for simulator toolbar
+    function switchState(state) {
+      const activeBtn = document.getElementById('sim-btn-active');
+      const suspendBtn = document.getElementById('sim-btn-suspend');
+      const notFoundBtn = document.getElementById('sim-btn-404');
+      const restrictedBtn = document.getElementById('sim-btn-restricted');
+      
+      const mainDossier = document.getElementById('dossier-main');
+      const state404 = document.getElementById('state-404');
+      const restrictedBanner = document.getElementById('restricted-banner');
+      const adminButtons = document.querySelectorAll('.admin-only-btn');
+
+      // Reset button styles
+      [activeBtn, suspendBtn, notFoundBtn, restrictedBtn].forEach(b => {
+        b.className = "px-space-sm py-1 rounded-lg font-label-sm text-label-sm font-medium bg-surface-container text-on-surface-variant hover:bg-surface-container-high transition-all";
+      });
+
+      if (state === 'active') {
+        activeBtn.className = "px-space-sm py-1 rounded-lg font-label-sm text-label-sm font-medium bg-primary text-on-primary transition-all";
+        mainDossier.classList.remove('hidden');
+        state404.classList.add('hidden');
+        restrictedBanner.classList.add('hidden');
+        adminButtons.forEach(btn => btn.removeAttribute('disabled'));
+        adminButtons.forEach(btn => btn.style.opacity = '1');
+        showToast('Active User Loaded: Dr. Laila El-Mansouri (#USR-2041)', 'verified');
+      } 
+      else if (state === '404') {
+        notFoundBtn.className = "px-space-sm py-1 rounded-lg font-label-sm text-label-sm font-medium bg-error text-on-error transition-all";
+        mainDossier.classList.add('hidden');
+        state404.classList.remove('hidden');
+        restrictedBanner.classList.add('hidden');
+        showToast('404 Fallback: User not found in database', 'person_off');
+      } 
+      else if (state === 'restricted') {
+        restrictedBtn.className = "px-space-sm py-1 rounded-lg font-label-sm text-label-sm font-medium bg-tertiary-container text-on-tertiary-container transition-all";
+        mainDossier.classList.remove('hidden');
+        state404.classList.add('hidden');
+        restrictedBanner.classList.remove('hidden');
+        // Disable admin actions
+        adminButtons.forEach(btn => {
+          btn.setAttribute('disabled', 'true');
+          btn.style.opacity = '0.4';
+          btn.style.cursor = 'not-allowed';
+        });
+        showToast('Auditor Mode: Administrative actions restricted', 'policy');
+      }
+    }
+
+    // Toggle Modal
+    function toggleSuspendModal(open) {
+      const modal = document.getElementById('suspend-modal');
+      if (open) {
+        modal.classList.remove('hidden');
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    // Confirm Suspension
+    function confirmSuspension() {
+      toggleSuspendModal(false);
+      const reason = document.getElementById('suspension-reason-select').value;
+      showToast(`Account #USR-2041 suspended under Decree 149 §14 (${reason}). All tokens revoked.`, 'lock_person');
+      // Visual feedback on status badge
+      const statusPill = document.querySelector('header .bg-primary-container');
+      if (statusPill) {
+        statusPill.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold shadow-sm";
+        statusPill.innerHTML = '<span class="w-2 h-2 rounded-full bg-error"></span><span>Status: Suspended (§14)</span>';
+      }
+    }
+
+    // Role switcher dropdown
+    function toggleRoleDropdown() {
+      const menu = document.getElementById('role-dropdown-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    function setRole(newRole) {
+      const btn = document.getElementById('role-dropdown-btn');
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">badge</span><span>Role: ${newRole}</span><span class="material-symbols-outlined text-[16px]">expand_more</span>`;
+      document.getElementById('role-dropdown-menu').classList.add('hidden');
+      showToast(`User role updated to "${newRole}". Audit record logged.`, 'verified');
+    }
+
+    // RTL Toggle
+    function toggleRTL() {
+      const root = document.getElementById('dossier-root');
+      const langLabel = document.getElementById('lang-label');
+      const currentDir = root.getAttribute('dir');
+      if (currentDir === 'rtl') {
+        root.removeAttribute('dir');
+        langLabel.innerText = "العربية (RTL)";
+        showToast('Switched to LTR Layout (English)', 'translate');
+      } else {
+        root.setAttribute('dir', 'rtl');
+        langLabel.innerText = "English (LTR)";
+        showToast('تم التحويل إلى وضع العرض العربي (RTL)', 'translate');
+      }
+    }
+
+    // Tabs switching
+    function switchDossierTab(tabName) {
+      const tabs = ['resources', 'handovers', 'audit', 'moderation'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-btn-' + t);
+        const panel = document.getElementById('tab-panel-' + t);
+        if (t === tabName) {
+          btn.setAttribute('aria-selected', 'true');
+          btn.className = "px-space-md py-2.5 font-label-md text-label-md font-semibold text-primary bg-surface-container-lowest rounded-t-lg shadow-sm flex items-center gap-1.5 transition-colors";
+          panel.classList.remove('hidden');
+        } else {
+          btn.setAttribute('aria-selected', 'false');
+          btn.className = "px-space-md py-2.5 font-label-md text-label-md font-medium text-on-surface-variant hover:text-on-surface rounded-t-lg flex items-center gap-1.5 transition-colors";
+          panel.classList.add('hidden');
+        }
+      });
+    }
+
+    // Export JSON
+    function exportDossierJSON() {
+      const dossierData = {
+        userId: "USR-2041",
+        name: "Dr. Laila El-Mansouri",
+        nameAr: "د. ليلى المنصوري",
+        role: "user",
+        status: "active",
+        decreeAttestation: "149/2019",
+        organization: {
+          nodeId: "ORG-CAI-MED-02",
+          name: "Al-Bustan Medical Support Outpost",
+          license: "892-CAI-2024"
+        },
+        metrics: {
+          surplusConsigned: 15,
+          standingQuotas: 4,
+          bilateralMatches: 8,
+          completedHandovers: 19,
+          totalKilogramsRescued: 142
+        },
+        auditTimestamp: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(dossierData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `USR-2041-Dossier-${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Exported User Dossier (JSON)', 'download');
+    }
+
+    // Generic Notification Toast
+    function showToast(message, iconName = 'info') {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      const toastIcon = document.getElementById('toast-icon');
+      toastMsg.innerText = message;
+      toastIcon.innerText = iconName;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4200);
+    }
+
+    function notifyAction(str) {
+      showToast(str, 'check_circle');
+    }
+
+    // Close role menu on outside click
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('role-dropdown-menu');
+      const btn = document.getElementById('role-dropdown-btn');
+      if (menu && !menu.classList.contains('hidden')) {
+        if (!menu.contains(e.target) && !btn.contains(e.target)) {
+          menu.classList.add('hidden');
+        }
+      }
+    });
+  </script>
+</div></main></div></body></html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>Dawwarha Civic Logistics</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#3f4946","surface-dim":"#d3dcd7","primary-fixed-dim":"#87d5c1","surface-container-high":"#e1eae5","tertiary-container":"#9f672b","surface-container-low":"#edf6f1","surface-bright":"#f2fbf6","on-primary":"#ffffff","secondary-fixed-dim":"#9bd2c0","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-container":"#fffaf8","on-tertiary-fixed":"#2d1600","surface-container-highest":"#dbe5e0","surface-tint":"#106a5a","on-primary-fixed":"#00201a","tertiary":"#834f14","on-surface":"#151d1a","surface":"#f2fbf6","surface-container-lowest":"#ffffff","on-secondary-fixed":"#002019","on-error-container":"#93000a","secondary-container":"#b6eedc","surface-container":"#e7f0eb","primary":"#076757","on-secondary-fixed-variant":"#184f42","on-error":"#ffffff","secondary-fixed":"#b6eedc","primary-fixed":"#a3f2dd","primary-container":"#2f806f","inverse-on-surface":"#eaf3ee","outline-variant":"#bec9c4","surface-variant":"#dbe5e0","background":"#f2fbf6","on-primary-container":"#ebfff7","secondary":"#33685a","error-container":"#ffdad6","on-tertiary-fixed-variant":"#6a3b00","on-secondary-container":"#396e5f","on-primary-fixed-variant":"#005143","outline":"#6f7975","tertiary-fixed":"#ffdcbf","on-background":"#151d1a","inverse-surface":"#2a322f","on-secondary":"#ffffff","inverse-primary":"#87d5c1","tertiary-fixed-dim":"#feb874"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","margin-mobile":"1rem","space-lg":"1.5rem","space-xl":"2.5rem","gutter-mobile":"1rem",margin:"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1.5rem"},fontFamily:{"headline-sm":["Inter"],"headline-lg-mobile":["Inter"],"headline-lg":["Inter"],"display-lg-mobile":["Inter"],"display-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"code-sm":["Inter"],"label-md":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"label-sm":["Inter"]},fontSize:{"headline-sm":["1.125rem",{lineHeight:"1.5rem",fontWeight:"500"}],"headline-lg-mobile":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["2rem",{lineHeight:"2.5rem",letterSpacing:"-0.015em",fontWeight:"600"}],"display-lg-mobile":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["3.5rem",{lineHeight:"4rem",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-md":["1.25rem",{lineHeight:"1.75rem",letterSpacing:"-0.005em",fontWeight:"600"}],"body-sm":["0.8125rem",{lineHeight:"1.25rem",fontWeight:"400"}],"code-sm":["0.8125rem",{lineHeight:"1.125rem",fontWeight:"400"}],"label-md":["0.875rem",{lineHeight:"1.25rem",fontWeight:"500"}],"body-lg":["1.125rem",{lineHeight:"1.75rem",fontWeight:"400"}],"body-md":["0.9375rem",{lineHeight:"1.5rem",fontWeight:"400"}],"label-sm":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 inset-x-0 h-16 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50"><div class="w-full h-16 px-space-md lg:px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">cached</span></div><div class="flex flex-col leading-tight"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">Dawwarha</span><span class="font-label-sm text-label-sm text-outline tracking-normal">دوّرها • Civic Logistics</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-container font-label-md rounded-lg"><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-resources" href="#">My Resources</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-requests" href="#">My Requests</a><a aria-current="page" class="px-space-sm py-1.5 transition-colors bg-secondary-container text-on-secondary-container font-label-md rounded-lg" data-path="matches" href="#">Matches (active)</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#">Handovers & Activity</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#">Impact & Ledger</a></nav></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-sm text-label-sm text-on-surface" title="Switch Language" type="button"><span class="material-symbols-outlined text-[16px] text-outline">language</span><span>EN / العربية</span></button><button class="relative w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary-container"></span></button><button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Documentation & Support" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left leading-none"><span class="font-label-md text-label-md text-on-surface">Dr. Laila El-Mansouri</span><span class="font-label-sm text-label-sm text-primary font-medium mt-0.5">Verified Node Lead</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-low z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-md"><div class="flex items-center justify-between mb-space-md"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Operations Hub</span><span class="px-2 py-0.5 rounded-full bg-surface-container font-code-sm text-code-sm text-secondary">CAI-01</span></div><div class="space-y-space-xs mb-space-lg"><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">add_circle</span><span>Create Request</span></button><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">inventory_2</span><span>Publish Resource</span></button></div><span class="block font-label-sm text-label-sm uppercase tracking-wider text-outline px-space-sm mb-space-xs">Logistical Ledger</span><nav class="space-y-1" data-active-classes="bg-secondary-container text-on-secondary-container font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-resources" href="#"><span class="material-symbols-outlined text-[20px]">archive</span><span class="font-label-md text-label-md">My Resources</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-requests" href="#"><span class="material-symbols-outlined text-[20px]">assignment_late</span><span class="font-label-md text-label-md">My Requests</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 transition-colors bg-secondary-container text-on-secondary-container font-medium rounded-lg" data-path="matches" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">swap_horiz</span><span class="font-label-md text-label-md">Matches</span></div><span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm">active</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span class="font-label-md text-label-md">Handovers & Activity</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-label-md text-label-md">Impact & Ledger</span></a></nav></div><div class="p-space-md"><div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-between mb-1"><span class="font-label-sm text-label-sm uppercase tracking-wide text-secondary font-semibold">Operational Custody</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><p class="font-label-md text-label-md text-on-surface font-medium truncate">Dr. Laila El-Mansouri</p><div class="flex items-center justify-between mt-1 pt-1"><span class="font-code-sm text-code-sm text-outline">Node Hash: CAI-SEC-01</span><span class="font-label-sm text-label-sm text-primary font-medium">Verified</span></div></div></div></aside><div class="pl-72"><main class="w-full min-h-[calc(100vh-4rem)] pt-16 px-space-md lg:px-gutter pb-space-xl bg-background"><div class="max-w-7xl mx-auto py-space-md"><div class="flex flex-col w-full text-on-surface" dir="ltr" id="settings-root">
+<!-- Top Operational Context & State Bar -->
+<div class="w-full bg-surface-container-lowest border-b border-outline-variant/30 px-space-md lg:px-space-xl py-space-sm mb-space-lg">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<!-- Tabs Navigation for Viewport Simulation -->
+<div class="flex items-center gap-1 overflow-x-auto py-1">
+<button class="px-3 py-1.5 rounded-lg text-label-md font-label-md bg-secondary-container text-on-secondary-container transition-colors shrink-0" onclick="switchNavSection('sec-identity')" type="button">
+          1. Identity & Security
+        </button>
+<button class="px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container transition-colors shrink-0" onclick="switchNavSection('sec-notifications')" type="button">
+          2. Notification Channels
+        </button>
+<button class="px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container transition-colors shrink-0" onclick="switchNavSection('sec-privacy')" type="button">
+          3. Geofence & Privacy
+        </button>
+<button class="px-3 py-1.5 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container transition-colors shrink-0" onclick="switchNavSection('sec-lifecycle')" type="button">
+          4. Lifecycle / Danger Zone
+        </button>
+</div>
+<!-- State & Live Localization Controller -->
+<div class="flex items-center gap-space-sm">
+<div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container font-code-sm text-code-sm text-secondary">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+<span>Express API v1.0 · JWT Sub: USR-8841-SEC</span>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-sm text-label-sm transition-colors border border-outline-variant/40" id="lang-toggle-btn" onclick="toggleBidiLocalization()" title="Toggle Arabic RTL / English LTR" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">translate</span>
+<span id="lang-toggle-label">العربية (Cairo RTL)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Page Header Breadcrumbs & Status -->
+<div class="w-full px-space-md lg:px-space-xl mb-space-lg">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div>
+<nav class="flex items-center gap-1.5 font-label-sm text-label-sm text-outline mb-1">
+<a class="hover:text-primary transition-colors" href="#">Dashboard</a>
+<span>/</span>
+<span class="text-on-surface-variant font-medium">Account & Security Settings (إعدادات الحساب والأمان)</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg tracking-tight text-on-surface" id="header-title">
+          Account & Operational Settings
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-3xl" id="header-desc">
+          Configure cryptographic credentials, notification dispatch rules, bilateral disclosure perimeters, and custodial session policies.
+        </p>
+</div>
+<!-- Verified Handshake Session Indicator -->
+<div class="flex items-center gap-space-sm px-3.5 py-2.5 rounded-xl bg-surface-container-low border border-outline-variant/30 shrink-0">
+<div class="w-9 h-9 rounded-lg bg-secondary-container/60 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Session TLS 1.3 Verified</span>
+<span class="font-code-sm text-code-sm text-outline">Handshake: 14:18 CLT · CAI-SEC-01</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Grid with Side Anchors -->
+<div class="w-full px-space-md lg:px-space-xl pb-space-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left Sub-Navigation (Sticky Anchor List) -->
+<aside class="lg:col-span-3 lg:sticky lg:top-20 space-y-1 bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/40 shadow-sm">
+<div class="px-3 py-2 text-label-sm font-label-sm text-outline uppercase tracking-wider">Configuration Scope</div>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-label-md font-label-md text-primary bg-primary/10 transition-colors" href="#sec-identity">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+<span>Core Account Identity</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#sec-password">
+<span class="material-symbols-outlined text-[18px]">lock_reset</span>
+<span>Authentication & Credentials</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#sec-notifications">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+<span>Dispatch & In-App Alerts</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#sec-localization">
+<span class="material-symbols-outlined text-[18px]">language</span>
+<span>Regional & Bidi Formatting</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-label-md font-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#sec-privacy">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+<span>Custodial Boundary & Disclosure</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-label-md font-label-md text-error hover:bg-error-container/40 transition-colors" href="#sec-lifecycle">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span>Account Lifecycle (Archival)</span>
+</a>
+<!-- System Model Note -->
+<div class="mt-4 pt-3 border-t border-outline-variant/30 px-3">
+<div class="flex items-center gap-1.5 text-label-sm font-label-sm text-secondary font-medium mb-1">
+<span class="material-symbols-outlined text-[15px]">database</span>
+<span>Collection: users</span>
+</div>
+<p class="font-code-sm text-code-sm text-outline leading-tight">
+            Document immutable fields synced via write-lock schema 12.5.
+          </p>
+</div>
+</aside>
+<!-- Center-Right Settings Panels -->
+<div class="lg:col-span-9 space-y-space-lg">
+<!-- SECTION A: Core Account Identity -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md lg:p-space-lg shadow-sm" id="sec-identity">
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-outline-variant/30 mb-space-md">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-headline-md text-on-surface">Core Account Identity</h2>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">GET /api/users/me</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Physical node custodian representation and verified communication addresses.
+              </p>
+</div>
+<div class="hidden items-center gap-1.5 px-2.5 py-1 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm" id="identity-dirty-indicator">
+<span class="material-symbols-outlined text-[14px]">edit</span>
+<span>Unsaved changes</span>
+</div>
+</div>
+<form class="space-y-space-md" id="form-identity" onsubmit="event.preventDefault(); triggerToast('Identity payload committed to /api/users/me');">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Legal Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-medium mb-1" for="input-fullname">
+                  Full Legal / Operational Name <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-10 px-3 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 text-body-md text-on-surface outline-none transition-all" id="input-fullname" maxlength="80" minlength="2" oninput="markIdentityDirty()" required="" type="text" value="Dr. Laila El-Mansouri"/>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-1">Identifies the physical signatory on bilaterally attested cargo handovers.</p>
+</div>
+<!-- Primary Email (Verified) -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="input-email">
+                    Primary Dispatch Email <span class="text-error">*</span>
+</label>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-primary font-medium">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Verified
+                  </span>
+</div>
+<input class="w-full h-10 px-3 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 text-body-md text-on-surface outline-none transition-all" id="input-email" oninput="markIdentityDirty()" required="" type="email" value="laila.mansouri@albustan-health.org"/>
+<p class="font-body-sm text-body-sm text-outline mt-1">Changing primary email triggers an authorization challenge to prior mailbox.</p>
+</div>
+<!-- Operating Corridor City -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-medium mb-1">
+                  Operating Governorate / City
+                </label>
+<div class="relative">
+<select class="w-full h-10 px-3 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none appearance-none" id="select-city" onchange="markIdentityDirty()">
+<option selected="" value="Cairo">Cairo (القاهرة)</option>
+<option value="Giza">Giza (الجيزة)</option>
+<option value="Alexandria">Alexandria (الإسكندرية)</option>
+<option value="Aswan">Aswan (أسوان)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-outline pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Corridor Specific Geofence Area -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-medium mb-1" for="input-corridor">
+                  Municipal Corridor & District
+                </label>
+<input class="w-full h-10 px-3 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 text-body-md text-on-surface outline-none transition-all" id="input-corridor" oninput="markIdentityDirty()" type="text" value="Al-Bustan / South Corniche Corridor"/>
+</div>
+</div>
+<!-- Read-only Institutional Node Mandate Badge -->
+<div class="p-space-sm rounded-lg bg-surface-container-low border border-outline-variant/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[22px]">corporate_fare</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-medium">Affiliated Civic Node: Al-Bustan Medical Logistics Node</span>
+<span class="block font-code-sm text-code-sm text-outline">Node Identifier: CAI-MED-02 · Mandate: Pharmaceutical Salvage</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-secondary border border-outline-variant/40 shrink-0">
+                Tier 3 Institutional Node (Locked)
+              </span>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-4 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high text-label-md font-label-md transition-colors" onclick="document.getElementById('identity-dirty-indicator').classList.add('hidden')" type="reset">
+                Revert Changes
+              </button>
+<button class="px-5 py-2 rounded-lg bg-primary hover:bg-secondary text-on-primary text-label-md font-label-md transition-colors shadow-sm flex items-center gap-1.5" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Identity Changes</span>
+</button>
+</div>
+</form>
+</section>
+<!-- SECTION B: Security & Password Management -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md lg:p-space-lg shadow-sm" id="sec-password">
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-outline-variant/30 mb-space-md">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-headline-md text-on-surface">Authentication & Password Rotation</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-code-sm text-code-sm text-outline">PUT /api/auth/password</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Cryptographic credential management utilizing salted bcrypt hashing (work factor 12). Plaintext is never persisted.
+              </p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container/40 text-secondary font-label-sm text-label-sm border border-secondary/20">
+              Active Algorithm: bcrypt(12)
+            </span>
+</div>
+<!-- NFR-002 Invalidation Notice -->
+<div class="p-3 mb-space-md rounded-lg bg-surface-container border border-outline-variant/40 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5">info</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+<strong class="font-medium">Session Invalidation Policy (NFR-002):</strong> Rotating your password will instantly revoke all existing JWT refresh tokens and terminate open sessions across all external dispatch terminals.
+            </p>
+</div>
+<form class="space-y-space-md max-w-2xl" id="form-password" onsubmit="event.preventDefault(); handlePasswordRotate();">
+<!-- Current Password -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-medium mb-1" for="current-pwd">
+                Current Password <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-10 px-3 pr-10 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 text-body-md text-on-surface outline-none" id="current-pwd" placeholder="••••••••••••" required="" type="password"/>
+<button class="absolute right-2.5 top-2.5 text-outline hover:text-on-surface" onclick="togglePasswordVisibility('current-pwd', this)" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- New Password -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-medium mb-1" for="new-pwd">
+                New Cryptographic Password <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-10 px-3 pr-10 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 text-body-md text-on-surface outline-none" id="new-pwd" minlength="8" oninput="validateEntropy(this.value)" placeholder="••••••••••••" required="" type="password"/>
+<button class="absolute right-2.5 top-2.5 text-outline hover:text-on-surface" onclick="togglePasswordVisibility('new-pwd', this)" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+<!-- Rule-Based Entropy Checks (No gamey bars) -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-2 font-label-sm text-label-sm">
+<div class="flex items-center gap-1 text-outline" id="rule-len">
+<span class="material-symbols-outlined text-[14px]">remove</span> 8+ Chars
+                </div>
+<div class="flex items-center gap-1 text-outline" id="rule-case">
+<span class="material-symbols-outlined text-[14px]">remove</span> Upper & Lower
+                </div>
+<div class="flex items-center gap-1 text-outline" id="rule-num">
+<span class="material-symbols-outlined text-[14px]">remove</span> 1+ Numeric
+                </div>
+<div class="flex items-center gap-1 text-outline" id="rule-sym">
+<span class="material-symbols-outlined text-[14px]">remove</span> 1+ Symbol
+                </div>
+</div>
+</div>
+<!-- Confirm New Password -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-medium mb-1" for="confirm-pwd">
+                Confirm New Password <span class="text-error">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-10 px-3 pr-10 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 text-body-md text-on-surface outline-none" id="confirm-pwd" oninput="validateMatch()" placeholder="••••••••••••" required="" type="password"/>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-[18px] text-outline hidden" id="match-status-icon">check_circle</span>
+</div>
+<p class="font-body-sm text-body-sm text-error hidden mt-1" id="match-error">Passwords do not match exactly.</p>
+</div>
+<div class="pt-2">
+<button class="px-5 py-2 rounded-lg bg-primary hover:bg-secondary text-on-primary text-label-md font-label-md transition-colors shadow-sm flex items-center gap-1.5" id="btn-rotate-pwd" type="submit">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span>Rotate Authentication Password (تحديث كلمة المرور)</span>
+</button>
+</div>
+</form>
+</section>
+<!-- SECTION C: Dispatch & Notification Preferences -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md lg:p-space-lg shadow-sm" id="sec-notifications">
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-outline-variant/30 mb-space-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Dispatch & Operational Notifications</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Select trigger events emitted by the matching engine and handover protocol.
+              </p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-outline font-code-sm text-code-sm">
+              Payload: NotificationEventBus
+            </span>
+</div>
+<div class="space-y-space-md">
+<!-- Event 1: Deterministic Match -->
+<div class="flex items-start justify-between gap-space-md p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
+<div class="space-y-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-medium text-on-surface">Deterministic Match Alerts</span>
+<span class="px-2 py-0.2 rounded bg-secondary-container text-on-secondary-container font-code-sm text-code-sm">Score ≥85%</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Dispatches immediately when a regional resource is paired with your open clinical logistics request.
+                </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" onchange="triggerToast('Match alert preference updated')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant/60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Event 2: Handover Bilateral Coordination -->
+<div class="flex items-start justify-between gap-space-md p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
+<div class="space-y-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-medium text-on-surface">Handover Bilateral Coordination (#HND)</span>
+<span class="px-2 py-0.2 rounded bg-tertiary-fixed text-on-tertiary-fixed font-code-sm text-code-sm">Critical State</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  High-priority pings when counterpart arrives at the geofence perimeter or scans intake custody tokens.
+                </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" disabled="" onchange="triggerToast('Handover alerts strictly locked active');" type="checkbox"/>
+<div class="w-11 h-6 bg-primary rounded-full opacity-60 cursor-not-allowed peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5"></div>
+</label>
+</div>
+<!-- Event 3: Trust & Governance Verdicts -->
+<div class="flex items-start justify-between gap-space-md p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
+<div class="space-y-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-medium text-on-surface">Trust & Governance Verdicts</span>
+<span class="px-2 py-0.2 rounded bg-surface-container font-code-sm text-code-sm text-outline">SEC-GOV</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Administrative attestations regarding medical credential review and institutional node tier updates.
+                </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input checked="" class="sr-only peer" onchange="triggerToast('Governance dispatch state updated')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant/60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Event 4: Ledger Minting Proofs -->
+<div class="flex items-start justify-between gap-space-md p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30">
+<div class="space-y-0.5">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-medium text-on-surface">Ledger Minting Proofs</span>
+<span class="px-2 py-0.2 rounded bg-surface-container font-code-sm text-code-sm text-outline">Audit Event</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Receipt of cryptographic hash commits into the transparent civic audit journal upon completed redistribution.
+                </p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+<input class="sr-only peer" onchange="triggerToast('Ledger proof notification updated')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant/60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Notification Delivery Channels -->
+<div class="mt-space-md pt-space-md border-t border-outline-variant/30">
+<h3 class="font-label-md text-label-md font-medium text-on-surface mb-space-sm">Designated Transport Mediums</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="p-3 rounded-lg bg-surface-container border border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">notifications</span>
+<span class="font-label-md text-label-md text-on-surface">Dawwarha In-App Hub</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Always Enforced</span>
+</div>
+<div class="p-3 rounded-lg bg-surface-container border border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">mail</span>
+<span class="font-label-md text-label-md text-on-surface">Relay to Primary Mailbox</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" onchange="triggerToast('Email dispatch relay updated')" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant/60 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION D: Language & Regional Formatting -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md lg:p-space-lg shadow-sm" id="sec-localization">
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-outline-variant/30 mb-space-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Interface & Localization Standards</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Strict bilingual parity for operational staff across Arabic and English terminals.
+              </p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-outline font-code-sm text-code-sm">i18n-spec: 2.1</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Language Direction Selector -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-medium mb-2">
+                Operational Language & Script
+              </label>
+<div class="space-y-2">
+<label class="flex items-center justify-between p-3 rounded-lg border border-outline-variant/40 hover:bg-surface-container cursor-pointer transition-colors">
+<div class="flex items-center gap-2.5">
+<input checked="" class="text-primary focus:ring-primary h-4 w-4" name="ui-lang" onchange="setSystemDirection('ltr')" type="radio" value="en"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-medium">English (UK/Cairo Standard)</span>
+<span class="font-body-sm text-body-sm text-outline">Left-to-Right (LTR) default display layout</span>
+</div>
+</div>
+<span class="font-code-sm text-code-sm text-outline">en-EG</span>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg border border-outline-variant/40 hover:bg-surface-container cursor-pointer transition-colors">
+<div class="flex items-center gap-2.5">
+<input class="text-primary focus:ring-primary h-4 w-4" name="ui-lang" onchange="setSystemDirection('rtl')" type="radio" value="ar"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-medium">العربية (Arabic - Cairo Mandate)</span>
+<span class="font-body-sm text-body-sm text-outline">Right-to-Left (RTL) مع ضبط متوازن للطباعة</span>
+</div>
+</div>
+<span class="font-code-sm text-code-sm text-outline">ar-EG</span>
+</label>
+</div>
+</div>
+<!-- Numerals & Calendar System -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-medium mb-2">
+                Numerical Notation in Ledgers
+              </label>
+<div class="space-y-2">
+<label class="flex items-center justify-between p-3 rounded-lg border border-outline-variant/40 hover:bg-surface-container cursor-pointer transition-colors">
+<div class="flex items-center gap-2.5">
+<input checked="" class="text-primary focus:ring-primary h-4 w-4" name="num-system" type="radio" value="western"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-medium">Western Arabic Numerals (0, 1, 2, 3...)</span>
+<span class="font-body-sm text-body-sm text-outline">MongoDB and ISO metric kg weights default format</span>
+</div>
+</div>
+<span class="font-code-sm text-code-sm text-secondary font-medium">1,240 kg</span>
+</label>
+<label class="flex items-center justify-between p-3 rounded-lg border border-outline-variant/40 hover:bg-surface-container cursor-pointer transition-colors">
+<div class="flex items-center gap-2.5">
+<input class="text-primary focus:ring-primary h-4 w-4" name="num-system" type="radio" value="eastern"/>
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-medium">Eastern Arabic Numerals (٠، ١، ٢، ٣...)</span>
+<span class="font-body-sm text-body-sm text-outline">For localized physical receipt printouts</span>
+</div>
+</div>
+<span class="font-code-sm text-code-sm text-secondary font-medium">١،٢٤٠ كجم</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION E: Privacy & Mutual Disclosure Perimeter -->
+<section class="bg-surface-container-lowest rounded-xl border border-outline-variant/40 p-space-md lg:p-space-lg shadow-sm" id="sec-privacy">
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-outline-variant/30 mb-space-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Privacy & Bilateral Disclosure Perimeter</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Section 13 privacy architecture: Protection of civic warehouse locations and operational staff personal phone lines.
+              </p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container/50 text-secondary font-label-sm text-label-sm border border-secondary/20">
+              Zero Open Scouting Policy
+            </span>
+</div>
+<!-- Structural Privacy Policy Explainer Card -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md mb-space-md">
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">lock</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-medium">Concealed Contact Channels</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Direct cellular numbers are encrypted and masked until both parties formally accept a generated match manifest.
+                </p>
+</div>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">pin_drop</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-medium">Geofence Fuzzing</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  General corridor (e.g. Al-Bustan Corridor) is shown to candidate nodes. Exact depot addresses unlock strictly upon bilateral confirmation.
+                </p>
+</div>
+</div>
+</div>
+<!-- Perimeter Controls -->
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between p-3.5 rounded-lg bg-surface-container border border-outline-variant/30">
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-medium">Require Verbal / WhatsApp Handshake Before Doorstep Dispatch</span>
+<span class="font-body-sm text-body-sm text-outline">Ensures field drivers confirm physical presence prior to warehouse dock gate unlocking.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input checked="" class="sr-only peer" onchange="triggerToast('Perimeter verification requirement saved')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant/60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-3.5 rounded-lg bg-surface-container border border-outline-variant/30">
+<div>
+<span class="block font-label-md text-label-md text-on-surface font-medium">Public Impact Ledger Redaction</span>
+<span class="font-body-sm text-body-sm text-outline">Mask specific hospital donor names with verified generic hashes on public dashboards.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer shrink-0">
+<input class="sr-only peer" onchange="triggerToast('Public hash masking preference toggled')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant/60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- SECTION F: Account Lifecycle / Danger Zone -->
+<section class="bg-surface-container-lowest rounded-xl border-2 border-error/30 p-space-md lg:p-space-lg shadow-sm" id="sec-lifecycle">
+<div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm border-b border-error/20 mb-space-md">
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-headline-md text-error">Account Lifecycle & Decommissioning</h2>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">منطقة الإجراءات الحاسمة</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                Section 12.5 Civic Audit Mandate: Historical transactions and attested custody handovers cannot be hard-deleted from MongoDB.
+              </p>
+</div>
+<span class="material-symbols-outlined text-error text-[24px]">gavel</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Card 1: Pause Operations -->
+<div class="p-space-md rounded-lg bg-surface-container-low border border-outline-variant/40 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary text-[20px]">pause_circle</span>
+<h3 class="font-label-md text-label-md font-medium text-on-surface">Deactivate Operations (تعطيل مؤقت)</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                  Temporarily suspends your node from the deterministic matching engine. Active stock is hidden, but historical logs remain intact.
+                </p>
+</div>
+<button class="w-full py-2 px-3 rounded-lg border border-outline hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-1.5" onclick="confirmPauseOperations()" type="button">
+<span class="material-symbols-outlined text-[16px]">pause</span>
+<span>Pause Active Dispatch</span>
+</button>
+</div>
+<!-- Card 2: Decommission / Archival -->
+<div class="p-space-md rounded-lg bg-error-container/20 border border-error/30 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-error text-[20px]">archive</span>
+<h3 class="font-label-md text-label-md font-medium text-error">Archival & Custody Transfer (أرشفة الحساب)</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">
+                  Transfers ongoing responsibilities to another institutional lead and sets user state to <code class="font-code-sm text-code-sm bg-surface-container px-1 py-0.5 rounded">isArchived: true</code> per ledger immutability rules.
+                </p>
+</div>
+<button class="w-full py-2 px-3 rounded-lg bg-error hover:bg-error/90 text-on-error font-label-md text-label-md transition-colors shadow-sm flex items-center justify-center gap-1.5" onclick="openDecommissionModal()" type="button">
+<span class="material-symbols-outlined text-[16px]">cancel</span>
+<span>Initiate Archival Flow</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- Confirmation Modal for Node Decommissioning -->
+<div class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4" id="decommission-modal">
+<div class="w-full max-w-lg bg-surface-container-lowest rounded-xl border border-outline-variant/60 shadow-xl p-space-lg relative animate-in fade-in zoom-in-95 duration-150">
+<div class="flex items-center gap-3 text-error mb-space-sm">
+<div class="w-10 h-10 rounded-lg bg-error-container text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">shield_with_heart</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Confirm Civic Node Archival</h3>
+<span class="font-code-sm text-code-sm text-outline">MongoDB Write: PATCH /api/users/me/decommission</span>
+</div>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant/40 space-y-2 mb-space-md">
+<p class="font-body-sm text-body-sm text-on-surface">
+          You are preparing to archive account <strong>Dr. Laila El-Mansouri (CAI-MED-02)</strong>.
+        </p>
+<ul class="font-body-sm text-body-sm text-on-surface-variant list-disc pl-5 space-y-1">
+<li>14 verified redistribution certificates will remain preserved on-chain.</li>
+<li>Bearer tokens will immediately return <code class="font-code-sm text-code-sm bg-surface-container px-1">403 AccountArchived</code>.</li>
+<li>Pending cargo must be reassigned to a successor node lead.</li>
+</ul>
+</div>
+<div class="mb-space-md">
+<label class="block font-label-sm text-label-sm text-on-surface font-medium mb-1" for="confirm-phrase-input">
+          Type the node token <strong class="select-all text-error">ARCHIVE-CAI-MED-02</strong> to confirm:
+        </label>
+<input class="w-full h-10 px-3 rounded-lg border border-outline-variant text-body-md font-code-sm text-on-surface outline-none focus:border-error focus:ring-2 focus:ring-error/20" id="confirm-phrase-input" oninput="toggleDecommissionSubmit(this.value)" placeholder="ARCHIVE-CAI-MED-02" type="text"/>
+</div>
+<div class="flex items-center justify-end gap-space-sm">
+<button class="px-4 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high text-label-md font-label-md transition-colors" onclick="closeDecommissionModal()" type="button">
+          Cancel
+        </button>
+<button class="px-5 py-2 rounded-lg bg-error text-on-error text-label-md font-label-md opacity-40 cursor-not-allowed transition-all shadow-sm flex items-center gap-1.5" disabled="" id="btn-final-decommission" onclick="executeDecommission()" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Commit Archival</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive Feedback Toast Banner -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-200 bg-surface-container-lowest border border-primary/30 shadow-lg rounded-xl p-3.5 flex items-center gap-3" id="settings-toast">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-label-md text-label-md text-on-surface font-medium">System Ledger State</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="toast-message">Update committed to memory.</span>
+</div>
+</div>
+</div>
+<script>
+  let isRTL = false;
+
+  function markIdentityDirty() {
+    const indicator = document.getElementById('identity-dirty-indicator');
+    if (indicator) indicator.classList.remove('hidden');
+  }
+
+  function togglePasswordVisibility(fieldId, btn) {
+    const field = document.getElementById(fieldId);
+    if (!field) return;
+    const isPw = field.type === 'password';
+    field.type = isPw ? 'text' : 'password';
+    const icon = btn.querySelector('.material-symbols-outlined');
+    if (icon) icon.textContent = isPw ? 'visibility_off' : 'visibility';
+  }
+
+  function validateEntropy(val) {
+    const len = document.getElementById('rule-len');
+    const cse = document.getElementById('rule-case');
+    const num = document.getElementById('rule-num');
+    const sym = document.getElementById('rule-sym');
+
+    const updateBadge = (el, condition) => {
+      const icon = el.querySelector('.material-symbols-outlined');
+      if (condition) {
+        el.className = 'flex items-center gap-1 text-primary font-medium';
+        if (icon) icon.textContent = 'check';
+      } else {
+        el.className = 'flex items-center gap-1 text-outline';
+        if (icon) icon.textContent = 'remove';
+      }
+    };
+
+    updateBadge(len, val.length >= 8);
+    updateBadge(cse, /[a-z]/.test(val) && /[A-Z]/.test(val));
+    updateBadge(num, /[0-9]/.test(val));
+    updateBadge(sym, /[^a-zA-Z0-9]/.test(val));
+
+    validateMatch();
+  }
+
+  function validateMatch() {
+    const newPwd = document.getElementById('new-pwd').value;
+    const confPwd = document.getElementById('confirm-pwd').value;
+    const icon = document.getElementById('match-status-icon');
+    const err = document.getElementById('match-error');
+
+    if (!confPwd) {
+      icon.classList.add('hidden');
+      err.classList.add('hidden');
+      return;
+    }
+
+    if (newPwd === confPwd) {
+      icon.classList.remove('hidden');
+      icon.className = 'material-symbols-outlined absolute right-2.5 top-2.5 text-[18px] text-primary';
+      err.classList.add('hidden');
+    } else {
+      icon.classList.remove('hidden');
+      icon.className = 'material-symbols-outlined absolute right-2.5 top-2.5 text-[18px] text-error';
+      err.classList.remove('hidden');
+    }
+  }
+
+  function handlePasswordRotate() {
+    const newPwd = document.getElementById('new-pwd').value;
+    const confPwd = document.getElementById('confirm-pwd').value;
+    if (newPwd !== confPwd) {
+      triggerToast('Error: Passwords must match exactly.');
+      return;
+    }
+    triggerToast('Password rotated successfully. Stale tokens revoked (NFR-002).');
+    document.getElementById('form-password').reset();
+    validateEntropy('');
+  }
+
+  function setSystemDirection(dir) {
+    const root = document.getElementById('settings-root');
+    const toggleLabel = document.getElementById('lang-toggle-label');
+    const hTitle = document.getElementById('header-title');
+    const hDesc = document.getElementById('header-desc');
+
+    if (dir === 'rtl') {
+      root.setAttribute('dir', 'rtl');
+      isRTL = true;
+      if (toggleLabel) toggleLabel.textContent = 'English (UK LTR)';
+      if (hTitle) hTitle.textContent = 'إعدادات الحساب والأمان التشغيلي';
+      if (hDesc) hDesc.textContent = 'تكوين بيانات الاعتماد المشفرة وقواعد إرسال الإشعارات ونطاق الإفصاح المتبادل وسياسات العهدة اللوجستية.';
+    } else {
+      root.setAttribute('dir', 'ltr');
+      isRTL = false;
+      if (toggleLabel) toggleLabel.textContent = 'العربية (Cairo RTL)';
+      if (hTitle) hTitle.textContent = 'Account & Operational Settings';
+      if (hDesc) hDesc.textContent = 'Configure cryptographic credentials, notification dispatch rules, bilateral disclosure perimeters, and custodial session policies.';
+    }
+  }
+
+  function toggleBidiLocalization() {
+    setSystemDirection(isRTL ? 'ltr' : 'rtl');
+    const targetVal = isRTL ? 'ar' : 'en';
+    const radio = document.querySelector(`input[name="ui-lang"][value="${targetVal}"]`);
+    if (radio) radio.checked = true;
+    triggerToast(isRTL ? 'تم تحويل الواجهة إلى العربية (RTL)' : 'Switched to English interface (LTR)');
+  }
+
+  function switchNavSection(sectionId) {
+    const target = document.getElementById(sectionId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function confirmPauseOperations() {
+    if (confirm('Pause matching operations for CAI-MED-02? Active listings will become invisible to regional seekers.')) {
+      triggerToast('Operations paused. Listings marked paused_by_custodian.');
+    }
+  }
+
+  function openDecommissionModal() {
+    const modal = document.getElementById('decommission-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeDecommissionModal() {
+    const modal = document.getElementById('decommission-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.getElementById('confirm-phrase-input').value = '';
+    toggleDecommissionSubmit('');
+  }
+
+  function toggleDecommissionSubmit(val) {
+    const btn = document.getElementById('btn-final-decommission');
+    if (val.trim() === 'ARCHIVE-CAI-MED-02') {
+      btn.disabled = false;
+      btn.classList.remove('opacity-40', 'cursor-not-allowed');
+      btn.classList.add('hover:bg-error/90');
+    } else {
+      btn.disabled = true;
+      btn.classList.add('opacity-40', 'cursor-not-allowed');
+      btn.classList.remove('hover:bg-error/90');
+    }
+  }
+
+  function executeDecommission() {
+    closeDecommissionModal();
+    triggerToast('Audit commit successful: Node marked isArchived: true (MongoDB 12.5)');
+  }
+
+  let toastTimeout;
+  function triggerToast(message) {
+    const toast = document.getElementById('settings-toast');
+    const msg = document.getElementById('toast-message');
+    if (!toast || !msg) return;
+
+    msg.textContent = message;
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toast.classList.add('translate-y-20', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3800);
+  }
+</script></div></main></div></body></html>

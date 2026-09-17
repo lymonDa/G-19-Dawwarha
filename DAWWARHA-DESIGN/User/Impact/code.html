@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>Dawwarha Civic Logistics</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#3f4946","surface-dim":"#d3dcd7","primary-fixed-dim":"#87d5c1","surface-container-high":"#e1eae5","tertiary-container":"#9f672b","surface-container-low":"#edf6f1","surface-bright":"#f2fbf6","on-primary":"#ffffff","secondary-fixed-dim":"#9bd2c0","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-container":"#fffaf8","on-tertiary-fixed":"#2d1600","surface-container-highest":"#dbe5e0","surface-tint":"#106a5a","on-primary-fixed":"#00201a","tertiary":"#834f14","on-surface":"#151d1a","surface":"#f2fbf6","surface-container-lowest":"#ffffff","on-secondary-fixed":"#002019","on-error-container":"#93000a","secondary-container":"#b6eedc","surface-container":"#e7f0eb","primary":"#076757","on-secondary-fixed-variant":"#184f42","on-error":"#ffffff","secondary-fixed":"#b6eedc","primary-fixed":"#a3f2dd","primary-container":"#2f806f","inverse-on-surface":"#eaf3ee","outline-variant":"#bec9c4","surface-variant":"#dbe5e0","background":"#f2fbf6","on-primary-container":"#ebfff7","secondary":"#33685a","error-container":"#ffdad6","on-tertiary-fixed-variant":"#6a3b00","on-secondary-container":"#396e5f","on-primary-fixed-variant":"#005143","outline":"#6f7975","tertiary-fixed":"#ffdcbf","on-background":"#151d1a","inverse-surface":"#2a322f","on-secondary":"#ffffff","inverse-primary":"#87d5c1","tertiary-fixed-dim":"#feb874"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","margin-mobile":"1rem","space-lg":"1.5rem","space-xl":"2.5rem","gutter-mobile":"1rem",margin:"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1.5rem"},fontFamily:{"headline-sm":["Inter"],"headline-lg-mobile":["Inter"],"headline-lg":["Inter"],"display-lg-mobile":["Inter"],"display-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"code-sm":["Inter"],"label-md":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"label-sm":["Inter"]},fontSize:{"headline-sm":["1.125rem",{lineHeight:"1.5rem",fontWeight:"500"}],"headline-lg-mobile":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["2rem",{lineHeight:"2.5rem",letterSpacing:"-0.015em",fontWeight:"600"}],"display-lg-mobile":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["3.5rem",{lineHeight:"4rem",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-md":["1.25rem",{lineHeight:"1.75rem",letterSpacing:"-0.005em",fontWeight:"600"}],"body-sm":["0.8125rem",{lineHeight:"1.25rem",fontWeight:"400"}],"code-sm":["0.8125rem",{lineHeight:"1.125rem",fontWeight:"400"}],"label-md":["0.875rem",{lineHeight:"1.25rem",fontWeight:"500"}],"body-lg":["1.125rem",{lineHeight:"1.75rem",fontWeight:"400"}],"body-md":["0.9375rem",{lineHeight:"1.5rem",fontWeight:"400"}],"label-sm":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 inset-x-0 h-16 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50"><div class="w-full h-16 px-space-md lg:px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">cached</span></div><div class="flex flex-col leading-tight"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">Dawwarha</span><span class="font-label-sm text-label-sm text-outline tracking-normal">دوّرها • Civic Logistics</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-container font-label-md rounded-lg"><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-resources" href="#">My Resources</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-requests" href="#">My Requests</a><a aria-current="page" class="px-space-sm py-1.5 transition-colors bg-secondary-container text-on-secondary-container font-label-md rounded-lg" data-path="matches" href="#">Matches (active)</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#">Handovers & Activity</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#">Impact & Ledger</a></nav></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-sm text-label-sm text-on-surface" title="Switch Language" type="button"><span class="material-symbols-outlined text-[16px] text-outline">language</span><span>EN / العربية</span></button><button class="relative w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary-container"></span></button><button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Documentation & Support" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left leading-none"><span class="font-label-md text-label-md text-on-surface">Dr. Laila El-Mansouri</span><span class="font-label-sm text-label-sm text-primary font-medium mt-0.5">Verified Node Lead</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-low z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-md"><div class="flex items-center justify-between mb-space-md"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Operations Hub</span><span class="px-2 py-0.5 rounded-full bg-surface-container font-code-sm text-code-sm text-secondary">CAI-01</span></div><div class="space-y-space-xs mb-space-lg"><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">add_circle</span><span>Create Request</span></button><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">inventory_2</span><span>Publish Resource</span></button></div><span class="block font-label-sm text-label-sm uppercase tracking-wider text-outline px-space-sm mb-space-xs">Logistical Ledger</span><nav class="space-y-1" data-active-classes="bg-secondary-container text-on-secondary-container font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-resources" href="#"><span class="material-symbols-outlined text-[20px]">archive</span><span class="font-label-md text-label-md">My Resources</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-requests" href="#"><span class="material-symbols-outlined text-[20px]">assignment_late</span><span class="font-label-md text-label-md">My Requests</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 transition-colors bg-secondary-container text-on-secondary-container font-medium rounded-lg" data-path="matches" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">swap_horiz</span><span class="font-label-md text-label-md">Matches</span></div><span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm">active</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span class="font-label-md text-label-md">Handovers & Activity</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-label-md text-label-md">Impact & Ledger</span></a></nav></div><div class="p-space-md"><div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-between mb-1"><span class="font-label-sm text-label-sm uppercase tracking-wide text-secondary font-semibold">Operational Custody</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><p class="font-label-md text-label-md text-on-surface font-medium truncate">Dr. Laila El-Mansouri</p><div class="flex items-center justify-between mt-1 pt-1"><span class="font-code-sm text-code-sm text-outline">Node Hash: CAI-SEC-01</span><span class="font-label-sm text-label-sm text-primary font-medium">Verified</span></div></div></div></aside><div class="pl-72"><main class="w-full min-h-[calc(100vh-4rem)] pt-16 px-space-md lg:px-gutter pb-space-xl bg-background"><div class="max-w-7xl mx-auto py-space-md"><div class="flex flex-col w-full text-on-surface" id="impact-root">
+<!-- Interactive Prototype QA Simulator Bar (Development & Verification Toolbar) -->
+<aside class="mb-space-lg p-space-sm rounded-xl bg-surface-container shadow-sm flex flex-wrap items-center justify-between gap-space-sm text-label-sm">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<span class="font-code-sm uppercase tracking-wider text-secondary font-semibold">QA Simulator Protocol</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary mx-1"></span>
+<span class="text-outline">Live Mongo Cache: <code class="text-on-surface font-code-sm">users.stats.cai_01</code></span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5">
+<button class="px-space-sm py-1 rounded-md bg-primary text-on-primary font-label-sm transition-all flex items-center gap-1" id="qa-btn-full" onclick="setQAMode('full')" type="button">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+<span>1. Full Ledger (14 Transfers)</span>
+</button>
+<button class="px-space-sm py-1 rounded-md bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-sm transition-all flex items-center gap-1" id="qa-btn-empty" onclick="setQAMode('empty')" type="button">
+<span class="material-symbols-outlined text-[14px]">drafts</span>
+<span>2. First-Time (0 Transfers)</span>
+</button>
+<button class="px-space-sm py-1 rounded-md bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-sm transition-all flex items-center gap-1" id="qa-btn-medical" onclick="setQAMode('medical')" type="button">
+<span class="material-symbols-outlined text-[14px]">medical_services</span>
+<span>3. Medical Only</span>
+</button>
+<button class="px-space-sm py-1 rounded-md bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-sm transition-all flex items-center gap-1" id="qa-btn-loading" onclick="setQAMode('loading')" type="button">
+<span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+<span>4. Loading Skeleton</span>
+</button>
+<button class="px-space-sm py-1 rounded-md bg-secondary-container text-on-secondary-container font-label-sm transition-all flex items-center gap-1" id="qa-btn-lang" onclick="toggleBilingual()" type="button">
+<span class="material-symbols-outlined text-[14px]">translate</span>
+<span id="qa-lang-indicator">Switch to العربية (RTL)</span>
+</button>
+</div>
+</aside>
+<!-- LOADING SKELETON STATE (HIDDEN BY DEFAULT) -->
+<div class="hidden flex-col gap-space-lg animate-pulse w-full" id="state-loading">
+<div class="h-28 rounded-xl bg-surface-container-high w-full"></div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<div class="h-32 rounded-xl bg-surface-container-high"></div>
+<div class="h-32 rounded-xl bg-surface-container-high"></div>
+<div class="h-32 rounded-xl bg-surface-container-high"></div>
+<div class="h-32 rounded-xl bg-surface-container-high"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<div class="lg:col-span-2 h-80 rounded-xl bg-surface-container-high"></div>
+<div class="h-80 rounded-xl bg-surface-container-high"></div>
+</div>
+</div>
+<!-- EMPTY STATE (FIRST-TIME CONTRIBUTOR) -->
+<div class="hidden flex-col items-center justify-center p-space-xl rounded-xl bg-surface-container-lowest shadow-md text-center max-w-3xl mx-auto my-space-lg" id="state-empty">
+<div class="w-16 h-16 rounded-full bg-secondary-container text-secondary flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-[32px]">balance</span>
+</div>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container text-outline font-code-sm text-code-sm uppercase tracking-wider mb-space-xs">Node: CAI-SEC-01 • Status: Initialized</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-space-xs" data-i18n="empty_title">Your Verified Civic Ledger Starts Here</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mb-space-lg" data-i18n="empty_desc">
+      Dawwarha records physical transfers verified bilaterally by both donor and recipient node. No artificial carbon ratings, no gamified points. When your first surplus asset or medical aid batch is safely received and cryptographic handshake completes, its permanent footprint will appear in this auditable registry.
+    </p>
+<div class="flex flex-wrap items-center justify-center gap-space-sm w-full max-w-md">
+<button class="flex-1 min-w-[180px] py-2.5 px-space-md rounded-lg bg-primary text-on-primary font-label-md hover:bg-primary-container shadow-sm transition-all flex items-center justify-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span data-i18n="empty_cta_publish">Publish Available Surplus</span>
+</button>
+<button class="flex-1 min-w-[180px] py-2.5 px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-secondary font-label-md transition-all flex items-center justify-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span data-i18n="empty_cta_explore">Browse Node Requests</span>
+</button>
+</div>
+<div class="mt-space-lg pt-space-md flex items-center gap-space-xs text-outline font-label-sm">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span data-i18n="empty_note">Compliant with National Civic Logistics Framework • Zero Speculative Math</span>
+</div>
+</div>
+<!-- MAIN LEDGER PRESENTATION CONTENT -->
+<div class="flex flex-col gap-space-lg w-full" id="state-content">
+<!-- Header & Audit Attestation Block -->
+<header class="flex flex-col gap-space-md">
+<!-- Breadcrumbs & Cryptographic Seal Badge -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs font-label-sm text-outline">
+<a class="hover:text-primary transition-colors" href="#">Dawwarha Hub</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-medium" data-i18n="breadcrumb_curr">Impact & Verified Outcomes</span>
+</nav>
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-code-sm" data-i18n="seal_badge">Audit-Verified Civic Impact • Merkle #DWR-IMP-CAI-2024</span>
+</div>
+</div>
+<!-- Main Headline + Editorial Context -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md">
+<div class="max-w-3xl flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight" data-i18n="page_title">Verified Community Impact & Ledger Summary</h1>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed" data-i18n="page_subtitle">
+            A factual, auditable aggregation of surplus resources redirected to community clinics, emergency shelters, and educational outposts through bilaterally attested physical handovers. Dawwarha registers tangible physical unit volumes, strictly omitting speculative eco-formulas, badges, or theoretical estimates.
+          </p>
+</div>
+<!-- High-contrast Action Utilities -->
+<div class="flex flex-wrap items-center gap-space-xs shrink-0">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-secondary font-label-md shadow-sm transition-all flex items-center gap-space-xs" onclick="triggerLedgerExport()" type="button">
+<span class="material-symbols-outlined text-[18px]">download_for_offline</span>
+<span data-i18n="btn_export">Export Signed Audit Ledger</span>
+</button>
+<a class="px-space-md py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md shadow-sm transition-all flex items-center gap-space-xs" href="#">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span data-i18n="btn_history">View Contribution Ledger</span>
+</a>
+</div>
+</div>
+</header>
+<!-- KPI Metric Cards (Grounded in Verified Mongo user.stats Cache) -->
+<section aria-label="Aggregated Civic Statistics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Card 1: Completed Bilateral Transfers -->
+<article class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between group hover:shadow-lg transition-shadow">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-outline uppercase tracking-wider" data-i18n="kpi_1_label">Attested Transfers</span>
+<span class="font-body-sm text-on-surface-variant" data-i18n="kpi_1_sub">Bilateral physical seals</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary-container text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">swap_horiz</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-primary leading-none" id="kpi-val-transfers">14</span>
+<span class="font-label-md text-secondary font-semibold" data-i18n="kpi_1_unit">transfers</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span data-i18n="kpi_1_audit">100% Counterpart Sealed</span>
+</span>
+<span class="font-code-sm text-outline">0 pending</span>
+</div>
+</article>
+<!-- Card 2: Physical Units Relocated -->
+<article class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between group hover:shadow-lg transition-shadow">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-outline uppercase tracking-wider" data-i18n="kpi_2_label">Physical Assets Relocated</span>
+<span class="font-body-sm text-on-surface-variant" data-i18n="kpi_2_sub">Counted inventory items</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">inventory</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-on-surface leading-none" id="kpi-val-units">86</span>
+<span class="font-label-md text-on-surface-variant font-semibold" data-i18n="kpi_2_unit">items & packs</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-secondary font-medium">
+<span class="material-symbols-outlined text-[16px]">category</span>
+<span data-i18n="kpi_2_audit">4 Civic Sectors</span>
+</span>
+<span class="font-code-sm text-outline">Δ 0.0% variance</span>
+</div>
+</article>
+<!-- Card 3: Community Counterpart Nodes -->
+<article class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between group hover:shadow-lg transition-shadow">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-outline uppercase tracking-wider" data-i18n="kpi_3_label">Recipient Nodes</span>
+<span class="font-body-sm text-on-surface-variant" data-i18n="kpi_3_sub">Accredited civic hubs</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">hub</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-tertiary leading-none" id="kpi-val-counterparts">9</span>
+<span class="font-label-md text-tertiary font-semibold" data-i18n="kpi_3_unit">community hubs</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-tertiary font-medium">
+<span class="material-symbols-outlined text-[16px]">pin_drop</span>
+<span data-i18n="kpi_3_audit">Cairo Metropolitan Gov.</span>
+</span>
+<span class="font-code-sm text-outline">Active cluster</span>
+</div>
+</article>
+<!-- Card 4: Speculative Claims Exclusion Guarantee -->
+<article class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between group hover:shadow-lg transition-shadow">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-outline uppercase tracking-wider" data-i18n="kpi_4_label">Speculative Rating</span>
+<span class="font-body-sm text-on-surface-variant" data-i18n="kpi_4_sub">Anti-Gamification Index</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container text-outline flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">security</span>
+</div>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-display-lg text-display-lg text-secondary leading-none">0</span>
+<span class="font-label-md text-secondary font-semibold" data-i18n="kpi_4_unit">EGP Claims</span>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center justify-between text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-secondary font-medium">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span data-i18n="kpi_4_audit">100% Non-Monetary</span>
+</span>
+<span class="font-code-sm text-outline">Zero gamification</span>
+</div>
+</article>
+</section>
+<!-- Civic Sector Breakdown (Detailed Distribution by Category) -->
+<section aria-labelledby="sector-heading" class="flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface" data-i18n="sect_title" id="sector-heading">Factual Breakdown by Civic Sector</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="sect_sub">Quantified assets verified during bilateral intake handovers</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-code-sm text-code-sm text-outline">Total Counted Assets: 86 Units</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md" id="sector-cards-container">
+<!-- Sector 1: Medical & Biomedical Hardware -->
+<article class="sector-card p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between" data-sector="medical">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm font-semibold">14.0%</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1" data-i18n="sec1_name">Medical Supplies & Devices</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm" data-i18n="sec1_desc">
+              Pediatric oximeters, oxygen regulators, sterile surgical leads & dressings.
+            </p>
+</div>
+<div class="pt-space-sm space-y-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_transfers_label">Transfers:</span>
+<span class="font-semibold text-on-surface">4 confirmed</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_units_label">Verified Volume:</span>
+<span class="font-semibold text-primary">12 clinical items</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_nodes_label">Primary Node:</span>
+<span class="text-on-surface truncate max-w-[120px]">Sayeda Zeinab Clinic</span>
+</div>
+</div>
+</article>
+<!-- Sector 2: Food Aid & Nutrition -->
+<article class="sector-card p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between" data-sector="food">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-9 h-9 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/15 text-tertiary font-label-sm font-semibold">58.1%</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1" data-i18n="sec2_name">Food Aid & Nutrition</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm" data-i18n="sec2_desc">
+              Shelf-stable dry staples, thermal-preserved hot meals, emergency nutritional tubs.
+            </p>
+</div>
+<div class="pt-space-sm space-y-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_transfers_label">Transfers:</span>
+<span class="font-semibold text-on-surface">5 confirmed</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_units_label">Verified Volume:</span>
+<span class="font-semibold text-tertiary">50 meal packs</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_nodes_label">Primary Node:</span>
+<span class="text-on-surface truncate max-w-[120px]">Maadi Night Shelter</span>
+</div>
+</div>
+</article>
+<!-- Sector 3: Education & Textbooks -->
+<article class="sector-card p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between" data-sector="education">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-9 h-9 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-secondary font-label-sm font-semibold">20.9%</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1" data-i18n="sec3_name">Education & Workbooks</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm" data-i18n="sec3_desc">
+              Standard curriculum textbooks, STEM laboratory kits, instructional stationery sets.
+            </p>
+</div>
+<div class="pt-space-sm space-y-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_transfers_label">Transfers:</span>
+<span class="font-semibold text-on-surface">3 confirmed</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_units_label">Verified Volume:</span>
+<span class="font-semibold text-secondary">18 student sets</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_nodes_label">Primary Node:</span>
+<span class="text-on-surface truncate max-w-[120px]">Al-Amal Learning Node</span>
+</div>
+</div>
+</article>
+<!-- Sector 4: Technology & IT Assets -->
+<article class="sector-card p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between" data-sector="tech">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">laptop_chromebook</span>
+</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm font-semibold">7.0%</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1" data-i18n="sec4_name">Technology & IT Hardware</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm" data-i18n="sec4_desc">
+              Refurbished business laptops, network switchgear, displays with clean memory zeroing.
+            </p>
+</div>
+<div class="pt-space-sm space-y-space-xs bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_transfers_label">Transfers:</span>
+<span class="font-semibold text-on-surface">2 confirmed</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_units_label">Verified Volume:</span>
+<span class="font-semibold text-primary">6 verified units</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-outline" data-i18n="sec_nodes_label">Primary Node:</span>
+<span class="text-on-surface truncate max-w-[120px]">Helwan Youth Lab</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Visualized Ledger Distribution: Progress Ratios & Transfer Velocity -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-md">
+<!-- Ratio Bar & Sector Weight Breakdown (2 Cols) -->
+<section aria-labelledby="ratio-heading" class="lg:col-span-2 p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface" data-i18n="dist_title" id="ratio-heading">Verified Asset Allocation Profile</h2>
+<span class="font-label-sm text-outline" data-i18n="dist_meta">Aggregate physical sum: 86 units</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md" data-i18n="dist_desc">
+            Visual breakdown of all attested intake receipts. Units are weighted by verified physical counts confirmed by receiver signature.
+          </p>
+<!-- Proportional Segmented Progress Track -->
+<div class="w-full h-4 rounded-full bg-surface-container flex overflow-hidden p-0.5 gap-0.5 mb-space-md shadow-inner">
+<div class="h-full rounded-l-full bg-tertiary-container transition-all" style="width: 58.1%;" title="Food Aid: 50 units (58.1%)"></div>
+<div class="h-full bg-primary transition-all" style="width: 20.9%;" title="Education: 18 units (20.9%)"></div>
+<div class="h-full bg-primary-container transition-all" style="width: 14.0%;" title="Medical Supplies: 12 units (14.0%)"></div>
+<div class="h-full rounded-r-full bg-secondary-fixed-dim transition-all" style="width: 7.0%;" title="Technology: 6 units (7.0%)"></div>
+</div>
+<!-- Legend Table -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm pt-space-xs">
+<div class="flex flex-col p-space-xs rounded bg-surface-container-low">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary-container shrink-0"></span>
+<span class="font-label-sm text-on-surface truncate" data-i18n="leg_food">Food Aid</span>
+</div>
+<span class="font-code-sm font-semibold text-on-surface">50 Units</span>
+<span class="font-label-sm text-outline">58.1% of total</span>
+</div>
+<div class="flex flex-col p-space-xs rounded bg-surface-container-low">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="w-2.5 h-2.5 rounded-full bg-primary shrink-0"></span>
+<span class="font-label-sm text-on-surface truncate" data-i18n="leg_edu">Education</span>
+</div>
+<span class="font-code-sm font-semibold text-on-surface">18 Units</span>
+<span class="font-label-sm text-outline">20.9% of total</span>
+</div>
+<div class="flex flex-col p-space-xs rounded bg-surface-container-low">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container shrink-0"></span>
+<span class="font-label-sm text-on-surface truncate" data-i18n="leg_med">Medical</span>
+</div>
+<span class="font-code-sm font-semibold text-on-surface">12 Units</span>
+<span class="font-label-sm text-outline">14.0% of total</span>
+</div>
+<div class="flex flex-col p-space-xs rounded bg-surface-container-low">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed-dim shrink-0"></span>
+<span class="font-label-sm text-on-surface truncate" data-i18n="leg_tech">Technology</span>
+</div>
+<span class="font-code-sm font-semibold text-on-surface">6 Units</span>
+<span class="font-label-sm text-outline">7.0% of total</span>
+</div>
+</div>
+</div>
+<!-- Verification Guarantee Pill -->
+<div class="mt-space-md p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary">policy</span>
+<span class="font-label-sm text-on-surface" data-i18n="audit_note">Verified via SHA-256 Physical QR & GPS Handover Geofence</span>
+</div>
+<span class="font-code-sm text-secondary font-medium">100% In-Person Verified</span>
+</div>
+</section>
+<!-- Custody Audit Seal & Node Status (1 Col) -->
+<section aria-labelledby="seal-heading" class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface" data-i18n="merkle_card_title" id="seal-heading">Cryptographic Node Seal</h2>
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+</div>
+<!-- Micro SVG Merkle Representation -->
+<div class="p-space-sm rounded-lg bg-surface-container-low mb-space-sm flex flex-col items-center">
+<svg class="w-full h-24 text-primary" fill="none" viewbox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+<!-- Top Root Node -->
+<circle cx="120" cy="18" fill="currentColor" fill-opacity="0.2" r="8" stroke="currentColor" stroke-width="2"></circle>
+<path d="M120 26 L70 54 M120 26 L170 54" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1.5"></path>
+<!-- Leaf Nodes -->
+<circle cx="45" cy="58" fill="currentColor" r="6"></circle>
+<circle cx="95" cy="58" fill="currentColor" r="6"></circle>
+<circle cx="145" cy="58" fill="currentColor" r="6"></circle>
+<circle cx="195" cy="58" fill="currentColor" r="6"></circle>
+<path d="M70 54 L45 58 M70 54 L95 58 M170 54 L145 58 M170 54 L195 58" stroke="currentColor" stroke-width="1.5"></path>
+</svg>
+<span class="font-code-sm text-outline text-[11px] mt-1">Merkle Root: e3b0c44298fc1c149afbf4c8996fb92427</span>
+</div>
+<ul class="space-y-space-xs font-body-sm text-on-surface-variant">
+<li class="flex items-center justify-between">
+<span class="text-outline" data-i18n="audit_prov">Contributing Node:</span>
+<span class="font-semibold text-on-surface">CAI-SEC-01 (Verified)</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="text-outline" data-i18n="audit_rep">Signatory:</span>
+<span class="font-medium text-on-surface">Dr. Laila El-Mansouri</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="text-outline" data-i18n="audit_sla">Avg. Sign-off Latency:</span>
+<span class="font-code-sm text-primary font-semibold">24 minutes</span>
+</li>
+<li class="flex items-center justify-between">
+<span class="text-outline" data-i18n="audit_integrity">Integrity Index:</span>
+<span class="font-code-sm text-primary font-semibold">1.00 (Zero Discrepancies)</span>
+</li>
+</ul>
+</div>
+<button class="mt-space-md w-full py-2 px-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-secondary font-label-md transition-all flex items-center justify-center gap-1" onclick="inspectRawLedger()" type="button">
+<span class="material-symbols-outlined text-[16px]">fingerprint</span>
+<span data-i18n="btn_inspect_ledger">Inspect Raw Hash Registry</span>
+</button>
+</section>
+</div>
+<!-- Active Partner Nodes Grid (Cairo Civic Ecosystem) -->
+<section aria-labelledby="nodes-heading" class="flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface" data-i18n="partners_title" id="nodes-heading">Verified Recipient Counterpart Hubs</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="partners_sub">Community clinics and emergency relief outposts in the Cairo municipal corridor</p>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-container text-secondary font-label-sm font-semibold">4 Primary Civic Anchors</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Recipient 1: Sayeda Zeinab Emergency Clinic -->
+<article class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm font-medium">Healthcare Node</span>
+<span class="font-code-sm text-outline">CAI-MED-04</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Sayeda Zeinab Emergency Clinic</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Primary triage & maternal health outpatient facility serving southern Old Cairo.</p>
+</div>
+<div class="mt-space-md pt-space-xs space-y-1 text-body-sm">
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_lead">Intake Lead:</span>
+<span class="text-on-surface font-medium">Dr. M. Fahmy</span>
+</div>
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_received">Verified Received:</span>
+<span class="text-primary font-semibold">12 Medical Units</span>
+</div>
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_status">Custody Attestation:</span>
+<span class="text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Bilateral
+              </span>
+</div>
+</div>
+</article>
+<!-- Recipient 2: Maadi Night Shelter & Community Kitchen -->
+<article class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-tertiary font-label-sm font-medium">Thermal Shelter</span>
+<span class="font-code-sm text-outline">CAI-SHL-02</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Maadi Community Shelter</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Night sanctuary and family nutrition hub with cold-chain certified intake dock.</p>
+</div>
+<div class="mt-space-md pt-space-xs space-y-1 text-body-sm">
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_lead">Intake Lead:</span>
+<span class="text-on-surface font-medium">Samir Kassam</span>
+</div>
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_received">Verified Received:</span>
+<span class="text-tertiary font-semibold">50 Meals (5 batches)</span>
+</div>
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_status">Custody Attestation:</span>
+<span class="text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Bilateral
+              </span>
+</div>
+</div>
+</article>
+<!-- Recipient 3: Al-Amal Literacy & Tutoring Center -->
+<article class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-secondary font-label-sm font-medium">Education Node</span>
+<span class="font-code-sm text-outline">CAI-EDU-09</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Al-Amal Learning Center</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Community after-school facility providing accredited primary learning kits.</p>
+</div>
+<div class="mt-space-md pt-space-xs space-y-1 text-body-sm">
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_lead">Intake Lead:</span>
+<span class="text-on-surface font-medium">Ustaza Hanan N.</span>
+</div>
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_received">Verified Received:</span>
+<span class="text-secondary font-semibold">18 Curriculum Kits</span>
+</div>
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_status">Custody Attestation:</span>
+<span class="text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Bilateral
+              </span>
+</div>
+</div>
+</article>
+<!-- Recipient 4: Helwan Youth Tech Incubator -->
+<article class="p-space-md rounded-xl bg-surface-container-lowest shadow-md flex flex-col justify-between">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm font-medium">Hardware Node</span>
+<span class="font-code-sm text-outline">CAI-TCH-03</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Helwan Youth Tech Lab</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Refurbishment workshop training youth on Linux systems and open-source electronics.</p>
+</div>
+<div class="mt-space-md pt-space-xs space-y-1 text-body-sm">
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_lead">Intake Lead:</span>
+<span class="text-on-surface font-medium">Eng. Tarek Adel</span>
+</div>
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_received">Verified Received:</span>
+<span class="text-primary font-semibold">6 Corporate Laptops</span>
+</div>
+<div class="flex justify-between text-outline">
+<span data-i18n="partner_status">Custody Attestation:</span>
+<span class="text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Bilateral
+              </span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Monthly Cumulative Ledger Timeline (October - November 2024 Audits) -->
+<section aria-labelledby="timeline-heading" class="p-space-md lg:p-space-lg rounded-xl bg-surface-container-lowest shadow-md flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface" data-i18n="timeline_title" id="timeline-heading">Verified Handover Timeline & Intake Trace</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="timeline_sub">Chronological ledger of sealed counter-transfers confirmed by GPS geofence</p>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-space-sm py-1 rounded-md bg-surface-container font-code-sm text-outline">Sync State: Current</span>
+</div>
+</div>
+<div class="space-y-space-sm">
+<!-- Transfer Entry 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-sm hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-secondary-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Sayeda Zeinab Emergency Clinic</span>
+<span class="font-code-sm text-outline">#TRN-8841-A</span>
+</div>
+<span class="font-body-sm text-on-surface-variant">4x O2 Regulators + 8x Sterile Surgical Leads • Verified intact packaging</span>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-space-md">
+<div class="flex flex-col text-right">
+<span class="font-label-md text-on-surface font-semibold">18 Nov 2024 • 14:22</span>
+<span class="font-code-sm text-primary font-medium">Bilateral Sealed (22m SLA)</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]" title="Cryptographically Attested">verified</span>
+</div>
+</div>
+<!-- Transfer Entry 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-sm hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Maadi Night Shelter</span>
+<span class="font-code-sm text-outline">#TRN-8819-F</span>
+</div>
+<span class="font-body-sm text-on-surface-variant">30x Insulated Hot Nutritional Trays • Temp: 68°C attested at dock</span>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-space-md">
+<div class="flex flex-col text-right">
+<span class="font-label-md text-on-surface font-semibold">12 Nov 2024 • 19:40</span>
+<span class="font-code-sm text-primary font-medium">Bilateral Sealed (18m SLA)</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]" title="Cryptographically Attested">verified</span>
+</div>
+</div>
+<!-- Transfer Entry 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-sm hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">laptop_chromebook</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Helwan Youth Tech Lab</span>
+<span class="font-code-sm text-outline">#TRN-8762-T</span>
+</div>
+<span class="font-body-sm text-on-surface-variant">6x ThinkPad T480s (Clean SSD hashes • Passed diagnostic intake)</span>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-space-md">
+<div class="flex flex-col text-right">
+<span class="font-label-md text-on-surface font-semibold">03 Nov 2024 • 11:15</span>
+<span class="font-code-sm text-primary font-medium">Bilateral Sealed (31m SLA)</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]" title="Cryptographically Attested">verified</span>
+</div>
+</div>
+<!-- Transfer Entry 4 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-sm hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Al-Amal Learning Center</span>
+<span class="font-code-sm text-outline">#TRN-8701-E</span>
+</div>
+<span class="font-body-sm text-on-surface-variant">18x Science Curriculum Workbooks + 2x Lab Glassware Units</span>
+</div>
+</div>
+<div class="flex items-center justify-between md:justify-end gap-space-md">
+<div class="flex flex-col text-right">
+<span class="font-label-md text-on-surface font-semibold">27 Oct 2024 • 15:50</span>
+<span class="font-code-sm text-primary font-medium">Bilateral Sealed (24m SLA)</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]" title="Cryptographically Attested">verified</span>
+</div>
+</div>
+</div>
+<div class="flex justify-center pt-space-xs">
+<a class="font-label-md text-primary hover:text-primary-container transition-colors flex items-center gap-1" href="#">
+<span data-i18n="link_view_all_transfers">View all 14 historical handover receipts</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- Auditing Protocol Architecture Banner -->
+<section class="p-space-md rounded-xl bg-secondary-container text-on-secondary-container flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<span class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[26px]">gavel</span>
+</span>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-container font-semibold" data-i18n="protocol_title">Zero-Speculation Civic Standard</h3>
+<p class="font-body-sm text-body-sm text-on-secondary-fixed-variant leading-relaxed max-w-2xl" data-i18n="protocol_desc">
+            Unlike commercial platforms that invent arbitrary carbon offset equations or vanity currency rewards, Dawwarha operates strictly as a bilateral physical inventory ledger. Each unit here represents verified custody transferred in person between accredited community custodians.
+          </p>
+</div>
+</div>
+<button class="px-space-md py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-bright text-secondary font-label-md shadow-sm transition-all shrink-0" onclick="openAuditInfoModal()" type="button">
+<span data-i18n="btn_view_spec">Read Ledger Governance Standard</span>
+</button>
+</section>
+</div>
+<!-- RAW MERKLE LEDGER MODAL (INTERACTIVE) -->
+<dialog class="p-0 rounded-xl bg-surface-container-lowest shadow-xl max-w-2xl w-full text-on-surface backdrop:bg-inverse-surface/40" id="ledger-modal">
+<div class="p-space-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm border-b-0">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">fingerprint</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Raw Audit Attestation Proofs</h3>
+</div>
+<button class="w-8 h-8 rounded-lg text-outline hover:bg-surface-container flex items-center justify-center" onclick="document.getElementById('ledger-modal').close()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-on-surface-variant">
+        Every completed physical transfer is anchored with immutable cryptographic hash signatures from both custodian nodes.
+      </p>
+<div class="bg-surface-container-low p-space-sm rounded-lg font-code-sm text-[12px] space-y-2 overflow-x-auto text-on-surface">
+<div><span class="text-outline">// Master Attestation Block</span></div>
+<div><strong>Node Public Key:</strong> 0x7c9a2d3b5e4f...CAI-SEC-01</div>
+<div><strong>Bilateral Custody Handshake:</strong> VERIFIED_IN_PERSON</div>
+<div><strong>Signature Algorithm:</strong> Ed25519 / SHA-256</div>
+<div><strong>Receipt Root:</strong> <span class="text-primary">8f4e2c91b7d5a3...30c14f7b</span></div>
+<div><strong>Timestamp Anchor:</strong> 2024-11-18T14:22:04.108Z [Cairo, EGY]</div>
+<div><strong>Total Units Under Seal:</strong> 86 physical items</div>
+</div>
+<div class="flex justify-end gap-space-xs pt-space-xs">
+<button class="px-space-md py-2 rounded-lg bg-primary text-on-primary font-label-md" onclick="document.getElementById('ledger-modal').close()" type="button">
+          Close Registry Inspector
+        </button>
+</div>
+</div>
+</dialog>
+<!-- JAVASCRIPT MICRO-INTERACTIONS & QA STATE CONTROLLER -->
+<script>
+    const translations = {
+      en: {
+        breadcrumb_curr: "Impact & Verified Outcomes",
+        seal_badge: "Audit-Verified Civic Impact • Merkle #DWR-IMP-CAI-2024",
+        page_title: "Verified Community Impact & Ledger Summary",
+        page_subtitle: "A factual, auditable aggregation of surplus resources redirected to community clinics, emergency shelters, and educational outposts through bilaterally attested physical handovers. Dawwarha registers tangible physical unit volumes, strictly omitting speculative eco-formulas, badges, or theoretical estimates.",
+        btn_export: "Export Signed Audit Ledger",
+        btn_history: "View Contribution Ledger",
+        kpi_1_label: "Attested Transfers",
+        kpi_1_sub: "Bilateral physical seals",
+        kpi_1_unit: "transfers",
+        kpi_1_audit: "100% Counterpart Sealed",
+        kpi_2_label: "Physical Assets Relocated",
+        kpi_2_sub: "Counted inventory items",
+        kpi_2_unit: "items & packs",
+        kpi_2_audit: "4 Civic Sectors",
+        kpi_3_label: "Recipient Nodes",
+        kpi_3_sub: "Accredited civic hubs",
+        kpi_3_unit: "community hubs",
+        kpi_3_audit: "Cairo Metropolitan Gov.",
+        kpi_4_label: "Speculative Rating",
+        kpi_4_sub: "Anti-Gamification Index",
+        kpi_4_unit: "EGP Claims",
+        kpi_4_audit: "100% Non-Monetary",
+        sect_title: "Factual Breakdown by Civic Sector",
+        sect_sub: "Quantified assets verified during bilateral intake handovers",
+        sec1_name: "Medical Supplies & Devices",
+        sec1_desc: "Pediatric oximeters, oxygen regulators, sterile surgical leads & dressings.",
+        sec2_name: "Food Aid & Nutrition",
+        sec2_desc: "Shelf-stable dry staples, thermal-preserved hot meals, emergency nutritional tubs.",
+        sec3_name: "Education & Workbooks",
+        sec3_desc: "Standard curriculum textbooks, STEM laboratory kits, instructional stationery sets.",
+        sec4_name: "Technology & IT Hardware",
+        sec4_desc: "Refurbished business laptops, network switchgear, displays with clean memory zeroing.",
+        sec_transfers_label: "Transfers:",
+        sec_units_label: "Verified Volume:",
+        sec_nodes_label: "Primary Node:",
+        dist_title: "Verified Asset Allocation Profile",
+        dist_meta: "Aggregate physical sum: 86 units",
+        dist_desc: "Visual breakdown of all attested intake receipts. Units are weighted by verified physical counts confirmed by receiver signature.",
+        leg_food: "Food Aid",
+        leg_edu: "Education",
+        leg_med: "Medical",
+        leg_tech: "Technology",
+        audit_note: "Verified via SHA-256 Physical QR & GPS Handover Geofence",
+        merkle_card_title: "Cryptographic Node Seal",
+        audit_prov: "Contributing Node:",
+        audit_rep: "Signatory:",
+        audit_sla: "Avg. Sign-off Latency:",
+        audit_integrity: "Integrity Index:",
+        btn_inspect_ledger: "Inspect Raw Hash Registry",
+        partners_title: "Verified Recipient Counterpart Hubs",
+        partners_sub: "Community clinics and emergency relief outposts in the Cairo municipal corridor",
+        partner_lead: "Intake Lead:",
+        partner_received: "Verified Received:",
+        partner_status: "Custody Attestation:",
+        timeline_title: "Verified Handover Timeline & Intake Trace",
+        timeline_sub: "Chronological ledger of sealed counter-transfers confirmed by GPS geofence",
+        link_view_all_transfers: "View all 14 historical handover receipts",
+        protocol_title: "Zero-Speculation Civic Standard",
+        protocol_desc: "Unlike commercial platforms that invent arbitrary carbon offset equations or vanity currency rewards, Dawwarha operates strictly as a bilateral physical inventory ledger. Each unit here represents verified custody transferred in person between accredited community custodians.",
+        btn_view_spec: "Read Ledger Governance Standard",
+        empty_title: "Your Verified Civic Ledger Starts Here",
+        empty_desc: "Dawwarha records physical transfers verified bilaterally by both donor and recipient node. No artificial carbon ratings, no gamified points. When your first surplus asset or medical aid batch is safely received and cryptographic handshake completes, its permanent footprint will appear in this auditable registry.",
+        empty_cta_publish: "Publish Available Surplus",
+        empty_cta_explore: "Browse Node Requests",
+        empty_note: "Compliant with National Civic Logistics Framework • Zero Speculative Math"
+      },
+      ar: {
+        breadcrumb_curr: "سجل الأثر المجتمعي المعتمد",
+        seal_badge: "أثر مجتمعي موثق غير قابل للتلاعب • ختم DWR-IMP-CAI-2024",
+        page_title: "سجل الأثر المجتمعي وحصيلة المساهمات المكتملة",
+        page_subtitle: "تجميع تدقيقي فعلي للموارد الفائضة المعاد توجيهها إلى العيادات المجتمعية وملاجئ الطوارئ والمراكز التعليمية من خلال عمليات تسليم مادية معتمدة ثنائياً. تسجل منصة دوّرها كميات فعلية ملموسة، مستبعدةً تماماً أي معادلات كربونية وهمية أو أوسمة ترفيهية.",
+        btn_export: "تصدير كشف الأثر المعتمد",
+        btn_history: "عرض سجل المساهمات التفصيلي",
+        kpi_1_label: "تحويلات معتمدة ثنائياً",
+        kpi_1_sub: "أختام استلام مادي ثنائي",
+        kpi_1_unit: "تحويل موثق",
+        kpi_1_audit: "موثقة 100% من الطرفين",
+        kpi_2_label: "وحدات مادية تم تدويرها",
+        kpi_2_sub: "أصول عينية تم إحصاؤها",
+        kpi_2_unit: "وحدة ووجبة",
+        kpi_2_audit: "٤ قطاعات مجتمعية",
+        kpi_3_label: "شركاء الاستلام الميداني",
+        kpi_3_sub: "مراكز ونقاط استلام معتمدة",
+        kpi_3_unit: "نقاط مجتمعية",
+        kpi_3_audit: "نطاق القاهرة الكبرى",
+        kpi_4_label: "مؤشر المضاربات المالية",
+        kpi_4_sub: "مقياس النزاهة غير الربحية",
+        kpi_4_unit: "جنيه مطالبات وهمية",
+        kpi_4_audit: "ميثاق مدني عيني 100%",
+        sect_title: "توزيع الأثر المعتمد حسب القطاع المدني",
+        sect_sub: "كميات مادية موثقة تم التحقق منها خلال إجراءات التسليم المشترك",
+        sec1_name: "مستلزمات وأجهزة طبية",
+        sec1_desc: "أجهزة قياس أكسجين للأطفال، منظمات أكسجين، وصلات وشاش جراحي معقم.",
+        sec2_name: "إمدادات غذائية ووجبات حرارية",
+        sec2_desc: "مواد تموينية جافة ومحفوظة، وجبات متكاملة موثقة بسلسلة تبريد دقيقة.",
+        sec3_name: "تعليم وكتب دراسية",
+        sec3_desc: "كتب مناهج دراسية معتمدة، مجموعات قرطاسية وأدوات معامل فيزياء مدرسية.",
+        sec4_name: "تقنية ومعدات تكنولوجيا المعلومات",
+        sec4_desc: "أجهزة حاسوب محمولة تم تجديدها، محولات شبكة، شاشات مع محو بيانات مشفر.",
+        sec_transfers_label: "التحويلات:",
+        sec_units_label: "الحجم المعتمد:",
+        sec_nodes_label: "النقطة المستلمة:",
+        dist_title: "توزيع الأصول المحولة المعتمدة",
+        dist_meta: "المجموع الكلي الفعلي: ٨٦ وحدة",
+        dist_desc: "تحليل بصري دقيق لكافة إيصالات الاستلام المادي المعتمدة بالتوقيع الثنائي.",
+        leg_food: "إغاثة غذائية",
+        leg_edu: "تعليم",
+        leg_med: "طبي",
+        leg_tech: "تقنية",
+        audit_note: "تم التدقيق عبر رمز QR المادي والنطاق الجغرافي المشفر",
+        merkle_card_title: "الختم التشفيري لنقطة العمليات",
+        audit_prov: "النقطة المساهمة:",
+        audit_rep: "المسؤول المعتمد:",
+        audit_sla: "متوسط وقت التوقيع:",
+        audit_integrity: "مؤشر النزاهة:",
+        btn_inspect_ledger: "فحص سجل التشفير الخام",
+        partners_title: "نقاط ومؤسسات الاستلام الشريكة المعتمدة",
+        partners_sub: "عيادات مجتمعية ومراكز طوارئ ميدانية في النطاق البلدي للقاهرة",
+        partner_lead: "مسؤول الاستلام:",
+        partner_received: "المستلم المعتمد:",
+        partner_status: "التوثيق الثنائي:",
+        timeline_title: "المسار الزمني الموثق لعمليات التسليم",
+        timeline_sub: "سجل زمني للتحويلات المعتمدة ميدانياً والمثبتة جغرافياً",
+        link_view_all_transfers: "عرض كافة إيصالات الاستلام الـ ١٤ السابقة",
+        protocol_title: "المعيار المدني الصارم: صفر مضاربات",
+        protocol_desc: "بخلاف المنصات الترويجية التي تبتكر أرقاماً عشوائية لتعويض الكربون أو مكافآت ونقاط وهمية، تعمل دوّرها كسجل مادي فعلي لنقل العهدة بين أمناء المجتمع المعتمدين حصراً.",
+        btn_view_spec: "الاطلاع على معيار حوكمة السجل المدني",
+        empty_title: "يبدأ سجلك المدني المعتمد من هنا",
+        empty_desc: "تسجل دوّرها عمليات التحويل المادي التي يتم توثيقها ثنائياً بواسطة الطرفين المانح والمستلم. لا توجد نقاط لعب أو حسابات كربون ترويجية. بمجرد إتمام أول عملية تسليم فعلي، ستظهر هنا كأصل مدني مثبت.",
+        empty_cta_publish: "نشر مورد أو فائض متاح",
+        empty_cta_explore: "تصفح طلبات واحتياجات النقاط",
+        empty_note: "متوافق مع أطر العمل اللوجستي الوطني للمجتمع • بلا حسابات تقديرية"
+      }
+    };
+
+    let currentLanguage = 'en';
+
+    function setQAMode(mode) {
+      const stateContent = document.getElementById('state-content');
+      const stateEmpty = document.getElementById('state-empty');
+      const stateLoading = document.getElementById('state-loading');
+      
+      // Update simulator buttons state
+      const btns = ['full', 'empty', 'medical', 'loading'];
+      btns.forEach(b => {
+        const el = document.getElementById(`qa-btn-${b}`);
+        if (b === mode) {
+          el.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+          el.classList.add('bg-primary', 'text-on-primary');
+        } else {
+          el.classList.remove('bg-primary', 'text-on-primary');
+          el.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+        }
+      });
+
+      // Sector cards
+      const sectorCards = document.querySelectorAll('.sector-card');
+      sectorCards.forEach(c => c.style.display = '');
+
+      // Visibility toggles
+      if (mode === 'loading') {
+        stateContent.classList.add('hidden');
+        stateEmpty.classList.add('hidden');
+        stateLoading.classList.remove('hidden');
+        stateLoading.classList.add('flex');
+      } else if (mode === 'empty') {
+        stateContent.classList.add('hidden');
+        stateLoading.classList.add('hidden');
+        stateEmpty.classList.remove('hidden');
+        stateEmpty.classList.add('flex');
+      } else if (mode === 'medical') {
+        stateLoading.classList.add('hidden');
+        stateEmpty.classList.add('hidden');
+        stateContent.classList.remove('hidden');
+        sectorCards.forEach(c => {
+          if (c.getAttribute('data-sector') !== 'medical') {
+            c.style.display = 'none';
+          }
+        });
+      } else { // 'full'
+        stateLoading.classList.add('hidden');
+        stateEmpty.classList.add('hidden');
+        stateContent.classList.remove('hidden');
+      }
+    }
+
+    function toggleBilingual() {
+      currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+      const root = document.getElementById('impact-root');
+      const langIndicator = document.getElementById('qa-lang-indicator');
+
+      if (currentLanguage === 'ar') {
+        root.setAttribute('dir', 'rtl');
+        langIndicator.textContent = 'Switch to English (LTR)';
+      } else {
+        root.setAttribute('dir', 'ltr');
+        langIndicator.textContent = 'Switch to العربية (RTL)';
+      }
+
+      // Apply translations to all data-i18n items
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLanguage] && translations[currentLanguage][key]) {
+          el.textContent = translations[currentLanguage][key];
+        }
+      });
+    }
+
+    function inspectRawLedger() {
+      const modal = document.getElementById('ledger-modal');
+      if (modal) modal.showModal();
+    }
+
+    function triggerLedgerExport() {
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-6 right-6 z-50 px-space-md py-3 rounded-xl bg-primary text-on-primary shadow-xl font-label-md flex items-center gap-space-xs transition-all';
+      toast.innerHTML = '<span class="material-symbols-outlined text-[20px]">verified</span><span>Audit Ledger Certificate (#DWR-IMP-CAI-2024.pdf) generated successfully.</span>';
+      document.body.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 400);
+      }, 3500);
+    }
+
+    function openAuditInfoModal() {
+      inspectRawLedger();
+    }
+  </script>
+</div></div></main></div></body></html>

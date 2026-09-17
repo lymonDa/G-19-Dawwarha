@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-background":"#151d1a","on-tertiary-fixed-variant":"#6a3b00","surface-container":"#e7f0eb","on-primary-container":"#ebfff7","tertiary-container":"#9f672b","tertiary-fixed-dim":"#feb874","on-tertiary-fixed":"#2d1600","tertiary":"#834f14","primary-fixed-dim":"#87d5c1","error-container":"#ffdad6","on-surface":"#151d1a","surface-container-low":"#edf6f1","secondary-container":"#b6eedc","error":"#ba1a1a","on-secondary-fixed-variant":"#184f42","on-secondary":"#ffffff","surface-container-highest":"#dbe5e0","on-error-container":"#93000a","on-primary":"#ffffff","secondary-fixed":"#b6eedc","on-primary-fixed-variant":"#005143","inverse-primary":"#87d5c1","background":"#f2fbf6","tertiary-fixed":"#ffdcbf","on-tertiary-container":"#fffaf8","on-primary-fixed":"#00201a","outline-variant":"#bec9c4","surface-container-high":"#e1eae5","inverse-on-surface":"#eaf3ee","outline":"#6f7975","secondary":"#33685a","primary-container":"#2f806f","surface-tint":"#106a5a","surface-variant":"#dbe5e0","surface-container-lowest":"#ffffff","inverse-surface":"#2a322f","on-tertiary":"#ffffff","surface-dim":"#d3dcd7","on-secondary-container":"#396e5f","primary":"#076757","on-error":"#ffffff","on-surface-variant":"#3f4946","surface":"#f2fbf6","secondary-fixed-dim":"#9bd2c0","primary-fixed":"#a3f2dd","surface-bright":"#f2fbf6","on-secondary-fixed":"#002019"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"gutter-mobile":"1rem","space-xl":"2.5rem","gutter":"1.5rem","space-lg":"1.5rem","margin":"2rem","space-xs":"0.25rem","space-md":"1rem","margin-mobile":"1rem","space-sm":"0.5rem"},fontFamily:{"headline-sm":["Inter"],"label-sm":["Inter"],"body-sm":["Inter"],"display-lg-mobile":["Inter"],"display-lg":["Inter"],"label-md":["Inter"],"headline-md":["Inter"],"body-md":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"],"code-sm":["Inter"],"headline-lg-mobile":["Inter"]},fontSize:{"headline-sm":["1.125rem",{"lineHeight":"1.5rem","fontWeight":"500"}],"label-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}],"body-sm":["0.8125rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"display-lg-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"display-lg":["3.5rem",{"lineHeight":"4rem","letterSpacing":"-0.02em","fontWeight":"600"}],"label-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"500"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-md":["0.9375rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"headline-lg":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.015em","fontWeight":"600"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","fontWeight":"400"}],"code-sm":["0.8125rem",{"lineHeight":"1.125rem","fontWeight":"400"}],"headline-lg-mobile":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.01em","fontWeight":"600"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center justify-between border-b border-outline-variant/30"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container"><span class="material-symbols-outlined text-[20px]">recycling</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-tight font-semibold">دَوَّرها</span><span class="font-label-sm text-label-sm text-outline">Dawwarha Civic OS</span></div></div><span class="px-2 py-0.5 rounded-full bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant">v2.4-GOV</span></div><nav class="flex flex-col gap-1 p-space-sm" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-lg"><div class="px-space-xs pt-space-sm pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Overview</div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="overview" href="#"><span class="material-symbols-outlined text-[18px]">dashboard</span>Admin Dashboard</a><div class="px-space-xs pt-space-md pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Trust & Moderation</div><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 transition-colors bg-primary-container text-on-primary-container font-medium rounded-lg" data-path="verification-queue" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">verified_user</span>Verification Queue</div><span class="px-2 py-0.5 rounded-full bg-tertiary-fixed font-label-sm text-label-sm text-on-tertiary-fixed font-semibold">5</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="content-reports-flags" href="#"><span class="material-symbols-outlined text-[18px]">flag</span>Content Reports & Flags</a><div class="px-space-xs pt-space-md pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Operations & Ecosystem</div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="users-directory" href="#"><span class="material-symbols-outlined text-[18px]">groups</span>Users Directory</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="organizations-directory" href="#"><span class="material-symbols-outlined text-[18px]">apartment</span>Organizations Directory</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="resources-oversight" href="#"><span class="material-symbols-outlined text-[18px]">inventory_2</span>Resources Oversight</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="standing-quotas" href="#"><span class="material-symbols-outlined text-[18px]">assignment_late</span>Requests Standing Quotas</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="bilateral-matches" href="#"><span class="material-symbols-outlined text-[18px]">hub</span>Bilateral Matches & Pairing</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="custodial-handovers" href="#"><span class="material-symbols-outlined text-[18px]">swap_horizontal_circle</span>Custodial Handovers</a><div class="px-space-xs pt-space-md pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Impact & Governance</div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="category-taxonomy" href="#"><span class="material-symbols-outlined text-[18px]">category</span>Category Taxonomy</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="analytics-ledger" href="#"><span class="material-symbols-outlined text-[18px]">monitoring</span>Platform Analytics & Ledger</a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="audit-logs" href="#"><span class="material-symbols-outlined text-[18px]">history_toggle_off</span>Audit Trail & Logs</a></nav></div><div class="p-space-md bg-surface-container-low border-t border-outline-variant/30 flex flex-col gap-1"><div class="flex items-center gap-space-xs text-primary font-label-sm text-label-sm font-semibold"><span class="material-symbols-outlined text-[16px]">policy</span>Decree 149/2019 Ready</div><p class="font-label-sm text-label-sm text-outline">National Circular Ledger sync active.</p></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter border-b border-outline-variant/20"><div class="flex items-center gap-space-lg flex-1 max-w-2xl"><div class="relative w-full max-w-md"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full h-10 pl-9 pr-space-md rounded-lg bg-surface-container-low border-0 text-on-surface font-body-sm text-body-sm focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest outline-none placeholder:text-outline" placeholder="Search audit hash, registry tax ID, org, or batch UID..." type="text"/></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-low border border-outline-variant/30"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-code-sm text-code-sm text-on-surface font-medium">Merkle #819,004</span><span class="font-label-sm text-label-sm text-outline">• Verified Synced</span></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-1 px-space-sm py-1.5 rounded-lg border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button"><span class="font-semibold text-primary">EN</span><span class="text-outline">/</span><span class="font-medium">عربي</span></button><div class="h-6 w-px bg-outline-variant/40"></div><div class="flex items-center gap-space-sm"><div class="flex flex-col text-right hidden sm:flex"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Eng. Reham M.</span><span class="font-label-sm text-label-sm text-outline">Lead Platform Operator</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 flex-1 w-full px-gutter py-space-lg bg-background"><div class="flex flex-col w-full" dir="ltr" id="resources-workspace">
+<!-- QA SIMULATOR & COMPLIANCE TELEMETRY BAR -->
+<section class="w-full bg-surface-container-high px-space-md py-space-xs rounded-lg mb-space-md flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container-lowest shadow-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">QA Matrix Simulator</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest rounded-md p-0.5 shadow-sm">
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-primary-container text-on-primary-container font-medium transition-all" id="btn-scen-std" onclick="setScenario('standard')" type="button">1. Standard Active</button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container transition-all" id="btn-scen-insp" onclick="setScenario('inspection')" type="button">2. Inspection (#RES-8821)</button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container transition-all" id="btn-scen-trans" onclick="openLifecycleModal('RES-MED-8821', 'available')" type="button">3. Transition Gateway</button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container transition-all" id="btn-scen-flag" onclick="setScenario('flagged')" type="button">4. Flagged (1)</button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container transition-all" id="btn-scen-empty" onclick="setScenario('empty')" type="button">5. Empty State</button>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+<span>Lead Operator: <strong class="text-on-surface font-semibold">Eng. Reham M.</strong> (Decree 149/2019 Auditor)</span>
+</div>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-md bg-surface-container-lowest text-primary hover:bg-surface-container font-label-sm text-label-sm shadow-sm transition-colors" id="rtl-toggle-btn" onclick="toggleRTL()" type="button">
+<span class="material-symbols-outlined text-[16px]">translate</span>
+<span id="rtl-label">Preview Arabic (RTL)</span>
+</button>
+</div>
+</section>
+<!-- SUB-NAV BREADCRUMBS & CONTEXT HEADER -->
+<header class="flex flex-col gap-space-sm mb-space-lg">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<span class="hover:text-on-surface transition-colors cursor-pointer">System Administration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="hover:text-on-surface transition-colors cursor-pointer">Supply Domain Oversight (Eng. Adham M.)</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Resources Consignment Ledger</span>
+</div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="flex flex-col gap-1 max-w-3xl">
+<div class="flex items-center gap-space-sm flex-wrap">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-semibold">
+            Platform Resources & Surplus Consignment Oversight
+          </h1>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+            Collection 4 · strict-audit
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Authoritative administrative ledger of physical surplus lots consigned by registered citizens and accredited partner nodes across Egypt under Circular Economy Decree 149/2019.
+        </p>
+<div class="flex items-center gap-space-md mt-1 font-label-sm text-label-sm text-outline">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px] text-primary">database</span> Mongoose v7.4 Model: <code class="font-code-sm text-code-sm text-on-surface bg-surface-container px-1 rounded">ResourceSchema</code></span>
+<span>•</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px] text-primary">account_tree</span> Strict 11-State Finite Machine</span>
+<span>•</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px] text-primary">inventory</span> 7 Seed Taxonomies</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0 self-start lg:self-center">
+<button class="flex items-center gap-2 px-space-md py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors shadow-sm" onclick="showNotification('MoSS National Registry sync verified. 318 lots re-indexed.')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">sync</span>
+          Sync MoSS Registry
+        </button>
+<button class="flex items-center gap-2 px-space-md py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container font-label-md text-label-md transition-colors shadow-sm" onclick="exportData()" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+          Export Consignments (.CSV)
+        </button>
+</div>
+</div>
+</header>
+<!-- 4 CONCISE METRIC CARDS (BACKEND COLLECTION-DERIVED) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-lg">
+<!-- Metric 1 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Total Consigned Lots</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">318</span>
+<span class="font-body-sm text-body-sm text-outline">lots</span>
+</div>
+<div class="mt-2 flex items-center justify-between text-outline font-label-sm text-label-sm">
+<span class="text-primary font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>+22 this week
+        </span>
+<span>Index { status: 1 }</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Active & Available</span>
+<div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">244</span>
+<span class="font-body-sm text-body-sm text-outline">open lots</span>
+</div>
+<div class="mt-2 flex items-center justify-between text-outline font-label-sm text-label-sm">
+<span class="text-secondary font-semibold">Ready for pairing</span>
+<span>76.7% operational pool</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">In-Flight Bilateral</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">56</span>
+<span class="font-body-sm text-body-sm text-outline">lots active</span>
+</div>
+<div class="mt-2 flex items-center justify-between text-outline font-label-sm text-label-sm">
+<span class="text-tertiary font-semibold">32 Matched · 24 In Handover</span>
+<span>Avg SLA 1.8 days</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Settled & Impact Logged</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+</div>
+</div>
+<div class="flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">614</span>
+<span class="font-body-sm text-body-sm text-outline">immutable</span>
+</div>
+<div class="mt-2 flex items-center justify-between text-outline font-label-sm text-label-sm">
+<span class="text-on-surface-variant font-medium">Merkle sync root #819k</span>
+<span class="font-code-sm text-code-sm text-primary">Zero rollbacks</span>
+</div>
+</div>
+</section>
+<!-- SEARCH & STRICT ALLOW-LISTED FILTERS -->
+<section class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm mb-space-md flex flex-col gap-space-sm">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-sm">
+<!-- Search Input -->
+<div class="md:col-span-4 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-space-md rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:bg-surface-container-lowest outline-none placeholder:text-outline" id="resource-search" oninput="applyFilters()" placeholder="Search lot title, #RES-..., provider, location..." type="text"/>
+</div>
+<!-- Controlled Category Filter (Exact 7 seed taxonomy) -->
+<div class="md:col-span-2">
+<select class="w-full h-10 px-space-sm rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md outline-none" id="filter-category" onchange="applyFilters()">
+<option value="ALL">All Categories (7)</option>
+<option value="Food">Food (أغذية تموينية)</option>
+<option value="Books">Books (كتب ومطبوعات)</option>
+<option value="Furniture">Furniture (أثاث ومفروشات)</option>
+<option value="Clothing">Clothing (ملابس وأقمشة)</option>
+<option value="School Supplies">School Supplies (أدوات دراسية)</option>
+<option value="Office Equipment">Office Equipment (تجهيزات مكتبية)</option>
+<option value="Other">Other / Biomedical Surplus</option>
+</select>
+</div>
+<!-- 11-State Lifecycle Status Enum Filter -->
+<div class="md:col-span-2">
+<select class="w-full h-10 px-space-sm rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md outline-none" id="filter-status" onchange="applyFilters()">
+<option value="ALL">All 11 Enums</option>
+<option value="draft">draft</option>
+<option value="published">published</option>
+<option value="available">available</option>
+<option value="matched">matched</option>
+<option value="accepted">accepted</option>
+<option value="in_handover">in_handover</option>
+<option value="completed">completed</option>
+<option value="impact_recorded">impact_recorded</option>
+<option value="expired">expired</option>
+<option value="cancelled">cancelled</option>
+<option value="unavailable">unavailable</option>
+</select>
+</div>
+<!-- Governorate Filter -->
+<div class="md:col-span-2">
+<select class="w-full h-10 px-space-sm rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md outline-none" id="filter-gov" onchange="applyFilters()">
+<option value="ALL">All Governorates</option>
+<option value="Cairo">Cairo (القاهرة)</option>
+<option value="Giza">Giza (الجيزة)</option>
+<option value="Alexandria">Alexandria (الإسكندرية)</option>
+<option value="Qalyubia">Qalyubia (القليوبية)</option>
+</select>
+</div>
+<!-- Provider Node Type -->
+<div class="md:col-span-2">
+<select class="w-full h-10 px-space-sm rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md outline-none" id="filter-node" onchange="applyFilters()">
+<option value="ALL">All Node Types</option>
+<option value="Verified Org">Verified MoSS NGO</option>
+<option value="Institutional">Academic / Clinic</option>
+<option value="Citizen">Verified Citizen Node</option>
+</select>
+</div>
+</div>
+<!-- Active Filter Feedback & Reset -->
+<div class="flex items-center justify-between pt-1 font-label-sm text-label-sm text-outline">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">filter_list</span>
+<span id="active-filter-summary">Showing <strong class="text-on-surface" id="visible-count">8</strong> records of 318 consigned lots · Compound index active</span>
+</div>
+<button class="text-primary hover:underline font-medium" onclick="resetFilters()" type="button">Reset All Filters</button>
+</div>
+</section>
+<!-- MAIN TWO-COLUMN SPLIT: MASTER TABLE + INTERACTIVE INSPECTION DRAWER -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-start">
+<!-- MASTER ADMINISTRATIVE LEDGER TABLE (8 COLUMNS ON LARGE) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col transition-all duration-300" id="table-container">
+<div class="px-space-md py-space-sm bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Active Consignment Ledger</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container font-code-sm text-code-sm text-on-surface-variant font-medium">idx: status_cat_createdAt</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="font-label-sm text-label-sm text-outline">Sort: Newest First</span>
+</div>
+</div>
+<!-- Table Body -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="resources-table">
+<thead>
+<tr class="bg-surface-container-lowest text-outline font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-2.5 px-space-md font-medium">Lot Identification & Spec</th>
+<th class="py-2.5 px-space-md font-medium">Category</th>
+<th class="py-2.5 px-space-md font-medium">Consignment Node</th>
+<th class="py-2.5 px-space-md font-medium">Window & Qty</th>
+<th class="py-2.5 px-space-md font-medium">Lifecycle State</th>
+<th class="py-2.5 px-space-md font-medium text-right">Triage</th>
+</tr>
+</thead>
+<tbody class="divide-y-0" id="resource-tbody">
+<!-- Row 1: Focus Item (RES-MED-8821) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-surface-container-lowest" id="row-res-8821" onclick="inspectResource('RES-MED-8821')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm text-primary font-bold">#RES-MED-8821</span>
+<span class="px-1.5 py-0.2 rounded bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-[10px]">Sterile Cleared</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold truncate max-w-[190px]">15x O2 Flowmeters & Regulators</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">Other (Biomed)</span>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Dr. Laila El-Mansouri</span>
+<span class="font-label-sm text-label-sm text-outline truncate max-w-[130px]">Al-Bustan Medical #02</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">15 Units</span>
+<span class="font-label-sm text-label-sm text-primary">Exp: 28 Dec 2024</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                  available
+                </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<button class="p-1 rounded hover:bg-surface-container text-primary" onclick="event.stopPropagation(); inspectResource('RES-MED-8821');" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Matched Item -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-surface-container-lowest" id="row-res-food-9012" onclick="inspectResource('RES-FOO-9012')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-tertiary-container flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">nutrition</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm text-on-surface-variant font-bold">#RES-FOO-9012</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[190px]">450kg Rice & Dry Lentils Bulk</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant">Food</span>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Nile Mills Co-Op</span>
+<span class="font-label-sm text-label-sm text-outline">Giza South Terminal</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">450 kg</span>
+<span class="font-label-sm text-label-sm text-outline">Exp: 05 Jan 2025</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-semibold whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px] text-primary">link</span>
+                  matched (#REQ-7712)
+                </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<button class="p-1 rounded hover:bg-surface-container text-primary" onclick="event.stopPropagation(); inspectResource('RES-FOO-9012');" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: In Handover -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-surface-container-lowest" id="row-res-off-3140" onclick="inspectResource('RES-OFF-3140')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary-container flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">laptop_chromebook</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm text-on-surface-variant font-bold">#RES-OFF-3140</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[190px]">12x Refurbished Thin-Clients</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant">Office Equip</span>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Smart Cairo Hub</span>
+<span class="font-label-sm text-label-sm text-outline">Smart Village Depot</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">12 Boxes</span>
+<span class="font-label-sm text-label-sm text-outline">Exp: 30 Dec 2024</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px]">local_shipping</span>
+                  in_handover (#HND-9941)
+                </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<button class="p-1 rounded hover:bg-surface-container text-primary" onclick="event.stopPropagation(); inspectResource('RES-OFF-3140');" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Impact Recorded (Terminal Immutable) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-surface-container-lowest" id="row-res-fur-1099" onclick="inspectResource('RES-FUR-1099')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-on-surface-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">chair</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm text-on-surface-variant font-bold">#RES-FUR-1099</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-highest text-outline font-label-sm text-[10px]">Merkle Synced</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[190px]">20x Dual Modular School Desks</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant">Furniture</span>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">El-Amal Foundation</span>
+<span class="font-label-sm text-label-sm text-outline">Heliopolis Civic Bay</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">20 Sets</span>
+<span class="font-label-sm text-label-sm text-outline">Settled 12 Nov</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+                  impact_recorded
+                </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<button class="p-1 rounded hover:bg-surface-container text-primary" onclick="event.stopPropagation(); inspectResource('RES-FUR-1099');" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: School Supplies (Available) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-surface-container-lowest" id="row-res-sch-4450" onclick="inspectResource('RES-SCH-4450')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm text-primary font-bold">#RES-SCH-4450</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[190px]">80x Geometry Sets & Notebooks</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant">School Supplies</span>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Tariq Ramadan</span>
+<span class="font-label-sm text-label-sm text-outline">Nasr City Citizen Node</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">80 Kits</span>
+<span class="font-label-sm text-label-sm text-primary">Exp: 15 Jan 2025</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+                  available
+                </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<button class="p-1 rounded hover:bg-surface-container text-primary" onclick="event.stopPropagation(); inspectResource('RES-SCH-4450');" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 6: Books (Draft) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-surface-container-lowest" id="row-res-bok-5501" onclick="inspectResource('RES-BOK-5501')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm text-outline font-bold">#RES-BOK-5501</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[190px]">230x Secondary Science Textbooks</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant">Books</span>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Dar El-Kotob Branch</span>
+<span class="font-label-sm text-label-sm text-outline">Downtown Cairo Node</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">230 Units</span>
+<span class="font-label-sm text-label-sm text-outline">Pending Publish</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-highest text-outline font-label-sm text-label-sm font-semibold whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px]">edit_note</span>
+                  draft
+                </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<button class="p-1 rounded hover:bg-surface-container text-primary" onclick="event.stopPropagation(); inspectResource('RES-BOK-5501');" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 7: Clothing (Published / Pending Activation) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-surface-container-lowest" id="row-res-clo-7721" onclick="inspectResource('RES-CLO-7721')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">apparel</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm text-on-surface-variant font-bold">#RES-CLO-7721</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[190px]">60x Winter Jackets & Woolens</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant">Clothing</span>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Misr Spinning Surplus</span>
+<span class="font-label-sm text-label-sm text-outline">El-Mahalla Outpost</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">60 Pieces</span>
+<span class="font-label-sm text-label-sm text-outline">Exp: 10 Feb 2025</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px] text-primary">published_with_changes</span>
+                  published
+                </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<button class="p-1 rounded hover:bg-surface-container text-primary" onclick="event.stopPropagation(); inspectResource('RES-CLO-7721');" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 8: Flagged / Soft-Archived Unavailable -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-error-container/20" id="row-res-med-6610" onclick="inspectResource('RES-MED-6610')">
+<td class="py-2.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-error-container flex items-center justify-center text-error flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">report</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm text-error font-bold">#RES-MED-6610</span>
+<span class="px-1.5 py-0.2 rounded bg-error text-on-error font-label-sm text-[10px]">1 Flag</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium truncate max-w-[190px]">Expired Dialysis Filter Kits</span>
+</div>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="px-2 py-0.5 rounded-md bg-surface-container font-label-sm text-label-sm text-on-surface-variant">Other</span>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Delta Warehouse #09</span>
+<span class="font-label-sm text-label-sm text-outline">Tanta Station</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">18 Units</span>
+<span class="font-label-sm text-label-sm text-error">End < Start Invalid</span>
+</div>
+</td>
+<td class="py-2.5 px-space-md">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-outline font-label-sm text-label-sm font-semibold whitespace-nowrap">
+<span class="material-symbols-outlined text-[13px]">block</span>
+                  unavailable
+                </span>
+</td>
+<td class="py-2.5 px-space-md text-right">
+<button class="p-1 rounded hover:bg-surface-container text-primary" onclick="event.stopPropagation(); inspectResource('RES-MED-6610');" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Empty State Card (Hidden by default) -->
+<div class="hidden p-space-xl flex-col items-center justify-center text-center gap-space-sm bg-surface-container-lowest" id="empty-state-view">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[32px]">inventory</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">No Consigned Resources Match Filter Criteria</h3>
+<p class="font-body-sm text-body-sm text-outline max-w-md">
+          Compound index query <code class="font-code-sm text-code-sm text-primary">{ status, categoryId, createdAt: -1 }</code> yielded zero document references in Collection 4.
+        </p>
+<button class="px-space-md py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm" onclick="resetFilters()" type="button">
+          Reset Filter Matrix
+        </button>
+</div>
+<!-- Pagination & Ledger Integrity Footer -->
+<div class="px-space-md py-space-sm bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-outline">
+<div class="flex items-center gap-space-xs">
+<span>Row limit: <strong>8 of 318</strong></span>
+<span>•</span>
+<span>Page 1 of 40</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded bg-surface-container text-outline opacity-50 cursor-not-allowed" disabled="" type="button">Previous</button>
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-semibold" type="button">1</button>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button">2</button>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button">3</button>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface" type="button">Next</button>
+</div>
+</div>
+</div>
+<!-- DETAILED SIDE INSPECTION DRAWER (5 COLUMNS ON LARGE) -->
+<aside class="lg:col-span-5 bg-surface-container-lowest rounded-xl shadow-sm flex flex-col overflow-hidden" id="inspection-drawer">
+<!-- Drawer Header -->
+<div class="p-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-bold text-primary" id="drawer-id">#RES-MED-8821</span>
+<span class="px-2 py-0.2 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold" id="drawer-pill-status">available</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">Consignment Verification Gateway</span>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors" onclick="showNotification('Audit certificate exported for #RES-MED-8821')" title="Export Cryptographic Snapshot" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+</button>
+<button class="p-1.5 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container transition-colors" onclick="collapseDrawer()" title="Minimize Drawer" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Drawer Content Scrollable -->
+<div class="p-space-md flex flex-col gap-space-md max-h-[calc(100vh-280px)] overflow-y-auto">
+<!-- SECTION A: SPECIFICATIONS & REGULATORY CLEARANCE -->
+<section class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<h4 class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Section A: Resource Specifications & Safety</h4>
+<span class="font-code-sm text-code-sm text-primary">FR-024 / Schema §6.3</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-space-xs">
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold" id="drawer-title">
+                  15x Portable Oxygen Flowmeters & Regulators
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" id="drawer-desc">
+                  Biomedical surplus from clinic consolidation. Factory calibrated, sterile sealed packaging intact. Pediatric & adult dual-prong adapter kits included.
+                </p>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold whitespace-nowrap" id="drawer-category">
+                Other (Biomedical)
+              </span>
+</div>
+<!-- Mandatory Safety & Hygiene Disclosure -->
+<div class="p-space-xs rounded bg-surface-container-lowest mt-1 flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] flex-shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col font-label-sm text-label-sm">
+<span class="font-semibold text-on-surface">Mandatory Safety & Hygiene Disclosure (Decree 149/2019)</span>
+<span class="text-on-surface-variant">Attestation confirmed: "Sterile packaging intact, verified by Biomedical Eng. Inspection Sheet #BIO-2024-918."</span>
+</div>
+</div>
+<!-- Custodial Location & Coordinates -->
+<div class="grid grid-cols-2 gap-space-xs pt-1">
+<div class="p-space-xs rounded bg-surface-container-lowest flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Custodial Warehouse Node</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">location_on</span>
+                  Maadi Supply Bay 04, Cairo
+                </span>
+<span class="font-code-sm text-code-sm text-outline">Geo: 30.0124° N, 31.2084° E</span>
+</div>
+<div class="p-space-xs rounded bg-surface-container-lowest flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Availability Window (end > start)</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">14 Nov 2024 → 28 Dec 2024</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">schedule</span> 44 days remaining
+                </span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION B: PROVIDER & CHAIN OF CUSTODY NODE -->
+<section class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<h4 class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Section B: Consignment Node & Trust Score</h4>
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">MoSS Verified</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-sm font-semibold">
+                  د.ل
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-body-md text-body-md text-on-surface font-semibold" id="drawer-provider-name">Dr. Laila El-Mansouri</span>
+<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline">MoSS Civic Node Lic: <strong class="text-on-surface">#892-CAI-2024</strong></span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">99.2%</span>
+<span class="block font-label-sm text-label-sm text-outline">Reliability Ledger</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-space-xs pt-1 font-label-sm text-label-sm text-outline text-center">
+<div class="p-1.5 rounded bg-surface-container-lowest">
+<span class="block font-semibold text-on-surface">34 Lots</span>
+<span>Past Consignments</span>
+</div>
+<div class="p-1.5 rounded bg-surface-container-lowest">
+<span class="block font-semibold text-primary">0 Cancellations</span>
+<span>Dispute Rate: 0.0%</span>
+</div>
+<div class="p-1.5 rounded bg-surface-container-lowest">
+<span class="block font-semibold text-on-surface">1.2h</span>
+<span>Avg Handover Response</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION C: CROSS-ENTITY RELATIONSHIPS (LINKED COLLECTIONS) -->
+<section class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<h4 class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Section C: Bilateral Match Candidates</h4>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Bilateral Pairing Engine</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface font-semibold">3 Active Clinic Requests Fit This Lot:</span>
+<span class="font-code-sm text-code-sm text-outline">SLA Match Score</span>
+</div>
+<!-- Top Match Candidate -->
+<div class="p-space-xs rounded bg-surface-container-lowest flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center font-semibold text-sm">
+                  94%
+                </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Sayeda Zeinab Community Clinic (#REQ-4102)</span>
+<span class="font-label-sm text-label-sm text-outline">Requested: 10-15 O2 Regulators · 6.2 km distance</span>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm hover:bg-primary-container transition-colors" onclick="proposeMatch('RES-MED-8821', 'REQ-4102')" type="button">
+                Pair
+              </button>
+</div>
+<!-- Candidate 2 -->
+<div class="p-space-xs rounded bg-surface-container-lowest flex items-center justify-between gap-space-sm opacity-80">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container-high text-on-surface flex items-center justify-center font-semibold text-sm">
+                  88%
+                </div>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Helwan Charitable Dispensary (#REQ-4088)</span>
+<span class="font-label-sm text-label-sm text-outline">Requested: 8 Regulators · 14.8 km distance</span>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" onclick="proposeMatch('RES-MED-8821', 'REQ-4088')" type="button">
+                Pair
+              </button>
+</div>
+<!-- Moderation flags check -->
+<div class="flex items-center justify-between pt-1 font-label-sm text-label-sm text-outline">
+<span class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[15px]">check_circle</span> 0 Active Reports (Clean Audit Record)
+              </span>
+<a class="text-outline hover:text-on-surface hover:underline" href="#">View Ledger #819,004</a>
+</div>
+</div>
+</section>
+<!-- SECTION D: STRICT STATE TRANSITION MATRIX GATEWAY (§9.2) -->
+<section class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<h4 class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Section D: Finite Lifecycle Control Gateway</h4>
+<span class="font-code-sm text-code-sm text-outline">resourceLifecycleService.js</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between p-space-xs rounded bg-surface-container-lowest">
+<span class="font-label-sm text-label-sm text-outline">Current Finite State:</span>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold" id="gateway-curr-state">available</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline">
+              * Per §9.2 of the architectural plan, arbitrary state overriding is blocked. Only lawful next states according to current status can be enacted.
+            </p>
+<!-- Valid Transitions Buttons Box -->
+<div class="flex flex-col gap-2" id="gateway-transitions">
+<button class="w-full flex items-center justify-between px-space-sm py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm" onclick="openLifecycleModal('RES-MED-8821', 'available')" type="button">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">hub</span>
+                  Transition: Propose Match (available → matched)
+                </span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="w-full flex items-center justify-between px-space-sm py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" onclick="performDirectTransition('RES-MED-8821', 'unavailable')" type="button">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary">pause_circle</span>
+                  Mark Temporarily Unavailable (Provider Request)
+                </span>
+<span class="font-label-sm text-label-sm text-outline">reversible</span>
+</button>
+<button class="w-full flex items-center justify-between px-space-sm py-2 rounded-lg bg-error-container text-on-error-container font-label-md text-label-md hover:bg-opacity-80 transition-colors" onclick="performDirectTransition('RES-MED-8821', 'cancelled')" type="button">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+                  Soft-Archive & Cancel Listing (cancelled)
+                </span>
+<span class="font-label-sm text-label-sm text-error">Status-based</span>
+</button>
+</div>
+<!-- Blocked Invalid Transition Note -->
+<div class="p-space-xs rounded bg-surface-container-highest/60 flex items-start gap-2 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[16px] text-error flex-shrink-0 mt-0.5">lock</span>
+<span><strong>Terminal Protection Active:</strong> States <em>completed</em> and <em>impact_recorded</em> cannot be manually selected. They strictly require cryptographic two-sided handover OTP co-attestation.</span>
+</div>
+</div>
+</section>
+</div>
+</aside>
+</div>
+<!-- STATUTORY COMPLIANCE & MERKLE AUDIT FOOTER STRIP -->
+<footer class="mt-space-lg p-space-md bg-surface-container-lowest rounded-xl shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-outline">
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="flex items-center gap-1.5 text-primary font-semibold">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Egyptian Circular Economy Law 149/2019 Mandatory Audit Protocol</span>
+</div>
+<span>•</span>
+<span>Collection 4 Schema Version: <strong>2.4.0-Mongo7</strong></span>
+<span>•</span>
+<span>Cryptographic Root: <code class="font-code-sm text-code-sm text-on-surface bg-surface-container px-1 py-0.5 rounded">sha256:8f2a...910b</code></span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center gap-1 text-on-surface font-medium">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+        Zero Hard-Deletions Permitted (§12.5)
+      </span>
+<span>Dawwarha Core v2.4</span>
+</div>
+</footer>
+<!-- LIFECYCLE TRANSITION MODAL (GATEWAY ENFORCER) -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden flex items-center justify-center p-space-md" id="lifecycle-modal">
+<div class="bg-surface-container-lowest rounded-2xl shadow-xl max-w-lg w-full p-space-lg flex flex-col gap-space-md border-0">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">alt_route</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Execute Lifecycle Transition</h3>
+<span class="font-label-sm text-label-sm text-outline">Resource Lot: <strong class="text-primary font-code-sm" id="modal-lot-id">#RES-MED-8821</strong></span>
+</div>
+</div>
+<button class="p-1 text-outline hover:text-on-surface rounded-lg" onclick="closeLifecycleModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1.5 font-label-sm text-label-sm">
+<div class="flex items-center justify-between">
+<span class="text-outline">Current Authoritative State:</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-bold" id="modal-curr-state">available</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline">Auditing Operator:</span>
+<span class="text-on-surface font-semibold">Eng. Reham M. (Super Admin)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline">Transition Matrix Rule:</span>
+<span class="text-primary font-code-sm">§9.2 Table-Driven resourceLifecycleService</span>
+</div>
+</div>
+<!-- Transition Selector: Strictly Allowed Target States Only -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="target-state-select">
+          Select Lawful Next Target State:
+        </label>
+<select class="w-full h-11 px-space-sm rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md outline-none focus:ring-2 focus:ring-primary" id="target-state-select">
+<option value="matched">matched — Candidate paired with valid requisition</option>
+<option value="unavailable">unavailable — Soft-quarantine by provider notice</option>
+<option value="cancelled">cancelled — Revocation & terminal soft-archive</option>
+</select>
+<span class="font-label-sm text-label-sm text-outline">Terminal transitions (completed, impact_recorded) require counterpart signature and cannot be forced.</span>
+</div>
+<!-- Mandatory Audit Log Justification -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface font-semibold" for="transition-reason">
+          Mandatory Decree 149/2019 Justification Note:
+        </label>
+<textarea class="w-full p-space-sm rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm outline-none placeholder:text-outline focus:bg-surface-container-lowest" id="transition-reason" placeholder="Enter formal audit reason for this resource state change..." rows="3"></textarea>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-2">
+<button class="px-space-md py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors" onclick="closeLifecycleModal()" type="button">
+          Cancel
+        </button>
+<button class="px-space-lg py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm" onclick="commitLifecycleTransition()" type="button">
+          Commit & Write Merkle Log
+        </button>
+</div>
+</div>
+</div>
+<!-- TOAST NOTIFICATION CONTAINER -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="toast">
+<div class="flex items-center gap-space-sm px-space-md py-3 rounded-xl bg-inverse-surface text-inverse-on-surface shadow-lg font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+<span id="toast-message">Action processed successfully</span>
+</div>
+</div>
+<!-- CLIENT LOGIC & DATASET SIMULATOR -->
+<script>
+    // In-memory resource repository representing Collection 4 and 7 controlled categories
+    const mockResources = {
+      'RES-MED-8821': {
+        id: 'RES-MED-8821',
+        title: '15x Portable Oxygen Flowmeters & Regulators',
+        category: 'Other',
+        categoryDisplay: 'Other (Biomedical Surplus)',
+        status: 'available',
+        providerName: 'Dr. Laila El-Mansouri',
+        providerOrg: 'Al-Bustan Medical Reserve #ORG-CAI-MED-02',
+        quantity: '15 Units (Sterile sealed cartons)',
+        window: '14 Nov 2024 → 28 Dec 2024',
+        location: 'Maadi Central Supply Bay 04, Cairo',
+        coords: '30.0124° N, 31.2084° E',
+        safetyAttestation: 'Sterile packaging intact, verified by Biomedical Eng. Inspection Sheet #BIO-2024-918.',
+        description: 'Biomedical surplus from clinic consolidation. Factory calibrated, sterile sealed packaging intact. Pediatric & adult dual-prong adapter kits included.',
+        flags: 0
+      },
+      'RES-FOO-9012': {
+        id: 'RES-FOO-9012',
+        title: '450kg Rice & Dry Lentils Bulk',
+        category: 'Food',
+        categoryDisplay: 'Food (أغذية تموينية)',
+        status: 'matched',
+        providerName: 'Nile Mills Co-Op',
+        providerOrg: 'Giza Regional Warehouse Node',
+        quantity: '450 kg (Jute dry bags)',
+        window: '01 Nov 2024 → 05 Jan 2025',
+        location: 'Giza South Terminal, Giza',
+        coords: '29.9870° N, 31.2110° E',
+        safetyAttestation: 'MoSS Food Inspection Batch Cert #EGY-FOOD-9901.',
+        description: 'High quality Egyptian long grain rice and brown lentils in sealed 25kg dry sacks.',
+        flags: 0
+      },
+      'RES-OFF-3140': {
+        id: 'RES-OFF-3140',
+        title: '12x Refurbished Thin-Clients',
+        category: 'Office Equipment',
+        categoryDisplay: 'Office Equipment',
+        status: 'in_handover',
+        providerName: 'Smart Cairo Hub',
+        providerOrg: 'Smart Village Digital Hub',
+        quantity: '12 Boxes (Dual Core, 8GB RAM)',
+        window: '10 Nov 2024 → 30 Dec 2024',
+        location: 'Smart Village Logistics Dock, Giza',
+        coords: '30.0710° N, 31.0210° E',
+        safetyAttestation: 'Data wiped under DoD 5220.22-M specification.',
+        description: 'Refurbished low power terminals complete with power supplies and verified working displays.',
+        flags: 0
+      },
+      'RES-FUR-1099': {
+        id: 'RES-FUR-1099',
+        title: '20x Dual Modular School Desks',
+        category: 'Furniture',
+        categoryDisplay: 'Furniture (أثاث ومفروشات)',
+        status: 'impact_recorded',
+        providerName: 'El-Amal Foundation',
+        providerOrg: 'Heliopolis Civic Bay',
+        quantity: '20 Dual Sets',
+        window: '01 Oct 2024 → 12 Nov 2024',
+        location: 'Heliopolis Depot, Cairo',
+        coords: '30.0890° N, 31.3280° E',
+        safetyAttestation: 'Sanded hardwood, electrostatic anti-rust paint.',
+        description: 'Completed redistribution to Al-Noor Primary School. Merkle block #819,002 immutable.',
+        flags: 0
+      },
+      'RES-SCH-4450': {
+        id: 'RES-SCH-4450',
+        title: '80x Geometry Sets & Notebooks',
+        category: 'School Supplies',
+        categoryDisplay: 'School Supplies',
+        status: 'available',
+        providerName: 'Tariq Ramadan',
+        providerOrg: 'Nasr City Citizen Node',
+        quantity: '80 Complete Packs',
+        window: '01 Dec 2024 → 15 Jan 2025',
+        location: 'Nasr City Civic Center, Cairo',
+        coords: '30.0560° N, 31.3410° E',
+        safetyAttestation: 'New factory stationery surplus.',
+        description: 'Unused ruler sets, compasses, protractors and squared graphing exercise books.',
+        flags: 0
+      },
+      'RES-BOK-5501': {
+        id: 'RES-BOK-5501',
+        title: '230x Secondary Science Textbooks',
+        category: 'Books',
+        categoryDisplay: 'Books (كتب ومطبوعات)',
+        status: 'draft',
+        providerName: 'Dar El-Kotob Branch',
+        providerOrg: 'Downtown Cairo Node',
+        quantity: '230 Volumes',
+        window: 'Drafting Phase',
+        location: 'Bab El-Khalq Storage, Cairo',
+        coords: '30.0444° N, 31.2357° E',
+        safetyAttestation: 'Egyptian Ministry of Education curriculum aligned.',
+        description: 'Surplus printed textbooks from academic year 2023/2024 awaiting catalog approval.',
+        flags: 0
+      },
+      'RES-CLO-7721': {
+        id: 'RES-CLO-7721',
+        title: '60x Winter Jackets & Woolens',
+        category: 'Clothing',
+        categoryDisplay: 'Clothing (ملابس وأقمشة)',
+        status: 'published',
+        providerName: 'Misr Spinning Surplus',
+        providerOrg: 'El-Mahalla Outpost',
+        quantity: '60 Pieces',
+        window: '20 Nov 2024 → 10 Feb 2025',
+        location: 'El-Mahalla Logistics Yard',
+        coords: '30.9706° N, 31.1669° E',
+        safetyAttestation: 'Dry cleaned and moisture-barrier packaged.',
+        description: 'Adult heavy thermal winter jackets in varied sizes (M to XXL).',
+        flags: 0
+      },
+      'RES-MED-6610': {
+        id: 'RES-MED-6610',
+        title: 'Expired Dialysis Filter Kits',
+        category: 'Other',
+        categoryDisplay: 'Other (Biomedical)',
+        status: 'unavailable',
+        providerName: 'Delta Warehouse #09',
+        providerOrg: 'Tanta Medical Station',
+        quantity: '18 Units',
+        window: 'INVALID: End < Start',
+        location: 'Tanta Outpost, Gharbia',
+        coords: '30.7865° N, 31.0004° E',
+        safetyAttestation: 'FAILED: Expiry window breach detected by automated validator.',
+        description: 'Automated policy block. Dates failed custom validator availabilityWindow.end > availabilityWindow.start.',
+        flags: 1
+      }
+    };
+
+    // State transition options allowed per current state (§9.2)
+    const validTransitions = {
+      'draft': ['published', 'cancelled'],
+      'published': ['available', 'cancelled'],
+      'available': ['matched', 'unavailable', 'cancelled'],
+      'matched': ['accepted', 'available', 'cancelled'],
+      'accepted': ['in_handover', 'cancelled'],
+      'in_handover': ['completed', 'cancelled'],
+      'completed': ['impact_recorded'],
+      'impact_recorded': [], // Terminal
+      'expired': ['unavailable'],
+      'cancelled': [], // Terminal
+      'unavailable': ['available', 'cancelled']
+    };
+
+    // Toast notification helper
+    function showNotification(text) {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-message');
+      msg.textContent = text;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+
+    // Inspect resource in Side Drawer
+    function inspectResource(resId) {
+      const item = mockResources[resId];
+      if (!item) return;
+
+      document.getElementById('drawer-id').textContent = '#' + item.id;
+      document.getElementById('drawer-title').textContent = item.title;
+      document.getElementById('drawer-desc').textContent = item.description;
+      document.getElementById('drawer-category').textContent = item.categoryDisplay;
+      document.getElementById('drawer-pill-status').textContent = item.status;
+      document.getElementById('drawer-provider-name').textContent = item.providerName;
+      document.getElementById('gateway-curr-state').textContent = item.status;
+
+      // Update gateway buttons based on valid next states
+      updateGatewayTransitions(resId, item.status);
+
+      showNotification('Loaded inspection audit for #' + item.id);
+    }
+
+    // Update the drawer buttons strictly per the transition matrix
+    function updateGatewayTransitions(resId, currentStatus) {
+      const container = document.getElementById('gateway-transitions');
+      container.innerHTML = '';
+
+      const allowed = validTransitions[currentStatus] || [];
+      if (allowed.length === 0) {
+        container.innerHTML = '<div class="p-2 rounded bg-surface-container font-label-sm text-label-sm text-outline text-center">This resource is in an immutable terminal state (' + currentStatus + '). Ledger history is locked.</div>';
+        return;
+      }
+
+      allowed.forEach(target => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'w-full flex items-center justify-between px-space-sm py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors';
+        btn.onclick = () => openLifecycleModal(resId, currentStatus, target);
+
+        let icon = 'arrow_forward';
+        if (target === 'matched') icon = 'hub';
+        if (target === 'available') icon = 'check_circle';
+        if (target === 'unavailable') icon = 'pause_circle';
+        if (target === 'cancelled') icon = 'cancel';
+
+        btn.innerHTML = `
+          <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-primary">${icon}</span>
+            Transition to: <strong>${target}</strong>
+          </span>
+          <span class="font-code-sm text-code-sm text-outline">valid</span>
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    // Modal Handling
+    let activeModalResource = null;
+
+    function openLifecycleModal(resId, currentStatus, defaultTarget) {
+      activeModalResource = resId;
+      document.getElementById('modal-lot-id').textContent = '#' + resId;
+      document.getElementById('modal-curr-state').textContent = currentStatus;
+      
+      const select = document.getElementById('target-state-select');
+      select.innerHTML = '';
+      
+      const allowed = validTransitions[currentStatus] || [];
+      if (allowed.length === 0) {
+        alert('Terminal states cannot be altered per §9.2.');
+        return;
+      }
+
+      allowed.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s;
+        opt.textContent = `${s} — Valid transition from ${currentStatus}`;
+        if (defaultTarget && s === defaultTarget) opt.selected = true;
+        select.appendChild(opt);
+      });
+
+      document.getElementById('lifecycle-modal').classList.remove('hidden');
+    }
+
+    function closeLifecycleModal() {
+      document.getElementById('lifecycle-modal').classList.add('hidden');
+    }
+
+    function commitLifecycleTransition() {
+      const select = document.getElementById('target-state-select');
+      const targetState = select.value;
+      const reason = document.getElementById('transition-reason').value.trim();
+
+      if (!reason) {
+        alert('Decree 149/2019 requires a documented justification note for administrative ledger mutations.');
+        return;
+      }
+
+      if (activeModalResource && mockResources[activeModalResource]) {
+        mockResources[activeModalResource].status = targetState;
+        inspectResource(activeModalResource);
+      }
+
+      closeLifecycleModal();
+      document.getElementById('transition-reason').value = '';
+      showNotification(`Transition committed: #${activeModalResource} is now [${targetState}]. Merkle block #819,005 mined.`);
+    }
+
+    function performDirectTransition(resId, targetState) {
+      if (confirm(`Execute immediate soft-transition of #${resId} to status [${targetState}]?`)) {
+        if (mockResources[resId]) {
+          mockResources[resId].status = targetState;
+          inspectResource(resId);
+          showNotification(`Resource #${resId} updated to ${targetState}. Soft archival registered.`);
+        }
+      }
+    }
+
+    function proposeMatch(resId, reqId) {
+      showNotification(`Proposal dispatched: ${resId} paired with requisition ${reqId}. Awaiting mutual OTP acceptance.`);
+    }
+
+    function collapseDrawer() {
+      const drawer = document.getElementById('inspection-drawer');
+      const table = document.getElementById('table-container');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        table.classList.remove('lg:col-span-12');
+        table.classList.add('lg:col-span-7');
+      } else {
+        drawer.classList.add('hidden');
+        table.classList.remove('lg:col-span-7');
+        table.classList.add('lg:col-span-12');
+      }
+    }
+
+    // QA Simulator presets
+    function setScenario(scen) {
+      // Reset scenario button styles
+      ['btn-scen-std', 'btn-scen-insp', 'btn-scen-flag', 'btn-scen-empty'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.className = 'px-2.5 py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container transition-all';
+        }
+      });
+
+      const drawer = document.getElementById('inspection-drawer');
+      const table = document.getElementById('table-container');
+      const emptyView = document.getElementById('empty-state-view');
+      const tbody = document.getElementById('resource-tbody');
+
+      if (scen === 'standard') {
+        document.getElementById('btn-scen-std').className = 'px-2.5 py-1 rounded font-label-sm text-label-sm bg-primary-container text-on-primary-container font-medium transition-all';
+        drawer.classList.remove('hidden');
+        table.classList.remove('lg:col-span-12');
+        table.classList.add('lg:col-span-7');
+        emptyView.classList.add('hidden');
+        tbody.classList.remove('hidden');
+        resetFilters();
+        inspectResource('RES-MED-8821');
+      } else if (scen === 'inspection') {
+        document.getElementById('btn-scen-insp').className = 'px-2.5 py-1 rounded font-label-sm text-label-sm bg-primary-container text-on-primary-container font-medium transition-all';
+        drawer.classList.remove('hidden');
+        table.classList.remove('lg:col-span-12');
+        table.classList.add('lg:col-span-7');
+        emptyView.classList.add('hidden');
+        tbody.classList.remove('hidden');
+        inspectResource('RES-MED-8821');
+      } else if (scen === 'flagged') {
+        document.getElementById('btn-scen-flag').className = 'px-2.5 py-1 rounded font-label-sm text-label-sm bg-primary-container text-on-primary-container font-medium transition-all';
+        document.getElementById('filter-status').value = 'unavailable';
+        applyFilters();
+        inspectResource('RES-MED-6610');
+      } else if (scen === 'empty') {
+        document.getElementById('btn-scen-empty').className = 'px-2.5 py-1 rounded font-label-sm text-label-sm bg-primary-container text-on-primary-container font-medium transition-all';
+        document.getElementById('resource-search').value = 'NonExistentHash99999';
+        applyFilters();
+      }
+    }
+
+    // Filter Logic
+    function applyFilters() {
+      const search = document.getElementById('resource-search').value.toLowerCase();
+      const cat = document.getElementById('filter-category').value;
+      const status = document.getElementById('filter-status').value;
+
+      let visible = 0;
+      const rows = document.querySelectorAll('#resource-tbody tr');
+
+      rows.forEach(row => {
+        const id = row.id.replace('row-res-', '').toUpperCase();
+        const text = row.textContent.toLowerCase();
+        
+        let matchSearch = !search || text.includes(search);
+        let matchCat = (cat === 'ALL') || text.includes(cat.toLowerCase());
+        let matchStatus = (status === 'ALL') || text.includes(status.toLowerCase());
+
+        if (matchSearch && matchCat && matchStatus) {
+          row.style.display = '';
+          visible++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      document.getElementById('visible-count').textContent = visible;
+      const emptyView = document.getElementById('empty-state-view');
+      const tbody = document.getElementById('resource-tbody');
+
+      if (visible === 0) {
+        emptyView.classList.remove('hidden');
+        tbody.classList.add('hidden');
+      } else {
+        emptyView.classList.add('hidden');
+        tbody.classList.remove('hidden');
+      }
+    }
+
+    function resetFilters() {
+      document.getElementById('resource-search').value = '';
+      document.getElementById('filter-category').value = 'ALL';
+      document.getElementById('filter-status').value = 'ALL';
+      document.getElementById('filter-gov').value = 'ALL';
+      document.getElementById('filter-node').value = 'ALL';
+      applyFilters();
+      showNotification('Filters cleared. Full 318-lot dataset re-indexed.');
+    }
+
+    function exportData() {
+      showNotification('Generating CSV export according to Decree 149/2019 spec... Download initiated.');
+    }
+
+    // RTL Toggle for bilingual parity demonstration
+    let isRTL = false;
+    function toggleRTL() {
+      isRTL = !isRTL;
+      const root = document.getElementById('resources-workspace');
+      const label = document.getElementById('rtl-label');
+      if (isRTL) {
+        root.setAttribute('dir', 'rtl');
+        label.textContent = 'Preview English (LTR)';
+        showNotification('تم تفعيل الواجهة العربية والمحاذاة الموازية (RTL)');
+      } else {
+        root.setAttribute('dir', 'ltr');
+        label.textContent = 'Preview Arabic (RTL)';
+        showNotification('Switched to English interface view (LTR)');
+      }
+    }
+
+    // Initialize initial drawer content
+    window.addEventListener('DOMContentLoaded', () => {
+      inspectResource('RES-MED-8821');
+    });
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-outline-variant/20 py-space-md px-gutter"><div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-outline"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-primary">verified</span><span>Compliant with Arab Republic of Egypt Circular Economy Law & Executive Decree 149/2019</span></div><div>Dawwarha Civic Operations System © 2024. All Ledger Mutations Cryptographically Timestamped.</div></div></footer></div></body></html>

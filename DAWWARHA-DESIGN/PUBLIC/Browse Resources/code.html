@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { margin: 0; padding: 0; } body { overscroll-behavior: none; } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-primary-fixed-variant": "#005143", "on-surface-variant": "#3f4946", "surface-container-high": "#e1eae5", "inverse-surface": "#2a322f", "on-secondary-fixed-variant": "#184f42", "background": "#f2fbf6", "on-background": "#151d1a", "on-error": "#ffffff", "on-primary": "#ffffff", "surface": "#f2fbf6", "on-tertiary-fixed": "#2d1600", "on-secondary-fixed": "#002019", "on-tertiary-fixed-variant": "#6a3b00", "on-tertiary": "#ffffff", "surface-container": "#e7f0eb", "primary-container": "#2f806f", "outline": "#6f7975", "surface-variant": "#dbe5e0", "on-primary-fixed": "#00201a", "surface-container-low": "#edf6f1", "error": "#ba1a1a", "tertiary-container": "#9f672b", "primary-fixed-dim": "#87d5c1", "surface-container-lowest": "#ffffff", "on-error-container": "#93000a", "surface-container-highest": "#dbe5e0", "on-secondary": "#ffffff", "inverse-on-surface": "#eaf3ee", "on-secondary-container": "#396e5f", "inverse-primary": "#87d5c1", "on-surface": "#151d1a", "tertiary-fixed": "#ffdcbf", "error-container": "#ffdad6", "surface-dim": "#d3dcd7", "surface-bright": "#f2fbf6", "outline-variant": "#bec9c4", "secondary-fixed-dim": "#9bd2c0", "secondary": "#33685a", "primary-fixed": "#a3f2dd", "secondary-fixed": "#b6eedc", "on-tertiary-container": "#fffaf8", "surface-tint": "#106a5a", "primary": "#076757", "tertiary": "#834f14", "on-primary-container": "#ebfff7", "tertiary-fixed-dim": "#feb874", "secondary-container": "#b6eedc" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "gutter": "1.5rem", "space-md": "1rem", "margin": "2rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "gutter-mobile": "1rem", "space-xl": "2.5rem", "margin-mobile": "1rem", "space-sm": "0.5rem" }, fontFamily: { "label-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "display-lg": ["Inter"], "headline-sm": ["Inter"], "display-lg-mobile": ["Inter"], "headline-lg": ["Inter"], "body-lg": ["Inter"], "body-sm": ["Inter"], "label-md": ["Inter"], "code-sm": ["Inter"], "headline-md": ["Inter"], "body-md": ["Inter"] }, fontSize: { "label-sm": ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.02em", fontWeight: "500" }], "headline-lg-mobile": ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.01em", fontWeight: "600" }], "display-lg": ["3.5rem", { lineHeight: "4rem", letterSpacing: "-0.02em", fontWeight: "600" }], "headline-sm": ["1.125rem", { lineHeight: "1.5rem", fontWeight: "500" }], "display-lg-mobile": ["2.25rem", { lineHeight: "2.75rem", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-lg": ["2rem", { lineHeight: "2.5rem", letterSpacing: "-0.015em", fontWeight: "600" }], "body-lg": ["1.125rem", { lineHeight: "1.75rem", fontWeight: "400" }], "body-sm": ["0.8125rem", { lineHeight: "1.25rem", fontWeight: "400" }], "label-md": ["0.875rem", { lineHeight: "1.25rem", fontWeight: "500" }], "code-sm": ["0.8125rem", { lineHeight: "1.125rem", fontWeight: "400" }], "headline-md": ["1.25rem", { lineHeight: "1.75rem", letterSpacing: "-0.005em", fontWeight: "600" }], "body-md": ["0.9375rem", { lineHeight: "1.5rem", fontWeight: "400" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant"><div class="h-16 max-w-7xl mx-auto px-6 flex items-center justify-between gap-4"><div class="flex items-center gap-8"><a class="flex items-center gap-3" data-path="browse-resources" href="#"><img alt="Brand logo. - Primary color: #2f806f
+- Font: inter
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XOT7uJUAmNDQ0yopBY1_ogVvlzexeTk-j61J4o-cNjpgjmGQguLZoN0P_TP0nmzZRrw38vUGANTli6INJN2Oqc0v6NbWF53xLg5ftVXuG1vw8fq-8pvPmhXTKQmeZVeQXVP6vJ9WMQ2TV1QkNEwUcYDzWgQkgyDLg955mFHKs0INuQyb2t2w_LpLyruHk-XE0FJZk8LIa75OjwlUv0ou7Lh-pJ7lAZUB3tjPR4fWk9QHHWzpRgq2WsZGov"/><span class="font-headline-md text-headline-sm text-primary tracking-tight font-bold">Dawwarha</span><span class="hidden xl:inline-block px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm border border-outline-variant/40">Civic Exchange</span></a><nav class="hidden lg:flex items-center gap-6" data-active-classes="text-primary border-b-2 border-primary font-semibold"><a aria-current="page" class="py-5 transition-colors text-primary border-b-2 border-primary font-semibold" data-path="browse-resources" href="#">Browse Resources</a><a class="text-on-surface-variant hover:text-on-surface py-5 transition-colors font-label-md text-label-md" data-path="browse-requests" href="#">Browse Requests</a><a class="text-on-surface-variant hover:text-on-surface py-5 transition-colors font-label-md text-label-md" data-path="how-it-works" href="#">How It Works</a><a class="text-on-surface-variant hover:text-on-surface py-5 transition-colors font-label-md text-label-md" data-path="trust-safety" href="#">Trust &amp; Safety</a><a class="text-on-surface-variant hover:text-on-surface py-5 transition-colors font-label-md text-label-md" data-path="about" href="#">About</a></nav></div><div class="flex items-center gap-3"><button aria-label="Toggle Language English or Arabic" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-sm text-label-sm" type="button"><span class="font-medium">EN</span><span class="text-outline">/</span><span class="font-medium font-arabic">العربية</span></button><a class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-secondary font-label-md text-label-md hover:bg-surface-container-low transition-colors" data-path="login" href="#">Log In</a><a class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md shadow-sm hover:bg-primary transition-all active:scale-[0.99]" data-path="offer-surplus" href="#"><span class="material-symbols-outlined text-[18px]">add_circle</span><span>Offer Surplus Resources</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-280px)]"><div class="flex flex-col w-full">
+<!-- Interactive View State Controller Logic -->
+<script>
+    function switchDiscoveryTab(tabName) {
+      const grid = document.getElementById('inventory-results-grid');
+      const emptyState = document.getElementById('inventory-empty-state');
+      const skeletonState = document.getElementById('inventory-skeleton-state');
+      const tabBtns = document.querySelectorAll('.tab-switch-btn');
+
+      tabBtns.forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+        btn.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+      });
+
+      if (tabName === 'all') {
+        grid.classList.remove('hidden');
+        emptyState.classList.add('hidden');
+        skeletonState.classList.add('hidden');
+        document.getElementById('tab-btn-all').classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+        document.getElementById('tab-btn-all').classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+      } else if (tabName === 'empty') {
+        grid.classList.add('hidden');
+        emptyState.classList.remove('hidden');
+        skeletonState.classList.add('hidden');
+        document.getElementById('tab-btn-empty').classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+        document.getElementById('tab-btn-empty').classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+      } else if (tabName === 'loading') {
+        grid.classList.add('hidden');
+        emptyState.classList.add('hidden');
+        skeletonState.classList.remove('hidden');
+        document.getElementById('tab-btn-loading').classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+        document.getElementById('tab-btn-loading').classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+      }
+    }
+
+    function toggleFilterDrawer(open) {
+      const drawer = document.getElementById('mobile-filter-drawer');
+      const backdrop = document.getElementById('filter-drawer-backdrop');
+      if (open) {
+        drawer.classList.remove('translate-y-full');
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+      } else {
+        drawer.classList.add('translate-y-full');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+      }
+    }
+
+    function removeFilter(pillId) {
+      const pill = document.getElementById(pillId);
+      if (pill) pill.remove();
+    }
+
+    function clearSearchInput() {
+      const input = document.getElementById('resource-search-input');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+    }
+  </script>
+<!-- Network Interruption Alert State (Dismissible / Actionable) -->
+<aside aria-label="System Connectivity Banner" class="w-full bg-surface-container-high px-6 py-2.5 flex items-center justify-between">
+<div class="max-w-7xl mx-auto w-full flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-[20px] animate-pulse">cloud_sync</span>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<span class="font-semibold text-on-surface">Audit Ledger Sync:</span>
+<span>Offline updates queued. Live verified batches refreshed 42s ago across Greater Cairo distribution nodes.</span>
+</div>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-lowest transition-colors font-label-sm text-label-sm inline-flex items-center gap-1.5" onclick="this.closest('aside').remove()" type="button">
+<span class="material-symbols-outlined text-[15px]">refresh</span>
+<span>Retry Sync</span>
+</button>
+</div>
+</aside>
+<!-- Main Discovery Container -->
+<section class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 flex flex-col gap-8">
+<!-- Top Meta Breadcrumb & Primary Civic Header -->
+<header class="flex flex-col gap-4">
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-semibold">Browse Resources</span>
+<span class="text-outline-variant">/</span>
+<span class="font-arabic text-on-surface-variant">الموارد المتاحة</span>
+</nav>
+<!-- Headline Layout -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-2">
+<div class="max-w-3xl flex flex-col gap-2.5">
+<div class="flex flex-wrap items-center gap-2.5">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              184 Active Verified Listings
+            </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-[15px] text-primary">verified_user</span>
+              Civic Non-Commercial Protocol
+            </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">
+            Available Community Resources
+            <span class="block text-primary font-headline-md text-headline-md font-medium mt-1 font-arabic">
+              الموارد والفوائض المجتمعية المتاحة للتبادل الأهلي
+            </span>
+</h1>
+<p class="text-on-surface-variant font-body-md text-body-md leading-relaxed">
+            Real-time verified surplus food, learning materials, mobility aids, and inspected refurbished equipment awaiting transparent community custody transfer across Greater Cairo &amp; Giza municipal zones.
+          </p>
+</div>
+<!-- Primary Civic CTAs -->
+<div class="flex flex-wrap items-center gap-3 shrink-0">
+<a class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-on-primary-fixed-variant transition-colors shadow-sm active:scale-[0.99]" href="#">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>Offer Surplus Resource</span>
+</a>
+<a class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors shadow-sm" href="#">
+<span class="material-symbols-outlined text-secondary text-[20px]">handshake</span>
+<span>Browse Community Requests</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Search & Unified Filtration Surface -->
+<div class="bg-surface-container-lowest rounded-xl p-5 sm:p-6 shadow-sm flex flex-col gap-6">
+<!-- Primary Search Input Block -->
+<div class="relative w-full">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant text-[22px] pointer-events-none">search</span>
+<input class="w-full h-12 pl-12 pr-28 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest focus:outline-none transition-all placeholder:text-outline" id="resource-search-input" placeholder="Search surplus by item type, neighborhood (e.g., Maadi, Dokki, Shubra), or certified provider..." type="text" value="Maadi Degla"/>
+<div class="absolute right-3 flex items-center gap-1.5">
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" onclick="clearSearchInput()" title="Clear search" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-code-sm text-code-sm">
+              18 Matches
+            </span>
+</div>
+</div>
+</div>
+<!-- Horizontal Scrollable Category Filter Chips -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Resource Classifications</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant font-arabic">تصنيف المورد</span>
+</div>
+<div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+<button class="shrink-0 px-4 py-2 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm flex items-center gap-2" type="button">
+<span>All Categories</span>
+<span class="px-1.5 py-0.2 bg-on-primary/20 rounded-full font-code-sm text-code-sm">184</span>
+</button>
+<button class="shrink-0 px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-sm text-label-sm flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">restaurant</span>
+<span>Food Surplus &amp; Hot Meals</span>
+<span class="px-1.5 py-0.2 bg-surface-container-high rounded-full font-code-sm text-code-sm">48</span>
+</button>
+<button class="shrink-0 px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-sm text-label-sm flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">backpack</span>
+<span>School &amp; Learning Kits</span>
+<span class="px-1.5 py-0.2 bg-surface-container-high rounded-full font-code-sm text-code-sm">42</span>
+</button>
+<button class="shrink-0 px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-sm text-label-sm flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary-container">laptop_mac</span>
+<span>Refurbished Tech</span>
+<span class="px-1.5 py-0.2 bg-surface-container-high rounded-full font-code-sm text-code-sm">28</span>
+</button>
+<button class="shrink-0 px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-sm text-label-sm flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-tertiary">accessible_forward</span>
+<span>Medical &amp; Mobility Aids</span>
+<span class="px-1.5 py-0.2 bg-surface-container-high rounded-full font-code-sm text-code-sm">24</span>
+</button>
+<button class="shrink-0 px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-sm text-label-sm flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">chair</span>
+<span>Furniture &amp; Desks</span>
+<span class="px-1.5 py-0.2 bg-surface-container-high rounded-full font-code-sm text-code-sm">31</span>
+</button>
+<button class="shrink-0 px-4 py-2 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-sm text-label-sm flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px] text-outline">inventory_2</span>
+<span>Essential Household</span>
+<span class="px-1.5 py-0.2 bg-surface-container-high rounded-full font-code-sm text-code-sm">11</span>
+</button>
+</div>
+</div>
+<!-- Secondary Multi-Tier Filter Controls Bar -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-2">
+<!-- Location Selector & Neighborhood Radius -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface flex items-center justify-between">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">near_me</span>
+              Location / Radius
+            </span>
+<span class="text-outline font-normal">&lt;5 km Zone</span>
+</label>
+<div class="relative">
+<select class="w-full h-10 px-3.5 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm appearance-none focus:bg-surface-container-lowest focus:outline-none transition-colors">
+<option>Cairo: Maadi &amp; Basatin (Active)</option>
+<option>Giza: Dokki &amp; Agouza</option>
+<option>Cairo: Heliopolis &amp; Nasr City</option>
+<option>Cairo: Old Cairo &amp; Fustat</option>
+<option>Cairo: Shubra &amp; Rod El Farag</option>
+<option>All Greater Cairo &amp; Giza</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-[18px] text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Availability Window Selector -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface flex items-center justify-between">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary">schedule</span>
+              Availability Window
+            </span>
+<span class="text-tertiary font-code-sm text-code-sm">Urgent &lt;24h</span>
+</label>
+<div class="relative">
+<select class="w-full h-10 px-3.5 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm appearance-none focus:bg-surface-container-lowest focus:outline-none transition-colors">
+<option>Urgent Dispatch Required (&lt;24h)</option>
+<option>Next 72 Hours Window</option>
+<option>Flexible / Standing Surplus</option>
+<option>All Availability Windows</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-[18px] text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Provider Trust Tier -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface flex items-center justify-between">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+              Provider Type
+            </span>
+<span class="text-outline font-normal">All Verified</span>
+</label>
+<div class="relative">
+<select class="w-full h-10 px-3.5 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm appearance-none focus:bg-surface-container-lowest focus:outline-none transition-colors">
+<option>All Accredited Providers</option>
+<option>Verified Community Kitchens</option>
+<option>Licensed Civil Associations (NGOs)</option>
+<option>Verified Civic Hubs</option>
+<option>Verified Households</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-[18px] text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Sorting Criteria -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface flex items-center justify-between">
+<span class="inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">sort</span>
+              Sorting Order
+            </span>
+<span class="text-outline font-normal">Auto-Prioritized</span>
+</label>
+<div class="relative">
+<select class="w-full h-10 px-3.5 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm appearance-none focus:bg-surface-container-lowest focus:outline-none transition-colors">
+<option>Urgency: Expiring Soonest</option>
+<option>Proximity: Closest First</option>
+<option>Newest Registered</option>
+<option>Quantity: Highest Volume First</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-2.5 text-[18px] text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Active Filter Badges & Quick Reset Strip -->
+<div class="flex flex-wrap items-center justify-between gap-3 pt-3">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-label-sm text-label-sm text-outline">Active Filters:</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-on-surface font-label-sm text-label-sm" id="filter-pill-1">
+<span>Location: Maadi Degla (&lt;5km)</span>
+<button class="hover:text-error transition-colors" onclick="removeFilter('filter-pill-1')" title="Remove filter" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm" id="filter-pill-2">
+<span>Status: Verified Non-Expired</span>
+<button class="hover:text-error transition-colors" onclick="removeFilter('filter-pill-2')" title="Remove filter" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-sm text-label-sm" id="filter-pill-3">
+<span>Thermal Tracking Verified</span>
+<button class="hover:text-error transition-colors" onclick="removeFilter('filter-pill-3')" title="Remove filter" type="button">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="lg:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm" onclick="toggleFilterDrawer(true)" type="button">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+<span>More Filters</span>
+</button>
+<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" type="button">
+<span class="material-symbols-outlined text-[15px]">restart_alt</span>
+<span>Reset All Filters</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Discovery State Demonstrator / Meta Bar -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Showing 1–6 of 184 Available Resources</span>
+<span class="hidden md:inline-block text-outline">|</span>
+<span class="hidden md:inline-flex items-center gap-1 text-outline font-label-sm text-label-sm font-arabic">
+          مُحدث ومؤكد عبر لجان التوزيع الميدانية
+        </span>
+</div>
+<!-- State Switching Controls (Simulating All / Empty / Loading) -->
+<div class="flex items-center gap-1.5 bg-surface-container rounded-lg p-1">
+<button class="tab-switch-btn px-3 py-1 rounded font-label-sm text-label-sm bg-primary text-on-primary shadow-sm transition-colors" id="tab-btn-all" onclick="switchDiscoveryTab('all')">
+          All Active (184)
+        </button>
+<button class="tab-switch-btn px-3 py-1 rounded font-label-sm text-label-sm bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-colors" id="tab-btn-loading" onclick="switchDiscoveryTab('loading')">
+          Loading Skeleton
+        </button>
+<button class="tab-switch-btn px-3 py-1 rounded font-label-sm text-label-sm bg-surface-container-low text-on-surface-variant hover:text-on-surface transition-colors" id="tab-btn-empty" onclick="switchDiscoveryTab('empty')">
+          Empty State
+        </button>
+</div>
+</div>
+<!-- VIEW CONTAINER 1: ACTIVE RESOURCE CARDS GRID -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="inventory-results-grid">
+<!-- CARD 1: Prepared Hot Food Surplus (From User Reference Photo 1) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex flex-col">
+<!-- Card Image & Urgency Pill -->
+<div class="relative w-full h-52 overflow-hidden bg-surface-container">
+<img alt="40 Prepared Hot Rice &amp; Meat Meals stacked in insulated catering containers" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhNowlypJhfjxzY7roVN3hIT80lu0ephhG1JuZTfqZKdHjTilmun1pF5zcphi4ur4qNpVVgTvhDcg9aeA5p2dmWfRNSmyyBqpWpgypSUECNVgBabTLsL68SQteHeelD-ZyT8iN_Uaqc_EffaH2T-IXouuc2DGCTg1zvKebmdk3QrKQ1-CHtVsVELMThfKvG2dKJOL63XdrfOEooZJBxh-4IRauMj75XwK6ZgEYsJVc0zm5LOIlKjQMqQ"/>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[15px]">soup_kitchen</span>
+                Hot Food Surplus
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/95 text-tertiary font-label-sm text-label-sm font-semibold shadow-sm backdrop-blur">
+<span class="material-symbols-outlined text-[15px] animate-spin text-tertiary">timer</span>
+                Expires in 5h 20m
+              </span>
+</div>
+</div>
+<!-- Card Content Body -->
+<div class="p-5 flex flex-col gap-3.5">
+<div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span class="material-symbols-outlined text-primary text-[16px]">location_on</span>
+<span>Maadi Degla, Cairo</span>
+<span class="text-outline">·</span>
+<span class="font-code-sm text-code-sm font-medium">1.4 km away</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">
+                40 Prepared Hot Rice &amp; Meat Meals
+              </h2>
+<p class="font-arabic font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                وجبات طازجة مغلفة ومجهزة بالكامل في حاويات حرارية معقمة
+              </p>
+</div>
+<!-- Quantitative Civic Payload Grid -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-3">
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">BATCH QUANTITY</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">40 Units</span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">PACKING TYPE</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Thermal Insulated</span>
+</div>
+</div>
+<!-- Health & Safety Standard Disclosure -->
+<div class="flex items-start gap-2 bg-secondary-container/40 p-2.5 rounded-lg text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px] shrink-0 text-secondary">verified_user</span>
+<p class="font-body-sm text-body-sm leading-tight">
+                Inspected &amp; sealed per Egyptian Food Safety Authority thermal guidelines. Zero cash exchange protocol.
+              </p>
+</div>
+<!-- Verified Provider Footprint -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-label-sm">
+                  AB
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Al-Bustan Kitchen</span>
+<span class="material-symbols-outlined text-primary text-[16px]" title="Accredited Civic Kitchen">verified</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Verified Community Kitchen · 128 Rescues</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-5 pt-0 flex flex-col gap-2">
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">assignment_turned_in</span>
+<span>Request for Community Distribution</span>
+</button>
+<a class="text-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors py-1" href="#">
+            Inspect Cold-Chain &amp; Custody Details →
+          </a>
+</div>
+</article>
+<!-- CARD 2: School & Learning Kits (From User Reference Photo 2) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex flex-col">
+<!-- Card Image & Urgency Pill -->
+<div class="relative w-full h-52 overflow-hidden bg-surface-container">
+<img alt="25 Heavy-Duty Student Backpacks with Notebooks and Stationery Kits" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2F6884zbZzdtHj81nHFQU_zVvGgY1gxgz28H8cNTSMkUg4NXq5qX3ZnPqbXlngdC_0Ip3R_g78YCzBlsA_dfqUkO8iq27euRCaEI-b9w3M-EjdPLTCPnSvhmCbE_ncKP5sCF-wP8-lG10-6Khw5UX9C3xuW4pe3M17rG1V3SEoSi1uYL1Jk3cRJrdrO9NBLXn6mgYbGPPraZJDDGSfh08uF1L2j0i5wgJoeNIpg8r4tJAYi5DiRiPCQ"/>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[15px]">backpack</span>
+                School Supplies
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/95 text-on-surface-variant font-label-sm text-label-sm font-semibold shadow-sm backdrop-blur">
+<span class="material-symbols-outlined text-[15px] text-secondary">date_range</span>
+                Valid: Next 72 Hours
+              </span>
+</div>
+</div>
+<!-- Card Content Body -->
+<div class="p-5 flex flex-col gap-3.5">
+<div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span class="material-symbols-outlined text-primary text-[16px]">location_on</span>
+<span>Dokki, Giza</span>
+<span class="text-outline">·</span>
+<span class="font-code-sm text-code-sm font-medium">3.2 km away</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">
+                25 Heavy-Duty Backpacks &amp; Stationery Kits
+              </h2>
+<p class="font-arabic font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                حقائب مدرسية جديدة غير مستعملة مع أقلام ودفاتر للعام الدراسي
+              </p>
+</div>
+<!-- Quantitative Civic Payload Grid -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-3">
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">DONATION VOLUME</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">25 Full Kits</span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">TARGET AUDIENCE</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Prep / Primary Ages</span>
+</div>
+</div>
+<!-- Health & Safety Standard Disclosure -->
+<div class="flex items-start gap-2 bg-surface-container p-2.5 rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] shrink-0 text-primary">inventory</span>
+<p class="font-body-sm text-body-sm leading-tight">
+                Item condition pre-verified by Dawwarha community ambassador. Stored in clean dry storage.
+              </p>
+</div>
+<!-- Verified Provider Footprint -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-label-sm">
+                  TM
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Tarek M.</span>
+<span class="material-symbols-outlined text-primary text-[16px]" title="Verified Citizen Donor">verified</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Verified Individual Citizen · 4 Donations</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-5 pt-0 flex flex-col gap-2">
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+<span>Request Handover for Students</span>
+</button>
+<a class="text-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors py-1" href="#">
+            View Inventory Breakdown &amp; Packing List →
+          </a>
+</div>
+</article>
+<!-- CARD 3: Refurbished Tech & Workstations (From User Reference Photo 3) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex flex-col">
+<!-- Card Image & Urgency Pill -->
+<div class="relative w-full h-52 overflow-hidden bg-surface-container">
+<img alt="6 Refurbished Business Laptops with Monitors, Mice, and Keyboard Workstations" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIFh0CiZPX5NrPlWHclD1_YMyTOUN6u1yKzoBg7RlY-YZM9gB6_pWsJbuJxODOKrRpj7IjnROxoJgr6eOnAdtFGWxv8yvuQre214RZbs7Vph4_RYpeJivT1W-uQH-nj2ul8bu8QQUDdhVc5Mn-4Kg0_QAHOy2xdqq9AGo8n6OxBIUMslR9idNx9y_zjRXAgnOwbVrbN8bbdorzQtk3ve8OpU7MeVtbgol_2dPZuLOr2hhKFmb9gv79dQ"/>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[15px]">devices</span>
+                Refurbished Tech
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/95 text-on-surface-variant font-label-sm text-label-sm font-semibold shadow-sm backdrop-blur">
+<span class="material-symbols-outlined text-[15px] text-primary">all_inclusive</span>
+                Standing Allocation
+              </span>
+</div>
+</div>
+<!-- Card Content Body -->
+<div class="p-5 flex flex-col gap-3.5">
+<div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span class="material-symbols-outlined text-primary text-[16px]">location_on</span>
+<span>Heliopolis, Cairo</span>
+<span class="text-outline">·</span>
+<span class="font-code-sm text-code-sm font-medium">4.8 km away</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">
+                6 Refurbished Laptops &amp; Complete Workstations
+              </h2>
+<p class="font-arabic font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                أجهزة حاسوب محمولة تم فحصها وتجهيزها لمراكز التدريب والمختبرات
+              </p>
+</div>
+<!-- Quantitative Civic Payload Grid -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-3">
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">EQUIPMENT COUNT</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">6 Sets</span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">TECH SPEC</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Intel Core i5 / 16GB</span>
+</div>
+</div>
+<!-- Health & Safety Standard Disclosure -->
+<div class="flex items-start gap-2 bg-secondary-container/30 p-2.5 rounded-lg text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px] shrink-0 text-primary">security</span>
+<p class="font-body-sm text-body-sm leading-tight">
+                Data sanitized via NIST 800-88 standards. Fresh Linux/LibreOffice installed with hardware health report.
+              </p>
+</div>
+<!-- Verified Provider Footprint -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-sm">
+                  CT
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Cairo Tech For Good</span>
+<span class="material-symbols-outlined text-primary text-[16px]" title="Accredited NGO Hub">verified</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Accredited Civic Tech Initiative · 410 Devices</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-5 pt-0 flex flex-col gap-2">
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">school</span>
+<span>Request for Educational Lab</span>
+</button>
+<a class="text-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors py-1" href="#">
+            Download Hardware Diagnostic Log →
+          </a>
+</div>
+</article>
+<!-- CARD 4: Community Desks & Ergonomic Setup (From User Reference Photo 4) -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex flex-col">
+<!-- Card Image & Urgency Pill -->
+<div class="relative w-full h-52 overflow-hidden bg-surface-container">
+<img alt="8 Modular Wooden Training Desks and Ergonomic Mesh Chairs in Community Hall" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDidkUE0TPHjznhgNkQKiQpWvo6ovVNrxKVZjcyH99BF6QfBB0-tkxF-xN5tcic2j1-issmmBGRlzNiZsM-OIWiyRiFV77i88eiw_kzEj7VAklxdI0K9jTTVAuRvugq78bFxkWCqJwqSkXnwOq9SUdxSLWR_r3_FM3tCisKeKEQFTWealATdbG4etSN6etNx_5l-vWZDxdt3JWckDb1oqJL6JFN-wGqgCnW_rMySMsp0AvP7ybpjyqFBA"/>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary text-on-tertiary font-label-sm text-label-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[15px]">chair</span>
+                Furniture &amp; Desks
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/95 text-on-surface-variant font-label-sm text-label-sm font-semibold shadow-sm backdrop-blur">
+<span class="material-symbols-outlined text-[15px] text-primary">event_available</span>
+                Pickup: Next 48h
+              </span>
+</div>
+</div>
+<!-- Card Content Body -->
+<div class="p-5 flex flex-col gap-3.5">
+<div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span class="material-symbols-outlined text-primary text-[16px]">location_on</span>
+<span>Nasr City, Cairo</span>
+<span class="text-outline">·</span>
+<span class="font-code-sm text-code-sm font-medium">5.1 km away</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">
+                8 Wooden Ergonomic Desks &amp; Chairs
+              </h2>
+<p class="font-arabic font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                مقاعد ومكاتب خشبية لمراكز التدريب والتعليم المجتمعي
+              </p>
+</div>
+<!-- Quantitative Civic Payload Grid -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-3">
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">CAPACITY</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">8 Stations</span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">DIMENSIONS</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">120x60cm Mod</span>
+</div>
+</div>
+<!-- Health & Safety Standard Disclosure -->
+<div class="flex items-start gap-2 bg-surface-container p-2.5 rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] shrink-0 text-secondary">verified</span>
+<p class="font-body-sm text-body-sm leading-tight">
+                Solid wood, intact joinery. Disassembled for direct flatbed or van community transport.
+              </p>
+</div>
+<!-- Verified Provider Footprint -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant flex items-center justify-center font-bold text-label-sm">
+                  AA
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Al-Amal Training Initiative</span>
+<span class="material-symbols-outlined text-primary text-[16px]" title="Licensed Civil Society Foundation">verified</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Licensed Foundation · Cairo #8832</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-5 pt-0 flex flex-col gap-2">
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">meeting_room</span>
+<span>Request for Community Space</span>
+</button>
+<a class="text-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors py-1" href="#">
+            Arrange Volunteer Transport Match →
+          </a>
+</div>
+</article>
+<!-- CARD 5: Fresh Bakery & Whole Grain Surplus -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex flex-col">
+<!-- Card Image & Urgency Pill -->
+<div class="relative w-full h-52 overflow-hidden bg-surface-container">
+<img alt="60 Fresh Sealed Bakery Packs and Baladi Flatbreads in Crates" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhNowlypJhfjxzY7roVN3hIT80lu0ephhG1JuZTfqZKdHjTilmun1pF5zcphi4ur4qNpVVgTvhDcg9aeA5p2dmWfRNSmyyBqpWpgypSUECNVgBabTLsL68SQteHeelD-ZyT8iN_Uaqc_EffaH2T-IXouuc2DGCTg1zvKebmdk3QrKQ1-CHtVsVELMThfKvG2dKJOL63XdrfOEooZJBxh-4IRauMj75XwK6ZgEYsJVc0zm5LOIlKjQMqQ"/>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[15px]">bakery_dining</span>
+                Fresh Bakery Surplus
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/95 text-tertiary font-label-sm text-label-sm font-semibold shadow-sm backdrop-blur">
+<span class="material-symbols-outlined text-[15px] animate-spin text-tertiary">timer</span>
+                Urgent: Next 3h 45m
+              </span>
+</div>
+</div>
+<!-- Card Content Body -->
+<div class="p-5 flex flex-col gap-3.5">
+<div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span class="material-symbols-outlined text-primary text-[16px]">location_on</span>
+<span>Old Cairo / Fustat</span>
+<span class="text-outline">·</span>
+<span class="font-code-sm text-code-sm font-medium">2.1 km away</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">
+                60 Fresh Bakery Packs &amp; Whole Grain Breads
+              </h2>
+<p class="font-arabic font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                مخبوزات طازجة معبأة في أكياس محكمة الإغلاق لدور الرعاية والملاجئ
+              </p>
+</div>
+<!-- Quantitative Civic Payload Grid -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-3">
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">PACK COUNT</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">60 Sealed Bags</span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">BAKE TIME</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">Today, 06:30 AM</span>
+</div>
+</div>
+<!-- Health & Safety Standard Disclosure -->
+<div class="flex items-start gap-2 bg-secondary-container/40 p-2.5 rounded-lg text-on-secondary-container">
+<span class="material-symbols-outlined text-[18px] shrink-0 text-secondary">verified_user</span>
+<p class="font-body-sm text-body-sm leading-tight">
+                Batch tracked via Egyptian Food Safety Code. Clean handling verification active.
+              </p>
+</div>
+<!-- Verified Provider Footprint -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-label-sm">
+                  AN
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Al-Nour Bakery Hub</span>
+<span class="material-symbols-outlined text-primary text-[16px]" title="Accredited Bakery Node">verified</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Civic Food Partner · 89 Redistributions</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-5 pt-0 flex flex-col gap-2">
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">volunteer_activism</span>
+<span>Request for Shelter Delivery</span>
+</button>
+<a class="text-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors py-1" href="#">
+            Review Allergens &amp; Ingestion Schedule →
+          </a>
+</div>
+</article>
+<!-- CARD 6: Educational Curricula Textbooks -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex flex-col">
+<!-- Card Image & Urgency Pill -->
+<div class="relative w-full h-52 overflow-hidden bg-surface-container">
+<img alt="120 Curated Egyptian National Curriculum Science &amp; Math Textbooks" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2F6884zbZzdtHj81nHFQU_zVvGgY1gxgz28H8cNTSMkUg4NXq5qX3ZnPqbXlngdC_0Ip3R_g78YCzBlsA_dfqUkO8iq27euRCaEI-b9w3M-EjdPLTCPnSvhmCbE_ncKP5sCF-wP8-lG10-6Khw5UX9C3xuW4pe3M17rG1V3SEoSi1uYL1Jk3cRJrdrO9NBLXn6mgYbGPPraZJDDGSfh08uF1L2j0i5wgJoeNIpg8r4tJAYi5DiRiPCQ"/>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-[15px]">menu_book</span>
+                Curriculum Books
+              </span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/95 text-on-surface-variant font-label-sm text-label-sm font-semibold shadow-sm backdrop-blur">
+<span class="material-symbols-outlined text-[15px] text-primary">repeat</span>
+                Standing Stock
+              </span>
+</div>
+</div>
+<!-- Card Content Body -->
+<div class="p-5 flex flex-col gap-3.5">
+<div>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span class="material-symbols-outlined text-primary text-[16px]">location_on</span>
+<span>Shubra, Cairo</span>
+<span class="text-outline">·</span>
+<span class="font-code-sm text-code-sm font-medium">6.4 km away</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-on-surface tracking-tight">
+                120 Science &amp; Math Textbooks (Prep / Primary)
+              </h2>
+<p class="font-arabic font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                كتب دراسية بحالة ممتازة جاهزة لإعادة الاستخدام في مراكز محو الأمية
+              </p>
+</div>
+<!-- Quantitative Civic Payload Grid -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low rounded-lg p-3">
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">VOLUME</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">120 Copies</span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm text-outline">CURRICULUM</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface truncate">MoE Egyptian Syllabus</span>
+</div>
+</div>
+<!-- Health & Safety Standard Disclosure -->
+<div class="flex items-start gap-2 bg-surface-container p-2.5 rounded-lg text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] shrink-0 text-primary">auto_stories</span>
+<p class="font-body-sm text-body-sm leading-tight">
+                Inspected by community library volunteers. Clean, complete, unmarked binding.
+              </p>
+</div>
+<!-- Verified Provider Footprint -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-label-sm">
+                  FG
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Future Generations Library</span>
+<span class="material-symbols-outlined text-primary text-[16px]" title="Accredited NGO">verified</span>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Nonprofit Cultural Entity · 64 Batches</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-5 pt-0 flex flex-col gap-2">
+<button class="w-full py-2.5 px-4 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-on-primary-fixed-variant transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">family_restroom</span>
+<span>Request for Community Students</span>
+</button>
+<a class="text-center font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors py-1" href="#">
+            View Complete Subject Roster →
+          </a>
+</div>
+</article>
+</div>
+<!-- VIEW CONTAINER 2: SKELETON LOADING STATE (Interactive Switch) -->
+<div class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="inventory-skeleton-state">
+<!-- Skeleton 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-4 animate-pulse">
+<div class="w-full h-48 bg-surface-container rounded-lg"></div>
+<div class="flex items-center gap-2">
+<div class="w-24 h-5 bg-surface-container rounded-full"></div>
+<div class="w-20 h-5 bg-surface-container rounded-full"></div>
+</div>
+<div class="w-3/4 h-6 bg-surface-container rounded"></div>
+<div class="w-1/2 h-4 bg-surface-container-low rounded"></div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low p-3 rounded-lg">
+<div class="w-full h-8 bg-surface-container rounded"></div>
+<div class="w-full h-8 bg-surface-container rounded"></div>
+</div>
+<div class="w-full h-10 bg-surface-container rounded-lg mt-2"></div>
+</div>
+<!-- Skeleton 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-4 animate-pulse">
+<div class="w-full h-48 bg-surface-container rounded-lg"></div>
+<div class="flex items-center gap-2">
+<div class="w-24 h-5 bg-surface-container rounded-full"></div>
+<div class="w-20 h-5 bg-surface-container rounded-full"></div>
+</div>
+<div class="w-3/4 h-6 bg-surface-container rounded"></div>
+<div class="w-1/2 h-4 bg-surface-container-low rounded"></div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low p-3 rounded-lg">
+<div class="w-full h-8 bg-surface-container rounded"></div>
+<div class="w-full h-8 bg-surface-container rounded"></div>
+</div>
+<div class="w-full h-10 bg-surface-container rounded-lg mt-2"></div>
+</div>
+<!-- Skeleton 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-4 animate-pulse">
+<div class="w-full h-48 bg-surface-container rounded-lg"></div>
+<div class="flex items-center gap-2">
+<div class="w-24 h-5 bg-surface-container rounded-full"></div>
+<div class="w-20 h-5 bg-surface-container rounded-full"></div>
+</div>
+<div class="w-3/4 h-6 bg-surface-container rounded"></div>
+<div class="w-1/2 h-4 bg-surface-container-low rounded"></div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low p-3 rounded-lg">
+<div class="w-full h-8 bg-surface-container rounded"></div>
+<div class="w-full h-8 bg-surface-container rounded"></div>
+</div>
+<div class="w-full h-10 bg-surface-container rounded-lg mt-2"></div>
+</div>
+</div>
+<!-- VIEW CONTAINER 3: EMPTY DISCOVERY STATE (Interactive Switch) -->
+<div class="hidden bg-surface-container-lowest rounded-xl p-12 shadow-sm flex flex-col items-center justify-center text-center gap-5" id="inventory-empty-state">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[32px] text-outline">search_off</span>
+</div>
+<div class="max-w-md flex flex-col gap-2">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">
+          No resources match these active filters
+        </h3>
+<p class="font-arabic text-primary font-medium text-body-md">
+          لا توجد موارد مطابقة لمعايير البحث الحالية في هذا النطاق الجغرافي
+        </p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+          Try expanding your geographic proximity radius beyond 5km, or uncheck urgent time window restrictions to discover more standing community assets.
+        </p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-2" onclick="switchDiscoveryTab('all')" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Clear All Active Filters</span>
+</button>
+<a class="px-4 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-on-primary-fixed-variant transition-colors flex items-center gap-2 shadow-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Publish a Community Need Request</span>
+</a>
+</div>
+</div>
+<!-- Audited Pagination Interface -->
+<nav aria-label="Inventory Pagination" class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t-0">
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+        Showing <span class="font-semibold text-on-surface">1 to 6</span> of <span class="font-semibold text-on-surface">184 verified surplus items</span> across Greater Cairo
+      </div>
+<div class="flex items-center gap-1.5">
+<button class="w-9 h-9 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high flex items-center justify-center transition-colors disabled:opacity-40" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center justify-center shadow-sm" type="button">
+          1
+        </button>
+<button class="w-9 h-9 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container font-label-sm text-label-sm font-medium flex items-center justify-center transition-colors" type="button">
+          2
+        </button>
+<button class="w-9 h-9 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container font-label-sm text-label-sm font-medium flex items-center justify-center transition-colors" type="button">
+          3
+        </button>
+<span class="px-2 text-outline font-body-sm text-body-sm">...</span>
+<button class="w-9 h-9 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container font-label-sm text-label-sm font-medium flex items-center justify-center transition-colors" type="button">
+          31
+        </button>
+<button class="w-9 h-9 rounded-lg bg-surface-container-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</nav>
+<!-- Civic Trust & Two-Sided Chain of Custody Standard Banner -->
+<div class="bg-surface-container-low rounded-xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary shrink-0 flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[26px]">gavel</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">
+            Dawwarha Physical Verification &amp; Custody Standard
+          </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed max-w-2xl">
+            Every transaction on Dawwarha operates under an audited dual-signature protocol. No money is exchanged. Surplus redistribution is tracked by weight, timestamp, and food safety inspection checklists to ensure direct community nourishment and zero loss.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<a class="px-4 py-2 rounded-lg bg-surface-container-lowest text-secondary hover:bg-surface-container font-label-sm text-label-sm font-semibold transition-colors shadow-sm" href="#">
+          View Protocol Specs
+        </a>
+<a class="px-4 py-2 rounded-lg bg-secondary text-on-secondary hover:bg-on-secondary-fixed-variant font-label-sm text-label-sm font-semibold transition-colors shadow-sm" href="#">
+          Register Community Hub
+        </a>
+</div>
+</div>
+</section>
+<!-- Mobile / Tablet Filter Drawer Simulation Component -->
+<div class="fixed inset-0 bg-on-background/40 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300" id="filter-drawer-backdrop" onclick="toggleFilterDrawer(false)"></div>
+<div class="fixed bottom-0 left-0 right-0 max-h-[85vh] bg-surface-container-lowest rounded-t-2xl z-50 p-6 flex flex-col gap-5 shadow-xl transform translate-y-full transition-transform duration-300 overflow-y-auto" id="mobile-filter-drawer">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">tune</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Refine Inventory Filters</h3>
+</div>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface" onclick="toggleFilterDrawer(false)" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface">Distance Radius</label>
+<div class="flex items-center gap-2">
+<input class="w-full accent-primary" max="25" min="1" type="range" value="5"/>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface shrink-0">5 km</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface">Food Safety Temperature Class</label>
+<div class="flex flex-col gap-1.5">
+<label class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<input checked="" class="accent-primary rounded" type="checkbox"/>
+            Hot-Holding (Inspected &gt; 65°C)
+          </label>
+<label class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<input checked="" class="accent-primary rounded" type="checkbox"/>
+            Chilled / Refrigerated (&lt; 4°C)
+          </label>
+<label class="flex items-center gap-2 font-body-sm text-body-sm text-on-surface">
+<input class="accent-primary rounded" type="checkbox"/>
+            Ambient Dry Goods
+          </label>
+</div>
+</div>
+</div>
+<div class="pt-4 flex items-center gap-3">
+<button class="flex-1 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold shadow-sm" onclick="toggleFilterDrawer(false)" type="button">
+        Apply 18 Matches
+      </button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md" onclick="toggleFilterDrawer(false)" type="button">
+        Cancel
+      </button>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-outline-variant pt-12 pb-8"><div class="max-w-7xl mx-auto px-6"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-10 border-b border-outline-variant"><div class="lg:col-span-2 pr-0 lg:pr-8"><div class="flex items-center gap-2 mb-3"><img alt="Dawwarha" class="h-6 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XOT7uJUAmNDQ0yopBY1_ogVvlzexeTk-j61J4o-cNjpgjmGQguLZoN0P_TP0nmzZRrw38vUGANTli6INJN2Oqc0v6NbWF53xLg5ftVXuG1vw8fq-8pvPmhXTKQmeZVeQXVP6vJ9WMQ2TV1QkNEwUcYDzWgQkgyDLg955mFHKs0INuQyb2t2w_LpLyruHk-XE0FJZk8LIa75OjwlUv0ou7Lh-pJ7lAZUB3tjPR4fWk9QHHWzpRgq2WsZGov"/><span class="font-headline-sm text-headline-sm text-primary font-bold">Dawwarha</span></div><p class="text-on-surface-variant font-body-sm text-body-sm leading-relaxed mb-4">Dawwarha is an open civic infrastructure facilitating transparent community-level resource rescue, verifiable redistribution, and circular logistics. Bridging institutions and grassroots networks with operational certainty.</p><div class="flex items-center gap-2 text-on-surface-variant font-code-sm text-code-sm bg-surface-container-low px-3 py-2 rounded border border-outline-variant"><span class="material-symbols-outlined text-primary text-[16px]">verified</span><span>Audit Protocol ID: DWR-CIVIC-2024.11</span></div></div><div><h3 class="font-label-md text-label-md font-semibold text-on-surface mb-3">Platform</h3><ul class="space-y-2 font-body-sm text-body-sm"><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="browse-resources" href="#">Available Resources</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="browse-requests" href="#">Community Requests</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="offer-surplus" href="#">Register Surplus Batch</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="logistics-routing" href="#">Logistics &amp; Hub Map</a></li></ul></div><div><h3 class="font-label-md text-label-md font-semibold text-on-surface mb-3">Civic Trust &amp; Safety</h3><ul class="space-y-2 font-body-sm text-body-sm"><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="trust-safety" href="#">Chain of Custody Standard</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="food-safety-charter" href="#">Cold-Chain &amp; Food Safety</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="verification-framework" href="#">NGO Verification Criteria</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="incident-reporting" href="#">Report Integrity Variance</a></li></ul></div><div><h3 class="font-label-md text-label-md font-semibold text-on-surface mb-3">Governance</h3><ul class="space-y-2 font-body-sm text-body-sm"><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="about" href="#">Mission &amp; Leadership</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="how-it-works" href="#">Operating Manual</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="impact-ledger" href="#">Audited Impact Ledger</a></li><li><a class="text-on-surface-variant hover:text-primary transition-colors" data-path="privacy-terms" href="#">Civic Data Accord</a></li></ul></div></div><div class="mt-8 pt-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-body-sm text-body-sm text-on-surface-variant"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-tertiary text-[18px]">health_and_safety</span><span>Mandatory Food Safety Notice: All distributed perishables adhere strictly to regional municipal health safety directives and inspected thermal handoffs.</span></div><div class="flex items-center gap-6 shrink-0 font-label-sm text-label-sm"><span>© 2024 Dawwarha Platform. All civic rights reserved.</span><span>Bilingual EN / AR</span></div></div></div></footer></body></html>

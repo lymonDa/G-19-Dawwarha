@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-bright":"#f2fbf6","on-background":"#151d1a","primary-container":"#2f806f","secondary":"#33685a","surface-container-lowest":"#ffffff","on-secondary-fixed-variant":"#184f42","surface-container":"#e7f0eb","on-primary-container":"#ebfff7","inverse-primary":"#87d5c1","on-primary-fixed-variant":"#005143","on-tertiary-container":"#fffaf8","tertiary-fixed":"#ffdcbf","on-secondary-fixed":"#002019","on-error-container":"#93000a","on-secondary-container":"#396e5f","error":"#ba1a1a","secondary-fixed":"#b6eedc","surface-container-highest":"#dbe5e0","on-error":"#ffffff","inverse-on-surface":"#eaf3ee","surface-dim":"#d3dcd7","surface-variant":"#dbe5e0","on-primary":"#ffffff","on-tertiary-fixed":"#2d1600","on-surface-variant":"#3f4946","surface-tint":"#106a5a","tertiary":"#834f14","on-surface":"#151d1a","inverse-surface":"#2a322f","tertiary-container":"#9f672b","secondary-container":"#b6eedc","outline":"#6f7975","surface":"#f2fbf6","error-container":"#ffdad6","secondary-fixed-dim":"#9bd2c0","on-tertiary-fixed-variant":"#6a3b00","primary":"#076757","outline-variant":"#bec9c4","primary-fixed":"#a3f2dd","surface-container-low":"#edf6f1","on-tertiary":"#ffffff","primary-fixed-dim":"#87d5c1","on-secondary":"#ffffff","background":"#f2fbf6","tertiary-fixed-dim":"#feb874","surface-container-high":"#e1eae5","on-primary-fixed":"#00201a"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xs":"0.25rem","gutter-mobile":"1rem","space-xl":"2.5rem","margin-mobile":"1rem","space-sm":"0.5rem","space-lg":"1.5rem","margin":"2rem","gutter":"1.5rem","space-md":"1rem"},fontFamily:{"headline-lg":["Inter"],"label-md":["Inter"],"display-lg-mobile":["Inter"],"headline-md":["Inter"],"headline-lg-mobile":["Inter"],"body-sm":["Inter"],"display-lg":["Inter"],"label-sm":["Inter"],"code-sm":["Inter"],"body-lg":["Inter"],"headline-sm":["Inter"],"body-md":["Inter"]},fontSize:{"headline-lg":["2rem",{lineHeight:"2.5rem",letterSpacing:"-0.015em",fontWeight:"600"}],"label-md":["0.875rem",{lineHeight:"1.25rem",fontWeight:"500"}],"display-lg-mobile":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-md":["1.25rem",{lineHeight:"1.75rem",letterSpacing:"-0.005em",fontWeight:"600"}],"headline-lg-mobile":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.01em",fontWeight:"600"}],"body-sm":["0.8125rem",{lineHeight:"1.25rem",fontWeight:"400"}],"display-lg":["3.5rem",{lineHeight:"4rem",letterSpacing:"-0.02em",fontWeight:"600"}],"label-sm":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}],"code-sm":["0.8125rem",{lineHeight:"1.125rem",fontWeight:"400"}],"body-lg":["1.125rem",{lineHeight:"1.75rem",fontWeight:"400"}],"headline-sm":["1.125rem",{lineHeight:"1.5rem",fontWeight:"500"}],"body-md":["0.9375rem",{lineHeight:"1.5rem",fontWeight:"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface min-h-screen flex flex-col antialiased"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-[1440px] mx-auto px-margin-mobile lg:px-margin flex items-center justify-between"><div class="flex items-center gap-space-md"><img alt="Official Dawwarha Brand Identity Specification Board: showcasing the primary logo lockup in full color, dark reversed mode, 1-color monochrome stencil, app icons, and multi-scale favicon tests (48px, 32px, 24px, 16px) with design tokens and strategic concept rationale." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XU6u3OXR8giCvcuUF6ZhbwocalwoA8GvZg0AX6E9ufD_13Hd2caL1eoTnyWPf4UOiu1puV8VbEQ-kHCMsJccO9Vwzm4doyud3m89yheLrgN_jdWKdDoLpJwJU44eyOmOmJzEiODu9Cl8MnOynlkRuc2ssqYFadU7qpQDKW0vBpdFlXBEpViB4MXPeundiP6k9KLdqBnr_3IDLCl5aO2FWOILucSMnnwvavqZ-gjxSepCIeoYgmFYeUzHYw"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-none">Dawwarha</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">دَوِّرْهَا • Civic Circular Logistics</span></div><div class="hidden sm:flex items-center gap-1.5 ml-space-sm px-2.5 py-0.5 rounded-full bg-surface-container-low"><span class="material-symbols-outlined text-primary text-[14px]">verified_user</span><span class="font-label-sm text-label-sm text-secondary">Secure Civic Gateway</span></div></div><div class="flex items-center gap-space-md"><nav class="flex items-center gap-space-sm" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg"><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="login" href="#">Sign In</a><a aria-current="page" class="px-3 py-1.5 transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="account-recovery" href="#">Recover Access</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="register" href="#">Register Entity</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="support" href="#">Civic Help</a></nav><div class="flex items-center gap-space-xs pl-space-xs"><button aria-label="Switch Language to Arabic" class="px-2 py-1 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button">العربية</button><a class="hidden md:flex items-center gap-1 px-2 py-1 rounded-lg text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" href="#"><span class="material-symbols-outlined text-[16px]">arrow_back</span><span>Platform</span></a></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 flex-1 bg-surface"><div class="flex flex-col w-full">
+<!-- Interactive State & View Simulator Toolbar -->
+<aside aria-label="Simulator Toolbar" class="w-full bg-surface-container-high py-space-sm px-margin-mobile lg:px-margin border-b border-surface-variant">
+<div class="max-w-[1440px] mx-auto flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="flex items-center gap-1 font-code-sm text-code-sm uppercase tracking-wider text-secondary font-semibold mr-space-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">tune</span>
+          Audit Simulator:
+        </span>
+<!-- Mode Select Pills -->
+<div aria-label="Prototype state selector" class="flex items-center gap-1.5 flex-wrap" id="modePillContainer" role="radiogroup">
+<button aria-checked="true" class="sim-btn px-2.5 py-1 rounded text-label-sm font-label-sm transition-all bg-primary text-on-primary" data-mode="p1-form" role="radio" type="button">
+            1. Forgot Password
+          </button>
+<button aria-checked="false" class="sim-btn px-2.5 py-1 rounded text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-variant" data-mode="p1-success" role="radio" type="button">
+            2. Email Sent (Audit Safe)
+          </button>
+<button aria-checked="false" class="sim-btn px-2.5 py-1 rounded text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-variant" data-mode="p1-rate-limit" role="radio" type="button">
+            3. Rate Limit (429)
+          </button>
+<button aria-checked="false" class="sim-btn px-2.5 py-1 rounded text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-variant" data-mode="p1-server-err" role="radio" type="button">
+            4. Server Fault (500)
+          </button>
+<button aria-checked="false" class="sim-btn px-2.5 py-1 rounded text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-variant" data-mode="p2-form" role="radio" type="button">
+            5. Reset Token Form
+          </button>
+<button aria-checked="false" class="sim-btn px-2.5 py-1 rounded text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-variant" data-mode="p2-success" role="radio" type="button">
+            6. Password Updated
+          </button>
+<button aria-checked="false" class="sim-btn px-2.5 py-1 rounded text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-variant" data-mode="p2-expired" role="radio" type="button">
+            7. Expired / Invalid
+          </button>
+</div>
+</div>
+<!-- Locale Switcher -->
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-outline">Locale:</span>
+<div class="inline-flex p-0.5 rounded-lg bg-surface-container-low shadow-sm">
+<button class="px-2.5 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-lowest text-primary font-semibold shadow-xs transition-all" id="btnLocaleEn" type="button">
+            EN (LTR)
+          </button>
+<button class="px-2.5 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-all" id="btnLocaleAr" type="button">
+            العربية (RTL)
+          </button>
+</div>
+</div>
+</div>
+</aside>
+<!-- Route Indicator Header Ribbon -->
+<div class="w-full bg-surface-container-low border-b border-surface-variant/70 py-1.5 px-margin-mobile lg:px-margin">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between text-code-sm font-code-sm">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-outline uppercase tracking-wider font-label-sm">Active Route:</span>
+<code class="text-primary font-semibold px-1.5 py-0.5 rounded bg-surface-container-lowest" id="activeRouteDisplay">/forgot-password</code>
+</div>
+<div class="hidden md:flex items-center gap-space-sm text-outline font-label-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px] text-primary">lock_clock</span> 15-Min TTL Token</span>
+<span class="text-surface-variant">•</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[15px] text-primary">visibility_off</span> Zero Enumeration Protection</span>
+</div>
+</div>
+</div>
+<!-- Main Recovery Experience Canvas -->
+<main class="w-full max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-space-xl flex flex-col items-center justify-center min-h-[640px]" dir="ltr" id="recoveryAppRoot">
+<!-- Central Card Shell (14px radius, border-first, high trust) -->
+<div class="w-full max-w-[490px] bg-surface-container-lowest rounded-[14px] shadow-[0_4px_24px_rgba(22,78,65,0.05)] border border-surface-variant p-6 sm:p-8 transition-all duration-300">
+<!-- Top Brand Lockup / Civic Shield -->
+<div class="flex flex-col items-center text-center mb-space-lg">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center mb-space-sm border border-surface-variant/80 text-primary">
+<span class="material-symbols-outlined text-[28px]" id="headerIcon">lock_reset</span>
+</div>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-container text-secondary mb-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wide" id="domainCategoryBadge">Civic Identity Verification</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface" id="authCardTitle">Forgot your password?</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1.5 max-w-[390px]" id="authCardSubtitle">
+          Enter the email associated with your Dawwarha account and we'll help you get back in.
+        </p>
+</div>
+<!-- STATE 1: Page 01 - Forgot Password Form -->
+<section aria-labelledby="authCardTitle" class="flex flex-col space-y-space-md" id="viewP1Form">
+<!-- Live Alert Banner (Rate limit / Server error) -->
+<div class="hidden p-3 rounded-lg border text-body-sm font-body-sm items-start gap-2.5" id="p1FeedbackBanner" role="alert">
+<span class="material-symbols-outlined text-[18px] shrink-0 mt-0.5" id="p1FeedbackIcon">info</span>
+<div class="flex-1" id="p1FeedbackText"></div>
+</div>
+<form class="space-y-space-md" id="forgotPassForm" novalidate="">
+<div class="flex flex-col space-y-1.5">
+<label class="font-label-md text-label-md text-on-surface flex items-center justify-between" for="recoveryEmail" id="labelEmail">
+<span>Work or volunteer email</span>
+<span class="font-label-sm text-label-sm text-outline">Civic ID</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px] ml-3 rtl:mr-3 rtl:ml-0" id="emailIcon">
+                mail
+              </span>
+<input aria-describedby="emailError emailHelper" aria-invalid="false" autocomplete="email" class="w-full h-11 pl-10 pr-3 rtl:pr-10 rtl:pl-3 bg-surface-container-lowest rounded-lg border border-surface-variant text-body-md font-body-md text-on-surface placeholder:text-outline/70 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors" id="recoveryEmail" name="email" placeholder="representative@municipality.gov" type="email"/>
+</div>
+<!-- Helper text -->
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1" id="emailHelper">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+<span id="helperTextSpan">We will dispatch an authorized one-time security link.</span>
+</p>
+<!-- Error text -->
+<p class="hidden font-body-sm text-body-sm text-error flex items-center gap-1" id="emailError" role="alert">
+<span class="material-symbols-outlined text-[14px]">error</span>
+<span id="emailErrorText">Email is required</span>
+</p>
+</div>
+<!-- Submit CTA -->
+<button class="w-full h-11 bg-primary hover:bg-secondary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm active:scale-[0.99] disabled:opacity-70 cursor-pointer" id="btnSubmitForgot" type="submit">
+<span id="btnSubmitForgotText">Send Reset Link</span>
+<span class="material-symbols-outlined text-[18px] rtl:rotate-180" id="btnForgotArrow">arrow_forward</span>
+<div class="hidden w-4 h-4 rounded-full border-2 border-on-primary border-t-transparent animate-spin" id="btnForgotSpinner"></div>
+</button>
+</form>
+<!-- Back to Sign-in Navigation -->
+<div class="pt-space-xs text-center border-t border-surface-variant/60">
+<a class="inline-flex items-center gap-1.5 font-label-md text-label-md text-primary hover:text-secondary hover:underline transition-colors mt-2" href="#" id="linkBackLogin">
+<span class="material-symbols-outlined text-[16px] rtl:rotate-180">arrow_back</span>
+<span id="linkBackLoginText">Back to Sign In</span>
+</a>
+</div>
+</section>
+<!-- STATE 2: Page 01 - Check Email (Success & Zero-Enumeration Safe) -->
+<section aria-labelledby="authCardTitle" class="hidden flex flex-col items-center text-center space-y-space-md" id="viewP1Success">
+<!-- Envelope Stamp Illustration -->
+<div class="relative my-2">
+<div class="w-16 h-16 rounded-full bg-secondary-container/50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">mark_email_read</span>
+</div>
+<span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low border border-surface-variant/80 text-start w-full space-y-2">
+<div class="flex items-center justify-between text-code-sm font-code-sm text-outline">
+<span class="font-semibold uppercase tracking-wider text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span> Dispatch Record
+            </span>
+<span class="text-label-sm">Exp: 15 min</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="safeNoticeDetail">
+            If an active verified partner or volunteer profile matches <strong class="text-on-surface font-semibold" id="dispatchedEmailPlaceholder">user@domain.org</strong>, instructions to reset access are on the way.
+          </p>
+<div class="flex items-center gap-1.5 pt-1 text-label-sm font-label-sm text-secondary">
+<span class="material-symbols-outlined text-[15px]">lock_person</span>
+<span id="enumBadgeText">Protected against account enumeration.</span>
+</div>
+</div>
+<div class="flex flex-col w-full gap-2 pt-2">
+<button class="w-full h-11 bg-primary hover:bg-secondary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 transition-all" id="btnReturnLoginFromSuccess" type="button">
+<span id="btnReturnLoginText">Return to Sign In</span>
+</button>
+<button class="w-full h-10 bg-transparent hover:bg-surface-container text-primary font-label-md text-label-md rounded-lg flex items-center justify-center transition-colors" id="btnTryAnotherEmail" type="button">
+<span id="btnTryAnotherText">Try another email address</span>
+</button>
+</div>
+</section>
+<!-- STATE 3: Page 02 - Reset Password Form (/reset-password/:token) -->
+<section aria-labelledby="authCardTitle" class="hidden flex flex-col space-y-space-md" id="viewP2Form">
+<!-- Security Token Context -->
+<div class="p-3 rounded-lg bg-surface-container-low border border-surface-variant/70 flex items-center justify-between text-code-sm font-code-sm">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary">vpn_key</span>
+<span>Auth Token:</span>
+<span class="text-on-surface font-semibold">tk_••••••••89d2</span>
+</div>
+<span class="text-secondary font-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Valid
+          </span>
+</div>
+<form class="space-y-space-md" id="resetPassForm" novalidate="">
+<!-- New Password Input -->
+<div class="flex flex-col space-y-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="newPasswordInput" id="lblNewPass">
+              New Password
+            </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px] ml-3 rtl:mr-3 rtl:ml-0">
+                password
+              </span>
+<input aria-describedby="passChecklist" autocomplete="new-password" class="w-full h-11 pl-10 pr-10 rtl:pr-10 rtl:pl-10 bg-surface-container-lowest rounded-lg border border-surface-variant text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors" id="newPasswordInput" name="newPassword" placeholder="••••••••••••" type="password"/>
+<button aria-label="Toggle password visibility" class="absolute top-1/2 -translate-y-1/2 right-2.5 rtl:right-auto rtl:left-2.5 p-1 text-outline hover:text-on-surface rounded" id="btnToggleNewPass" type="button">
+<span class="material-symbols-outlined text-[20px]" id="eyeNewPass">visibility</span>
+</button>
+</div>
+</div>
+<!-- Confirm Password Input -->
+<div class="flex flex-col space-y-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="confirmPasswordInput" id="lblConfirmPass">
+              Confirm New Password
+            </label>
+<div class="relative">
+<span class="material-symbols-outlined absolute top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[20px] ml-3 rtl:mr-3 rtl:ml-0">
+                lock_clock
+              </span>
+<input autocomplete="new-password" class="w-full h-11 pl-10 pr-10 rtl:pr-10 rtl:pl-10 bg-surface-container-lowest rounded-lg border border-surface-variant text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors" id="confirmPasswordInput" name="confirmPassword" placeholder="••••••••••••" type="password"/>
+<button aria-label="Toggle confirm password visibility" class="absolute top-1/2 -translate-y-1/2 right-2.5 rtl:right-auto rtl:left-2.5 p-1 text-outline hover:text-on-surface rounded" id="btnToggleConfirmPass" type="button">
+<span class="material-symbols-outlined text-[20px]" id="eyeConfirmPass">visibility</span>
+</button>
+</div>
+</div>
+<!-- Real-Time Password Policy Checklist (WCAG 2.2 compliant: icons + text) -->
+<div aria-live="polite" class="p-3.5 rounded-lg bg-surface-container-low/70 border border-surface-variant/80 space-y-2" id="passChecklist">
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider text-secondary block mb-1" id="lblChecklistTitle">
+              Password Requirements
+            </span>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-body-sm font-body-sm">
+<!-- Requirement 1: 8+ chars -->
+<div class="flex items-center gap-1.5 text-outline transition-colors" id="reqLength">
+<span class="material-symbols-outlined text-[16px] text-outline" id="reqLengthIcon">radio_button_unchecked</span>
+<span id="reqLengthText">8+ characters</span>
+</div>
+<!-- Requirement 2: Contains number -->
+<div class="flex items-center gap-1.5 text-outline transition-colors" id="reqNumber">
+<span class="material-symbols-outlined text-[16px] text-outline" id="reqNumberIcon">radio_button_unchecked</span>
+<span id="reqNumberText">At least 1 number</span>
+</div>
+<!-- Requirement 3: Mixed case / symbols -->
+<div class="flex items-center gap-1.5 text-outline transition-colors" id="reqMixed">
+<span class="material-symbols-outlined text-[16px] text-outline" id="reqMixedIcon">radio_button_unchecked</span>
+<span id="reqMixedText">Mixed case &amp; symbols</span>
+</div>
+<!-- Requirement 4: Passwords match -->
+<div class="flex items-center gap-1.5 text-outline transition-colors" id="reqMatch">
+<span class="material-symbols-outlined text-[16px] text-outline" id="reqMatchIcon">radio_button_unchecked</span>
+<span id="reqMatchText">Passwords match</span>
+</div>
+</div>
+</div>
+<!-- Submit CTA -->
+<button class="w-full h-11 bg-primary hover:bg-secondary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer" disabled="" id="btnSubmitReset" type="submit">
+<span id="btnSubmitResetText">Update Password</span>
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<div class="hidden w-4 h-4 rounded-full border-2 border-on-primary border-t-transparent animate-spin" id="btnResetSpinner"></div>
+</button>
+</form>
+</section>
+<!-- STATE 4: Page 02 - Success Confirmation -->
+<section aria-labelledby="authCardTitle" class="hidden flex flex-col items-center text-center space-y-space-md" id="viewP2Success">
+<div class="relative my-2">
+<div class="w-16 h-16 rounded-full bg-secondary-container/60 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[34px]">task_alt</span>
+</div>
+<span class="w-2.5 h-2.5 rounded-full bg-primary absolute top-0 right-1"></span>
+</div>
+<div class="p-4 rounded-lg bg-surface-container-low border border-surface-variant/80 text-start w-full space-y-1.5">
+<div class="flex items-center gap-2 text-label-md font-label-md text-on-surface font-semibold">
+<span class="material-symbols-outlined text-[18px] text-primary">check_circle</span>
+<span id="p2SuccessBoxTitle">Identity Verified &amp; Key Revoked</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="p2SuccessBoxBody">
+            All previous authenticated sessions and temporary reset tokens have been invalidated for municipal security compliance.
+          </p>
+</div>
+<button class="w-full h-11 bg-primary hover:bg-secondary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 transition-all" id="btnFinalSignIn" type="button">
+<span id="btnFinalSignInText">Sign in to Dawwarha Platform</span>
+<span class="material-symbols-outlined text-[18px] rtl:rotate-180">login</span>
+</button>
+</section>
+<!-- STATE 5: Page 02 - Invalid / Expired Token -->
+<section aria-labelledby="authCardTitle" class="hidden flex flex-col items-center text-center space-y-space-md" id="viewP2Expired">
+<div class="relative my-2">
+<div class="w-16 h-16 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[32px]">link_off</span>
+</div>
+</div>
+<div class="p-4 rounded-lg bg-error-container/40 border border-error/20 text-start w-full space-y-2">
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-on-error-container font-semibold">
+<span class="material-symbols-outlined text-[18px] text-error">warning</span>
+<span id="p2ExpiredBoxTitle">Token Lifetime Exceeded</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="p2ExpiredBoxBody">
+            For security reasons, Dawwarha password reset links expire after 15 minutes or once used. The security token has been removed from cache.
+          </p>
+<div class="font-code-sm text-code-sm text-outline pt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">terminal</span>
+<span>STATUS: ERR_AUTH_TOKEN_EXPIRED</span>
+</div>
+</div>
+<div class="flex flex-col w-full gap-2 pt-2">
+<button class="w-full h-11 bg-primary hover:bg-secondary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 transition-all" id="btnRequestNewLink" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span id="btnRequestNewText">Request New Link</span>
+</button>
+<button class="w-full h-10 bg-transparent hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md rounded-lg flex items-center justify-center transition-colors" id="btnBackToLoginFromExpired" type="button">
+<span id="btnBackLoginExpiredText">Back to Sign In</span>
+</button>
+</div>
+</section>
+<!-- Trust Footer Inside Card -->
+<div class="mt-space-lg pt-space-sm border-t border-surface-variant/50 flex items-center justify-between text-label-sm text-outline">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">policy</span>
+<span>Zero-Waste Civic Gateway</span>
+</span>
+<span>v2.4.0 (Angular Core)</span>
+</div>
+</div>
+</main>
+<!-- Technical Specification & Contract Isolation Panel for Angular Engineers -->
+<section class="w-full bg-surface-container-lowest border-t border-surface-variant py-space-xl px-margin-mobile lg:px-margin mt-space-lg">
+<div class="max-w-[1440px] mx-auto space-y-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-sm border-b border-surface-variant">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container text-label-sm font-code-sm uppercase font-semibold">Engineering Contract</span>
+<span class="font-code-sm text-code-sm text-outline">v2-spec-auth-recovery</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-1">Angular Security Architecture &amp; REST Contract Isolation</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Specification for frontend state managers and backend engineers bridging the recovery service to existing stateless JWT infrastructure.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Verified Zero-Enumeration Boundary</span>
+</div>
+</div>
+<!-- Architecture Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Pillar 1: Backend MVP Status -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-surface-variant space-y-3">
+<div class="flex items-center gap-2 text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined">dataset</span>
+<h3>MVP Integration State</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Dawwarha’s current production cluster manages sessions via stateless Bearer JWTs (<code class="text-primary font-code-sm">/auth/login</code> and <code class="text-primary font-code-sm">/auth/register</code>). Recovery runs in complete endpoint isolation without mutating standard refresh token schemas.
+          </p>
+<div class="p-2.5 rounded bg-surface-container-lowest border border-surface-variant/70 text-code-sm font-code-sm text-outline">
+<div class="text-secondary font-semibold">Active Auth Stack:</div>
+            • Stateless HS256 Token<br/>
+            • Role: Municipal Inspector / Org<br/>
+            • Redis TTL ephemeral token cache
+          </div>
+</div>
+<!-- Pillar 2: Contract Specifications -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-surface-variant space-y-3">
+<div class="flex items-center gap-2 text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined">api</span>
+<h3>Proposed REST Contracts</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Deterministic endpoints returning standard HTTP response codes and sanitizing stack traces.
+          </p>
+<div class="space-y-2">
+<div class="p-2 rounded bg-surface-container-lowest border border-surface-variant/70 text-code-sm font-code-sm">
+<span class="text-primary font-bold">POST</span> <span class="text-on-surface font-semibold">/api/auth/forgot-password</span>
+<div class="text-outline text-[11px] mt-1">Payload: { email: string }</div>
+<div class="text-secondary text-[11px]">Returns: 200 OK (Always generic message)</div>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest border border-surface-variant/70 text-code-sm font-code-sm">
+<span class="text-primary font-bold">POST</span> <span class="text-on-surface font-semibold">/api/auth/reset-password</span>
+<div class="text-outline text-[11px] mt-1">Payload: { token: string, password: string }</div>
+<div class="text-secondary text-[11px]">Returns: 200 OK | 400 Bad | 410 Expired</div>
+</div>
+</div>
+</div>
+<!-- Pillar 3: Frontend Security Rules -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-surface-variant space-y-3">
+<div class="flex items-center gap-2 text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined">security</span>
+<h3>Frontend Defense Rules</h3>
+</div>
+<ul class="space-y-2 font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-start gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check</span>
+<span><strong>Zero Account Enumeration:</strong> The UI returns identical success messaging whether an email is registered or unlisted.</span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check</span>
+<span><strong>No Token Persistence:</strong> The reset token is held only in memory/route param; never written to <code class="font-code-sm text-primary">localStorage</code>.</span>
+</li>
+<li class="flex items-start gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">check</span>
+<span><strong>WCAG 2.2 Dual Coding:</strong> Password criteria strictly communicate state via icons + text, preventing color-only confusion.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  (function() {
+    // Current Prototype State
+    const state = {
+      mode: 'p1-form', // p1-form, p1-success, p1-rate-limit, p1-server-err, p2-form, p2-success, p2-expired
+      locale: 'en',    // 'en' or 'ar'
+      lastEmailEntered: 'civic.officer@cairo.gov.eg'
+    };
+
+    // Locale Dictionary
+    const i18n = {
+      en: {
+        domainCategory: "Civic Identity Verification",
+        titles: {
+          'p1-form': "Forgot your password?",
+          'p1-rate-limit': "Forgot your password?",
+          'p1-server-err': "Forgot your password?",
+          'p1-success': "Check your email",
+          'p2-form': "Create a new password",
+          'p2-success': "Password updated",
+          'p2-expired': "This reset link is no longer valid"
+        },
+        subtitles: {
+          'p1-form': "Enter the email associated with your Dawwarha account and we'll help you get back in.",
+          'p1-rate-limit': "Enter the email associated with your Dawwarha account and we'll help you get back in.",
+          'p1-server-err': "Enter the email associated with your Dawwarha account and we'll help you get back in.",
+          'p1-success': "If an account is associated with this email, you'll receive instructions to reset your password.",
+          'p2-form': "Choose a strong password you haven't used before.",
+          'p2-success': "Your password has been changed successfully. You can now sign in with your new credentials.",
+          'p2-expired': "Request a new password reset link to continue accessing the Dawwarha portal."
+        },
+        icons: {
+          'p1-form': 'lock_reset',
+          'p1-rate-limit': 'lock_clock',
+          'p1-server-err': 'cloud_off',
+          'p1-success': 'mark_email_read',
+          'p2-form': 'password',
+          'p2-success': 'task_alt',
+          'p2-expired': 'link_off'
+        },
+        routes: {
+          'p1': '/forgot-password',
+          'p2': '/reset-password/tk_e4198fa0'
+        },
+        labels: {
+          email: "Work or volunteer email",
+          emailPlaceholder: "representative@municipality.gov",
+          helperText: "We will dispatch an authorized one-time security link.",
+          btnSubmitForgot: "Send Reset Link",
+          btnSubmitForgotLoading: "Sending reset link...",
+          linkBackLogin: "Back to Sign In",
+          enumNotice: "Protected against account enumeration.",
+          btnReturnLogin: "Return to Sign In",
+          btnTryAnother: "Try another email address",
+          lblNewPass: "New Password",
+          lblConfirmPass: "Confirm New Password",
+          lblChecklist: "Password Requirements",
+          reqLength: "8+ characters",
+          reqNumber: "At least 1 number",
+          reqMixed: "Mixed case & symbols",
+          reqMatch: "Passwords match",
+          btnSubmitReset: "Update Password",
+          btnSubmitResetLoading: "Updating password...",
+          btnFinalSignIn: "Sign in to Dawwarha Platform",
+          btnRequestNew: "Request New Link",
+          rateLimitMsg: "Too many requests. Please wait a moment and try again.",
+          serverErrMsg: "We couldn't process your request right now. Municipal ledger sync in progress."
+        }
+      },
+      ar: {
+        domainCategory: "التحقق من الهوية المدنية",
+        titles: {
+          'p1-form': "نسيت كلمة المرور؟",
+          'p1-rate-limit': "نسيت كلمة المرور؟",
+          'p1-server-err': "نسيت كلمة المرور؟",
+          'p1-success': "تحقق من بريدك الإلكتروني",
+          'p2-form': "تعيين كلمة مرور جديدة",
+          'p2-success': "تم تحديث كلمة المرور بنجاح",
+          'p2-expired': "هذا الرابط لم يعد صالحاً"
+        },
+        subtitles: {
+          'p1-form': "أدخل البريد الإلكتروني المرتبط بحسابك على دَوَّرها وسنرسل لك رابط استعادة الوصول.",
+          'p1-rate-limit': "أدخل البريد الإلكتروني المرتبط بحسابك على دَوَّرها وسنرسل لك رابط استعادة الوصول.",
+          'p1-server-err': "أدخل البريد الإلكتروني المرتبط بحسابك على دَوَّرها وسنرسل لك رابط استعادة الوصول.",
+          'p1-success': "إذا كان هناك حساب مرتبط بهذا البريد، فستتلقى تعليمات إعادة تعيين كلمة المرور فوراً.",
+          'p2-form': "اختر كلمة مرور قوية لم يسبق لك استخدامها في المنظومة.",
+          'p2-success': "تم تغيير كلمة المرور بنجاح. يمكنك الآن تسجيل الدخول باستخدام بيانات الاعتماد الجديدة.",
+          'p2-expired': "انتهت صلاحية هذا الرابط الأمني. يرجى طلب رابط جديد للمتابعة."
+        },
+        icons: {
+          'p1-form': 'lock_reset',
+          'p1-rate-limit': 'lock_clock',
+          'p1-server-err': 'cloud_off',
+          'p1-success': 'mark_email_read',
+          'p2-form': 'password',
+          'p2-success': 'task_alt',
+          'p2-expired': 'link_off'
+        },
+        routes: {
+          'p1': '/forgot-password',
+          'p2': '/reset-password/tk_e4198fa0'
+        },
+        labels: {
+          email: "البريد الإلكتروني للعمل أو التطوع",
+          emailPlaceholder: "user@dawwarha.gov.eg",
+          helperText: "سنقوم بإرسال رابط أمني مخصص وصالح لمرة واحدة.",
+          btnSubmitForgot: "إرسال رابط إعادة التعيين",
+          btnSubmitForgotLoading: "جاري الإرسال...",
+          linkBackLogin: "العودة إلى تسجيل الدخول",
+          enumNotice: "محمي بالكامل ضد هجمات استقصاء الحسابات.",
+          btnReturnLogin: "الرجوع لتسجيل الدخول",
+          btnTryAnother: "تجربة بريد إلكتروني آخر",
+          lblNewPass: "كلمة المرور الجديدة",
+          lblConfirmPass: "تأكيد كلمة المرور الجديدة",
+          lblChecklist: "متطلبات كلمة المرور",
+          reqLength: "8 أحرف على الأقل",
+          reqNumber: "رقم واحد على الأقل",
+          reqMixed: "أحرف كبيرة وصغيرة ورموز",
+          reqMatch: "تطابق كلمتي المرور",
+          btnSubmitReset: "تحديث كلمة المرور",
+          btnSubmitResetLoading: "جاري التحديث...",
+          btnFinalSignIn: "تسجيل الدخول إلى منصة دوّرها",
+          btnRequestNew: "طلب رابط جديد",
+          rateLimitMsg: "تم تجاوز عدد المحاولات المسموح بها. يرجى الانتظار قليلاً ثم المحاولة مجدداً.",
+          serverErrMsg: "تعذر معالجة طلبك حالياً. يجري التحقق ومزامنة سجلات البنية البلدية."
+        }
+      }
+    };
+
+    // DOM Elements
+    const root = document.getElementById('recoveryAppRoot');
+    const authCardTitle = document.getElementById('authCardTitle');
+    const authCardSubtitle = document.getElementById('authCardSubtitle');
+    const headerIcon = document.getElementById('headerIcon');
+    const domainCategoryBadge = document.getElementById('domainCategoryBadge');
+    const activeRouteDisplay = document.getElementById('activeRouteDisplay');
+
+    // Views
+    const viewP1Form = document.getElementById('viewP1Form');
+    const viewP1Success = document.getElementById('viewP1Success');
+    const viewP2Form = document.getElementById('viewP2Form');
+    const viewP2Success = document.getElementById('viewP2Success');
+    const viewP2Expired = document.getElementById('viewP2Expired');
+    const p1FeedbackBanner = document.getElementById('p1FeedbackBanner');
+    const p1FeedbackIcon = document.getElementById('p1FeedbackIcon');
+    const p1FeedbackText = document.getElementById('p1FeedbackText');
+
+    // Inputs & Forms
+    const forgotPassForm = document.getElementById('forgotPassForm');
+    const recoveryEmail = document.getElementById('recoveryEmail');
+    const emailError = document.getElementById('emailError');
+    const emailErrorText = document.getElementById('emailErrorText');
+    const btnSubmitForgot = document.getElementById('btnSubmitForgot');
+    const btnSubmitForgotText = document.getElementById('btnSubmitForgotText');
+    const btnForgotSpinner = document.getElementById('btnForgotSpinner');
+    const btnForgotArrow = document.getElementById('btnForgotArrow');
+
+    // Page 2 Inputs
+    const resetPassForm = document.getElementById('resetPassForm');
+    const newPasswordInput = document.getElementById('newPasswordInput');
+    const confirmPasswordInput = document.getElementById('confirmPasswordInput');
+    const btnToggleNewPass = document.getElementById('btnToggleNewPass');
+    const btnToggleConfirmPass = document.getElementById('btnToggleConfirmPass');
+    const eyeNewPass = document.getElementById('eyeNewPass');
+    const eyeConfirmPass = document.getElementById('eyeConfirmPass');
+    const btnSubmitReset = document.getElementById('btnSubmitReset');
+    const btnSubmitResetText = document.getElementById('btnSubmitResetText');
+    const btnResetSpinner = document.getElementById('btnResetSpinner');
+
+    // Password Criteria Checklist items
+    const reqLength = document.getElementById('reqLength');
+    const reqLengthIcon = document.getElementById('reqLengthIcon');
+    const reqNumber = document.getElementById('reqNumber');
+    const reqNumberIcon = document.getElementById('reqNumberIcon');
+    const reqMixed = document.getElementById('reqMixed');
+    const reqMixedIcon = document.getElementById('reqMixedIcon');
+    const reqMatch = document.getElementById('reqMatch');
+    const reqMatchIcon = document.getElementById('reqMatchIcon');
+
+    // State Application
+    function renderState() {
+      const dict = i18n[state.locale];
+      const isArabic = state.locale === 'ar';
+
+      // Set Directionality
+      root.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
+      document.body.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
+
+      // Update Titles and Icons
+      authCardTitle.textContent = dict.titles[state.mode] || dict.titles['p1-form'];
+      authCardSubtitle.textContent = dict.subtitles[state.mode] || dict.subtitles['p1-form'];
+      headerIcon.textContent = dict.icons[state.mode] || 'lock_reset';
+      domainCategoryBadge.textContent = dict.domainCategory;
+
+      // Update Route text
+      const isPage2 = state.mode.startsWith('p2');
+      activeRouteDisplay.textContent = isPage2 ? dict.routes.p2 : dict.routes.p1;
+
+      // Reset feedback banner
+      p1FeedbackBanner.classList.add('hidden');
+      p1FeedbackBanner.classList.remove('bg-warning/10', 'text-warning', 'border-warning/30', 'bg-error-container/40', 'text-error', 'border-error/20');
+
+      // Hide all view containers
+      [viewP1Form, viewP1Success, viewP2Form, viewP2Success, viewP2Expired].forEach(el => el.classList.add('hidden'));
+
+      // View Routing
+      if (state.mode === 'p1-form') {
+        viewP1Form.classList.remove('hidden');
+      } else if (state.mode === 'p1-rate-limit') {
+        viewP1Form.classList.remove('hidden');
+        p1FeedbackBanner.classList.remove('hidden');
+        p1FeedbackBanner.classList.add('bg-warning/10', 'text-on-surface', 'border-warning/40');
+        p1FeedbackIcon.textContent = 'speed';
+        p1FeedbackIcon.className = "material-symbols-outlined text-[18px] shrink-0 mt-0.5 text-warning";
+        p1FeedbackText.innerHTML = `<strong>429 Rate Limited:</strong> ${dict.labels.rateLimitMsg}`;
+      } else if (state.mode === 'p1-server-err') {
+        viewP1Form.classList.remove('hidden');
+        p1FeedbackBanner.classList.remove('hidden');
+        p1FeedbackBanner.classList.add('bg-error-container/30', 'text-on-surface', 'border-error/30');
+        p1FeedbackIcon.textContent = 'report';
+        p1FeedbackIcon.className = "material-symbols-outlined text-[18px] shrink-0 mt-0.5 text-error";
+        p1FeedbackText.innerHTML = `<strong>500 Service Error:</strong> ${dict.labels.serverErrMsg}`;
+      } else if (state.mode === 'p1-success') {
+        viewP1Success.classList.remove('hidden');
+        const mailHolder = document.getElementById('dispatchedEmailPlaceholder');
+        if (mailHolder) mailHolder.textContent = state.lastEmailEntered || 'representative@dawwarha.org';
+      } else if (state.mode === 'p2-form') {
+        viewP2Form.classList.remove('hidden');
+      } else if (state.mode === 'p2-success') {
+        viewP2Success.classList.remove('hidden');
+      } else if (state.mode === 'p2-expired') {
+        viewP2Expired.classList.remove('hidden');
+      }
+
+      // Update All Labels and Button Texts for current locale
+      applyLocalizationLabels(dict);
+
+      // Update Simulator Pill Active Styling
+      document.querySelectorAll('#modePillContainer .sim-btn').forEach(btn => {
+        const active = btn.getAttribute('data-mode') === state.mode;
+        btn.setAttribute('aria-checked', active ? 'true' : 'false');
+        if (active) {
+          btn.className = "sim-btn px-2.5 py-1 rounded text-label-sm font-label-sm transition-all bg-primary text-on-primary font-semibold shadow-xs";
+        } else {
+          btn.className = "sim-btn px-2.5 py-1 rounded text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface hover:bg-surface-variant";
+        }
+      });
+    }
+
+    function applyLocalizationLabels(dict) {
+      // Labels
+      const lblEmail = document.getElementById('labelEmail');
+      if (lblEmail) lblEmail.firstElementChild.textContent = dict.labels.email;
+      if (recoveryEmail) recoveryEmail.placeholder = dict.labels.emailPlaceholder;
+      const helperTextSpan = document.getElementById('helperTextSpan');
+      if (helperTextSpan) helperTextSpan.textContent = dict.labels.helperText;
+      if (btnSubmitForgotText) btnSubmitForgotText.textContent = dict.labels.btnSubmitForgot;
+      const linkBackLoginText = document.getElementById('linkBackLoginText');
+      if (linkBackLoginText) linkBackLoginText.textContent = dict.labels.linkBackLogin;
+      
+      const enumBadgeText = document.getElementById('enumBadgeText');
+      if (enumBadgeText) enumBadgeText.textContent = dict.labels.enumNotice;
+      const btnReturnLoginText = document.getElementById('btnReturnLoginText');
+      if (btnReturnLoginText) btnReturnLoginText.textContent = dict.labels.btnReturnLogin;
+      const btnTryAnotherText = document.getElementById('btnTryAnotherText');
+      if (btnTryAnotherText) btnTryAnotherText.textContent = dict.labels.btnTryAnother;
+
+      // Page 2 labels
+      const lblNewPass = document.getElementById('lblNewPass');
+      if (lblNewPass) lblNewPass.textContent = dict.labels.lblNewPass;
+      const lblConfirmPass = document.getElementById('lblConfirmPass');
+      if (lblConfirmPass) lblConfirmPass.textContent = dict.labels.lblConfirmPass;
+      const lblChecklistTitle = document.getElementById('lblChecklistTitle');
+      if (lblChecklistTitle) lblChecklistTitle.textContent = dict.labels.lblChecklist;
+      const reqLengthText = document.getElementById('reqLengthText');
+      if (reqLengthText) reqLengthText.textContent = dict.labels.reqLength;
+      const reqNumberText = document.getElementById('reqNumberText');
+      if (reqNumberText) reqNumberText.textContent = dict.labels.reqNumber;
+      const reqMixedText = document.getElementById('reqMixedText');
+      if (reqMixedText) reqMixedText.textContent = dict.labels.reqMixed;
+      const reqMatchText = document.getElementById('reqMatchText');
+      if (reqMatchText) reqMatchText.textContent = dict.labels.reqMatch;
+      if (btnSubmitResetText) btnSubmitResetText.textContent = dict.labels.btnSubmitReset;
+      const btnFinalSignInText = document.getElementById('btnFinalSignInText');
+      if (btnFinalSignInText) btnFinalSignInText.textContent = dict.labels.btnFinalSignIn;
+      const btnRequestNewText = document.getElementById('btnRequestNewText');
+      if (btnRequestNewText) btnRequestNewText.textContent = dict.labels.btnRequestNew;
+      const btnBackLoginExpiredText = document.getElementById('btnBackLoginExpiredText');
+      if (btnBackLoginExpiredText) btnBackLoginExpiredText.textContent = dict.labels.linkBackLogin;
+    }
+
+    // Interactive Mode Button Click Handlers
+    document.querySelectorAll('#modePillContainer .sim-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.mode = btn.getAttribute('data-mode');
+        renderState();
+      });
+    });
+
+    // Language Switcher Logic
+    const btnLocaleEn = document.getElementById('btnLocaleEn');
+    const btnLocaleAr = document.getElementById('btnLocaleAr');
+
+    btnLocaleEn.addEventListener('click', () => {
+      state.locale = 'en';
+      btnLocaleEn.className = "px-2.5 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-lowest text-primary font-semibold shadow-xs transition-all";
+      btnLocaleAr.className = "px-2.5 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-all";
+      renderState();
+    });
+
+    btnLocaleAr.addEventListener('click', () => {
+      state.locale = 'ar';
+      btnLocaleAr.className = "px-2.5 py-0.5 rounded text-label-sm font-label-sm bg-surface-container-lowest text-primary font-semibold shadow-xs transition-all";
+      btnLocaleEn.className = "px-2.5 py-0.5 rounded text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-all";
+      renderState();
+    });
+
+    // Email Input Validation Handler
+    function validateEmail(val) {
+      if (!val || !val.trim()) {
+        return { valid: false, msg: state.locale === 'ar' ? 'البريد الإلكتروني مطلوب' : 'Email is required' };
+      }
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!regex.test(val.trim())) {
+        return { valid: false, msg: state.locale === 'ar' ? 'يرجى إدخال بريد إلكتروني صحيح' : 'Enter a valid email address' };
+      }
+      return { valid: true };
+    }
+
+    forgotPassForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = recoveryEmail.value;
+      const validation = validateEmail(val);
+
+      if (!validation.valid) {
+        emailError.classList.remove('hidden');
+        emailErrorText.textContent = validation.msg;
+        recoveryEmail.classList.add('border-error');
+        recoveryEmail.setAttribute('aria-invalid', 'true');
+        return;
+      }
+
+      // Valid: clear errors & simulate submit flow
+      emailError.classList.add('hidden');
+      recoveryEmail.classList.remove('border-error');
+      recoveryEmail.setAttribute('aria-invalid', 'false');
+      state.lastEmailEntered = val;
+
+      // Trigger Spinner
+      btnSubmitForgot.disabled = true;
+      btnForgotSpinner.classList.remove('hidden');
+      btnForgotArrow.classList.add('hidden');
+      btnSubmitForgotText.textContent = i18n[state.locale].labels.btnSubmitForgotLoading;
+
+      setTimeout(() => {
+        btnSubmitForgot.disabled = false;
+        btnForgotSpinner.classList.add('hidden');
+        btnForgotArrow.classList.remove('hidden');
+        btnSubmitForgotText.textContent = i18n[state.locale].labels.btnSubmitForgot;
+        state.mode = 'p1-success';
+        renderState();
+      }, 700);
+    });
+
+    recoveryEmail.addEventListener('input', () => {
+      if (!emailError.classList.contains('hidden')) {
+        const validation = validateEmail(recoveryEmail.value);
+        if (validation.valid) {
+          emailError.classList.add('hidden');
+          recoveryEmail.classList.remove('border-error');
+          recoveryEmail.setAttribute('aria-invalid', 'false');
+        }
+      }
+    });
+
+    // Reset Form Handlers & Realtime Password Validator
+    function evaluatePasswordCriteria() {
+      const p1 = newPasswordInput.value || '';
+      const p2 = confirmPasswordInput.value || '';
+
+      const isLength = p1.length >= 8;
+      const isNumber = /\d/.test(p1);
+      const isMixed = /[a-z]/.test(p1) && /[A-Z]/.test(p1) && /[^A-Za-z0-9]/.test(p1);
+      const isMatch = p1.length > 0 && p1 === p2;
+
+      // Update Requirement 1 (8+ chars)
+      updateReqVisual(reqLength, reqLengthIcon, isLength);
+      // Update Requirement 2 (Contains number)
+      updateReqVisual(reqNumber, reqNumberIcon, isNumber);
+      // Update Requirement 3 (Mixed case & symbols)
+      updateReqVisual(reqMixed, reqMixedIcon, isMixed);
+      // Update Requirement 4 (Match)
+      updateReqVisual(reqMatch, reqMatchIcon, isMatch);
+
+      // Submit Enabled if all 4 met
+      const allValid = isLength && isNumber && isMixed && isMatch;
+      btnSubmitReset.disabled = !allValid;
+    }
+
+    function updateReqVisual(container, iconEl, isValid) {
+      if (isValid) {
+        container.className = "flex items-center gap-1.5 text-primary font-medium transition-colors";
+        iconEl.textContent = "check_circle";
+        iconEl.className = "material-symbols-outlined text-[16px] text-primary";
+      } else {
+        container.className = "flex items-center gap-1.5 text-outline transition-colors";
+        iconEl.textContent = "radio_button_unchecked";
+        iconEl.className = "material-symbols-outlined text-[16px] text-outline";
+      }
+    }
+
+    newPasswordInput.addEventListener('input', evaluatePasswordCriteria);
+    confirmPasswordInput.addEventListener('input', evaluatePasswordCriteria);
+
+    // Password Visibility Toggles
+    btnToggleNewPass.addEventListener('click', () => {
+      const isPass = newPasswordInput.type === 'password';
+      newPasswordInput.type = isPass ? 'text' : 'password';
+      eyeNewPass.textContent = isPass ? 'visibility_off' : 'visibility';
+    });
+
+    btnToggleConfirmPass.addEventListener('click', () => {
+      const isPass = confirmPasswordInput.type === 'password';
+      confirmPasswordInput.type = isPass ? 'text' : 'password';
+      eyeConfirmPass.textContent = isPass ? 'visibility_off' : 'visibility';
+    });
+
+    // Reset Password Form Submission
+    resetPassForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      btnSubmitReset.disabled = true;
+      btnResetSpinner.classList.remove('hidden');
+      btnSubmitResetText.textContent = i18n[state.locale].labels.btnSubmitResetLoading;
+
+      setTimeout(() => {
+        btnSubmitReset.disabled = false;
+        btnResetSpinner.classList.add('hidden');
+        btnSubmitResetText.textContent = i18n[state.locale].labels.btnSubmitReset;
+        state.mode = 'p2-success';
+        renderState();
+      }, 700);
+    });
+
+    // Contextual secondary button link listeners
+    document.getElementById('btnTryAnotherEmail')?.addEventListener('click', () => {
+      state.mode = 'p1-form';
+      renderState();
+    });
+
+    document.getElementById('btnReturnLoginFromSuccess')?.addEventListener('click', () => {
+      alert("Redirecting to /login with zero stored trace.");
+    });
+
+    document.getElementById('btnRequestNewLink')?.addEventListener('click', () => {
+      state.mode = 'p1-form';
+      renderState();
+    });
+
+    document.getElementById('btnBackToLoginFromExpired')?.addEventListener('click', () => {
+      alert("Redirecting to /login...");
+    });
+
+    document.getElementById('btnFinalSignIn')?.addEventListener('click', () => {
+      alert("Authentication token renewed. Proceeding to Dawwarha Municipal Dashboard...");
+    });
+
+    // Initial Render
+    renderState();
+  })();
+</script></main><footer class="w-full bg-surface-container-low shadow-[0_-1px_8px_rgba(0,0,0,0.02)]"><div class="max-w-[1440px] mx-auto px-margin-mobile lg:px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary text-[20px]">account_balance</span><div><p class="font-label-md text-label-md text-on-surface font-semibold">Municipal Civic Redistribution Custody Infrastructure</p><p class="font-body-sm text-body-sm text-on-surface-variant">Verified zero-waste ledger protocols • ISO 14001 Compliant Redistribution Ledger</p></div></div><div class="flex flex-wrap items-center gap-space-lg"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-container"></span><span class="font-label-sm text-label-sm text-on-surface-variant">TLS 1.3 / E2EE Key Custody</span></div><span class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Dawwarha Platform. All rights reserved.</span></div></div></footer></body></html>

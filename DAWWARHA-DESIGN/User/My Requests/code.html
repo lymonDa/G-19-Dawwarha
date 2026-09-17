@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "tertiary-fixed": "#ffdcbf",
+          "secondary": "#33685a",
+          "primary-fixed": "#a3f2dd",
+          "tertiary-fixed-dim": "#feb874",
+          "tertiary-container": "#9f672b",
+          "inverse-surface": "#2a322f",
+          "on-tertiary-container": "#fffaf8",
+          "on-secondary-fixed-variant": "#184f42",
+          "tertiary": "#834f14",
+          "outline-variant": "#bec9c4",
+          "on-error-container": "#93000a",
+          "on-primary-fixed-variant": "#005143",
+          "surface-tint": "#106a5a",
+          "surface-dim": "#d3dcd7",
+          "surface-variant": "#dbe5e0",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed-dim": "#9bd2c0",
+          "primary-container": "#2f806f",
+          "on-secondary": "#ffffff",
+          "on-primary-container": "#ebfff7",
+          "outline": "#6f7975",
+          "on-tertiary-fixed-variant": "#6a3b00",
+          "surface-bright": "#f2fbf6",
+          "inverse-on-surface": "#eaf3ee",
+          "inverse-primary": "#87d5c1",
+          "on-error": "#ffffff",
+          "secondary-fixed": "#b6eedc",
+          "on-secondary-container": "#396e5f",
+          "on-surface": "#151d1a",
+          "surface-container": "#e7f0eb",
+          "error": "#ba1a1a",
+          "surface-container-low": "#edf6f1",
+          "secondary-container": "#b6eedc",
+          "on-surface-variant": "#3f4946",
+          "surface-container-highest": "#dbe5e0",
+          "on-primary": "#ffffff",
+          "primary": "#076757",
+          "error-container": "#ffdad6",
+          "on-background": "#151d1a",
+          "on-primary-fixed": "#00201a",
+          "primary-fixed-dim": "#87d5c1",
+          "surface-container-high": "#e1eae5",
+          "background": "#f2fbf6",
+          "on-secondary-fixed": "#002019",
+          "on-tertiary-fixed": "#2d1600",
+          "surface": "#f2fbf6"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-sm": "0.5rem",
+          "space-md": "1rem",
+          "space-xs": "0.25rem",
+          "margin": "2rem",
+          "gutter-mobile": "1rem",
+          "space-lg": "1.5rem",
+          "margin-mobile": "1rem",
+          "space-xl": "2.5rem",
+          "gutter": "1.5rem"
+        },
+        "fontFamily": {
+          "code-sm": ["Inter"],
+          "body-lg": ["Inter"],
+          "display-lg": ["Inter"],
+          "label-md": ["Inter"],
+          "headline-sm": ["Inter"],
+          "headline-lg-mobile": ["Inter"],
+          "body-md": ["Inter"],
+          "headline-lg": ["Inter"],
+          "label-sm": ["Inter"],
+          "headline-md": ["Inter"],
+          "display-lg-mobile": ["Inter"],
+          "body-sm": ["Inter"]
+        },
+        "fontSize": {
+          "code-sm": ["0.8125rem", {"lineHeight": "1.125rem", "fontWeight": "400"}],
+          "body-lg": ["1.125rem", {"lineHeight": "1.75rem", "fontWeight": "400"}],
+          "display-lg": ["3.5rem", {"lineHeight": "4rem", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+          "label-md": ["0.875rem", {"lineHeight": "1.25rem", "fontWeight": "500"}],
+          "headline-sm": ["1.125rem", {"lineHeight": "1.5rem", "fontWeight": "500"}],
+          "headline-lg-mobile": ["1.5rem", {"lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "body-md": ["0.9375rem", {"lineHeight": "1.5rem", "fontWeight": "400"}],
+          "headline-lg": ["2rem", {"lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+          "label-sm": ["0.75rem", {"lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500"}],
+          "headline-md": ["1.25rem", {"lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+          "display-lg-mobile": ["2.25rem", {"lineHeight": "2.75rem", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "body-sm": ["0.8125rem", {"lineHeight": "1.25rem", "fontWeight": "400"}]
+        }
+      }
+    }
+  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(22,78,65,0.06)]"><div class="w-full h-16 px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><img alt="Brand logo. - Primary color: #2f806f
+- Font: inter
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UF3eZN9ykWZnSQyxFrz5DF0sre37execbFQJ_vdOQK-qiWAqzr1zbbltQ-wBaxlDMj-gxy7HrIZ7vu8RBvegsjS_z2Dqi82uhgx06Xr6IJ2ggM86b4D7OSule6dlnt9bUMK_L_vwcnh-xMRT9EvcoFvxWjlvskYCxx6PKq-Ucu8VbY7kaEeHu5pSryJ8SPzR1z5rdmVUQSSCZHAAn-nutc5S0DXeLSAs0LHd4TR1ZgQAw-dhFpAWIs039D"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">Dawwarha <span class="text-on-surface-variant font-label-md text-label-md font-normal">| دَوّرها</span></span><span class="font-label-sm text-label-sm text-outline flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>Amman Civic Node #12 / Cairo Hub</span></div></div><nav class="hidden xl:flex items-center gap-space-xs p-space-xs bg-surface-container-low rounded-lg" data-active-classes="bg-secondary-container text-on-secondary-fixed font-bold rounded-lg"><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-resources" href="#">My Resources</a><a aria-current="page" class="px-space-md py-space-xs transition-colors bg-secondary-container text-on-secondary-fixed font-bold rounded-lg" data-path="my-requests" href="#">My Requests</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="matches" href="#">Matches</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#">Handovers &amp; Activity</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#">Impact &amp; Ledger</a></nav><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-space-xs"><button class="px-space-sm py-0.5 rounded-md font-label-sm text-label-sm text-on-surface bg-surface-container-lowest font-medium shadow-[0_1px_2px_rgba(0,0,0,0.04)]">EN</button><button class="px-space-sm py-0.5 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">العربية</button></div><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span></button><button class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"><span class="material-symbols-outlined">help_outline</span></button><div class="hidden md:flex items-center gap-space-sm pl-space-sm"><div class="text-right"><div class="font-label-md text-label-md text-on-surface font-semibold">Dr. Laila El-Mansouri</div><div class="font-label-sm text-label-sm text-primary">Verified Node Lead</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(22,78,65,0.04)] z-40 flex flex-col justify-between p-space-md overflow-y-auto"><div class="flex flex-col gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider px-space-xs">Operations Hub</span><div class="grid grid-cols-1 gap-space-xs pt-space-xs"><button class="w-full h-10 px-space-md rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs shadow-[0_2px_6px_rgba(7,103,87,0.15)] hover:bg-secondary transition-colors"><span>+ Create Request</span></button><button class="w-full h-10 px-space-md rounded-lg bg-surface-container-low text-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs hover:bg-surface-container-high transition-colors"><span>+ Publish Resource</span></button></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-bold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span>Dashboard</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="my-resources" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span>My Resources</a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm transition-colors bg-secondary-container text-on-secondary-fixed font-bold rounded-lg" data-path="my-requests" href="#"><span class="material-symbols-outlined text-[20px]">assignment_late</span>My Requests</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="matches" href="#"><span class="material-symbols-outlined text-[20px]">sync_alt</span>Matches</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span>Handovers &amp; Activity</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#"><span class="material-symbols-outlined text-[20px]">account_balance</span>Impact &amp; Ledger</a></nav></div><div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline">Operational Custody</span><span class="w-2 h-2 rounded-full bg-primary inline-block"></span></div><div class="font-label-md text-label-md font-semibold text-on-surface">Dr. Laila El-Mansouri</div><div class="font-label-sm text-label-sm text-primary">Verified Node Lead</div><div class="font-code-sm text-code-sm text-outline pt-space-xs">Node: CAI-SEC-01</div></div></aside><div class="pl-72"><main class="w-full pt-16 bg-surface min-h-screen px-gutter py-space-lg"><div class="flex flex-col w-full pb-space-xl">
+<!-- 1. Interactive Simulation & Prototype Controller -->
+<div class="w-full bg-surface-container-high rounded-xl p-space-sm mb-space-lg shadow-sm flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-code-sm text-code-sm text-outline px-space-xs flex items-center gap-1 font-semibold uppercase">
+<span class="material-symbols-outlined text-[15px] text-primary">tune</span> Simulation Mode:
+      </span>
+<button class="sim-btn px-space-sm py-1 rounded-md font-label-sm text-label-sm font-semibold bg-primary text-on-primary transition-all" id="sim-btn-active" onclick="setSimState('active')">
+        1. Active Requests (Default)
+      </button>
+<button class="sim-btn px-space-sm py-1 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-lowest transition-all" id="sim-btn-empty" onclick="setSimState('empty')">
+        2. Empty State (New Seeker)
+      </button>
+<button class="sim-btn px-space-sm py-1 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-lowest transition-all" id="sim-btn-filtered" onclick="setSimState('filtered')">
+        3. Filtered None
+      </button>
+<button class="sim-btn px-space-sm py-1 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-lowest transition-all" id="sim-btn-skeleton" onclick="setSimState('skeleton')">
+        4. Loading Skeleton
+      </button>
+<button class="px-space-sm py-1 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:bg-surface-container-lowest transition-all" onclick="openWithdrawModal()">
+        5. Withdraw Modal
+      </button>
+<button class="sim-btn px-space-sm py-1 rounded-md font-label-sm text-label-sm text-error hover:bg-error-container transition-all" id="sim-btn-error" onclick="setSimState('error')">
+        6. API Error (500)
+      </button>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="flex items-center gap-space-xs px-space-sm py-1 rounded-md bg-surface-container-lowest font-label-sm text-label-sm text-on-surface hover:text-primary shadow-sm transition-all" id="lang-toggle-btn" onclick="toggleLanguageDirection()">
+<span class="material-symbols-outlined text-[16px] text-primary">translate</span>
+<span id="lang-indicator">🌐 Switch to العربية (RTL)</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col w-full gap-space-lg" dir="ltr" id="localized-wrapper">
+<!-- 2. Breadcrumbs & Contextual Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<nav class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<a class="hover:text-primary transition-colors" href="#">Dashboard</a>
+<span>/</span>
+<span class="text-on-surface font-semibold">My Requests</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">
+          My Community Requests <span class="text-primary font-headline-md text-headline-md font-normal font-sans">| طلباتي المجتمعية</span>
+</h1>
+<p class="font-body-md text-body-md text-outline max-w-3xl">
+          Manage your active community needs and standing institutional requests. Review explainable algorithm-matched surplus and coordinate direct verified handovers.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<a class="px-space-md h-10 rounded-lg bg-surface-container-low text-secondary font-label-md text-label-md font-semibold flex items-center gap-space-xs hover:bg-surface-container-high transition-colors shadow-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">search</span>
+<span>Browse Available Resources</span>
+</a>
+<button class="px-space-md h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center gap-space-xs hover:bg-secondary transition-colors shadow-md">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Create Request (+ نشر طلب احتياج)</span>
+</button>
+</div>
+</div>
+<!-- 3. Real Backend-Aligned Summary Metric Tiles -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Total Requests</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+</div>
+</div>
+<div class="mt-space-sm">
+<div class="font-headline-lg text-headline-lg text-on-surface font-bold">5</div>
+<div class="font-label-sm text-label-sm text-outline mt-0.5">Spanning medical, educational, and food recovery</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Open &amp; Searching</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">radar</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">2</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">Active Scans</span>
+</div>
+<div class="font-label-sm text-label-sm text-outline mt-0.5">Actively scanning circulating inventory</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Algorithmic Matches</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-tertiary font-bold">2</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">Ready for Review</span>
+</div>
+<div class="font-label-sm text-label-sm text-outline mt-0.5">1 requires terms review, 1 in coordination</div>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Fulfilled &amp; Audited</span>
+<div class="w-8 h-8 rounded-lg bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">4</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">100% Verified</span>
+</div>
+<div class="font-label-sm text-label-sm text-outline mt-0.5">Ledger-anchored custodial handovers</div>
+</div>
+</div>
+<!-- 4. Filter & Search Controls (Demand-First Hierarchy) -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-space-sm justify-between">
+<!-- Search -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full h-10 pl-10 pr-space-md bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 shadow-inner" placeholder="Search requests by title, category, district, or reference ID..." type="text"/>
+</div>
+<!-- Category & Urgency Pickers -->
+<div class="flex flex-wrap items-center gap-space-xs">
+<select class="h-10 px-space-md bg-surface-container-low text-on-surface font-label-sm text-label-sm rounded-lg focus:outline-none hover:bg-surface-container-high transition-colors">
+<option>All Categories</option>
+<option>Healthcare &amp; Linens</option>
+<option>Books &amp; Curriculum</option>
+<option>Food &amp; Perishables</option>
+<option>Refurbished Tech</option>
+</select>
+<select class="h-10 px-space-md bg-surface-container-low text-on-surface font-label-sm text-label-sm rounded-lg focus:outline-none hover:bg-surface-container-high transition-colors">
+<option>All Urgencies</option>
+<option>🔴 High Urgency (2)</option>
+<option>🟡 Medium Urgency (2)</option>
+<option>🟢 Low / Standing Need (1)</option>
+</select>
+<select class="h-10 px-space-md bg-surface-container-low text-on-surface font-label-sm text-label-sm rounded-lg focus:outline-none hover:bg-surface-container-high transition-colors">
+<option>Sort: Urgency: Highest First</option>
+<option>Sort: Newest Created</option>
+<option>Sort: Closest Match Score</option>
+</select>
+</div>
+</div>
+<!-- Status Segments -->
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<button class="px-space-md py-1.5 rounded-full font-label-sm text-label-sm font-semibold bg-primary text-on-primary">
+          All Requests (5)
+        </button>
+<button class="px-space-md py-1.5 rounded-full font-label-sm text-label-sm font-medium bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors">
+          Open / Searching (2)
+        </button>
+<button class="px-space-md py-1.5 rounded-full font-label-sm text-label-sm font-medium bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors flex items-center gap-1.5">
+<span>Matched (2)</span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+</button>
+<button class="px-space-md py-1.5 rounded-full font-label-sm text-label-sm font-medium bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors">
+          Fulfilled (4)
+        </button>
+<button class="px-space-md py-1.5 rounded-full font-label-sm text-label-sm font-medium bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors">
+          Withdrawn (1)
+        </button>
+</div>
+</div>
+<!-- MAIN VIEW CONTAINER: Dynamically switched via Prototype Simulator -->
+<div class="flex flex-col gap-space-lg w-full" id="sim-view-container">
+<!-- ================= CARD 1 ================= -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col">
+<!-- Urgent Notice Strip -->
+<div class="bg-error-container text-on-error-container px-space-md py-1.5 font-label-sm text-label-sm font-semibold flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">emergency</span>
+<span>🔴 HIGH URGENCY (عاجل - خلال 24 ساعة)</span>
+</div>
+<span class="font-code-sm text-code-sm uppercase tracking-wider">Ref: REQ-MED-2024-5109</span>
+</div>
+<!-- Body Payload -->
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-sm mb-1 flex-wrap">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold">Healthcare &amp; Linens</span>
+<span class="font-code-sm text-code-sm text-outline">Medical Hardware Tier-1</span>
+<span class="font-label-sm text-label-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Sayeda Zeinab Clinic Outpost (Cairo · 3.4 km corridor)
+                </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">
+                High-Capacity Oxygen Regulators &amp; Pediatric Pulse Oximeters
+              </h2>
+</div>
+<div class="text-left lg:text-right shrink-0 bg-surface-container-low px-space-md py-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-outline block">Quantity Requested</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">4 Units</span>
+<span class="font-label-sm text-label-sm text-primary block">Triage intake buffer</span>
+</div>
+</div>
+<!-- Lifecycle Stepper -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-xs w-full justify-between relative">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-sm text-label-sm font-bold">✓</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">1. Published</span>
+<span class="font-code-sm text-code-sm text-outline">Yesterday, 14:20</span>
+</div>
+</div>
+<div class="h-0.5 flex-1 mx-2 bg-primary"></div>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center font-label-sm text-label-sm font-bold animate-pulse">●</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold text-tertiary">2. Matched (96%)</span>
+<span class="font-code-sm text-code-sm text-tertiary font-semibold">Terms Review</span>
+</div>
+</div>
+<div class="h-0.5 flex-1 mx-2 bg-outline-variant"></div>
+<div class="flex items-center gap-2 opacity-50">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-outline flex items-center justify-center font-label-sm text-label-sm">3</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-outline">3. In Handover</span>
+<span class="font-code-sm text-code-sm text-outline">Pending</span>
+</div>
+</div>
+<div class="h-0.5 flex-1 mx-2 bg-outline-variant"></div>
+<div class="flex items-center gap-2 opacity-50">
+<div class="w-7 h-7 rounded-full bg-surface-container-high text-outline flex items-center justify-center font-label-sm text-label-sm">4</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-outline">4. Fulfilled</span>
+<span class="font-code-sm text-code-sm text-outline">Audit Seal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Explainable Match Module -->
+<div class="bg-surface-bright rounded-xl p-space-md shadow-inner flex flex-col gap-space-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px] text-primary">verified_user</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Top Verified Match Detected: 96% Compatibility Score</span>
+</div>
+<span class="font-code-sm text-code-sm text-primary font-bold bg-primary-fixed px-space-sm py-0.5 rounded-full">
+                Surplus Source: Al-Bustan Medical Center
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">
+              Matched inventory offer: <strong class="text-on-surface">6 Medical Grade Regulators &amp; Monitors</strong>. Excess operational inventory flagged for urgent civic transfer.
+            </p>
+<!-- 5-Signal Compatibility Breakdown -->
+<div class="grid grid-cols-2 sm:grid-cols-5 gap-space-xs pt-space-xs">
+<div class="bg-surface-container-lowest p-space-xs rounded-lg text-center shadow-sm">
+<span class="font-label-sm text-label-sm text-outline block">Category</span>
+<span class="font-label-sm text-label-sm font-bold text-primary">100% Fit ✓</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg text-center shadow-sm">
+<span class="font-label-sm text-label-sm text-outline block">Proximity</span>
+<span class="font-label-sm text-label-sm font-bold text-primary">94% (&lt;3.5km) ✓</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg text-center shadow-sm">
+<span class="font-label-sm text-label-sm text-outline block">Quantity</span>
+<span class="font-label-sm text-label-sm font-bold text-primary">100% Covers ✓</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg text-center shadow-sm">
+<span class="font-label-sm text-label-sm text-outline block">Urgency SLA</span>
+<span class="font-label-sm text-label-sm font-bold text-primary">98% Priority ✓</span>
+</div>
+<div class="bg-surface-container-lowest p-space-xs rounded-lg text-center shadow-sm">
+<span class="font-label-sm text-label-sm text-outline block">Node Status</span>
+<span class="font-label-sm text-label-sm font-bold text-primary">Ready Today ✓</span>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-wrap items-center justify-between pt-space-xs gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+<span class="font-label-sm text-label-sm text-outline">Action Required: Donor node awaiting your custodial receipt agreement</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md h-9 rounded-lg bg-surface-container-low text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
+                Decline Match
+              </button>
+<button class="px-space-md h-9 rounded-lg bg-surface-container-low text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high transition-colors">
+                View Request Details
+              </button>
+<button class="px-space-md h-9 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-bold flex items-center gap-1 hover:bg-secondary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">handshake</span>
+                Review &amp; Accept Match (96%)
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= CARD 2 ================= -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col">
+<div class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-space-md py-1.5 font-label-sm text-label-sm font-semibold flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span>🟡 MEDIUM URGENCY (Within 72 Hours)</span>
+</div>
+<span class="font-code-sm text-code-sm uppercase tracking-wider">Ref: REQ-EDU-2024-4102</span>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-center">
+<div class="lg:col-span-8 flex flex-col">
+<div class="flex items-center gap-space-sm mb-1 flex-wrap">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold">Books &amp; Curriculum</span>
+<span class="font-label-sm text-label-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Old Cairo Community Learning Center
+                </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">
+                30 Complete Primary School Mathematics &amp; Science Textbook Sets (Grades 4-6)
+              </h2>
+<p class="font-body-sm text-body-sm text-outline mt-1">
+                Curriculum renewal for registered underprivileged students preparing for seasonal district examinations.
+              </p>
+</div>
+<div class="lg:col-span-4 h-36 rounded-lg overflow-hidden relative shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Spacious clean community learning center classroom with modern light wood desks and ergonomic chairs, a whiteboard at the front, and large bright windows overlooking green trees, evoking educational civic empowerment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjSU0HTXHzZNcZjUU9sMMf6b3_gXSKz56iZFr9iFENcGFbsHA59xkhuYVZO8YwIUsMAqS-jpDTYJUxk2YLj_jsYqAtT5PiOVOWOwfktv-F3wHu1p3d2uEE5aAP_oLX5CdqPTaASzNamrcaLhZc08gbeVKqZQkNJCsgUixh2ovbDJ-wYv-HJJjNS9MGG6xI3uq68IkTUcjzEJUqkrfhr0NqJpmNGMI5WfLaTcRBM8wGvTYfk-xrLFGO0Q"/>
+<div class="absolute bottom-2 left-2 px-space-xs py-0.5 rounded bg-inverse-surface/80 text-inverse-on-surface font-code-sm text-code-sm">
+                Target: 30 Complete Sets
+              </div>
+</div>
+</div>
+<!-- Potential Match Banner -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm font-bold text-on-surface">Potential Candidate Match Available (88% Match)</div>
+<div class="font-body-sm text-body-sm text-outline">Surplus of 45 verified textbook copies located at Maadi Community Hub (Distance: 4.2 km).</div>
+</div>
+</div>
+<button class="px-space-md h-9 rounded-lg bg-surface-container-lowest text-primary font-label-sm text-label-sm font-semibold hover:bg-primary hover:text-on-primary transition-all shadow-sm shrink-0">
+              View Candidate Match (88%)
+            </button>
+</div>
+<!-- Action bar -->
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-code-sm text-code-sm text-outline">Published: 2 days ago · Custodian: Dr. Laila El-Mansouri</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm h-8 rounded-md bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface">
+                Edit Request
+              </button>
+<button class="px-space-sm h-8 rounded-md bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface">
+                View Details
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= CARD 3 ================= -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col">
+<div class="bg-error-container text-on-error-container px-space-md py-1.5 font-label-sm text-label-sm font-semibold flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span>🔴 HIGH URGENCY (Target: Tonight 19:30 Cairo)</span>
+</div>
+<span class="font-code-sm text-code-sm uppercase tracking-wider">Ref: REQ-FD-2024-8849</span>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-sm mb-1">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold">Food &amp; Perishables</span>
+<span class="font-code-sm text-code-sm text-outline">Prepared Warm Meals</span>
+<span class="font-label-sm text-label-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Fustat / Old Cairo Youth Center
+                </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">
+                50 Hot Prepared Meals for Night Shelter Residents
+              </h2>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">
+                Hot dinner distribution for elderly sheltered unhoused individuals before seasonal temperature drop.
+              </p>
+</div>
+<div class="text-left lg:text-right shrink-0 bg-surface-container-low px-space-md py-space-xs rounded-lg">
+<span class="font-label-sm text-label-sm text-outline block">Portions Needed</span>
+<span class="font-headline-sm text-headline-sm text-error font-bold">50 Portions</span>
+<span class="font-label-sm text-label-sm text-outline block">Food Safe Sealed Containers</span>
+</div>
+</div>
+<!-- Searching Status Indicator Banner -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary animate-spin">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Active Corridor Broadcast in Progress</span>
+<span class="font-body-sm text-body-sm text-outline">
+                  Scanning circular surplus within 8km radius across licensed commercial kitchens, banquet surplus, and civic hubs. 0 matches currently eligible.
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs shrink-0">
+<button class="px-space-md h-9 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-secondary transition-colors">
+                Boost Corridor Broadcast
+              </button>
+</div>
+</div>
+<!-- Stepper for Open Request -->
+<div class="flex items-center justify-between text-outline font-label-sm text-label-sm pt-space-xs">
+<span class="flex items-center gap-1 font-semibold text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span> 1. Published (Broadcasting to 42 Partner Kitchens)
+            </span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm h-8 rounded-md bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm hover:text-on-surface">Edit Details</button>
+<button class="px-space-sm h-8 rounded-md bg-surface-container-low text-error font-label-sm text-label-sm hover:bg-error-container" onclick="openWithdrawModal()">Withdraw Request</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= CARD 4 ================= -->
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col">
+<div class="bg-surface-container-high text-secondary px-space-md py-1.5 font-label-sm text-label-sm font-semibold flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>🟢 FULFILLED (Completed Transfer &amp; Sealed)</span>
+</div>
+<span class="font-code-sm text-code-sm uppercase tracking-wider text-outline">Ref: REQ-TC-2024-3310</span>
+</div>
+<div class="p-space-lg flex flex-col gap-space-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-center">
+<div class="lg:col-span-8 flex flex-col">
+<div class="flex items-center gap-space-sm mb-1">
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-label-sm text-label-sm font-semibold">Refurbished Tech</span>
+<span class="font-label-sm text-label-sm text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Nasr City Civic Lab
+                </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold">
+                4 Refurbished Laptops for Girls Coding Apprenticeship Hub
+              </h2>
+<p class="font-body-sm text-body-sm text-outline mt-1">
+                Successfully assigned and distributed into the youth technology cohort. All machines operational with verified battery health and open-source OS installed.
+              </p>
+</div>
+<div class="lg:col-span-4 h-36 rounded-lg overflow-hidden relative shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Refurbished clean Dell laptops stacked neatly on a wooden workshop table with peripheral cables and mice, in a bright tech lab with whiteboards and shelves in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN0v_KmGOUXf-GtbkHEuQJKSUvssxQw7LGrbvLTmkJbyv_ttFk7fz4U0NTINNbe-maTWg0iHXTAVaKx_BelvdW5CMMVZLhFelpsu4biGlSh0ZJVHANzuiUXNpym3m9OmigeRzqHqCoQtUO8dkKE2KvGRh13PMz-IKWU8oUXqL3iLtzsuDUxv-KcZ2-LOP1jjTv1tnAS6ESVc8ttP-jSFFDoTFd-cDbcDNqmd04fNexbcDgr9pVKjF_Hg"/>
+<div class="absolute bottom-2 left-2 px-space-xs py-0.5 rounded bg-primary text-on-primary font-code-sm text-code-sm font-bold">
+                Received: 4 Laptops (Core i5, 8GB RAM)
+              </div>
+</div>
+</div>
+<!-- Cryptographic Proof Box -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Cryptographic Proof &amp; Custodial Handover Sealed</span>
+<span class="font-code-sm text-code-sm text-outline">
+                  Two-sided custodial confirmation verified Nov 12, 2024 · Ledger Hash: 0x8f2a49b81...98cd (Ledger Block #81290)
+                </span>
+</div>
+</div>
+<button class="px-space-md h-9 rounded-lg bg-surface-container-lowest text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-high transition-colors shadow-sm shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">workspace_premium</span>
+              View Handover Certificate
+            </button>
+</div>
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline">Fulfilled via Node #14 Helwan Industrial Surplus Node</span>
+<button class="px-space-md h-8 rounded-md bg-surface-container-low text-primary font-label-sm text-label-sm hover:bg-surface-container-high font-semibold">
+              + Duplicate as New Standing Request
+            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- 6. Pagination & Civic Protection Accord Notice -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-md">
+<span class="font-label-sm text-label-sm text-outline">
+        Showing 1-4 of 5 Community Needs
+      </span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high disabled:opacity-40" disabled="">
+          Previous
+        </button>
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-bold">
+          1
+        </button>
+<button class="w-8 h-8 rounded-lg bg-surface-container-low text-on-surface font-label-sm text-label-sm hover:bg-surface-container-high">
+          2
+        </button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container-high">
+          Next
+        </button>
+</div>
+</div>
+<!-- Zero-Cash Civic Accord Footer Banner -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center gap-space-md mt-space-sm shadow-sm">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold text-on-surface">Dawwarha Zero-Cash Protocol &amp; Civic Transparency Guarantee</span>
+<span class="font-body-sm text-body-sm text-outline">
+          Requests are strictly non-monetized mutual civic aid. No commercial reselling, delivery surcharges, or broker fees are permitted. All handovers generate transparent cryptographic custody ledger entries accessible for community audit.
+        </span>
+</div>
+</div>
+</div>
+<!-- WITHDRAW CONFIRMATION MODAL (Hidden by default) -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/60 backdrop-blur-sm hidden flex items-center justify-center p-space-md" id="withdraw-modal">
+<div class="bg-surface-container-lowest max-w-lg w-full rounded-2xl p-space-xl shadow-xl flex flex-col gap-space-md">
+<div class="w-12 h-12 rounded-full bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">warning</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Withdraw Community Request?</h3>
+<p class="font-body-md text-body-md text-outline mt-1">
+          Are you sure you want to retract <strong class="text-on-surface">REQ-FD-2024-8849 (50 Hot Prepared Meals)</strong>? This will release any reservation hold and remove your need from active algorithmic matching nodes.
+        </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs font-label-sm text-label-sm">
+<label class="text-on-surface font-semibold">Please select a reason for audit logging:</label>
+<select class="w-full h-10 px-space-md bg-surface-container-lowest rounded-md text-on-surface focus:outline-none">
+<option>Need fulfilled through alternate local provider</option>
+<option>Event or requirement cancelled</option>
+<option>Quantity or specifications changed (will recreate)</option>
+<option>Other civic reason</option>
+</select>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md h-10 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" onclick="closeWithdrawModal()">
+          Keep Request Active
+        </button>
+<button class="px-space-md h-10 rounded-lg bg-error text-on-error font-label-md text-label-md font-bold hover:opacity-90 transition-opacity" onclick="closeWithdrawModal()">
+          Confirm Withdrawal
+        </button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Prototype State Manager
+  function setSimState(mode) {
+    const container = document.getElementById('sim-view-container');
+    const buttons = document.querySelectorAll('.sim-btn');
+    buttons.forEach(b => {
+      b.classList.remove('bg-primary', 'text-on-primary', 'bg-error', 'text-on-error');
+      b.classList.add('text-on-surface-variant');
+    });
+
+    const activeBtn = document.getElementById(`sim-btn-${mode}`);
+    if (activeBtn) {
+      if (mode === 'error') {
+        activeBtn.classList.add('bg-error', 'text-on-error');
+      } else {
+        activeBtn.classList.add('bg-primary', 'text-on-primary');
+      }
+      activeBtn.classList.remove('text-on-surface-variant');
+    }
+
+    if (mode === 'active') {
+      window.location.reload ? null : null; // preserves default state
+      renderDefaultCards();
+    } else if (mode === 'empty') {
+      container.innerHTML = `
+        <div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-md flex flex-col items-center justify-center text-center py-16 gap-space-md">
+          <div class="w-20 h-20 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-[40px]">inventory_2</span>
+          </div>
+          <div class="max-w-md">
+            <h3 class="font-headline-md text-headline-md font-bold text-on-surface">No Requests Published Yet</h3>
+            <p class="font-body-md text-body-md text-outline mt-1">
+              Your community node currently has zero standing needs logged. Register your required materials, medical buffers, or food resources to engage the algorithmic rescue pipeline.
+            </p>
+          </div>
+          <button class="px-space-lg h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-bold flex items-center gap-space-xs hover:bg-secondary transition-colors shadow-md">
+            <span class="material-symbols-outlined text-[20px]">add_circle</span>
+            <span>Publish Your First Community Request</span>
+          </button>
+        </div>
+      `;
+    } else if (mode === 'filtered') {
+      container.innerHTML = `
+        <div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-md flex flex-col items-center justify-center text-center py-16 gap-space-md">
+          <div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center text-outline">
+            <span class="material-symbols-outlined text-[32px]">filter_list_off</span>
+          </div>
+          <div class="max-w-md">
+            <h3 class="font-headline-md text-headline-md font-bold text-on-surface">No Matching Requests Found</h3>
+            <p class="font-body-md text-body-md text-outline mt-1">
+              None of your existing community requests match the active filter criteria. Try clearing query filters or widening the district corridor range.
+            </p>
+          </div>
+          <button onclick="setSimState('active')" class="px-space-md h-10 rounded-lg bg-surface-container-low text-primary font-label-md text-label-md font-semibold hover:bg-surface-container-high transition-colors">
+            Reset Filters
+          </button>
+        </div>
+      `;
+    } else if (mode === 'skeleton') {
+      container.innerHTML = `
+        <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-md flex flex-col gap-space-md animate-pulse">
+          <div class="h-6 w-1/4 bg-surface-container-high rounded"></div>
+          <div class="h-8 w-3/4 bg-surface-container-high rounded"></div>
+          <div class="h-24 w-full bg-surface-container-low rounded-xl"></div>
+          <div class="flex justify-between items-center">
+            <div class="h-8 w-32 bg-surface-container-high rounded"></div>
+            <div class="h-8 w-48 bg-surface-container-high rounded"></div>
+          </div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-md flex flex-col gap-space-md animate-pulse">
+          <div class="h-6 w-1/3 bg-surface-container-high rounded"></div>
+          <div class="h-8 w-2/3 bg-surface-container-high rounded"></div>
+          <div class="h-20 w-full bg-surface-container-low rounded-xl"></div>
+        </div>
+      `;
+    } else if (mode === 'error') {
+      container.innerHTML = `
+        <div class="bg-surface-container-lowest rounded-xl p-space-xl shadow-md flex flex-col items-center justify-center text-center py-16 gap-space-md">
+          <div class="w-16 h-16 rounded-full bg-error-container text-error flex items-center justify-center">
+            <span class="material-symbols-outlined text-[36px]">sync_problem</span>
+          </div>
+          <div class="max-w-md">
+            <h3 class="font-headline-md text-headline-md font-bold text-on-surface">500 Server Telemetry Error</h3>
+            <p class="font-body-md text-body-md text-outline mt-1">
+              Unable to synchronize request ledger from Cairo Central Cluster Node. Retrying connection in background.
+            </p>
+          </div>
+          <button onclick="setSimState('active')" class="px-space-md h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-secondary transition-colors">
+            Reload Request Stream
+          </button>
+        </div>
+      `;
+    }
+  }
+
+  function renderDefaultCards() {
+    window.location.reload();
+  }
+
+  // Bilingual Direction Toggle
+  let isRTL = false;
+  function toggleLanguageDirection() {
+    isRTL = !isRTL;
+    const wrapper = document.getElementById('localized-wrapper');
+    const indicator = document.getElementById('lang-indicator');
+    if (isRTL) {
+      wrapper.setAttribute('dir', 'rtl');
+      indicator.innerText = '🌐 Switch to English (LTR)';
+    } else {
+      wrapper.setAttribute('dir', 'ltr');
+      indicator.innerText = '🌐 Switch to العربية (RTL)';
+    }
+  }
+
+  // Withdraw Modal Handler
+  function openWithdrawModal() {
+    document.getElementById('withdraw-modal').classList.remove('hidden');
+  }
+
+  function closeWithdrawModal() {
+    document.getElementById('withdraw-modal').classList.add('hidden');
+  }
+</script></main></div></body></html>
