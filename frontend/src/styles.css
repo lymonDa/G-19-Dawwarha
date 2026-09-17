@@ -1,3 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #17211E;
+    background-color: #F8FAF9;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  [dir="rtl"] {
+    font-family: 'IBM Plex Sans Arabic', Tahoma, sans-serif;
+  }
+
+  /* Accessible focus rings */
+  :focus-visible {
+    outline: 2px solid #2F806F;
+    outline-offset: 2px;
+  }
+
+  /* Remove default button focus ring outline when not keyboard focused */
+  button:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Responsive image containment */
+  img, svg, video {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Global scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F2F5F3;
+}
+::-webkit-scrollbar-thumb {
+  background: #DCE3E0;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8A9792;
+}
