@@ -15,6 +15,40 @@ export class OrganizationApiService {
   private api = inject(ApiBaseService);
 
   /**
+   * Retrieves current user's organization.
+   * Endpoint: GET /api/organizations/mine
+   */
+  getMyOrganization(): Observable<Organization> {
+    return this.api.get<{ success: boolean; data: any }>('/organizations/mine').pipe(
+      map(res => this.normalizeOrganization(res.data)),
+      catchError(err => {
+        return throwError(() => ({
+          statusCode: err?.status || 500,
+          code: err?.error?.error?.code || 'NOT_FOUND',
+          message: err?.error?.error?.message || 'تعذر العثور على بيانات المنظمة'
+        }));
+      })
+    );
+  }
+
+  /**
+   * Registers a new civil organization.
+   * Endpoint: POST /api/organizations
+   */
+  registerOrganization(payload: any): Observable<Organization> {
+    return this.api.post<{ success: boolean; data: any }>('/organizations', payload).pipe(
+      map(res => this.normalizeOrganization(res.data)),
+      catchError(err => {
+        return throwError(() => ({
+          statusCode: err?.status || 500,
+          code: err?.error?.error?.code || 'REGISTRATION_ERROR',
+          message: err?.error?.error?.message || 'Could not complete organization registration.'
+        }));
+      })
+    );
+  }
+
+  /**
    * Retrieves organization details by ID.
    * Endpoint: GET /api/organizations/:id
    */

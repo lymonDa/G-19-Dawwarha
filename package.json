@@ -9,6 +9,7 @@
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
     "install-backend": "cd backend && npm install",
-    "install-frontend": "cd frontend && npm install"
+    "install-frontend": "cd frontend && npm install",
+    "preview": "npm --prefix frontend run preview"
   }
 }

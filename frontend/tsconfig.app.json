@@ -9,11 +9,11 @@
     "src/main.ts"
   ],
   "include": [
-<<<<<<< HEAD
-    "src/**/*.d.ts"
-=======
     "src/**/*.d.ts",
     "src/**/*.ts"
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
+  ],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/test-setup.ts"
   ]
 }

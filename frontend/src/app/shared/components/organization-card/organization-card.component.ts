@@ -74,7 +74,7 @@ import { BadgeComponent } from '../../ui/badge/badge.component';
                 variant="danger"
                 size="sm"
                 [isLoading]="isProcessing"
-                (clicked)="reject.emit(org.id || (orgAny)._id)"
+                (clicked)="reject.emit(org.id)"
               >
                 رفض التوثيق
               </app-button>
@@ -82,7 +82,7 @@ import { BadgeComponent } from '../../ui/badge/badge.component';
                 variant="primary"
                 size="sm"
                 [isLoading]="isProcessing"
-                (clicked)="verify.emit(org.id || (orgAny)._id)"
+                (clicked)="verify.emit(org.id)"
               >
                 اعتماد وتوثيق
               </app-button>
@@ -105,24 +105,20 @@ export class OrganizationCardComponent {
   @Output() verify = new EventEmitter<string>();
   @Output() reject = new EventEmitter<string>();
 
-  get orgAny(): any {
-    return this.org as any;
-  }
-
   getCity(): string {
-    return this.orgAny?.contact?.city || this.orgAny?.contactInfo?.address?.city || '';
+    return this.org?.contact?.city || '';
   }
 
   getAddress(): string {
-    return this.orgAny?.contact?.address || this.orgAny?.contactInfo?.address?.street || '';
+    return this.org?.contact?.address || '';
   }
 
   getEmail(): string {
-    return this.orgAny?.contact?.email || this.orgAny?.contactInfo?.email || '';
+    return this.org?.contact?.email || '';
   }
 
   getStatus(): string {
-    return this.orgAny?.verificationStatus || this.orgAny?.verification?.status || 'pending';
+    return this.org?.verificationStatus || 'pending';
   }
 
   getTypeText(type: string): string {

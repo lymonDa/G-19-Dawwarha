@@ -71,7 +71,7 @@ export class SelectComponent implements ControlValueAccessor {
   @Input() label?: string;
   @Input() placeholder?: string;
   @Input() helperText?: string;
-  @Input() error?: string;
+  @Input() error?: string | null;
   @Input() disabled = false;
   @Input() required = false;
   @Input() options: SelectOption[] = [];

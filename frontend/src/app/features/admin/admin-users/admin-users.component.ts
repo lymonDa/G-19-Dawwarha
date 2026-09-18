@@ -1,10 +1,10 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiBaseService } from '../../../core/services/api-base.service';
+import { AdminApiService } from '../admin-api.service';
 import { ToastService } from '../../../core/services/toast.service';
-import { User, UserRole, UserStatus } from '../../../core/models/user.model';
-import { Paginated } from '../../../core/models/pagination.model';
+import { LanguageService } from '../../../core/services/language.service';
+import { User, UserRole } from '../../../core/models/user.model';
 import { TableComponent } from '../../../shared/ui/table/table.component';
 import { PaginationComponent } from '../../../shared/ui/pagination/pagination.component';
 import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
@@ -30,19 +30,19 @@ import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.
     SelectComponent
   ],
   template: `
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-6" [dir]="lang.direction()">
       <!-- Header -->
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-xl font-bold text-neutral-900">User & Account Management</h1>
-          <p class="text-xs text-neutral-500 mt-0.5">View and edit user and organization roles, suspend violating accounts.</p>
+          <h1 class="text-xl font-bold text-neutral-900">{{ lang.t().ADMIN_USERS_TITLE }}</h1>
+          <p class="text-xs text-neutral-500 mt-0.5">{{ lang.t().ADMIN_USERS_SUBTITLE }}</p>
         </div>
 
         <!-- Filters Bar -->
         <div class="flex items-center gap-2 w-full sm:w-auto">
           <div class="w-full sm:w-60">
             <app-search
-              [placeholder]="'Search by name or email...'"
+              [placeholder]="lang.t().ADMIN_SEARCH_USERS_PLACEHOLDER"
               [(ngModel)]="searchQuery"
               (search)="onSearchChange()"
               (cleared)="onSearchChange()"
@@ -53,7 +53,7 @@ import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.
             <app-select
               [options]="roleOptions"
               [(ngModel)]="roleFilter"
-              (ngModelChange)="loadUsers()"
+              (ngModelChange)="onRoleFilterChange()"
             ></app-select>
           </div>
         </div>
@@ -78,20 +78,32 @@ import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.
                 <app-skeleton variant="rectangular"></app-skeleton>
               </td>
             </tr>
+          } @else if (errorMessage()) {
+            <!-- Error State with Retry (No Fake Fallback Data) -->
+            <tr>
+              <td colspan="6" class="py-8 text-center">
+                <div class="flex flex-col items-center gap-2 text-xs text-danger-900">
+                  <span class="font-medium">{{ errorMessage() }}</span>
+                  <app-button variant="secondary" size="sm" (clicked)="loadUsers()">
+                    {{ lang.t().ADMIN_RETRY }}
+                  </app-button>
+                </div>
+              </td>
+            </tr>
           } @else if (users().length === 0) {
             <tr>
               <td colspan="6" class="py-8 text-center text-xs text-neutral-500">
-                No users found matching your search.
+                {{ lang.t().ADMIN_NO_USERS }}
               </td>
             </tr>
           } @else {
-            @for (user of users(); track (user.id || userAny(user)._id)) {
+            @for (user of users(); track user.id) {
               <tr class="hover:bg-neutral-50/80 transition-colors">
                 <!-- Name & Email -->
                 <td class="px-4 py-3">
                   <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-full bg-primary-100 text-primary-800 text-xs font-bold flex items-center justify-center shrink-0">
-                      {{ user.name.charAt(0) }}
+                      {{ user.name ? user.name.charAt(0) : 'U' }}
                     </div>
                     <div>
                       <p class="font-semibold text-neutral-900 text-xs">{{ user.name }}</p>
@@ -171,11 +183,13 @@ import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.
   `
 })
 export class AdminUsersComponent implements OnInit {
-  private api = inject(ApiBaseService);
+  private adminApi = inject(AdminApiService);
   private toast = inject(ToastService);
+  readonly lang = inject(LanguageService);
 
   readonly users = signal<User[]>([]);
   readonly isLoading = signal(true);
+  readonly errorMessage = signal<string | null>(null);
   readonly page = signal(1);
   readonly total = signal(0);
   readonly totalPages = signal(1);
@@ -199,70 +213,33 @@ export class AdminUsersComponent implements OnInit {
     this.loadUsers();
   }
 
-  userAny(user: User): any {
-    return user as any;
+  onRoleFilterChange(): void {
+    this.page.set(1);
+    this.loadUsers();
   }
 
   loadUsers(): void {
     this.isLoading.set(true);
-    const params: Record<string, any> = {
-      page: this.page(),
-      limit: this.limit
-    };
-    if (this.roleFilter) params['role'] = this.roleFilter;
-    if (this.searchQuery) params['search'] = this.searchQuery;
+    this.errorMessage.set(null);
 
-    this.api.get<any>('/admin/users', params).subscribe({
+    this.adminApi.getUsers({
+      page: this.page(),
+      limit: this.limit,
+      role: this.roleFilter || undefined,
+      search: this.searchQuery || undefined
+    }).subscribe({
       next: (res) => {
-        const raw = res.data || [];
-        const normalized = raw.map((u: any) => ({
-          ...u,
-          id: u._id || u.id
-        }));
-        const total = res.pagination?.total ?? res.total ?? normalized.length;
-        const totalPages = res.pagination?.totalPages ?? res.totalPages ?? Math.max(1, Math.ceil(total / this.limit));
-        this.users.set(normalized);
-        this.total.set(total);
-        this.totalPages.set(totalPages);
+        this.users.set(res.data);
+        this.total.set(res.total);
+        this.totalPages.set(res.totalPages);
         this.isLoading.set(false);
       },
       error: (err) => {
-        // Fallback demo data if backend offline
-        this.users.set([
-          {
-            id: 'u1',
-            name: 'Ahmed Mahmoud',
-            email: 'provider@dawwarha.org',
-            role: 'user',
-            status: 'active',
-            stats: { contributionsCount: 12, successfulTransfers: 12, rating: 4.9 },
-            createdAt: '2026-02-10T10:00:00Z'
-          },
-          {
-            id: 'u2',
-            name: 'Resalat Al-Kheir Association',
-            email: 'seeker@dawwarha.org',
-            role: 'organization',
-            status: 'active',
-            stats: { contributionsCount: 28, successfulTransfers: 26, rating: 5.0 },
-            createdAt: '2026-01-15T14:30:00Z'
-          },
-          {
-            id: 'u3',
-            name: 'System Administrator',
-            email: 'admin@dawwarha.org',
-            role: 'admin',
-            status: 'active',
-            stats: { contributionsCount: 0, successfulTransfers: 0, rating: 5.0 },
-            createdAt: '2026-01-01T00:00:00Z'
-          }
-        ]);
-        this.total.set(3);
+        this.users.set([]);
+        this.total.set(0);
         this.totalPages.set(1);
         this.isLoading.set(false);
-        if (err?.message) {
-          this.toast.error(err.message);
-        }
+        this.errorMessage.set(err?.message || 'Failed to fetch users list');
       }
     });
   }
@@ -287,11 +264,12 @@ export class AdminUsersComponent implements OnInit {
     if (!user) return;
 
     this.isProcessingAction.set(true);
-    const userId = (user as any)._id || user.id;
     const isSuspending = user.status === 'active';
-    const endpoint = isSuspending ? `/admin/users/${userId}/suspend` : `/admin/users/${userId}/reactivate`;
+    const action$ = isSuspending
+      ? this.adminApi.suspendUser(user.id)
+      : this.adminApi.reactivateUser(user.id);
 
-    this.api.put<{ success: boolean; data: User }>(endpoint, {}).subscribe({
+    action$.subscribe({
       next: () => {
         this.isProcessingAction.set(false);
         this.isDialogOpen.set(false);

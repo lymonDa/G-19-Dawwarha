@@ -2,17 +2,27 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiBaseService } from '../../../core/services/api-base.service';
+import { OrganizationApiService } from '../organization-api.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { InputComponent } from '../../../shared/ui/input/input.component';
 import { CardComponent } from '../../../shared/ui/card/card.component';
+import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.component';
+import { TextareaComponent } from '../../../shared/ui/textarea/textarea.component';
 import { OrganizationType } from '../../../core/models/organization.model';
 
 @Component({
   selector: 'app-org-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonComponent, InputComponent, CardComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonComponent,
+    InputComponent,
+    CardComponent,
+    SelectComponent,
+    TextareaComponent
+  ],
   template: `
     <div class="max-w-2xl mx-auto py-8">
       <div class="flex flex-col gap-6">
@@ -33,21 +43,13 @@ import { OrganizationType } from '../../../core/models/organization.model';
               [error]="getFieldError('name')"
             ></app-input>
 
-            <div class="flex flex-col gap-1.5">
-              <label class="text-sm font-medium text-neutral-900">
-                Organization Type <span class="text-danger">*</span>
-              </label>
-              <select
-                formControlName="type"
-                class="w-full px-3.5 py-2.5 bg-white text-neutral-900 text-sm rounded-md border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary"
-              >
-                <option value="ngo">Non-Governmental Organization (NGO)</option>
-                <option value="charity">Charitable Association</option>
-                <option value="community_group">Community / Youth Initiative</option>
-                <option value="educational">Educational Institution</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
+            <app-select
+              label="Organization Type"
+              [required]="true"
+              [options]="orgTypeOptions"
+              formControlName="type"
+              [error]="getFieldError('type')"
+            ></app-select>
 
             <app-input
               label="Official Registration / License Number (if applicable)"
@@ -55,15 +57,12 @@ import { OrganizationType } from '../../../core/models/organization.model';
               formControlName="registrationNumber"
             ></app-input>
 
-            <div class="flex flex-col gap-1.5">
-              <label class="text-sm font-medium text-neutral-900">About the Organization's Activities</label>
-              <textarea
-                formControlName="description"
-                rows="3"
-                placeholder="Write a brief description of your development or humanitarian focus..."
-                class="w-full px-3.5 py-2.5 bg-white text-neutral-900 text-sm rounded-md border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary"
-              ></textarea>
-            </div>
+            <app-textarea
+              label="About the Organization's Activities"
+              placeholder="Write a brief description of your development or humanitarian focus..."
+              [rows]="3"
+              formControlName="description"
+            ></app-textarea>
 
             <!-- Contact Fields -->
             <div class="pt-2 border-t border-neutral-100 flex flex-col gap-4">
@@ -123,11 +122,19 @@ import { OrganizationType } from '../../../core/models/organization.model';
 })
 export class OrgRegisterComponent {
   private fb = inject(FormBuilder);
-  private api = inject(ApiBaseService);
+  private orgApi = inject(OrganizationApiService);
   private router = inject(Router);
   private toast = inject(ToastService);
 
   readonly isLoading = signal(false);
+
+  readonly orgTypeOptions: SelectOption[] = [
+    { value: 'ngo', label: 'Non-Governmental Organization (NGO)' },
+    { value: 'charity', label: 'Charitable Association' },
+    { value: 'community_group', label: 'Community / Youth Initiative' },
+    { value: 'educational', label: 'Educational Institution' },
+    { value: 'other', label: 'Other' }
+  ];
 
   orgForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -173,7 +180,7 @@ export class OrgRegisterComponent {
       }
     };
 
-    this.api.post<{ success: boolean; data: any }>('/organizations', payload).subscribe({
+    this.orgApi.registerOrganization(payload).subscribe({
       next: () => {
         this.isLoading.set(false);
         this.toast.success('Organization registered successfully — your profile is under review.', 'Registered');

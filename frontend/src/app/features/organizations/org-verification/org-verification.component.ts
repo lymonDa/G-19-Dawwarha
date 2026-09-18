@@ -1,21 +1,12 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-<<<<<<< HEAD
 import { OrganizationApiService } from '../organization-api.service';
+import { ToastService } from '../../../core/services/toast.service';
 import { AuthService } from '../../../core/auth/auth.service';
 import { Organization, OrganizationVerificationStatus } from '../../../core/models/organization.model';
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
-=======
-import { ToastService } from '../../../core/services/toast.service';
-import { ApiBaseService } from '../../../core/services/api-base.service';
-import { AuthService } from '../../../core/auth/auth.service';
-import { CardComponent } from '../../../shared/ui/card/card.component';
-import { ButtonComponent } from '../../../shared/ui/button/button.component';
-import { InputComponent } from '../../../shared/ui/input/input.component';
-import { TextareaComponent } from '../../../shared/ui/textarea/textarea.component';
->>>>>>> f4df77b (fix(frontend): resolve audit issues and backend contract mismatches)
 import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
 import { VerificationBadgeComponent } from '../../../shared/components/verification-badge/verification-badge.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
@@ -23,7 +14,6 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
 @Component({
   selector: 'app-org-verification',
   standalone: true,
-<<<<<<< HEAD
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -33,9 +23,6 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
     VerificationBadgeComponent,
     SkeletonComponent
   ],
-=======
-  imports: [CommonModule, ReactiveFormsModule, CardComponent, ButtonComponent, InputComponent, TextareaComponent, BadgeComponent],
->>>>>>> f4df77b (fix(frontend): resolve audit issues and backend contract mismatches)
   template: `
     <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6" dir="rtl">
       <!-- Header -->
@@ -139,7 +126,6 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
               </div>
             }
 
-<<<<<<< HEAD
             <!-- Error Alert -->
             @if (errorMessage()) {
               <div class="p-3 mb-4 rounded-xl bg-danger-bg border border-danger/30 text-danger-900 text-xs flex items-center gap-2" role="alert">
@@ -149,14 +135,6 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
                 <span>{{ errorMessage() }}</span>
               </div>
             }
-=======
-          <app-textarea
-            label="Additional Notes for Admins"
-            formControlName="notes"
-            placeholder="Any additional information you'd like to clarify..."
-            [rows]="3"
-          ></app-textarea>
->>>>>>> f4df77b (fix(frontend): resolve audit issues and backend contract mismatches)
 
             <form [formGroup]="verificationForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
               <!-- Primary Document Link -->
@@ -208,12 +186,8 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
 })
 export class OrgVerificationComponent implements OnInit {
   private fb = inject(FormBuilder);
-<<<<<<< HEAD
   private orgApi = inject(OrganizationApiService);
-=======
   private toast = inject(ToastService);
-  private api = inject(ApiBaseService);
->>>>>>> f4df77b (fix(frontend): resolve audit issues and backend contract mismatches)
   private authService = inject(AuthService);
 
   readonly isLoading = signal<boolean>(true);
@@ -241,25 +215,22 @@ export class OrgVerificationComponent implements OnInit {
 
   loadOrgData(): void {
     this.isLoading.set(true);
-    const orgId = this.authService.currentUser()?.organizationId || 'demo-org-id';
+    const orgId = this.authService.currentUser()?.organizationId;
+
+    if (!orgId) {
+      this.isLoading.set(false);
+      this.errorMessage.set('لم يتم العثور على منظمة مسجلة لهذا الحساب.');
+      return;
+    }
 
     this.orgApi.getOrganizationById(orgId).subscribe({
       next: (org) => {
         this.organization.set(org);
         this.isLoading.set(false);
       },
-      error: () => {
-        // Fallback for demo when org ID is not yet created
-        this.organization.set({
-          id: orgId,
-          name: 'جمعية نهر العطاء للتنمية',
-          type: 'ngo',
-          verificationStatus: 'unverified',
-          ownerUserId: this.authService.currentUser()?.id || '',
-          contact: { email: '', phone: '', address: '', city: 'القاهرة' },
-          createdAt: new Date().toISOString()
-        });
+      error: (err) => {
         this.isLoading.set(false);
+        this.errorMessage.set(err?.message || 'تعذر جلب بيانات المنظمة.');
       }
     });
   }
@@ -274,7 +245,6 @@ export class OrgVerificationComponent implements OnInit {
     if (!org) return;
 
     this.isSubmitting.set(true);
-<<<<<<< HEAD
     this.errorMessage.set(null);
     this.successMessage.set(null);
 
@@ -289,11 +259,15 @@ export class OrgVerificationComponent implements OnInit {
           ...updatedOrg,
           verificationStatus: 'pending'
         });
-        this.successMessage.set('تم إرسال وثائق التوثيق بنجاح وهي قيد المراجعة الإدارية من قبل فريق العمل.');
+        const msg = 'تم إرسال وثائق التوثيق بنجاح وهي قيد المراجعة الإدارية من قبل فريق العمل.';
+        this.successMessage.set(msg);
+        this.toast.success(msg, 'تم التقديم بنجاح');
       },
       error: (err) => {
         this.isSubmitting.set(false);
-        this.errorMessage.set(err?.message || 'تعذر حفظ وثائق التوثيق.');
+        const errMsg = err?.message || 'تعذر حفظ وثائق التوثيق.';
+        this.errorMessage.set(errMsg);
+        this.toast.error(errMsg, 'خطأ');
       }
     });
   }
@@ -365,24 +339,5 @@ export class OrgVerificationComponent implements OnInit {
       default:
         return 'قم برفع وثائق التسجيل الرسمية للحصول على شارة التوثيق وتوسيع نطاق استلام الموارد.';
     }
-=======
-    const val = this.verificationForm.value;
-
-    const user = this.authService.currentUser();
-    const orgId = (user as any)?.organizationId || (user as any)?._id || 'mine';
-
-    this.api.put(`/organizations/${orgId}`, {
-      submittedDocuments: [val.docUrl]
-    }).subscribe({
-      next: () => {
-        this.isSubmitting.set(false);
-        this.toast.success('Verification documents submitted successfully. An admin will review them shortly.', 'Submitted');
-      },
-      error: (err) => {
-        this.isSubmitting.set(false);
-        this.toast.error(err?.message || 'Failed to submit verification documents. Please try again.', 'Error');
-      }
-    });
->>>>>>> f4df77b (fix(frontend): resolve audit issues and backend contract mismatches)
   }
 }

@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { ApiBaseService } from '../../../core/services/api-base.service';
+import { OrganizationApiService } from '../organization-api.service';
 import { Organization } from '../../../core/models/organization.model';
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
@@ -80,43 +80,37 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
 })
 export class OrgProfileComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private api = inject(ApiBaseService);
+  private orgApi = inject(OrganizationApiService);
 
   readonly org = signal<Organization | null>(null);
   readonly isLoading = signal(true);
 
   get isVerified(): boolean {
-    const o = this.org() as any;
-    if (!o) return false;
-    return o.verification?.status === 'approved' || o.verificationStatus === 'verified';
+    return this.org()?.verificationStatus === 'verified';
   }
 
   get contactEmail(): string {
-    const o = this.org() as any;
-    return o?.contactInfo?.email || o?.contact?.email || '';
+    return this.org()?.contact?.email || '';
   }
 
   get contactPhone(): string {
-    const o = this.org() as any;
-    return o?.contactInfo?.phone || o?.contact?.phone || '';
+    return this.org()?.contact?.phone || '';
   }
 
   get contactCity(): string {
-    const o = this.org() as any;
-    return o?.contactInfo?.address?.city || o?.contact?.city || '';
+    return this.org()?.contact?.city || '';
   }
 
   get contactAddress(): string {
-    const o = this.org() as any;
-    return o?.contactInfo?.address?.street || o?.contact?.address || '';
+    return this.org()?.contact?.address || '';
   }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.api.get<{ success: boolean; data: Organization }>(`/organizations/${id}`).subscribe({
-        next: (res) => {
-          this.org.set(res.data);
+      this.orgApi.getOrganizationById(id).subscribe({
+        next: (organization) => {
+          this.org.set(organization);
           this.isLoading.set(false);
         },
         error: () => {

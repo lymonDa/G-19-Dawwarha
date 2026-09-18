@@ -63,6 +63,7 @@ import { ButtonComponent } from '../button/button.component';
             <app-button
               [variant]="confirmVariant"
               [isLoading]="isLoading"
+              [disabled]="confirmDisabled"
               (clicked)="handleConfirm()"
             >
               {{ confirmText }}
@@ -79,6 +80,7 @@ export class DialogComponent implements OnChanges {
   @Input() confirmText = 'تأكيد';
   @Input() cancelText = 'إلغاء';
   @Input() confirmVariant: 'primary' | 'danger' = 'primary';
+  @Input() confirmDisabled = false;
   @Input() showCancel = true;
   @Input() isLoading = false;
 

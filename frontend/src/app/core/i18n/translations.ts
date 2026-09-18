@@ -81,6 +81,32 @@ export interface TranslationDictionary {
   FOOTER_LINKS_HEADER: string;
   FOOTER_ORGS_HEADER: string;
   FOOTER_COPYRIGHT: string;
+
+  // Admin Console
+  ADMIN_TITLE: string;
+  ADMIN_CONSOLE_VERSION: string;
+  ADMIN_BACK_TO_APP: string;
+  ADMIN_SIGN_OUT: string;
+  ADMIN_CONTROL_MONITORING: string;
+  ADMIN_NAV_DASHBOARD: string;
+  ADMIN_NAV_USERS: string;
+  ADMIN_NAV_ORGANIZATIONS: string;
+  ADMIN_NAV_RESOURCES: string;
+  ADMIN_NAV_REQUESTS: string;
+  ADMIN_NAV_REPORTS: string;
+  ADMIN_NAV_CATEGORIES: string;
+  ADMIN_MOBILE_NAV_TITLE: string;
+  ADMIN_USERS_TITLE: string;
+  ADMIN_USERS_SUBTITLE: string;
+  ADMIN_ORGS_TITLE: string;
+  ADMIN_ORGS_SUBTITLE: string;
+  ADMIN_SEARCH_USERS_PLACEHOLDER: string;
+  ADMIN_FILTER_ALL: string;
+  ADMIN_FILTER_PENDING: string;
+  ADMIN_FILTER_VERIFIED: string;
+  ADMIN_RETRY: string;
+  ADMIN_NO_USERS: string;
+  ADMIN_NO_ORGS: string;
 }
 
 export const translations: Record<'ar' | 'en', TranslationDictionary> = {
@@ -160,7 +186,32 @@ export const translations: Record<'ar' | 'en', TranslationDictionary> = {
     FOOTER_DESC: 'منصة رقمية موثوقة لإعادة توجيه وتدوير الموارد الفائضة والأجهزة والمستلزمات إلى الفئات الأكثر احتياجاً والجمعيات الأهلية، بنظام مطابق ذكي وتوثيق تسليم ثنائي.',
     FOOTER_LINKS_HEADER: 'روابط هامة',
     FOOTER_ORGS_HEADER: 'الجمعيات والمنظمات',
-    FOOTER_COPYRIGHT: '© 2026 دَوَّرها (Dawwarha). مشروع تخرج NTI - جميع الحقوق محفوظة.'
+    FOOTER_COPYRIGHT: '© 2026 دَوَّرها (Dawwarha). مشروع تخرج NTI - جميع الحقوق محفوظة.',
+
+    ADMIN_TITLE: 'دَوَّرها · العمليات الإدارية',
+    ADMIN_CONSOLE_VERSION: 'الإصدار 1.0',
+    ADMIN_BACK_TO_APP: 'العودة للمنصة',
+    ADMIN_SIGN_OUT: 'تسجيل الخروج',
+    ADMIN_CONTROL_MONITORING: 'التحكم والمتابعة',
+    ADMIN_NAV_DASHBOARD: 'لوحة المؤشرات والتحليلات',
+    ADMIN_NAV_USERS: 'المستخدمون والحسابات',
+    ADMIN_NAV_ORGANIZATIONS: 'المنظمات والتوثيق',
+    ADMIN_NAV_RESOURCES: 'الموارد المعروضة',
+    ADMIN_NAV_REQUESTS: 'طلبات الاحتياج',
+    ADMIN_NAV_REPORTS: 'البلاغات والرقابة',
+    ADMIN_NAV_CATEGORIES: 'إدارة التصنيفات',
+    ADMIN_MOBILE_NAV_TITLE: 'قائمة الإدارة',
+    ADMIN_USERS_TITLE: 'إدارة المستخدمين والحسابات',
+    ADMIN_USERS_SUBTITLE: 'عرض وإدارة أدوار المستخدمين والمنظمات، وتعليق الحسابات المخالفة.',
+    ADMIN_ORGS_TITLE: 'قائمة توثيق واعتماد المنظمات',
+    ADMIN_ORGS_SUBTITLE: 'فحص وثائق التسجيل الرسمية وشهادات الإشهار لمنح شارة التوثيق المعتمدة.',
+    ADMIN_SEARCH_USERS_PLACEHOLDER: 'البحث بالاسم أو البريد الإلكتروني...',
+    ADMIN_FILTER_ALL: 'الكل',
+    ADMIN_FILTER_PENDING: 'قيد المراجعة',
+    ADMIN_FILTER_VERIFIED: 'موثقة',
+    ADMIN_RETRY: 'إعادة المحاولة',
+    ADMIN_NO_USERS: 'لم يتم العثور على مستخدمين يطابقون معايير البحث.',
+    ADMIN_NO_ORGS: 'لا توجد منظمات تطابق التصفية الحالية.'
   },
   en: {
     BRAND_NAME: 'Dawwarha',
@@ -238,6 +289,31 @@ export const translations: Record<'ar' | 'en', TranslationDictionary> = {
     FOOTER_DESC: 'Civic infrastructure for urban surplus recovery and community reallocation with transparent rule-based matching and two-sided custody sign-offs.',
     FOOTER_LINKS_HEADER: 'Platform Links',
     FOOTER_ORGS_HEADER: 'Organizations',
-    FOOTER_COPYRIGHT: '© 2026 Dawwarha (دَوَّرها). NTI Graduation Project. All rights reserved.'
+    FOOTER_COPYRIGHT: '© 2026 Dawwarha (دَوَّرها). NTI Graduation Project. All rights reserved.',
+
+    ADMIN_TITLE: 'Dawwarha · Operations',
+    ADMIN_CONSOLE_VERSION: 'Console v1.0',
+    ADMIN_BACK_TO_APP: 'Back to App',
+    ADMIN_SIGN_OUT: 'Sign Out',
+    ADMIN_CONTROL_MONITORING: 'Control & Monitoring',
+    ADMIN_NAV_DASHBOARD: 'Dashboard & Analytics',
+    ADMIN_NAV_USERS: 'Users & Accounts',
+    ADMIN_NAV_ORGANIZATIONS: 'Organizations & Verification',
+    ADMIN_NAV_RESOURCES: 'Listed Resources',
+    ADMIN_NAV_REQUESTS: 'Demand Requests',
+    ADMIN_NAV_REPORTS: 'Reports & Moderation',
+    ADMIN_NAV_CATEGORIES: 'Manage Categories',
+    ADMIN_MOBILE_NAV_TITLE: 'Admin Navigation',
+    ADMIN_USERS_TITLE: 'User & Account Management',
+    ADMIN_USERS_SUBTITLE: 'View and edit user and organization roles, suspend violating accounts.',
+    ADMIN_ORGS_TITLE: 'Organization Verification Queue',
+    ADMIN_ORGS_SUBTITLE: 'Review supporting documents and official registration certificates to grant the Verified Badge.',
+    ADMIN_SEARCH_USERS_PLACEHOLDER: 'Search by name or email...',
+    ADMIN_FILTER_ALL: 'All',
+    ADMIN_FILTER_PENDING: 'Pending Review',
+    ADMIN_FILTER_VERIFIED: 'Verified',
+    ADMIN_RETRY: 'Retry',
+    ADMIN_NO_USERS: 'No users found matching your search.',
+    ADMIN_NO_ORGS: 'No organizations match the current filter.'
   }
 };

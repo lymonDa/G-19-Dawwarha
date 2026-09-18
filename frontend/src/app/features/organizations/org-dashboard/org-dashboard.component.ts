@@ -1,7 +1,7 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ApiBaseService } from '../../../core/services/api-base.service';
+import { OrganizationApiService } from '../organization-api.service';
 import { AuthService } from '../../../core/auth/auth.service';
 import { Organization } from '../../../core/models/organization.model';
 import { CardComponent } from '../../../shared/ui/card/card.component';
@@ -127,32 +127,19 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
   `
 })
 export class OrgDashboardComponent implements OnInit {
-  private api = inject(ApiBaseService);
+  private orgApi = inject(OrganizationApiService);
   authService = inject(AuthService);
 
   readonly org = signal<Organization | null>(null);
   readonly isLoading = signal(true);
 
   ngOnInit(): void {
-    const endpoint = '/organizations/mine';
+    const orgId = this.authService.currentUser()?.organizationId;
+    const request$ = orgId ? this.orgApi.getOrganizationById(orgId) : this.orgApi.getMyOrganization();
 
-    this.api.get<{ success: boolean; data: Organization }>(endpoint).subscribe({
-      next: (res) => {
-        const raw = res.data as any;
-        if (raw) {
-          const mapped: Organization = {
-            ...raw,
-            id: raw.id || raw._id,
-            verificationStatus: raw.verification?.status === 'approved' ? 'verified' : (raw.verification?.status || raw.verificationStatus || 'pending'),
-            contact: raw.contact || {
-              email: raw.contactInfo?.email || '',
-              phone: raw.contactInfo?.phone || '',
-              city: raw.contactInfo?.address?.city || 'Cairo',
-              address: raw.contactInfo?.address?.street || ''
-            }
-          };
-          this.org.set(mapped);
-        }
+    request$.subscribe({
+      next: (organization) => {
+        this.org.set(organization);
         this.isLoading.set(false);
       },
       error: () => {

@@ -156,10 +156,10 @@ export class ProfileComponent implements OnInit {
 
     this.authService.updateProfile({
       name,
-      contactInfo: { phone },
+      contactInfo: { phone: phone ? phone.trim() : undefined },
       location: { city, area },
       address: { city, area }
-    } as any).subscribe({
+    }).subscribe({
       next: () => {
         this.isSaving.set(false);
         this.profileForm.markAsPristine();

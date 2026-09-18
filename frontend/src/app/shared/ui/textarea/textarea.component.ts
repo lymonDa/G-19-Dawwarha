@@ -60,7 +60,7 @@ export class TextareaComponent implements ControlValueAccessor, AfterViewInit {
   @Input() label?: string;
   @Input() placeholder?: string;
   @Input() helperText?: string;
-  @Input() error?: string;
+  @Input() error?: string | null;
   @Input() disabled = false;
   @Input() readonly = false;
   @Input() required = false;

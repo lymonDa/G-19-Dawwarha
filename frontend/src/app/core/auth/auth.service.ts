@@ -4,12 +4,30 @@ import { User } from '../models/user.model';
 =======
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap, catchError, of } from 'rxjs';
+import { Observable, tap, catchError, of, map } from 'rxjs';
 import { ApiBaseService } from '../services/api-base.service';
 import { User, UserRole } from '../models/user.model';
 import { AuthSession, AuthResponse } from './auth-session.model';
 import { ToastService } from '../services/toast.service';
 >>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
+
+export interface UpdateProfilePayload {
+  name?: string;
+  contactInfo?: {
+    phone?: string;
+    email?: string;
+  };
+  location?: {
+    city: string;
+    area?: string;
+  };
+  address?: {
+    street?: string;
+    city?: string;
+    area?: string;
+    country?: string;
+  };
+}
 
 @Injectable({
   providedIn: 'root'
@@ -93,6 +111,20 @@ export class AuthService {
     this.restoreSession();
   }
 
+  private normalizeUser(data: any): User {
+    if (!data) return data;
+    const phone = data.contactInfo?.phone || data.phone;
+    return {
+      ...data,
+      id: data._id || data.id,
+      phone,
+      contactInfo: {
+        ...data.contactInfo,
+        phone
+      }
+    };
+  }
+
   private restoreLocalState(): void {
     if (typeof localStorage === 'undefined') return;
     const token = localStorage.getItem(this.TOKEN_KEY);
@@ -103,7 +135,7 @@ export class AuthService {
     if (userJson) {
       try {
         const user = JSON.parse(userJson) as User;
-        this.currentUserSignal.set(user);
+        this.currentUserSignal.set(this.normalizeUser(user));
       } catch {
         // Invalid stored json
       }
@@ -151,12 +183,13 @@ export class AuthService {
     const token = this.tokenSignal();
     if (!token) return;
 
-    this.api.get<{ success: boolean; data: User }>('/users/me').pipe(
+    this.api.get<{ success: boolean; data: any }>('/users/me').pipe(
       tap(res => {
         if (res && res.data) {
-          this.currentUserSignal.set(res.data);
+          const user = this.normalizeUser(res.data);
+          this.currentUserSignal.set(user);
           if (typeof localStorage !== 'undefined') {
-            localStorage.setItem(this.USER_KEY, JSON.stringify(res.data));
+            localStorage.setItem(this.USER_KEY, JSON.stringify(user));
           }
         }
       }),
@@ -167,8 +200,12 @@ export class AuthService {
     ).subscribe();
   }
 
-  updateProfile(data: Partial<User>): Observable<{ success: boolean; data: User }> {
-    return this.api.put<{ success: boolean; data: User }>('/users/me', data).pipe(
+  updateProfile(data: UpdateProfilePayload): Observable<{ success: boolean; data: User }> {
+    return this.api.put<{ success: boolean; data: any }>('/users/me', data).pipe(
+      map(res => ({
+        success: res.success,
+        data: this.normalizeUser(res.data)
+      })),
       tap(res => {
         if (res && res.data) {
           this.currentUserSignal.set(res.data);
@@ -182,11 +219,12 @@ export class AuthService {
   }
 
   private setSession(token: string, user: User): void {
+    const normalized = this.normalizeUser(user);
     this.tokenSignal.set(token);
-    this.currentUserSignal.set(user);
+    this.currentUserSignal.set(normalized);
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem(this.TOKEN_KEY, token);
-      localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+      localStorage.setItem(this.USER_KEY, JSON.stringify(normalized));
     }
   }
 

@@ -80,4 +80,38 @@ describe('AuthService', () => {
     expect(service.currentUser()).toBeNull();
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/']);
   });
+
+  it('should send contactInfo.phone on updateProfile and normalize user phone in local state', () => {
+    const updatedUserResponse = {
+      success: true,
+      data: {
+        _id: 'u1',
+        name: 'Ahmed Mahmoud Updated',
+        email: 'ahmed@test.com',
+        role: 'user',
+        status: 'active',
+        contactInfo: {
+          phone: '01012345678'
+        }
+      }
+    };
+    mockApi.put.mockReturnValue(of(updatedUserResponse));
+
+    service.updateProfile({
+      name: 'Ahmed Mahmoud Updated',
+      contactInfo: { phone: '01012345678' }
+    }).subscribe(res => {
+      expect(res.success).toBe(true);
+      expect(res.data.phone).toBe('01012345678');
+    });
+
+    expect(mockApi.put).toHaveBeenCalledWith('/users/me', {
+      name: 'Ahmed Mahmoud Updated',
+      contactInfo: { phone: '01012345678' }
+    });
+    expect(service.currentUser()?.phone).toBe('01012345678');
+    expect(service.currentUser()?.contactInfo?.phone).toBe('01012345678');
+    expect(mockToast.success).toHaveBeenCalled();
+  });
 });
+
