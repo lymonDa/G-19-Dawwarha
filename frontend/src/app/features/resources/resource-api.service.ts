@@ -60,13 +60,37 @@ export class ResourceApiService {
   private api = inject(ApiBaseService);
 
   list(filters: ResourceFilters = {}): Observable<ResourcesPage> {
-    return this.api.get<ResourcesListResponse>('/resources', filters as Record<string, any>).pipe(
+    const params: Record<string, any> = {};
+    if (filters.categoryId) params['categoryId'] = filters.categoryId;
+    if (filters.category) params['category'] = filters.category;
+    if (filters.city) params['city'] = filters.city;
+    if (filters.area) params['area'] = filters.area;
+    if (filters.status) params['status'] = filters.status;
+    if (filters.page) params['page'] = filters.page;
+    if (filters.limit) params['limit'] = filters.limit;
+
+    return this.api.get<ResourcesListResponse>('/resources', params).pipe(
       map(response => ({
-        items: response.data.map(raw => this.toResource(raw)),
-        total: response.pagination.total,
-        page: response.pagination.page,
-        limit: response.pagination.limit,
-        totalPages: response.pagination.totalPages
+        items: (response.data || []).map(raw => this.toResource(raw)),
+        total: response.pagination?.total ?? response.data?.length ?? 0,
+        page: response.pagination?.page ?? 1,
+        limit: response.pagination?.limit ?? 10,
+        totalPages: response.pagination?.totalPages ?? 1
+      }))
+    );
+  }
+
+  /**
+   * Safe helper to list the current user's resources by fetching and filtering by providerId.
+   * Prepared for when backend adds dedicated GET /api/resources/me or providerId query filter.
+   */
+  listMine(currentUserId: string): Observable<Resource[]> {
+    return this.list({ limit: 100 }).pipe(
+      map(page => page.items.filter(item => {
+        const pid = typeof item.providerId === 'object' && item.providerId !== null
+          ? (item.providerId as any)._id || (item.providerId as any).id
+          : item.providerId;
+        return String(pid) === String(currentUserId);
       }))
     );
   }
@@ -105,19 +129,21 @@ export class ResourceApiService {
     );
   }
 
-  private toResource(raw: ResourceApiResponse): Resource {
+  private toResource(raw: ResourceApiResponse | any): Resource {
     return {
-      id: raw._id,
+      id: raw._id || raw.id,
+      _id: raw._id,
       title: raw.title,
       categoryId: raw.categoryId,
+      category: typeof raw.categoryId === 'object' && raw.categoryId !== null ? raw.categoryId : undefined,
       quantity: raw.quantity,
       description: raw.description,
-      location: raw.location,
-      availabilityWindow: raw.availabilityWindow,
+      location: raw.location || { city: '' },
+      availabilityWindow: raw.availabilityWindow || { start: '', end: '' },
       status: raw.status,
       providerId: raw.providerId,
-      providerOrgId: raw.providerOrgId ?? undefined,
-      safetyDisclosure: raw.safetyDisclosure ?? undefined,
+      providerOrgId: raw.providerOrgId ?? null,
+      safetyDisclosure: raw.safetyDisclosure ?? null,
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt
     };

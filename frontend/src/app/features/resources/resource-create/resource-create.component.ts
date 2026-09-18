@@ -1,52 +1,519 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+
+import { ResourceApiService, CreateResourcePayload, UpdateResourcePayload } from '../resource-api.service';
+import { AuthService } from '../../../core/auth/auth.service';
+import { ToastService } from '../../../core/services/toast.service';
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { InputComponent } from '../../../shared/ui/input/input.component';
+import { TextareaComponent } from '../../../shared/ui/textarea/textarea.component';
+import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { CategorySelectorComponent } from '../../../shared/components/category-selector/category-selector.component';
+import { Resource } from '../../../core/models/resource.model';
+
+function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
+  const start = group.get('startDate')?.value;
+  const end = group.get('endDate')?.value;
+  if (start && end) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    if (endDate <= startDate) {
+      return { invalidDateRange: true };
+    }
+  }
+  return null;
+}
 
 @Component({
   selector: 'app-resource-create',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, CardComponent, ButtonComponent, InputComponent, CategorySelectorComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink,
+    CardComponent,
+    ButtonComponent,
+    InputComponent,
+    TextareaComponent,
+    SkeletonComponent,
+    CategorySelectorComponent
+  ],
   template: `
-    <div class="max-w-2xl mx-auto py-8 px-4 flex flex-col gap-6">
+    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6">
+      <!-- Back Navigation -->
+      <a
+        [routerLink]="isEdit ? ['/resources', resourceId] : ['/resources']"
+        class="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-500 hover:text-neutral-900 transition-colors"
+      >
+        <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>{{ isEdit ? 'Back to Resource Details' : 'Back to Resources' }}</span>
+      </a>
+
+      <!-- Page Heading -->
       <div>
-        <h1 class="text-2xl font-bold text-neutral-900">List a Surplus Resource</h1>
-        <p class="text-xs text-neutral-500 mt-0.5">Specify the resource details, quantity, and location to begin matching with organizations and recipients.</p>
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
+          {{ isEdit ? 'Edit Surplus Resource' : 'List a Surplus Resource' }}
+        </h1>
+        <p class="text-sm text-neutral-500 mt-1">
+          {{ isEdit
+            ? 'Update the resource specifications, quantity, or pickup window for this listing.'
+            : 'Specify the resource details, quantity, and location to begin matching with organizations and recipients.' }}
+        </p>
       </div>
 
-      <app-card padding="lg">
-        <form class="flex flex-col gap-4">
-          <app-input label="Resource Title" placeholder="e.g. 5 study desks in good condition" [required]="true"></app-input>
-
-          <app-category-selector [(ngModel)]="categoryId" name="categoryId" [required]="true"></app-category-selector>
-
-          <div class="grid grid-cols-2 gap-3">
-            <app-input label="Quantity" type="number" placeholder="1" [required]="true"></app-input>
-            <app-input label="Unit" placeholder="unit, box, piece"></app-input>
+      <!-- Loading State in Edit Mode -->
+      @if (isLoadingResource) {
+        <div class="space-y-4">
+          <app-skeleton variant="card" height="120px"></app-skeleton>
+          <app-skeleton variant="card" height="280px"></app-skeleton>
+        </div>
+      } @else if (terminalBlocked) {
+        <!-- Terminal State Notice -->
+        <div class="rounded-card border border-warning/30 bg-warning-bg p-6 text-sm text-neutral-800" role="alert">
+          <div class="flex items-start gap-3">
+            <svg class="h-6 w-6 text-warning shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <h3 class="font-bold text-base text-neutral-900">Editing Locked</h3>
+              <p class="mt-1 text-neutral-600">
+                This listing is in status <span class="font-bold uppercase tracking-wider text-xs px-2 py-0.5 rounded bg-neutral-200/80">{{ currentStatus }}</span> and can no longer be edited.
+              </p>
+              <div class="mt-4">
+                <a [routerLink]="['/resources', resourceId]">
+                  <app-button variant="outline" size="sm">View Resource</app-button>
+                </a>
+              </div>
+            </div>
           </div>
-
-          <div class="flex flex-col gap-1.5">
-            <label class="text-sm font-medium text-neutral-900">Description & Condition</label>
-            <textarea rows="3" placeholder="Describe the resource specs and any important details about its condition..." class="w-full px-3.5 py-2.5 bg-white border border-neutral-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"></textarea>
+        </div>
+      } @else {
+        <!-- Error Alert Banner -->
+        @if (errorMessage) {
+          <div class="rounded-card border border-danger/30 bg-danger-bg p-4 text-sm text-danger flex items-center gap-2" role="alert">
+            <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>{{ errorMessage }}</span>
           </div>
+        }
 
-          <div class="grid grid-cols-2 gap-3">
-            <app-input label="City" placeholder="Cairo" [required]="true"></app-input>
-            <app-input label="Neighborhood / Area" placeholder="Maadi" [required]="true"></app-input>
-          </div>
+        <!-- Reactive Form -->
+        <app-card padding="lg">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-6" novalidate>
+            <!-- 1. Resource Identity -->
+            <div class="space-y-4">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-100 pb-2">
+                1. Resource Details
+              </h3>
 
-          <div class="pt-4 flex justify-end">
-            <app-button variant="primary">Publish Resource & Activate Matching</app-button>
-          </div>
-        </form>
-      </app-card>
+              <div>
+                <app-input
+                  label="Resource Title"
+                  placeholder="e.g. 5 study desks in good condition"
+                  [required]="true"
+                  formControlName="title"
+                  [error]="isFieldTouched('title') ? titleError : null"
+                ></app-input>
+              </div>
+
+              <div>
+                <app-category-selector
+                  formControlName="categoryId"
+                  [required]="true"
+                ></app-category-selector>
+                @if (categoryError && isFieldTouched('categoryId')) {
+                  <p class="text-xs text-danger mt-1">{{ categoryError }}</p>
+                }
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <app-input
+                  label="Available Quantity"
+                  type="number"
+                  placeholder="1"
+                  [required]="true"
+                  formControlName="quantity"
+                  [error]="isFieldTouched('quantity') ? quantityError : null"
+                ></app-input>
+
+                <div class="flex flex-col justify-end">
+                  <span class="text-xs text-neutral-400 mb-2">Must be at least 1 unit</span>
+                </div>
+              </div>
+
+              <div>
+                <app-textarea
+                  label="Description & Specifications"
+                  placeholder="Describe the resource specs, condition, and any important details for recipients..."
+                  [required]="true"
+                  [rows]="4"
+                  formControlName="description"
+                  [error]="isFieldTouched('description') ? descriptionError : null"
+                ></app-textarea>
+              </div>
+            </div>
+
+            <!-- 2. Location Section -->
+            <div class="space-y-4">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-100 pb-2">
+                2. Pickup Location
+              </h3>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <app-input
+                  label="City"
+                  placeholder="e.g. Cairo"
+                  [required]="true"
+                  formControlName="city"
+                  [error]="isFieldTouched('city') ? cityError : null"
+                ></app-input>
+
+                <app-input
+                  label="Neighborhood / Area"
+                  placeholder="e.g. Maadi"
+                  formControlName="area"
+                ></app-input>
+              </div>
+            </div>
+
+            <!-- 3. Availability Window (Backend Mandated) -->
+            <div class="space-y-4">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-100 pb-2">
+                3. Availability Window
+              </h3>
+              <p class="text-xs text-neutral-500">
+                Specify the timeframe during which this resource is ready for collection.
+              </p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-sm font-medium text-neutral-900">
+                    Available From <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    formControlName="startDate"
+                    class="w-full rounded-md border border-neutral-200 bg-white px-3.5 py-2 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  />
+                  @if (startDateError && isFieldTouched('startDate')) {
+                    <p class="text-xs text-danger">{{ startDateError }}</p>
+                  }
+                </div>
+
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-sm font-medium text-neutral-900">
+                    Available Until <span class="text-danger">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    formControlName="endDate"
+                    class="w-full rounded-md border border-neutral-200 bg-white px-3.5 py-2 text-sm text-neutral-900 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  />
+                  @if (endDateError && isFieldTouched('endDate')) {
+                    <p class="text-xs text-danger">{{ endDateError }}</p>
+                  }
+                </div>
+              </div>
+
+              @if (form.errors?.['invalidDateRange'] && (form.get('endDate')?.touched || form.get('startDate')?.touched)) {
+                <div class="text-xs text-danger font-medium mt-1">
+                  Availability end date must be strictly after the start date.
+                </div>
+              }
+            </div>
+
+            <!-- 4. Safety & Compliance Disclosure -->
+            <div class="space-y-4">
+              <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-100 pb-2">
+                4. Safety & Condition Disclosure (Optional)
+              </h3>
+
+              <app-textarea
+                label="Safety Notes"
+                placeholder="Disclose any storage requirements, expiration notices, or sanitized handling details..."
+                [rows]="2"
+                formControlName="safetyDisclosure"
+              ></app-textarea>
+            </div>
+
+            <!-- Form Submission Action -->
+            <div class="pt-4 border-t border-neutral-100 flex items-center justify-end gap-3">
+              <a [routerLink]="isEdit ? ['/resources', resourceId] : ['/resources']">
+                <app-button variant="outline" type="button">Cancel</app-button>
+              </a>
+
+              <app-button
+                variant="primary"
+                type="submit"
+                [isLoading]="isSubmitting"
+                [disabled]="isSubmitting"
+              >
+                {{ isEdit ? 'Save Changes' : 'Publish Resource' }}
+              </app-button>
+            </div>
+          </form>
+        </app-card>
+      }
     </div>
   `
 })
-export class ResourceCreateComponent {
-  categoryId: string | null = null;
+export class ResourceCreateComponent implements OnInit {
+  private fb = inject(FormBuilder);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private resourceApi = inject(ResourceApiService);
+  private authService = inject(AuthService);
+  private toast = inject(ToastService);
+
+  isEdit = false;
+  resourceId: string | null = null;
+  isLoadingResource = false;
+  isSubmitting = false;
+  terminalBlocked = false;
+  currentStatus = '';
+  errorMessage: string | null = null;
+
+  readonly form: FormGroup = this.fb.group(
+    {
+      title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+      categoryId: [null, [Validators.required]],
+      quantity: [1, [Validators.required, Validators.min(1)]],
+      description: ['', [Validators.required, Validators.maxLength(1000)]],
+      city: ['', [Validators.required]],
+      area: [''],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
+      safetyDisclosure: ['']
+    },
+    { validators: dateRangeValidator }
+  );
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isEdit = true;
+      this.resourceId = id;
+      this.loadResourceForEdit(id);
+    }
+  }
+
+  isFieldTouched(name: string): boolean {
+    const c = this.form.get(name);
+    return !!(c && (c.touched || c.dirty));
+  }
+
+  get titleError(): string | null {
+    const ctrl = this.form.get('title');
+    if (ctrl?.errors) {
+      if (ctrl.errors['required']) return 'Title is required';
+      if (ctrl.errors['minlength']) return 'Title must be at least 3 characters';
+      if (ctrl.errors['maxlength']) return 'Title must be at most 100 characters';
+    }
+    return null;
+  }
+
+  get categoryError(): string | null {
+    const ctrl = this.form.get('categoryId');
+    if (ctrl?.errors?.['required']) {
+      return 'Category is required';
+    }
+    return null;
+  }
+
+  get quantityError(): string | null {
+    const ctrl = this.form.get('quantity');
+    if (ctrl?.errors) {
+      if (ctrl.errors['required']) return 'Quantity is required';
+      if (ctrl.errors['min']) return 'Quantity must be greater than 0';
+    }
+    return null;
+  }
+
+  get descriptionError(): string | null {
+    const ctrl = this.form.get('description');
+    if (ctrl?.errors) {
+      if (ctrl.errors['required']) return 'Description is required';
+      if (ctrl.errors['maxlength']) return 'Description must be at most 1000 characters';
+    }
+    return null;
+  }
+
+  get cityError(): string | null {
+    const ctrl = this.form.get('city');
+    if (ctrl?.errors?.['required']) {
+      return 'City is required';
+    }
+    return null;
+  }
+
+  get startDateError(): string | null {
+    const ctrl = this.form.get('startDate');
+    if (ctrl?.errors?.['required']) {
+      return 'Start date is required';
+    }
+    return null;
+  }
+
+  get endDateError(): string | null {
+    const ctrl = this.form.get('endDate');
+    if (ctrl?.errors?.['required']) {
+      return 'End date is required';
+    }
+    return null;
+  }
+
+  private loadResourceForEdit(id: string): void {
+    this.isLoadingResource = true;
+    this.resourceApi.get(id).subscribe({
+      next: (resource: Resource) => {
+        this.isLoadingResource = false;
+        this.currentStatus = resource.status;
+
+        // Terminal state check per Backend Plan Section 16 (terminal listings cannot be edited)
+        const terminalStates = ['completed', 'impact_recorded', 'cancelled', 'expired'];
+        if (terminalStates.includes(resource.status)) {
+          this.terminalBlocked = true;
+          return;
+        }
+
+        // Authorization check: owner or admin
+        const currentUserId = this.authService.currentUser()?.id || this.authService.currentUser()?._id;
+        const providerId = typeof resource.providerId === 'object' && resource.providerId !== null
+          ? (resource.providerId as any)._id || (resource.providerId as any).id
+          : resource.providerId;
+
+        const isOwner = currentUserId && String(providerId) === String(currentUserId);
+        const isAdmin = this.authService.isAdmin();
+
+        if (!isOwner && !isAdmin) {
+          this.errorMessage = "You do not have permission to edit this resource.";
+          this.terminalBlocked = true;
+          return;
+        }
+
+        // Pre-fill form
+        const categoryId = typeof resource.categoryId === 'object' && resource.categoryId !== null
+          ? (resource.categoryId as any)._id || (resource.categoryId as any).id
+          : resource.categoryId;
+
+        const startDate = resource.availabilityWindow?.start
+          ? this.formatDateForInput(resource.availabilityWindow.start)
+          : '';
+        const endDate = resource.availabilityWindow?.end
+          ? this.formatDateForInput(resource.availabilityWindow.end)
+          : '';
+
+        this.form.patchValue({
+          title: resource.title || '',
+          categoryId: categoryId || null,
+          quantity: resource.quantity || 1,
+          description: resource.description || '',
+          city: resource.location?.city || '',
+          area: resource.location?.area || '',
+          startDate,
+          endDate,
+          safetyDisclosure: resource.safetyDisclosure || ''
+        });
+      },
+      error: (err) => {
+        this.isLoadingResource = false;
+        this.errorMessage = err?.error?.error?.message || err?.error?.message || 'Could not load resource details.';
+      }
+    });
+  }
+
+  onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    if (this.isSubmitting || this.terminalBlocked) return;
+    this.isSubmitting = true;
+    this.errorMessage = null;
+
+    const val = this.form.value;
+    const startIso = new Date(val.startDate).toISOString();
+    const endIso = new Date(val.endDate).toISOString();
+
+    if (this.isEdit && this.resourceId) {
+      const payload: UpdateResourcePayload = {
+        title: val.title.trim(),
+        categoryId: val.categoryId,
+        quantity: Number(val.quantity),
+        description: val.description.trim(),
+        location: {
+          city: val.city.trim(),
+          area: val.area ? val.area.trim() : undefined
+        },
+        availabilityWindow: {
+          start: startIso,
+          end: endIso
+        },
+        safetyDisclosure: val.safetyDisclosure ? val.safetyDisclosure.trim() : undefined
+      };
+
+      this.resourceApi.update(this.resourceId, payload).subscribe({
+        next: (updated) => {
+          this.isSubmitting = false;
+          this.toast.success('Resource updated successfully');
+          this.router.navigate(['/resources', updated.id]);
+        },
+        error: (err) => {
+          this.isSubmitting = false;
+          this.errorMessage = err?.error?.error?.message || err?.error?.message || 'Failed to update resource.';
+        }
+      });
+    } else {
+      const payload: CreateResourcePayload = {
+        title: val.title.trim(),
+        categoryId: val.categoryId,
+        quantity: Number(val.quantity),
+        description: val.description.trim(),
+        location: {
+          city: val.city.trim(),
+          area: val.area ? val.area.trim() : undefined
+        },
+        availabilityWindow: {
+          start: startIso,
+          end: endIso
+        },
+        safetyDisclosure: val.safetyDisclosure ? val.safetyDisclosure.trim() : undefined
+      };
+
+      this.resourceApi.create(payload).subscribe({
+        next: (created) => {
+          this.isSubmitting = false;
+          this.toast.success('Resource listed successfully');
+          this.router.navigate(['/resources', created.id]);
+        },
+        error: (err) => {
+          this.isSubmitting = false;
+          this.errorMessage = err?.error?.error?.message || err?.error?.message || 'Failed to list resource.';
+        }
+      });
+    }
+  }
+
+  private formatDateForInput(dateStr: string): string {
+    try {
+      const d = new Date(dateStr);
+      return d.toISOString().split('T')[0];
+    } catch {
+      return '';
+    }
+  }
 }

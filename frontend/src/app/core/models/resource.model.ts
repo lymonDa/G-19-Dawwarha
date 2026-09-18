@@ -1,4 +1,5 @@
 import { Category } from './category.model';
+import { User } from './user.model';
 
 export type ResourceStatus =
   | 'draft'
@@ -28,31 +29,40 @@ export type ResourceLifecycleAction =
   | 'logImpact'
   | 'reopen';
 
+export interface ResourceLocation {
+  city: string;
+  area?: string;
+}
+
+export interface ResourceAvailabilityWindow {
+  start: string;
+  end: string;
+}
+
 export interface ResourceFilters {
+  category?: string;
   categoryId?: string;
-  status?: ResourceStatus;
   city?: string;
+  area?: string;
+  status?: ResourceStatus | ResourceStatus[];
   page?: number;
   limit?: number;
-  [key: string]: any;
 }
 
 export interface Resource {
   id: string;
   _id?: string;
   title: string;
-  category?: Category;
-  categoryId?: string;
-  quantity: number;
-  unit?: string;
   description: string;
-  location: { area?: string; city: string };
-  availabilityWindow?: { start?: string; end?: string; startDate?: string; endDate?: string };
+  categoryId?: string;
+  category?: Category;
+  quantity: number;
+  location: ResourceLocation;
+  availabilityWindow: ResourceAvailabilityWindow;
   status: ResourceStatus;
-  providerId: string;
-  providerOrgId?: string;
-  imageUrl?: string;
-  safetyDisclosure?: string;
+  providerId: string | User;
+  providerOrgId?: string | null;
+  safetyDisclosure?: string | null;
   createdAt: string;
   updatedAt?: string;
 }

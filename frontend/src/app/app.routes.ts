@@ -87,6 +87,12 @@ export const appRoutes: Routes = [
         title: 'عرض مورد جديد — دَوَّرها'
       },
       {
+        path: 'resources/:id/edit',
+        loadComponent: () =>
+          import('./features/resources/resource-create/resource-create.component').then(m => m.ResourceCreateComponent),
+        title: 'تعديل المورد المعروض — دَوَّرها'
+      },
+      {
         path: 'resources/mine',
         loadComponent: () =>
           import('./features/resources/my-resources/my-resources.component').then(m => m.MyResourcesComponent),

@@ -20,6 +20,22 @@ interface CategoriesListResponse {
   data: CategoryApiResponse[];
 }
 
+interface CategoryDetailResponse {
+  success: boolean;
+  data: CategoryApiResponse;
+}
+
+export interface CreateCategoryPayload {
+  name: string;
+  description: string;
+}
+
+export interface UpdateCategoryPayload {
+  name?: string;
+  description?: string;
+  isActive?: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,6 +64,27 @@ export class CategoryApiService {
         this.loaded = true;
       }),
       finalize(() => this.isLoading.set(false))
+    );
+  }
+
+  create(payload: CreateCategoryPayload): Observable<Category> {
+    return this.api.post<CategoryDetailResponse>('/categories', payload).pipe(
+      map(response => this.toCategory(response.data)),
+      tap(() => this.list(true).subscribe())
+    );
+  }
+
+  update(id: string, payload: UpdateCategoryPayload): Observable<Category> {
+    return this.api.put<CategoryDetailResponse>(`/categories/${id}`, payload).pipe(
+      map(response => this.toCategory(response.data)),
+      tap(() => this.list(true).subscribe())
+    );
+  }
+
+  delete(id: string): Observable<Category> {
+    return this.api.delete<CategoryDetailResponse>(`/categories/${id}`).pipe(
+      map(response => this.toCategory(response.data)),
+      tap(() => this.list(true).subscribe())
     );
   }
 
