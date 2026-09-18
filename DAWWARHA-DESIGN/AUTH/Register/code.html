@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#b6eedc","inverse-on-surface":"#eaf3ee","outline":"#6f7975","primary-fixed":"#a3f2dd","on-error-container":"#93000a","on-secondary-container":"#396e5f","on-secondary-fixed":"#002019","on-tertiary-fixed":"#2d1600","on-secondary":"#ffffff","surface":"#f2fbf6","surface-container":"#e7f0eb","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#184f42","surface-container-highest":"#dbe5e0","on-primary-container":"#ebfff7","on-error":"#ffffff","surface-variant":"#dbe5e0","on-tertiary-container":"#fffaf8","primary-container":"#2f806f","on-surface-variant":"#3f4946","surface-container-lowest":"#ffffff","outline-variant":"#bec9c4","primary-fixed-dim":"#87d5c1","on-primary-fixed":"#00201a","error":"#ba1a1a","surface-container-high":"#e1eae5","on-tertiary-fixed-variant":"#6a3b00","secondary-container":"#b6eedc","surface-bright":"#f2fbf6","on-background":"#151d1a","error-container":"#ffdad6","on-primary-fixed-variant":"#005143","surface-container-low":"#edf6f1","secondary-fixed-dim":"#9bd2c0","surface-tint":"#106a5a","background":"#f2fbf6","inverse-surface":"#2a322f","secondary":"#33685a","on-surface":"#151d1a","inverse-primary":"#87d5c1","tertiary-fixed-dim":"#feb874","primary":"#076757","tertiary":"#834f14","surface-dim":"#d3dcd7","tertiary-container":"#9f672b","tertiary-fixed":"#ffdcbf","on-primary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-xs":"0.25rem","space-lg":"1.5rem","margin":"2rem","gutter":"1.5rem","space-sm":"0.5rem","gutter-mobile":"1rem","margin-mobile":"1rem","space-xl":"2.5rem"},"fontFamily":{"headline-md":["Inter"],"body-sm":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"display-lg":["Inter"],"label-sm":["Inter"],"headline-sm":["Inter"],"code-sm":["Inter"],"headline-lg":["Inter"],"display-lg-mobile":["Inter"],"headline-lg-mobile":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-sm":["0.8125rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","fontWeight":"400"}],"body-md":["0.9375rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"display-lg":["3.5rem",{"lineHeight":"4rem","letterSpacing":"-0.02em","fontWeight":"600"}],"label-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}],"headline-sm":["1.125rem",{"lineHeight":"1.5rem","fontWeight":"500"}],"code-sm":["0.8125rem",{"lineHeight":"1.125rem","fontWeight":"400"}],"headline-lg":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.015em","fontWeight":"600"}],"display-lg-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg-mobile":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"500"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest border-b border-surface-variant"><div class="h-16 max-w-7xl mx-auto px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-sm"><a class="flex items-center gap-space-sm" data-path="browse-resources" href="#"><img alt="Dawwarha Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XOT7uJUAmNDQ0yopBY1_ogVvlzexeTk-j61J4o-cNjpgjmGQguLZoN0P_TP0nmzZRrw38vUGANTli6INJN2Oqc0v6NbWF53xLg5ftVXuG1vw8fq-8pvPmhXTKQmeZVeQXVP6vJ9WMQ2TV1QkNEwUcYDzWgQkgyDLg955mFHKs0INuQyb2t2w_LpLyruHk-XE0FJZk8LIa75OjwlUv0ou7Lh-pJ7lAZUB3tjPR4fWk9QHHWzpRgq2WsZGov"/><div class="flex items-baseline gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Dawwarha</span><span class="font-body-sm text-body-sm text-on-surface-variant" dir="rtl">دَوِّرها</span></div></a><div class="hidden sm:inline-flex items-center gap-space-xs px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container border border-outline-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[14px] text-primary">verified_user</span><span>Verified Auth Gateway</span></div></div><div class="flex items-center gap-space-sm"><button class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg border border-surface-variant bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">language</span><span>English</span><span class="text-outline-variant">|</span><span dir="rtl">العربية</span></button><a class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-lg border border-surface-variant text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-colors" data-path="browse-resources" href="#"><span class="material-symbols-outlined text-[16px]">arrow_back</span><span>Back to Platform</span></a></div></div></header><main class="w-full pt-16 flex-1 flex flex-col items-center justify-center bg-surface"><div class="flex flex-col w-full">
+<!-- Live State Emulator Controls Toolbar -->
+<aside class="w-full bg-surface-container-lowest border-b border-surface-variant py-space-sm px-margin sticky top-16 z-40">
+<div class="max-w-4xl mx-auto flex flex-wrap items-center justify-between gap-space-sm text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-semibold text-on-surface">Interactive Prototype Controls:</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<button class="state-pill px-space-sm py-1 rounded-full border border-surface-variant bg-surface-container text-on-surface hover:bg-surface-variant transition-colors" data-active="true" onclick="setScreenState(1, 'valid')" type="button">
+          Step 1: Default
+        </button>
+<button class="state-pill px-space-sm py-1 rounded-full border border-surface-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-colors" onclick="setScreenState(1, 'error')" type="button">
+          Step 1: Errors
+        </button>
+<button class="state-pill px-space-sm py-1 rounded-full border border-surface-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-colors" onclick="setScreenState(2, 'individual')" type="button">
+          Step 2: Individual
+        </button>
+<button class="state-pill px-space-sm py-1 rounded-full border border-surface-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-colors" onclick="setScreenState(3, 'org')" type="button">
+          Step 3: Org Protocol
+        </button>
+<button class="state-pill px-space-sm py-1 rounded-full border border-surface-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-colors" onclick="setScreenState('loading')" type="button">
+          Loading State
+        </button>
+<button class="state-pill px-space-sm py-1 rounded-full border border-surface-variant bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-colors" onclick="setScreenState('success')" type="button">
+          Success Ledger
+        </button>
+<button class="px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-medium hover:bg-secondary-fixed transition-colors flex items-center gap-1" id="langToggleBtn" onclick="toggleLanguage()" type="button">
+<span class="material-symbols-outlined text-[14px]">translate</span>
+<span id="langBtnText">عربي (RTL)</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Central Canvas -->
+<div class="w-full max-w-3xl mx-auto px-margin-mobile sm:px-margin py-space-xl transition-all duration-300" id="registrationCanvas">
+<!-- Registration Header -->
+<div class="text-center mb-space-lg">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm mb-space-xs">
+<span class="material-symbols-outlined text-[15px] text-primary">hub</span>
+<span data-i18n="badge-civic-gateway">Egypt Civic Redistribution Network</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-space-xs tracking-tight" data-i18n="title-main">
+        Create Your Dawwarha Custody Identity
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto" data-i18n="desc-main">
+        Transparent community custody. Connecting surplus food, educational equipment, and domestic supplies to verified community hubs with zero monetization.
+      </p>
+</div>
+<!-- Stepper Navigation Indicator -->
+<div class="mb-space-lg bg-surface-container-lowest rounded-xl border border-surface-variant p-space-sm" id="stepperIndicator">
+<div class="grid grid-cols-3 gap-space-xs text-center font-label-sm text-label-sm">
+<div class="flex items-center justify-center gap-space-xs py-2 px-space-xs rounded-lg bg-surface-container text-primary font-semibold transition-all" id="stepTab1">
+<span class="step-badge h-5 w-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[11px] font-bold">1</span>
+<span class="truncate" data-i18n="step1-title">Basic Account</span>
+</div>
+<div class="flex items-center justify-center gap-space-xs py-2 px-space-xs rounded-lg text-on-surface-variant transition-all" id="stepTab2">
+<span class="step-badge h-5 w-5 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-[11px] font-bold">2</span>
+<span class="truncate" data-i18n="step2-title">Role &amp; Stakeholder</span>
+</div>
+<div class="flex items-center justify-center gap-space-xs py-2 px-space-xs rounded-lg text-on-surface-variant transition-all opacity-60" id="stepTab3">
+<span class="step-badge h-5 w-5 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-[11px] font-bold">3</span>
+<span class="truncate" data-i18n="step3-title">Org Verification</span>
+</div>
+</div>
+</div>
+<!-- Master Form Shell -->
+<div class="bg-surface-container-lowest rounded-[14px] border border-surface-variant shadow-sm overflow-hidden">
+<!-- STEP 1 CONTAINER -->
+<section class="p-space-lg space-y-space-md" id="stepSection1">
+<div class="border-b border-surface-variant pb-space-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface" data-i18n="step1-header">Personal Credentials &amp; Civic Node</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="step1-sub">All custody handovers require verified localized accountability.</p>
+</div>
+<form class="space-y-space-md" id="step1Form" onsubmit="event.preventDefault(); goToStep(2);">
+<!-- Full Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1" data-i18n="label-name" for="fullName">
+              Full Legal Name / Designated Representative
+            </label>
+<div class="relative">
+<input class="w-full h-10 px-3 bg-surface-container-lowest border border-surface-variant rounded-lg text-on-surface text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" id="fullName" placeholder="e.g. Laila Mohamed Ahmed" required="" type="text" value="Dr. Laila El-Mansouri"/>
+</div>
+<p class="hidden text-error font-body-sm text-body-sm mt-1 flex items-center gap-1" id="nameError">
+<span class="material-symbols-outlined text-[14px]">error</span>
+<span data-i18n="err-name">Please enter your legal identifying name.</span>
+</p>
+</div>
+<!-- Email -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="font-label-md text-label-md text-on-surface" data-i18n="label-email" for="emailInput">
+                Institutional / Primary Email
+              </label>
+<span class="font-code-sm text-code-sm text-on-surface-variant" data-i18n="used-for-jwt">Used for JWT authentication</span>
+</div>
+<div class="relative">
+<input class="w-full h-10 px-3 bg-surface-container-lowest border border-surface-variant rounded-lg text-on-surface text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" id="emailInput" placeholder="name@organization.org or personal email" required="" type="email" value="laila.mansouri@cairo-relief.org"/>
+</div>
+<p class="hidden text-error font-body-sm text-body-sm mt-1 flex items-center gap-1" id="emailError">
+<span class="material-symbols-outlined text-[14px]">error</span>
+<span data-i18n="err-email">Valid email format required for audit handshakes.</span>
+</p>
+</div>
+<!-- Password & Requirements -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1" data-i18n="label-password" for="passwordInput">
+              Secure Custody Password
+            </label>
+<div class="relative">
+<input class="w-full h-10 px-3 pr-10 rtl:pr-3 rtl:pl-10 bg-surface-container-lowest border border-surface-variant rounded-lg text-on-surface text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" id="passwordInput" required="" type="password" value="CivicCairo#2025"/>
+<button aria-label="Toggle password visibility" class="absolute right-2 rtl:right-auto rtl:left-2 top-2 text-on-surface-variant hover:text-on-surface p-1" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined text-[18px]" id="pwdEyeIcon">visibility</span>
+</button>
+</div>
+<!-- Dynamic Password Checks -->
+<div class="mt-2 grid grid-cols-3 gap-space-xs font-label-sm text-label-sm">
+<div class="flex items-center gap-1 text-primary" id="pwdRuleLen">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span data-i18n="pwd-rule-len">8+ characters</span>
+</div>
+<div class="flex items-center gap-1 text-primary" id="pwdRuleNum">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span data-i18n="pwd-rule-num">1+ number</span>
+</div>
+<div class="flex items-center gap-1 text-primary" id="pwdRuleSpec">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span data-i18n="pwd-rule-spec">1+ symbol / case</span>
+</div>
+</div>
+<p class="hidden text-error font-body-sm text-body-sm mt-1 flex items-center gap-1" id="passwordError">
+<span class="material-symbols-outlined text-[14px]">error</span>
+<span data-i18n="err-pwd">Password must satisfy all security parameters.</span>
+</p>
+</div>
+<!-- Location (Governorate & Operational District) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1" data-i18n="label-gov" for="citySelect">
+                Governorate (المحافظة)
+              </label>
+<select class="w-full h-10 px-3 bg-surface-container-lowest border border-surface-variant rounded-lg text-on-surface text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" id="citySelect">
+<option selected="" value="cairo">Cairo (القاهرة)</option>
+<option value="giza">Giza (الجيزة)</option>
+<option value="alexandria">Alexandria (الإسكندرية)</option>
+<option value="dakahlia">Dakahlia (الدقهلية)</option>
+<option value="qalyubia">Qalyubia (القليوبية)</option>
+<option value="sharqia">Sharqia (الشرقية)</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1" data-i18n="label-district" for="districtInput">
+                Primary District / Area (الحي / المنطقة)
+              </label>
+<input class="w-full h-10 px-3 bg-surface-container-lowest border border-surface-variant rounded-lg text-on-surface text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" id="districtInput" placeholder="e.g. Dokki, Nasr City, Mohandessin" required="" type="text" value="Maadi &amp; Old Cairo"/>
+</div>
+</div>
+<div class="pt-space-sm flex justify-end">
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-primary hover:bg-on-secondary-fixed-variant text-on-primary font-label-md text-label-md transition-colors shadow-sm" type="submit">
+<span data-i18n="btn-continue-role">Continue to Role Verification</span>
+<span class="material-symbols-outlined text-[18px] rtl:rotate-180">arrow_forward</span>
+</button>
+</div>
+</form>
+</section>
+<!-- STEP 2 CONTAINER (ROLE SELECTION) -->
+<section class="hidden p-space-lg space-y-space-md" id="stepSection2">
+<div class="border-b border-surface-variant pb-space-sm">
+<h2 class="font-headline-sm text-headline-sm text-on-surface" data-i18n="step2-header">Select Your Stakeholder Capacity</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="step2-sub">Defines logistics permissions, custody receipt generation, and resource distribution volume.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Card A: Individual Citizen -->
+<div class="cursor-pointer border-2 border-surface-variant rounded-xl p-space-md hover:border-primary/50 transition-all bg-surface-container-lowest flex flex-col justify-between group" id="roleCardIndividual" onclick="selectRole('individual')">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="h-10 w-10 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[22px]">person</span>
+</div>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container border border-outline-variant" data-i18n="badge-instant">
+                  Instant Access
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1" data-i18n="role-ind-title">
+                Individual / Household
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm" data-i18n="role-ind-desc">
+                For private citizens donating surplus personal items, seasonal clothing, or requesting neighborhood aid parcels.
+              </p>
+<ul class="font-body-sm text-body-sm text-on-surface-variant space-y-1">
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span>
+<span data-i18n="role-ind-point1">Single parcel listings up to 50kg</span>
+</li>
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span>
+<span data-i18n="role-ind-point2">Direct peer or hub handovers</span>
+</li>
+</ul>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-surface-variant flex items-center justify-between text-primary font-label-md text-label-md">
+<span data-i18n="btn-select-individual">Select Individual</span>
+<span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+</div>
+</div>
+<!-- Card B: Civic Organization -->
+<div class="cursor-pointer border-2 border-primary rounded-xl p-space-md bg-surface-container-low transition-all flex flex-col justify-between group shadow-sm" id="roleCardOrg" onclick="selectRole('organization')">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="h-10 w-10 rounded-lg bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">corporate_fare</span>
+</div>
+<span class="font-label-sm text-label-sm px-space-xs py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-semibold" data-i18n="badge-moss">
+                  MOSS Verified Access
+                </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1" data-i18n="role-org-title">
+                Civic Organization / NGO
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm" data-i18n="role-org-desc">
+                For accredited food banks, soup kitchens, public clinics, emergency shelters, and educational endowments.
+              </p>
+<ul class="font-body-sm text-body-sm text-on-surface-variant space-y-1">
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span>
+<span data-i18n="role-org-point1">Bulk standing claims &amp; pallet redistribution</span>
+</li>
+<li class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span>
+<span data-i18n="role-org-point2">Tax-free custody transfer chain slips</span>
+</li>
+</ul>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-surface-variant flex items-center justify-between text-primary font-label-md text-label-md font-semibold">
+<span data-i18n="btn-org-selected">Selected for Verification</span>
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+</div>
+</div>
+<div class="pt-space-sm flex items-center justify-between">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 rounded-lg border border-surface-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" onclick="goToStep(1)" type="button">
+<span class="material-symbols-outlined text-[18px] rtl:rotate-180">arrow_back</span>
+<span data-i18n="btn-back">Back</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-primary hover:bg-on-secondary-fixed-variant text-on-primary font-label-md text-label-md transition-colors shadow-sm" id="roleContinueBtn" onclick="proceedFromRole()" type="button">
+<span data-i18n="btn-continue-org-protocol" id="roleContinueText">Proceed to Verification Protocol</span>
+<span class="material-symbols-outlined text-[18px] rtl:rotate-180">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- STEP 3 CONTAINER (ORGANIZATION VERIFICATION PROTOCOL) -->
+<section class="hidden p-space-lg space-y-space-md" id="stepSection3">
+<div class="border-b border-surface-variant pb-space-sm">
+<div class="flex items-center gap-space-xs text-primary font-label-sm text-label-sm mb-1">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span data-i18n="badge-accreditation">Civic Trust &amp; Anti-Fraud Ledger</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface" data-i18n="step3-header">Institutional Accreditation &amp; MOSS Registry</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="step3-sub">Dawwarha guarantees zero resale or commercial exploitation of redirected assets.</p>
+</div>
+<!-- Institutional Transparency Banner -->
+<div class="bg-surface-container-low rounded-xl p-space-md border border-surface-variant flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">policy</span>
+<div class="font-body-sm text-body-sm">
+<strong class="text-on-surface font-semibold" data-i18n="org-notice-title">24-Hour Express Review Guarantee:</strong>
+<p class="text-on-surface-variant mt-0.5" data-i18n="org-notice-desc">
+              Your organization account is created immediately with browse capability. Bulk logistics claims unlock within 24 hours once Ministry of Social Solidarity (MOSS) registry records are audited.
+            </p>
+</div>
+</div>
+<form class="space-y-space-md" id="orgForm" onsubmit="event.preventDefault(); simulateSubmission();">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Org Legal Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1" data-i18n="label-org-name" for="orgLegalName">
+                Official Entity Name (اسم الجمعية أو المؤسسة)
+              </label>
+<input class="w-full h-10 px-3 bg-surface-container-lowest border border-surface-variant rounded-lg text-on-surface text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" id="orgLegalName" required="" type="text" value="Al-Amal Civic Welfare Foundation"/>
+</div>
+<!-- Org Entity Type -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1" data-i18n="label-entity-type" for="orgTypeSelect">
+                Institutional Entity Classification
+              </label>
+<select class="w-full h-10 px-3 bg-surface-container-lowest border border-surface-variant rounded-lg text-on-surface text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" id="orgTypeSelect">
+<option selected="" value="ngo">Registered NGO / Civic Association (جمعية أهلية مشهرة)</option>
+<option value="kitchen">Community Relief Kitchen / Soup Pantry (مطبخ إطعام مركزي)</option>
+<option value="hospital">Charitable Health Clinic or Shelter (مستوصف أو مأوى خيري)</option>
+<option value="school">Public / Experimental Community School (مدرسة مجتمعية)</option>
+</select>
+</div>
+</div>
+<!-- MOSS License Number -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="font-label-md text-label-md text-on-surface" data-i18n="label-moss-num" for="mossNumber">
+                MOSS Registration / Decree Number (رقم إشهار التضامن)
+              </label>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Cairo Gov. Decree #4928/2019</span>
+</div>
+<div class="relative">
+<input class="w-full h-10 px-3 bg-surface-container-lowest border border-surface-variant rounded-lg text-on-surface text-body-md font-mono focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" id="mossNumber" placeholder="e.g. 1042 / 2021" required="" type="text" value="MOSS-EG-4928-CAI"/>
+</div>
+</div>
+<!-- File Upload Dropzone -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1" data-i18n="label-proof-doc">
+              Proof of Registration Decree or Operating License (PDF / JPEG)
+            </label>
+<div class="border-2 border-dashed border-surface-variant hover:border-primary/60 rounded-xl p-space-md text-center bg-surface-container-lowest transition-all">
+<span class="material-symbols-outlined text-[32px] text-primary mb-1">cloud_upload</span>
+<p class="font-label-md text-label-md text-on-surface" data-i18n="upload-cta">Drag and drop certification decree or <span class="text-primary underline cursor-pointer">browse file</span></p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1" data-i18n="upload-specs">Official Ministry Decree, Board Authorization, or Tax Exemption Certificate (Max 15MB)</p>
+<!-- Mock Uploaded Item -->
+<div class="mt-space-sm inline-flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container border border-surface-variant text-on-surface font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-[16px] text-primary">description</span>
+<span>decree_accreditation_2025_al-amal.pdf (2.4 MB)</span>
+<span class="material-symbols-outlined text-[16px] text-primary">check</span>
+</div>
+</div>
+</div>
+<!-- Civic Non-Commercial Covenant Checkbox -->
+<div class="pt-space-xs">
+<label class="flex items-start gap-space-xs cursor-pointer select-none">
+<input checked="" class="mt-1 h-4 w-4 rounded border-surface-variant text-primary focus:ring-primary/30 accent-primary" id="covenantCheck" required="" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant" data-i18n="covenant-text">
+                I formally certify on behalf of this entity that all received inventory through Dawwarha will be distributed purely free of charge under Egyptian Good Samaritan custody standards, with zero commercial resale.
+              </span>
+</label>
+</div>
+<!-- Form Actions -->
+<div class="pt-space-sm flex items-center justify-between border-t border-surface-variant">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2 rounded-lg border border-surface-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" onclick="goToStep(2)" type="button">
+<span class="material-symbols-outlined text-[18px] rtl:rotate-180">arrow_back</span>
+<span data-i18n="btn-back">Back</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-xl py-2.5 rounded-lg bg-primary hover:bg-on-secondary-fixed-variant text-on-primary font-label-md text-label-md transition-all shadow-sm" id="submitBtn" type="submit">
+<span data-i18n="btn-complete-reg" id="submitBtnText">Submit Registration &amp; Open Account</span>
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</button>
+</div>
+</form>
+</section>
+<!-- SUCCESS / AUDIT LEDGER STATE -->
+<section class="hidden p-space-xl text-center space-y-space-md" id="successSection">
+<div class="h-16 w-16 bg-secondary-container rounded-full flex items-center justify-center mx-auto text-primary">
+<span class="material-symbols-outlined text-[36px]">mark_email_read</span>
+</div>
+<div>
+<div class="inline-flex items-center gap-1 px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm mb-2">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+<span data-i18n="success-badge">Dawwarha Custody Node Initialized</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2" data-i18n="success-title">
+            Verification Dispatched &amp; Account Created
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mx-auto" data-i18n="success-msg">
+            We have transmitted an activation key to <strong class="text-on-surface font-semibold" id="successEmailDisplay">laila.mansouri@cairo-relief.org</strong>. Please confirm your civic email within 48 hours.
+          </p>
+</div>
+<!-- Verification Pipeline Status Card -->
+<div class="max-w-md mx-auto bg-surface-container rounded-xl p-space-md border border-surface-variant text-left rtl:text-right space-y-space-xs">
+<div class="flex items-center justify-between text-on-surface font-label-sm text-label-sm border-b border-surface-variant pb-2">
+<span class="font-semibold" data-i18n="queue-title">Accreditation Audit Pipeline</span>
+<span class="font-code-sm text-code-sm text-primary font-bold">TICKET #DW-2025-9481</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm pt-1">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span data-i18n="queue-step1">Personal JWT session ready for immediate login</span>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-tertiary text-[18px]">pending</span>
+<span data-i18n="queue-step2">MOSS #4928 validation queue (Estimated: 6 hours)</span>
+</div>
+<div class="flex items-center gap-space-xs text-outline font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px]">radio_button_unchecked</span>
+<span data-i18n="queue-step3">Full institutional pallet allocation unlocked</span>
+</div>
+</div>
+<div class="pt-space-sm flex flex-col sm:flex-row items-center justify-center gap-space-sm">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs px-space-xl py-2.5 rounded-lg bg-primary hover:bg-on-secondary-fixed-variant text-on-primary font-label-md text-label-md transition-colors shadow-sm" data-path="login" href="#">
+<span data-i18n="btn-go-login">Proceed to Civic Sign In</span>
+<span class="material-symbols-outlined text-[18px]">login</span>
+</a>
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs px-space-md py-2.5 rounded-lg border border-surface-variant text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-colors" onclick="setScreenState(1, 'valid')" type="button">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+<span data-i18n="btn-reset-demo">Restart Registration Demo</span>
+</button>
+</div>
+</section>
+<!-- Footer Anchor for Login -->
+<div class="bg-surface-container px-space-lg py-space-sm border-t border-surface-variant flex items-center justify-between font-body-sm text-body-sm text-on-surface-variant" id="cardLoginFooter">
+<div>
+<span data-i18n="already-have-account">Already registered as a custody agent?</span>
+<a class="text-primary font-semibold hover:underline ms-1" data-i18n="link-signin" data-path="login" href="#">Sign in to workspace</a>
+</div>
+<div class="hidden sm:flex items-center gap-1 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span data-i18n="tls-protected">TLS 1.3 End-to-End Encrypted</span>
+</div>
+</div>
+</div>
+<!-- Institutional Civic Trust Badges -->
+<div class="mt-space-lg grid grid-cols-1 md:grid-cols-3 gap-space-sm text-center">
+<div class="p-space-sm rounded-xl bg-surface-container-lowest border border-surface-variant flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-[24px] mb-1">balance</span>
+<h4 class="font-headline-sm text-body-md font-semibold text-on-surface" data-i18n="trust-1-title">Good Samaritan Legal Shield</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" data-i18n="trust-1-desc">Direct compliance with civic food rescue and uncommercial safety standards.</p>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-lowest border border-surface-variant flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-[24px] mb-1">no_sim</span>
+<h4 class="font-headline-sm text-body-md font-semibold text-on-surface" data-i18n="trust-2-title">Strict Zero-Cash Mandate</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" data-i18n="trust-2-desc">100% prohibited from advertising, selling, or monetizing reallocated resources.</p>
+</div>
+<div class="p-space-sm rounded-xl bg-surface-container-lowest border border-surface-variant flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-[24px] mb-1">receipt_long</span>
+<h4 class="font-headline-sm text-body-md font-semibold text-on-surface" data-i18n="trust-3-title">Immutable Custody Logs</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5" data-i18n="trust-3-desc">Auditable double-signature handover receipts logged cryptographically.</p>
+</div>
+</div>
+</div>
+<script>
+    // Internationalization dictionary
+    const i18n = {
+      en: {
+        "badge-civic-gateway": "Egypt Civic Redistribution Network",
+        "title-main": "Create Your Dawwarha Custody Identity",
+        "desc-main": "Transparent community custody. Connecting surplus food, educational equipment, and domestic supplies to verified community hubs with zero monetization.",
+        "step1-title": "Basic Account",
+        "step2-title": "Role & Stakeholder",
+        "step3-title": "Org Verification",
+        "step1-header": "Personal Credentials & Civic Node",
+        "step1-sub": "All custody handovers require verified localized accountability.",
+        "label-name": "Full Legal Name / Designated Representative",
+        "label-email": "Institutional / Primary Email",
+        "used-for-jwt": "Used for JWT authentication",
+        "label-password": "Secure Custody Password",
+        "pwd-rule-len": "8+ characters",
+        "pwd-rule-num": "1+ number",
+        "pwd-rule-spec": "1+ symbol / case",
+        "label-gov": "Governorate (المحافظة)",
+        "label-district": "Primary District / Area (الحي / المنطقة)",
+        "btn-continue-role": "Continue to Role Verification",
+        "step2-header": "Select Your Stakeholder Capacity",
+        "step2-sub": "Defines logistics permissions, custody receipt generation, and resource distribution volume.",
+        "badge-instant": "Instant Access",
+        "role-ind-title": "Individual / Household",
+        "role-ind-desc": "For private citizens donating surplus personal items, seasonal clothing, or requesting neighborhood aid parcels.",
+        "role-ind-point1": "Single parcel listings up to 50kg",
+        "role-ind-point2": "Direct peer or hub handovers",
+        "btn-select-individual": "Select Individual",
+        "badge-moss": "MOSS Verified Access",
+        "role-org-title": "Civic Organization / NGO",
+        "role-org-desc": "For accredited food banks, soup kitchens, public clinics, emergency shelters, and educational endowments.",
+        "role-org-point1": "Bulk standing claims & pallet redistribution",
+        "role-org-point2": "Tax-free custody transfer chain slips",
+        "btn-org-selected": "Selected for Verification",
+        "btn-back": "Back",
+        "btn-continue-org-protocol": "Proceed to Verification Protocol",
+        "badge-accreditation": "Civic Trust & Anti-Fraud Ledger",
+        "step3-header": "Institutional Accreditation & MOSS Registry",
+        "step3-sub": "Dawwarha guarantees zero resale or commercial exploitation of redirected assets.",
+        "org-notice-title": "24-Hour Express Review Guarantee:",
+        "org-notice-desc": "Your organization account is created immediately with browse capability. Bulk logistics claims unlock within 24 hours once Ministry of Social Solidarity (MOSS) registry records are audited.",
+        "label-org-name": "Official Entity Name (اسم الجمعية أو المؤسسة)",
+        "label-entity-type": "Institutional Entity Classification",
+        "label-moss-num": "MOSS Registration / Decree Number (رقم إشهار التضامن)",
+        "label-proof-doc": "Proof of Registration Decree or Operating License (PDF / JPEG)",
+        "upload-cta": "Drag and drop certification decree or browse file",
+        "upload-specs": "Official Ministry Decree, Board Authorization, or Tax Exemption Certificate (Max 15MB)",
+        "covenant-text": "I formally certify on behalf of this entity that all received inventory through Dawwarha will be distributed purely free of charge under Egyptian Good Samaritan custody standards, with zero commercial resale.",
+        "btn-complete-reg": "Submit Registration & Open Account",
+        "success-badge": "Dawwarha Custody Node Initialized",
+        "success-title": "Verification Dispatched & Account Created",
+        "success-msg": "We have transmitted an activation key to laila.mansouri@cairo-relief.org. Please confirm your civic email within 48 hours.",
+        "queue-title": "Accreditation Audit Pipeline",
+        "queue-step1": "Personal JWT session ready for immediate login",
+        "queue-step2": "MOSS #4928 validation queue (Estimated: 6 hours)",
+        "queue-step3": "Full institutional pallet allocation unlocked",
+        "btn-go-login": "Proceed to Civic Sign In",
+        "btn-reset-demo": "Restart Registration Demo",
+        "already-have-account": "Already registered as a custody agent?",
+        "link-signin": "Sign in to workspace",
+        "tls-protected": "TLS 1.3 End-to-End Encrypted",
+        "trust-1-title": "Good Samaritan Legal Shield",
+        "trust-1-desc": "Direct compliance with civic food rescue and uncommercial safety standards.",
+        "trust-2-title": "Strict Zero-Cash Mandate",
+        "trust-2-desc": "100% prohibited from advertising, selling, or monetizing reallocated resources.",
+        "trust-3-title": "Immutable Custody Logs",
+        "trust-3-desc": "Auditable double-signature handover receipts logged cryptographically.",
+        "err-name": "Please enter your legal identifying name.",
+        "err-email": "Valid email format required for audit handshakes.",
+        "err-pwd": "Password must satisfy all security parameters."
+      },
+      ar: {
+        "badge-civic-gateway": "شبكة إعادة التوزيع الأهلي المصرية",
+        "title-main": "إنشاء هوية عهدة في منصة دَوِّرها",
+        "desc-main": "أمانة مجتمعية شفافة. نوصل الفائض الغذائي والمعدات التعليمية والمستلزمات إلى المراكز الأهلية المعتمدة دون أي ربح مالي.",
+        "step1-title": "بيانات الحساب الأساسية",
+        "step2-title": "طبيعة الاستخدام والكيان",
+        "step3-title": "اعتماد المؤسسة",
+        "step1-header": "البيانات الشخصية والنطاق الجغرافي",
+        "step1-sub": "تتطلب عمليات الاستلام والتسليم التوثيق الجغرافي الدقيق لضمان الأمانة.",
+        "label-name": "الاسم القانوني الكامل / ممثل الحساب",
+        "label-email": "البريد الإلكتروني المعتمد",
+        "used-for-jwt": "يُستخدم لتوثيق الجلسة والتنبيهات",
+        "label-password": "كلمة سر الحساب الآمنة",
+        "pwd-rule-len": "8+ أحرف",
+        "pwd-rule-num": "رقم واحد على الأقل",
+        "pwd-rule-spec": "رمز أو حرف خاص",
+        "label-gov": "المحافظة",
+        "label-district": "الحي / المنطقة التشغيلية الرئيسية",
+        "btn-continue-role": "المتابعة لاختيار صفة الحساب",
+        "step2-header": "تحديد صفة الكيان وصلاحيات التوزيع",
+        "step2-sub": "يحدد الصلاحيات اللوجستية، وسندات التسليم، وحجم الإرساليات المصرح بها.",
+        "badge-instant": "تفعيل فوري",
+        "role-ind-title": "مواطن / فرد أو أسرة مستفيدة",
+        "role-ind-desc": "للأفراد الراغبين في التبرع بفائض الأثاث المنزلي، الملابس، أو طلب الدعم العيني لأسرة.",
+        "role-ind-point1": "إرساليات فردية حتى 50 كجم",
+        "role-ind-point2": "تسليم واستلام مباشر أو عبر نقاط الحي",
+        "btn-select-individual": "اختيار حساب فردي",
+        "badge-moss": "اعتماد وزارة التضامن الاجتماعي",
+        "role-org-title": "مؤسسة أهلية / جمعية خيرية / مدرسة",
+        "role-org-desc": "للجمعيات المشهرة، بنوك الطعام، المطابخ الأهلية، المستوصفات، والمدارس المجتمعية.",
+        "role-org-point1": "تنسيق شحنات كبرى وحصص لوجستية واسعة",
+        "role-org-point2": "سندات تسليم عهدة معتمدة ومعفاة من الرسوم",
+        "btn-org-selected": "تم الاختيار لبروتوكول التحقق",
+        "btn-back": "رجوع",
+        "btn-continue-org-protocol": "الانتقال لبروتوكول التحقق والترخيص",
+        "badge-accreditation": "سجل النزاهة المجتمعية ومكافحة المتاجرة",
+        "step3-header": "بيانات القيد وإشهار وزارة التضامن",
+        "step3-sub": "تضمن منصة دَوِّرها حظر إعادة بيع أي مورد أو المتاجرة به بأي شكل.",
+        "org-notice-title": "ضمان المراجعة السريعة خلال 24 ساعة:",
+        "org-notice-desc": "يُفعل الحساب فوريًا للاستعراض وتحديد الاحتياجات، ويتم اعتماد استلام الشحنات الكبرى رسميًا خلال 24 ساعة بمطابقة السجل مع وزارة التضامن.",
+        "label-org-name": "اسم الجمعية أو المؤسسة الرسمي",
+        "label-entity-type": "التصنيف الرسمي للكيان",
+        "label-moss-num": "رقم إشهار الجمعية أو ترخيص التشغيل",
+        "label-proof-doc": "صورة قرار الإشهار أو خطاب التفويض (PDF / JPEG)",
+        "upload-cta": "اسحب وأفلت مستند الإشهار أو تصفح من جهازك",
+        "upload-specs": "صورة قرار الإشهار الوزاري أو تفويض مجلس الإدارة (بحد أقصى 15 ميجابايت)",
+        "covenant-text": "أقر بصفتي المفوض عن هذه المؤسسة بأن جميع الموارد المستلمة عبر دَوِّرها ستوزع مجانًا بالكامل وفق معايير الحماية الأهلية ودون أي مقابل تجاري.",
+        "btn-complete-reg": "تسجيل الحساب وتفعيل بيانات العهدة",
+        "success-badge": "تم تهيئة عقدة العهدة في دَوِّرها بنجاح",
+        "success-title": "تم إرسال رابط التفعيل وتوثيق الحساب",
+        "success-msg": "أرسلنا رابط التحقق وتأكيد الجلسة إلى laila.mansouri@cairo-relief.org. يُرجى مراجعة البريد لتفعيل حسابك خلال 48 ساعة.",
+        "queue-title": "مسار تدقيق الاعتماد الأهلي",
+        "queue-step1": "جلسة الدخول الشخصية جاهزة للتسجيل",
+        "queue-step2": "قيد المراجعة لسجل التضامن رقم 4928 (المتبقي: 6 ساعات تقريبًا)",
+        "queue-step3": "فتح الصلاحية اللوجستية الكاملة للشحنات الكبرى",
+        "btn-go-login": "الانتقال لتسجيل الدخول",
+        "btn-reset-demo": "إعادة تشغيل تجربة التسجيل",
+        "already-have-account": "لديك حساب عهدة مسجل بالفعل؟",
+        "link-signin": "تسجيل الدخول للنظام",
+        "tls-protected": "حماية مشفرة بالكامل بمعيار TLS 1.3",
+        "trust-1-title": "حماية مبدأ السامري الصالح",
+        "trust-1-desc": "مطابقة تامة لقوانين الإنقاذ الأهلي وتوزيع الفائض دون مساءلة تجارية.",
+        "trust-2-title": "منع التعامل النقدي منعًا باتًا",
+        "trust-2-desc": "يُحظر تمامًا بيع أو مقايضة أو إدخال أي مقابل مادي على المواد المستلمة.",
+        "trust-3-title": "سجلات عهدة مشفرة وغير قابلة للتغيير",
+        "trust-3-desc": "توثيق استلام ثنائي الطرف مع حفظ إحداثيات ومواعيد النقل بدقة تامة.",
+        "err-name": "يرجى كتابة الاسم الرسمي المعتمد.",
+        "err-email": "مطلوب بريد إلكتروني صحيح لتسجيل العهدة.",
+        "err-pwd": "يجب استيفاء جميع شروط كلمة السر."
+      }
+    };
+
+    let currentLanguage = 'en';
+    let selectedRoleType = 'organization'; // 'individual' or 'organization'
+
+    function toggleLanguage() {
+      currentLanguage = currentLanguage === 'en' ? 'ar' : 'en';
+      const canvas = document.getElementById('registrationCanvas');
+      const langBtnText = document.getElementById('langBtnText');
+      
+      if (currentLanguage === 'ar') {
+        canvas.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ar');
+        langBtnText.textContent = 'English (LTR)';
+      } else {
+        canvas.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+        langBtnText.textContent = 'عربي (RTL)';
+      }
+
+      // Update text nodes
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[currentLanguage] && i18n[currentLanguage][key]) {
+          el.textContent = i18n[currentLanguage][key];
+        }
+      });
+    }
+
+    function togglePasswordVisibility() {
+      const pwdInput = document.getElementById('passwordInput');
+      const eyeIcon = document.getElementById('pwdEyeIcon');
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        eyeIcon.textContent = 'visibility_off';
+      } else {
+        pwdInput.type = 'password';
+        eyeIcon.textContent = 'visibility';
+      }
+    }
+
+    function goToStep(stepNumber) {
+      const s1 = document.getElementById('stepSection1');
+      const s2 = document.getElementById('stepSection2');
+      const s3 = document.getElementById('stepSection3');
+      const success = document.getElementById('successSection');
+      const stepper = document.getElementById('stepperIndicator');
+      const cardFooter = document.getElementById('cardLoginFooter');
+
+      // Clear errors
+      document.getElementById('nameError').classList.add('hidden');
+      document.getElementById('emailError').classList.add('hidden');
+      document.getElementById('passwordError').classList.add('hidden');
+
+      // Stepper Tab styling
+      const tab1 = document.getElementById('stepTab1');
+      const tab2 = document.getElementById('stepTab2');
+      const tab3 = document.getElementById('stepTab3');
+
+      [s1, s2, s3, success].forEach(s => s.classList.add('hidden'));
+      stepper.classList.remove('hidden');
+      cardFooter.classList.remove('hidden');
+
+      // Reset Tab Colors
+      const activeClass = ['bg-surface-container', 'text-primary', 'font-semibold'];
+      const inactiveClass = ['text-on-surface-variant', 'font-normal'];
+      
+      [tab1, tab2, tab3].forEach(tab => {
+        tab.className = 'flex items-center justify-center gap-space-xs py-2 px-space-xs rounded-lg text-on-surface-variant transition-all';
+        const badge = tab.querySelector('.step-badge');
+        badge.className = 'step-badge h-5 w-5 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-[11px] font-bold';
+      });
+
+      if (stepNumber === 1) {
+        s1.classList.remove('hidden');
+        tab1.className = 'flex items-center justify-center gap-space-xs py-2 px-space-xs rounded-lg bg-surface-container text-primary font-semibold transition-all';
+        tab1.querySelector('.step-badge').className = 'step-badge h-5 w-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[11px] font-bold';
+      } else if (stepNumber === 2) {
+        s2.classList.remove('hidden');
+        tab1.querySelector('.step-badge').innerHTML = '<span class="material-symbols-outlined text-[13px]">check</span>';
+        tab1.querySelector('.step-badge').className = 'step-badge h-5 w-5 rounded-full bg-secondary text-on-primary flex items-center justify-center text-[11px] font-bold';
+        
+        tab2.className = 'flex items-center justify-center gap-space-xs py-2 px-space-xs rounded-lg bg-surface-container text-primary font-semibold transition-all';
+        tab2.querySelector('.step-badge').className = 'step-badge h-5 w-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[11px] font-bold';
+      } else if (stepNumber === 3) {
+        s3.classList.remove('hidden');
+        tab1.querySelector('.step-badge').innerHTML = '<span class="material-symbols-outlined text-[13px]">check</span>';
+        tab1.querySelector('.step-badge').className = 'step-badge h-5 w-5 rounded-full bg-secondary text-on-primary flex items-center justify-center text-[11px] font-bold';
+        tab2.querySelector('.step-badge').innerHTML = '<span class="material-symbols-outlined text-[13px]">check</span>';
+        tab2.querySelector('.step-badge').className = 'step-badge h-5 w-5 rounded-full bg-secondary text-on-primary flex items-center justify-center text-[11px] font-bold';
+
+        tab3.className = 'flex items-center justify-center gap-space-xs py-2 px-space-xs rounded-lg bg-surface-container text-primary font-semibold transition-all';
+        tab3.querySelector('.step-badge').className = 'step-badge h-5 w-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[11px] font-bold';
+      }
+    }
+
+    function selectRole(role) {
+      selectedRoleType = role;
+      const indCard = document.getElementById('roleCardIndividual');
+      const orgCard = document.getElementById('roleCardOrg');
+      const continueBtnText = document.getElementById('roleContinueText');
+
+      if (role === 'individual') {
+        indCard.className = 'cursor-pointer border-2 border-primary rounded-xl p-space-md bg-surface-container-low transition-all flex flex-col justify-between group shadow-sm';
+        indCard.querySelector('.material-symbols-outlined:last-child').textContent = 'check_circle';
+        
+        orgCard.className = 'cursor-pointer border-2 border-surface-variant rounded-xl p-space-md hover:border-primary/50 transition-all bg-surface-container-lowest flex flex-col justify-between group';
+        orgCard.querySelector('.material-symbols-outlined:last-child').textContent = 'radio_button_unchecked';
+        
+        continueBtnText.textContent = currentLanguage === 'ar' ? 'إنهاء التسجيل (حساب فردي)' : 'Complete Individual Registration';
+      } else {
+        orgCard.className = 'cursor-pointer border-2 border-primary rounded-xl p-space-md bg-surface-container-low transition-all flex flex-col justify-between group shadow-sm';
+        orgCard.querySelector('.material-symbols-outlined:last-child').textContent = 'check_circle';
+        
+        indCard.className = 'cursor-pointer border-2 border-surface-variant rounded-xl p-space-md hover:border-primary/50 transition-all bg-surface-container-lowest flex flex-col justify-between group';
+        indCard.querySelector('.material-symbols-outlined:last-child').textContent = 'radio_button_unchecked';
+        
+        continueBtnText.textContent = currentLanguage === 'ar' ? 'الانتقال لبروتوكول التحقق والترخيص' : 'Proceed to Verification Protocol';
+      }
+    }
+
+    function proceedFromRole() {
+      if (selectedRoleType === 'organization') {
+        goToStep(3);
+      } else {
+        simulateSubmission();
+      }
+    }
+
+    function simulateSubmission() {
+      const submitBtn = document.getElementById('submitBtn');
+      const submitText = document.getElementById('submitBtnText');
+      const emailVal = document.getElementById('emailInput').value;
+      
+      // Loading state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-on-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+          <span>Authenticating Civic Node...</span>
+        `;
+      }
+
+      setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
+        showSuccessView(emailVal);
+      }, 1200);
+    }
+
+    function showSuccessView(email) {
+      document.getElementById('stepSection1').classList.add('hidden');
+      document.getElementById('stepSection2').classList.add('hidden');
+      document.getElementById('stepSection3').classList.add('hidden');
+      document.getElementById('stepperIndicator').classList.add('hidden');
+      document.getElementById('cardLoginFooter').classList.add('hidden');
+      
+      const success = document.getElementById('successSection');
+      success.classList.remove('hidden');
+
+      const disp = document.getElementById('successEmailDisplay');
+      if (disp && email) {
+        disp.textContent = email;
+      }
+    }
+
+    // Emulator State Dispatcher
+    function setScreenState(step, variation) {
+      // Highlight active pill
+      document.querySelectorAll('.state-pill').forEach(btn => {
+        btn.classList.remove('bg-surface-container', 'text-on-surface');
+        btn.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+      });
+      event.currentTarget.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+      event.currentTarget.classList.add('bg-surface-container', 'text-on-surface');
+
+      if (step === 1) {
+        goToStep(1);
+        if (variation === 'error') {
+          document.getElementById('fullName').value = '';
+          document.getElementById('emailInput').value = 'invalid-email-syntax';
+          document.getElementById('passwordInput').value = 'pass';
+          
+          document.getElementById('nameError').classList.remove('hidden');
+          document.getElementById('emailError').classList.remove('hidden');
+          document.getElementById('passwordError').classList.remove('hidden');
+          
+          document.getElementById('pwdRuleLen').className = 'flex items-center gap-1 text-error';
+          document.getElementById('pwdRuleLen').querySelector('.material-symbols-outlined').textContent = 'cancel';
+          document.getElementById('pwdRuleNum').className = 'flex items-center gap-1 text-error';
+          document.getElementById('pwdRuleNum').querySelector('.material-symbols-outlined').textContent = 'cancel';
+        } else {
+          document.getElementById('fullName').value = 'Dr. Laila El-Mansouri';
+          document.getElementById('emailInput').value = 'laila.mansouri@cairo-relief.org';
+          document.getElementById('passwordInput').value = 'CivicCairo#2025';
+          document.getElementById('pwdRuleLen').className = 'flex items-center gap-1 text-primary';
+          document.getElementById('pwdRuleLen').querySelector('.material-symbols-outlined').textContent = 'check_circle';
+          document.getElementById('pwdRuleNum').className = 'flex items-center gap-1 text-primary';
+          document.getElementById('pwdRuleNum').querySelector('.material-symbols-outlined').textContent = 'check_circle';
+        }
+      } else if (step === 2) {
+        goToStep(2);
+        selectRole(variation);
+      } else if (step === 3) {
+        goToStep(3);
+        selectRole('organization');
+      } else if (step === 'loading') {
+        goToStep(3);
+        simulateSubmission();
+      } else if (step === 'success') {
+        showSuccessView('laila.mansouri@cairo-relief.org');
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-surface-variant py-space-md"><div class="max-w-7xl mx-auto px-margin flex flex-col sm:flex-row items-center justify-between gap-space-sm font-body-sm text-body-sm text-on-surface-variant"><div>© 2025 Dawwarha (دَوِّرها) · Secured Civic Redistribution Custody</div><div class="flex items-center gap-space-md"><a class="hover:text-on-surface transition-colors font-label-sm text-label-sm" data-path="trust-and-safety" href="#">Trust &amp; Safety</a><a class="hover:text-on-surface transition-colors font-label-sm text-label-sm" data-path="privacy" href="#">Privacy</a><a class="hover:text-on-surface transition-colors font-label-sm text-label-sm" data-path="terms" href="#">Terms</a></div></div></footer></body></html>

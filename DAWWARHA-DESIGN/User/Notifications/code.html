@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>Dawwarha Civic Logistics</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#3f4946","surface-dim":"#d3dcd7","primary-fixed-dim":"#87d5c1","surface-container-high":"#e1eae5","tertiary-container":"#9f672b","surface-container-low":"#edf6f1","surface-bright":"#f2fbf6","on-primary":"#ffffff","secondary-fixed-dim":"#9bd2c0","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-container":"#fffaf8","on-tertiary-fixed":"#2d1600","surface-container-highest":"#dbe5e0","surface-tint":"#106a5a","on-primary-fixed":"#00201a","tertiary":"#834f14","on-surface":"#151d1a","surface":"#f2fbf6","surface-container-lowest":"#ffffff","on-secondary-fixed":"#002019","on-error-container":"#93000a","secondary-container":"#b6eedc","surface-container":"#e7f0eb","primary":"#076757","on-secondary-fixed-variant":"#184f42","on-error":"#ffffff","secondary-fixed":"#b6eedc","primary-fixed":"#a3f2dd","primary-container":"#2f806f","inverse-on-surface":"#eaf3ee","outline-variant":"#bec9c4","surface-variant":"#dbe5e0","background":"#f2fbf6","on-primary-container":"#ebfff7","secondary":"#33685a","error-container":"#ffdad6","on-tertiary-fixed-variant":"#6a3b00","on-secondary-container":"#396e5f","on-primary-fixed-variant":"#005143","outline":"#6f7975","tertiary-fixed":"#ffdcbf","on-background":"#151d1a","inverse-surface":"#2a322f","on-secondary":"#ffffff","inverse-primary":"#87d5c1","tertiary-fixed-dim":"#feb874"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","margin-mobile":"1rem","space-lg":"1.5rem","space-xl":"2.5rem","gutter-mobile":"1rem",margin:"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1.5rem"},fontFamily:{"headline-sm":["Inter"],"headline-lg-mobile":["Inter"],"headline-lg":["Inter"],"display-lg-mobile":["Inter"],"display-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"code-sm":["Inter"],"label-md":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"label-sm":["Inter"]},fontSize:{"headline-sm":["1.125rem",{lineHeight:"1.5rem",fontWeight:"500"}],"headline-lg-mobile":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["2rem",{lineHeight:"2.5rem",letterSpacing:"-0.015em",fontWeight:"600"}],"display-lg-mobile":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["3.5rem",{lineHeight:"4rem",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-md":["1.25rem",{lineHeight:"1.75rem",letterSpacing:"-0.005em",fontWeight:"600"}],"body-sm":["0.8125rem",{lineHeight:"1.25rem",fontWeight:"400"}],"code-sm":["0.8125rem",{lineHeight:"1.125rem",fontWeight:"400"}],"label-md":["0.875rem",{lineHeight:"1.25rem",fontWeight:"500"}],"body-lg":["1.125rem",{lineHeight:"1.75rem",fontWeight:"400"}],"body-md":["0.9375rem",{lineHeight:"1.5rem",fontWeight:"400"}],"label-sm":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 inset-x-0 h-16 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50"><div class="w-full h-16 px-space-md lg:px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">cached</span></div><div class="flex flex-col leading-tight"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">Dawwarha</span><span class="font-label-sm text-label-sm text-outline tracking-normal">دوّرها • Civic Logistics</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-container font-label-md rounded-lg"><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-resources" href="#">My Resources</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-requests" href="#">My Requests</a><a aria-current="page" class="px-space-sm py-1.5 transition-colors bg-secondary-container text-on-secondary-container font-label-md rounded-lg" data-path="matches" href="#">Matches (active)</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#">Handovers & Activity</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#">Impact & Ledger</a></nav></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-sm text-label-sm text-on-surface" title="Switch Language" type="button"><span class="material-symbols-outlined text-[16px] text-outline">language</span><span>EN / العربية</span></button><button class="relative w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary-container"></span></button><button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Documentation & Support" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left leading-none"><span class="font-label-md text-label-md text-on-surface">Dr. Laila El-Mansouri</span><span class="font-label-sm text-label-sm text-primary font-medium mt-0.5">Verified Node Lead</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-low z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-md"><div class="flex items-center justify-between mb-space-md"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Operations Hub</span><span class="px-2 py-0.5 rounded-full bg-surface-container font-code-sm text-code-sm text-secondary">CAI-01</span></div><div class="space-y-space-xs mb-space-lg"><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">add_circle</span><span>Create Request</span></button><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">inventory_2</span><span>Publish Resource</span></button></div><span class="block font-label-sm text-label-sm uppercase tracking-wider text-outline px-space-sm mb-space-xs">Logistical Ledger</span><nav class="space-y-1" data-active-classes="bg-secondary-container text-on-secondary-container font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-resources" href="#"><span class="material-symbols-outlined text-[20px]">archive</span><span class="font-label-md text-label-md">My Resources</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-requests" href="#"><span class="material-symbols-outlined text-[20px]">assignment_late</span><span class="font-label-md text-label-md">My Requests</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 transition-colors bg-secondary-container text-on-secondary-container font-medium rounded-lg" data-path="matches" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">swap_horiz</span><span class="font-label-md text-label-md">Matches</span></div><span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm">active</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span class="font-label-md text-label-md">Handovers & Activity</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-label-md text-label-md">Impact & Ledger</span></a></nav></div><div class="p-space-md"><div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-between mb-1"><span class="font-label-sm text-label-sm uppercase tracking-wide text-secondary font-semibold">Operational Custody</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><p class="font-label-md text-label-md text-on-surface font-medium truncate">Dr. Laila El-Mansouri</p><div class="flex items-center justify-between mt-1 pt-1"><span class="font-code-sm text-code-sm text-outline">Node Hash: CAI-SEC-01</span><span class="font-label-sm text-label-sm text-primary font-medium">Verified</span></div></div></div></aside><div class="pl-72"><main class="w-full min-h-[calc(100vh-4rem)] pt-16 px-space-md lg:px-gutter pb-space-xl bg-background"><div class="max-w-7xl mx-auto py-space-md"><div class="flex flex-col w-full">
+<!-- Interactive State / QA Toolbar -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-sm mb-space-md flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span class="font-medium">QA State Simulator (Task 4.3 & 4.C Testing):</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5" id="stateControls">
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm hover:opacity-90 transition-all" data-state-btn="active" onclick="setState('active')" type="button">
+        1. Active Inbox (14)
+      </button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container transition-all" data-state-btn="empty" onclick="setState('empty')" type="button">
+        2. Empty Inbox
+      </button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container transition-all" data-state-btn="filtered_none" onclick="setState('filtered_none')" type="button">
+        3. Filter Empty
+      </button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm hover:bg-surface-container transition-all" data-state-btn="loading" onclick="setState('loading')" type="button">
+        4. Skeletons
+      </button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-lowest text-primary font-label-sm text-label-sm hover:bg-surface-container transition-all" id="rtlToggleBtn" onclick="toggleRTL()" type="button">
+<span class="material-symbols-outlined text-[16px]">swap_horiz</span>
+<span id="rtlBtnText">RTL: العربية</span>
+</button>
+</div>
+</div>
+<!-- Notification View Container with RTL support -->
+<div class="w-full flex flex-col transition-all duration-200" id="notificationRoot">
+<!-- Contextual Breadcrumb & Header Section -->
+<div class="flex flex-col gap-space-xs mb-space-lg">
+<nav aria-label="Breadcrumbs" class="flex items-center gap-1.5 text-on-surface-variant font-label-sm text-label-sm">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+<span data-i18n="crumb_dashboard">Dashboard</span>
+</a>
+<span class="text-outline">/</span>
+<span class="text-on-surface font-medium" data-i18n="crumb_notifications">Operational Notifications (مركز الإشعارات التشغيلية)</span>
+</nav>
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md pt-space-xs">
+<div>
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight" data-i18n="title">
+              Notifications
+            </h1>
+<span class="px-2.5 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold tracking-wide">
+              CAI-SEC-01
+            </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1" data-i18n="subtitle">
+            Stay updated on matches, handovers, requests, and civic coordination requiring your action.
+          </p>
+</div>
+<!-- Quick Actions Header Bar -->
+<div class="flex items-center gap-space-xs shrink-0">
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-secondary font-label-md text-label-md transition-all shadow-sm" id="markAllBtn" onclick="markAllAsRead()" type="button">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+<span data-i18n="mark_all_read">Mark all as read (تحديد الكل كمقروء)</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant transition-all shadow-sm" onclick="triggerRefresh()" title="Refresh records" type="button">
+<span class="material-symbols-outlined text-[20px]" id="refreshIcon">refresh</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant transition-all shadow-sm" onclick="showToast('Opened Notification Delivery Preferences (Matrix §24)')" title="Preferences" type="button">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Ledger Metric Summary Strip -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm mt-space-sm">
+<div class="bg-surface-container-lowest p-space-sm rounded-xl flex items-center gap-space-sm shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/40 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">inbox</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-outline" data-i18n="metric_total">Total Ledger Records</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold tabular-nums" id="totalRecordsCount">14</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-xl flex items-center gap-space-sm shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container/20 text-primary flex items-center justify-center shrink-0 relative">
+<span class="material-symbols-outlined text-[22px]">pending_actions</span>
+<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary animate-pulse" id="badgePulse"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-outline" data-i18n="metric_unread">Action Required</span>
+<span class="font-headline-sm text-headline-sm text-primary font-semibold tabular-nums" id="unreadRecordsCount">3 Unread</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-xl flex items-center gap-space-sm shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed/30 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-outline" data-i18n="metric_custody">Custody Status</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate">Active Node</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-xl flex items-center gap-space-sm shadow-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">sync</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-outline" data-i18n="metric_sync">Realtime Sync</span>
+<span class="font-label-md text-label-md text-on-surface font-medium truncate" id="syncStatus">Just now (14:52)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Filter Navigation Tabs (Categorized strictly by backend notification types) -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-xs shadow-sm mb-space-lg flex flex-col md:flex-row md:items-center md:justify-between gap-space-xs overflow-x-auto">
+<div class="flex items-center gap-1 overflow-x-auto py-0.5" id="categoryFilterTabs">
+<button class="px-3 py-1.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-md text-label-md font-medium whitespace-nowrap transition-colors flex items-center gap-1.5" data-cat="all" onclick="filterCategory('all')" type="button">
+<span data-i18n="cat_all">All</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-lowest/60 text-secondary font-code-sm text-code-sm" id="countAll">14</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1.5" data-cat="matches" onclick="filterCategory('matches')" type="button">
+<span data-i18n="cat_matches">Matches & Pairings (التطابقات)</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-code-sm text-code-sm">4</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1.5" data-cat="handover" onclick="filterCategory('handover')" type="button">
+<span data-i18n="cat_handover">Handover Coordination (تسليم العهدة)</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-code-sm text-code-sm">5</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1.5" data-cat="trust" onclick="filterCategory('trust')" type="button">
+<span data-i18n="cat_trust">Organization & Trust (التحقق والثقة)</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-code-sm text-code-sm">2</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1.5" data-cat="ledger" onclick="filterCategory('ledger')" type="button">
+<span data-i18n="cat_ledger">Contributions & Ledger (السجل)</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-code-sm text-code-sm">2</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1.5" data-cat="system" onclick="filterCategory('system')" type="button">
+<span data-i18n="cat_system">System (النظام)</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container text-on-surface-variant font-code-sm text-code-sm">1</span>
+</button>
+</div>
+<!-- Unread Only Toggle Pill -->
+<div class="shrink-0 px-space-xs py-1 flex items-center border-t md:border-t-0 md:border-l border-surface-container">
+<label class="cursor-pointer flex items-center gap-2 select-none">
+<input class="sr-only peer" id="unreadToggle" onchange="toggleUnreadOnly(this.checked)" type="checkbox"/>
+<div class="w-8 h-4 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] rtl:after:right-[2px] rtl:after:left-auto after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-primary relative"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant peer-checked:text-primary font-medium" data-i18n="unread_toggle_label">Unread only (غير المقروء فقط)</span>
+</label>
+</div>
+</div>
+<!-- Active Notifications Content -->
+<div class="space-y-space-lg" id="inboxContent">
+<!-- Group: TODAY -->
+<div class="notification-group" data-group="today">
+<div class="flex items-center gap-space-sm mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold" data-i18n="group_today">Today (اليوم)</span>
+<div class="h-[1px] flex-1 bg-surface-container"></div>
+<span class="font-code-sm text-code-sm text-outline">3 events</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Notification 1: Urgent Action - Bilateral Handover -->
+<article class="notif-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-item-id="notif-1" data-type="handover" data-unread="true">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex flex-col sm:flex-row items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]">local_shipping</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 text-primary font-label-sm text-label-sm font-semibold">
+                      Handover Milestone · Bilateral Sign-off Pending
+                    </span>
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse inline-block" title="Unread action required"></span>
+<span class="font-code-sm text-code-sm text-outline">#HND-8841-QX</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline tabular-nums">12 mins ago · 14:48 Cairo Time</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-1">
+                  Seeker Verified Physical Receipt — Action Required on Handover #HND-8841-QX
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+                  Dr. Hisham Kassem (Sayeda Zeinab Clinic Outpost) has physically scanned and attested to the <strong>4 Oxygen Regulators & Oximeter Leads</strong>. Your final provider confirmation is required to permanently seal the bilateral record.
+                </p>
+<!-- Custodial Verification Badge Bar -->
+<div class="bg-surface-container-low rounded-lg p-space-xs px-space-sm mb-space-sm flex flex-wrap items-center justify-between gap-2 text-on-surface-variant font-code-sm text-code-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]">pin_drop</span>
+<span>Geo: 30.0131° N, 31.2089° E (Sayeda Zeinab Clinic)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">lock</span>
+<span>Target Match: #MTC-MED-2024-9102</span>
+</div>
+</div>
+<!-- Action CTA Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-all shadow-sm" onclick="handleAction('seal_handover', 'HND-8841-QX')" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Confirm & Seal Handover (تأكيد تسليم العهدة)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-md text-label-md transition-all" onclick="handleAction('view_record', 'HND-8841-QX')" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span>View Custodial Record</span>
+</button>
+<button class="text-outline hover:text-on-surface font-label-sm text-label-sm ml-auto rtl:mr-auto rtl:ml-0" onclick="markItemRead('notif-1')" type="button">
+                    Mark as read
+                  </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Notification 2: Deterministic Match Proposal -->
+<article class="notif-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-item-id="notif-2" data-type="matches" data-unread="true">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex flex-col sm:flex-row items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-secondary-container/40 text-secondary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]">auto_awesome</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+                      Deterministic Match Proposal · High Affinity (96%)
+                    </span>
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse inline-block" title="New Match"></span>
+<span class="font-code-sm text-code-sm text-outline">#MTC-EDU-2024-4102</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline tabular-nums">42 mins ago · 14:18 Cairo Time</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-1">
+                  New Deterministic Match: 45 Primary School Textbooks paired with Old Cairo Clinic Outpost
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+                  Dawwarha rule-based engine resolved an 88% compatibility match between your surplus at <strong>Maadi Community Hub</strong> and Old Cairo Community Learning Center's standing request (#REQ-EDU-2024-4102).
+                </p>
+<!-- Civic Compatibility Breakdown Card -->
+<div class="bg-surface-container-low rounded-lg p-space-sm mb-space-sm">
+<div class="text-label-sm font-label-sm text-outline mb-1 font-medium">Algorithmic Affinity Scorecard:</div>
+<div class="flex flex-wrap items-center gap-space-md text-body-sm font-body-sm">
+<span class="inline-flex items-center gap-1 text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Category: 100%
+                    </span>
+<span class="inline-flex items-center gap-1 text-secondary font-medium">
+<span class="material-symbols-outlined text-[16px]">near_me</span> Proximity: 88% (4.2 km transit)
+                    </span>
+<span class="inline-flex items-center gap-1 text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">inventory</span> Quantity: 100% (45 of 45 books)
+                    </span>
+<span class="font-code-sm text-code-sm text-outline ml-auto rtl:mr-auto rtl:ml-0">Δ 0.0% variance</span>
+</div>
+</div>
+<!-- Action CTA Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-all shadow-sm" onclick="handleAction('evaluate_match', 'MTC-EDU-2024-4102')" type="button">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+<span>Evaluate Candidate Match (مراجعة التطابق)</span>
+</button>
+<button class="text-outline hover:text-on-surface font-label-sm text-label-sm ml-auto rtl:mr-auto rtl:ml-0" onclick="markItemRead('notif-2')" type="button">
+                    Mark as read
+                  </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Notification 3: Organization Trust Decided -->
+<article class="notif-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all hover:shadow-md relative overflow-hidden" data-item-id="notif-3" data-type="trust" data-unread="true">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex flex-col sm:flex-row items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary font-label-sm text-label-sm font-semibold">
+                      Trust & Verification Decided · Platform Governance
+                    </span>
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse inline-block" title="Unread"></span>
+<span class="font-code-sm text-code-sm text-outline">SEC-GOV-2024</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline tabular-nums">2 hours ago · 12:30 Cairo Time</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-1">
+                  Institutional Verification Approved: Al-Bustan Medical Logistics Node
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+                  Platform administrators have reviewed your submitted Ministry of Health accreditation credentials. Your verified badge is now active, unlocking standing civic requisitions and priority logistics dispatch.
+                </p>
+<!-- Action CTA Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md transition-all" onclick="handleAction('view_org', 'CAI-SEC-01')" type="button">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+<span>View Verified Organization Profile (عرض الملف الموثق)</span>
+</button>
+<button class="text-outline hover:text-on-surface font-label-sm text-label-sm ml-auto rtl:mr-auto rtl:ml-0" onclick="markItemRead('notif-3')" type="button">
+                    Mark as read
+                  </button>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+<!-- Group: YESTERDAY -->
+<div class="notification-group" data-group="yesterday">
+<div class="flex items-center gap-space-sm mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold" data-i18n="group_yesterday">Yesterday (أمس)</span>
+<div class="h-[1px] flex-1 bg-surface-container"></div>
+<span class="font-code-sm text-code-sm text-outline">1 event</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Notification 4: Contribution Minted (Warm Sand / Tertiary accent) -->
+<article class="notif-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all hover:shadow-md" data-item-id="notif-4" data-type="ledger" data-unread="false">
+<div class="flex flex-col sm:flex-row items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed/40 text-tertiary flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]">military_tech</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed/30 text-tertiary font-label-sm text-label-sm font-semibold">
+                      Contribution Minted · Civic Ledger
+                    </span>
+<span class="font-code-sm text-code-sm text-outline">#HND-FD-8841</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline tabular-nums">Yesterday at 18:14</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-normal mb-1">
+                  Handover Completed & Permanently Minted to Civic Ledger
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+                  Transfer #HND-FD-8841 (<strong>50 Packaged Fresh Balanced Meals</strong> to Night Shelter) was confirmed bilaterally. <strong>+1 Redistribution</strong> and <strong>18.2 kg food rescue</strong> credited to Cairo Southern Medical Hub.
+                </p>
+<!-- Minting Hash Preview -->
+<div class="bg-surface-container-low/60 rounded-lg p-space-xs px-space-sm mb-space-sm flex items-center justify-between text-outline font-code-sm text-code-sm">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-[16px] text-tertiary">fingerprint</span>
+<span class="truncate">Proof Hash: sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069</span>
+</div>
+<span class="shrink-0 text-secondary font-medium">Recorded</span>
+</div>
+<!-- Action CTA Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-md text-label-md transition-all" onclick="handleAction('view_ledger', 'HND-FD-8841')" type="button">
+<span class="material-symbols-outlined text-[18px]">format_image_left</span>
+<span>Inspect Impact Ledger Record (سجل الأثر)</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+<!-- Group: EARLIER THIS WEEK -->
+<div class="notification-group" data-group="earlier">
+<div class="flex items-center gap-space-sm mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold" data-i18n="group_earlier">Earlier This Week (سابقاً هذا الأسبوع)</span>
+<div class="h-[1px] flex-1 bg-surface-container"></div>
+<span class="font-code-sm text-code-sm text-outline">2 events</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Notification 5: Moderation / Report Resolved -->
+<article class="notif-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all hover:shadow-md" data-item-id="notif-5" data-type="trust" data-unread="false">
+<div class="flex flex-col sm:flex-row items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]">gavel</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+                      Trust & Moderation Review · Integrity Protocol
+                    </span>
+<span class="font-code-sm text-code-sm text-outline">#REP-8021</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline tabular-nums">Nov 12, 2024 · 09:15</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-normal mb-1">
+                  Moderation Review Completed for Inquiry #REP-8021
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+                  The listing verification concern you submitted regarding perishable items condition was investigated and resolved in accordance with Dawwarha Food Safety Protocols.
+                </p>
+<!-- Action CTA Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-all" onclick="handleAction('view_report', 'REP-8021')" type="button">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+<span>View Resolution Details (تفاصيل المراجعة)</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- Notification 6: Match Expired / Released to pool -->
+<article class="notif-card bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all hover:shadow-md" data-item-id="notif-6" data-type="matches" data-unread="false">
+<div class="flex flex-col sm:flex-row items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-outline flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[24px]">timer_off</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-space-xs mb-1">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-outline font-label-sm text-label-sm">
+                      Match Lifecycle Update
+                    </span>
+<span class="font-code-sm text-code-sm text-outline">#MTC-SHL-2024-1029</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline tabular-nums">3 days ago</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-normal mb-1">
+                  Match Hold Window Expired for Inactive Requisition #MTC-SHL-2024-1029
+                </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-sm">
+                  Winter blankets match allocation hold timed out after 18h inactivity. Consigned inventory was returned to the open Cairo South circulating pool.
+                </p>
+<!-- Action CTA Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm pt-1">
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-all" onclick="handleAction('browse_pool', 'Cairo-South')" type="button">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+<span>Browse Open Circulation (تصفح المتاح)</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+</div>
+</div>
+</div>
+<!-- Empty State: All Caught Up -->
+<div class="hidden w-full bg-surface-container-lowest rounded-xl p-space-xl flex flex-col items-center justify-center text-center shadow-sm my-space-md" id="stateEmpty">
+<div class="w-16 h-16 rounded-full bg-secondary-container/40 text-primary flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-[36px]">done_all</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 font-semibold" data-i18n="empty_title">
+        You're All Caught Up! (كل الإشعارات مقروءة)
+      </h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mb-space-lg" data-i18n="empty_desc">
+        When important matches, handovers, custody updates, or civic verification events occur in your Cairo hub, they will appear here in real-time.
+      </p>
+<div class="flex flex-wrap items-center justify-center gap-space-sm">
+<button class="px-4 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md transition-all" onclick="setState('active')" type="button">
+          Reload Active Records
+        </button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-md text-label-md transition-all" onclick="showToast('Directed to Operational Handovers ledger')" type="button">
+          View Active Handovers
+        </button>
+</div>
+</div>
+<!-- Filtered None State -->
+<div class="hidden w-full bg-surface-container-lowest rounded-xl p-space-xl flex flex-col items-center justify-center text-center shadow-sm my-space-md" id="stateFilteredNone">
+<div class="w-16 h-16 rounded-full bg-surface-container text-outline flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-[36px]">filter_list_off</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2 font-semibold">
+        No Matching Notifications Found
+      </h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mb-space-md">
+        No operational records match the current filter selection. Try toggling off the "Unread only" filter or switching to "All".
+      </p>
+<button class="px-4 py-2 rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-md text-label-md transition-all" onclick="resetFilters()" type="button">
+        Reset All Filters
+      </button>
+</div>
+<!-- Loading Skeleton State -->
+<div class="hidden space-y-space-md my-space-sm animate-pulse" id="stateLoading">
+<div class="h-5 w-32 bg-surface-container rounded"></div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container"></div>
+<div class="space-y-2 flex-1">
+<div class="h-4 bg-surface-container rounded w-1/3"></div>
+<div class="h-3 bg-surface-container rounded w-1/4"></div>
+</div>
+</div>
+<div class="h-4 bg-surface-container rounded w-3/4"></div>
+<div class="h-3 bg-surface-container rounded w-full"></div>
+<div class="h-9 bg-surface-container rounded w-44"></div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container"></div>
+<div class="space-y-2 flex-1">
+<div class="h-4 bg-surface-container rounded w-1/2"></div>
+<div class="h-3 bg-surface-container rounded w-1/6"></div>
+</div>
+</div>
+<div class="h-4 bg-surface-container rounded w-2/3"></div>
+<div class="h-3 bg-surface-container rounded w-5/6"></div>
+<div class="h-9 bg-surface-container rounded w-36"></div>
+</div>
+</div>
+<!-- Deleted Target Graceful Notice Toast / Banner -->
+<div class="hidden mt-space-md p-space-sm bg-error-container text-on-error-container rounded-xl flex items-center justify-between gap-space-sm shadow-sm" id="gracefulBanner">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[20px]">info</span>
+<span class="font-body-sm text-body-sm font-medium">Notice: Target entity was already fulfilled or archived by node peer. Navigating to custodial history record.</span>
+</div>
+<button class="text-on-error-container hover:opacity-80" onclick="document.getElementById('gracefulBanner').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Toast Notification element -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-inverse-surface text-inverse-on-surface px-4 py-3 rounded-xl shadow-lg flex items-center gap-2 font-label-md text-label-md" id="actionToast">
+<span class="material-symbols-outlined text-primary-fixed text-[20px]">check_circle</span>
+<span id="toastMessage">Action completed successfully</span>
+</div>
+</div>
+<script>
+  let isRTL = false;
+  let activeCategory = 'all';
+  let unreadOnly = false;
+
+  const translations = {
+    en: {
+      crumb_dashboard: "Dashboard",
+      crumb_notifications: "Operational Notifications (مركز الإشعارات التشغيلية)",
+      title: "Notifications",
+      subtitle: "Stay updated on matches, handovers, requests, and civic coordination requiring your action.",
+      mark_all_read: "Mark all as read (تحديد الكل كمقروء)",
+      metric_total: "Total Ledger Records",
+      metric_unread: "Action Required",
+      metric_custody: "Custody Status",
+      metric_sync: "Realtime Sync",
+      cat_all: "All",
+      cat_matches: "Matches & Pairings (التطابقات)",
+      cat_handover: "Handover Coordination (تسليم العهدة)",
+      cat_trust: "Organization & Trust (التحقق والثقة)",
+      cat_ledger: "Contributions & Ledger (السجل)",
+      cat_system: "System (النظام)",
+      unread_toggle_label: "Unread only (غير المقروء فقط)",
+      group_today: "Today (اليوم)",
+      group_yesterday: "Yesterday (أمس)",
+      group_earlier: "Earlier This Week (سابقاً هذا الأسبوع)",
+      empty_title: "You're All Caught Up! (كل الإشعارات مقروءة)",
+      empty_desc: "When important matches, handovers, custody updates, or civic verification events occur in your Cairo hub, they will appear here in real-time."
+    },
+    ar: {
+      crumb_dashboard: "لوحة التحكم",
+      crumb_notifications: "مركز الإشعارات والعمليات التشغيلية",
+      title: "الإشعارات والتنبيهات",
+      subtitle: "تابع تحديثات التطابقات، تسليم العهدات، ومستجدات التوثيق المدني التي تتطلب اتخاذ إجراء فوري.",
+      mark_all_read: "تحديد الكل كمقروء",
+      metric_total: "إجمالي السجلات التشغيلية",
+      metric_unread: "تتطلب اتخاذ إجراء",
+      metric_custody: "حالة العهدة النشطة",
+      metric_sync: "المزامنة المباشرة",
+      cat_all: "الكل",
+      cat_matches: "التطابقات والربط",
+      cat_handover: "تنسيق تسليم العهدة",
+      cat_trust: "التحقق والثقة المؤسسية",
+      cat_ledger: "السجل المجتمعي والأثر",
+      cat_system: "إشعارات النظام",
+      unread_toggle_label: "غير المقروء فقط",
+      group_today: "اليوم",
+      group_yesterday: "أمس",
+      group_earlier: "سابقاً هذا الأسبوع",
+      empty_title: "أنت على اطلاع دائم! لا توجد إشعارات معلقة",
+      empty_desc: "عند حدوث تطابقات جديدة أو اكتمال عمليات تسليم العهدة في نطاق نقطة القاهرة، ستظهر هنا فوراً."
+    }
+  };
+
+  function setState(state) {
+    const inbox = document.getElementById('inboxContent');
+    const empty = document.getElementById('stateEmpty');
+    const filteredNone = document.getElementById('stateFilteredNone');
+    const loading = document.getElementById('stateLoading');
+
+    inbox.classList.add('hidden');
+    empty.classList.add('hidden');
+    filteredNone.classList.add('hidden');
+    loading.classList.add('hidden');
+
+    document.querySelectorAll('#stateControls button[data-state-btn]').forEach(btn => {
+      btn.classList.remove('bg-primary', 'text-on-primary');
+      btn.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+    });
+
+    const activeBtn = document.querySelector(`[data-state-btn="${state}"]`);
+    if (activeBtn) {
+      activeBtn.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+      activeBtn.classList.add('bg-primary', 'text-on-primary');
+    }
+
+    if (state === 'active') {
+      inbox.classList.remove('hidden');
+      applyFilters();
+    } else if (state === 'empty') {
+      empty.classList.remove('hidden');
+      document.getElementById('unreadRecordsCount').textContent = '0 Unread';
+      const pulse = document.getElementById('badgePulse');
+      if (pulse) pulse.classList.add('hidden');
+    } else if (state === 'filtered_none') {
+      filteredNone.classList.remove('hidden');
+    } else if (state === 'loading') {
+      loading.classList.remove('hidden');
+    }
+  }
+
+  function filterCategory(cat) {
+    activeCategory = cat;
+    document.querySelectorAll('#categoryFilterTabs button').forEach(btn => {
+      if (btn.getAttribute('data-cat') === cat) {
+        btn.className = 'px-3 py-1.5 rounded-lg bg-secondary-container text-on-secondary-container font-label-md text-label-md font-medium whitespace-nowrap transition-colors flex items-center gap-1.5';
+      } else {
+        btn.className = 'px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1.5';
+      }
+    });
+    applyFilters();
+  }
+
+  function toggleUnreadOnly(checked) {
+    unreadOnly = checked;
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const cards = document.querySelectorAll('.notif-card');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const type = card.getAttribute('data-type');
+      const isUnread = card.getAttribute('data-unread') === 'true';
+
+      const matchesCat = (activeCategory === 'all' || type === activeCategory);
+      const matchesUnread = (!unreadOnly || isUnread);
+
+      if (matchesCat && matchesUnread) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    document.querySelectorAll('.notification-group').forEach(group => {
+      const hasVisibleChild = Array.from(group.querySelectorAll('.notif-card')).some(c => !c.classList.contains('hidden'));
+      if (hasVisibleChild) {
+        group.classList.remove('hidden');
+      } else {
+        group.classList.add('hidden');
+      }
+    });
+
+    const filteredNone = document.getElementById('stateFilteredNone');
+    const inbox = document.getElementById('inboxContent');
+
+    if (visibleCount === 0) {
+      inbox.classList.add('hidden');
+      filteredNone.classList.remove('hidden');
+    } else {
+      inbox.classList.remove('hidden');
+      filteredNone.classList.add('hidden');
+    }
+  }
+
+  function resetFilters() {
+    unreadOnly = false;
+    const toggle = document.getElementById('unreadToggle');
+    if (toggle) toggle.checked = false;
+    filterCategory('all');
+  }
+
+  function markAllAsRead() {
+    const unreadCards = document.querySelectorAll('.notif-card[data-unread="true"]');
+    unreadCards.forEach(card => {
+      card.setAttribute('data-unread', 'false');
+      const sideBar = card.querySelector('.bg-primary, .bg-secondary');
+      if (sideBar) sideBar.classList.add('hidden');
+      const pulseDot = card.querySelector('.animate-pulse');
+      if (pulseDot) pulseDot.classList.add('hidden');
+      const title = card.querySelector('h2');
+      if (title) title.classList.replace('font-semibold', 'font-normal');
+    });
+
+    document.getElementById('unreadRecordsCount').textContent = '0 Unread (تم الإجراء)';
+    const badgePulse = document.getElementById('badgePulse');
+    if (badgePulse) badgePulse.classList.add('hidden');
+
+    showToast('All 3 action notifications marked as read');
+    applyFilters();
+  }
+
+  function markItemRead(itemId) {
+    const card = document.querySelector(`[data-item-id="${itemId}"]`);
+    if (card) {
+      card.setAttribute('data-unread', 'false');
+      const sideBar = card.querySelector('.bg-primary, .bg-secondary');
+      if (sideBar) sideBar.classList.add('hidden');
+      const pulseDot = card.querySelector('.animate-pulse');
+      if (pulseDot) pulseDot.classList.add('hidden');
+      const title = card.querySelector('h2');
+      if (title) title.classList.replace('font-semibold', 'font-normal');
+
+      const remainingUnread = document.querySelectorAll('.notif-card[data-unread="true"]').length;
+      document.getElementById('unreadRecordsCount').textContent = `${remainingUnread} Unread`;
+      if (remainingUnread === 0) {
+        const badgePulse = document.getElementById('badgePulse');
+        if (badgePulse) badgePulse.classList.add('hidden');
+      }
+      showToast('Record marked as read');
+      applyFilters();
+    }
+  }
+
+  function handleAction(actionType, entityId) {
+    if (actionType === 'seal_handover') {
+      showToast(`Redirecting to Bilateral Handover Seal Portal (#${entityId})...`);
+    } else if (actionType === 'evaluate_match') {
+      showToast(`Opening Deterministic Match Engine (#${entityId})...`);
+    } else if (actionType === 'view_org') {
+      showToast(`Loading verified credentials for node ${entityId}`);
+    } else if (actionType === 'view_ledger') {
+      showToast(`Opening Immutable Proof-of-Redistribution #${entityId}`);
+    } else {
+      showToast(`Action invoked for ${entityId}`);
+    }
+  }
+
+  function triggerRefresh() {
+    const icon = document.getElementById('refreshIcon');
+    icon.classList.add('animate-spin');
+    setTimeout(() => {
+      icon.classList.remove('animate-spin');
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('syncStatus').textContent = `Just now (${timeStr})`;
+      showToast('Notifications synchronized with Cairo Node CAI-01');
+    }, 600);
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('actionToast');
+    const toastMsg = document.getElementById('toastMessage');
+    toastMsg.textContent = message;
+    toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+    }, 3200);
+  }
+
+  function toggleRTL() {
+    isRTL = !isRTL;
+    const root = document.getElementById('notificationRoot');
+    const lang = isRTL ? 'ar' : 'en';
+    const dict = translations[lang];
+
+    if (isRTL) {
+      root.setAttribute('dir', 'rtl');
+      document.getElementById('rtlBtnText').textContent = 'LTR: English';
+    } else {
+      root.setAttribute('dir', 'ltr');
+      document.getElementById('rtlBtnText').textContent = 'RTL: العربية';
+    }
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) {
+        el.textContent = dict[key];
+      }
+    });
+
+    showToast(isRTL ? 'تم تفعيل الاتجاه العربي (RTL)' : 'Switched to English Layout (LTR)');
+  }
+</script></div></main></div></body></html>

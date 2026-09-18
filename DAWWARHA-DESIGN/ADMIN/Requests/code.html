@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary-container":"#9f672b","inverse-on-surface":"#eaf3ee","on-error-container":"#93000a","error-container":"#ffdad6","on-primary":"#ffffff","on-secondary-container":"#396e5f","surface-container-lowest":"#ffffff","secondary":"#33685a","surface-container-highest":"#dbe5e0","on-secondary":"#ffffff","on-primary-fixed-variant":"#005143","on-tertiary":"#ffffff","on-primary-container":"#ebfff7","surface-dim":"#d3dcd7","primary-fixed-dim":"#87d5c1","on-background":"#151d1a","on-surface-variant":"#3f4946","on-secondary-fixed":"#002019","on-tertiary-container":"#fffaf8","surface-container-low":"#edf6f1","secondary-container":"#b6eedc","inverse-primary":"#87d5c1","tertiary":"#834f14","surface":"#f2fbf6","outline-variant":"#bec9c4","primary-fixed":"#a3f2dd","background":"#f2fbf6","surface-container":"#e7f0eb","primary":"#076757","secondary-fixed-dim":"#9bd2c0","on-error":"#ffffff","on-tertiary-fixed":"#2d1600","on-tertiary-fixed-variant":"#6a3b00","surface-bright":"#f2fbf6","on-primary-fixed":"#00201a","error":"#ba1a1a","secondary-fixed":"#b6eedc","on-secondary-fixed-variant":"#184f42","surface-tint":"#106a5a","primary-container":"#2f806f","inverse-surface":"#2a322f","tertiary-fixed":"#ffdcbf","surface-container-high":"#e1eae5","on-surface":"#151d1a","surface-variant":"#dbe5e0","tertiary-fixed-dim":"#feb874","outline":"#6f7975"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-md":"1rem","margin":"2rem","space-lg":"1.5rem","gutter-mobile":"1rem","gutter":"1.5rem","space-xl":"2.5rem","space-sm":"0.5rem","space-xs":"0.25rem","margin-mobile":"1rem"},fontFamily:{"headline-lg":["Inter"],"body-lg":["Inter"],"headline-md":["Inter"],"label-md":["Inter"],"display-lg-mobile":["Inter"],"code-sm":["Inter"],"headline-lg-mobile":["Inter"],"headline-sm":["Inter"],"display-lg":["Inter"],"body-md":["Inter"],"label-sm":["Inter"],"body-sm":["Inter"]},fontSize:{"headline-lg":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.015em","fontWeight":"600"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","fontWeight":"400"}],"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.005em","fontWeight":"600"}],"label-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"500"}],"display-lg-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"code-sm":["0.8125rem",{"lineHeight":"1.125rem","fontWeight":"400"}],"headline-lg-mobile":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-sm":["1.125rem",{"lineHeight":"1.5rem","fontWeight":"500"}],"display-lg":["3.5rem",{"lineHeight":"4rem","letterSpacing":"-0.02em","fontWeight":"600"}],"body-md":["0.9375rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"label-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}],"body-sm":["0.8125rem",{"lineHeight":"1.25rem","fontWeight":"400"}]}}}}</script></head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-y-auto"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center justify-between border-b border-outline-variant/30"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container"><span class="material-symbols-outlined text-[20px]">recycling</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-tight font-semibold">دَوَّرها</span><span class="font-label-sm text-label-sm text-outline">Dawwarha Civic OS</span></div></div><span class="px-2 py-0.5 rounded-full bg-surface-container-high font-label-sm text-label-sm text-on-surface-variant font-medium">v2.4-GOV</span></div><nav class="flex flex-col gap-1 p-space-sm" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-lg"><div class="px-space-xs pt-space-sm pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Overview</div><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="overview" href="#">Admin Dashboard</a><div class="px-space-xs pt-space-md pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Trust & Moderation</div><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="verification-queue" href="#">Verification Queue</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="content-reports-flags" href="#">Content Reports & Flags</a><div class="px-space-xs pt-space-md pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Operations & Ecosystem</div><a aria-current="page" class="flex items-center px-space-sm py-2 transition-colors bg-primary-container text-on-primary-container font-medium rounded-lg" data-path="requests-standing-quotas" href="#">Requests Standing Quotas</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="users-directory" href="#">Users Directory</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="organizations-directory" href="#">Organizations Directory</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="resources-oversight" href="#">Resources Oversight</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="bilateral-matches" href="#">Bilateral Matches & Pairing</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="custodial-handovers" href="#">Custodial Handovers</a><div class="px-space-xs pt-space-md pb-1 font-label-sm text-label-sm uppercase tracking-wider text-outline">Impact & Governance</div><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="category-taxonomy" href="#">Category Taxonomy</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="analytics-ledger" href="#">Platform Analytics & Ledger</a><a class="flex items-center px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-label-md text-label-md" data-path="audit-logs" href="#">Audit Trail & Logs</a></nav></div><div class="p-space-md bg-surface-container-low border-t border-outline-variant/30 flex flex-col gap-1"><div class="flex items-center gap-space-xs text-primary font-label-sm text-label-sm font-semibold"><span class="material-symbols-outlined text-[16px]">policy</span>Decree 149/2019 Ready</div><p class="font-label-sm text-label-sm text-outline">National Circular Ledger sync active.</p></div></aside><div class="pl-72 flex flex-col min-h-screen"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-gutter border-b border-outline-variant/20"><div class="flex items-center gap-space-md flex-1 max-w-2xl"><div class="relative w-full max-w-sm"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full h-10 pl-9 pr-space-md rounded-lg bg-surface-container-low border-0 text-on-surface font-body-sm text-body-sm focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest outline-none placeholder:text-outline" placeholder="Search quota ID, beneficiary, national registry, or batch UID..." type="text"/></div><div class="hidden lg:flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg bg-surface-container-low border border-outline-variant/30"><span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span><span class="font-code-sm text-code-sm text-on-surface font-medium">Merkle #819,004</span><span class="font-label-sm text-label-sm text-primary font-medium">• Verified Synced</span></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center bg-surface-container-low rounded-lg p-0.5 border border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm"><span class="px-2 py-1 text-outline text-[11px] font-semibold uppercase tracking-wider">Simulate:</span><button class="px-2 py-1 rounded bg-surface-container-lowest text-primary font-semibold shadow-sm" type="button">Super Admin</button><button class="px-2 py-1 rounded hover:text-on-surface" type="button">Municipal Rep</button><button class="px-2 py-1 rounded hover:text-on-surface" type="button">NGO Auditor</button></div><button class="flex items-center gap-1 px-space-sm py-1.5 rounded-lg border border-outline-variant/40 bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" type="button"><span class="font-semibold text-primary">EN</span><span class="text-outline">/</span><span class="font-medium">عربي</span></button><div class="h-6 w-px bg-outline-variant/40"></div><div class="flex items-center gap-space-sm"><div class="flex flex-col text-right hidden sm:flex"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Eng. Reham M.</span><span class="font-label-sm text-label-sm text-outline">Lead Civic Auditor & Super Admin</span></div><div class="w-9 h-9 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-semibold text-label-sm">RM</div></div></div></header><main class="relative pt-16 flex-1 w-full px-gutter py-space-lg bg-background"><div class="flex flex-col w-full text-on-surface">
+<!-- Interactive State Bar / QA Telemetry Controller -->
+<div class="w-full bg-surface-container-low px-space-md py-space-sm rounded-lg flex flex-wrap items-center justify-between gap-space-sm mb-space-md">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-ping"></span>
+        QA Domain 3 Active
+      </span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Demand & Matching Engine · Eng. Dina A. Elyan</span>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+<span class="text-outline">Simulation Presets:</span>
+<button class="px-2 py-1 rounded bg-surface-container-lowest text-primary font-semibold shadow-sm hover:bg-surface-container transition-colors" id="btn-preset-default" onclick="setPreset('default')" type="button">1. Standard Active</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container transition-colors" id="btn-preset-matched" onclick="setPreset('matched')" type="button">2. Matched Pair View</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container transition-colors" id="btn-preset-fulfilled" onclick="setPreset('fulfilled')" type="button">3. Fulfilled/Archived</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container transition-colors" id="btn-preset-urgent" onclick="setPreset('urgent')" type="button">4. Critical Triage (18)</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container transition-colors" id="btn-preset-empty" onclick="setPreset('empty')" type="button">5. Zero-State</button>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" id="btn-toggle-drawer" onclick="toggleDrawer()" type="button">
+<span class="material-symbols-outlined text-[16px]">dock_to_left</span>
+<span id="drawer-btn-label">Hide Drawer</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors" id="btn-rtl" onclick="toggleDirection()" type="button">
+<span class="material-symbols-outlined text-[16px]">translate</span>
+<span id="rtl-label">RTL Arabic View</span>
+</button>
+</div>
+</div>
+<!-- Breadcrumbs & Operational Governance Header -->
+<div class="flex flex-col gap-space-xs mb-space-lg">
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-outline">
+<span>System Administration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Operations & Ecosystem</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Requests & Standing Quotas</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-code-sm text-[11px]">/admin/requests</span>
+</div>
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md mt-1">
+<div class="flex flex-col">
+<div class="flex items-center gap-3">
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">
+            Community Requests & Standing Requisition Quotas Oversight
+          </h1>
+<span class="hidden md:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+            Decree 149/2019
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+          سجل طلبات واحتياجات المجتمع وحوكمة الحصص المؤسسية الدورية · Municipal demand pipeline & algorithmic candidate pairing.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-secondary font-label-md text-label-md shadow-sm transition-colors" onclick="triggerSyncRegistry()" type="button">
+<span class="material-symbols-outlined text-[18px]" id="sync-icon">sync</span>
+<span>Sync MoSS Needs Registry</span>
+</button>
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-primary text-on-primary hover:bg-secondary transition-all font-label-md text-label-md shadow-sm" onclick="exportData()" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Export Requisitions (.CSV / JSON)</span>
+</button>
+</div>
+</div>
+<!-- MongoDB Schema Badge & Compound Index Telemetry -->
+<div class="mt-2 p-2.5 rounded-lg bg-surface-container-low flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2 text-on-surface-variant font-code-sm text-code-sm">
+<span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary-container font-semibold">Collection 5: requests</span>
+<span class="text-outline">•</span>
+<span class="font-medium">Mongoose Schema: RequestSchema</span>
+<span class="text-outline">•</span>
+<span class="text-secondary font-medium">7-State Finite Machine</span>
+<span class="text-outline">•</span>
+<span class="text-outline-variant font-mono">idx: { status: 1, categoryId: 1, urgency: -1, createdAt: -1 }</span>
+</div>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[14px] text-primary">database</span>
+<span>Strict Status-Based Archival Only (Zero Hard-Delete)</span>
+</div>
+</div>
+</div>
+<!-- 4 Executive Operational Metric Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-gutter mb-space-lg">
+<!-- Stat 1: Total Requests -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Total Requests Logged</span>
+<span class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface font-semibold tabular-nums mt-1 leading-none" id="metric-total">184</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">inventory_2</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="inline-flex items-center text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+          +14 this week
+        </span>
+<span class="text-outline font-code-sm">MongoDB live count</span>
+</div>
+</div>
+<!-- Stat 2: Open Needs -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Open & Unfulfilled Need</span>
+<span class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface font-semibold tabular-nums mt-1 leading-none" id="metric-open">128</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed/40 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[24px]">pending_actions</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="text-on-surface font-medium">69.5% operational pool</span>
+<span class="text-outline">Awaiting donors</span>
+</div>
+</div>
+<!-- Stat 3: High Urgency -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-error">High Urgency Triage</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-error font-semibold tabular-nums leading-none" id="metric-urgent">18</span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">Priority SLA</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-error-container/60 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[24px]">emergency</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="text-error font-medium">Medical & Perishables</span>
+<span class="text-outline">Avg response 4.2h</span>
+</div>
+</div>
+<!-- Stat 4: Fulfilled Handover -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Fulfilled & Settled</span>
+<span class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary font-semibold tabular-nums mt-1 leading-none" id="metric-fulfilled">412</span>
+</div>
+<div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[24px]">fact_check</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="text-primary font-medium">Verified Handover</span>
+<span class="text-outline font-code-sm">Zero disputes</span>
+</div>
+</div>
+</div>
+<!-- Controlled Search & Allow-Listed Filter Bar -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm mb-space-md flex flex-col gap-space-sm">
+<div class="flex flex-col lg:flex-row items-center gap-space-sm">
+<!-- Search Input -->
+<div class="relative w-full lg:w-96 flex-shrink-0">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-space-md rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-outline shadow-inner transition-all" id="filter-search" oninput="applyFilters()" placeholder="Search by title, #REQ-..., org, or area..." type="text"/>
+</div>
+<!-- Filters Row -->
+<div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-2 w-full">
+<!-- Filter 1: Category (7 statutory) -->
+<select class="h-10 px-2.5 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="filter-category" onchange="applyFilters()">
+<option value="all">All Categories (7)</option>
+<option value="Food">Food (أغذية)</option>
+<option value="Books">Books (كتب وتثقيف)</option>
+<option value="Furniture">Furniture (أثاث)</option>
+<option value="Clothing">Clothing (كساء)</option>
+<option value="School Supplies">School Supplies (تعليمي)</option>
+<option value="Office Equip">Office Equip (مكتبي)</option>
+<option value="Other">Other / Medical (أخرى)</option>
+</select>
+<!-- Filter 2: Lifecycle Status (7 exact enums) -->
+<select class="h-10 px-2.5 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="filter-status" onchange="applyFilters()">
+<option value="all">All Statuses (7)</option>
+<option value="draft">Draft</option>
+<option value="published">Published</option>
+<option value="matched">Matched</option>
+<option value="accepted">Accepted</option>
+<option value="fulfilled">Fulfilled</option>
+<option value="cancelled">Cancelled</option>
+<option value="expired">Expired</option>
+</select>
+<!-- Filter 3: Urgency Triage -->
+<select class="h-10 px-2.5 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="filter-urgency" onchange="applyFilters()">
+<option value="all">All Urgency Levels</option>
+<option value="high">🔴 High Urgency (Critical)</option>
+<option value="medium">🟡 Medium Urgency</option>
+<option value="low">🔵 Low Urgency</option>
+</select>
+<!-- Filter 4: Requester Node -->
+<select class="h-10 px-2.5 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="filter-node" onchange="applyFilters()">
+<option value="all">All Requester Nodes</option>
+<option value="ngo">Accredited NGOs</option>
+<option value="hospital">Healthcare Outposts</option>
+<option value="center">Community Centers</option>
+<option value="citizen">Individual Citizens</option>
+</select>
+<!-- Filter 5: Governorate -->
+<select class="h-10 px-2.5 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="filter-governorate" onchange="applyFilters()">
+<option value="all">All Governorates</option>
+<option value="Cairo">Cairo (القاهرة)</option>
+<option value="Giza">Giza (الجيزة)</option>
+<option value="Alexandria">Alexandria (الإسكندرية)</option>
+<option value="Qalyubia">Qalyubia (القليوبية)</option>
+<option value="Minya">Minya (المنيا)</option>
+</select>
+</div>
+</div>
+<!-- Active Filter Status & Reset -->
+<div class="flex items-center justify-between pt-2 text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span id="results-count">Showing 8 records of 184 active community requests</span>
+<span class="text-outline">•</span>
+<span class="text-outline font-code-sm">Query execution: 1.4ms (Indexed)</span>
+</div>
+<button class="text-primary hover:text-secondary font-medium transition-colors hover:underline" onclick="resetFilters()" type="button">
+        Reset All Filters
+      </button>
+</div>
+</div>
+<!-- Operational Workspace: Main Table Split Layout with Slide-Over Drawer -->
+<div class="relative flex flex-col xl:flex-row gap-gutter items-start w-full mb-space-lg">
+<!-- Table Container (Flex-1) -->
+<div class="w-full transition-all duration-300 flex-1 min-w-0" id="table-wrapper">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Table Visual Header with Batch Action Strip -->
+<div class="p-space-sm px-space-md bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-space-sm font-label-sm text-label-sm text-on-surface-variant">
+<input class="rounded text-primary focus:ring-primary" id="select-all" onclick="toggleSelectAll(this)" type="checkbox"/>
+<span class="font-medium">Master Requisitions Stream</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-outline text-[11px] font-mono">SORT: urgency DESC, createdAt DESC</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-outline hidden sm:inline">Bulk Actions:</span>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface-variant text-label-sm font-medium transition-colors" type="button">Pair With Pools</button>
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-error text-label-sm font-medium transition-colors" type="button">Expire Stale</button>
+</div>
+</div>
+<!-- Master Data Table -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left font-body-sm text-body-sm" id="requests-table">
+<thead>
+<tr class="bg-surface-container-lowest text-outline font-label-sm text-label-sm uppercase tracking-wider text-[11px]">
+<th class="py-3 px-3 w-10 text-center">
+<span class="sr-only">Select</span>
+</th>
+<th class="py-3 px-4 font-semibold">Requisition Details & Need</th>
+<th class="py-3 px-3 font-semibold">Category</th>
+<th class="py-3 px-3 font-semibold">Urgency</th>
+<th class="py-3 px-4 font-semibold">Requester Entity & Node</th>
+<th class="py-3 px-3 font-semibold">Territory</th>
+<th class="py-3 px-3 font-semibold">Lifecycle Status</th>
+<th class="py-3 px-4 text-right font-semibold">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low text-on-surface" id="table-body">
+<!-- ROW 1: #REQ-MED-4401 (Selected Row) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-primary-fixed/10" id="row-REQ-MED-4401" onclick="inspectRow('REQ-MED-4401')">
+<td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
+<input class="row-checkbox rounded text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-3 px-4 min-w-[240px]">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-error-container text-error flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">medical_services</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REQ-MED-4401</span>
+<span class="px-1.5 py-0.2 rounded bg-error/10 text-error font-mono text-[10px] font-bold">CRITICAL</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">12x Emergency Portable Oxygen Concentrators & Flow Regulators</span>
+<span class="text-outline text-[12px] line-clamp-1">Pediatric clinic surge; calibrated O2 flow apparatus required immediately.</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[12px]">Other: Biomedical</span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+                    High
+                  </span>
+</td>
+<td class="py-3 px-4 min-w-[190px]">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Sayeda Zeinab Emergency Clinic</span>
+<div class="flex items-center gap-1 text-[11px] text-outline">
+<span>#ORG-CAI-MED-05</span>
+<span>•</span>
+<span class="text-primary font-medium">Tier 2 Clinic</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+<span>Sayeda Zeinab, Cairo</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="status-badge px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                    Published
+                  </span>
+</td>
+<td class="py-3 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-label-sm text-label-sm hover:bg-secondary transition-colors font-medium" onclick="inspectRow('REQ-MED-4401')" type="button">
+                      Inspect
+                    </button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" title="Quick Options" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2: #REQ-FOO-1029 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer" id="row-REQ-FOO-1029" onclick="inspectRow('REQ-FOO-1029')">
+<td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
+<input class="row-checkbox rounded text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-3 px-4 min-w-[240px]">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-tertiary-container/20 text-tertiary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">nutrition</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REQ-FOO-1029</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">800kg Fresh Rice, Legumes & Dry Pantry Staples</span>
+<span class="text-outline text-[12px] line-clamp-1">MoSS-cleared communal kitchen program supporting 420 low-income families.</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[12px]">Food</span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+                    High
+                  </span>
+</td>
+<td class="py-3 px-4 min-w-[190px]">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Nile Basin Food Banking</span>
+<div class="flex items-center gap-1 text-[11px] text-outline">
+<span>#NGO-7721-EG</span>
+<span>•</span>
+<span class="text-primary font-medium">Accredited NGO</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+<span>Mohandessin, Giza</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    Published
+                  </span>
+</td>
+<td class="py-3 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors font-medium" onclick="inspectRow('REQ-FOO-1029')" type="button">
+                      Inspect
+                    </button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3: #REQ-SCH-7712 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer" id="row-REQ-SCH-7712" onclick="inspectRow('REQ-SCH-7712')">
+<td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
+<input class="row-checkbox rounded text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-3 px-4 min-w-[240px]">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">school</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REQ-SCH-7712</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">150x Primary School Educational Geometry & Notebook Kits</span>
+<span class="text-outline text-[12px] line-clamp-1">Back-to-school community replenishment quota for public primary students.</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[12px]">School Supplies</span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+                    Medium
+                  </span>
+</td>
+<td class="py-3 px-4 min-w-[190px]">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Resala Educational Hub</span>
+<div class="flex items-center gap-1 text-[11px] text-outline">
+<span>#EDU-8120</span>
+<span>•</span>
+<span class="text-primary font-medium">Accredited NGO</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+<span>Maadi West, Cairo</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">join_right</span>
+                    Matched (RES-SCH)
+                  </span>
+</td>
+<td class="py-3 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors font-medium" onclick="inspectRow('REQ-SCH-7712')" type="button">
+                      Inspect
+                    </button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4: #REQ-CLO-3390 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer" id="row-REQ-CLO-3390" onclick="inspectRow('REQ-CLO-3390')">
+<td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
+<input class="row-checkbox rounded text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-3 px-4 min-w-[240px]">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container text-secondary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">checkroom</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REQ-CLO-3390</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">120x Thermal Winter Jackets & Warm Blankets (All Sizes)</span>
+<span class="text-outline text-[12px] line-clamp-1">Cold wave shelter preparedness for unhoused seniors in informal settlements.</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[12px]">Clothing</span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px]">warning</span>
+                    High
+                  </span>
+</td>
+<td class="py-3 px-4 min-w-[190px]">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Hilal Red Crescent Giza</span>
+<div class="flex items-center gap-1 text-[11px] text-outline">
+<span>#RED-GIZ-04</span>
+<span>•</span>
+<span class="text-primary font-medium">Civic Responder</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+<span>Imbaba, Giza</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+                    Draft (Pending Audit)
+                  </span>
+</td>
+<td class="py-3 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors font-medium" onclick="inspectRow('REQ-CLO-3390')" type="button">
+                      Inspect
+                    </button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 5: #REQ-OFF-2195 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer" id="row-REQ-OFF-2195" onclick="inspectRow('REQ-OFF-2195')">
+<td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
+<input class="row-checkbox rounded text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-3 px-4 min-w-[240px]">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container text-secondary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">computer</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REQ-OFF-2195</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">15x Refurbished Desktop Thin-Clients for Civic Computer Lab</span>
+<span class="text-outline text-[12px] line-clamp-1">Digital literacy youth station installation; monitors & keyboards included.</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[12px]">Office Equip</span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+                    Medium
+                  </span>
+</td>
+<td class="py-3 px-4 min-w-[190px]">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Dar Al-Salam Youth Center</span>
+<div class="flex items-center gap-1 text-[11px] text-outline">
+<span>#MYS-CAI-19</span>
+<span>•</span>
+<span class="text-primary font-medium">Youth Outpost</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+<span>Dar Al-Salam, Cairo</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    Published
+                  </span>
+</td>
+<td class="py-3 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors font-medium" onclick="inspectRow('REQ-OFF-2195')" type="button">
+                      Inspect
+                    </button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 6: #REQ-FUR-6084 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer" id="row-REQ-FUR-6084" onclick="inspectRow('REQ-FUR-6084')">
+<td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
+<input class="row-checkbox rounded text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-3 px-4 min-w-[240px]">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container text-secondary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">chair</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REQ-FUR-6084</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">30x Sturdy Wooden Classroom Study Desks & Benches</span>
+<span class="text-outline text-[12px] line-clamp-1">Community tutoring rooms expansion; durable oak or laminated ply.</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[12px]">Furniture</span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-outline font-label-sm text-label-sm font-medium">
+                    Low
+                  </span>
+</td>
+<td class="py-3 px-4 min-w-[190px]">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Al-Amal Heliopolis Branch</span>
+<div class="flex items-center gap-1 text-[11px] text-outline">
+<span>#NGO-4412-CAI</span>
+<span>•</span>
+<span class="text-primary font-medium">Accredited NGO</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+<span>Heliopolis, Cairo</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary">task_alt</span>
+                    Accepted
+                  </span>
+</td>
+<td class="py-3 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors font-medium" onclick="inspectRow('REQ-FUR-6084')" type="button">
+                      Inspect
+                    </button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 7: #REQ-MED-9100 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer" id="row-REQ-MED-9100" onclick="inspectRow('REQ-MED-9100')">
+<td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
+<input class="row-checkbox rounded text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-3 px-4 min-w-[240px]">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">accessible</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REQ-MED-9100</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold line-clamp-1">25x Pediatric Orthopedic Wheelchairs & Walking Canes</span>
+<span class="text-outline text-[12px] line-clamp-1">Rehabilitation clinic standing quota for young mobility-impaired patients.</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[12px]">Other: Medical</span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed/40 text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[13px]">schedule</span>
+                    Medium
+                  </span>
+</td>
+<td class="py-3 px-4 min-w-[190px]">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Cairo South Children Clinic</span>
+<div class="flex items-center gap-1 text-[11px] text-outline">
+<span>#MOH-CAI-204</span>
+<span>•</span>
+<span class="text-primary font-medium">Healthcare Outpost</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+<span>Al-Khalifa, Cairo</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary">check_circle</span>
+                    Fulfilled
+                  </span>
+</td>
+<td class="py-3 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors font-medium" onclick="inspectRow('REQ-MED-9100')" type="button">
+                      Inspect
+                    </button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 8: #REQ-FOO-8802 (Expired / Archived) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer opacity-75" id="row-REQ-FOO-8802" onclick="inspectRow('REQ-FOO-8802')">
+<td class="py-3 px-3 text-center" onclick="event.stopPropagation()">
+<input class="row-checkbox rounded text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="py-3 px-4 min-w-[240px]">
+<div class="flex items-start gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface-container text-outline flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">timer_off</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-outline">#REQ-FOO-8802</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-outline text-[10px] font-mono">ARCHIVED</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-medium line-clamp-1">Expired Request: Canned Ready Meals Batch #08</span>
+<span class="text-outline text-[12px] line-clamp-1">Auto-expired after 30-day unfulfilled window per circular health protocol.</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-[12px]">Food</span>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container text-outline font-label-sm text-label-sm font-medium">
+                    Low
+                  </span>
+</td>
+<td class="py-3 px-4 min-w-[190px]">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-on-surface">Tamer S. El-Gohary</span>
+<div class="flex items-center gap-1 text-[11px] text-outline">
+<span>#USR-9941</span>
+<span>•</span>
+<span class="text-outline font-medium">Citizen Seeker</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">location_on</span>
+<span>Montaza, Alexandria</span>
+</div>
+</td>
+<td class="py-3 px-3 whitespace-nowrap">
+<span class="px-2.5 py-1 rounded-full bg-surface-container text-outline font-label-sm text-label-sm font-semibold inline-flex items-center gap-1">
+                    Expired (Archived)
+                  </span>
+</td>
+<td class="py-3 px-4 text-right whitespace-nowrap" onclick="event.stopPropagation()">
+<div class="flex items-center justify-end gap-1.5">
+<button class="px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-sm text-label-sm transition-colors font-medium" onclick="inspectRow('REQ-FOO-8802')" type="button">
+                      Inspect
+                    </button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Zero State (Hidden by default, shown via preset) -->
+<div class="hidden p-space-xl flex flex-col items-center justify-center text-center" id="table-zero-state">
+<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center text-outline mb-space-sm">
+<span class="material-symbols-outlined text-[32px]">filter_list_off</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">No requisitions match active filter parameters</span>
+<p class="font-body-sm text-body-sm text-outline max-w-md mt-1 mb-space-md">
+            The indexed MongoDB query returned zero standing quotas. Verify status enum criteria or adjust geographic bounds.
+          </p>
+<button class="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-secondary transition-colors" onclick="resetFilters()" type="button">
+            Clear Active Filter Predicates
+          </button>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-space-sm px-space-md bg-surface-container-low flex flex-wrap items-center justify-between gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<span>Page 1 of 23</span>
+<span class="text-outline">•</span>
+<span class="font-code-sm text-outline">Cursor: 65a8829f00e31 · Range [0 - 8]</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-outline cursor-not-allowed font-medium" disabled="" type="button">Previous</button>
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-semibold" type="button">1</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-medium" type="button">2</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-medium" type="button">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-medium" type="button">23</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-medium" type="button">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide-Over Inspection Drawer (Detailed Requisition #REQ-MED-4401) -->
+<div class="w-full xl:w-[480px] flex-shrink-0 bg-surface-container-lowest rounded-xl shadow-sm transition-all duration-300 overflow-hidden flex flex-col" id="inspection-drawer">
+<!-- Drawer Header -->
+<div class="p-space-md bg-surface-container-low flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm font-bold text-primary" id="drawer-id">#REQ-MED-4401</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold" id="drawer-status-chip">
+              published
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold inline-flex items-center gap-1" id="drawer-urgency-chip">
+<span class="material-symbols-outlined text-[12px]">emergency</span>
+              High (Critical)
+            </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-1 leading-snug" id="drawer-title">
+            12x Emergency Portable Oxygen Concentrators & Flow Regulators
+          </h2>
+<span class="font-label-sm text-label-sm text-outline mt-0.5">Created: 2024-03-08 08:14 UTC · Verified by MoSS Dispatch</span>
+</div>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container transition-colors" onclick="closeDrawer()" title="Close Inspector" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Drawer Body (Scrollable) -->
+<div class="p-space-md flex flex-col gap-space-md max-h-[750px] overflow-y-auto">
+<!-- SECTION A: Clinical Requisition Specifications & Justification -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Section A: Requisition Specifications</span>
+<span class="font-code-sm text-code-sm text-primary font-mono">DB Schema §6.5</span>
+</div>
+<div class="grid grid-cols-2 gap-2 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex flex-col">
+<span class="text-[11px] text-outline uppercase">Category Ref</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Other (Biomedical Surplus)</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[11px] text-outline uppercase">Quantity Needed</span>
+<span class="font-label-md text-label-md font-bold text-primary tabular-nums">12 Units (Calibrated)</span>
+</div>
+<div class="flex flex-col col-span-2 pt-1">
+<span class="text-[11px] text-outline uppercase">Beneficiary Node</span>
+<span class="font-label-md text-label-md font-semibold text-on-surface">Sayeda Zeinab Emergency Clinic (#ORG-CAI-MED-05)</span>
+<span class="text-[12px] text-on-surface-variant">Tier 2 Community Health Center · Decree 149/2019 Certified</span>
+</div>
+<div class="flex flex-col col-span-2 pt-1">
+<span class="text-[11px] text-outline uppercase">Primary Medical Custodian</span>
+<div class="flex items-center gap-2 mt-0.5">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-[10px]">HK</div>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Dr. Hisham Kassem (#USR-3382)</span>
+<span class="text-outline text-[11px]">• Head Clinician</span>
+</div>
+</div>
+<div class="flex flex-col col-span-2 pt-1">
+<span class="text-[11px] text-outline uppercase">Designated Delivery Depot</span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Sayeda Zeinab Clinic Depot Bay 02, Old Cairo (Lat 30.029, Lon 31.238)</span>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-1">
+<span class="text-[11px] text-outline uppercase font-semibold">Requisition Rationale & Clinical Justification</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+              "Emergency seasonal pediatric respiratory surge. Depot oxygen pipeline reserves are operating at 92% capacity. Need 12 portable concentrators capable of 5-10L/min flow rates to discharge stabilized patients safely to home-care beds."
+            </p>
+</div>
+</div>
+<!-- SECTION B: Bilateral Matching Engine Context (FR-009 / FR-010 / Task 3.B) -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Section B: Bilateral Matching Engine Context</span>
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container font-code-sm text-[11px] font-bold">1 Candidate Found</span>
+</div>
+<!-- Matched Resource Card -->
+<div class="p-space-sm rounded-lg bg-primary-fixed/15 flex flex-col gap-2.5" id="matched-resource-card">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-md bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">handshake</span>
+</div>
+<div class="flex flex-col">
+<span class="font-code-sm text-code-sm font-bold text-primary">Consignment Lot #RES-MED-8821</span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">15x Portable O2 Flowmeters & Regulators</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary text-on-primary font-bold font-label-sm text-[11px]">94% Fit</span>
+</div>
+<p class="font-body-sm text-[12px] text-on-surface-variant">
+              Consigned by Dr. Laila El-Mansouri at Al-Bustan Medical Reserve (Maadi). Surplus reallocation ready for custodial dispatch.
+            </p>
+<!-- Matching Score Breakdown Matrix (DB Plan §6.6) -->
+<div class="bg-surface-container-lowest p-2 rounded flex flex-col gap-1.5">
+<span class="text-[11px] text-outline font-semibold uppercase">Compatibility Matrix (DB Plan §6.6)</span>
+<!-- Category Metric -->
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-on-surface-variant">Category Overlap</span>
+<span class="font-mono font-bold text-primary">1.00 (Exact Match)</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full"></div>
+</div>
+<!-- Location Metric -->
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-on-surface-variant">Geographic Proximity (Cairo Metro)</span>
+<span class="font-mono font-bold text-primary">0.90 (7.4 km delta)</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[90%]"></div>
+</div>
+<!-- Quantity Metric -->
+<div class="flex items-center justify-between text-[11px]">
+<span class="text-on-surface-variant">Quantity Sufficiency (15 offered vs 12 needed)</span>
+<span class="font-mono font-bold text-primary">0.95 (+25% buffer)</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[95%]"></div>
+</div>
+</div>
+<!-- Bilateral Action Button -->
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-2 px-3 rounded-lg bg-primary hover:bg-secondary text-on-primary font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1.5 shadow-sm transition-all" id="btn-accept-match" onclick="acceptBilateralCandidate()" type="button">
+<span class="material-symbols-outlined text-[16px]">link</span>
+<span>Trigger Bilateral Match Acceptance</span>
+</button>
+<button class="py-2 px-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm font-medium transition-colors" onclick="rejectCandidate()" title="Reject candidate and re-queue" type="button">
+                Reject
+              </button>
+</div>
+</div>
+</div>
+<!-- SECTION C: Valid Administrative Lifecycle Actions (Backend Plan Task 3.A) -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Section C: State Machine Transitions</span>
+<span class="font-code-sm text-code-sm text-outline font-mono">requestLifecycleService.js</span>
+</div>
+<div class="flex flex-col gap-1.5">
+<!-- Action 1 -->
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold flex items-center justify-between transition-colors" onclick="transitionToStatus('matched')" type="button">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">link</span>
+<span>Advance to "Matched" (Link Lot #RES-MED-8821)</span>
+</span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</button>
+<!-- Action 2 -->
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold flex items-center justify-between transition-colors" onclick="transitionToStatus('accepted')" type="button">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">approval</span>
+<span>Direct Authorization to "Accepted"</span>
+</span>
+<span class="material-symbols-outlined text-[16px] text-outline">arrow_forward</span>
+</button>
+<!-- Action 3: Cancel -->
+<button class="w-full py-2 px-3 rounded-lg bg-surface-container-low hover:bg-error-container/40 text-error font-label-sm text-label-sm font-semibold flex items-center justify-between transition-colors" onclick="promptCancelRequisition()" type="button">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Withdraw / Cancel Requisition (Audit Archival)</span>
+</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- SECTION D: Regulatory Audit Trail & State History -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Section D: Immutable Audit Trail</span>
+<span class="font-code-sm text-[11px] text-outline">Cryptographically Anchored</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-3 font-code-sm text-[11px]" id="audit-trail-container">
+<!-- Event 1 -->
+<div class="flex items-start gap-2">
+<span class="w-2 h-2 rounded-full bg-primary mt-1 flex-shrink-0"></span>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold">REQUEST_STATUS_PUBLISHED</span>
+<span class="text-outline">2024-03-08 08:14:22 UTC • Actor: Dr. Hisham Kassem (#USR-3382)</span>
+<span class="text-on-surface-variant font-mono text-[10px]">Hash: 0x9f1a2...e4a8</span>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="flex items-start gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary mt-1 flex-shrink-0"></span>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold">AUTOMATED_COMPATIBILITY_SCORED</span>
+<span class="text-outline">2024-03-08 08:14:29 UTC • System Engine v2.4</span>
+<span class="text-on-surface-variant">Computed score: 0.94 vs Lot #RES-MED-8821</span>
+</div>
+</div>
+<!-- Event 3 -->
+<div class="flex items-start gap-2">
+<span class="w-2 h-2 rounded-full bg-outline-variant mt-1 flex-shrink-0"></span>
+<div class="flex flex-col">
+<span class="text-on-surface font-semibold">CIVIC_AUDIT_LOG_OPENED</span>
+<span class="text-outline">2024-03-08 08:14:29 UTC • Admin Eng. Dina A. Elyan</span>
+<span class="text-on-surface-variant">Standing institutional quota inspection initiated</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer -->
+<div class="p-space-sm px-space-md bg-surface-container-low flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-outline font-code-sm text-[11px]">Merkle Node: #819,004</span>
+<button class="inline-flex items-center gap-1 text-primary hover:text-secondary font-medium" onclick="printRequisition()" type="button">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Print Manifest Form</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none" id="toast-container"></div>
+<!-- Client-Side Operational Simulator & Interaction Logic -->
+<script>
+    let activePreset = 'default';
+    let isDrawerOpen = true;
+    let isRtl = false;
+
+    // Toast dispatch helper
+    function showToast(title, message, isSuccess = true) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `pointer-events-auto p-4 rounded-xl shadow-lg flex items-center gap-3 transition-all duration-300 transform translate-y-2 opacity-0 ${
+        isSuccess ? 'bg-primary text-on-primary' : 'bg-surface-container-highest text-on-surface'
+      }`;
+      toast.innerHTML = `
+        <span class="material-symbols-outlined text-[20px]">${isSuccess ? 'task_alt' : 'info'}</span>
+        <div class="flex flex-col">
+          <span class="font-label-md text-label-md font-semibold">${title}</span>
+          <span class="font-body-sm text-[12px] opacity-90">${message}</span>
+        </div>
+      `;
+      container.appendChild(toast);
+      
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // Toggle slide-over inspection drawer
+    function toggleDrawer() {
+      const drawer = document.getElementById('inspection-drawer');
+      const btnLabel = document.getElementById('drawer-btn-label');
+      isDrawerOpen = !isDrawerOpen;
+
+      if (isDrawerOpen) {
+        drawer.classList.remove('hidden');
+        btnLabel.innerText = 'Hide Drawer';
+      } else {
+        drawer.classList.add('hidden');
+        btnLabel.innerText = 'Open Inspector';
+      }
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('inspection-drawer');
+      const btnLabel = document.getElementById('drawer-btn-label');
+      isDrawerOpen = false;
+      drawer.classList.add('hidden');
+      btnLabel.innerText = 'Open Inspector';
+    }
+
+    // Toggle RTL / LTR Mirroring
+    function toggleDirection() {
+      const root = document.querySelector('body') || document.documentElement;
+      const rtlLabel = document.getElementById('rtl-label');
+      isRtl = !isRtl;
+
+      if (isRtl) {
+        root.setAttribute('dir', 'rtl');
+        rtlLabel.innerText = 'LTR English View';
+        showToast('RTL Activated', 'Viewing through Arabic civic administrative perspective (اللغة العربية).');
+      } else {
+        root.setAttribute('dir', 'ltr');
+        rtlLabel.innerText = 'RTL Arabic View';
+        showToast('LTR Activated', 'Viewing through Latin layout grid.');
+      }
+    }
+
+    // Sync with Ministry of Social Solidarity Needs Registry
+    function triggerSyncRegistry() {
+      const icon = document.getElementById('sync-icon');
+      icon.classList.add('animate-spin');
+      showToast('MoSS Registry Sync', 'Connecting to National Needs Integration Gateway...');
+      
+      setTimeout(() => {
+        icon.classList.remove('animate-spin');
+        showToast('Sync Successful', 'MoSS Decree 149/2019 quotas updated. +4 pending requisitions reconciled.', true);
+      }, 1400);
+    }
+
+    // Export Requisitions
+    function exportData() {
+      showToast('Generating Export', 'Compiling Collection 5 requisitions ledger to signed CSV/JSON archive...');
+      setTimeout(() => {
+        showToast('Export Ready', 'Requisitions_Dawwarha_2024.csv successfully downloaded.', true);
+      }, 1000);
+    }
+
+    // Print Manifest
+    function printRequisition() {
+      window.print();
+    }
+
+    // Master row inspection
+    function inspectRow(reqId) {
+      if (!isDrawerOpen) toggleDrawer();
+
+      // Clear row highlights
+      document.querySelectorAll('#requests-table tbody tr').forEach(r => r.classList.remove('bg-primary-fixed/10'));
+      const activeRow = document.getElementById('row-' + reqId);
+      if (activeRow) activeRow.classList.add('bg-primary-fixed/10');
+
+      if (reqId === 'REQ-MED-4401') {
+        document.getElementById('drawer-id').innerText = '#REQ-MED-4401';
+        document.getElementById('drawer-title').innerText = '12x Emergency Portable Oxygen Concentrators & Flow Regulators';
+        document.getElementById('drawer-status-chip').innerText = 'published';
+        document.getElementById('drawer-urgency-chip').className = 'px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold inline-flex items-center gap-1';
+        document.getElementById('drawer-urgency-chip').innerHTML = '<span class="material-symbols-outlined text-[12px]">emergency</span> High (Critical)';
+        document.getElementById('matched-resource-card').classList.remove('hidden');
+      } else if (reqId === 'REQ-FOO-1029') {
+        document.getElementById('drawer-id').innerText = '#REQ-FOO-1029';
+        document.getElementById('drawer-title').innerText = '800kg Fresh Rice, Legumes & Dry Pantry Staples';
+        document.getElementById('drawer-status-chip').innerText = 'published';
+        document.getElementById('drawer-urgency-chip').className = 'px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold inline-flex items-center gap-1';
+        document.getElementById('drawer-urgency-chip').innerHTML = '<span class="material-symbols-outlined text-[12px]">warning</span> High';
+      } else if (reqId === 'REQ-FOO-8802') {
+        document.getElementById('drawer-id').innerText = '#REQ-FOO-8802';
+        document.getElementById('drawer-title').innerText = 'Expired Request: Canned Ready Meals Batch #08';
+        document.getElementById('drawer-status-chip').innerText = 'expired';
+        document.getElementById('drawer-urgency-chip').className = 'px-2 py-0.5 rounded-full bg-surface-container text-outline font-label-sm text-label-sm font-medium';
+        document.getElementById('drawer-urgency-chip').innerText = 'Archived / Stale';
+      } else {
+        document.getElementById('drawer-id').innerText = '#' + reqId;
+        document.getElementById('drawer-title').innerText = 'Community Requisition Quota Inspector';
+      }
+
+      showToast('Requisition Loaded', `Displaying verified data payload for #${reqId}`);
+    }
+
+    // Trigger Bilateral Match Acceptance
+    function acceptBilateralCandidate() {
+      const btn = document.getElementById('btn-accept-match');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Pairing In Progress...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span> Bilateral Pair Established';
+        btn.classList.remove('bg-primary', 'hover:bg-secondary');
+        btn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+        document.getElementById('drawer-status-chip').innerText = 'matched';
+        document.getElementById('drawer-status-chip').className = 'px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold';
+        
+        // Append to audit trail
+        const audit = document.getElementById('audit-trail-container');
+        const entry = document.createElement('div');
+        entry.className = 'flex items-start gap-2';
+        entry.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-primary-container mt-1 flex-shrink-0"></span>
+          <div class="flex flex-col">
+            <span class="text-on-surface font-semibold">BILATERAL_MATCH_ACCEPTED</span>
+            <span class="text-outline">Just now • Admin Eng. Dina A. Elyan</span>
+            <span class="text-on-surface-variant">Linked to Lot #RES-MED-8821. Custodial dispatch scheduled.</span>
+          </div>
+        `;
+        audit.prepend(entry);
+        showToast('Pairing Anchored', 'Transactional POST /api/matches accepted. Notification pushed to Sayeda Zeinab Clinic.', true);
+      }, 1200);
+    }
+
+    function rejectCandidate() {
+      document.getElementById('matched-resource-card').classList.add('opacity-40');
+      showToast('Candidate Rejected', 'Lot #RES-MED-8821 decoupled. Search queue triggered for subsequent inventory lots.');
+    }
+
+    // Lifecycle state transitions
+    function transitionToStatus(newStatus) {
+      document.getElementById('drawer-status-chip').innerText = newStatus;
+      showToast('State Transition', `Requisition transitioned according to requestLifecycleService.js -> ${newStatus.toUpperCase()}`, true);
+    }
+
+    function promptCancelRequisition() {
+      const reason = prompt('Please specify mandatory administrative rationale for requisition cancellation per Decree 149/2019:');
+      if (reason) {
+        document.getElementById('drawer-status-chip').innerText = 'cancelled';
+        document.getElementById('drawer-status-chip').className = 'px-2 py-0.5 rounded-full bg-surface-container text-error font-label-sm text-label-sm font-semibold';
+        showToast('Archived as Cancelled', 'Requisition archived without physical removal to preserve permanent audit integrity.');
+      }
+    }
+
+    // Preset controller
+    function setPreset(preset) {
+      activePreset = preset;
+      const presets = ['default', 'matched', 'fulfilled', 'urgent', 'empty'];
+      presets.forEach(p => {
+        const b = document.getElementById('btn-preset-' + p);
+        if (b) {
+          if (p === preset) {
+            b.className = 'px-2 py-1 rounded bg-surface-container-lowest text-primary font-semibold shadow-sm hover:bg-surface-container transition-colors';
+          } else {
+            b.className = 'px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container transition-colors';
+          }
+        }
+      });
+
+      const tableBody = document.getElementById('table-body');
+      const zeroState = document.getElementById('table-zero-state');
+      const resultsCount = document.getElementById('results-count');
+
+      if (preset === 'empty') {
+        tableBody.classList.add('hidden');
+        zeroState.classList.remove('hidden');
+        resultsCount.innerText = 'Showing 0 records of 184 active community requests';
+        showToast('Zero-State Preset', 'Displaying operational empty container with filter reset controls.');
+        return;
+      } else {
+        tableBody.classList.remove('hidden');
+        zeroState.classList.add('hidden');
+      }
+
+      if (preset === 'urgent') {
+        document.getElementById('filter-urgency').value = 'high';
+        applyFilters();
+        showToast('Critical Triage Filter', 'Filtering 18 urgent requisitions requiring immediate municipal attention.');
+      } else if (preset === 'matched') {
+        document.getElementById('filter-status').value = 'matched';
+        applyFilters();
+        inspectRow('REQ-SCH-7712');
+        showToast('Matched Candidates', 'Reviewing active pairings and algorithmic lot matches.');
+      } else if (preset === 'fulfilled') {
+        document.getElementById('filter-status').value = 'fulfilled';
+        applyFilters();
+        inspectRow('REQ-MED-9100');
+        showToast('Fulfilled Quotas', 'Inspecting verified custodial settlements and Merkle stamps.');
+      } else {
+        resetFilters();
+        inspectRow('REQ-MED-4401');
+      }
+    }
+
+    // Filter application
+    function applyFilters() {
+      const q = (document.getElementById('filter-search').value || '').toLowerCase();
+      const cat = document.getElementById('filter-category').value;
+      const stat = document.getElementById('filter-status').value;
+      const urg = document.getElementById('filter-urgency').value;
+
+      const rows = document.querySelectorAll('#table-body tr');
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        let show = true;
+
+        if (q && !text.includes(q)) show = false;
+        if (cat !== 'all' && !text.includes(cat.toLowerCase())) show = false;
+        if (urg !== 'all' && !text.includes(urg.toLowerCase())) show = false;
+        if (stat !== 'all' && !text.includes(stat.toLowerCase())) show = false;
+
+        if (show) {
+          row.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          row.classList.add('hidden');
+        }
+      });
+
+      const zeroState = document.getElementById('table-zero-state');
+      const tableBody = document.getElementById('table-body');
+      if (visibleCount === 0) {
+        tableBody.classList.add('hidden');
+        zeroState.classList.remove('hidden');
+      } else {
+        tableBody.classList.remove('hidden');
+        zeroState.classList.add('hidden');
+      }
+
+      document.getElementById('results-count').innerText = `Showing ${visibleCount} records of 184 active community requests`;
+    }
+
+    function resetFilters() {
+      document.getElementById('filter-search').value = '';
+      document.getElementById('filter-category').value = 'all';
+      document.getElementById('filter-status').value = 'all';
+      document.getElementById('filter-urgency').value = 'all';
+      document.getElementById('filter-node').value = 'all';
+      document.getElementById('filter-governorate').value = 'all';
+
+      document.querySelectorAll('#table-body tr').forEach(r => r.classList.remove('hidden'));
+      document.getElementById('table-body').classList.remove('hidden');
+      document.getElementById('table-zero-state').classList.add('hidden');
+      document.getElementById('results-count').innerText = 'Showing 8 records of 184 active community requests';
+    }
+
+    function toggleSelectAll(master) {
+      document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = master.checked);
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-outline-variant/20 py-space-md px-gutter"><div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-sm font-label-sm text-label-sm text-outline"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-primary">verified</span><span>Compliant with Arab Republic of Egypt Circular Economy Law & Executive Decree 149/2019</span></div><div>Dawwarha Civic Operations System © 2024. All Ledger Mutations Cryptographically Timestamped.</div></div></footer></div></body></html>

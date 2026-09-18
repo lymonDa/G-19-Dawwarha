@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>Dawwarha Civic Logistics</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#3f4946","surface-dim":"#d3dcd7","primary-fixed-dim":"#87d5c1","surface-container-high":"#e1eae5","tertiary-container":"#9f672b","surface-container-low":"#edf6f1","surface-bright":"#f2fbf6","on-primary":"#ffffff","secondary-fixed-dim":"#9bd2c0","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-container":"#fffaf8","on-tertiary-fixed":"#2d1600","surface-container-highest":"#dbe5e0","surface-tint":"#106a5a","on-primary-fixed":"#00201a","tertiary":"#834f14","on-surface":"#151d1a","surface":"#f2fbf6","surface-container-lowest":"#ffffff","on-secondary-fixed":"#002019","on-error-container":"#93000a","secondary-container":"#b6eedc","surface-container":"#e7f0eb","primary":"#076757","on-secondary-fixed-variant":"#184f42","on-error":"#ffffff","secondary-fixed":"#b6eedc","primary-fixed":"#a3f2dd","primary-container":"#2f806f","inverse-on-surface":"#eaf3ee","outline-variant":"#bec9c4","surface-variant":"#dbe5e0","background":"#f2fbf6","on-primary-container":"#ebfff7","secondary":"#33685a","error-container":"#ffdad6","on-tertiary-fixed-variant":"#6a3b00","on-secondary-container":"#396e5f","on-primary-fixed-variant":"#005143","outline":"#6f7975","tertiary-fixed":"#ffdcbf","on-background":"#151d1a","inverse-surface":"#2a322f","on-secondary":"#ffffff","inverse-primary":"#87d5c1","tertiary-fixed-dim":"#feb874"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","margin-mobile":"1rem","space-lg":"1.5rem","space-xl":"2.5rem","gutter-mobile":"1rem",margin:"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1.5rem"},fontFamily:{"headline-sm":["Inter"],"headline-lg-mobile":["Inter"],"headline-lg":["Inter"],"display-lg-mobile":["Inter"],"display-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"code-sm":["Inter"],"label-md":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"label-sm":["Inter"]},fontSize:{"headline-sm":["1.125rem",{lineHeight:"1.5rem",fontWeight:"500"}],"headline-lg-mobile":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["2rem",{lineHeight:"2.5rem",letterSpacing:"-0.015em",fontWeight:"600"}],"display-lg-mobile":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["3.5rem",{lineHeight:"4rem",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-md":["1.25rem",{lineHeight:"1.75rem",letterSpacing:"-0.005em",fontWeight:"600"}],"body-sm":["0.8125rem",{lineHeight:"1.25rem",fontWeight:"400"}],"code-sm":["0.8125rem",{lineHeight:"1.125rem",fontWeight:"400"}],"label-md":["0.875rem",{lineHeight:"1.25rem",fontWeight:"500"}],"body-lg":["1.125rem",{lineHeight:"1.75rem",fontWeight:"400"}],"body-md":["0.9375rem",{lineHeight:"1.5rem",fontWeight:"400"}],"label-sm":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 inset-x-0 h-16 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50"><div class="w-full h-16 px-space-md lg:px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">cached</span></div><div class="flex flex-col leading-tight"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">Dawwarha</span><span class="font-label-sm text-label-sm text-outline tracking-normal">دوّرها • Civic Logistics</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-container font-label-md rounded-lg"><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-resources" href="#">My Resources</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-requests" href="#">My Requests</a><a aria-current="page" class="px-space-sm py-1.5 transition-colors bg-secondary-container text-on-secondary-container font-label-md rounded-lg" data-path="matches" href="#">Matches (active)</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#">Handovers & Activity</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#">Impact & Ledger</a></nav></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-sm text-label-sm text-on-surface" title="Switch Language" type="button"><span class="material-symbols-outlined text-[16px] text-outline">language</span><span>EN / العربية</span></button><button class="relative w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary-container"></span></button><button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Documentation & Support" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left leading-none"><span class="font-label-md text-label-md text-on-surface">Dr. Laila El-Mansouri</span><span class="font-label-sm text-label-sm text-primary font-medium mt-0.5">Verified Node Lead</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-low z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-md"><div class="flex items-center justify-between mb-space-md"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Operations Hub</span><span class="px-2 py-0.5 rounded-full bg-surface-container font-code-sm text-code-sm text-secondary">CAI-01</span></div><div class="space-y-space-xs mb-space-lg"><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">add_circle</span><span>Create Request</span></button><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">inventory_2</span><span>Publish Resource</span></button></div><span class="block font-label-sm text-label-sm uppercase tracking-wider text-outline px-space-sm mb-space-xs">Logistical Ledger</span><nav class="space-y-1" data-active-classes="bg-secondary-container text-on-secondary-container font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-resources" href="#"><span class="material-symbols-outlined text-[20px]">archive</span><span class="font-label-md text-label-md">My Resources</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-requests" href="#"><span class="material-symbols-outlined text-[20px]">assignment_late</span><span class="font-label-md text-label-md">My Requests</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 transition-colors bg-secondary-container text-on-secondary-container font-medium rounded-lg" data-path="matches" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">swap_horiz</span><span class="font-label-md text-label-md">Matches</span></div><span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm">active</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span class="font-label-md text-label-md">Handovers & Activity</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-label-md text-label-md">Impact & Ledger</span></a></nav></div><div class="p-space-md"><div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-between mb-1"><span class="font-label-sm text-label-sm uppercase tracking-wide text-secondary font-semibold">Operational Custody</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><p class="font-label-md text-label-md text-on-surface font-medium truncate">Dr. Laila El-Mansouri</p><div class="flex items-center justify-between mt-1 pt-1"><span class="font-code-sm text-code-sm text-outline">Node Hash: CAI-SEC-01</span><span class="font-label-sm text-label-sm text-primary font-medium">Verified</span></div></div></div></aside><div class="pl-72"><main class="w-full min-h-[calc(100vh-4rem)] pt-16 px-space-md lg:px-gutter pb-space-xl bg-background"><div class="max-w-7xl mx-auto py-space-md"><div class="flex flex-col w-full space-y-space-md">
+<!-- Interactive Prototype QA Perspective Toolbar (Testing Simulator) -->
+<aside aria-label="Prototype Role Simulator" class="w-full bg-surface-container-lowest rounded-xl shadow-sm p-space-sm flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="flex items-center justify-center w-6 h-6 rounded-md bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">QA State Perspective Switcher</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Active Model: MongoDB <code class="text-primary font-medium">users.collection</code> (Task 1.2 / Rahma)</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-1.5">
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-primary text-on-primary shadow-sm flex items-center gap-1 transition-all" id="sim-btn-lead" onclick="switchState('lead')" type="button">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+<span>1. Node Lead (Default)</span>
+</button>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center gap-1 transition-all" id="sim-btn-seeker" onclick="switchState('seeker')" type="button">
+<span class="material-symbols-outlined text-[14px]">person</span>
+<span>2. Individual Seeker (L1)</span>
+</button>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center gap-1 transition-all" id="sim-btn-edit" onclick="toggleEditMode()" type="button">
+<span class="material-symbols-outlined text-[14px]">edit</span>
+<span id="sim-edit-label">3. Edit Profile Mode</span>
+</button>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center gap-1 transition-all" id="sim-btn-skeleton" onclick="switchState('skeleton')" type="button">
+<span class="material-symbols-outlined text-[14px]">hourglass_empty</span>
+<span>4. Loading Skeleton</span>
+</button>
+<div class="w-[1px] h-5 bg-surface-container-high mx-1 hidden sm:block"></div>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-secondary font-medium hover:bg-surface-container-high flex items-center gap-1 transition-all" onclick="toggleBilingual()" type="button">
+<span class="material-symbols-outlined text-[14px]">translate</span>
+<span id="sim-lang-label">View in Arabic / العربية</span>
+</button>
+</div>
+</aside>
+<!-- Notification Toast (Hidden by default, triggered on save/copy) -->
+<div class="hidden fixed bottom-6 right-6 z-50 bg-primary text-on-primary px-space-md py-space-sm rounded-lg shadow-xl flex items-center gap-space-sm transform transition-all duration-300" id="toast-banner">
+<span class="material-symbols-outlined text-[20px]" id="toast-icon">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold" id="toast-title">Profile Ledger Updated</span>
+<span class="font-body-sm text-body-sm opacity-90" id="toast-msg">Signed bilateral credentials successfully synched to CAI-SEC-01.</span>
+</div>
+</div>
+<!-- SKELETON STATE WRAPPER (Swapped dynamically) -->
+<div class="hidden flex-col w-full space-y-space-md animate-pulse" id="skeleton-container">
+<div class="w-full h-12 bg-surface-container-high rounded-lg"></div>
+<div class="w-full h-64 bg-surface-container-high rounded-xl"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-md">
+<div class="h-28 bg-surface-container-high rounded-xl"></div>
+<div class="h-28 bg-surface-container-high rounded-xl"></div>
+<div class="h-28 bg-surface-container-high rounded-xl"></div>
+<div class="h-28 bg-surface-container-high rounded-xl"></div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<div class="lg:col-span-7 h-96 bg-surface-container-high rounded-xl"></div>
+<div class="lg:col-span-5 h-96 bg-surface-container-high rounded-xl"></div>
+</div>
+</div>
+<!-- LIVE USER CONTENT WRAPPER -->
+<div class="flex flex-col w-full space-y-space-md" id="main-content-display">
+<!-- Screen Navigation Breadcrumbs & Top Action Bar -->
+<section class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-xs">
+<div class="flex flex-col">
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs text-outline font-label-sm text-label-sm">
+<a class="hover:text-primary transition-colors" href="#">Dashboard</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-medium" id="breadcrumb-current">User Profile & Community Identity</span>
+<span class="text-outline/70 font-normal hidden sm:inline" id="breadcrumb-ar">(الملف الشخصي والهوية المجتمعية)</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-0.5" id="header-page-title">
+          Community Identity & Custody
+        </h1>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-space-sm self-start sm:self-auto">
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container-lowest text-secondary hover:bg-surface-container font-label-md text-label-md shadow-sm transition-all" onclick="copyTrustPassport()" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span id="btn-passport-text">Share Trust Passport</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-primary-container text-on-primary-container hover:bg-primary font-label-md text-label-md shadow-sm transition-all" id="btn-primary-action" onclick="toggleEditMode()" type="button">
+<span class="material-symbols-outlined text-[18px]" id="action-icon">edit_note</span>
+<span id="action-text">Edit Civic Profile</span>
+</button>
+</div>
+</section>
+<!-- INLINE EDITING PANEL (Hidden by Default, toggled by Edit Profile) -->
+<section class="hidden bg-surface-container-lowest rounded-xl shadow-md p-space-lg transition-all" id="edit-form-panel">
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">badge</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Update Verified Community Profile</h2>
+<p class="font-body-sm text-body-sm text-outline">Modifications are timestamped and signed to your node registry ledger entry (<code class="font-code-sm text-code-sm">PUT /api/users/me</code>).</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-outline hover:bg-surface-container flex items-center justify-center transition-colors" onclick="toggleEditMode()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="space-y-space-md" id="profile-edit-form" onsubmit="saveProfileEdits(event)">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm uppercase tracking-wide text-outline">Full Name (English)</label>
+<input class="w-full h-10 px-space-sm rounded-lg bg-surface font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest transition-all" id="input-name-en" required="" type="text" value="Dr. Laila El-Mansouri"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm uppercase tracking-wide text-outline">Full Name (Arabic / الاسم بالعربية)</label>
+<input class="w-full h-10 px-space-sm rounded-lg bg-surface font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest transition-all" dir="rtl" id="input-name-ar" required="" type="text" value="د. ليلى المنصوري"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm uppercase tracking-wide text-outline">Civic Role / Title</label>
+<input class="w-full h-10 px-space-sm rounded-lg bg-surface font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest transition-all" id="input-role" required="" type="text" value="Verified Logistics Node Lead"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm uppercase tracking-wide text-outline">Public Operational District</label>
+<input class="w-full h-10 px-space-sm rounded-lg bg-surface font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest transition-all" id="input-district" required="" type="text" value="Cairo - Corniche South Bay & Maadi"/>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<label class="font-label-sm text-label-sm uppercase tracking-wide text-outline">Factual Civic Bio</label>
+<span class="font-label-sm text-label-sm text-outline">Strictly non-commercial · Plaintext</span>
+</div>
+<textarea class="w-full p-space-sm rounded-lg bg-surface font-body-md text-body-md text-on-surface focus:outline-none focus:bg-surface-container-lowest transition-all" id="input-bio" rows="3">Lead Logistics Coordinator at Al-Bustan Medical Support Outpost. Coordinating surplus biomedical equipment, surgical leads, and clinical nutritional resources with registered community clinics across Cairo.</textarea>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">lock_person</span>
+<div class="flex flex-col text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-medium text-on-surface">Data Privacy Assurance & Geofencing</span>
+<span>Direct phone number and specific physical storage floor coordinates remain shielded under bilateral handover cryptoseals. They will solely unlock to counterparts once an official match is dual-confirmed.</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-2 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors" onclick="toggleEditMode()" type="button">
+            Cancel
+          </button>
+<button class="px-space-lg py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container shadow-sm transition-all flex items-center gap-space-xs" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Sign & Save Changes</span>
+</button>
+</div>
+</form>
+</section>
+<!-- 1. Profile Hero & Identity Card -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg transition-all relative overflow-hidden">
+<!-- Subtle top decorative ambient band -->
+<div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-primary via-primary-container to-secondary-fixed"></div>
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-lg">
+<!-- Left Column: Avatar + Basic Info -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md min-w-0">
+<!-- Avatar Frame with Verified Badge Badge Overlay -->
+<div class="relative shrink-0">
+<div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-surface-container flex items-center justify-center overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="Close-up professional portrait of Dr. Laila El-Mansouri, a confident middle-aged Egyptian woman doctor wearing a white clinical coat with warm lighting in a modern Cairo community clinic. Subdued emerald and soft teal medical setting background with honest natural expression." id="profile-avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR6o_Fhk9lBQGEEUbYKKtUL-gy5iiwAE-OSYLm_opUNOM9-YUQYhxbr1bKMPWJS48bdf5BFLdW5FizW3tVAO8BVU9tVtEmF2mIg-vue8PT5W3w57Y837KOELT7Na5msHfwo2dtJScNmRAdePLiBRNlftHBDQi3qrBtFgjoznDl91w8cmwNjGsBVdpu10xJZXpUWcONj9ip5QuVh2nQlJaw4Vy7F9nv3t_Ml-4AxPNLHF5XM_VZibqXOQ"/>
+</div>
+<!-- Verification Token Marker -->
+<div class="absolute -bottom-1.5 -right-1.5 w-7 h-7 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center" id="verified-badge-icon" title="Bilateral Institutional Verification Active">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<!-- Titles & Identifiers -->
+<div class="flex flex-col min-w-0 space-y-1">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1" id="badge-verification-status">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>Institutional Verification Approved (اعتماد مؤسسي موثق)</span>
+</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-medium" id="badge-moh-accreditation">
+                MoH Civic Reg: Cairo #892-C
+              </span>
+</div>
+<div class="flex items-baseline gap-space-sm pt-0.5">
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight truncate" id="display-name">
+                Dr. Laila El-Mansouri
+              </h2>
+<span class="font-headline-sm text-headline-sm text-outline hidden sm:inline" dir="rtl" id="display-name-ar">
+                د. ليلى المنصوري
+              </span>
+</div>
+<p class="font-label-md text-label-md text-secondary font-medium flex items-center gap-1.5" id="display-role-node">
+<span class="material-symbols-outlined text-[18px]">domain_verification</span>
+<span>Verified Logistics Node Lead · Hub <span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container font-semibold">CAI-SEC-01</span> (Al-Bustan Medical Bay, Cairo)</span>
+</p>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-md text-outline font-body-sm text-body-sm pt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+<span id="member-tenure">Member since October 2024</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span id="display-district">Cairo Municipal District (South Corniche)</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">handshake</span>
+<span id="display-standing">Civic Good Standing (100% Bilateral)</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Merkle Node Identity Seal -->
+<div class="w-full lg:w-72 p-space-sm rounded-xl bg-surface-container-low flex flex-col justify-between shrink-0 shadow-sm">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold">Custody Passport Hash</span>
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-lowest text-primary font-medium">L3 Node</span>
+</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant truncate py-1" title="0x8f2a67e0291ba4c98cd91">
+            0x8f2a...98cd
+          </div>
+<div class="flex items-center justify-between pt-1 text-outline font-label-sm text-label-sm">
+<span>Bilateral Trust Score</span>
+<span class="text-primary font-semibold">Strictly Factual (Audit Safe)</span>
+</div>
+</div>
+</div>
+<!-- Verified Civic Bio -->
+<div class="mt-space-md pt-space-md bg-surface-container/40 -mx-space-lg px-space-lg pb-space-sm rounded-b-xl">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold block mb-1">
+          Operational Mandate & Public Focus
+        </span>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-4xl leading-relaxed" id="display-bio">
+          Lead Logistics Coordinator at Al-Bustan Medical Support Outpost. Coordinating surplus biomedical equipment, surgical leads, and clinical nutritional resources with registered community clinics across Cairo.
+        </p>
+</div>
+</section>
+<!-- 2. Factual Participation & Civic Ledger Context (Anti-Gamification) -->
+<section class="flex flex-col space-y-space-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface tracking-tight">Factual Participation & Custody Ledger</h2>
+<p class="font-body-sm text-body-sm text-outline">Calculated directly from bilaterally reconciled digital handovers in collection <code class="font-code-sm text-code-sm">users.stats</code>.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<a class="font-label-sm text-label-sm text-tertiary hover:underline flex items-center gap-0.5" href="#">
+<span>View Contribution History (عرض سجل المساهمات)</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- 4 Core Metric Bento Tiles -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Metric 1: Completed Transfers -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Completed Transfers</span>
+<span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</span>
+</div>
+<div class="mt-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface font-semibold tracking-tight" id="stat-transfers">14</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">Transfers</span>
+</div>
+<div class="flex items-center gap-1 text-outline font-body-sm text-body-sm mt-1">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>100% Bilaterally Sealed</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 100%"></div>
+</div>
+</div>
+<!-- Metric 2: Distinct Physical Assets -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Relocated Assets</span>
+<span class="w-8 h-8 rounded-lg bg-secondary-container/40 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span>
+</span>
+</div>
+<div class="mt-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface font-semibold tracking-tight" id="stat-assets">86</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Items</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-1 truncate">Biomedical items & devices</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 86%"></div>
+</div>
+</div>
+<!-- Metric 3: Accredited Community Counterparts -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Accredited Nodes</span>
+<span class="w-8 h-8 rounded-lg bg-tertiary-fixed/30 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">groups_3</span>
+</span>
+</div>
+<div class="mt-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface font-semibold tracking-tight" id="stat-counterparts">9</span>
+<span class="font-label-sm text-label-sm text-tertiary font-medium">Partners</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-1 truncate">Verified clinics & NGO outposts</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<!-- Metric 4: Diverted Surplus Weight -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Surplus Diverted</span>
+<span class="w-8 h-8 rounded-lg bg-primary-fixed/40 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">scale</span>
+</span>
+</div>
+<div class="mt-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-primary font-semibold tracking-tight" id="stat-weight">18.2</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">kg Net</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-1 truncate">Zero municipal incinerator waste</p>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 62%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Two-Column Civic Identity & Node Association Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Left Column: Community Affiliation & Operational Node (7 Cols) -->
+<section class="lg:col-span-7 bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col justify-between space-y-space-md">
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">corporate_fare</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Community Affiliation & Node Hub</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-outline font-code-sm text-code-sm">NODE-STATUS: ACTIVE</span>
+</div>
+<!-- Organization Highlight Box -->
+<div class="p-space-md rounded-xl bg-surface-container-low space-y-space-xs">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Institutional Custodian</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold mt-0.5" id="org-name">
+                  Al-Bustan Medical Logistics Node
+                </h4>
+<p class="font-body-sm text-body-sm text-outline">Verified Level 3 Healthcare Community Infrastructure</p>
+</div>
+<span class="w-8 h-8 rounded-lg bg-surface-container-lowest text-primary flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[20px]">local_hospital</span>
+</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-sm pt-space-xs">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Node Reference</span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface" id="org-node-hash">CAI-MED-02</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Custody Scope</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">B2B Clinic Clearing</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Inspection Cycle</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Quarterly Audit</span>
+</div>
+</div>
+</div>
+<!-- Service Geography & Routing Coverage -->
+<div class="space-y-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold block">
+              Direct Service Geography & Handover Corridors
+            </span>
+<div class="flex flex-wrap gap-1.5" id="district-tags">
+<span class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span>Sayeda Zeinab</span>
+</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span>Maadi District</span>
+</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span>Old Cairo (مصر القديمة)</span>
+</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-container text-on-surface font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">near_me</span>
+<span>Helwan Health Corridor</span>
+</span>
+</div>
+</div>
+<!-- Primary Operational Categories -->
+<div class="space-y-space-xs pt-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold block">
+              Certified Dispatch & Intake Categories
+            </span>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-xs flex items-center gap-space-sm">
+<span class="w-8 h-8 rounded-md bg-primary-fixed/30 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">medical_services</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-medium truncate">Medical Supplies & Devices</span>
+<span class="font-body-sm text-body-sm text-outline truncate">Surplus biomedical & clinical</span>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-xs flex items-center gap-space-sm">
+<span class="w-8 h-8 rounded-md bg-tertiary-fixed/30 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">vaccines</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-medium truncate">Emergency Nutrition</span>
+<span class="font-body-sm text-body-sm text-outline truncate">Clinical therapeutic packages</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Node Map Preview -->
+<div class="pt-space-sm">
+<div class="w-full h-36 bg-cover bg-center rounded-lg relative overflow-hidden shadow-inner flex items-end p-space-sm" data-alt="Satellite map view of central Cairo around Bab El-Louk and Tahrir district with clean emerald vector map pin overlay representing Al-Bustan logistics node center. Subtle green boundary polygon highlighting the operational corridor." data-location="Al-Bustan, Bab El-Louk, Cairo, Egypt" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCBE8ZS4RgEjtigjmVjiJntFlbKaUYurPmKVuOnQ_24WOijCNLn0lqEa0OceC_heKQRRwqlEaNJCKVdaX52sKZuMwHQM70DO55-Mrvqi3EV80DWjwmQyjDvDrZPKgr8gRCz4k9F6V2xG_lm5MKGd9ni4jLiJ7V1vbFabM3yWeNMXrGoZ9Y3rSq6bvQcRsoDj51QdSUpCArsTQBBR2_aa2C-K_CFv8XCBvcZelbcvXJPCJucGfZouhiXjg')">
+<div class="bg-surface-container-lowest/90 backdrop-blur-sm px- space-sm py-1 rounded-md flex items-center gap-2 text-on-surface shadow-sm">
+<span class="material-symbols-outlined text-primary text-[16px]">pin_drop</span>
+<span class="font-label-sm text-label-sm font-medium">Bilateral Geofence: Active Central Cairo Node</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Account Privacy & Immutable Verification Ledger (5 Cols) -->
+<section class="lg:col-span-5 bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col justify-between space-y-space-md">
+<div class="space-y-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">fingerprint</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Privacy & Security Boundary</h3>
+</div>
+<span class="material-symbols-outlined text-outline text-[18px]" title="Cryptographically anchored immutable records">info</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+            Core identity vectors are strictly segregated from operational custody logs. Credentials below require municipal multisig re-verification to adjust.
+          </p>
+<!-- Verification Attributes Ledger List -->
+<div class="space-y-space-xs pt-1">
+<!-- Email Vector -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col min-w-0 pr-2">
+<span class="font-label-sm text-label-sm text-outline">Primary Authentication Identity</span>
+<span class="font-body-md text-body-md text-on-surface font-medium truncate" id="user-email">laila.mansouri@albustan-health.org</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm font-semibold shrink-0 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Verified</span>
+</span>
+</div>
+<!-- User UUID -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">System UUID</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold" id="user-uuid">USR-8841-SEC</span>
+</div>
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center text-outline transition-colors" onclick="copyValue('USR-8841-SEC')" title="Copy UUID" type="button">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+<!-- Registration Genesis -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Genesis Registration Timestamp</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium" id="genesis-date">12 Oct 2024 · 09:41 UTC</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">Block #18902</span>
+</div>
+<!-- Custody Clearance Level -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Custodial Trust Level</span>
+<span class="font-body-sm text-body-sm text-on-surface font-semibold" id="custody-tier-text">Tier 3 (Institutional Community Custody)</span>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]">shield</span>
+</div>
+</div>
+</div>
+<!-- Security Segregation Disclaimer Notice -->
+<div class="p-space-sm rounded-lg bg-surface-container/60 space-y-1">
+<div class="flex items-center gap-1 text-on-surface font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[18px] text-secondary">admin_panel_settings</span>
+<span>Security Architecture Segregation</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline leading-snug">
+            Password rotations, multi-factor keys, and notification channels are kept isolated under <a class="text-primary hover:underline font-medium" href="#">Settings / Security</a> to prevent authorization contamination with public trust proofs.
+          </p>
+</div>
+<!-- External Transparency Ledger Link -->
+<div class="pt-space-xs">
+<a class="w-full py-2 px-space-md rounded-lg bg-surface-container-low hover:bg-surface-container text-secondary font-label-md text-label-md flex items-center justify-center gap-space-xs transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+<span>Inspect Verified Impact Ledger (كشف الأثر)</span>
+</a>
+</div>
+</section>
+</div>
+<!-- 4. Community Trust Passport Quick Share Drawer / Snapshot Modal Trigger Section -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm p-space-md flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed/30 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[28px]">qr_code_2</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Decentralized Public Trust Passport</h4>
+<p class="font-body-sm text-body-sm text-outline">Generate a tamper-proof cryptographic summary credential for municipal health inspections and field dispatch handovers.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full md:w-auto">
+<button class="flex-1 md:flex-none px-space-md py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors flex items-center justify-center gap-1.5" onclick="copyTrustPassport()" type="button">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+<span>Copy Passport Link</span>
+</button>
+<button class="flex-1 md:flex-none px-space-md py-2 rounded-lg bg-primary-container text-on-primary-container hover:bg-primary font-label-md text-label-md transition-colors flex items-center justify-center gap-1.5 shadow-sm" onclick="printPassportAudit()" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Export Ledger Proof (PDF)</span>
+</button>
+</div>
+</section>
+</div>
+<!-- INLINE INTERACTIVE PROTOTYPE CONTROLLER (Simulating Task 1.2 & Rahma Backend) -->
+<script>
+    // State storage reflecting users.collection schema
+    const mockData = {
+      lead: {
+        nameEn: "Dr. Laila El-Mansouri",
+        nameAr: "د. ليلى المنصوري",
+        role: "Verified Logistics Node Lead",
+        roleAr: "مسؤول نقطة إمداد معتمدة",
+        node: "CAI-SEC-01",
+        org: "Al-Bustan Medical Logistics Node",
+        nodeHash: "CAI-MED-02",
+        bio: "Lead Logistics Coordinator at Al-Bustan Medical Support Outpost. Coordinating surplus biomedical equipment, surgical leads, and clinical nutritional resources with registered community clinics across Cairo.",
+        district: "Cairo Municipal District (South Corniche)",
+        tenure: "Member since October 2024",
+        email: "laila.mansouri@albustan-health.org",
+        uuid: "USR-8841-SEC",
+        tier: "Tier 3 (Institutional Community Custody)",
+        verified: true,
+        stats: { transfers: "14", assets: "86", partners: "9", weight: "18.2" }
+      },
+      seeker: {
+        nameEn: "Tarek Amin",
+        nameAr: "طارق أمين",
+        role: "Community Recipient / Individual Seeker",
+        roleAr: "مستفيد مجتمعي مستقل",
+        node: "CAI-INDIV-44",
+        org: "Independent Civic Recipient",
+        nodeHash: "CAI-SEEK-01",
+        bio: "Individual civic coordinator bridging excess infant nutritional formula and essential mobility devices to elders in the Sayeda Zeinab neighborhood.",
+        district: "Sayeda Zeinab & Old Cairo",
+        tenure: "Member since January 2025",
+        email: "tarek.amin@community-cairo.org",
+        uuid: "USR-3209-L1",
+        tier: "Tier 1 (Verified Resident Identity)",
+        verified: false,
+        stats: { transfers: "3", assets: "8", partners: "2", weight: "2.4" }
+      }
+    };
+
+    let activeProfile = "lead";
+    let isArabic = false;
+
+    function renderActiveProfile() {
+      const data = mockData[activeProfile];
+      
+      // Update Texts
+      document.getElementById('display-name').textContent = isArabic ? data.nameAr : data.nameEn;
+      document.getElementById('display-name-ar').textContent = isArabic ? data.nameEn : data.nameAr;
+      document.getElementById('display-role-node').innerHTML = `
+        <span class="material-symbols-outlined text-[18px]">domain_verification</span>
+        <span>${isArabic ? data.roleAr : data.role} · Hub <span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container font-semibold">${data.node}</span></span>
+      `;
+      document.getElementById('display-bio').textContent = data.bio;
+      document.getElementById('display-district').textContent = data.district;
+      document.getElementById('member-tenure').textContent = data.tenure;
+      document.getElementById('user-email').textContent = data.email;
+      document.getElementById('user-uuid').textContent = data.uuid;
+      document.getElementById('custody-tier-text').textContent = data.tier;
+      document.getElementById('org-name').textContent = data.org;
+      document.getElementById('org-node-hash').textContent = data.nodeHash;
+
+      // Stats
+      document.getElementById('stat-transfers').textContent = data.stats.transfers;
+      document.getElementById('stat-assets').textContent = data.stats.assets;
+      document.getElementById('stat-counterparts').textContent = data.stats.partners;
+      document.getElementById('stat-weight').textContent = data.stats.weight;
+
+      // Verification Badge Visibility
+      const badgeElem = document.getElementById('badge-verification-status');
+      const mohElem = document.getElementById('badge-moh-accreditation');
+      const iconCheck = document.getElementById('verified-badge-icon');
+
+      if (data.verified) {
+        badgeElem.classList.remove('hidden');
+        mohElem.classList.remove('hidden');
+        iconCheck.classList.remove('hidden');
+      } else {
+        badgeElem.classList.add('hidden');
+        mohElem.classList.add('hidden');
+        iconCheck.classList.add('hidden');
+      }
+
+      // Sync form fields
+      document.getElementById('input-name-en').value = data.nameEn;
+      document.getElementById('input-name-ar').value = data.nameAr;
+      document.getElementById('input-role').value = data.role;
+      document.getElementById('input-district').value = data.district;
+      document.getElementById('input-bio').value = data.bio;
+    }
+
+    function switchState(state) {
+      const mainContent = document.getElementById('main-content-display');
+      const skeleton = document.getElementById('skeleton-container');
+      const btnLead = document.getElementById('sim-btn-lead');
+      const btnSeeker = document.getElementById('sim-btn-seeker');
+      const btnSkel = document.getElementById('sim-btn-skeleton');
+
+      if (state === 'skeleton') {
+        mainContent.classList.add('hidden');
+        skeleton.classList.remove('hidden');
+        skeleton.classList.add('flex');
+        btnLead.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface";
+        btnSeeker.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface";
+        btnSkel.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-primary text-on-primary shadow-sm";
+        return;
+      }
+
+      // Restore view
+      skeleton.classList.add('hidden');
+      skeleton.classList.remove('flex');
+      mainContent.classList.remove('hidden');
+
+      activeProfile = state;
+      if (state === 'lead') {
+        btnLead.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-primary text-on-primary shadow-sm flex items-center gap-1 transition-all";
+        btnSeeker.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center gap-1 transition-all";
+        btnSkel.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center gap-1 transition-all";
+      } else {
+        btnSeeker.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-primary text-on-primary shadow-sm flex items-center gap-1 transition-all";
+        btnLead.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center gap-1 transition-all";
+        btnSkel.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center gap-1 transition-all";
+      }
+      renderActiveProfile();
+    }
+
+    function toggleEditMode() {
+      const panel = document.getElementById('edit-form-panel');
+      const actionText = document.getElementById('action-text');
+      const actionIcon = document.getElementById('action-icon');
+      const simBtn = document.getElementById('sim-btn-edit');
+
+      const isOpen = !panel.classList.contains('hidden');
+      if (isOpen) {
+        panel.classList.add('hidden');
+        actionText.textContent = "Edit Civic Profile";
+        actionIcon.textContent = "edit_note";
+        simBtn.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-surface-container text-on-surface hover:bg-surface-container-high flex items-center gap-1 transition-all";
+      } else {
+        panel.classList.remove('hidden');
+        actionText.textContent = "Close Edit Form";
+        actionIcon.textContent = "close";
+        simBtn.className = "px-space-sm py-1 rounded-lg text-label-sm font-label-sm bg-secondary text-on-secondary shadow-sm flex items-center gap-1 transition-all";
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function saveProfileEdits(e) {
+      e.preventDefault();
+      const data = mockData[activeProfile];
+      data.nameEn = document.getElementById('input-name-en').value;
+      data.nameAr = document.getElementById('input-name-ar').value;
+      data.role = document.getElementById('input-role').value;
+      data.district = document.getElementById('input-district').value;
+      data.bio = document.getElementById('input-bio').value;
+
+      renderActiveProfile();
+      toggleEditMode();
+      showToast("Ledger Synchronized", "Civic credentials cryptographically resigned to CAI-SEC-01.");
+    }
+
+    function toggleBilingual() {
+      isArabic = !isArabic;
+      const langLabel = document.getElementById('sim-lang-label');
+      langLabel.textContent = isArabic ? "Switch to English / الإنجليزية" : "View in Arabic / العربية";
+      renderActiveProfile();
+    }
+
+    function showToast(title, msg) {
+      const toast = document.getElementById('toast-banner');
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+
+    function copyTrustPassport() {
+      const url = `https://dawwarha.gov.eg/passport/${mockData[activeProfile].uuid}`;
+      navigator.clipboard?.writeText(url);
+      showToast("Passport Link Copied", `Verification URI generated: ${url}`);
+    }
+
+    function copyValue(val) {
+      navigator.clipboard?.writeText(val);
+      showToast("Copied to Clipboard", val);
+    }
+
+    function printPassportAudit() {
+      showToast("Compiling PDF Ledger", "Retrieving bilateral signatures for USR-8841-SEC...");
+    }
+
+    // Initialize default profile
+    renderActiveProfile();
+  </script>
+</div></div></main></div></body></html>

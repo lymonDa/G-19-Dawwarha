@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>Dawwarha Civic Logistics</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#3f4946","surface-dim":"#d3dcd7","primary-fixed-dim":"#87d5c1","surface-container-high":"#e1eae5","tertiary-container":"#9f672b","surface-container-low":"#edf6f1","surface-bright":"#f2fbf6","on-primary":"#ffffff","secondary-fixed-dim":"#9bd2c0","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-container":"#fffaf8","on-tertiary-fixed":"#2d1600","surface-container-highest":"#dbe5e0","surface-tint":"#106a5a","on-primary-fixed":"#00201a","tertiary":"#834f14","on-surface":"#151d1a","surface":"#f2fbf6","surface-container-lowest":"#ffffff","on-secondary-fixed":"#002019","on-error-container":"#93000a","secondary-container":"#b6eedc","surface-container":"#e7f0eb","primary":"#076757","on-secondary-fixed-variant":"#184f42","on-error":"#ffffff","secondary-fixed":"#b6eedc","primary-fixed":"#a3f2dd","primary-container":"#2f806f","inverse-on-surface":"#eaf3ee","outline-variant":"#bec9c4","surface-variant":"#dbe5e0","background":"#f2fbf6","on-primary-container":"#ebfff7","secondary":"#33685a","error-container":"#ffdad6","on-tertiary-fixed-variant":"#6a3b00","on-secondary-container":"#396e5f","on-primary-fixed-variant":"#005143","outline":"#6f7975","tertiary-fixed":"#ffdcbf","on-background":"#151d1a","inverse-surface":"#2a322f","on-secondary":"#ffffff","inverse-primary":"#87d5c1","tertiary-fixed-dim":"#feb874"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","margin-mobile":"1rem","space-lg":"1.5rem","space-xl":"2.5rem","gutter-mobile":"1rem",margin:"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1.5rem"},fontFamily:{"headline-sm":["Inter"],"headline-lg-mobile":["Inter"],"headline-lg":["Inter"],"display-lg-mobile":["Inter"],"display-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"code-sm":["Inter"],"label-md":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"label-sm":["Inter"]},fontSize:{"headline-sm":["1.125rem",{lineHeight:"1.5rem",fontWeight:"500"}],"headline-lg-mobile":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["2rem",{lineHeight:"2.5rem",letterSpacing:"-0.015em",fontWeight:"600"}],"display-lg-mobile":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["3.5rem",{lineHeight:"4rem",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-md":["1.25rem",{lineHeight:"1.75rem",letterSpacing:"-0.005em",fontWeight:"600"}],"body-sm":["0.8125rem",{lineHeight:"1.25rem",fontWeight:"400"}],"code-sm":["0.8125rem",{lineHeight:"1.125rem",fontWeight:"400"}],"label-md":["0.875rem",{lineHeight:"1.25rem",fontWeight:"500"}],"body-lg":["1.125rem",{lineHeight:"1.75rem",fontWeight:"400"}],"body-md":["0.9375rem",{lineHeight:"1.5rem",fontWeight:"400"}],"label-sm":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 inset-x-0 h-16 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50"><div class="w-full h-16 px-space-md lg:px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">cached</span></div><div class="flex flex-col leading-tight"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">Dawwarha</span><span class="font-label-sm text-label-sm text-outline tracking-normal">دوّرها • Civic Logistics</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-container font-label-md rounded-lg"><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-resources" href="#">My Resources</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-requests" href="#">My Requests</a><a aria-current="page" class="px-space-sm py-1.5 transition-colors bg-secondary-container text-on-secondary-container font-label-md rounded-lg" data-path="matches" href="#">Matches (active)</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#">Handovers & Activity</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#">Impact & Ledger</a></nav></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-sm text-label-sm text-on-surface" title="Switch Language" type="button"><span class="material-symbols-outlined text-[16px] text-outline">language</span><span>EN / العربية</span></button><button class="relative w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary-container"></span></button><button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Documentation & Support" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left leading-none"><span class="font-label-md text-label-md text-on-surface">Dr. Laila El-Mansouri</span><span class="font-label-sm text-label-sm text-primary font-medium mt-0.5">Verified Node Lead</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-low z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-md"><div class="flex items-center justify-between mb-space-md"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Operations Hub</span><span class="px-2 py-0.5 rounded-full bg-surface-container font-code-sm text-code-sm text-secondary">CAI-01</span></div><div class="space-y-space-xs mb-space-lg"><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">add_circle</span><span>Create Request</span></button><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">inventory_2</span><span>Publish Resource</span></button></div><span class="block font-label-sm text-label-sm uppercase tracking-wider text-outline px-space-sm mb-space-xs">Logistical Ledger</span><nav class="space-y-1" data-active-classes="bg-secondary-container text-on-secondary-container font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-resources" href="#"><span class="material-symbols-outlined text-[20px]">archive</span><span class="font-label-md text-label-md">My Resources</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-requests" href="#"><span class="material-symbols-outlined text-[20px]">assignment_late</span><span class="font-label-md text-label-md">My Requests</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 transition-colors bg-secondary-container text-on-secondary-container font-medium rounded-lg" data-path="matches" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">swap_horiz</span><span class="font-label-md text-label-md">Matches</span></div><span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm">active</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span class="font-label-md text-label-md">Handovers & Activity</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-label-md text-label-md">Impact & Ledger</span></a></nav></div><div class="p-space-md"><div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-between mb-1"><span class="font-label-sm text-label-sm uppercase tracking-wide text-secondary font-semibold">Operational Custody</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><p class="font-label-md text-label-md text-on-surface font-medium truncate">Dr. Laila El-Mansouri</p><div class="flex items-center justify-between mt-1 pt-1"><span class="font-code-sm text-code-sm text-outline">Node Hash: CAI-SEC-01</span><span class="font-label-sm text-label-sm text-primary font-medium">Verified</span></div></div></div></aside><div class="pl-72"><main class="w-full min-h-[calc(100vh-4rem)] pt-16 px-space-md lg:px-gutter pb-space-xl bg-background"><div class="max-w-7xl mx-auto py-space-md"><div class="flex flex-col w-full text-on-surface" id="match-details-root">
+<!-- ================= TOP INTERACTIVE STATE EMULATOR & BILINGUAL BAR ================= -->
+<div class="w-full bg-surface-container-high rounded-xl p-space-sm mb-space-md shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-primary-container text-on-primary-container">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-semibold">
+          QA / Verification State Emulator:
+        </span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5" id="emulator-controls">
+<button class="emulator-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-primary text-on-primary shadow-sm transition-colors" data-state="proposed" type="button">
+          1. Proposed (Review & Accept)
+        </button>
+<button class="emulator-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-surface-container-lowest text-on-surface-variant hover:bg-surface transition-colors" data-state="accepted" type="button">
+          2. Terms Accepted (Handover)
+        </button>
+<button class="emulator-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-surface-container-lowest text-on-surface-variant hover:bg-surface transition-colors" data-state="declined" type="button">
+          3. Declined / Archived
+        </button>
+<button class="emulator-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-surface-container-lowest text-on-surface-variant hover:bg-surface transition-colors" data-state="conflict" type="button">
+          4. 409 Conflict (Expired)
+        </button>
+<button class="px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-surface-container-lowest text-tertiary hover:bg-surface transition-colors flex items-center gap-1" id="btn-trigger-modal" type="button">
+<span class="material-symbols-outlined text-[14px]">visibility</span>
+<span>Open Accept Modal</span>
+</button>
+<button class="px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed transition-colors flex items-center gap-1 font-medium" id="btn-toggle-rtl" type="button">
+<span class="material-symbols-outlined text-[14px]">swap_horiz</span>
+<span id="rtl-label">Switch to العربية (RTL)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ================= BREADCRUMB & CONTEXTUAL HEADER ================= -->
+<div class="w-full mb-space-md">
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-xs">
+<!-- Breadcrumb -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">arrow_back</span>
+<span>Back to Matches (العودة للتطابقات)</span>
+</a>
+<span>/</span>
+<span class="text-on-surface-variant font-medium">#MTC-MED-2024-9102</span>
+<span>/</span>
+<span class="text-primary font-semibold">Match Details (تفاصيل التطابق)</span>
+</nav>
+<!-- Audit Consensus Tag -->
+<div class="flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-surface-container-low text-secondary font-code-sm text-code-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Engine Consensus: CAI-LGR-V2 • Deterministic FR-009</span>
+</div>
+</div>
+<!-- Title and Badges row -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm pb-space-sm">
+<div class="space-y-1">
+<div class="flex flex-wrap items-center gap-space-xs">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="header-title">
+            Match Review: Oxygen Regulators for Emergency Clinic Outpost
+          </h1>
+<span class="text-outline font-label-md text-label-md hidden md:inline">|</span>
+<span class="font-headline-sm text-headline-sm text-outline font-normal" dir="rtl">
+            مراجعة التطابق: أجهزة تنظيم الأكسجين للعيادة الميدانية
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-outline flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary">verified</span>
+<span>Mutual dual-custody verification required prior to contact unlocking and physical dispatch.</span>
+</p>
+</div>
+<!-- Live Dynamic Status Badge -->
+<div class="flex items-center gap-space-xs shrink-0">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md shadow-sm" id="state-status-pill">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-medium" id="state-status-text">Proposed — Mutual Review Required (مقترح — بانتظار المراجعة)</span>
+</div>
+</div>
+</div>
+<!-- Match Affinity Highlight Banner -->
+<div class="relative overflow-hidden rounded-xl bg-primary text-on-primary p-space-md shadow-md flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="relative z-10 flex items-start gap-space-sm">
+<div class="w-12 h-12 rounded-lg bg-on-primary/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px] text-primary-fixed">target</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-md text-headline-md text-on-primary">96% Deterministic Fit</span>
+<span class="font-headline-sm text-headline-sm text-primary-fixed font-normal" dir="rtl">(توافق قطعي مثبت)</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm">High Precision • Rank #1</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-primary/90 max-w-3xl">
+            Calculated via Dawwarha's strictly rule-based civic matching engine (FR-009/FR-010). Transparent, verifiable civic logistics with zero opaque black-box algorithms.
+          </p>
+</div>
+</div>
+<div class="relative z-10 flex items-center md:flex-col items-end justify-between md:justify-center gap-1 bg-on-primary/10 px-space-md py-space-sm rounded-lg shrink-0">
+<span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider">Audit Expiry Timer</span>
+<span class="font-code-sm text-code-sm font-semibold text-on-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed">timer</span>
+<span id="reservation-timer">18h : 42m : 15s</span>
+</span>
+<span class="font-label-sm text-label-sm text-on-primary/70">Hold reserved for node</span>
+</div>
+</div>
+</div>
+<!-- ================= STATE 4: CONFLICT NOTIFICATION (Hidden by default) ================= -->
+<div class="hidden w-full bg-error-container text-on-error-container p-space-md rounded-xl mb-space-md shadow-sm" id="state-conflict-banner">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-error text-[24px] shrink-0">warning</span>
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm font-semibold">409 Conflict: Allocation Expired or Re-allocated</h3>
+<p class="font-body-sm text-body-sm text-on-surface">
+          The 18-hour mutual review window for this civic pairing lapsed. The 4 oxygen regulator units were released back to the open civic pool to prevent inventory stagnation in emergency response zones.
+        </p>
+<div class="pt-space-xs flex gap-space-xs">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-error font-label-sm text-label-sm shadow-sm hover:bg-surface transition-colors" type="button">
+            Request Re-Evaluation (طلب إعادة فحص)
+          </button>
+<button class="px-3 py-1.5 rounded-lg bg-error text-on-error font-label-sm text-label-sm shadow-sm hover:opacity-90 transition-opacity" type="button">
+            Browse Alternative Resources
+          </button>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= CORE DUAL COLUMN COMPARISON ================= -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-md mb-space-lg">
+<!-- LEFT COLUMN: AVAILABLE RESOURCE -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl shadow-sm p-space-md relative overflow-hidden">
+<div class="absolute top-0 inset-x-0 h-1 bg-primary"></div>
+<!-- Card Top Meta -->
+<div class="flex items-center justify-between pb-space-sm mb-space-sm bg-surface-container-low/40 -mx-space-md -mt-space-md p-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold block">Civic Asset • المورد المتاح</span>
+<span class="font-label-md text-label-md text-primary font-semibold">RES-MED-2024-0082</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-medium">
+          Custody Verified
+        </span>
+</div>
+<!-- Title & Category -->
+<div class="space-y-1 mb-space-md">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-secondary font-label-sm text-label-sm font-medium">Medical Supplies (مستلزمات طبية)</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-outline font-code-sm text-code-sm">Oxygen/ICU</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">
+          4 High-Capacity Oxygen Regulators & Pediatric Oximeters
+        </h2>
+<p class="font-body-sm text-body-sm text-outline" dir="rtl">
+          ٤ منظمات أكسجين طبية عالية القدرة مع مجسات نبض للأطفال
+        </p>
+</div>
+<!-- Visual Asset Thumbnail / Specification Block -->
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low mb-space-md">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="A clean hospital-grade set of four calibrated oxygen regulators with brass connectors, precision pressure gauges, and infant SpO2 clip sensors resting on a sterile stainless steel cart under cool medical laboratory lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqhEtA2BllvGGq76aI_ZuA9biOSj9rLo8lR4K6Oz9kN35-JyxRYUzL786wxmpjd_ACOtmV6MKrAvfYWlaZLiDlK_RG4RW6qEbOWkboaBEHeVeemD4GJfcUkjxk2dJ6t6oxVvsz9qDb_BU7MT7zFh4HPQm0CvTDS_WQoPskfhokDHOQsFd_21ZHRA2c7dVTp0SRux5seaCM2i5vwZLhhq7tjenOF69vCqaj1KVaVs5het6-ZNl6GEvbNQ"/>
+</div>
+<div class="space-y-1 min-w-0">
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-secondary font-semibold">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span>Inspected & Sterile Packaged</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Compliant with Egyptian National Healthcare Authority standards. Calibrated 12 days ago at Al-Bustan Hub.
+          </p>
+<span class="font-code-sm text-code-sm text-outline block truncate">HASH: 0x9F4B2...7C19</span>
+</div>
+</div>
+<!-- Key Payload Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm mb-space-md">
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Available Volume • الكمية</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">4 Complete Units</span>
+<span class="font-body-sm text-body-sm text-primary block mt-0.5">Zero shortfall (100% matched)</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Availability SLA • نافذة الاستلام</span>
+<span class="font-label-md text-label-md text-on-surface font-medium block">Ready Now • 08:00 – 18:00</span>
+<span class="font-body-sm text-body-sm text-outline block mt-0.5">Pre-cleared for dispatch</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Location Corridor • الممر اللوجستي</span>
+<span class="font-label-md text-label-md text-on-surface font-medium block">Maadi Medical Logistics Bay</span>
+<span class="font-body-sm text-body-sm text-outline block mt-0.5">Cairo Logistics Corridor (WH #3)</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Civic Custodian • أمين المورد</span>
+<span class="font-label-md text-label-md text-on-surface font-medium block">Dr. Laila El-Mansouri</span>
+<span class="font-body-sm text-body-sm text-primary font-medium block mt-0.5">Verified Lead [CAI-MED-02]</span>
+</div>
+</div>
+<!-- Custodial Statement -->
+<div class="mt-auto p-space-sm rounded-lg bg-surface-container-high/60 flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">gavel</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+<strong class="text-on-surface font-medium">Custodial Pledge:</strong> Non-monetized community reserve. Guaranteed sealed calibration certificates included in the physical handover sleeve.
+        </p>
+</div>
+</div>
+<!-- RIGHT COLUMN: COMMUNITY NEED -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl shadow-sm p-space-md relative overflow-hidden">
+<div class="absolute top-0 inset-x-0 h-1 bg-tertiary"></div>
+<!-- Card Top Meta -->
+<div class="flex items-center justify-between pb-space-sm mb-space-sm bg-surface-container-low/40 -mx-space-md -mt-space-md p-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">assignment_late</span>
+</span>
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline font-semibold block">Civic Request • الطلب المقترن</span>
+<span class="font-label-md text-label-md text-tertiary font-semibold">REQ-MED-2024-5109</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>High Urgency • 24h SLA</span>
+</span>
+</div>
+<!-- Title & Category -->
+<div class="space-y-1 mb-space-md">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-secondary font-label-sm text-label-sm font-medium">Emergency Clinic Intake</span>
+<span class="px-2 py-0.5 rounded-md bg-tertiary-fixed text-on-tertiary-fixed font-code-sm text-code-sm">Critical Care</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">
+          Emergency Oxygen Regulators for Clinic Outpost
+        </h2>
+<p class="font-body-sm text-body-sm text-outline" dir="rtl">
+          أجهزة تنظيم أكسجين عاجلة لدعم عيادة الطوارئ الميدانية
+        </p>
+</div>
+<!-- Beneficiary Outpost Snapshot -->
+<div class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container-low mb-space-md">
+<div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 bg-surface-container-high relative">
+<img class="w-full h-full object-cover" data-alt="Exterior shot of a bustling urban civic medical clinic entrance in Cairo with clear institutional signage, volunteers receiving supplies, clean tiled floors, and active community emergency intake staff." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmbSLe4fO7LHaDTBnFBxmpeHF4xCj9fmwwRTl5_2NFx49_4mQIm3Efiy1f3Soivw54ocvkbSU9Y0R74TSV6Hz3fh1NJXceHeChS_9O3AcGs89oBnBemLo_jyEpX_2Qff-CK5A-nRhmNv47ulI-7q9lHQD9p2FHZUYMV2OPEn0WRab9Ia34H717T-gbv6wseLDBXi1zRC6vVaMevBTwm62b7iyJmg-aMhIeGg9cSnm5zVaN9yomt_xyFA"/>
+</div>
+<div class="space-y-1 min-w-0">
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface font-semibold">
+<span class="material-symbols-outlined text-[16px] text-tertiary">local_hospital</span>
+<span>Sayeda Zeinab Clinic Outpost</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+            Serving an estimated 480 daily neighborhood cases. Pediatric respiratory ward operating at peak threshold.
+          </p>
+<span class="font-code-sm text-code-sm text-outline block truncate">NODE HASH: CAI-CLI-04-EGY</span>
+</div>
+</div>
+<!-- Key Payload Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm mb-space-md">
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Requested Need • الاحتياج الفعلي</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">4 Units (100% Filled)</span>
+<span class="font-body-sm text-body-sm text-primary block mt-0.5">Δ 0.0% Variance delta</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Required SLA • الموعد النهائي</span>
+<span class="font-label-md text-label-md text-on-surface font-medium block">Within 24 Hours</span>
+<span class="font-body-sm text-body-sm text-error font-medium block mt-0.5">Critical pediatric surge</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Transit Distance • المسافة والمسار</span>
+<span class="font-label-md text-label-md text-on-surface font-medium block">3.4 km direct route</span>
+<span class="font-body-sm text-body-sm text-outline block mt-0.5">~14 mins via Maadi Corniche</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Intake Lead • منسق الاستلام</span>
+<span class="font-label-md text-label-md text-on-surface font-medium block">Dr. Hisham Kassem (MD)</span>
+<span class="font-body-sm text-body-sm text-primary font-medium block mt-0.5">Verified Medical Officer</span>
+</div>
+</div>
+<!-- Intake Statement -->
+<div class="mt-auto p-space-sm rounded-lg bg-surface-container-high/60 flex items-start gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">verified</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+<strong class="text-on-surface font-medium">Civic Ledger Guarantee:</strong> Units will be immediately registered in the outpatient clinic emergency ledger upon QR confirmation.
+        </p>
+</div>
+</div>
+</div>
+<!-- ================= WHY THIS MATCH? (5-SIGNAL EXPLAINABLE BREAKDOWN) ================= -->
+<section class="w-full bg-surface-container-lowest rounded-xl shadow-sm p-space-md mb-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between pb-space-sm mb-space-md border-b border-surface-container gap-space-xs">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">analytics</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Why This Match? • دقة وموجبات التطابق</h2>
+</div>
+<p class="font-body-sm text-body-sm text-outline mt-0.5">
+          Breakdown of the 5 deterministic algorithmic signals governed by platform RFC specifications §12.
+        </p>
+</div>
+<div class="px-space-sm py-1 rounded-lg bg-surface-container text-secondary font-code-sm text-code-sm font-medium">
+        Formula: (0.30×T) + (0.25×P) + (0.20×Q) + (0.15×U) + (0.10×A) = 0.962
+      </div>
+</div>
+<!-- 5 Signals Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-sm mb-space-md">
+<!-- Signal 1: Taxonomy -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col justify-between space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold uppercase">1. Taxonomy</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">100%</span>
+</div>
+<div class="space-y-1">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 100%"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">Exact Sub-Tier</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Medical > Critical ICU Oxygenation match with zero classification drift.</p>
+</div>
+<span class="font-code-sm text-code-sm text-secondary font-medium">Weight: 30%</span>
+</div>
+<!-- Signal 2: Corridor Proximity -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col justify-between space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold uppercase">2. Corridor</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">94%</span>
+</div>
+<div class="space-y-1">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 94%"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">3.4 km Direct Distance</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Maadi to Sayeda Zeinab corridor. Minimal courier fuel footprint (<14 min).</p>
+</div>
+<span class="font-code-sm text-code-sm text-secondary font-medium">Weight: 25%</span>
+</div>
+<!-- Signal 3: Quantity Coverage -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col justify-between space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold uppercase">3. Quantity</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">100%</span>
+</div>
+<div class="space-y-1">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 100%"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">4 / 4 Units Matched</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Complete 1-to-1 satisfaction with zero leftover parcel fragmentation.</p>
+</div>
+<span class="font-code-sm text-code-sm text-secondary font-medium">Weight: 20%</span>
+</div>
+<!-- Signal 4: Urgency Alignment -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col justify-between space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold uppercase">4. Urgency</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">98%</span>
+</div>
+<div class="space-y-1">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 98%"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">Critical Sync</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Immediate availability directly satisfies high pediatric emergency priority.</p>
+</div>
+<span class="font-code-sm text-code-sm text-secondary font-medium">Weight: 15%</span>
+</div>
+<!-- Signal 5: SLA Readiness -->
+<div class="p-space-sm rounded-xl bg-surface-container-low flex flex-col justify-between space-y-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline font-semibold uppercase">5. SLA Readiness</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">100%</span>
+</div>
+<div class="space-y-1">
+<div class="w-full bg-surface-container rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 100%"></div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold block">Zero Dispatch Latency</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Provider staging bay pre-authorized for immediate custody dispatch.</p>
+</div>
+<span class="font-code-sm text-code-sm text-secondary font-medium">Weight: 10%</span>
+</div>
+</div>
+<!-- Interactive Route Corridor Visualizer -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md w-full md:w-auto">
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest shadow-sm flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[28px]">route</span>
+</div>
+<div class="space-y-0.5">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Corridor Transit Vector: Cairo South</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-code-sm text-code-sm">CAI-CORR-04</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+            Optimal routing: Maadi Corniche • Est. 14 mins delivery cycle • Clean cold-chain not required (durable device tier).
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 w-full md:w-auto justify-end">
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-outline block">Co2 Avoidance Impact</span>
+<span class="font-label-md text-label-md text-primary font-bold">28.4 kg CO2e saved vs new procurement</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= PRIVACY & CONTACT GOVERNANCE SHIELD ================= -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-md mb-space-lg shadow-sm">
+<div class="flex flex-col md:flex-row items-start gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">shield</span>
+</div>
+<div class="space-y-2 flex-1">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-2">
+<span>Beneficiary & Provider Privacy Perimeter Protected</span>
+<span class="text-secondary font-normal" dir="rtl">(حماية الخصوصية للمستفيد والجهة المانحة)</span>
+</h3>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-secondary font-code-sm text-code-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>Pre-Acceptance Shield Engaged</span>
+</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Direct courier contact phone numbers, exact warehouse bay access pins, door-to-door GPS coordinates, and custodial transfer OTP/QR tokens remain cryptographically encrypted until mutual terms are formally accepted.
+        </p>
+<div class="pt-1 flex flex-wrap items-center gap-space-md text-outline font-label-sm text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+<span>Encrypted Dual-Token Verification</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+<span>Zero Commercial Markups Or Brokerage Fees</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+<span>Auditable Civic Redistribution Guarantee</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= DYNAMIC STATE 2: ACCEPTED HANDOVER VIEW (Hidden by default) ================= -->
+<div class="hidden w-full bg-surface-container-lowest rounded-xl shadow-md p-space-md mb-space-lg border-l-4 border-primary" id="state-accepted-panel">
+<div class="flex flex-col md:flex-row items-start justify-between gap-space-md">
+<div class="space-y-2">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</span>
+<h3 class="font-headline-md text-headline-md text-primary font-semibold">
+            Handover Record #HND-2024-8831 Initialized
+          </h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Both custodial parties have consented. Direct contact channels and physical dispatch custody tokens are now active.
+        </p>
+<div class="flex flex-wrap gap-space-sm pt-space-xs">
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Provider Direct Line</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold font-code-sm">+20 100 849 2110</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Pickup Bay Location</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Bay 3, Al-Bustan Medical Depot</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-outline block">Dual-Auth Handover PIN</span>
+<span class="font-code-sm text-code-sm text-primary font-bold tracking-widest text-headline-sm">940-218</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 flex flex-col gap-2 w-full md:w-auto">
+<button class="px-4 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm hover:bg-primary-container transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>
+<span>Open Field Scanner</span>
+</button>
+<button class="px-4 py-2 rounded-lg bg-surface-container-low text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Download Manifest PDF</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ================= DYNAMIC STATE 3: DECLINED STATE (Hidden by default) ================= -->
+<div class="hidden w-full bg-surface-container-lowest rounded-xl shadow-sm p-space-md mb-space-lg" id="state-declined-panel">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-outline text-[24px]">archive</span>
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Match Archived & Declined</h3>
+<p class="font-body-sm text-body-sm text-outline">
+          Reason recorded: "Timing misaligned with specialized pediatric courier availability". The resources have been freed for alternative matches.
+        </p>
+</div>
+</div>
+</div>
+<!-- ================= PRIMARY ACTION DOCK & RESERVATION FOOTER ================= -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-sm p-space-md mb-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md" id="primary-action-dock">
+<div class="space-y-1 text-center md:text-left">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-semibold block">
+        Consensus Execution • إجراءات الاعتماد
+      </span>
+<p class="font-body-sm text-body-sm text-outline">
+        Reviewing node: <strong class="text-on-surface">Al-Bustan Medical Logistics</strong>. Accepting transitions custody into active transit state.
+      </p>
+</div>
+<!-- Action Buttons Group -->
+<div class="flex flex-wrap items-center gap-space-xs justify-center md:justify-end w-full md:w-auto">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container-low text-secondary font-label-md text-label-md hover:bg-surface-container hover:text-on-surface transition-colors flex items-center gap-1.5" id="btn-decline" type="button">
+<span class="material-symbols-outlined text-[18px] text-error">close</span>
+<span>Decline Match (استبعاد)</span>
+</button>
+<button class="px-space-sm py-2.5 rounded-lg bg-surface-container-low text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors flex items-center gap-1.5" id="btn-print-audit" title="Export Ledger" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span class="hidden sm:inline">Audit Ledger</span>
+</button>
+<button class="px-space-lg py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-md hover:bg-primary-container transition-all flex items-center gap-2 font-medium" id="btn-accept-match" type="button">
+<span class="material-symbols-outlined text-[20px]">handshake</span>
+<span>Accept Match & Open Handover</span>
+<span class="font-normal opacity-90 hidden sm:inline" dir="rtl">(قبول وبدء التسليم)</span>
+</button>
+</div>
+</div>
+<!-- ================= ZERO-CASH CIVIC PROTOCOL FOOTER ================= -->
+<footer class="w-full pt-space-xs pb-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm text-outline font-label-sm text-label-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span>Dawwarha Protocol • 100% Non-Monetized Mutual Civic Circulation • Cairo Node CAI-01</span>
+</div>
+<div class="flex items-center gap-space-md font-code-sm text-code-sm">
+<span>Consensus Hash: #CAI-LGR-9102-ALPHA</span>
+<span>Dual-Signature Required</span>
+</div>
+</footer>
+<!-- ================= INTERACTIVE ACCEPTANCE MODAL DIALOG ================= -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-space-md bg-inverse-surface/40 backdrop-blur-sm hidden" id="accept-modal">
+<div class="w-full max-w-xl bg-surface-container-lowest rounded-xl shadow-xl overflow-hidden animate-in fade-in zoom-in duration-150">
+<!-- Modal Header -->
+<div class="bg-surface-container-low p-space-md flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Affirm Custodial Handover Terms</h3>
+<span class="font-label-sm text-label-sm text-outline" dir="rtl">تأكيد شروط التسليم الأهلي والمسؤولية المجتمعية</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-outline hover:bg-surface-container hover:text-on-surface flex items-center justify-center" id="modal-close-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body Form -->
+<div class="p-space-md space-y-space-md">
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<div class="flex justify-between font-label-sm text-label-sm text-outline">
+<span>Transfer Payload:</span>
+<span class="font-code-sm text-code-sm text-on-surface font-semibold">4x Oxygen Regulators</span>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-outline">
+<span>Recipient:</span>
+<span class="text-on-surface font-medium">Sayeda Zeinab Clinic Outpost (Dr. Hisham Kassem)</span>
+</div>
+</div>
+<div class="space-y-space-sm">
+<!-- Affirmation Checkbox 1 -->
+<label class="flex items-start gap-space-sm cursor-pointer select-none">
+<input class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary accent-primary" id="check-affirm-1" type="checkbox"/>
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-medium text-on-surface block">Zero-Cash & Non-Monetized Redistribution Guarantee</span>
+              I solemnly affirm that this equipment transfer involves no monetary exchange, service charges, or private brokerage fees.
+            </div>
+</label>
+<!-- Affirmation Checkbox 2 -->
+<label class="flex items-start gap-space-sm cursor-pointer select-none">
+<input class="mt-1 w-4 h-4 rounded text-primary focus:ring-primary accent-primary" id="check-affirm-2" type="checkbox"/>
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+<span class="font-medium text-on-surface block">Dual-Signature QR / OTP Verification Protocol</span>
+              I agree to execute in-person mutual confirmation via Dawwarha one-time transfer code upon courier arrival at the intake outpost.
+            </div>
+</label>
+</div>
+<div class="p-space-sm rounded-lg bg-secondary-container/40 text-on-secondary-container font-label-sm text-label-sm flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] shrink-0 text-secondary">info</span>
+<span>Confirming will immediately unlock the direct phone line and exact depot pickup pin for the courier team.</span>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="bg-surface-container-low p-space-md flex items-center justify-end gap-space-xs">
+<button class="px-4 py-2 rounded-lg bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container" id="modal-cancel-btn" type="button">
+          Cancel (إلغاء)
+        </button>
+<button class="px-5 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-medium opacity-50 cursor-not-allowed shadow-sm transition-all flex items-center gap-1.5" disabled="" id="modal-confirm-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">lock_open</span>
+<span>Confirm & Unlock Handover</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ================= INLINE SCRIPT: INTERACTION & STATE SIMULATION ================= -->
+<script>
+    (function() {
+      const root = document.getElementById('match-details-root');
+      const modal = document.getElementById('accept-modal');
+      const btnAccept = document.getElementById('btn-accept-match');
+      const btnTriggerModal = document.getElementById('btn-trigger-modal');
+      const modalClose = document.getElementById('modal-close-btn');
+      const modalCancel = document.getElementById('modal-cancel-btn');
+      const modalConfirm = document.getElementById('modal-confirm-btn');
+      const check1 = document.getElementById('check-affirm-1');
+      const check2 = document.getElementById('check-affirm-2');
+
+      const statusPill = document.getElementById('state-status-pill');
+      const statusText = document.getElementById('state-status-text');
+      const conflictBanner = document.getElementById('state-conflict-banner');
+      const acceptedPanel = document.getElementById('state-accepted-panel');
+      const declinedPanel = document.getElementById('state-declined-panel');
+      const actionDock = document.getElementById('primary-action-dock');
+
+      // QA State Emulator
+      const emulatorButtons = document.querySelectorAll('.emulator-btn');
+
+      function setState(state) {
+        emulatorButtons.forEach(btn => {
+          if (btn.dataset.state === state) {
+            btn.className = 'emulator-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-primary text-on-primary shadow-sm transition-colors';
+          } else {
+            btn.className = 'emulator-btn px-2.5 py-1 rounded-lg font-label-sm text-label-sm bg-surface-container-lowest text-on-surface-variant hover:bg-surface transition-colors';
+          }
+        });
+
+        // Hide all conditional state components first
+        conflictBanner.classList.add('hidden');
+        acceptedPanel.classList.add('hidden');
+        declinedPanel.classList.add('hidden');
+        actionDock.classList.remove('hidden');
+
+        if (state === 'proposed') {
+          statusPill.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-md text-label-md shadow-sm';
+          statusText.textContent = 'Proposed — Mutual Review Required (مقترح — بانتظار المراجعة)';
+        } else if (state === 'accepted') {
+          statusPill.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md shadow-sm';
+          statusText.textContent = 'Terms Accepted — Handover Active (تم القبول — جاري التسليم)';
+          acceptedPanel.classList.remove('hidden');
+          actionDock.classList.add('hidden');
+        } else if (state === 'declined') {
+          statusPill.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-outline font-label-md text-label-md shadow-sm';
+          statusText.textContent = 'Declined & Archived (مستبعد ومؤرشف)';
+          declinedPanel.classList.remove('hidden');
+          actionDock.classList.add('hidden');
+        } else if (state === 'conflict') {
+          statusPill.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md shadow-sm';
+          statusText.textContent = '409 Conflict: Hold Expired (انتهت مهلة الحجز)';
+          conflictBanner.classList.remove('hidden');
+        }
+      }
+
+      emulatorButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          setState(btn.dataset.state);
+        });
+      });
+
+      // RTL Switcher
+      const rtlBtn = document.getElementById('btn-toggle-rtl');
+      const rtlLabel = document.getElementById('rtl-label');
+      let isRtl = false;
+
+      rtlBtn.addEventListener('click', () => {
+        isRtl = !isRtl;
+        if (isRtl) {
+          root.setAttribute('dir', 'rtl');
+          rtlLabel.textContent = 'Switch to English (LTR)';
+        } else {
+          root.removeAttribute('dir');
+          rtlLabel.textContent = 'Switch to العربية (RTL)';
+        }
+      });
+
+      // Modal Controls
+      function openModal() {
+        modal.classList.remove('hidden');
+      }
+      function closeModal() {
+        modal.classList.add('hidden');
+        check1.checked = false;
+        check2.checked = false;
+        updateModalConfirmState();
+      }
+
+      function updateModalConfirmState() {
+        if (check1.checked && check2.checked) {
+          modalConfirm.removeAttribute('disabled');
+          modalConfirm.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+          modalConfirm.setAttribute('disabled', 'true');
+          modalConfirm.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+      }
+
+      btnAccept.addEventListener('click', openModal);
+      btnTriggerModal.addEventListener('click', openModal);
+      modalClose.addEventListener('click', closeModal);
+      modalCancel.addEventListener('click', closeModal);
+      check1.addEventListener('change', updateModalConfirmState);
+      check2.addEventListener('change', updateModalConfirmState);
+
+      modalConfirm.addEventListener('click', () => {
+        closeModal();
+        setState('accepted');
+      });
+
+      // Decline button shortcut
+      document.getElementById('btn-decline').addEventListener('click', () => {
+        if (confirm('Decline this proposed match? The 4 units will be unlocked for next matching queue.')) {
+          setState('declined');
+        }
+      });
+
+      // Print Audit Ledger
+      document.getElementById('btn-print-audit').addEventListener('click', () => {
+        window.print();
+      });
+
+      // Simple live countdown emulator
+      const timerEl = document.getElementById('reservation-timer');
+      let totalSeconds = 18 * 3600 + 42 * 60 + 15;
+      setInterval(() => {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          const h = Math.floor(totalSeconds / 3600);
+          const m = Math.floor((totalSeconds % 3600) / 60);
+          const s = totalSeconds % 60;
+          timerEl.textContent = `${h}h : ${m.toString().padStart(2, '0')}m : ${s.toString().padStart(2, '0')}s`;
+        }
+      }, 1000);
+
+    })();
+  </script>
+</div></div></main></div></body></html>

@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "error": "#ba1a1a", "inverse-primary": "#87d5c1", "primary-container": "#2f806f", "surface": "#f2fbf6", "outline": "#6f7975", "surface-variant": "#dbe5e0", "on-tertiary-fixed-variant": "#6a3b00", "surface-container-high": "#e1eae5", "on-surface": "#151d1a", "secondary-container": "#b6eedc", "on-primary-fixed-variant": "#005143", "inverse-surface": "#2a322f", "on-secondary-fixed": "#002019", "surface-container-low": "#edf6f1", "on-tertiary": "#ffffff", "tertiary-fixed": "#ffdcbf", "on-secondary": "#ffffff", "on-primary": "#ffffff", "on-tertiary-container": "#fffaf8", "surface-tint": "#106a5a", "secondary": "#33685a", "background": "#f2fbf6", "inverse-on-surface": "#eaf3ee", "on-primary-container": "#ebfff7", "on-error-container": "#93000a", "tertiary-container": "#9f672b", "surface-bright": "#f2fbf6", "on-secondary-fixed-variant": "#184f42", "tertiary-fixed-dim": "#feb874", "primary-fixed": "#a3f2dd", "tertiary": "#834f14", "on-error": "#ffffff", "on-background": "#151d1a", "secondary-fixed": "#b6eedc", "error-container": "#ffdad6", "on-primary-fixed": "#00201a", "on-surface-variant": "#3f4946", "outline-variant": "#bec9c4", "surface-container-highest": "#dbe5e0", "surface-dim": "#d3dcd7", "surface-container-lowest": "#ffffff", "on-secondary-container": "#396e5f", "secondary-fixed-dim": "#9bd2c0", "primary": "#076757", "primary-fixed-dim": "#87d5c1", "on-tertiary-fixed": "#2d1600", "surface-container": "#e7f0eb" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-lg": "1.5rem", "margin-mobile": "1rem", "space-xs": "0.25rem", "gutter": "1.5rem", "gutter-mobile": "1rem", "space-xl": "2.5rem", "margin": "2rem", "space-md": "1rem", "space-sm": "0.5rem" }, "fontFamily": { "headline-md": ["Inter"], "body-lg": ["Inter"], "code-sm": ["Inter"], "body-md": ["Inter"], "display-lg": ["Inter"], "label-md": ["Inter"], "body-sm": ["Inter"], "headline-lg": ["Inter"], "headline-sm": ["Inter"], "headline-lg-mobile": ["Inter"], "display-lg-mobile": ["Inter"], "label-sm": ["Inter"] }, "fontSize": { "headline-md": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600" }], "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }], "code-sm": ["0.8125rem", { "lineHeight": "1.125rem", "fontWeight": "400" }], "body-md": ["0.9375rem", { "lineHeight": "1.5rem", "fontWeight": "400" }], "display-lg": ["3.5rem", { "lineHeight": "4rem", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-md": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "500" }], "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" }], "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "headline-sm": ["1.125rem", { "lineHeight": "1.5rem", "fontWeight": "500" }], "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "display-lg-mobile": ["2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col border-r border-outline-variant/40"><div class="h-16 px-6 flex items-center gap-3 border-b border-outline-variant/30"><img alt="Dawwarha Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHW5iUzzfZ3tkKX5sneM_dpeO4zAR6n6YXigLCwtYR_1yGiiTqTKFzTuPEffhSzw3067CynFKDourtLDeGS0Ofg4T2nfvvQ0Oeb8Dc9FlPxH-deVo52S1YRc7-9qzZe2te8ElnUmzmdOz9Y4bhRM5dvY2MUCF5f9MZw3f9rWRreivrU8n9429RkdGyHxD1SNnbD5ZxtYzaONfUjZF1xEv2PKhWtIjW368ScpEb5PFxABLyyIfDs6q2lQ"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary font-bold tracking-tight">Dawwarha</span><span class="font-label-sm text-label-sm text-on-surface-variant">Admin Control Center</span></div></div><div class="flex-1 overflow-y-auto px-4 py-4 space-y-6"><nav class="space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-label-md"><div class="px-3 pb-1.5 font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Overview</div><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Admin Dashboard</span></a></nav><nav class="space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-label-md"><div class="px-3 pb-1.5 font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Trust &amp; Moderation</div><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="verification-queue" href="#"><span class="material-symbols-outlined text-[20px]">verified_user</span><span>Verification Queue</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="content-reports-and-flags" href="#"><span class="material-symbols-outlined text-[20px]">flag</span><span>Content Reports &amp; Flags</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="moderation-workspace" href="#"><span class="material-symbols-outlined text-[20px]">gavel</span><span>Moderation Workspace</span></a></nav><nav class="space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-label-md"><div class="px-3 pb-1.5 font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Operations &amp; Ecosystem</div><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="users-directory" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Users Directory</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="organizations-directory" href="#"><span class="material-symbols-outlined text-[20px]">corporate_fare</span><span>Organizations Directory</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="resources-oversight" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Resources Oversight</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="requests-and-standing-quotas" href="#"><span class="material-symbols-outlined text-[20px]">assignment_turned_in</span><span>Requests &amp; Standing Quotas</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="bilateral-pairing" href="#"><span class="material-symbols-outlined text-[20px]">sync_alt</span><span>Bilateral Pairing</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="custodial-handovers" href="#"><span class="material-symbols-outlined text-[20px]">front_hand</span><span>Custodial Handovers</span></a></nav><nav class="space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-label-md"><div class="px-3 pb-1.5 font-label-sm text-label-sm text-outline uppercase tracking-wider font-semibold">Impact &amp; Governance</div><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="category-taxonomy" href="#"><span class="material-symbols-outlined text-[20px]">account_tree</span><span>Category Taxonomy</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="platform-analytics-and-ledger" href="#"><span class="material-symbols-outlined text-[20px]">query_stats</span><span>Platform Analytics &amp; Ledger</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="audit-trail-and-logs" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span>Audit Trail &amp; Logs</span></a></nav></div><div class="p-4 border-t border-outline-variant/30 bg-surface-container-low/40"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Ledger Engine Online</span></div><span class="font-code-sm text-code-sm text-outline">v3.4.1</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest border-b border-outline-variant/40 z-40 flex items-center justify-between px-gutter shadow-[0_1px_8px_rgba(22,78,65,0.04)]"><div class="flex items-center gap-4 flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span><input class="w-full h-10 pl-9 pr-4 rounded-lg bg-surface-container-low border border-outline-variant/50 text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all" placeholder="Search hash, organization, custody ledger, or audit trace ID..." type="text"/></div></div><div class="flex items-center gap-3.5"><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/40 border border-secondary/20 text-on-secondary-container"><span class="material-symbols-outlined text-[15px] text-primary">verified</span><span class="font-code-sm text-code-sm font-semibold tracking-tight">Block #819,004 (Synced)</span></div><div class="flex items-center bg-surface-container-low border border-outline-variant/50 rounded-lg px-2 py-1"><span class="material-symbols-outlined text-outline text-[16px] mr-1">tune</span><select class="bg-transparent font-label-sm text-label-sm text-on-surface focus:outline-none cursor-pointer pr-1"><option>Prod Live (Node #1)</option><option>Staging Simulator</option><option>Stress Test Cluster</option></select></div><button class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-outline-variant/50 bg-surface-container-low hover:bg-surface-container hover:text-primary transition-colors text-on-surface-variant font-label-sm text-label-sm" title="Switch Interface Language" type="button"><span class="material-symbols-outlined text-[16px]">translate</span><span class="font-semibold">العربية / EN</span></button><div class="h-6 w-[1px] bg-outline-variant/40 mx-0.5"></div><div class="flex items-center gap-2.5 pl-1"><div class="flex flex-col text-right"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Eng. Reham M.</span><span class="font-label-sm text-label-sm text-outline leading-tight">Lead Civic Auditor &amp; Super Admin</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface">
+<!-- TOP OPERATIONAL BAR / QA SIMULATOR & NODE HEARTBEAT -->
+<div class="w-full bg-surface-container-low px-gutter py-2.5 flex flex-wrap items-center justify-between gap-3 text-body-sm">
+<div class="flex items-center flex-wrap gap-2">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-code-sm text-code-sm font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+        QA SIMULATOR
+      </span>
+<div class="flex items-center gap-1 bg-surface-container-lowest rounded-lg p-0.5 shadow-sm">
+<button class="px-2.5 py-1 rounded text-on-primary bg-primary font-label-sm text-label-sm font-medium transition-colors" id="preset-all" onclick="setAuditPreset('all')" type="button">
+          1. All Administrative Events
+        </button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" id="preset-entity" onclick="setAuditPreset('entity')" type="button">
+          2. Entity Deep Dive (#RES-MED-6610)
+        </button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" id="preset-actor" onclick="setAuditPreset('actor')" type="button">
+          3. Actor Filter (Eng. Reham M.)
+        </button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" id="preset-reversible" onclick="setAuditPreset('reversible')" type="button">
+          4. Reversible Target (§14 Delete)
+        </button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" id="preset-zero" onclick="setAuditPreset('zero')" type="button">
+          5. Zero Activity State
+        </button>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px] text-primary">terminal</span>
+<span>Cairo Core Node #01</span>
+<span class="text-outline-variant">/</span>
+<span class="font-semibold text-primary">Merkle Block #819,004</span>
+<span class="text-outline-variant">/</span>
+<span class="inline-flex items-center gap-1 text-on-secondary-container bg-secondary-container/60 px-2 py-0.5 rounded-full font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[13px]">lock</span>
+          Tamper-Evident SHA-256
+        </span>
+</div>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container font-label-sm text-label-sm font-semibold transition-colors shadow-sm" onclick="toggleLanguageContext()" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">g_translate</span>
+<span id="lang-label">العربية (RTL)</span>
+</button>
+</div>
+</div>
+<!-- MAIN AUDIT CANVAS -->
+<div class="px-gutter py-space-lg space-y-space-lg">
+<!-- HEADER & STATUTORY META -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+<div class="space-y-1.5 max-w-4xl">
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-outline">
+<span>System Administration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Impact &amp; Governance</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Audit Trail &amp; Immutable Logs</span>
+</div>
+<div class="flex flex-wrap items-center gap-3 pt-0.5">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">
+            Administrative Activity &amp; Compliance Audit Ledger
+          </h1>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-code-sm text-code-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+            /api/admin/audit · Append-Only Event Stream
+          </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Authoritative chronological record of administrative actions, moderation decisions, entity state mutations, and custody endorsements across Dawwarha. Compliant with <strong class="text-on-surface font-medium">Egyptian Circular Economy Decree 149/2019 (§12.5 Statutory Traceability &amp; Waste Containment)</strong>. Governed by zero-destruction archival protocols.
+        </p>
+</div>
+<!-- ACTIONS -->
+<div class="flex items-center gap-2.5 flex-shrink-0">
+<button class="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md font-semibold hover:bg-surface-container transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Statutory Cert (PDF/A-3)</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold hover:bg-primary-container transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span>Export Audit Log (.CSV / Merkle Digest)</span>
+</button>
+</div>
+</div>
+<!-- EXECUTIVE STATUTORY METRIC TILES -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Tile 1 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Total Audit Events</span>
+<span class="material-symbols-outlined text-[20px] text-primary">receipt_long</span>
+</div>
+<div class="mt-3">
+<div class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">1,428</div>
+<div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="text-primary font-medium">100% Append-only</span>
+<span>· Zero rollbacks</span>
+</div>
+</div>
+</div>
+<!-- Tile 2 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Administrative Actors</span>
+<span class="material-symbols-outlined text-[20px] text-secondary">admin_panel_settings</span>
+</div>
+<div class="mt-3">
+<div class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">04 Operators</div>
+<div class="mt-1 font-body-sm text-body-sm text-on-surface-variant truncate">
+            Super Admin, MoSS Rep, Gov Auditor, Daemon
+          </div>
+</div>
+</div>
+<!-- Tile 3 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Mutated Target Entities</span>
+<span class="material-symbols-outlined text-[20px] text-tertiary">hub</span>
+</div>
+<div class="mt-3">
+<div class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">642 Entities</div>
+<div class="mt-1 font-body-sm text-body-sm text-on-surface-variant">
+            Orgs, Resources, Matches, Users &amp; Reports
+          </div>
+</div>
+</div>
+<!-- Tile 4 -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Immutability Integrity</span>
+<span class="material-symbols-outlined text-[20px] text-primary">security</span>
+</div>
+<div class="mt-3">
+<div class="flex items-center gap-2">
+<div class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">100.0%</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">VERIFIED</span>
+</div>
+<div class="mt-1 font-code-sm text-code-sm text-on-surface-variant">
+            SHA-256 State Chain Validated
+          </div>
+</div>
+</div>
+</div>
+<!-- FILTERING & QUERY CONSOLE -->
+<div class="p-4 rounded-xl bg-surface-container-lowest shadow-sm space-y-3">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+<!-- Search -->
+<div class="md:col-span-4 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(47,128,111,0.25)] transition-all" id="search-input" oninput="handleSearch(this.value)" placeholder="Search by Event ID, Target (#RES-6610), Actor or Keyword..." type="text" value=""/>
+</div>
+<!-- Actor Dropdown -->
+<div class="md:col-span-2">
+<select class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(47,128,111,0.25)]" id="actor-filter" onchange="applyFilters()">
+<option value="all">All Actors (4)</option>
+<option value="reham">Eng. Reham M. (Super Admin)</option>
+<option value="tarek">Dr. Tarek Mansoor (MoSS Auditor)</option>
+<option value="adham">Adham M. (Operations Lead)</option>
+<option value="system">System Daemon (Auto Engine)</option>
+</select>
+</div>
+<!-- Action Dropdown -->
+<div class="md:col-span-2">
+<select class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(47,128,111,0.25)]" id="action-filter" onchange="applyFilters()">
+<option value="all">All Actions (All Mutations)</option>
+<option value="resolve">Report Resolved &amp; Cascaded</option>
+<option value="hold">Bilateral Match Hold</option>
+<option value="approve">Organization Approved</option>
+<option value="suspend">User Suspended</option>
+<option value="deactivate">Category Deactivated</option>
+<option value="expire">Resource Auto-Expired</option>
+</select>
+</div>
+<!-- Entity Type Dropdown -->
+<div class="md:col-span-2">
+<select class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(47,128,111,0.25)]" id="entity-filter" onchange="applyFilters()">
+<option value="all">All Target Entities</option>
+<option value="resource">Resource</option>
+<option value="organization">Organization</option>
+<option value="user">User Account</option>
+<option value="match">Bilateral Match</option>
+<option value="category">Taxonomy Category</option>
+<option value="report">Safety / Content Report</option>
+</select>
+</div>
+<!-- Date Range -->
+<div class="md:col-span-2 flex items-center gap-2">
+<div class="relative w-full">
+<select class="w-full h-10 px-3 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-lowest focus:shadow-[0_0_0_2px_rgba(47,128,111,0.25)] appearance-none">
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>Statutory Q4 2024</option>
+<option>Custom Merkle Epoch</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-outline pointer-events-none text-[18px]">calendar_today</span>
+</div>
+</div>
+</div>
+<!-- Active Filters Pill Bar -->
+<div class="flex flex-wrap items-center justify-between pt-1 text-label-sm font-label-sm" id="active-pills">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-outline uppercase tracking-wider font-semibold">Active Scope:</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface">
+<span>Filter: Non-Destructive Active Records</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-container/50 text-on-secondary-container" id="scope-pill">
+<span>Scope: Complete Audit Ledger (All Entities)</span>
+</span>
+</div>
+<button class="text-primary hover:text-secondary font-semibold inline-flex items-center gap-1 transition-colors" onclick="resetFilters()" type="button">
+<span class="material-symbols-outlined text-[14px]">replay</span>
+          Reset Filters
+        </button>
+</div>
+</div>
+<!-- SPLIT WORKSPACE: 60% MASTER AUDIT TABLE / 40% EVENT INSPECTION DOSSIER -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+<!-- LEFT PANE: AUDIT TABLE (7 of 12 cols = ~58%) -->
+<div class="lg:col-span-7 space-y-3">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<!-- Table Bar -->
+<div class="px-4 py-3 bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">Event Ledger Timeline</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-code-sm text-code-sm">Showing <span id="event-count">6</span> of 1,428</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[16px] text-primary">sync</span>
+<span>Live Ledger Ingestion</span>
+</div>
+</div>
+<!-- Empty State (Hidden by default) -->
+<div class="hidden p-12 text-center flex-col items-center justify-center space-y-3" id="empty-state">
+<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[28px]">search_off</span>
+</div>
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface">No Audit Events Found</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+              No immutable ledger entries match the selected filters or cryptographic query parameters.
+            </p>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-medium" onclick="resetFilters()" type="button">
+              Restore Default Ledger View
+            </button>
+</div>
+<!-- Audit Table Data -->
+<div class="overflow-x-auto" id="table-container">
+<table class="w-full text-left font-body-sm text-body-sm border-collapse">
+<thead>
+<tr class="bg-surface-container-low/70 text-outline font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-2.5 px-3 font-semibold">Timestamp (UTC)</th>
+<th class="py-2.5 px-3 font-semibold">Actor</th>
+<th class="py-2.5 px-3 font-semibold">Action Executed</th>
+<th class="py-2.5 px-3 font-semibold">Target Entity</th>
+<th class="py-2.5 px-3 font-semibold text-right">Inspection</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-normal" id="audit-tbody">
+<!-- ROW 1 (SELECTED) -->
+<tr class="bg-surface-container-low/60 hover:bg-surface-container-high/40 transition-colors cursor-pointer" id="row-1" onclick="selectEvent(1)">
+<td class="py-2.5 px-3 whitespace-nowrap">
+<div class="font-medium text-on-surface">11:45:00</div>
+<div class="font-code-sm text-code-sm text-outline">Today (18m ago)</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface flex items-center gap-1">
+<span>Eng. Reham M.</span>
+<span class="material-symbols-outlined text-[14px] text-primary" title="Civic Auditor Verified">verified</span>
+</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">#USR-1002</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-tertiary-container/30 text-on-surface font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                      Report Resolved &amp; Cascaded
+                    </span>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5 truncate max-w-[180px]">
+                      status: available → unavailable
+                    </div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface truncate max-w-[160px]">Dialysis Filter Kits</div>
+<div class="font-code-sm text-code-sm text-primary font-semibold">#RES-MED-6610</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-primary text-on-primary">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+</span>
+</td>
+</tr>
+<!-- ROW 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors cursor-pointer" id="row-2" onclick="selectEvent(2)">
+<td class="py-2.5 px-3 whitespace-nowrap">
+<div class="font-medium text-on-surface">09:20:14</div>
+<div class="font-code-sm text-code-sm text-outline">Today (2.5h ago)</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface flex items-center gap-1">
+<span>System Daemon</span>
+<span class="material-symbols-outlined text-[14px] text-outline">smart_toy</span>
+</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">Auto-Heuristic Node</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-secondary font-label-sm text-label-sm font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                      Bilateral Match Hold
+                    </span>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5 truncate max-w-[180px]">
+                      Halted allocation flow
+                    </div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface truncate max-w-[160px]">Match #MTCH-9941</div>
+<div class="font-code-sm text-code-sm text-primary">#RES-MED-6610</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</span>
+</td>
+</tr>
+<!-- ROW 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors cursor-pointer" id="row-3" onclick="selectEvent(3)">
+<td class="py-2.5 px-3 whitespace-nowrap">
+<div class="font-medium text-on-surface">16:30:22</div>
+<div class="font-code-sm text-code-sm text-outline">Yesterday (1d ago)</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface flex items-center gap-1">
+<span>Eng. Reham M.</span>
+<span class="material-symbols-outlined text-[14px] text-primary">verified</span>
+</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">Super Admin</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                      Organization Approved
+                    </span>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5 truncate max-w-[180px]">
+                      verification: pending → approved
+                    </div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface truncate max-w-[160px]">Hilal Red Crescent Giza</div>
+<div class="font-code-sm text-code-sm text-primary">#ORG-GIZ-REL-01</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</span>
+</td>
+</tr>
+<!-- ROW 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors cursor-pointer" id="row-4" onclick="selectEvent(4)">
+<td class="py-2.5 px-3 whitespace-nowrap">
+<div class="font-medium text-on-surface">14:12:08</div>
+<div class="font-code-sm text-code-sm text-outline">12 Nov (2d ago)</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface">Adham M.</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">#USR-1004 · Supply Lead</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                      Category Deactivated
+                    </span>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5 truncate max-w-[180px]">
+                      isActive: true → false (Archived)
+                    </div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface truncate max-w-[160px]">Obsolete Thin-Clients T1</div>
+<div class="font-code-sm text-code-sm text-primary">#CAT-OFF-09</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</span>
+</td>
+</tr>
+<!-- ROW 5 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors cursor-pointer" id="row-5" onclick="selectEvent(5)">
+<td class="py-2.5 px-3 whitespace-nowrap">
+<div class="font-medium text-on-surface">10:05:41</div>
+<div class="font-code-sm text-code-sm text-outline">11 Nov (3d ago)</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface flex items-center gap-1">
+<span>Eng. Reham M.</span>
+<span class="material-symbols-outlined text-[14px] text-primary">verified</span>
+</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">Super Admin</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                      User Suspended
+                    </span>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5 truncate max-w-[180px]">
+                      status: active → suspended (§14)
+                    </div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface truncate max-w-[160px]">Mahmoud S. El-Sayed</div>
+<div class="font-code-sm text-code-sm text-error font-medium">#USR-8819</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</span>
+</td>
+</tr>
+<!-- ROW 6 (EDGE CASE: SOFT-DELETED/ARCHIVED TARGET) -->
+<tr class="hover:bg-surface-container-low/50 transition-colors cursor-pointer bg-surface-container-low/20" id="row-6" onclick="selectEvent(6)">
+<td class="py-2.5 px-3 whitespace-nowrap">
+<div class="font-medium text-on-surface">08:30:19</div>
+<div class="font-code-sm text-code-sm text-outline">10 Nov (4d ago)</div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-on-surface">System Daemon</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">Lifecycle Scheduler</div>
+</td>
+<td class="py-2.5 px-3">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                      Resource Auto-Expired
+                    </span>
+<div class="font-code-sm text-code-sm text-on-surface-variant mt-0.5 truncate max-w-[180px]">
+                      status: available → expired
+                    </div>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-medium text-outline flex items-center gap-1 truncate max-w-[160px]">
+<span class="material-symbols-outlined text-[14px]">archive</span>
+<span>[Archived] Canned Lot #08</span>
+</div>
+<div class="font-code-sm text-code-sm text-outline">#RES-FOO-8802 (Preserved)</div>
+</td>
+<td class="py-2.5 px-3 text-right">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Bar -->
+<div class="px-4 py-3 bg-surface-container-low flex flex-col sm:flex-row items-center justify-between gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<div>
+              Showing <span class="font-semibold text-on-surface">1-6</span> of <span class="font-semibold text-on-surface">1,428</span> events · Page 1 of 238
+            </div>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-outline hover:text-on-surface disabled:opacity-50 shadow-sm" disabled="" type="button">
+                Previous
+              </button>
+<span class="px-2 py-1 font-code-sm text-code-sm font-semibold text-primary">1</span>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm" type="button">
+                2
+              </button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm" type="button">
+                3
+              </button>
+<span class="px-1 text-outline">...</span>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm" type="button">
+                238
+              </button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container shadow-sm" type="button">
+                Next
+              </button>
+</div>
+</div>
+</div>
+<!-- STATUTORY PROTOCOL FOOTNOTE -->
+<div class="p-3 rounded-lg bg-surface-container-low flex items-start gap-2.5 font-body-sm text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-primary flex-shrink-0 mt-0.5">policy</span>
+<div>
+<strong class="text-on-surface">Law 149/2019 Archival Rule:</strong> In accordance with Egyptian regulatory requirements for surplus circular asset recovery, administrative deletions perform an in-place cryptographic soft-seal. Primary payload records remain historically queryable with cryptographic lineage intact.
+          </div>
+</div>
+</div>
+<!-- RIGHT PANE: DEEP EVENT INSPECTION DOSSIER (5 of 12 cols = ~42%) -->
+<div class="lg:col-span-5 space-y-4">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-5 space-y-5">
+<!-- Dossier Header -->
+<div class="space-y-2 pb-4 bg-surface-container-low/40 p-4 rounded-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-bold text-primary" id="dossier-id">#EVT-AUD-98201</span>
+<span class="px-2 py-0.2 rounded-full bg-secondary-container/60 text-on-secondary-container font-code-sm text-code-sm font-medium">Seq: #819004.14</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-primary" title="Immutable Record">verified</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface leading-snug" id="dossier-title">
+              Report Resolved &amp; Statutory Quarantine Enforced
+            </h2>
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-outline">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span id="dossier-timestamp">2024-11-14 11:45:00.218 UTC</span>
+</div>
+</div>
+<!-- SECTION A: WHO (THE ACTOR) -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Section A: Authoritative Actor (WHO)</span>
+<span class="material-symbols-outlined text-[16px] text-primary">person_check</span>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low space-y-2.5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-md">
+                  RM
+                </div>
+<div>
+<div class="font-label-md text-label-md font-bold text-on-surface flex items-center gap-1.5" id="dossier-actor-name">
+                    Eng. Reham M.
+                    <span class="material-symbols-outlined text-[15px] text-primary">verified</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant" id="dossier-actor-role">
+                    Super Admin &amp; Lead Civic Auditor (#USR-1002)
+                  </div>
+</div>
+</div>
+<div class="pt-2 text-code-sm font-code-sm text-on-surface-variant space-y-1">
+<div class="flex items-center justify-between">
+<span class="text-outline">Auth Mode:</span>
+<span class="text-on-surface font-medium">Session JWT (mTLS Cairo Govnet)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline">IP Origin:</span>
+<span class="text-on-surface font-mono">196.221.44.12 (Cairo Backbone)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-outline">Client Agent:</span>
+<span class="text-on-surface truncate max-w-[200px]">Dawwarha Ops v2.4 (Chrome 130)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION B: WHAT & WHY (MANDATE & JUSTIFICATION) -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Section B: Statutory Mandate &amp; Reason (WHY)</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">gavel</span>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low space-y-2 text-body-sm font-body-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">API Operation:</span>
+<span class="font-code-sm text-code-sm text-primary font-semibold">POST /api/reports/:id/resolve</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Regulatory Mandate:</span>
+<span class="font-label-sm text-label-sm font-medium text-on-surface">Law 149/2019 §12.5 (Biomedical Waste)</span>
+</div>
+<div class="pt-1 text-on-surface-variant bg-surface-container-lowest p-3 rounded text-body-sm italic">
+                “Consignment lot #RES-MED-6610 placed under immediate statutory quarantine (status: unavailable) following verified physical inspection of breached packaging and expired sterilization date. Provider Delta Warehouse #09 notified.”
+              </div>
+</div>
+</div>
+<!-- SECTION C: TO WHAT (TARGET CONTEXT) -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Section C: Affected Target Entity (TO WHAT)</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">inventory_2</span>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low space-y-3">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="font-label-sm text-label-sm text-outline">Polymorphic Target Ref:</div>
+<div class="font-label-md text-label-md font-bold text-on-surface">
+                    Report #REP-MED-9021 <span class="font-normal text-outline">→ Resource #RES-MED-6610</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+                    Dialysis Filter Kits (SURPLUS LOT #04) · Cat: Medical Consumables
+                  </div>
+</div>
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+                  QUARANTINED
+                </span>
+</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">
+<span class="text-outline">Custody Origin:</span> Delta Warehouse #09 (Ibrahim Fawzi, #USR-5521)
+              </div>
+<div class="flex items-center gap-2 pt-1">
+<a class="inline-flex items-center gap-1 text-primary hover:text-secondary font-label-sm text-label-sm font-semibold transition-colors" href="#">
+<span>View Resource in Oversight</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+<span class="text-outline-variant">·</span>
+<a class="inline-flex items-center gap-1 text-primary hover:text-secondary font-label-sm text-label-sm font-semibold transition-colors" href="#">
+<span>View Original Safety Report</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- SECTION D: STATE MUTATION DELTA (BEFORE / AFTER) -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Section D: State Mutation Delta (BEFORE vs AFTER)</span>
+<span class="material-symbols-outlined text-[16px] text-primary">difference</span>
+</div>
+<div class="rounded-lg bg-surface-container-low overflow-hidden text-body-sm font-body-sm">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-high/60 text-outline font-label-sm text-label-sm">
+<th class="py-2 px-3 text-left">Schema Field</th>
+<th class="py-2 px-3 text-left">Before Mutation</th>
+<th class="py-2 px-3 text-left">After Mutation</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container font-code-sm text-code-sm">
+<tr>
+<td class="py-2 px-3 font-semibold text-on-surface">resources.status</td>
+<td class="py-2 px-3 text-outline">available (Hold)</td>
+<td class="py-2 px-3 text-error font-bold bg-error-container/20">unavailable (Quarantine)</td>
+</tr>
+<tr>
+<td class="py-2 px-3 font-semibold text-on-surface">reports.status</td>
+<td class="py-2 px-3 text-outline">open</td>
+<td class="py-2 px-3 text-primary font-bold bg-secondary-container/30">resolved</td>
+</tr>
+<tr>
+<td class="py-2 px-3 font-semibold text-on-surface">reports.reviewedBy</td>
+<td class="py-2 px-3 text-outline">null</td>
+<td class="py-2 px-3 text-on-surface">#USR-1002 (Eng. Reham M.)</td>
+</tr>
+<tr>
+<td class="py-2 px-3 font-semibold text-on-surface">reports.decreeMandate</td>
+<td class="py-2 px-3 text-outline">false</td>
+<td class="py-2 px-3 text-primary font-bold">true (§12.5 Enforced)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- SECTION E: CRYPTOGRAPHIC TAMPER-PROOF TRAIL -->
+<div class="space-y-2.5">
+<div class="flex items-center justify-between text-outline">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Section E: Merkle Ledger Immutability Trail</span>
+<span class="material-symbols-outlined text-[16px] text-primary">hub</span>
+</div>
+<div class="p-3.5 rounded-lg bg-surface-container-low font-code-sm text-code-sm space-y-2">
+<div>
+<div class="text-outline">Previous Event Root (Parent SHA-256):</div>
+<div class="text-on-surface font-mono text-[11px] truncate select-all">8f3be29a10fc9001b62384a8c19a2e379b32fa90a12cd0041289fe928019a2</div>
+</div>
+<div>
+<div class="text-outline">Current Event Hash (Payload SHA-256):</div>
+<div class="text-primary font-mono text-[11px] font-bold truncate select-all">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</div>
+</div>
+<div class="pt-2 flex items-center justify-between text-label-sm font-label-sm border-t border-outline-variant/30">
+<span class="text-on-surface font-semibold">Ledger Node: Cairo-01</span>
+<span class="text-primary font-bold">Verification: Unbroken Chain</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- INTERACTIVE SCRIPTS FOR AUDIT WORKSPACE & PRESETS -->
+<script>
+  let isRtl = false;
+
+  function setAuditPreset(preset) {
+    // Reset button states
+    ['all', 'entity', 'actor', 'reversible', 'zero'].forEach(p => {
+      const btn = document.getElementById(`preset-${p}`);
+      if (btn) {
+        btn.classList.remove('bg-primary', 'text-on-primary', 'font-medium');
+        btn.classList.add('text-on-surface-variant');
+      }
+    });
+
+    const activeBtn = document.getElementById(`preset-${preset}`);
+    if (activeBtn) {
+      activeBtn.classList.remove('text-on-surface-variant');
+      activeBtn.classList.add('bg-primary', 'text-on-primary', 'font-medium');
+    }
+
+    const searchInput = document.getElementById('search-input');
+    const actorFilter = document.getElementById('actor-filter');
+    const actionFilter = document.getElementById('action-filter');
+    const entityFilter = document.getElementById('entity-filter');
+    const emptyState = document.getElementById('empty-state');
+    const tableContainer = document.getElementById('table-container');
+    const scopePill = document.getElementById('scope-pill');
+    const rows = [1, 2, 3, 4, 5, 6].map(i => document.getElementById(`row-${i}`));
+
+    // Reset table visibility
+    emptyState.classList.add('hidden');
+    emptyState.classList.remove('flex');
+    tableContainer.classList.remove('hidden');
+    rows.forEach(r => r.classList.remove('hidden'));
+
+    if (preset === 'all') {
+      searchInput.value = '';
+      actorFilter.value = 'all';
+      actionFilter.value = 'all';
+      entityFilter.value = 'all';
+      scopePill.textContent = 'Scope: Complete Audit Ledger (All Entities)';
+      document.getElementById('event-count').textContent = '6';
+      selectEvent(1);
+    } else if (preset === 'entity') {
+      searchInput.value = '#RES-MED-6610';
+      actorFilter.value = 'all';
+      actionFilter.value = 'all';
+      entityFilter.value = 'resource';
+      scopePill.textContent = 'Scope: Target Deep-Dive #RES-MED-6610';
+      // Show row 1 and row 2 which touch RES-MED-6610
+      rows.forEach((r, idx) => {
+        if (idx > 1) r.classList.add('hidden');
+      });
+      document.getElementById('event-count').textContent = '2';
+      selectEvent(1);
+    } else if (preset === 'actor') {
+      searchInput.value = '';
+      actorFilter.value = 'reham';
+      actionFilter.value = 'all';
+      entityFilter.value = 'all';
+      scopePill.textContent = 'Scope: Operator Filter (Eng. Reham M.)';
+      // Show rows 1, 3, 5
+      [2, 4, 6].forEach(idx => rows[idx - 1].classList.add('hidden'));
+      document.getElementById('event-count').textContent = '3';
+      selectEvent(1);
+    } else if (preset === 'reversible') {
+      searchInput.value = 'Archived';
+      actorFilter.value = 'all';
+      actionFilter.value = 'expire';
+      entityFilter.value = 'resource';
+      scopePill.textContent = 'Scope: Reversible Historical Record (Soft-Archived)';
+      // Show only row 6
+      rows.forEach((r, idx) => {
+        if (idx !== 5) r.classList.add('hidden');
+      });
+      document.getElementById('event-count').textContent = '1';
+      selectEvent(6);
+    } else if (preset === 'zero') {
+      searchInput.value = 'NonExistentHash999';
+      scopePill.textContent = 'Scope: No Active Matches';
+      tableContainer.classList.add('hidden');
+      emptyState.classList.remove('hidden');
+      emptyState.classList.add('flex');
+      document.getElementById('event-count').textContent = '0';
+    }
+  }
+
+  function handleSearch(val) {
+    if (val.trim().length === 0) {
+      setAuditPreset('all');
+    }
+  }
+
+  function applyFilters() {
+    // Quick filter feedback demo
+    const scopePill = document.getElementById('scope-pill');
+    scopePill.textContent = 'Scope: Custom Allow-Listed Administrative Filter';
+  }
+
+  function resetFilters() {
+    setAuditPreset('all');
+  }
+
+  function selectEvent(id) {
+    // Highlight table row
+    for (let i = 1; i <= 6; i++) {
+      const row = document.getElementById(`row-${i}`);
+      if (row) {
+        if (i === id) {
+          row.classList.add('bg-surface-container-low/60');
+        } else {
+          row.classList.remove('bg-surface-container-low/60');
+        }
+      }
+    }
+
+    const dossierId = document.getElementById('dossier-id');
+    const dossierTitle = document.getElementById('dossier-title');
+    const dossierTimestamp = document.getElementById('dossier-timestamp');
+
+    if (id === 1) {
+      dossierId.textContent = '#EVT-AUD-98201';
+      dossierTitle.textContent = 'Report Resolved & Statutory Quarantine Enforced';
+      dossierTimestamp.textContent = '2024-11-14 11:45:00.218 UTC';
+    } else if (id === 2) {
+      dossierId.textContent = '#EVT-AUD-98194';
+      dossierTitle.textContent = 'Bilateral Match Hold Engaged (Auto-Heuristic)';
+      dossierTimestamp.textContent = '2024-11-14 09:20:14.041 UTC';
+    } else if (id === 3) {
+      dossierId.textContent = '#EVT-AUD-98177';
+      dossierTitle.textContent = 'Organization Approved & Credentialed';
+      dossierTimestamp.textContent = '2024-11-13 16:30:22.903 UTC';
+    } else if (id === 4) {
+      dossierId.textContent = '#EVT-AUD-98150';
+      dossierTitle.textContent = 'Taxonomy Category Soft-Deactivated';
+      dossierTimestamp.textContent = '2024-11-12 14:12:08.771 UTC';
+    } else if (id === 5) {
+      dossierId.textContent = '#EVT-AUD-98112';
+      dossierTitle.textContent = 'User Suspended for Statutory §14 Violation';
+      dossierTimestamp.textContent = '2024-11-11 10:05:41.119 UTC';
+    } else if (id === 6) {
+      dossierId.textContent = '#EVT-AUD-98004';
+      dossierTitle.textContent = 'Resource Auto-Expired & Non-Destructive Archival';
+      dossierTimestamp.textContent = '2024-11-10 08:30:19.492 UTC';
+    }
+  }
+
+  function toggleLanguageContext() {
+    isRtl = !isRtl;
+    const htmlEl = document.documentElement;
+    const langLabel = document.getElementById('lang-label');
+    if (isRtl) {
+      htmlEl.setAttribute('dir', 'rtl');
+      langLabel.textContent = 'English (LTR)';
+    } else {
+      htmlEl.setAttribute('dir', 'ltr');
+      langLabel.textContent = 'العربية (RTL)';
+    }
+  }
+</script></main></div></body></html>

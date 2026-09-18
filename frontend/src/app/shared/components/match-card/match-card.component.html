@@ -1,0 +1,190 @@
+<div class="relative overflow-hidden rounded-card border border-neutral-200 bg-neutral-0 p-5 shadow-sm transition-shadow hover:shadow-md">
+  <!-- Top MatchScore Component (Flagship Task - Always Visible) -->
+  <app-match-score
+    [score]="match.score"
+    [breakdown]="match.scoreBreakdown"
+  />
+
+  <!-- Comparison Section: Desktop 2-column, Mobile stacked -->
+  <div class="mt-4 grid gap-4 md:grid-cols-2">
+    <!-- Resource Column -->
+    <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
+      <div class="flex items-center justify-between pb-2 border-b border-neutral-200/60">
+        <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">
+          Supplied Resource
+        </span>
+        <span class="rounded-md bg-neutral-200/60 px-2 py-0.5 text-xs font-semibold text-neutral-700">
+          Qty: {{ resourceQuantity }}
+        </span>
+      </div>
+
+      <div class="mt-2.5">
+        <h4 class="font-semibold text-neutral-900">
+          {{ resourceTitle }}
+        </h4>
+        <p class="mt-0.5 text-xs text-neutral-500">
+          Category: <span class="font-medium text-neutral-700">{{ resourceCategory }}</span>
+        </p>
+        <p class="mt-1 flex items-center gap-1 text-xs text-neutral-600">
+          <svg class="h-3.5 w-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          {{ resourceLocation }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Request Column -->
+    <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
+      <div class="flex items-center justify-between pb-2 border-b border-neutral-200/60">
+        <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">
+          Target Request
+        </span>
+        <span class="rounded-md bg-neutral-200/60 px-2 py-0.5 text-xs font-semibold text-neutral-700">
+          Qty: {{ requestQuantity }}
+        </span>
+      </div>
+
+      <div class="mt-2.5">
+        <h4 class="font-semibold text-neutral-900">
+          {{ requestCategory }}
+        </h4>
+        <p class="mt-0.5 text-xs text-neutral-500">
+          Urgency: <span class="font-medium capitalize text-neutral-700">{{ requestUrgency }}</span>
+        </p>
+        <p class="mt-1 flex items-center gap-1 text-xs text-neutral-600">
+          <svg class="h-3.5 w-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          {{ requestLocation }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions Bar -->
+  <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-100 pt-4">
+    <!-- Status Indicator if not proposed -->
+    <div>
+      @if (match.status && match.status !== 'proposed') {
+        <span
+          class="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold tracking-wide"
+          [ngClass]="statusBadgeClass"
+        >
+          Status: {{ statusLabel }}
+        </span>
+      } @else {
+        <span class="inline-flex items-center gap-1 rounded-full border border-info/20 bg-info-bg px-2.5 py-0.5 text-xs font-medium text-info">
+          Proposed Match
+        </span>
+      }
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-wrap items-center gap-2">
+      @if (match.status === 'proposed') {
+        <button
+          type="button"
+          (click)="triggerAccept()"
+          [disabled]="loading"
+          class="inline-flex items-center gap-1.5 rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2 disabled:opacity-50"
+        >
+          @if (loading) {
+            <svg class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+            <span>Processing...</span>
+          } @else {
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Accept Match</span>
+          }
+        </button>
+
+        <button
+          type="button"
+          (click)="triggerReject()"
+          [disabled]="loading"
+          class="inline-flex items-center gap-1.5 rounded-lg border border-danger/30 bg-neutral-0 px-3.5 py-2 text-sm font-semibold text-danger transition hover:bg-danger-bg focus:outline-none focus:ring-2 focus:ring-danger focus:ring-offset-2 disabled:opacity-50"
+        >
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          <span>Reject</span>
+        </button>
+      }
+
+      @if (showDetailsLink && matchId) {
+        <a
+          [routerLink]="['/matches', matchId]"
+          class="inline-flex items-center gap-1 rounded-lg border border-neutral-200 bg-neutral-0 px-3 py-2 text-sm font-medium text-neutral-700 transition hover:bg-neutral-50 hover:text-neutral-900"
+        >
+          <span>View Details</span>
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      }
+    </div>
+  </div>
+
+  <!-- Confirmation Dialog for Accept Match -->
+  @if (showAcceptConfirm) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/40 p-4 backdrop-blur-sm">
+      <div class="w-full max-w-md rounded-card border border-neutral-200 bg-neutral-0 p-6 shadow-xl animate-in fade-in zoom-in duration-150">
+        <h3 class="text-lg font-bold text-neutral-900">Confirm Match Acceptance</h3>
+        <p class="mt-2 text-sm text-neutral-600">
+          Accepting this match will initiate the handover coordination workflow between provider and requester. Do you want to proceed?
+        </p>
+        <div class="mt-6 flex justify-end gap-3">
+          <button
+            type="button"
+            (click)="cancelAccept()"
+            class="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="confirmAccept()"
+            class="rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-500"
+          >
+            Confirm & Accept
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Confirmation Dialog for Reject Match -->
+  @if (showRejectConfirm) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/40 p-4 backdrop-blur-sm">
+      <div class="w-full max-w-md rounded-card border border-neutral-200 bg-neutral-0 p-6 shadow-xl animate-in fade-in zoom-in duration-150">
+        <h3 class="text-lg font-bold text-danger">Reject This Match?</h3>
+        <p class="mt-2 text-sm text-neutral-600">
+          Are you sure you want to decline this candidate match? The resource will remain available for other matching requests.
+        </p>
+        <div class="mt-6 flex justify-end gap-3">
+          <button
+            type="button"
+            (click)="cancelReject()"
+            class="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="confirmReject()"
+            class="rounded-lg bg-danger px-4 py-2 text-sm font-semibold text-white hover:bg-danger/90"
+          >
+            Confirm Reject
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-fixed":"#b6eedc","inverse-on-surface":"#eaf3ee","outline":"#6f7975","primary-fixed":"#a3f2dd","on-error-container":"#93000a","on-secondary-container":"#396e5f","on-secondary-fixed":"#002019","on-tertiary-fixed":"#2d1600","on-secondary":"#ffffff","surface":"#f2fbf6","surface-container":"#e7f0eb","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#184f42","surface-container-highest":"#dbe5e0","on-primary-container":"#ebfff7","on-error":"#ffffff","surface-variant":"#dbe5e0","on-tertiary-container":"#fffaf8","primary-container":"#2f806f","on-surface-variant":"#3f4946","surface-container-lowest":"#ffffff","outline-variant":"#bec9c4","primary-fixed-dim":"#87d5c1","on-primary-fixed":"#00201a","error":"#ba1a1a","surface-container-high":"#e1eae5","on-tertiary-fixed-variant":"#6a3b00","secondary-container":"#b6eedc","surface-bright":"#f2fbf6","on-background":"#151d1a","error-container":"#ffdad6","on-primary-fixed-variant":"#005143","surface-container-low":"#edf6f1","secondary-fixed-dim":"#9bd2c0","surface-tint":"#106a5a","background":"#f2fbf6","inverse-surface":"#2a322f","secondary":"#33685a","on-surface":"#151d1a","inverse-primary":"#87d5c1","tertiary-fixed-dim":"#feb874","primary":"#076757","tertiary":"#834f14","surface-dim":"#d3dcd7","tertiary-container":"#9f672b","tertiary-fixed":"#ffdcbf","on-primary":"#ffffff"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-md":"1rem","space-xs":"0.25rem","space-lg":"1.5rem","margin":"2rem","gutter":"1.5rem","space-sm":"0.5rem","gutter-mobile":"1rem","margin-mobile":"1rem","space-xl":"2.5rem"},"fontFamily":{"headline-md":["Inter"],"body-sm":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"display-lg":["Inter"],"label-sm":["Inter"],"headline-sm":["Inter"],"code-sm":["Inter"],"headline-lg":["Inter"],"display-lg-mobile":["Inter"],"headline-lg-mobile":["Inter"],"label-md":["Inter"]},"fontSize":{"headline-md":["1.25rem",{"lineHeight":"1.75rem","letterSpacing":"-0.005em","fontWeight":"600"}],"body-sm":["0.8125rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"body-lg":["1.125rem",{"lineHeight":"1.75rem","fontWeight":"400"}],"body-md":["0.9375rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"display-lg":["3.5rem",{"lineHeight":"4rem","letterSpacing":"-0.02em","fontWeight":"600"}],"label-sm":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.02em","fontWeight":"500"}],"headline-sm":["1.125rem",{"lineHeight":"1.5rem","fontWeight":"500"}],"code-sm":["0.8125rem",{"lineHeight":"1.125rem","fontWeight":"400"}],"headline-lg":["2rem",{"lineHeight":"2.5rem","letterSpacing":"-0.015em","fontWeight":"600"}],"display-lg-mobile":["2.25rem",{"lineHeight":"2.75rem","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg-mobile":["1.5rem",{"lineHeight":"2rem","letterSpacing":"-0.01em","fontWeight":"600"}],"label-md":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"500"}]}}}}</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between"><header class="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest border-b border-surface-variant"><div class="h-16 max-w-7xl mx-auto px-margin flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-sm"><a class="flex items-center gap-space-sm" data-path="browse-resources" href="#"><img alt="Dawwarha Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XOT7uJUAmNDQ0yopBY1_ogVvlzexeTk-j61J4o-cNjpgjmGQguLZoN0P_TP0nmzZRrw38vUGANTli6INJN2Oqc0v6NbWF53xLg5ftVXuG1vw8fq-8pvPmhXTKQmeZVeQXVP6vJ9WMQ2TV1QkNEwUcYDzWgQkgyDLg955mFHKs0INuQyb2t2w_LpLyruHk-XE0FJZk8LIa75OjwlUv0ou7Lh-pJ7lAZUB3tjPR4fWk9QHHWzpRgq2WsZGov"/><div class="flex items-baseline gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Dawwarha</span><span class="font-body-sm text-body-sm text-on-surface-variant" dir="rtl">دَوِّرها</span></div></a><div class="hidden sm:inline-flex items-center gap-space-xs px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-container border border-outline-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[14px] text-primary">verified_user</span><span>Verified Auth Gateway</span></div></div><div class="flex items-center gap-space-sm"><button class="inline-flex items-center gap-space-xs px-space-sm py-1.5 rounded-lg border border-surface-variant bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors font-label-sm text-label-sm" type="button"><span class="material-symbols-outlined text-[16px]">language</span><span>English</span><span class="text-outline-variant">|</span><span dir="rtl">العربية</span></button><a class="inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-lg border border-surface-variant text-on-surface-variant hover:text-on-surface hover:bg-surface-container font-label-sm text-label-sm transition-colors" data-path="browse-resources" href="#"><span class="material-symbols-outlined text-[16px]">arrow_back</span><span>Back to Platform</span></a></div></div></header><main class="w-full pt-16 flex-1 flex flex-col items-center justify-center bg-surface"><div class="flex flex-col w-full py-space-md px-margin-mobile sm:px-margin max-w-7xl mx-auto space-y-space-lg">
+<!-- TOP STATE SWITCHER BAR -->
+<section aria-label="Interactive State Emulator" class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-primary-container text-on-primary">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Auth State Simulator</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dawwarha Angular 18 Auth Interceptor &amp; Gateways</span>
+</div>
+</div>
+<!-- Right Controls: Language Switcher & Quick Scenario Selector -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="inline-flex items-center rounded-lg bg-surface-container p-0.5">
+<button class="px-space-sm py-1 rounded-md font-label-sm text-label-sm bg-surface-container-lowest text-on-surface shadow-sm transition-all" id="lang-ltr-btn" onclick="setLanguage('en')" type="button">English (LTR)</button>
+<button class="px-space-sm py-1 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all" id="lang-rtl-btn" onclick="setLanguage('ar')" type="button">العربية (RTL)</button>
+</div>
+<button class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" onclick="resetState()" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Reset Default</span>
+</button>
+</div>
+</div>
+<!-- 12 State Pill Tabs -->
+<div aria-label="Authentication States" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-space-xs pt-space-xs" role="tablist">
+<button class="state-tab-btn active-state-tab flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-1" onclick="switchState(1)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">1. Default Logged Out</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Guest ready</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">200</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-2" onclick="switchState(2)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">2. Restoring Session</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Splash preloader</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">APP_INIT</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-3" onclick="switchState(3)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">3. Login Submitting</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Pending payload</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">POST</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-4" onclick="switchState(4)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">4. Validation Errors</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Field-level 400</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">400</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-5" onclick="switchState(5)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">5. Invalid Creds</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Neutral 401 copy</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">401</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-6" onclick="switchState(6)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">6. Suspended Custody</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Account restricted</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">403-S</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-7" onclick="switchState(7)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">7. Session Expired</span>
+<span class="block text-[11px] text-on-surface-variant truncate">JWT timeout</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">401-EXP</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-8" onclick="switchState(8)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">8. Return-URL Guard</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Preserved route</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">GUARD</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-9" onclick="switchState(9)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">9. Forbidden View</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Insufficient ACL</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">403</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-10" onclick="switchState(10)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">10. Client Logout</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Token purge confirmed</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">PURGE</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-11" onclick="switchState(11)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">11. Reg Success</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Ledger profile set</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">201</span>
+</button>
+<button class="state-tab-btn flex items-center justify-between px-space-sm py-2 rounded-lg text-left transition-all" id="state-tab-12" onclick="switchState(12)" type="button">
+<div class="truncate">
+<span class="block font-label-sm text-label-sm font-semibold">12. Network Failure</span>
+<span class="block text-[11px] text-on-surface-variant truncate">Gateway timeout</span>
+</div>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container font-mono">500</span>
+</button>
+</div>
+</section>
+<!-- MAIN INTERACTIVE CONTAINER -->
+<div class="w-full flex flex-col items-center justify-center min-h-[580px] py-space-sm" dir="ltr" id="auth-environment">
+<!-- AUTH CARD SHELL -->
+<div class="w-full max-w-[480px] bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col transition-all">
+<!-- BRAND HEADER INSIDE CONTAINER -->
+<div class="flex flex-col items-center text-center pb-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center text-primary mb-space-xs">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">sync_alt</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight" id="header-brand-title">Dawwarha Authentication Gateway</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1" id="header-brand-subtitle">Secured Civic Resource Custody &amp; Circular Logistics</p>
+<!-- Dynamic Context Return URL Badge (Toggled in States 7 & 8) -->
+<div class="hidden mt-space-xs inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container font-code-sm text-code-sm text-on-surface-variant" id="badge-return-url">
+<span class="material-symbols-outlined text-[15px] text-primary">navigation</span>
+<span>Target: <span class="font-semibold text-primary" id="badge-url-text">/dashboard/resources/create</span></span>
+<span class="text-outline-variant">|</span>
+<span class="text-tertiary font-medium">Sanitized</span>
+</div>
+</div>
+<!-- DYNAMIC STATUS NOTIFICATION (AuthAlert Component) -->
+<div aria-live="assertive" class="mb-space-md hidden" id="auth-alert-container" role="alert">
+<!-- Content will be injected by JavaScript -->
+</div>
+<!-- VIEW 1: REGULAR FORM (States 1, 3, 4, 5, 7, 8, 12) -->
+<form class="space-y-space-md" id="view-form" onsubmit="event.preventDefault(); switchState(3);">
+<!-- Email Input Group -->
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface" for="auth-email" id="label-email">Civic ID or Corporate Email</label>
+<span class="font-body-sm text-body-sm text-on-surface-variant" id="email-field-hint">e.g. foodbank@dawwarha.org</span>
+</div>
+<div class="relative">
+<span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</span>
+<input aria-describedby="email-error-msg email-field-hint" autocomplete="email" class="w-full h-11 ps-10 pe-3 bg-surface-container-lowest text-on-surface rounded-lg font-body-md text-body-md focus:outline-none focus:bg-surface-container-low transition-colors" id="auth-email" name="email" required="" type="email" value="logistics@dawwarha.org"/>
+</div>
+<div class="hidden items-center gap-1.5 text-error pt-1" id="email-error-container">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span class="font-body-sm text-body-sm" id="email-error-msg">Enter a valid email address (e.g. custody@org.ngo).</span>
+</div>
+</div>
+<!-- Password Input Group -->
+<div class="space-y-1">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface" for="auth-password" id="label-password">Security Passphrase</label>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#" id="link-forgot" onclick="event.preventDefault();">Forgot credentials?</a>
+</div>
+<div class="relative">
+<span class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</span>
+<input aria-describedby="password-error-msg" autocomplete="current-password" class="w-full h-11 ps-10 pe-10 bg-surface-container-lowest text-on-surface rounded-lg font-body-md text-body-md focus:outline-none focus:bg-surface-container-low transition-colors" id="auth-password" name="password" required="" type="password" value="••••••••••••"/>
+<button aria-label="Toggle password visibility" class="absolute inset-y-0 end-0 flex items-center pe-3 text-on-surface-variant hover:text-on-surface transition-colors" id="toggle-password-btn" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined text-[18px]" id="password-toggle-icon">visibility</span>
+</button>
+</div>
+<div class="hidden items-center gap-1.5 text-error pt-1" id="password-error-container">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span class="font-body-sm text-body-sm" id="password-error-msg">Password is required and must contain at least 8 characters.</span>
+</div>
+</div>
+<!-- Checkbox Row -->
+<div class="flex items-center justify-between pt-space-xs">
+<label class="flex items-center gap-2.5 cursor-pointer select-none">
+<input checked="" class="w-[18px] h-[18px] rounded bg-surface-container-low text-primary accent-primary cursor-pointer" id="remember-device" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface" id="label-remember">Remember this workstation for 14 days</span>
+</label>
+<span class="font-code-sm text-code-sm text-outline flex items-center gap-1" title="Encrypted device hash fingerprinting active">
+<span class="material-symbols-outlined text-[14px]">key</span>
+<span>Ed25519</span>
+</span>
+</div>
+<!-- Submit Button -->
+<button class="w-full h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-space-xs hover:bg-on-secondary-fixed-variant active:scale-[0.99] transition-all shadow-sm" id="btn-submit" type="submit">
+<span class="material-symbols-outlined text-[18px]" id="btn-submit-icon">lock_open</span>
+<span id="btn-submit-text">Verify &amp; Sign In</span>
+<div class="hidden w-4 h-4 border-2 border-on-primary border-t-transparent rounded-full animate-spin" id="btn-submit-spinner"></div>
+</button>
+<!-- Secondary Register Link -->
+<div class="pt-space-xs text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant" id="text-no-account">
+            Operating a verified shelter, warehouse, or charity? 
+            <a class="font-semibold text-primary hover:underline" href="#" id="link-register" onclick="switchState(11); return false;">Apply for Custody Access</a>
+</p>
+</div>
+</form>
+<!-- VIEW 2: APP SESSION RESTORING SPLASH (State 2) -->
+<div class="hidden flex-col items-center justify-center py-space-xl space-y-space-md text-center" id="view-restoring">
+<div class="relative flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-primary-container/20 animate-ping absolute"></div>
+<div class="w-14 h-14 rounded-full bg-primary-container flex items-center justify-center text-on-primary shadow-sm">
+<span class="material-symbols-outlined text-[28px] animate-pulse">lock_person</span>
+</div>
+</div>
+<div class="space-y-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface" id="restoring-title">Restoring Encrypted Session</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs" id="restoring-subtitle">Validating JWT signature and claims with Dawwarha Civic Gateway...</p>
+</div>
+<!-- Animated Progress Meter -->
+<div class="w-48 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3 animate-pulse rounded-full"></div>
+</div>
+<span class="font-code-sm text-code-sm text-outline">HTTP 1.1 /api/v1/auth/me • 42ms</span>
+</div>
+<!-- VIEW 3: SUSPENDED ACCOUNT (State 6) -->
+<div class="hidden flex-col items-center text-center py-space-md space-y-space-md" id="view-suspended">
+<div class="w-14 h-14 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[30px]">gavel</span>
+</div>
+<div class="space-y-1">
+<h2 class="font-headline-sm text-headline-sm text-error" id="suspended-title">Account Custody Suspended</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm" id="suspended-body">
+            Your organization profile is currently marked as suspended due to an audit divergence flag (Ref: <span class="font-mono font-medium text-on-surface">#CUSTODY-8942-FLAG</span>).
+          </p>
+</div>
+<div class="w-full p-space-sm rounded-lg bg-surface-container-low text-left font-body-sm text-body-sm space-y-1">
+<div class="flex justify-between text-on-surface font-label-sm text-label-sm">
+<span>Audit Protocol:</span>
+<span class="font-mono text-tertiary">ISO-14044 / Food-Safety</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Suspension Date:</span>
+<span>2025-02-14 09:41 UTC</span>
+</div>
+</div>
+<div class="w-full flex flex-col gap-space-xs pt-space-xs">
+<button class="w-full h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-space-xs" onclick="alert('Routing to Dawwarha Compliance Grievance Desk...')" type="button">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+<span id="btn-suspended-appeal">File Custody Appeal</span>
+</button>
+<button class="w-full h-10 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors" onclick="switchState(1)" type="button">
+<span id="btn-suspended-signout">Return to Public Portal</span>
+</button>
+</div>
+</div>
+<!-- VIEW 4: FORBIDDEN 403 ACL GATE (State 9) -->
+<div class="hidden flex-col items-center text-center py-space-md space-y-space-md" id="view-forbidden">
+<div class="w-14 h-14 rounded-full bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[30px]">shield_lock</span>
+</div>
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-error-container/60 text-error font-code-sm text-code-sm mb-1">
+<span>HTTP 403: Forbidden Scope</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface" id="forbidden-title">Access Restriction Level High</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm" id="forbidden-body">
+            You don't have permission to do that. Your active credential profile lacks the <span class="font-mono font-medium text-on-surface">ROLE_REGIONAL_AUDITOR</span> authority.
+          </p>
+</div>
+<!-- Role Badge Comparison Card -->
+<div class="w-full bg-surface-container-low rounded-lg p-space-sm space-y-2 text-left">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Your Active Role:</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-semibold">RECIPIENT_NGO_VOLUNTEER</span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Required Access Authority:</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-mono">CORE_DISPATCHER_ADMIN</span>
+</div>
+</div>
+<div class="w-full flex flex-col gap-space-xs pt-space-xs">
+<button class="w-full h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-space-xs" onclick="switchState(1)" type="button">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span id="btn-forbidden-dashboard">Back to My Authorized Workspace</span>
+</button>
+<button class="w-full h-10 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-colors" onclick="switchState(10)" type="button">
+<span id="btn-forbidden-switch">Switch Account / Purge Session</span>
+</button>
+</div>
+</div>
+<!-- VIEW 5: INSTANT CLIENT-SIDE LOGOUT CONFIRMATION (State 10) -->
+<div class="hidden flex-col items-center text-center py-space-md space-y-space-md" id="view-logout">
+<div class="w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[30px]">logout</span>
+</div>
+<div class="space-y-1">
+<h2 class="font-headline-sm text-headline-sm text-on-surface" id="logout-title">Client-Side Session Purged</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm" id="logout-body">
+            You have securely logged out. JWT credentials, local user state, and sensitive in-memory queries have been cleanly discarded.
+          </p>
+</div>
+<!-- Ledger Audit confirmation card -->
+<div class="w-full bg-surface-container-low rounded-lg p-space-sm text-start font-code-sm text-code-sm space-y-1 text-on-surface-variant">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>localStorage.removeItem('dawwarha_jwt') • done</span>
+</div>
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>State Store cache flushed (0 bytes retained)</span>
+</div>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span>Stateless token discarded without server lock contention</span>
+</div>
+</div>
+<button class="w-full h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-space-xs shadow-sm" onclick="switchState(1)" type="button">
+<span class="material-symbols-outlined text-[18px]">login</span>
+<span id="btn-logout-again">Sign In Again</span>
+</button>
+</div>
+<!-- VIEW 6: REGISTRATION SUCCESS ONBOARDING (State 11) -->
+<div class="hidden flex-col items-center text-center py-space-md space-y-space-md" id="view-register-success">
+<div class="w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[30px]">assignment_turned_in</span>
+</div>
+<div class="space-y-1">
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm mb-1">
+<span>HTTP 201 Created</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface" id="reg-success-title">Account Created Successfully</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm" id="reg-success-body">
+            Organization custody profile registered. Initializing your secure cryptographic session tokens...
+          </p>
+</div>
+<!-- Forwarding Visualizer -->
+<div class="w-full bg-surface-container-low rounded-lg p-space-sm flex items-center justify-between text-start">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></div>
+<span class="font-body-sm text-body-sm text-on-surface" id="reg-forwarding-text">Auto-forwarding to Onboarding Verification in 3s</span>
+</div>
+<span class="font-code-sm text-code-sm text-primary font-semibold">/onboarding/kyc</span>
+</div>
+<button class="w-full h-11 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-space-xs" onclick="switchState(1)" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+<span id="btn-reg-instant">Enter Workspace Immediately</span>
+</button>
+</div>
+</div>
+<!-- SECURITY TRUST BADGES BELOW CARD -->
+<div class="mt-space-md flex flex-wrap items-center justify-center gap-space-md text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span>Zero-Trust Civic Ledger</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">lock</span>
+<span>Stateless JWT w/ Refresh Rotation</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">policy</span>
+<span>WCAG 2.2 AA • Bilingual LTR/RTL</span>
+</div>
+</div>
+</div>
+<!-- ARCHITECTURAL CONTEXT & HTTP INTERCEPTOR FLOW DRAWER -->
+<section aria-label="Architectural Context" class="w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-sm space-y-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-xs">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">account_tree</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Angular HTTP Interceptor &amp; Security Architecture</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Complete client-side lifecycle implementation contract for <span class="font-mono text-on-surface">DawwarhaAuthInterceptor</span></p>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-code-sm text-code-sm text-on-surface-variant">RFC 6750 Bearer</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-code-sm text-code-sm text-primary">Angular v18.x</span>
+</div>
+</div>
+<!-- Interactive Lifecycle Visualizer Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-space-sm">
+<!-- Card 1: Request Interception -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col justify-between space-y-space-xs">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-primary">01. REQUEST PIPELINE</span>
+<span class="material-symbols-outlined text-[18px] text-primary">flight_takeoff</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Reads accessToken from localStorage. If non-expired, clones outgoing HttpHeaders with <span class="font-code-sm text-code-sm text-on-surface bg-surface-container px-1 py-0.5 rounded">Authorization: Bearer &lt;token&gt;</span>.
+          </p>
+</div>
+<div class="pt-2 font-code-sm text-code-sm text-on-surface-variant">
+<span class="text-primary">•</span> Pass-through on public auth routes
+        </div>
+</div>
+<!-- Card 2: 401 Interceptor -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col justify-between space-y-space-xs">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-tertiary">02. 401 UNAUTHORIZED</span>
+<span class="material-symbols-outlined text-[18px] text-tertiary">history_toggle_off</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Catches expired or invalid token response. Silently clears token storage, encodes active route as <span class="font-code-sm text-code-sm text-on-surface bg-surface-container px-1 py-0.5 rounded">returnUrl</span>, triggers session alert, and navigates to <span class="font-code-sm text-code-sm text-on-surface bg-surface-container px-1 py-0.5 rounded">/auth/login</span>.
+          </p>
+</div>
+<div class="pt-2 font-code-sm text-code-sm text-on-surface-variant">
+<span class="text-tertiary">•</span> Zero infinite redirect loops
+        </div>
+</div>
+<!-- Card 3: 403 Forbidden -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col justify-between space-y-space-xs">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-error">03. 403 FORBIDDEN</span>
+<span class="material-symbols-outlined text-[18px] text-error">block</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Distinguishes between Suspended accounts (<span class="font-code-sm text-code-sm text-on-surface bg-surface-container px-1 py-0.5 rounded">SUSPENDED_403</span>) and Role authorization failures. Preserves active session tokens to avoid unnecessary re-authentications.
+          </p>
+</div>
+<div class="pt-2 font-code-sm text-code-sm text-on-surface-variant">
+<span class="text-error">•</span> Preserves user audit credentials
+        </div>
+</div>
+<!-- Card 4: Client-side Token Discard -->
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col justify-between space-y-space-xs">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm font-semibold text-primary">04. CLIENT PURGE</span>
+<span class="material-symbols-outlined text-[18px] text-primary">delete_forever</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Stateless design eliminates costly DB token blacklist lookups. On logout, memory store &amp; storage tokens are synchronously annihilated; pending requests are cancelled via RxJS teardown.
+          </p>
+</div>
+<div class="pt-2 font-code-sm text-code-sm text-on-surface-variant">
+<span class="text-primary">•</span> Instant, offline-resilient logout
+        </div>
+</div>
+</div>
+<!-- Telemetry & Live Contract Log -->
+<div class="w-full bg-surface-container-low rounded-lg p-space-sm font-code-sm text-code-sm space-y-1">
+<div class="flex items-center justify-between text-on-surface-variant pb-1">
+<span class="font-semibold text-on-surface uppercase tracking-wider text-[11px]">Live Interceptor Event Bus Snapshot</span>
+<span class="font-mono text-[11px]" id="live-time-stamp">2025-02-14 18:32:04 UTC</span>
+</div>
+<div class="text-on-surface font-mono" id="live-log-output">
+        [DawwarhaAuthInterceptor] Initialized in Mode: Production Civic Gateway. Current State: IDLE_LOGGED_OUT.
+      </div>
+</div>
+</section>
+</div>
+<script>
+  let currentLanguage = 'en';
+  let currentState = 1;
+  let passwordVisible = false;
+
+  const translations = {
+    en: {
+      brandTitle: "Dawwarha Authentication Gateway",
+      brandSubtitle: "Secured Civic Resource Custody & Circular Logistics",
+      emailLabel: "Civic ID or Corporate Email",
+      emailHint: "e.g. foodbank@dawwarha.org",
+      passwordLabel: "Security Passphrase",
+      forgotLink: "Forgot credentials?",
+      rememberLabel: "Remember this workstation for 14 days",
+      submitDefault: "Verify & Sign In",
+      submitSubmitting: "Verifying credentials...",
+      submitTryAgain: "Try Again",
+      noAccount: "Operating a verified shelter, warehouse, or charity?",
+      applyCustody: "Apply for Custody Access",
+      restoringTitle: "Restoring Encrypted Session",
+      restoringSubtitle: "Validating JWT signature and claims with Dawwarha Civic Gateway...",
+      suspendedTitle: "Account Custody Suspended",
+      suspendedBody: "Your account is currently suspended. Please contact Dawwarha support if you believe this is a mistake.",
+      suspendedAppeal: "File Custody Appeal",
+      suspendedSignout: "Return to Public Portal",
+      forbiddenTitle: "Access Restriction Level High",
+      forbiddenBody: "You don't have permission to do that.",
+      forbiddenDashboard: "Back to My Authorized Workspace",
+      forbiddenSwitch: "Switch Account / Purge Session",
+      logoutTitle: "Client-Side Session Purged",
+      logoutBody: "You have securely logged out. JWT credentials, local user state, and sensitive in-memory queries have been cleanly discarded.",
+      logoutAgain: "Sign In Again",
+      regTitle: "Account Created Successfully",
+      regBody: "Account created successfully. Initializing session...",
+      regForwarding: "Auto-forwarding to Onboarding Verification in 3s",
+      regInstant: "Enter Workspace Immediately"
+    },
+    ar: {
+      brandTitle: "بوابة المصادقة الآمنة لدَوِّرها",
+      brandSubtitle: "حفظ الموارد المجتمعية المعتمدة والخدمات اللوجستية الدائرية",
+      emailLabel: "الهوية المجتمعية أو البريد المؤسسي",
+      emailHint: "مثال: foodbank@dawwarha.org",
+      passwordLabel: "رمز المرور الآمن",
+      forgotLink: "نسيت بيانات الاعتماد؟",
+      rememberLabel: "تذكر محطة العمل هذه لمدة 14 يوماً",
+      submitDefault: "التحقق وتسجيل الدخول",
+      submitSubmitting: "جاري التحقق من الهوية...",
+      submitTryAgain: "إعادة المحاولة",
+      noAccount: "هل تدير مأوى معتمداً أو مستودعاً أو جمعية خيرية؟",
+      applyCustody: "طلب اعتماد وصاية على الموارد",
+      restoringTitle: "استعادة الجلسة المشفرة",
+      restoringSubtitle: "جاري التحقق من صحة توقيع JWT وبصمة الأمان مع بوابة دَوِّرها...",
+      suspendedTitle: "تم تعليق حساب الوصاية",
+      suspendedBody: "حسابك معلق حالياً. يرجى التواصل مع دعم دَوِّرها إذا كنت تعتقد أن هذا خطأ.",
+      suspendedAppeal: "تقديم طلب مراجعة للتعليق",
+      suspendedSignout: "العودة للبوابة العامة",
+      forbiddenTitle: "مستوى الصلاحيات غير كافٍ",
+      forbiddenBody: "ليس لديك الإذن للقيام بهذا الإجراء.",
+      forbiddenDashboard: "العودة إلى مساحة العمل المصرح بها",
+      forbiddenSwitch: "تبديل الحساب / مسح الجلسة",
+      logoutTitle: "تم مسح بيانات الجلسة محلياً",
+      logoutBody: "تم تسجيل خروجك بأمان. تم إتلاف رمز JWT وحالة المستخدم المؤقتة فورياً بدون الاعتماد على مزامنة الخادم.",
+      logoutAgain: "تسجيل الدخول مجدداً",
+      regTitle: "تم إنشاء الحساب بنجاح",
+      regBody: "تم إنشاء الحساب بنجاح. جاري تهيئة الجلسة ومصادقة الوصاية...",
+      regForwarding: "التوجيه التلقائي لمطابقة الهوية خلال 3 ثوانٍ",
+      regInstant: "الدخول لمساحة العمل فوراً"
+    }
+  };
+
+  function updateTexts() {
+    const t = translations[currentLanguage];
+    document.getElementById('header-brand-title').innerText = t.brandTitle;
+    document.getElementById('header-brand-subtitle').innerText = t.brandSubtitle;
+    document.getElementById('label-email').innerText = t.emailLabel;
+    document.getElementById('email-field-hint').innerText = t.emailHint;
+    document.getElementById('label-password').innerText = t.passwordLabel;
+    document.getElementById('link-forgot').innerText = t.forgotLink;
+    document.getElementById('label-remember').innerText = t.rememberLabel;
+    document.getElementById('link-register').innerText = t.applyCustody;
+    document.getElementById('restoring-title').innerText = t.restoringTitle;
+    document.getElementById('restoring-subtitle').innerText = t.restoringSubtitle;
+    document.getElementById('suspended-title').innerText = t.suspendedTitle;
+    document.getElementById('suspended-body').innerText = t.suspendedBody;
+    document.getElementById('btn-suspended-appeal').innerText = t.suspendedAppeal;
+    document.getElementById('btn-suspended-signout').innerText = t.suspendedSignout;
+    document.getElementById('forbidden-title').innerText = t.forbiddenTitle;
+    document.getElementById('forbidden-body').innerText = t.forbiddenBody;
+    document.getElementById('btn-forbidden-dashboard').innerText = t.forbiddenDashboard;
+    document.getElementById('btn-forbidden-switch').innerText = t.forbiddenSwitch;
+    document.getElementById('logout-title').innerText = t.logoutTitle;
+    document.getElementById('logout-body').innerText = t.logoutBody;
+    document.getElementById('btn-logout-again').innerText = t.logoutAgain;
+    document.getElementById('reg-success-title').innerText = t.regTitle;
+    document.getElementById('reg-success-body').innerText = t.regBody;
+    document.getElementById('reg-forwarding-text').innerText = t.regForwarding;
+    document.getElementById('btn-reg-instant').innerText = t.regInstant;
+
+    // Button states handled conditionally
+    if (currentState === 3) {
+      document.getElementById('btn-submit-text').innerText = t.submitSubmitting;
+    } else if (currentState === 12) {
+      document.getElementById('btn-submit-text').innerText = t.submitTryAgain;
+    } else {
+      document.getElementById('btn-submit-text').innerText = t.submitDefault;
+    }
+  }
+
+  function setLanguage(lang) {
+    currentLanguage = lang;
+    const env = document.getElementById('auth-environment');
+    const btnLtr = document.getElementById('lang-ltr-btn');
+    const btnRtl = document.getElementById('lang-rtl-btn');
+
+    if (lang === 'ar') {
+      env.setAttribute('dir', 'rtl');
+      btnRtl.className = "px-space-sm py-1 rounded-md font-label-sm text-label-sm bg-surface-container-lowest text-on-surface shadow-sm transition-all";
+      btnLtr.className = "px-space-sm py-1 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all";
+    } else {
+      env.setAttribute('dir', 'ltr');
+      btnLtr.className = "px-space-sm py-1 rounded-md font-label-sm text-label-sm bg-surface-container-lowest text-on-surface shadow-sm transition-all";
+      btnRtl.className = "px-space-sm py-1 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-all";
+    }
+    updateTexts();
+  }
+
+  function togglePasswordVisibility() {
+    passwordVisible = !passwordVisible;
+    const input = document.getElementById('auth-password');
+    const icon = document.getElementById('password-toggle-icon');
+    if (passwordVisible) {
+      input.type = 'text';
+      icon.innerText = 'visibility_off';
+    } else {
+      input.type = 'password';
+      icon.innerText = 'visibility';
+    }
+  }
+
+  function hideAllViews() {
+    document.getElementById('view-form').classList.add('hidden');
+    document.getElementById('view-restoring').classList.add('hidden');
+    document.getElementById('view-suspended').classList.add('hidden');
+    document.getElementById('view-forbidden').classList.add('hidden');
+    document.getElementById('view-logout').classList.add('hidden');
+    document.getElementById('view-register-success').classList.add('hidden');
+
+    // Clean inputs and alerts
+    const alertBox = document.getElementById('auth-alert-container');
+    alertBox.classList.add('hidden');
+    alertBox.innerHTML = '';
+
+    document.getElementById('badge-return-url').classList.add('hidden');
+    document.getElementById('email-error-container').classList.add('hidden');
+    document.getElementById('password-error-container').classList.add('hidden');
+    document.getElementById('btn-submit-spinner').classList.add('hidden');
+    document.getElementById('btn-submit-icon').classList.remove('hidden');
+
+    const emailInput = document.getElementById('auth-email');
+    const passInput = document.getElementById('auth-password');
+    const submitBtn = document.getElementById('btn-submit');
+
+    emailInput.disabled = false;
+    passInput.disabled = false;
+    submitBtn.disabled = false;
+    submitBtn.classList.remove('opacity-75', 'cursor-not-allowed', 'bg-tertiary');
+    submitBtn.classList.add('bg-primary');
+  }
+
+  function renderAlert(type, icon, title, message) {
+    const alertBox = document.getElementById('auth-alert-container');
+    alertBox.classList.remove('hidden');
+
+    let bgClass = "bg-surface-container";
+    let textClass = "text-on-surface";
+    let iconClass = "text-primary";
+
+    if (type === 'danger') {
+      bgClass = "bg-error-container";
+      textClass = "text-on-error-container";
+      iconClass = "text-error";
+    } else if (type === 'warning') {
+      bgClass = "bg-tertiary-fixed";
+      textClass = "text-on-tertiary-fixed";
+      iconClass = "text-tertiary";
+    } else if (type === 'success') {
+      bgClass = "bg-secondary-container";
+      textClass = "text-on-secondary-container";
+      iconClass = "text-secondary";
+    } else if (type === 'info') {
+      bgClass = "bg-surface-container-high";
+      textClass = "text-on-surface";
+      iconClass = "text-primary";
+    }
+
+    alertBox.innerHTML = `
+      <div class="w-full p-space-sm rounded-lg ${bgClass} ${textClass} flex items-start gap-space-xs transition-all">
+        <span class="material-symbols-outlined text-[20px] ${iconClass} flex-shrink-0 mt-0.5">${icon}</span>
+        <div class="flex-1 text-start">
+          <div class="font-label-md text-label-md font-semibold">${title}</div>
+          <div class="font-body-sm text-body-sm leading-snug">${message}</div>
+        </div>
+        <button type="button" onclick="document.getElementById('auth-alert-container').classList.add('hidden')" class="text-on-surface-variant hover:text-on-surface">
+          <span class="material-symbols-outlined text-[16px]">close</span>
+        </button>
+      </div>
+    `;
+  }
+
+  function logBus(msg) {
+    const logEl = document.getElementById('live-log-output');
+    const timeEl = document.getElementById('live-time-stamp');
+    const now = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+    timeEl.innerText = now;
+    logEl.innerText = msg;
+  }
+
+  function switchState(stateNumber) {
+    currentState = stateNumber;
+    hideAllViews();
+
+    // Update Tab Styles
+    for (let i = 1; i <= 12; i++) {
+      const tab = document.getElementById(`state-tab-1${i === 10 ? '0' : i === 11 ? '1' : i === 12 ? '2' : i - 1}`);
+      const currentTab = document.getElementById(`state-tab-${i}`);
+      if (currentTab) {
+        if (i === stateNumber) {
+          currentTab.classList.add('bg-primary-container', 'text-on-primary');
+          currentTab.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'hover:bg-surface-container-low');
+          const badge = currentTab.querySelector('span:last-child');
+          if (badge) {
+            badge.classList.add('bg-on-secondary-fixed-variant', 'text-on-primary');
+            badge.classList.remove('bg-surface-container');
+          }
+          const subtext = currentTab.querySelector('.truncate span:last-child');
+          if (subtext) subtext.classList.add('text-on-primary-container');
+        } else {
+          currentTab.classList.remove('bg-primary-container', 'text-on-primary');
+          currentTab.classList.add('bg-surface-container-lowest', 'text-on-surface');
+          const badge = currentTab.querySelector('span:last-child');
+          if (badge) {
+            badge.classList.remove('bg-on-secondary-fixed-variant', 'text-on-primary');
+            badge.classList.add('bg-surface-container');
+          }
+          const subtext = currentTab.querySelector('.truncate span:last-child');
+          if (subtext) {
+            subtext.classList.remove('text-on-primary-container');
+            subtext.classList.add('text-on-surface-variant');
+          }
+        }
+      }
+    }
+
+    const t = translations[currentLanguage];
+
+    switch (stateNumber) {
+      case 1: // State 1: Default Logged Out
+        document.getElementById('view-form').classList.remove('hidden');
+        document.getElementById('btn-submit-text').innerText = t.submitDefault;
+        logBus(`[DawwarhaAuthInterceptor] STATE_1: Ready for credentials. localStorage.getItem('dawwarha_jwt') is null.`);
+        break;
+
+      case 2: // State 2: App Session Restoring
+        document.getElementById('view-restoring').classList.remove('hidden');
+        logBus(`[DawwarhaAuthInterceptor] STATE_2: APP_INITIALIZER dispatched GET /api/v1/auth/me. Rendering splash loader to eliminate UI flicker.`);
+        break;
+
+      case 3: // State 3: Login Submitting
+        document.getElementById('view-form').classList.remove('hidden');
+        document.getElementById('auth-email').disabled = true;
+        document.getElementById('auth-password').disabled = true;
+        const submitBtn = document.getElementById('btn-submit');
+        submitBtn.disabled = true;
+        submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+        document.getElementById('btn-submit-icon').classList.add('hidden');
+        document.getElementById('btn-submit-spinner').classList.remove('hidden');
+        document.getElementById('btn-submit-text').innerText = t.submitSubmitting;
+        logBus(`[DawwarhaAuthInterceptor] STATE_3: POST /api/v1/auth/login in transit. Buttons disabled, accessible spinner role engaged.`);
+        break;
+
+      case 4: // State 4: Validation Errors
+        document.getElementById('view-form').classList.remove('hidden');
+        document.getElementById('auth-email').value = "invalid-email-format";
+        document.getElementById('auth-password').value = "";
+        document.getElementById('email-error-container').classList.remove('hidden');
+        document.getElementById('password-error-container').classList.remove('hidden');
+        renderAlert(
+          'danger',
+          'report_problem',
+          currentLanguage === 'ar' ? 'أخطاء في التحقق من النموذج (400)' : 'Form Validation Errors (HTTP 400)',
+          currentLanguage === 'ar' ? 'يرجى مراجعة الحقول المشار إليها أدناه وتصحيحها قبل المتابعة.' : 'Please correct the highlighted fields below before submitting the verification payload.'
+        );
+        document.getElementById('btn-submit-text').innerText = t.submitDefault;
+        logBus(`[DawwarhaAuthInterceptor] STATE_4: Client-side reactive form validation failed or server returned RFC 7807 Bad Request payload.`);
+        break;
+
+      case 5: // State 5: Invalid Credentials (Neutral security copy)
+        document.getElementById('view-form').classList.remove('hidden');
+        renderAlert(
+          'danger',
+          'lock_clock',
+          currentLanguage === 'ar' ? 'تعذر التحقق من الهوية' : 'Authentication Failed',
+          currentLanguage === 'ar' ? 'البريد الإلكتروني أو كلمة المرور غير صحيحة.' : 'Email or password is incorrect.'
+        );
+        document.getElementById('btn-submit-text').innerText = t.submitDefault;
+        logBus(`[DawwarhaAuthInterceptor] STATE_5: HTTP 401 Credential Check. Neutral copy displayed strictly preventing user-enumeration attacks.`);
+        break;
+
+      case 6: // State 6: Suspended Account
+        document.getElementById('view-suspended').classList.remove('hidden');
+        logBus(`[DawwarhaAuthInterceptor] STATE_6: HTTP 403 Forbidden with code 'ACCOUNT_SUSPENDED'. Routed to compliance appeal gateway.`);
+        break;
+
+      case 7: // State 7: Session Expired (401 Interceptor)
+        document.getElementById('view-form').classList.remove('hidden');
+        document.getElementById('badge-return-url').classList.remove('hidden');
+        document.getElementById('badge-url-text').innerText = '/dashboard/ledger/verify-handover';
+        renderAlert(
+          'warning',
+          'schedule',
+          currentLanguage === 'ar' ? 'انتهت صلاحية الجلسة' : 'Session Expired',
+          currentLanguage === 'ar' ? 'انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى لمتابعة التسليم.' : 'Your session has expired. Please sign in again to continue custody operations.'
+        );
+        document.getElementById('btn-submit-text').innerText = t.submitDefault;
+        logBus(`[DawwarhaAuthInterceptor] STATE_7: 401 Response intercepted on protected route. Preserved returnUrl query parameter and purged expired token.`);
+        break;
+
+      case 8: // State 8: Unauthorized Return-URL Guard
+        document.getElementById('view-form').classList.remove('hidden');
+        document.getElementById('badge-return-url').classList.remove('hidden');
+        document.getElementById('badge-url-text').innerText = '/dashboard/resources/create';
+        renderAlert(
+          'info',
+          'security',
+          currentLanguage === 'ar' ? 'تسجيل الدخول مطلوب' : 'Authentication Required',
+          currentLanguage === 'ar' ? 'يرجى تسجيل الدخول للوصول إلى /dashboard/resources/create' : 'Please sign in to access /dashboard/resources/create'
+        );
+        document.getElementById('btn-submit-text').innerText = t.submitDefault;
+        logBus(`[DawwarhaAuthInterceptor] STATE_8: Angular AuthGuard blocked unauthenticated transition. Sanitized returnUrl set.`);
+        break;
+
+      case 9: // State 9: Forbidden 403 (Dedicated full Forbidden view)
+        document.getElementById('view-forbidden').classList.remove('hidden');
+        logBus(`[DawwarhaAuthInterceptor] STATE_9: HTTP 403 Forbidden. AuthGuard / Interceptor caught missing role scope. Session retained.`);
+        break;
+
+      case 10: // State 10: Instant Logout
+        document.getElementById('view-logout').classList.remove('hidden');
+        logBus(`[DawwarhaAuthInterceptor] STATE_10: Instant client-side purge executed. Token removed from localStorage. Zero server delay.`);
+        break;
+
+      case 11: // State 11: Registration Success
+        document.getElementById('view-register-success').classList.remove('hidden');
+        logBus(`[DawwarhaAuthInterceptor] STATE_11: HTTP 201 Created. Tokens registered into storage. Initializing session forward.`);
+        break;
+
+      case 12: // State 12: Network Error
+        document.getElementById('view-form').classList.remove('hidden');
+        renderAlert(
+          'danger',
+          'wifi_off',
+          currentLanguage === 'ar' ? 'خطأ في الاتصال بالشبكة' : 'Connection Failure',
+          currentLanguage === 'ar' ? 'تعذر الاتصال بخوادم دَوِّرها. تحقق من اتصالك وحاول مرة أخرى.' : 'We couldn\'t connect to Dawwarha. Check your connection and try again.'
+        );
+        const retryBtn = document.getElementById('btn-submit');
+        retryBtn.classList.remove('bg-primary');
+        retryBtn.classList.add('bg-tertiary');
+        document.getElementById('btn-submit-text').innerText = t.submitTryAgain;
+        document.getElementById('btn-submit-icon').innerText = 'refresh';
+        logBus(`[DawwarhaAuthInterceptor] STATE_12: HttpErrorResponse status 0 or 500 Network Gateway Timeout.`);
+        break;
+    }
+  }
+
+  function resetState() {
+    document.getElementById('auth-email').value = "logistics@dawwarha.org";
+    document.getElementById('auth-password').value = "••••••••••••";
+    switchState(1);
+  }
+
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', () => {
+    switchState(1);
+    updateTexts();
+  });
+</script></main><footer class="w-full bg-surface-container-lowest border-t border-surface-variant py-space-md"><div class="max-w-7xl mx-auto px-margin flex flex-col sm:flex-row items-center justify-between gap-space-sm font-body-sm text-body-sm text-on-surface-variant"><div>© 2025 Dawwarha (دَوِّرها) · Secured Civic Redistribution Custody</div><div class="flex items-center gap-space-md"><a class="hover:text-on-surface transition-colors font-label-sm text-label-sm" data-path="trust-and-safety" href="#">Trust &amp; Safety</a><a class="hover:text-on-surface transition-colors font-label-sm text-label-sm" data-path="privacy" href="#">Privacy</a><a class="hover:text-on-surface transition-colors font-label-sm text-label-sm" data-path="terms" href="#">Terms</a></div></div></footer></body></html>

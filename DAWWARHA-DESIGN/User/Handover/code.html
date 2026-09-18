@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>Dawwarha Civic Logistics</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface-variant":"#3f4946","surface-dim":"#d3dcd7","primary-fixed-dim":"#87d5c1","surface-container-high":"#e1eae5","tertiary-container":"#9f672b","surface-container-low":"#edf6f1","surface-bright":"#f2fbf6","on-primary":"#ffffff","secondary-fixed-dim":"#9bd2c0","on-tertiary":"#ffffff","error":"#ba1a1a","on-tertiary-container":"#fffaf8","on-tertiary-fixed":"#2d1600","surface-container-highest":"#dbe5e0","surface-tint":"#106a5a","on-primary-fixed":"#00201a","tertiary":"#834f14","on-surface":"#151d1a","surface":"#f2fbf6","surface-container-lowest":"#ffffff","on-secondary-fixed":"#002019","on-error-container":"#93000a","secondary-container":"#b6eedc","surface-container":"#e7f0eb","primary":"#076757","on-secondary-fixed-variant":"#184f42","on-error":"#ffffff","secondary-fixed":"#b6eedc","primary-fixed":"#a3f2dd","primary-container":"#2f806f","inverse-on-surface":"#eaf3ee","outline-variant":"#bec9c4","surface-variant":"#dbe5e0","background":"#f2fbf6","on-primary-container":"#ebfff7","secondary":"#33685a","error-container":"#ffdad6","on-tertiary-fixed-variant":"#6a3b00","on-secondary-container":"#396e5f","on-primary-fixed-variant":"#005143","outline":"#6f7975","tertiary-fixed":"#ffdcbf","on-background":"#151d1a","inverse-surface":"#2a322f","on-secondary":"#ffffff","inverse-primary":"#87d5c1","tertiary-fixed-dim":"#feb874"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xs":"0.25rem","margin-mobile":"1rem","space-lg":"1.5rem","space-xl":"2.5rem","gutter-mobile":"1rem",margin:"2rem","space-md":"1rem","space-sm":"0.5rem",gutter:"1.5rem"},fontFamily:{"headline-sm":["Inter"],"headline-lg-mobile":["Inter"],"headline-lg":["Inter"],"display-lg-mobile":["Inter"],"display-lg":["Inter"],"headline-md":["Inter"],"body-sm":["Inter"],"code-sm":["Inter"],"label-md":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"label-sm":["Inter"]},fontSize:{"headline-sm":["1.125rem",{lineHeight:"1.5rem",fontWeight:"500"}],"headline-lg-mobile":["1.5rem",{lineHeight:"2rem",letterSpacing:"-0.01em",fontWeight:"600"}],"headline-lg":["2rem",{lineHeight:"2.5rem",letterSpacing:"-0.015em",fontWeight:"600"}],"display-lg-mobile":["2.25rem",{lineHeight:"2.75rem",letterSpacing:"-0.01em",fontWeight:"600"}],"display-lg":["3.5rem",{lineHeight:"4rem",letterSpacing:"-0.02em",fontWeight:"600"}],"headline-md":["1.25rem",{lineHeight:"1.75rem",letterSpacing:"-0.005em",fontWeight:"600"}],"body-sm":["0.8125rem",{lineHeight:"1.25rem",fontWeight:"400"}],"code-sm":["0.8125rem",{lineHeight:"1.125rem",fontWeight:"400"}],"label-md":["0.875rem",{lineHeight:"1.25rem",fontWeight:"500"}],"body-lg":["1.125rem",{lineHeight:"1.75rem",fontWeight:"400"}],"body-md":["0.9375rem",{lineHeight:"1.5rem",fontWeight:"400"}],"label-sm":["0.75rem",{lineHeight:"1rem",letterSpacing:"0.02em",fontWeight:"500"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 inset-x-0 h-16 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50"><div class="w-full h-16 px-space-md lg:px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[20px]">cached</span></div><div class="flex flex-col leading-tight"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">Dawwarha</span><span class="font-label-sm text-label-sm text-outline tracking-normal">دوّرها • Civic Logistics</span></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-container font-label-md rounded-lg"><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-resources" href="#">My Resources</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-requests" href="#">My Requests</a><a aria-current="page" class="px-space-sm py-1.5 transition-colors bg-secondary-container text-on-secondary-container font-label-md rounded-lg" data-path="matches" href="#">Matches (active)</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#">Handovers & Activity</a><a class="px-space-sm py-1.5 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#">Impact & Ledger</a></nav></div><div class="flex items-center gap-space-sm"><button class="flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-surface-container hover:bg-surface-container-high transition-colors font-label-sm text-label-sm text-on-surface" title="Switch Language" type="button"><span class="material-symbols-outlined text-[16px] text-outline">language</span><span>EN / العربية</span></button><button class="relative w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Notifications" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary-container"></span></button><button class="w-9 h-9 flex items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" title="Documentation & Support" type="button"><span class="material-symbols-outlined text-[20px]">help_outline</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left leading-none"><span class="font-label-md text-label-md text-on-surface">Dr. Laila El-Mansouri</span><span class="font-label-sm text-label-sm text-primary font-medium mt-0.5">Verified Node Lead</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-low z-40 flex flex-col justify-between overflow-y-auto"><div class="p-space-md"><div class="flex items-center justify-between mb-space-md"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Operations Hub</span><span class="px-2 py-0.5 rounded-full bg-surface-container font-code-sm text-code-sm text-secondary">CAI-01</span></div><div class="space-y-space-xs mb-space-lg"><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md hover:bg-primary transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">add_circle</span><span>Create Request</span></button><button class="w-full flex items-center justify-center gap-space-xs py-2 px-space-md rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[18px]">inventory_2</span><span>Publish Resource</span></button></div><span class="block font-label-sm text-label-sm uppercase tracking-wider text-outline px-space-sm mb-space-xs">Logistical Ledger</span><nav class="space-y-1" data-active-classes="bg-secondary-container text-on-secondary-container font-medium rounded-lg"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-resources" href="#"><span class="material-symbols-outlined text-[20px]">archive</span><span class="font-label-md text-label-md">My Resources</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="my-requests" href="#"><span class="material-symbols-outlined text-[20px]">assignment_late</span><span class="font-label-md text-label-md">My Requests</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 transition-colors bg-secondary-container text-on-secondary-container font-medium rounded-lg" data-path="matches" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">swap_horiz</span><span class="font-label-md text-label-md">Matches</span></div><span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm">active</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span><span class="font-label-md text-label-md">Handovers & Activity</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#"><span class="material-symbols-outlined text-[20px]">monitoring</span><span class="font-label-md text-label-md">Impact & Ledger</span></a></nav></div><div class="p-space-md"><div class="p-space-sm rounded-lg bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center justify-between mb-1"><span class="font-label-sm text-label-sm uppercase tracking-wide text-secondary font-semibold">Operational Custody</span><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span></div><p class="font-label-md text-label-md text-on-surface font-medium truncate">Dr. Laila El-Mansouri</p><div class="flex items-center justify-between mt-1 pt-1"><span class="font-code-sm text-code-sm text-outline">Node Hash: CAI-SEC-01</span><span class="font-label-sm text-label-sm text-primary font-medium">Verified</span></div></div></div></aside><div class="pl-72"><main class="w-full min-h-[calc(100vh-4rem)] pt-16 px-space-md lg:px-gutter pb-space-xl bg-background"><div class="max-w-7xl mx-auto py-space-md"><div class="flex flex-col w-full font-body-md text-on-surface">
+<!-- QA PROTOTYPE STATE SIMULATOR BAR -->
+<div class="w-full bg-surface-container-high px-space-md py-space-xs mb-space-md rounded-lg shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">tune</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-semibold">QA State Simulator (Audit Sandbox)</span>
+</div>
+<div class="flex flex-wrap items-center gap-1.5" id="simulator-pills">
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm transition-all bg-primary text-on-primary font-medium shadow-sm" id="btn-scen-pending" onclick="setScenario('pending')" type="button">
+          1. In Progress (Both Pending)
+        </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container" id="btn-scen-provider" onclick="setScenario('provider_done')" type="button">
+          2. Provider Confirmed
+        </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container" id="btn-scen-completed" onclick="setScenario('completed')" type="button">
+          3. Both Confirmed (Sealed)
+        </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container flex items-center gap-1" onclick="openConfirmModal()" type="button">
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>4. Open Modal
+        </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm transition-all bg-surface-container-lowest text-tertiary hover:bg-surface-container" id="btn-scen-stale" onclick="setScenario('stale')" type="button">
+          5. 409 Conflict / Stale
+        </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm transition-all bg-surface-container-lowest text-error hover:bg-surface-container" id="btn-scen-forbidden" onclick="setScenario('forbidden')" type="button">
+          6. 403 Forbidden
+        </button>
+<button class="px-2.5 py-1 rounded-full text-label-sm font-label-sm transition-all bg-surface-container-lowest text-outline hover:bg-surface-container" id="btn-scen-notfound" onclick="setScenario('notfound')" type="button">
+          7. 404 Missing
+        </button>
+<div class="h-4 w-px bg-outline-variant mx-1"></div>
+<button class="px-2.5 py-1 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-sm text-label-sm font-medium flex items-center gap-1" id="lang-toggle-btn" onclick="toggleLanguage()" type="button">
+<span class="material-symbols-outlined text-[15px] text-primary">translate</span>
+<span id="lang-label">العربية (RTL)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ERROR / EDGE CASES (Hidden by default) -->
+<div class="hidden w-full mb-space-lg" id="view-error-container">
+<!-- 403 State -->
+<div class="hidden p-space-lg rounded-xl bg-surface-container-lowest shadow-sm text-center max-w-xl mx-auto py-space-xl" id="view-403">
+<div class="w-12 h-12 rounded-full bg-error/10 text-error flex items-center justify-center mx-auto mb-space-md">
+<span class="material-symbols-outlined text-[28px]">lock_person</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">403 · Access Restricted / وصول غير مصرح</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">You are not authenticated as an assigned Custodial Node Officer for Match <code class="font-code-sm text-code-sm bg-surface-container px-1 rounded">#MTC-MED-2024-9102</code>. Only the verified provider or recipient party may certify handovers.</p>
+<button class="px-space-md py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container" onclick="setScenario('pending')">Return to Authorized Session</button>
+</div>
+<!-- 404 State -->
+<div class="hidden p-space-lg rounded-xl bg-surface-container-lowest shadow-sm text-center max-w-xl mx-auto py-space-xl" id="view-404">
+<div class="w-12 h-12 rounded-full bg-outline-variant/30 text-outline flex items-center justify-center mx-auto mb-space-md">
+<span class="material-symbols-outlined text-[28px]">find_in_page</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">404 · Handover Not Found / لم يتم العثور على السجل</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">The requested custodial ledger key cannot be resolved across the Cairo South Logistics Partition.</p>
+<button class="px-space-md py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container" onclick="setScenario('pending')">Reset to Active Handover</button>
+</div>
+<!-- 409 State -->
+<div class="hidden p-space-lg rounded-xl bg-surface-container-lowest shadow-sm text-center max-w-xl mx-auto py-space-xl" id="view-409">
+<div class="w-12 h-12 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center mx-auto mb-space-md">
+<span class="material-symbols-outlined text-[28px]">sync_problem</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-space-xs">409 · Stale Handover State / تعارض في حالة التسليم</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md">The dispatch timestamp expired or the recipient node flagged a schedule cancellation at Staging Bay #3. Ledger re-synchronization required.</p>
+<button class="px-space-md py-2 rounded-lg bg-secondary text-on-secondary font-label-md text-label-md hover:bg-primary" onclick="setScenario('pending')">Sync Node State</button>
+</div>
+</div>
+<!-- MAIN OPERATIONAL CONTENT -->
+<div class="flex flex-col w-full gap-space-lg" id="main-handover-flow">
+<!-- BREADCRUMB & CONTEXTUAL NAVIGATION -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-wrap items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<a class="hover:text-primary transition-colors" href="#">Dashboard</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">Matches</a>
+<span>/</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant font-medium">#MTC-MED-2024-9102</span>
+<span>/</span>
+<span class="text-primary font-medium">Handover Coordination · إجراءات التسليم والاستلام</span>
+</div>
+<a class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary hover:text-primary font-medium transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Back to Match Details (العودة لتفاصيل التطابق)</span>
+</a>
+</div>
+<!-- STATUS BANNER & MATCH IDENTIFIER -->
+<div class="p-space-lg rounded-xl bg-surface-container-lowest shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1.5">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold tracking-wide" id="badge-status-chip">
+<span class="material-symbols-outlined text-[16px] animate-pulse">local_shipping</span>
+<span id="badge-status-text">Handover in Progress (التسليم قيد التنفيذ)</span>
+</span>
+<span class="font-code-sm text-code-sm text-outline">Protocol: DAW-FR-013</span>
+<span class="hidden md:inline text-outline-variant">•</span>
+<span class="font-label-sm text-label-sm text-secondary">Dispatch Window: 14:00 – 17:00 Cairo Time</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mt-1">
+          Dawwarha Custodial Confirmation & Ledger Verification
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex flex-wrap items-center gap-x-2">
+<span>Match: <strong class="font-medium text-on-surface">#MTC-MED-2024-9102</strong></span>
+<span>·</span>
+<span>Resource: <strong class="font-medium text-primary">RES-MED-2024-0082</strong> (Oxygen Systems)</span>
+<span>·</span>
+<span>Request: <strong class="font-medium text-secondary">REQ-MED-2024-5109</strong> (Sayeda Zeinab Clinic)</span>
+</p>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg lg:text-right shrink-0">
+<div class="font-label-sm text-label-sm text-outline uppercase tracking-wider mb-0.5">Consensus Ledger Hash</div>
+<div class="font-code-sm text-code-sm font-medium text-primary tracking-tight">HND-8841-QX · Block #81292</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-0.5 flex items-center lg:justify-end gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Node Partition CAI-LGR-V2</span>
+</div>
+</div>
+</div>
+<!-- DUAL-CONFIRMATION TRACKER (CORE CIVIC CONTAINER - §26 & §34) -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm mb-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<div class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">
+              Two-Sided Custodial Transfer Confirmation
+            </h2>
+</div>
+<p class="font-label-sm text-label-sm text-secondary font-medium mt-0.5">
+            التأكيد الثنائي لنقل العهدة والمسؤولية المجتمعية
+          </p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container font-label-sm text-label-sm text-outline">
+          Requirement: Independent Bilateral Attestation
+        </span>
+</div>
+<!-- Explanatory Copy Box -->
+<div class="bg-surface-container-low p-space-sm rounded-lg mb-space-lg flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">shield</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          In accordance with Dawwarha Civic Protocol (FR-013), this handover remains pending until <strong>BOTH parties independently certify physical receipt</strong>. One-sided completion is structurally blocked to guarantee chain of custody and community auditability.
+        </p>
+</div>
+<!-- Active User Perspective Banner -->
+<div class="bg-surface-container p-space-sm rounded-lg mb-space-lg flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">badge</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-medium">Your Role: Verified Resource Custodian (جهة تقديم المورد)</span>
+<span class="block font-label-sm text-label-sm text-outline">Dr. Laila El-Mansouri · Al-Bustan Medical Hub Cairo</span>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-medium">
+          Authorized to Sign Transfer
+        </span>
+</div>
+<!-- THE TWO SIDES + CRYPTOGRAPHIC CONDUIT -->
+<div class="grid grid-cols-1 lg:grid-cols-11 gap-space-md items-stretch">
+<!-- SIDE A: PROVIDER NODE -->
+<div class="lg:col-span-5 rounded-xl bg-surface-container-low p-space-md flex flex-col justify-between" id="provider-card">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Side A · Origin Custodian</span>
+<span class="px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-medium" id="provider-badge">
+                Pending Provider Sign-off
+              </span>
+</div>
+<div class="flex items-center gap-space-sm mb-space-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-sm">
+                LE
+              </div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Dr. Laila El-Mansouri</h4>
+<p class="font-label-sm text-label-sm text-outline">Al-Bustan Medical Logistics Bay (Cairo Sec-01)</p>
+</div>
+</div>
+<div class="space-y-1.5 pt-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between">
+<span>Dispatch Verified:</span>
+<span class="font-medium text-on-surface">Inspected sterile cargo</span>
+</div>
+<div class="flex justify-between">
+<span>Staging Gate:</span>
+<span class="font-code-sm text-code-sm text-primary font-medium">GATE-BAY-03</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-lowest rounded-lg p-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Provider Signature State:</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1" id="provider-sig-status">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span>
+                Awaiting Physical Handover
+              </span>
+</div>
+<div class="font-code-sm text-code-sm text-outline mt-0.5" id="provider-sig-time">Timestamp: —</div>
+</div>
+</div>
+<!-- CENTRAL NEXUS: CRYPTOGRAPHIC CONDUIT -->
+<div class="lg:col-span-1 flex flex-col items-center justify-center py-space-sm text-center">
+<div class="h-full w-px bg-surface-container-highest hidden lg:block"></div>
+<div class="my-2 p-2 rounded-full bg-surface-container-highest text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">sync</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline block lg:[writing-mode:vertical-rl] my-1">
+            TOKEN: HND-8841
+          </span>
+<div class="h-full w-px bg-surface-container-highest hidden lg:block"></div>
+</div>
+<!-- SIDE B: SEEKER NODE -->
+<div class="lg:col-span-5 rounded-xl bg-surface-container-low p-space-md flex flex-col justify-between" id="seeker-card">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Side B · Receiving Entity</span>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium" id="seeker-badge">
+                Pending Seeker Receipt
+              </span>
+</div>
+<div class="flex items-center gap-space-sm mb-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-headline-sm">
+                HK
+              </div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Dr. Hisham Kassem, MD</h4>
+<p class="font-label-sm text-label-sm text-outline">Sayeda Zeinab Emergency Clinic Outpost</p>
+</div>
+</div>
+<div class="space-y-1.5 pt-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<div class="flex justify-between">
+<span>Facility Verification:</span>
+<span class="font-medium text-on-surface">Certified Field Clinic #EG-SZ-40</span>
+</div>
+<div class="flex justify-between">
+<span>Direct Courier:</span>
+<span class="font-medium text-on-surface">Ahmed Samir (+20 102 994 8102)</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm bg-surface-container-lowest rounded-lg p-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Seeker Signature State:</span>
+<span class="font-label-sm text-label-sm text-outline font-semibold flex items-center gap-1" id="seeker-sig-status">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+                Awaiting Cargo Arrival & Check
+              </span>
+</div>
+<div class="font-code-sm text-code-sm text-outline mt-0.5" id="seeker-sig-time">Timestamp: —</div>
+</div>
+</div>
+</div>
+<!-- DOCK FOR USER ACTION (CONFIRM HANDOVER) -->
+<div class="mt-space-lg pt-space-md bg-surface-container-low p-space-md rounded-xl flex flex-col md:flex-row items-center justify-between gap-space-md" id="action-dock">
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+<span>Certify Physical Handover (إثبات التسليم الفعلي)</span>
+</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            By confirming, you attest under Dawwarha Civic standards that 4 calibrated oxygen units were transferred with seals intact.
+          </p>
+<span class="font-code-sm text-code-sm text-outline block mt-1">
+            Endpoint: POST /api/transactions/MTC-MED-2024-9102/confirm · Role derived from auth token
+          </span>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm shrink-0 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-space-md py-2.5 rounded-lg bg-surface-container-lowest text-on-surface-variant hover:text-error hover:bg-error-container/20 font-label-md text-label-md transition-colors" onclick="reportDiscrepancy()" type="button">
+            Report Irregularity
+          </button>
+<button class="flex-1 md:flex-none px-space-lg py-2.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary transition-all flex items-center justify-center gap-space-xs shadow-sm active:scale-[0.99]" id="main-confirm-btn" onclick="openConfirmModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">how_to_reg</span>
+<span>Confirm Handover (تأكيد تسليم العهدة)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- COMPLETED LEDGER BANNER (Visible on complete scenario) -->
+<div class="hidden p-space-lg rounded-xl bg-secondary-container/40 shadow-sm" id="completed-ledger-section">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">verified_user</span>
+</div>
+<div>
+<span class="px-2.5 py-0.5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold">
+              Civic Ledger Sealed & Validated
+            </span>
+<h3 class="font-headline-md text-headline-md text-on-surface mt-1">
+              Handover Completed & Recorded in Civic Impact Ledger
+            </h3>
+<p class="font-label-sm text-label-sm text-secondary font-medium">
+              تم إتمام التسليم وتوثيق الأثر المجتمعي بنجاح
+            </p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+              Final consensus hash: <code class="font-code-sm text-code-sm bg-surface-container-lowest px-1 rounded text-primary">0x98AF...CA12-SEALED</code>. 4 Oxygen Regulators are now under operational custody of Sayeda Zeinab Clinic.
+            </p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs w-full md:w-auto">
+<button class="px-space-md py-2 rounded-lg bg-surface-container-lowest text-secondary font-label-md text-label-md hover:bg-surface-container shadow-sm flex items-center gap-1" onclick="printReceipt()">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span>Download Certified Receipt</span>
+</button>
+<a class="px-space-md py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container shadow-sm flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">analytics</span>
+<span>View Impact Ledger</span>
+</a>
+</div>
+</div>
+</div>
+<!-- 5-STEP LIFECYCLE PROGRESS STEPPER -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">linear_scale</span>
+<span>Custodial Lifecycle Verification Path</span>
+</h3>
+<span class="font-code-sm text-code-sm text-outline">Task 4.A Protocol State</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-space-sm relative">
+<!-- Step 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm font-semibold text-primary">01. Match Approved</span>
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline">Nov 14, 14:20</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2">Parties consented to exchange terms</span>
+</div>
+<!-- Step 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm font-semibold text-primary">02. Handover Created</span>
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline">Nov 14, 14:21</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2">Atomic multi-document token initialized</span>
+</div>
+<!-- Step 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col justify-between" id="stepper-step3">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm font-semibold text-primary" id="stepper-title3">03. Provider Sign-off</span>
+<span class="material-symbols-outlined text-primary text-[18px]" id="stepper-icon3">radio_button_checked</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline" id="stepper-time3">Awaiting Provider</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium mt-2" id="stepper-desc3">Action Required by you (Dr. Laila)</span>
+</div>
+<!-- Step 4 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col justify-between opacity-80" id="stepper-step4">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface-variant" id="stepper-title4">04. Seeker Sign-off</span>
+<span class="material-symbols-outlined text-outline text-[18px]" id="stepper-icon4">radio_button_unchecked</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline" id="stepper-time4">Pending Step 3</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2" id="stepper-desc4">Recipient inspects seal and attests</span>
+</div>
+<!-- Step 5 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col justify-between opacity-70" id="stepper-step5">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface-variant" id="stepper-title5">05. Ledger Sealed</span>
+<span class="material-symbols-outlined text-outline text-[18px]" id="stepper-icon5">lock</span>
+</div>
+<p class="font-label-sm text-label-sm text-outline" id="stepper-time5">Automated Finality</p>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2" id="stepper-desc5">Impact metrics permanently minted</span>
+</div>
+</div>
+</div>
+<!-- LOGISTICAL DISPATCH & CARGO MANIFEST DETAILS -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- COLUMN 1 & 2: PHYSICAL CARGO & CORRIDOR ROUTE -->
+<div class="lg:col-span-2 space-y-space-lg">
+<!-- Transferred Asset Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex flex-wrap items-center justify-between gap-space-xs mb-space-md">
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Custodial Cargo Manifest</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">4 High-Capacity Oxygen Regulators & Pediatric Oximeters</h3>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-medium">
+              Medical Grade · Sterile Validated
+            </span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md mb-space-md">
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<span class="font-label-sm text-label-sm text-outline block">Batch Tracking ID</span>
+<span class="font-code-sm text-code-sm font-semibold text-on-surface">BAT-OXY-2024-0992</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Sealed by Egyptian Healthcare Regulatory Bay</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low space-y-1">
+<span class="font-label-sm text-label-sm text-outline block">Security Packaging Seal Hash</span>
+<span class="font-code-sm text-code-sm font-semibold text-primary">#0x9F4B-7C19-SEAL</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">Tamper-evident barcode attached</span>
+</div>
+</div>
+<!-- Photographic Verification Asset -->
+<div class="rounded-xl overflow-hidden bg-surface-container mb-space-md">
+<img class="w-full h-48 object-cover" data-alt="Community volunteers and clinic health workers in Cairo packaging clinical medical supplies and insulated food distribution boxes at an outdoor staging area in Maadi, daylight, documentary style photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASBEHQuE32sqf2p6y60_Zj8olfWg9RjZTkApgTq9TzDlPnQXW_J3B99UKNssbmj191nSxmXiON5JiEZ46lSg_jz5_PvxRP-AGL56BcEclN06VcAYLtbopM--F3e3kCQB0RjT8rGnQowBmw1Sxy4vzbjGv_Ep4iJR6pdhXbrnDtG1G6uA-_B-1oRydtAbCDr0z4apF0nuUeEMhoM_3-xhjXL9ipH0d03Estc_zPTAQVROsa7Z9Trzt4cQ"/>
+<div class="p-space-sm bg-surface-container-high flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">photo_camera</span>
+<span>Pre-dispatch verification snapshot uploaded at Al-Bustan Bay</span>
+</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline font-medium" onclick="viewSealPhoto()">View High-Res</button>
+</div>
+</div>
+<!-- Documentation Checklist -->
+<div class="space-y-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline block mb-1">Attached Chain-of-Custody Manifest</span>
+<div class="flex items-center justify-between p-space-xs rounded bg-surface-container-low">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<span class="font-label-md text-label-md text-on-surface">Biomedical Calibration Certificate (Cert #8821)</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">PDF · 1.4 MB</span>
+</div>
+<div class="flex items-center justify-between p-space-xs rounded bg-surface-container-low">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
+<span class="font-label-md text-label-md text-on-surface">Sayeda Zeinab Medical Necessity Requisition Authorization</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">PDF · 840 KB</span>
+</div>
+</div>
+</div>
+<!-- Authorized Transit Vector Map -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Authorized Transit Corridor</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Cairo South Direct Line (3.4 km)</h3>
+</div>
+<span class="font-code-sm text-code-sm text-secondary font-medium bg-secondary-container px-2 py-0.5 rounded">Transit: ~18 mins</span>
+</div>
+<!-- Location Map placeholder -->
+<div class="w-full h-56 rounded-xl bg-cover bg-center mb-space-sm relative flex items-end p-space-sm" data-location="Maadi Corniche to Sayeda Zeinab, Cairo, Egypt" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAqs7KyG2IgzOHjfynFf_V6eDcxj1bIdRI7IvD9B-mlNVv9JeTMHFCh8pYCosUgoScFCYkGr_Sk5ZM7dL8BBdDRR2a2D5icYeudjJOflSneP9z0MbN6IzshGt9NPIFnXWTTibaAhVu8hpyQC0dFp2lhATicDJq6FvE-b0keW-UXQuSlSaDX5uvWP8klMs22Mx0lg672-am6GVjgkL-6DewrJRf4yjuEAVqemQbpA_OZEbKvpu9v4dVe_Q');">
+<div class="bg-surface-container-lowest/95 backdrop-blur-md p-space-sm rounded-lg shadow-sm w-full flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary">route</span>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold block">Origin: Bay #3 (Maadi) → Destination: Clinic Outpost (Sayeda Zeinab)</span>
+<span class="font-code-sm text-code-sm text-outline">Vector approved by Cairo Civic Transport Coordination</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-medium hidden sm:inline">Active Route</span>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUMN 3: REVEALED CONTACTS & GATE PASS CODES -->
+<div class="space-y-space-lg">
+<!-- Gate Pass & Access Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider block mb-1">Staging Bay Security Gate Pass</span>
+<div class="p-space-md rounded-xl bg-surface-container-low text-center my-space-sm">
+<span class="font-label-sm text-label-sm text-outline block">Access Token Code</span>
+<div class="font-headline-lg text-headline-lg font-bold text-primary tracking-widest my-1 font-mono">
+              GATE-BAY-03
+            </div>
+<span class="font-label-sm text-label-sm text-secondary">Valid until today 18:00 Cairo Time</span>
+</div>
+<div class="space-y-space-sm pt-space-xs text-body-sm font-body-sm text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">location_on</span>
+<span>Staging Bay #3, Corniche Logistics Dock, Cairo</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">access_time</span>
+<span>Operating window: 14:00 – 17:00 (Nov 14, 2024)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">badge</span>
+<span>Guard post officer: Capt. Tarek Mansoor</span>
+</div>
+</div>
+</div>
+<!-- Mutual Contact Revelation (§18 & §35) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Unmasked Party Details</span>
+<span class="material-symbols-outlined text-primary text-[18px]">lock_open</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+            Direct coordination revealed upon match acceptance pursuant to privacy protocol FR-009.
+          </p>
+<div class="space-y-space-md">
+<!-- Recipient Direct Lead -->
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Recipient Intake Lead</span>
+<span class="font-label-sm text-label-sm text-primary font-medium">Verified MD</span>
+</div>
+<div class="font-label-md text-label-md text-on-surface font-semibold mt-0.5">Dr. Hisham Kassem</div>
+<a class="font-code-sm text-code-sm text-secondary hover:text-primary mt-1 inline-flex items-center gap-1" href="tel:+201004921092">
+<span class="material-symbols-outlined text-[14px]">phone</span>
+<span>+20 100 492 1092</span>
+</a>
+</div>
+<!-- Designated Dispatch Courier -->
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline">Direct Dispatch Driver</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">Civic Fleet</span>
+</div>
+<div class="font-label-md text-label-md text-on-surface font-semibold mt-0.5">Ahmed Samir (Vehicle: B-9182-CAI)</div>
+<a class="font-code-sm text-code-sm text-secondary hover:text-primary mt-1 inline-flex items-center gap-1" href="tel:+201029948102">
+<span class="material-symbols-outlined text-[14px]">call</span>
+<span>+20 102 994 8102</span>
+</a>
+</div>
+</div>
+<div class="mt-space-md pt-space-sm">
+<button class="w-full py-2 px-space-sm rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-space-xs transition-colors" onclick="printReceipt()" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Print Physical Custody Form</span>
+</button>
+</div>
+</div>
+<!-- Audit & Compliance Notice -->
+<div class="p-space-md rounded-xl bg-surface-container-high text-on-surface-variant">
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm font-semibold text-on-surface mb-1">
+<span class="material-symbols-outlined text-[16px] text-primary">policy</span>
+<span>Civic Audit Trail & Idempotency</span>
+</div>
+<p class="font-body-sm text-body-sm">
+            Each confirmation event is cryptographically signed with your authenticated token hash. Multiple taps will not create duplicate ledger records.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- INTERACTIVE MODAL DIALOG FOR CONFIRMATION (Accessible Dialog) -->
+<div class="fixed inset-0 bg-inverse-surface/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-space-md" id="confirm-modal-overlay">
+<div aria-labelledby="modal-title" aria-modal="true" class="bg-surface-container-lowest w-full max-w-lg rounded-xl shadow-xl overflow-hidden transform transition-all p-space-lg" role="dialog">
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface" id="modal-title">Confirm Physical Handover</h3>
+<span class="font-label-sm text-label-sm text-secondary font-medium">إقرار وتسجيل تسليم العهدة الطبية</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-full hover:bg-surface-container flex items-center justify-center text-outline" onclick="closeConfirmModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="space-y-space-md mb-space-lg">
+<div class="bg-surface-container-low p-space-sm rounded-lg">
+<span class="font-label-sm text-label-sm text-outline block mb-1">Match Ledger Unit</span>
+<div class="font-label-md text-label-md font-semibold text-on-surface">#MTC-MED-2024-9102 · Oxygen Regulators (x4)</div>
+<div class="font-label-sm text-label-sm text-outline mt-0.5">Origin Node: Al-Bustan Medical Logistics Bay</div>
+</div>
+<div class="space-y-space-sm text-body-sm font-body-sm text-on-surface-variant">
+<label class="flex items-start gap-space-xs cursor-pointer">
+<input checked="" class="mt-1 rounded accent-primary w-4 h-4 cursor-pointer" id="check-seal" type="checkbox"/>
+<span>I certify that security seal <code class="font-code-sm text-code-sm text-primary font-medium">#0x9F4B-7C19-SEAL</code> was intact upon transfer.</span>
+</label>
+<label class="flex items-start gap-space-xs cursor-pointer">
+<input checked="" class="mt-1 rounded accent-primary w-4 h-4 cursor-pointer" id="check-recipient" type="checkbox"/>
+<span>I verified the recipient identification credentials of Dr. Hisham Kassem's clinic outpost courier.</span>
+</label>
+</div>
+<div class="p-space-xs rounded bg-surface-container text-outline font-code-sm text-code-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">fingerprint</span>
+<span>Signing Key: NODE-CAI-SEC-01-AUTH</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-2 rounded-lg bg-surface-container text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors" onclick="closeConfirmModal()" type="button">
+          Cancel (إلغاء)
+        </button>
+<button class="px-space-lg py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors flex items-center gap-1 shadow-sm" onclick="executeConfirmation()" type="button">
+<span class="material-symbols-outlined text-[18px]">draw</span>
+<span>Sign & Attest Handover</span>
+</button>
+</div>
+</div>
+</div>
+<!-- TOAST NOTIFICATION -->
+<div class="fixed bottom-6 right-6 z-50 hidden bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-lg shadow-xl flex items-center gap-space-sm transition-all duration-300" id="toast">
+<span class="material-symbols-outlined text-primary-fixed-dim text-[20px]" id="toast-icon">check_circle</span>
+<span class="font-label-md text-label-md" id="toast-msg">Handover successfully recorded</span>
+</div>
+</div>
+<script>
+  let currentState = 'pending';
+  let isArabic = false;
+
+  function showToast(message, icon = 'check_circle') {
+    const toast = document.getElementById('toast');
+    const msgEl = document.getElementById('toast-msg');
+    const iconEl = document.getElementById('toast-icon');
+    msgEl.textContent = message;
+    iconEl.textContent = icon;
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 3500);
+  }
+
+  function openConfirmModal() {
+    document.getElementById('confirm-modal-overlay').classList.remove('hidden');
+  }
+
+  function closeConfirmModal() {
+    document.getElementById('confirm-modal-overlay').classList.add('hidden');
+  }
+
+  function executeConfirmation() {
+    closeConfirmModal();
+    setScenario('provider_done');
+    showToast('Provider signature registered in CAI-LGR-V2! Waiting on recipient confirmation.');
+  }
+
+  function reportDiscrepancy() {
+    const reason = prompt('Please specify the issue or cargo discrepancy to alert dispatch and freeze handover token:');
+    if (reason) {
+      showToast('Discrepancy reported. Handover flagged for nodal review.', 'warning');
+    }
+  }
+
+  function printReceipt() {
+    window.print();
+  }
+
+  function viewSealPhoto() {
+    showToast('High resolution seal photo verified: #0x9F4B-7C19-SEAL', 'verified');
+  }
+
+  function updatePillStyles(activeId) {
+    const pills = ['btn-scen-pending', 'btn-scen-provider', 'btn-scen-completed', 'btn-scen-stale', 'btn-scen-forbidden', 'btn-scen-notfound'];
+    pills.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (id === activeId) {
+          el.className = "px-2.5 py-1 rounded-full text-label-sm font-label-sm transition-all bg-primary text-on-primary font-medium shadow-sm";
+        } else {
+          el.className = "px-2.5 py-1 rounded-full text-label-sm font-label-sm transition-all bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container";
+        }
+      }
+    });
+  }
+
+  function setScenario(state) {
+    currentState = state;
+
+    const mainFlow = document.getElementById('main-handover-flow');
+    const errorContainer = document.getElementById('view-error-container');
+    const v403 = document.getElementById('view-403');
+    const v404 = document.getElementById('view-404');
+    const v409 = document.getElementById('view-409');
+
+    // Reset error container
+    errorContainer.classList.add('hidden');
+    v403.classList.add('hidden');
+    v404.classList.add('hidden');
+    v409.classList.add('hidden');
+    mainFlow.classList.remove('hidden');
+
+    const pBadge = document.getElementById('provider-badge');
+    const pSig = document.getElementById('provider-sig-status');
+    const pTime = document.getElementById('provider-sig-time');
+
+    const sBadge = document.getElementById('seeker-badge');
+    const sSig = document.getElementById('seeker-sig-status');
+    const sTime = document.getElementById('seeker-sig-time');
+
+    const badgeChip = document.getElementById('badge-status-chip');
+    const badgeText = document.getElementById('badge-status-text');
+
+    const completedSection = document.getElementById('completed-ledger-section');
+    const actionDock = document.getElementById('action-dock');
+
+    // Stepper elements
+    const s3Title = document.getElementById('stepper-title3');
+    const s3Icon = document.getElementById('stepper-icon3');
+    const s3Time = document.getElementById('stepper-time3');
+    const s3Desc = document.getElementById('stepper-desc3');
+
+    const s4Step = document.getElementById('stepper-step4');
+    const s4Title = document.getElementById('stepper-title4');
+    const s4Icon = document.getElementById('stepper-icon4');
+    const s4Time = document.getElementById('stepper-time4');
+    const s4Desc = document.getElementById('stepper-desc4');
+
+    const s5Step = document.getElementById('stepper-step5');
+    const s5Title = document.getElementById('stepper-title5');
+    const s5Icon = document.getElementById('stepper-icon5');
+    const s5Time = document.getElementById('stepper-time5');
+    const s5Desc = document.getElementById('stepper-desc5');
+
+    if (state === 'pending') {
+      updatePillStyles('btn-scen-pending');
+      badgeChip.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold tracking-wide";
+      badgeText.textContent = "Handover in Progress (التسليم قيد التنفيذ)";
+
+      pBadge.className = "px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-medium";
+      pBadge.textContent = "Pending Provider Sign-off";
+      pSig.className = "font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1";
+      pSig.innerHTML = '<span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span> Awaiting Physical Handover';
+      pTime.textContent = "Timestamp: —";
+
+      sBadge.className = "px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium";
+      sBadge.textContent = "Pending Seeker Receipt";
+      sSig.className = "font-label-sm text-label-sm text-outline font-semibold flex items-center gap-1";
+      sSig.innerHTML = '<span class="w-2 h-2 rounded-full bg-outline"></span> Awaiting Cargo Arrival & Check';
+      sTime.textContent = "Timestamp: —";
+
+      actionDock.classList.remove('hidden');
+      completedSection.classList.add('hidden');
+
+      // Stepper
+      s3Title.className = "font-label-sm text-label-sm font-semibold text-primary";
+      s3Icon.className = "material-symbols-outlined text-primary text-[18px]";
+      s3Icon.textContent = "radio_button_checked";
+      s3Time.textContent = "Awaiting Provider";
+      s3Desc.textContent = "Action Required by you (Dr. Laila)";
+
+      s4Step.className = "p-space-sm rounded-lg bg-surface-container-low flex flex-col justify-between opacity-80";
+      s4Title.className = "font-label-sm text-label-sm font-semibold text-on-surface-variant";
+      s4Icon.className = "material-symbols-outlined text-outline text-[18px]";
+      s4Icon.textContent = "radio_button_unchecked";
+      s4Time.textContent = "Pending Step 3";
+      s4Desc.textContent = "Recipient inspects seal and attests";
+
+      s5Step.className = "p-space-sm rounded-lg bg-surface-container-low flex flex-col justify-between opacity-70";
+      s5Title.className = "font-label-sm text-label-sm font-semibold text-on-surface-variant";
+      s5Icon.textContent = "lock";
+    }
+
+    else if (state === 'provider_done') {
+      updatePillStyles('btn-scen-provider');
+      badgeChip.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold tracking-wide";
+      badgeText.textContent = "Provider Confirmed · Awaiting Recipient (بانتظار المستلم)";
+
+      pBadge.className = "px-2.5 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-medium";
+      pBadge.textContent = "Confirmed by Dr. Laila";
+      pSig.className = "font-label-sm text-label-sm text-primary font-semibold flex items-center gap-1";
+      pSig.innerHTML = '<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span> Attested at 14:38 Cairo Time';
+      pTime.textContent = "Timestamp: Nov 14, 2024 · 14:38:12 UTC+2";
+
+      sBadge.className = "px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-medium";
+      sBadge.textContent = "Action Required: Seeker Attestation";
+      sSig.className = "font-label-sm text-label-sm text-tertiary font-semibold flex items-center gap-1";
+      sSig.innerHTML = '<span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span> Inspecting Physical Seals';
+      sTime.textContent = "Cargo in Custody of Courier Samir";
+
+      actionDock.classList.add('hidden');
+      completedSection.classList.add('hidden');
+
+      // Stepper
+      s3Title.className = "font-label-sm text-label-sm font-semibold text-primary";
+      s3Icon.className = "material-symbols-outlined text-primary text-[18px]";
+      s3Icon.textContent = "check_circle";
+      s3Time.textContent = "Completed (14:38)";
+      s3Desc.textContent = "Provider sign-off confirmed & hashed";
+
+      s4Step.className = "p-space-sm rounded-lg bg-surface-container-high flex flex-col justify-between";
+      s4Title.className = "font-label-sm text-label-sm font-semibold text-primary";
+      s4Icon.className = "material-symbols-outlined text-primary text-[18px]";
+      s4Icon.textContent = "radio_button_checked";
+      s4Time.textContent = "Current Action";
+      s4Desc.textContent = "Dr. Hisham Kassem verifying cargo at Outpost";
+
+      s5Step.className = "p-space-sm rounded-lg bg-surface-container-low flex flex-col justify-between opacity-70";
+      s5Title.className = "font-label-sm text-label-sm font-semibold text-on-surface-variant";
+    }
+
+    else if (state === 'completed') {
+      updatePillStyles('btn-scen-completed');
+      badgeChip.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold tracking-wide";
+      badgeText.textContent = "Custody Transferred & Ledger Sealed (تم إتمام التسليم)";
+
+      pBadge.className = "px-2.5 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-medium";
+      pBadge.textContent = "Confirmed · Dr. Laila";
+      pSig.className = "font-label-sm text-label-sm text-primary font-semibold flex items-center gap-1";
+      pSig.innerHTML = '<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span> Attested 14:38';
+      pTime.textContent = "Signature Hash: #SIG-0xA821";
+
+      sBadge.className = "px-2.5 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-sm text-label-sm font-medium";
+      sBadge.textContent = "Confirmed · Dr. Hisham";
+      sSig.className = "font-label-sm text-label-sm text-primary font-semibold flex items-center gap-1";
+      sSig.innerHTML = '<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span> Received & Sterile Verified 14:52';
+      sTime.textContent = "Signature Hash: #SIG-0xB991";
+
+      actionDock.classList.add('hidden');
+      completedSection.classList.remove('hidden');
+
+      // Stepper
+      s3Title.className = "font-label-sm text-label-sm font-semibold text-primary";
+      s3Icon.textContent = "check_circle";
+      s3Time.textContent = "Nov 14, 14:38";
+
+      s4Title.className = "font-label-sm text-label-sm font-semibold text-primary";
+      s4Icon.className = "material-symbols-outlined text-primary text-[18px]";
+      s4Icon.textContent = "check_circle";
+      s4Time.textContent = "Nov 14, 14:52";
+      s4Desc.textContent = "Seeker physical receipt signed";
+
+      s5Step.className = "p-space-sm rounded-lg bg-surface-container-high flex flex-col justify-between";
+      s5Title.className = "font-label-sm text-label-sm font-semibold text-primary";
+      s5Icon.className = "material-symbols-outlined text-primary text-[18px]";
+      s5Icon.textContent = "lock";
+      s5Time.textContent = "Minted #81292";
+      s5Desc.textContent = "Dual custodial consensus validated";
+
+      showToast('Civic impact score updated! 4 Oxygen Regulators transferred.', 'celebration');
+    }
+
+    else if (state === 'stale') {
+      updatePillStyles('btn-scen-stale');
+      mainFlow.classList.add('hidden');
+      errorContainer.classList.remove('hidden');
+      v409.classList.remove('hidden');
+    }
+
+    else if (state === 'forbidden') {
+      updatePillStyles('btn-scen-forbidden');
+      mainFlow.classList.add('hidden');
+      errorContainer.classList.remove('hidden');
+      v403.classList.remove('hidden');
+    }
+
+    else if (state === 'notfound') {
+      updatePillStyles('btn-scen-notfound');
+      mainFlow.classList.add('hidden');
+      errorContainer.classList.remove('hidden');
+      v404.classList.remove('hidden');
+    }
+  }
+
+  function toggleLanguage() {
+    isArabic = !isArabic;
+    const langLabel = document.getElementById('lang-label');
+    const mainEl = document.querySelector('main');
+    
+    if (isArabic) {
+      document.documentElement.setAttribute('dir', 'rtl');
+      document.documentElement.setAttribute('lang', 'ar');
+      langLabel.textContent = 'English (LTR)';
+      showToast('تم تحويل الواجهة إلى العربية والاتجاه من اليمين لليسار');
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr');
+      document.documentElement.setAttribute('lang', 'en');
+      langLabel.textContent = 'العربية (RTL)';
+      showToast('Switched to English interface (LTR)');
+    }
+  }
+</script></div></main></div></body></html>

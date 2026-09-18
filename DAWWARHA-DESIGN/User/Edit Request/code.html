@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "tertiary-fixed": "#ffdcbf",
+          "secondary": "#33685a",
+          "primary-fixed": "#a3f2dd",
+          "tertiary-fixed-dim": "#feb874",
+          "tertiary-container": "#9f672b",
+          "inverse-surface": "#2a322f",
+          "on-tertiary-container": "#fffaf8",
+          "on-secondary-fixed-variant": "#184f42",
+          "tertiary": "#834f14",
+          "outline-variant": "#bec9c4",
+          "on-error-container": "#93000a",
+          "on-primary-fixed-variant": "#005143",
+          "surface-tint": "#106a5a",
+          "surface-dim": "#d3dcd7",
+          "surface-variant": "#dbe5e0",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed-dim": "#9bd2c0",
+          "primary-container": "#2f806f",
+          "on-secondary": "#ffffff",
+          "on-primary-container": "#ebfff7",
+          "outline": "#6f7975",
+          "on-tertiary-fixed-variant": "#6a3b00",
+          "surface-bright": "#f2fbf6",
+          "inverse-on-surface": "#eaf3ee",
+          "inverse-primary": "#87d5c1",
+          "on-error": "#ffffff",
+          "secondary-fixed": "#b6eedc",
+          "on-secondary-container": "#396e5f",
+          "on-surface": "#151d1a",
+          "surface-container": "#e7f0eb",
+          "error": "#ba1a1a",
+          "surface-container-low": "#edf6f1",
+          "secondary-container": "#b6eedc",
+          "on-surface-variant": "#3f4946",
+          "surface-container-highest": "#dbe5e0",
+          "on-primary": "#ffffff",
+          "primary": "#076757",
+          "error-container": "#ffdad6",
+          "on-background": "#151d1a",
+          "on-primary-fixed": "#00201a",
+          "primary-fixed-dim": "#87d5c1",
+          "surface-container-high": "#e1eae5",
+          "background": "#f2fbf6",
+          "on-secondary-fixed": "#002019",
+          "on-tertiary-fixed": "#2d1600",
+          "surface": "#f2fbf6"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-sm": "0.5rem",
+          "space-md": "1rem",
+          "space-xs": "0.25rem",
+          "margin": "2rem",
+          "gutter-mobile": "1rem",
+          "space-lg": "1.5rem",
+          "margin-mobile": "1rem",
+          "space-xl": "2.5rem",
+          "gutter": "1.5rem"
+        },
+        "fontFamily": {
+          "code-sm": ["Inter"],
+          "body-lg": ["Inter"],
+          "display-lg": ["Inter"],
+          "label-md": ["Inter"],
+          "headline-sm": ["Inter"],
+          "headline-lg-mobile": ["Inter"],
+          "body-md": ["Inter"],
+          "headline-lg": ["Inter"],
+          "label-sm": ["Inter"],
+          "headline-md": ["Inter"],
+          "display-lg-mobile": ["Inter"],
+          "body-sm": ["Inter"]
+        },
+        "fontSize": {
+          "code-sm": ["0.8125rem", {"lineHeight": "1.125rem", "fontWeight": "400"}],
+          "body-lg": ["1.125rem", {"lineHeight": "1.75rem", "fontWeight": "400"}],
+          "display-lg": ["3.5rem", {"lineHeight": "4rem", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+          "label-md": ["0.875rem", {"lineHeight": "1.25rem", "fontWeight": "500"}],
+          "headline-sm": ["1.125rem", {"lineHeight": "1.5rem", "fontWeight": "500"}],
+          "headline-lg-mobile": ["1.5rem", {"lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "body-md": ["0.9375rem", {"lineHeight": "1.5rem", "fontWeight": "400"}],
+          "headline-lg": ["2rem", {"lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+          "label-sm": ["0.75rem", {"lineHeight": "1rem", "letterSpacing": "0.02em", "fontWeight": "500"}],
+          "headline-md": ["1.25rem", {"lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+          "display-lg-mobile": ["2.25rem", {"lineHeight": "2.75rem", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "body-sm": ["0.8125rem", {"lineHeight": "1.25rem", "fontWeight": "400"}]
+        }
+      }
+    }
+  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(22,78,65,0.06)]"><div class="w-full h-16 px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><img alt="Brand logo. - Primary color: #2f806f
+- Font: inter
+- Mode: light
+- Roundness: rounded-md
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UF3eZN9ykWZnSQyxFrz5DF0sre37execbFQJ_vdOQK-qiWAqzr1zbbltQ-wBaxlDMj-gxy7HrIZ7vu8RBvegsjS_z2Dqi82uhgx06Xr6IJ2ggM86b4D7OSule6dlnt9bUMK_L_vwcnh-xMRT9EvcoFvxWjlvskYCxx6PKq-Ucu8VbY7kaEeHu5pSryJ8SPzR1z5rdmVUQSSCZHAAn-nutc5S0DXeLSAs0LHd4TR1ZgQAw-dhFpAWIs039D"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">Dawwarha <span class="text-on-surface-variant font-label-md text-label-md font-normal">| دَوّرها</span></span><span class="font-label-sm text-label-sm text-outline flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-primary-container inline-block"></span>Amman Civic Node #12 / Cairo Hub</span></div></div><nav class="hidden xl:flex items-center gap-space-xs p-space-xs bg-surface-container-low rounded-lg" data-active-classes="bg-secondary-container text-on-secondary-fixed font-bold rounded-lg"><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="my-resources" href="#">My Resources</a><a aria-current="page" class="px-space-md py-space-xs transition-colors bg-secondary-container text-on-secondary-fixed font-bold rounded-lg" data-path="my-requests" href="#">My Requests</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="matches" href="#">Matches</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#">Handovers &amp; Activity</a><a class="px-space-md py-space-xs rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#">Impact &amp; Ledger</a></nav><div class="flex items-center gap-space-md"><div class="flex items-center bg-surface-container-low rounded-lg p-space-xs"><button class="px-space-sm py-0.5 rounded-md font-label-sm text-label-sm text-on-surface bg-surface-container-lowest font-medium shadow-[0_1px_2px_rgba(0,0,0,0.04)]">EN</button><button class="px-space-sm py-0.5 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors">العربية</button></div><button class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"><span class="material-symbols-outlined">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span></button><button class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors"><span class="material-symbols-outlined">help_outline</span></button><div class="hidden md:flex items-center gap-space-sm pl-space-sm"><div class="text-right"><div class="font-label-md text-label-md text-on-surface font-semibold">Dr. Laila El-Mansouri</div><div class="font-label-sm text-label-sm text-primary">Verified Node Lead</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-72 bg-surface-container-lowest shadow-[0_1px_8px_rgba(22,78,65,0.04)] z-40 flex flex-col justify-between p-space-md overflow-y-auto"><div class="flex flex-col gap-space-lg"><div class="flex flex-col gap-space-xs"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider px-space-xs">Operations Hub</span><div class="grid grid-cols-1 gap-space-xs pt-space-xs"><button class="w-full h-10 px-space-md rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs shadow-[0_2px_6px_rgba(7,103,87,0.15)] hover:bg-secondary transition-colors"><span>+ Create Request</span></button><button class="w-full h-10 px-space-md rounded-lg bg-surface-container-low text-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs hover:bg-surface-container-high transition-colors"><span>+ Publish Resource</span></button></div></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-secondary-container text-on-secondary-fixed font-bold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span>Dashboard</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="my-resources" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span>My Resources</a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm transition-colors bg-secondary-container text-on-secondary-fixed font-bold rounded-lg" data-path="my-requests" href="#"><span class="material-symbols-outlined text-[20px]">assignment_late</span>My Requests</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="matches" href="#"><span class="material-symbols-outlined text-[20px]">sync_alt</span>Matches</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="handovers-and-activity" href="#"><span class="material-symbols-outlined text-[20px]">local_shipping</span>Handovers &amp; Activity</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="impact-and-ledger" href="#"><span class="material-symbols-outlined text-[20px]">account_balance</span>Impact &amp; Ledger</a></nav></div><div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm text-outline">Operational Custody</span><span class="w-2 h-2 rounded-full bg-primary inline-block"></span></div><div class="font-label-md text-label-md font-semibold text-on-surface">Dr. Laila El-Mansouri</div><div class="font-label-sm text-label-sm text-primary">Verified Node Lead</div><div class="font-code-sm text-code-sm text-outline pt-space-xs">Node: CAI-SEC-01</div></div></aside><div class="pl-72"><main class="w-full pt-16 bg-surface min-h-screen px-gutter py-space-lg"><div class="flex flex-col w-full" id="dawwarha-editor-root">
+<!-- Interactive State Emulator Bar (Civic Prototype QA Engine) -->
+<div class="w-full bg-surface-container-high text-on-surface rounded-xl p-space-sm mb-space-lg shadow-sm flex flex-wrap items-center justify-between gap-space-sm border-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<div class="flex items-center gap-1.5 px-space-sm py-1 bg-surface rounded-lg text-primary font-label-sm">
+<span class="material-symbols-outlined text-[16px] animate-pulse">tune</span>
+<span class="font-semibold uppercase tracking-wider text-[11px]">QA Emulator</span>
+</div>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-medium transition-colors bg-primary text-on-primary" id="btn-state-published" onclick="setEmulatorState('published')">
+        1. Candidate Match (Default)
+      </button>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-medium transition-colors bg-surface hover:bg-surface-container text-on-surface-variant" id="btn-state-locked" onclick="setEmulatorState('locked')">
+        2. Matched / Locked Terms
+      </button>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-medium transition-colors bg-surface hover:bg-surface-container text-on-surface-variant" id="btn-state-dialog" onclick="setEmulatorState('dialog')">
+        3. Unsaved Dialog
+      </button>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-medium transition-colors bg-surface hover:bg-surface-container text-on-surface-variant" id="btn-state-saving" onclick="setEmulatorState('saving')">
+        4. Recalculating (Loading)
+      </button>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-medium transition-colors bg-surface hover:bg-surface-container text-on-surface-variant" id="btn-state-success" onclick="setEmulatorState('success')">
+        5. Success Toast
+      </button>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-medium transition-colors bg-surface hover:bg-surface-container text-on-surface-variant" id="btn-state-conflict" onclick="setEmulatorState('conflict')">
+        6. 409 Conflict
+      </button>
+<button class="px-space-sm py-1 rounded-lg text-label-sm font-medium transition-colors bg-surface hover:bg-surface-container text-on-surface-variant" id="btn-state-fulfilled" onclick="setEmulatorState('fulfilled')">
+        7. Fulfilled / Archived
+      </button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="flex items-center gap-1 px-space-sm py-1 rounded-lg bg-surface hover:bg-surface-container text-primary font-label-sm font-semibold transition-colors" id="btn-lang-toggle" onclick="toggleLanguageDirection()">
+<span class="material-symbols-outlined text-[16px]">translate</span>
+<span id="lang-toggle-text">العربية (RTL)</span>
+</button>
+<span class="text-label-sm text-outline font-code-sm hidden md:inline px-1">REQ-EDU-2024-4102</span>
+</div>
+</div>
+<!-- Locked State Warning (Hidden by default) -->
+<div class="hidden w-full mb-space-md p-space-md rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-start gap-space-sm" id="state-banner-locked">
+<span class="material-symbols-outlined text-tertiary text-[22px] shrink-0 mt-0.5">lock</span>
+<div class="flex-1 min-w-0">
+<div class="font-headline-sm text-headline-sm font-semibold text-tertiary">Formal Handover Terms Locked (قيد تسليم رسمي)</div>
+<p class="font-body-sm text-body-sm mt-0.5 text-on-tertiary-fixed-variant">
+        This request has been formally accepted by <span class="font-semibold">Maadi Community Hub</span> with custody handover protocol #HND-8831 initiated. Quantity, core category, and destination corridor cannot be modified. To release terms, contact the coordinating lead node or withdraw the handover from the Handover Operations Hub.
+      </p>
+</div>
+</div>
+<!-- Fulfilled / Closed Notice (Hidden by default) -->
+<div class="hidden w-full mb-space-md p-space-md rounded-xl bg-surface-container-high text-on-surface flex items-start gap-space-sm" id="state-banner-fulfilled">
+<span class="material-symbols-outlined text-primary text-[22px] shrink-0 mt-0.5">verified</span>
+<div class="flex-1 min-w-0">
+<div class="font-headline-sm text-headline-sm font-semibold text-primary">Request Fulfilled &amp; Ledger Reconciled (طلب مكتمل وموثق)</div>
+<p class="font-body-sm text-body-sm mt-0.5 text-on-surface-variant">
+        All 30 curriculum sets have been physically logged at Old Cairo Community Learning Center. Handover receipt confirmed on chain ledger hash <code class="font-code-sm text-code-sm bg-surface-container px-1 py-0.5 rounded">0x882a...bf91</code>. This record is immutable and archived for impact audit.
+      </p>
+</div>
+</div>
+<!-- Stale Data / 409 Conflict Banner (Hidden by default) -->
+<div class="hidden w-full mb-space-md p-space-md rounded-xl bg-error-container text-on-error-container flex items-start justify-between gap-space-sm" id="state-banner-conflict">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-error text-[22px] shrink-0 mt-0.5">sync_problem</span>
+<div>
+<div class="font-headline-sm text-headline-sm font-semibold text-error">Concurrency Conflict (خطأ في تزامن البيانات - 409)</div>
+<p class="font-body-sm text-body-sm mt-0.5">
+          Another verified coordinator (Node CAI-SEC-01) just updated the target timeline. Your local copy is stale. Refresh to merge records without losing non-conflicting field notes.
+        </p>
+</div>
+</div>
+<button class="px-space-sm py-1 rounded-lg bg-error text-on-error font-label-sm font-semibold whitespace-nowrap" onclick="setEmulatorState('published')">
+      Reload Fresh Record
+    </button>
+</div>
+<!-- Match Impact Awareness Banner (CRITICAL CIVIC REQUIREMENT) -->
+<div class="w-full mb-space-lg p-space-md rounded-xl bg-surface-container text-on-surface flex flex-col md:flex-row md:items-center justify-between gap-space-md shadow-sm" id="active-match-banner">
+<div class="flex items-start gap-space-sm">
+<div class="w-9 h-9 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">swap_calls</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-md text-label-md font-semibold text-primary">Active Match Evaluation Notice</span>
+<span class="px-space-xs py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-label-sm font-semibold">88% Candidate in Circulation</span>
+<span class="font-code-sm text-code-sm text-outline">Pipeline ID: #MTC-EDU-4102</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 max-w-4xl">
+          This request is currently paired with <span class="font-semibold text-on-surface">Maadi Community Hub (45 textbook sets available)</span>. Updating Category, Urgency, or Location will automatically trigger an explainable re-scoring pass by the circular matching engine and may refresh candidate ranks.
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 self-start md:self-center">
+<div class="text-right hidden xl:block">
+<div class="font-label-sm text-label-sm text-outline">Current Proximity</div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">4.2 km corridor</div>
+</div>
+<a class="px-space-sm py-1.5 rounded-lg bg-surface text-primary hover:bg-surface-container-high font-label-sm font-semibold transition-colors flex items-center gap-1" href="#pipeline-drawer">
+<span>Inspect Engine Signals</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Page Breadcrumb & Header Title -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs font-label-sm text-label-sm text-outline">
+<a class="hover:text-primary transition-colors" href="#">Operations Hub</a>
+<span>/</span>
+<a class="hover:text-primary transition-colors" href="#">My Requests</a>
+<span>/</span>
+<span class="text-on-surface font-code-sm">REQ-EDU-2024-4102</span>
+<span>/</span>
+<span class="text-primary font-medium">Edit Specifications</span>
+</div>
+<div class="flex items-baseline gap-space-sm flex-wrap">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight" id="header-request-title">
+          Edit Request: 30 Primary School Textbook Sets
+        </h1>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-label-sm font-semibold">
+          Status: Published (قيد الطرح)
+        </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Custodial Node: <span class="font-semibold text-on-surface">Dr. Laila El-Mansouri</span> · Cairo Sector 01 (CAI-SEC-01) · Old Cairo Community Learning Center
+      </p>
+</div>
+<!-- Right Header Quick Controls -->
+<div class="flex items-center gap-space-sm">
+<a class="px-space-md py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-medium transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+<span>Public View</span>
+</a>
+<button class="px-space-md py-2 rounded-lg bg-primary text-on-primary hover:bg-secondary font-label-md text-label-md font-semibold transition-colors flex items-center gap-1 shadow-sm" onclick="simulateSaveAction()">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Quick Save</span>
+</button>
+</div>
+</div>
+<!-- Main Grid: 2-Column Responsive Bento Layout (8 Col Form + 4 Col Context/Audit) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN (8 COLS): Controlled Edit Form -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- STEP 1: Community Need & Educational Specifications -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center font-label-md font-bold">1</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Community Need &amp; Educational Specifications</h2>
+<p class="font-label-sm text-label-sm text-outline">Define the civic asset requirements clearly to facilitate programmatic redistribution</p>
+</div>
+</div>
+<span class="text-label-sm font-code-sm text-outline">MongoDB: requests.specifications</span>
+</div>
+<!-- Request Title -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="input-req-title">
+              Need Statement / Title <span class="text-error">*</span>
+</label>
+<span class="font-code-sm text-code-sm text-outline" id="title-counter">68 / 100</span>
+</div>
+<input class="w-full h-10 px-space-md rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest transition-colors outline-none" id="input-req-title" oninput="handleFieldChange('title', this.value)" placeholder="E.g. Primary School Math &amp; Science Curricula" type="text" value="30 Complete Primary School Mathematics &amp; Science Textbook Sets (Grades 4-6)"/>
+<p class="font-body-sm text-body-sm text-outline">Provide a standardized, factual summary without fundraising slogans or promotional qualifiers.</p>
+</div>
+<!-- Controlled Civic Category Selector -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md font-semibold text-on-surface">
+              Controlled Civic Category (التصنيف المؤسسي) <span class="text-error">*</span>
+</label>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm font-medium">
+              High Engine Weight (1.00)
+            </span>
+</div>
+<div class="relative">
+<select class="w-full h-10 px-space-md rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest transition-colors outline-none appearance-none cursor-pointer pr-10" id="select-category" onchange="handleFieldChange('category', this.value)">
+<option selected="" value="cat-books">Books &amp; Curriculum (كتب ومناهج دراسية)</option>
+<option value="cat-edu-furniture">Educational Furniture (أثاث ومقاعد دراسية)</option>
+<option value="cat-tech">Refurbished Tech &amp; Computing (أجهزة تقنية وحواسيب)</option>
+<option value="cat-supplies">Stationery &amp; Student Supplies (أدوات وقرطاسية مدرسية)</option>
+<option value="cat-health">Healthcare &amp; Linens (مستلزمات صحية وأغطية)</option>
+<option value="cat-clothing">Student Clothing &amp; Uniforms (كسوة وملابس طلابية)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low text-on-surface-variant font-body-sm text-body-sm flex items-start gap-space-xs mt-1">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">info</span>
+<span>Category selection directly targets donor inventory nodes. Changing this from <strong>Books &amp; Curriculum</strong> will discard the current 88% candidate match with Maadi Community Hub.</span>
+</div>
+</div>
+<!-- Detailed Description & Context -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="input-req-desc">
+              Operational Context &amp; Distribution Plan <span class="text-error">*</span>
+</label>
+<span class="font-code-sm text-code-sm text-outline" id="desc-counter">214 / 500</span>
+</div>
+<textarea class="w-full p-space-md rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest transition-colors outline-none resize-y" id="input-req-desc" oninput="handleFieldChange('description', this.value)" placeholder="Detail the target group, educational term requirements, condition constraints, and distribution method..." rows="4">Curriculum renewal for registered underprivileged students preparing for seasonal district examinations. Complete sets with teacher guides preferred; acceptable condition must be clean and free of severe missing page damage.</textarea>
+<div class="flex items-center justify-between text-body-sm font-body-sm text-outline">
+<span>Include edition year (e.g., 2023-2025 Ministry accredited) and packaging preferences.</span>
+<span class="text-primary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">shield</span> Audit-compliant statement
+            </span>
+</div>
+</div>
+<!-- Institutional Identity Anchor -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold">
+              OC
+            </div>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Old Cairo Community Learning Center</div>
+<div class="font-body-sm text-body-sm text-outline">Registered NGO Beneficiary · Custody Lead: Dr. Laila El-Mansouri</div>
+</div>
+</div>
+<span class="px- space-sm py-1 rounded-full bg-surface text-primary font-label-sm text-label-sm font-semibold self-start sm:self-auto flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified</span> Civic Authenticated
+          </span>
+</div>
+</section>
+<!-- STEP 2: Quantity, SLA & Urgency Level -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center font-label-md font-bold">2</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Quantity &amp; Urgency SLA</h2>
+<p class="font-label-sm text-label-sm text-outline">Circular matching engine weights urgency against donor shelf shelf-life</p>
+</div>
+</div>
+<span class="text-label-sm font-code-sm text-outline">Field: quantity &amp; urgency</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Required Quantity Stepper -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md font-semibold text-on-surface">
+              Required Quantity (الكمية المطلوبة) <span class="text-error">*</span>
+</label>
+<div class="flex items-center h-10 bg-surface rounded-lg overflow-hidden">
+<button class="w-10 h-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="adjustQuantity(-5)" title="Decrease by 5" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<input class="flex-1 h-full bg-transparent text-center font-headline-sm text-headline-sm font-bold text-primary outline-none" id="input-req-quantity" max="500" min="1" oninput="handleFieldChange('quantity', this.value)" type="number" value="30"/>
+<button class="w-10 h-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="adjustQuantity(5)" title="Increase by 5" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<div class="px-space-sm h-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm flex items-center justify-center font-medium">
+                Sets (حزم)
+              </div>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Exact match buffer for 30 registered cohort students.</span>
+</div>
+<!-- Seasonal / Exam Target Deadline -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md font-semibold text-on-surface" for="input-target-deadline">
+              Target Distribution Deadline (الموعد المستهدف)
+            </label>
+<div class="relative flex items-center h-10 bg-surface rounded-lg px-space-md">
+<span class="material-symbols-outlined text-outline text-[18px] mr-2">calendar_today</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface outline-none cursor-pointer" id="input-target-deadline" onchange="handleFieldChange('deadline', this.value)" type="date" value="2025-06-01"/>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Prior to Term 2 final examination review sessions.</span>
+</div>
+</div>
+<!-- Urgency Enum Selector (Radio Cards) -->
+<div class="flex flex-col gap-space-xs mt-space-xs">
+<label class="font-label-md text-label-md font-semibold text-on-surface">
+            Operational Urgency Level (مستوى الأولوية والاحتياج) <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<!-- High Urgency -->
+<label class="cursor-pointer">
+<input class="sr-only peer" name="urgency-choice" onchange="handleFieldChange('urgency', 'high')" type="radio" value="high"/>
+<div class="p-space-md rounded-xl bg-surface peer-checked:bg-secondary-container peer-checked:text-on-secondary-fixed transition-all flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold">High (عاجل)</span>
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+</div>
+<span class="font-body-sm text-body-sm opacity-90">Within 24-48 Hours</span>
+<span class="text-[11px] font-code-sm opacity-75 mt-1">Triggers active radius push notifications</span>
+</div>
+</label>
+<!-- Medium Urgency (Default Selected) -->
+<label class="cursor-pointer">
+<input checked="" class="sr-only peer" name="urgency-choice" onchange="handleFieldChange('urgency', 'medium')" type="radio" value="medium"/>
+<div class="p-space-md rounded-xl bg-surface peer-checked:bg-secondary-container peer-checked:text-on-secondary-fixed transition-all flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold">Medium (متوسط)</span>
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+</div>
+<span class="font-body-sm text-body-sm opacity-90">Within 72 Hours</span>
+<span class="text-[11px] font-code-sm opacity-75 mt-1">Balanced corridor matching profile</span>
+</div>
+</label>
+<!-- Low / Standing Need -->
+<label class="cursor-pointer">
+<input class="sr-only peer" name="urgency-choice" onchange="handleFieldChange('urgency', 'low')" type="radio" value="low"/>
+<div class="p-space-md rounded-xl bg-surface peer-checked:bg-secondary-container peer-checked:text-on-secondary-fixed transition-all flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold">Standing (احتياج مستمر)</span>
+<span class="material-symbols-outlined text-[18px]">event_repeat</span>
+</div>
+<span class="font-body-sm text-body-sm opacity-90">Seasonal Window</span>
+<span class="text-[11px] font-code-sm opacity-75 mt-1">Optimizes for consolidated freight transport</span>
+</div>
+</label>
+</div>
+</div>
+</section>
+<!-- STEP 3: Location, Geofencing & Corridor -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center font-label-md font-bold">3</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Distribution Corridor &amp; Privacy Perimeter</h2>
+<p class="font-label-sm text-label-sm text-outline">Corridor determines multi-stop logistic clustering across Greater Cairo</p>
+</div>
+</div>
+<span class="text-label-sm font-code-sm text-outline">location.city &amp; location.area</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- City / Governorate -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md font-semibold text-on-surface">
+              Governorate / City (المحافظة) <span class="text-error">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-10 px-space-md rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest transition-colors outline-none cursor-pointer appearance-none pr-10" id="select-city" onchange="handleFieldChange('city', this.value)">
+<option selected="" value="Cairo">Cairo (القاهرة)</option>
+<option value="Giza">Giza (الجيزة)</option>
+<option value="Qalyubia">Qalyubia (القليوبية)</option>
+<option value="Alexandria">Alexandria (الإسكندرية)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- District / Corridor -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md font-semibold text-on-surface">
+              District / Logistics Corridor (الحي / المسار) <span class="text-error">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-10 px-space-md rounded-lg bg-surface text-on-surface font-body-md text-body-md focus:bg-surface-container-lowest transition-colors outline-none cursor-pointer appearance-none pr-10" id="select-area" onchange="handleFieldChange('area', this.value)">
+<option selected="" value="Old Cairo &amp; Sayeda Zeinab">Old Cairo &amp; Sayeda Zeinab (مصر القديمة والسيدة زينب)</option>
+<option value="Maadi &amp; Degla">Maadi &amp; Degla (المعادي ودجلة)</option>
+<option value="Helwan &amp; Tura">Helwan &amp; Tura (حلوان وطرة)</option>
+<option value="Downtown &amp; Abdeen">Downtown &amp; Abdeen (وسط البلد وعابدين)</option>
+<option value="Nasr City Corridor">Nasr City &amp; Heliopolis (مدينة نصر ومصر الجديدة)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Geofence & Privacy Guarantee Box -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">lock_clock</span>
+<div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Beneficiary Geofence &amp; Street Privacy Shield</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Exact physical drop-off coordinates (<span class="font-code-sm text-code-sm">30.0131° N, 31.2289° E</span>) remain cryptographically shielded from public crawlers. Decryption keys are issued solely to authenticated logistics coordinators upon confirmed handover scheduling.
+              </p>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-1 font-label-sm text-label-sm text-primary font-semibold px-space-sm py-1 bg-surface rounded-lg">
+<span class="material-symbols-outlined text-[16px]">verified_user</span> Encrypted
+          </div>
+</div>
+<!-- Interactive Map Visual of Corridor -->
+<div class="w-full h-44 rounded-xl overflow-hidden relative shadow-inner bg-surface-container flex items-center justify-center" data-location="Old Cairo, Cairo, Egypt" style="">
+<!-- Visual simulation of corridor map -->
+<div class="absolute inset-0 bg-gradient-to-tr from-surface-dim/70 via-surface-container-high/40 to-transparent"></div>
+<div class="relative z-10 flex flex-col items-center text-center p-space-sm bg-surface/90 backdrop-blur-sm rounded-xl max-w-sm shadow-sm">
+<span class="material-symbols-outlined text-primary text-[28px]">hub</span>
+<span class="font-label-md text-label-md font-bold text-on-surface mt-1">Corridor: Old Cairo → Maadi (4.2 km)</span>
+<span class="font-body-sm text-body-sm text-outline">Optimal handover route mapped via Ring Road / Corniche</span>
+</div>
+</div>
+</section>
+<!-- STEP 4: Community Trust & Zero-Cash Protocol -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center font-label-md font-bold">4</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Civic Integrity &amp; Zero-Cash Protocol</h2>
+<p class="font-label-sm text-label-sm text-outline">Institutional verification guarantees transparent redistribution</p>
+</div>
+</div>
+<span class="text-label-sm font-code-sm text-primary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">gavel</span> Mandatory Protocol
+          </span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface hover:bg-surface-container transition-colors cursor-pointer">
+<input checked="" class="mt-1 rounded accent-primary w-4 h-4 cursor-pointer" id="check-zero-cash" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Non-Monetized Civic Redistribution Affirmation</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">I certify under node custodian liability that requested textbooks will be distributed free of any charges, administrative fees, or transactional sales to verified students.</span>
+</div>
+</label>
+<label class="flex items-start gap-space-sm p-space-sm rounded-lg bg-surface hover:bg-surface-container transition-colors cursor-pointer">
+<input checked="" class="mt-1 rounded accent-primary w-4 h-4 cursor-pointer" id="check-receipt" type="checkbox"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-on-surface">Physical Verification &amp; Chain Ledger Receipt</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Recipient node commits to scanning receipt QR codes upon handover completion and updating inventory counts within 12 hours of delivery.</span>
+</div>
+</label>
+</div>
+</section>
+<!-- DANGER ZONE: Status-based Withdrawal -->
+<section class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm text-error">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+<h2 class="font-headline-sm text-headline-sm font-semibold">Civic Archive &amp; Withdrawal Zone (منطقة سحب الطلب)</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Withdrawing transitions this request from <span class="font-mono font-semibold">published</span> to <span class="font-mono font-semibold">withdrawn</span>. In accordance with Dawwarha's circular transparency policy, historical audit trails remain preserved on the public ledger. Withdrawing releases the current candidate match (Maadi Community Hub, 45 textbooks) back to the open civic pool.
+        </p>
+<div class="pt-space-xs flex items-center justify-between flex-wrap gap-space-sm">
+<span class="font-code-sm text-code-sm text-outline">Operation: PATCH /api/v1/requests/REQ-EDU-2024-4102/withdraw</span>
+<button class="px-space-md py-2 rounded-lg bg-error-container text-on-error-container hover:bg-error hover:text-on-error font-label-md text-label-md font-semibold transition-colors flex items-center gap-1" onclick="openWithdrawModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Withdraw Request (سحب الطلب)</span>
+</button>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN (4 COLS): Contextual Matching Engine Pipeline & Audit Trail -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg" id="pipeline-drawer">
+<!-- Current Match Pipeline Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">hub</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Matching Pipeline</h3>
+</div>
+<span class="font-code-sm text-code-sm text-primary bg-secondary-container px-2 py-0.5 rounded-full font-bold">
+            88% Affinity
+          </span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Candidate Node</span>
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+</div>
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface">Maadi Community Hub</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Verified Surplus Stock · Cairo South Node #04</div>
+<div class="flex items-center gap-space-sm pt-space-xs text-label-sm font-code-sm text-primary font-semibold">
+<span>Surplus: 45 textbook sets</span>
+<span>·</span>
+<span>Distance: 4.2 km</span>
+</div>
+</div>
+<!-- Explainable Matching Engine Signals (5 Signals from dina backend spec) -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Explainable Scoring Signals</span>
+<!-- Signal 1: Category Match -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">check_circle</span> Category Alignment
+              </span>
+<span class="font-code-sm font-semibold text-primary">100%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container">
+<div class="h-full rounded-full bg-primary" style="width: 100%"></div>
+</div>
+</div>
+<!-- Signal 2: Proximity & Corridor -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">near_me</span> Geographic Corridor (4.2 km)
+              </span>
+<span class="font-code-sm font-semibold text-primary" id="signal-geo">88%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container">
+<div class="h-full rounded-full bg-primary" id="signal-geo-bar" style="width: 88%"></div>
+</div>
+</div>
+<!-- Signal 3: Quantity Sufficiency -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">inventory</span> Quantity Coverage (30/45)
+              </span>
+<span class="font-code-sm font-semibold text-primary" id="signal-qty">100%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container">
+<div class="h-full rounded-full bg-primary" id="signal-qty-bar" style="width: 100%"></div>
+</div>
+</div>
+<!-- Signal 4: Urgency Delta -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">avg_pace</span> Urgency Match (72h SLA)
+              </span>
+<span class="font-code-sm font-semibold text-primary" id="signal-urgency">80%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container">
+<div class="h-full rounded-full bg-primary" id="signal-urgency-bar" style="width: 80%"></div>
+</div>
+</div>
+<!-- Signal 5: Availability Window -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">event_available</span> Warehouse Operating Hours
+              </span>
+<span class="font-code-sm font-semibold text-primary">92%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container">
+<div class="h-full rounded-full bg-primary" style="width: 92%"></div>
+</div>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface font-body-sm text-body-sm text-on-surface-variant flex items-center justify-between">
+<span class="text-outline">Engine Pass ID:</span>
+<span class="font-code-sm text-code-sm">ENG-MATCH-V2.8#810</span>
+</div>
+</div>
+<!-- Real-Time Re-scoring Simulator Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-xs text-on-surface font-headline-sm font-semibold">
+<span class="material-symbols-outlined text-secondary text-[20px]">analytics</span>
+<span>Simulation Preview</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">
+          Live delta preview: based on your uncommitted field modifications.
+        </p>
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="p-space-sm rounded-lg bg-surface flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Match Rank</span>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">#1 in Cairo</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface flex flex-col">
+<span class="font-label-sm text-label-sm text-outline">Est. Transit Time</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">22 Mins</span>
+</div>
+</div>
+</div>
+<!-- Request Audit Trail & Version Control -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">history</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Audit Ledger Trail</h3>
+</div>
+<span class="font-label-sm text-label-sm font-code-sm text-outline">v1.1 In Editor</span>
+</div>
+<div class="relative pl-6 space-y-4 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-high">
+<!-- Event 1 -->
+<div class="relative flex flex-col gap-0.5">
+<div class="absolute -left-[1.85rem] top-1 w-3 h-3 rounded-full bg-primary"></div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">v1.1 Draft Session Opened</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Logged in as Dr. Laila El-Mansouri</div>
+<div class="font-code-sm text-code-sm text-outline">Just now · CAI-SEC-01 (Current Node)</div>
+</div>
+<!-- Event 2 -->
+<div class="relative flex flex-col gap-0.5">
+<div class="absolute -left-[1.85rem] top-1 w-3 h-3 rounded-full bg-surface-container-highest"></div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">Candidate Match Generated</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Automated circular pairing algorithm</div>
+<div class="font-code-sm text-code-sm text-outline">Yesterday at 16:40 · Pipeline Engine</div>
+</div>
+<!-- Event 3 -->
+<div class="relative flex flex-col gap-0.5">
+<div class="absolute -left-[1.85rem] top-1 w-3 h-3 rounded-full bg-surface-container-highest"></div>
+<div class="font-label-md text-label-md font-semibold text-on-surface">v1.0 Request Created &amp; Published</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Need statement for 30 Math/Science sets</div>
+<div class="font-code-sm text-code-sm text-outline">2 days ago · Hash: 0x48f2...702c</div>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low text-on-surface-variant font-code-sm text-code-sm flex items-center justify-between">
+<span>Record ID:</span>
+<span>6654e8c1872b21004</span>
+</div>
+</div>
+</div>
+</div>
+<!-- FLOATING DIRTY-STATE PERSISTENCE DOCK (Pinned to viewport bottom) -->
+<div class="fixed bottom-4 left-4 right-4 md:left-80 md:right-8 z-40 bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl p-space-md shadow-xl flex flex-col sm:flex-row items-center justify-between gap-space-md transition-all" id="floating-action-bar">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-md text-label-md font-semibold text-on-surface" id="dirty-status-title">2 uncommitted modifications</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant font-code-sm text-code-sm">v1.1 draft</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline hidden sm:block" id="dirty-status-subtitle">
+          Quantity adjusted to 30 sets · Urgency maintained · Re-scoring ready
+        </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<button class="px-space-md py-2.5 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium transition-colors" onclick="confirmDiscardChanges()" type="button">
+        Cancel &amp; Return (إلغاء)
+      </button>
+<button class="px-space-lg py-2.5 rounded-lg bg-primary hover:bg-secondary text-on-primary font-label-md text-label-md font-semibold transition-all flex items-center gap-2 shadow-sm" id="btn-save-primary" onclick="simulateSaveAction()" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span id="btn-save-label">Save &amp; Recalculate Matches (حفظ وتحديث المطابقة)</span>
+</button>
+</div>
+</div>
+<!-- MODAL: Confirm Unsaved Changes Dialog -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden items-center justify-center p-space-md" id="modal-unsaved-dialog">
+<div class="bg-surface-container-lowest rounded-2xl max-w-lg w-full p-space-lg shadow-xl flex flex-col gap-space-md animate-in fade-in zoom-in-95 duration-150">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-error-container text-on-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">history_edu</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Unsaved Request Modifications</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            You have modified specifications for <span class="font-semibold text-on-surface">REQ-EDU-2024-4102</span>. Leaving now without saving will reset the matching engine calculations to the published v1.0 snapshot.
+          </p>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-1 font-body-sm text-body-sm">
+<div class="flex justify-between text-on-surface">
+<span class="text-outline">Modified fields:</span>
+<span class="font-semibold font-code-sm">Quantity (30 sets), Context Notes</span>
+</div>
+<div class="flex justify-between text-on-surface">
+<span class="text-outline">Active candidate match:</span>
+<span class="text-primary font-semibold">Maadi Community Hub (88%)</span>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-2 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium transition-colors" onclick="closeModal('modal-unsaved-dialog')">
+          Keep Editing
+        </button>
+<button class="px-space-md py-2 rounded-lg bg-error text-on-error hover:bg-error/90 font-label-md text-label-md font-semibold transition-colors" onclick="closeModal('modal-unsaved-dialog'); setEmulatorState('published')">
+          Discard All Changes
+        </button>
+</div>
+</div>
+</div>
+<!-- MODAL: Withdraw Request Modal -->
+<div class="fixed inset-0 z-50 bg-inverse-surface/40 backdrop-blur-sm hidden items-center justify-center p-space-md" id="modal-withdraw-dialog">
+<div class="bg-surface-container-lowest rounded-2xl max-w-lg w-full p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-error-container text-on-error-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">archive</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md font-semibold text-error">Confirm Request Withdrawal</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Are you sure you want to withdraw <span class="font-semibold text-on-surface">REQ-EDU-2024-4102</span> from public circulation?
+          </p>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-xs font-body-sm text-body-sm">
+<p class="text-on-surface font-semibold">Consequences of withdrawal:</p>
+<ul class="list-disc pl-5 text-on-surface-variant space-y-1">
+<li>The 88% candidate match with <strong class="text-on-surface">Maadi Community Hub</strong> will be released immediately.</li>
+<li>The request moves to <code>withdrawn</code> status and stops appearing in civic queries.</li>
+<li>Audit history remains permanently logged under Dr. Laila El-Mansouri's node ledger.</li>
+</ul>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold text-on-surface" for="withdraw-reason">Reason for Withdrawal (سبب السحب)</label>
+<select class="w-full h-10 px-space-md rounded-lg bg-surface text-on-surface font-body-sm text-body-sm outline-none" id="withdraw-reason">
+<option value="direct-fulfillment">Requirement met via direct community fulfillment</option>
+<option value="curriculum-changed">Educational curriculum requirement cancelled</option>
+<option value="duplicate">Duplicate request created by partner coordinator</option>
+<option value="other">Other institutional node adjustment</option>
+</select>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="px-space-md py-2 rounded-lg bg-surface hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium transition-colors" onclick="closeModal('modal-withdraw-dialog')">
+          Cancel
+        </button>
+<button class="px-space-md py-2 rounded-lg bg-error text-on-error hover:bg-error/90 font-label-md text-label-md font-semibold transition-colors flex items-center gap-1" onclick="executeWithdrawal()">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Confirm Withdrawal (تأكيد السحب)</span>
+</button>
+</div>
+</div>
+</div>
+<!-- TOAST: Feedback Notification System -->
+<div class="fixed top-20 right-6 z-50 transform translate-y-[-20px] opacity-0 pointer-events-none transition-all duration-200 bg-primary text-on-primary px-space-md py-space-sm rounded-xl shadow-lg flex items-center gap-space-sm max-w-md" id="civic-toast">
+<span class="material-symbols-outlined text-[22px]" id="toast-icon">check_circle</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold" id="toast-title">Request Updated &amp; Matches Recalculated</span>
+<span class="font-body-sm text-body-sm text-on-primary/90" id="toast-message">New score delta calculated across 5 circular matching signals.</span>
+</div>
+</div>
+</div>
+<!-- Client-side Logic: Emulation, Micro-interactions & Dual Directional Switching -->
+<script>
+  let isRTL = false;
+  let formDirty = true;
+  let currentState = 'published';
+
+  function adjustQuantity(delta) {
+    if (currentState === 'locked' || currentState === 'fulfilled') return;
+    const input = document.getElementById('input-req-quantity');
+    let val = parseInt(input.value || '0', 10);
+    val = Math.max(1, Math.min(500, val + delta));
+    input.value = val;
+    handleFieldChange('quantity', val);
+  }
+
+  function handleFieldChange(field, value) {
+    formDirty = true;
+    const dirtyBar = document.getElementById('floating-action-bar');
+    if (dirtyBar) dirtyBar.classList.remove('opacity-60');
+
+    if (field === 'title') {
+      const counter = document.getElementById('title-counter');
+      if (counter) counter.innerText = `${value.length} / 100`;
+    } else if (field === 'description') {
+      const counter = document.getElementById('desc-counter');
+      if (counter) counter.innerText = `${value.length} / 500`;
+    } else if (field === 'quantity') {
+      const val = parseInt(value, 10);
+      const qtySignal = document.getElementById('signal-qty');
+      const qtyBar = document.getElementById('signal-qty-bar');
+      if (val <= 45) {
+        if (qtySignal) qtySignal.innerText = '100%';
+        if (qtyBar) qtyBar.style.width = '100%';
+      } else {
+        const ratio = Math.max(20, Math.round((45 / val) * 100));
+        if (qtySignal) qtySignal.innerText = `${ratio}% (Partial Surplus)`;
+        if (qtyBar) qtyBar.style.width = `${ratio}%`;
+      }
+    } else if (field === 'urgency') {
+      const urgSignal = document.getElementById('signal-urgency');
+      const urgBar = document.getElementById('signal-urgency-bar');
+      if (value === 'high') {
+        if (urgSignal) urgSignal.innerText = '95%';
+        if (urgBar) urgBar.style.width = '95%';
+      } else if (value === 'medium') {
+        if (urgSignal) urgSignal.innerText = '80%';
+        if (urgBar) urgBar.style.width = '80%';
+      } else {
+        if (urgSignal) urgSignal.innerText = '65%';
+        if (urgBar) urgBar.style.width = '65%';
+      }
+    }
+  }
+
+  function setEmulatorState(state) {
+    currentState = state;
+    
+    // Update QA buttons
+    ['published', 'locked', 'dialog', 'saving', 'success', 'conflict', 'fulfilled'].forEach(s => {
+      const btn = document.getElementById(`btn-state-${s}`);
+      if (btn) {
+        if (s === state) {
+          btn.className = "px-space-sm py-1 rounded-lg text-label-sm font-medium transition-colors bg-primary text-on-primary";
+        } else {
+          btn.className = "px-space-sm py-1 rounded-lg text-label-sm font-medium transition-colors bg-surface hover:bg-surface-container text-on-surface-variant";
+        }
+      }
+    });
+
+    // Reset banners
+    document.getElementById('state-banner-locked').classList.add('hidden');
+    document.getElementById('state-banner-fulfilled').classList.add('hidden');
+    document.getElementById('state-banner-conflict').classList.add('hidden');
+    document.getElementById('active-match-banner').classList.remove('hidden');
+
+    const inputs = document.querySelectorAll('#input-req-title, #select-category, #input-req-desc, #input-req-quantity, #input-target-deadline, #select-city, #select-area, input[name="urgency-choice"]');
+    const primarySaveBtn = document.getElementById('btn-save-primary');
+
+    if (state === 'published') {
+      inputs.forEach(el => el.removeAttribute('disabled'));
+      if (primarySaveBtn) primarySaveBtn.removeAttribute('disabled');
+      showToast('Emulator: Default Published State with Active 88% Match', 'Candidate ready for terms confirmation.');
+    } else if (state === 'locked') {
+      document.getElementById('state-banner-locked').classList.remove('hidden');
+      inputs.forEach(el => el.setAttribute('disabled', 'true'));
+      if (primarySaveBtn) primarySaveBtn.setAttribute('disabled', 'true');
+      showToast('Emulator: Matched & Terms Locked', 'Handover #HND-8831 active. Core fields are read-only.');
+    } else if (state === 'dialog') {
+      document.getElementById('modal-unsaved-dialog').classList.remove('hidden');
+      document.getElementById('modal-unsaved-dialog').classList.add('flex');
+    } else if (state === 'saving') {
+      simulateSaveAction();
+    } else if (state === 'success') {
+      showToast('Changes Saved & Matches Recalculated', 'Explainable score engine updated: 88% affinity preserved.');
+    } else if (state === 'conflict') {
+      document.getElementById('state-banner-conflict').classList.remove('hidden');
+      showToast('Concurrency Error (409 Conflict)', 'Database version mismatch. Please reload record.');
+    } else if (state === 'fulfilled') {
+      document.getElementById('state-banner-fulfilled').classList.remove('hidden');
+      document.getElementById('active-match-banner').classList.add('hidden');
+      inputs.forEach(el => el.setAttribute('disabled', 'true'));
+      if (primarySaveBtn) primarySaveBtn.setAttribute('disabled', 'true');
+      showToast('Record Fulfilled & Reconciled', 'Physical textbooks logged in school inventory.');
+    }
+  }
+
+  function simulateSaveAction() {
+    const saveBtn = document.getElementById('btn-save-primary');
+    const label = document.getElementById('btn-save-label');
+    if (!saveBtn || !label) return;
+
+    saveBtn.setAttribute('disabled', 'true');
+    label.innerHTML = '<span class="animate-pulse">Recalculating 5 Engine Signals...</span>';
+
+    setTimeout(() => {
+      saveBtn.removeAttribute('disabled');
+      label.innerText = isRTL ? 'حفظ وتحديث المطابقة' : 'Save & Recalculate Matches';
+      showToast('Changes Saved & Matches Recalculated', 'Pipeline ID #MTC-EDU-4102 updated on civic ledger.');
+      
+      const dirtyBar = document.getElementById('floating-action-bar');
+      const titleStatus = document.getElementById('dirty-status-title');
+      if (titleStatus) titleStatus.innerText = 'All changes synchronized (v1.1)';
+    }, 1200);
+  }
+
+  function confirmDiscardChanges() {
+    document.getElementById('modal-unsaved-dialog').classList.remove('hidden');
+    document.getElementById('modal-unsaved-dialog').classList.add('flex');
+  }
+
+  function openWithdrawModal() {
+    document.getElementById('modal-withdraw-dialog').classList.remove('hidden');
+    document.getElementById('modal-withdraw-dialog').classList.add('flex');
+  }
+
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  function executeWithdrawal() {
+    closeModal('modal-withdraw-dialog');
+    showToast('Request Withdrawn (سحب الطلب)', 'Candidate match #MTC-EDU-4102 released to community pool.');
+    setEmulatorState('fulfilled');
+    const headerTitle = document.getElementById('header-request-title');
+    if (headerTitle) {
+      headerTitle.innerHTML = 'Archived Request: 30 Primary School Textbook Sets <span class="text-error font-body-md">(Withdrawn)</span>';
+    }
+  }
+
+  function showToast(title, message) {
+    const toast = document.getElementById('civic-toast');
+    const toastTitle = document.getElementById('toast-title');
+    const toastMsg = document.getElementById('toast-message');
+    if (!toast) return;
+
+    if (toastTitle) toastTitle.innerText = title;
+    if (toastMsg) toastMsg.innerText = message;
+
+    toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+    toast.classList.add('opacity-100', 'translate-y-0');
+
+    setTimeout(() => {
+      toast.classList.remove('opacity-100', 'translate-y-0');
+      toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-[-20px]');
+    }, 3800);
+  }
+
+  function toggleLanguageDirection() {
+    isRTL = !isRTL;
+    const root = document.getElementById('dawwarha-editor-root');
+    const toggleBtnText = document.getElementById('lang-toggle-text');
+    const saveLabel = document.getElementById('btn-save-label');
+    
+    if (isRTL) {
+      root.setAttribute('dir', 'rtl');
+      toggleBtnText.innerText = 'English (LTR)';
+      if (saveLabel) saveLabel.innerText = 'حفظ وتحديث المطابقة';
+    } else {
+      root.setAttribute('dir', 'ltr');
+      toggleBtnText.innerText = 'العربية (RTL)';
+      if (saveLabel) saveLabel.innerText = 'Save & Recalculate Matches';
+    }
+  }
+</script></main></div></body></html>

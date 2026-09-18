@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Cairo:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { 'colors': { 'on-tertiary-fixed': '#2d1600', 'on-tertiary-container': '#fffaf8', 'inverse-on-surface': '#eaf3ee', 'on-tertiary': '#ffffff', 'primary-fixed-dim': '#87d5c1', 'inverse-primary': '#87d5c1', 'surface-tint': '#106a5a', 'surface': '#f2fbf6', 'on-surface': '#151d1a', 'outline': '#6f7975', 'surface-variant': '#dbe5e0', 'surface-container': '#e7f0eb', 'on-tertiary-fixed-variant': '#6a3b00', 'surface-container-low': '#edf6f1', 'tertiary-fixed': '#ffdcbf', 'on-secondary': '#ffffff', 'tertiary': '#834f14', 'on-error': '#ffffff', 'secondary': '#33685a', 'inverse-surface': '#2a322f', 'on-secondary-fixed': '#002019', 'on-primary': '#ffffff', 'primary-fixed': '#a3f2dd', 'secondary-container': '#b6eedc', 'background': '#f2fbf6', 'on-background': '#151d1a', 'on-primary-fixed-variant': '#005143', 'surface-container-high': '#e1eae5', 'on-primary-container': '#ebfff7', 'secondary-fixed-dim': '#9bd2c0', 'error': '#ba1a1a', 'surface-dim': '#d3dcd7', 'on-surface-variant': '#3f4946', 'on-secondary-container': '#396e5f', 'secondary-fixed': '#b6eedc', 'surface-container-lowest': '#ffffff', 'on-primary-fixed': '#00201a', 'error-container': '#ffdad6', 'outline-variant': '#bec9c4', 'surface-container-highest': '#dbe5e0', 'tertiary-fixed-dim': '#feb874', 'surface-bright': '#f2fbf6', 'primary-container': '#2f806f', 'primary': '#076757', 'tertiary-container': '#9f672b', 'on-error-container': '#93000a', 'on-secondary-fixed-variant': '#184f42' }, 'borderRadius': { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, 'spacing': { 'space-sm': '0.5rem', 'gutter-mobile': '1rem', 'margin-mobile': '1rem', 'space-xs': '0.25rem', 'gutter': '1.5rem', 'space-lg': '1.5rem', 'space-xl': '2.5rem', 'space-md': '1rem', 'margin': '2rem' }, 'fontFamily': { 'body-lg': ['Inter'], 'label-sm': ['Inter'], 'code-sm': ['Inter'], 'headline-md': ['Inter'], 'body-md': ['Inter'], 'display-lg': ['Inter'], 'display-lg-mobile': ['Inter'], 'body-sm': ['Inter'], 'headline-sm': ['Inter'], 'headline-lg': ['Inter'], 'label-md': ['Inter'], 'headline-lg-mobile': ['Inter'] }, 'fontSize': { 'body-lg': ['1.125rem', { 'lineHeight': '1.75rem', 'fontWeight': '400' }], 'label-sm': ['0.75rem', { 'lineHeight': '1rem', 'letterSpacing': '0.02em', 'fontWeight': '500' }], 'code-sm': ['0.8125rem', { 'lineHeight': '1.125rem', 'fontWeight': '400' }], 'headline-md': ['1.25rem', { 'lineHeight': '1.75rem', 'letterSpacing': '-0.005em', 'fontWeight': '600' }], 'body-md': ['0.9375rem', { 'lineHeight': '1.5rem', 'fontWeight': '400' }], 'display-lg': ['3.5rem', { 'lineHeight': '4rem', 'letterSpacing': '-0.02em', 'fontWeight': '600' }], 'display-lg-mobile': ['2.25rem', { 'lineHeight': '2.75rem', 'letterSpacing': '-0.01em', 'fontWeight': '600' }], 'body-sm': ['0.8125rem', { 'lineHeight': '1.25rem', 'fontWeight': '400' }], 'headline-sm': ['1.125rem', { 'lineHeight': '1.5rem', 'fontWeight': '500' }], 'headline-lg': ['2rem', { 'lineHeight': '2.5rem', 'letterSpacing': '-0.015em', 'fontWeight': '600' }], 'label-md': ['0.875rem', { 'lineHeight': '1.25rem', 'fontWeight': '500' }], 'headline-lg-mobile': ['1.5rem', { 'lineHeight': '2rem', 'letterSpacing': '-0.01em', 'fontWeight': '600' }] } } } }</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-72 bg-surface-container-lowest border-r border-outline-variant/30 z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.02)]"><div class="flex flex-col h-full overflow-hidden"><div class="h-16 px-space-md border-b border-outline-variant/20 flex items-center justify-between shrink-0 bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="Official Dawwarha Brand Identity Specification Board: showcasing the primary logo lockup in full color, dark reversed mode, 1-color monochrome stencil, app icons, and multi-scale favicon tests (48px, 32px, 24px, 16px) with design tokens and strategic concept rationale." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XU6u3OXR8giCvcuUF6ZhbwocalwoA8GvZg0AX6E9ufD_13Hd2caL1eoTnyWPf4UOiu1puV8VbEQ-kHCMsJccO9Vwzm4doyud3m89yheLrgN_jdWKdDoLpJwJU44eyOmOmJzEiODu9Cl8MnOynlkRuc2ssqYFadU7qpQDKW0vBpdFlXBEpViB4MXPeundiP6k9KLdqBnr_3IDLCl5aO2FWOILucSMnnwvavqZ-gjxSepCIeoYgmFYeUzHYw"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-primary leading-none">Dawwarha</span><span class="font-code-sm text-code-sm text-on-surface-variant font-medium tracking-wide mt-0.5">CIVIC OPS OS</span></div></div><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container border border-secondary/20">Gov v2.4</span></div><div class="flex-1 overflow-y-auto px-space-sm py-space-md"><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-medium rounded-lg"><div class="px-space-sm pt-space-xs pb-1"><span class="font-label-sm text-label-sm tracking-wider uppercase text-outline font-semibold">Overview</span></div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="admin-dashboard" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">monitoring</span><span class="font-label-md text-label-md truncate">Admin Dashboard</span></a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm tracking-wider uppercase text-outline font-semibold">Trust &amp; Moderation</span></div><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="verification-queue" href="#"><div class="flex items-center gap-space-sm min-w-0"><span class="material-symbols-outlined text-[19px] shrink-0">verified_user</span><span class="font-label-md text-label-md truncate">Verification Queue</span></div><span class="font-code-sm text-code-sm px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface-variant">14</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="content-reports-and-flags" href="#"><div class="flex items-center gap-space-sm min-w-0"><span class="material-symbols-outlined text-[19px] shrink-0">flag</span><span class="font-label-md text-label-md truncate">Content Reports &amp; Flags</span></div><span class="font-code-sm text-code-sm px-1.5 py-0.2 rounded-full bg-error-container text-on-error-container font-medium">3</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 transition-colors bg-primary-container text-on-primary-container font-medium rounded-lg" data-path="moderation-workspace" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">gavel</span><span class="font-label-md text-label-md truncate">Moderation Workspace</span></a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm tracking-wider uppercase text-outline font-semibold">Operations &amp; Ecosystem</span></div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="users-directory" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">group</span><span class="font-label-md text-label-md truncate">Users Directory</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="organizations-directory" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">corporate_fare</span><span class="font-label-md text-label-md truncate">Organizations Directory</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="resources-oversight" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">inventory_2</span><span class="font-label-md text-label-md truncate">Resources Oversight</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="requests-standing-quotas" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">assignment_turned_in</span><span class="font-label-md text-label-md truncate">Requests &amp; Quotas</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="bilateral-matches-and-pairing" href="#"><div class="flex items-center gap-space-sm min-w-0"><span class="material-symbols-outlined text-[19px] shrink-0">compare_arrows</span><span class="font-label-md text-label-md truncate">Bilateral Pairing</span></div><span class="font-label-sm text-label-sm text-primary font-semibold">Δ 0.0%</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="custodial-handovers" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">lock_reset</span><span class="font-label-md text-label-md truncate">Custodial Handovers</span></a><div class="px-space-sm pt-space-md pb-1"><span class="font-label-sm text-label-sm tracking-wider uppercase text-outline font-semibold">Impact &amp; Governance</span></div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="category-taxonomy" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">account_tree</span><span class="font-label-md text-label-md truncate">Category Taxonomy</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="platform-analytics-and-ledger" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">receipt_long</span><span class="font-label-md text-label-md truncate">Analytics &amp; Ledger</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="audit-trail-and-logs" href="#"><span class="material-symbols-outlined text-[19px] shrink-0">history_edu</span><span class="font-label-md text-label-md truncate">Audit Trail &amp; Logs</span></a></nav></div><div class="p-space-sm border-t border-outline-variant/20 bg-surface-container-low/40 shrink-0"><div class="px-space-sm py-1 flex items-center justify-between text-outline"><span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Egyptian Decree 149</span><span class="material-symbols-outlined text-[16px] text-primary">policy</span></div><div class="px-space-sm pb-1"><p class="font-code-sm text-code-sm text-on-surface-variant leading-tight">Statutory Circular Registry Node Cairo-01</p></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest border-b border-outline-variant/20 z-40 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-md w-full max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline pointer-events-none">search</span><input class="w-full pl-9 pr-3 py-1.5 text-body-sm font-body-sm bg-surface rounded-lg border border-outline-variant/40 text-on-surface placeholder:text-outline focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-all" placeholder="Search custody hash, PIN, Org ID, or ledger unit..." type="search"/></div></div><div class="flex items-center gap-space-md"><div class="hidden xl:flex items-center gap-2 px-space-sm py-1 bg-surface-container-low rounded-lg border border-outline-variant/30 text-on-surface-variant"><span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span><span class="font-code-sm text-code-sm text-outline">Merkle Block:</span><span class="font-code-sm text-code-sm text-on-surface font-semibold">#819,004</span><span class="font-label-sm text-label-sm text-primary font-medium ml-1">[Synced]</span></div><div class="flex items-center gap-1.5 px-space-sm py-1 bg-surface rounded-lg border border-outline-variant/40"><span class="font-label-sm text-label-sm text-outline uppercase font-semibold">Simulate:</span><select class="font-label-sm text-label-sm font-semibold bg-transparent text-primary cursor-pointer focus:outline-none"><option selected="">Super Admin</option><option>Municipal Rep</option><option>NGO Auditor</option></select></div><div class="flex items-center border border-outline-variant/40 rounded-lg overflow-hidden bg-surface"><button class="px-2 py-1 font-label-sm text-label-sm font-semibold bg-primary text-on-primary" type="button">EN</button><button class="px-2 py-1 font-label-sm text-label-sm font-semibold text-on-surface-variant hover:text-on-surface" type="button">عربي</button></div><div class="h-6 w-px bg-outline-variant/40"></div><div class="flex items-center gap-space-sm"><div class="text-right hidden sm:block"><div class="font-label-md text-label-md font-semibold text-on-surface leading-tight">Eng. Reham M.</div><div class="font-code-sm text-code-sm text-outline leading-tight">Super Admin &amp; Lead Auditor</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 bg-surface min-h-[calc(100vh-4rem)]"><div class="w-full px-gutter py-gutter"><div class="flex flex-col w-full font-body-md text-on-surface">
+<!-- Interactive State Management & Preset Data Engine -->
+<script>
+    window.dawwarhaWorkspace = {
+      activePreset: 1,
+      isRTL: false,
+      filterType: 'all',
+      filterStatus: 'all',
+      filterReason: 'all',
+      searchQuery: '',
+      reports: [
+        {
+          id: 'REP-MED-9021',
+          targetType: 'resource',
+          targetId: 'RES-MED-6610',
+          targetTitle: 'Dialysis Filter Kits Lot #RES-MED-6610',
+          reason: 'safety',
+          description: 'During intake triage at Maadi Logistics Hub, lot #RES-MED-6610 of pediatric dialysis filter packs showed manufacturing date 2021-08 with expired sterilization seal dated Oct 2023. Violates Circular Economy Decree 149/2019 biomedical surplus provisions. Consignment must be quarantined immediately.',
+          status: 'open',
+          timeAgo: '3.2h ago',
+          timestamp: '2024-11-14 09:20 UTC',
+          reporterName: 'Dr. Hisham Kassem',
+          reporterRef: 'USR-3382',
+          reporterOrg: 'Sayeda Zeinab Community Health Center (MoSS Civic Node #892-CAI)',
+          providerName: 'Delta Warehouse #09',
+          providerStation: 'Tanta Logistics Station (Ibrahim Fawzi #USR-5521)',
+          category: 'Medical / Biomedical Surplus',
+          quantity: '40 sealed units (8 boxes)',
+          currentState: 'available',
+          heuristicSignal: '2nd safety flag on provider Delta Warehouse #09 within 60 days',
+          cascadeResourceLabel: 'Cascade: Update Resource status to "unavailable" (Statutory Quarantine)',
+          cascadeUserLabel: 'Cascade: Suspend Provider Ibrahim Fawzi (#USR-5521)',
+          suggestedResolution: 'Consignment lot #RES-MED-6610 placed under immediate statutory quarantine (status: unavailable) under Decree 149/2019 Art. 18. Consignment physical seal confiscated at Maadi Hub pending biomedical incinerator dispatch.',
+          imgEvidence1: 'placeholder',
+          imgEvidence2: 'placeholder'
+        },
+        {
+          id: 'REP-USR-4409',
+          targetType: 'user',
+          targetId: 'USR-8819',
+          targetTitle: 'Mahmoud S. El-Sayed (#USR-8819)',
+          reason: 'fraud',
+          description: 'Account holder confirmed pick-up booking for 4 pallet consignments of dry legumes across 3 distinct Cairo municipal centers, failed to show up without notice, and attempted re-registration with a secondary national ID. Potential brokerage diversion.',
+          status: 'reviewed',
+          timeAgo: '14h ago',
+          timestamp: '2024-11-13 22:45 UTC',
+          reporterName: 'Dr. Nehad El-Gharably',
+          reporterRef: 'ORG-CAI-02',
+          reporterOrg: 'Al-Bustan Medical & Relief Logistics',
+          providerName: 'Mahmoud S. El-Sayed (Personal Broker)',
+          providerStation: 'Heliopolis / Nasr City Hub Node',
+          category: 'Logistical Identity / Custody Standing',
+          quantity: '4 Consignment Allocations blocked',
+          currentState: 'active (probationary review)',
+          heuristicSignal: 'Repeated 0.0% variance breach alert triggered by bilateral pairing engine',
+          cascadeResourceLabel: 'Cascade: Revoke all pending reservations linked to #USR-8819',
+          cascadeUserLabel: 'Cascade: Apply immediate user status transition: "suspended"',
+          suggestedResolution: 'Account #USR-8819 transitioned to suspended under DB Plan §6.1 following 3 documented verified no-shows and fraudulent brokerage signal. Standing quotas zeroed indefinitely.',
+          imgEvidence1: 'placeholder',
+          imgEvidence2: 'placeholder'
+        },
+        {
+          id: 'REP-REQ-8812',
+          targetType: 'request',
+          targetId: 'REQ-FOO-1029',
+          targetTitle: '800kg Fresh Rice & Staples (#REQ-FOO-1029)',
+          reason: 'inappropriate',
+          description: 'Entity registered as a certified dry-pantry claimed industrial blast refrigeration capacity for perishables. Inspection by Shubra branch auditor found no operational power grid or cold-chain loggers on premises.',
+          status: 'open',
+          timeAgo: '6.5h ago',
+          timestamp: '2024-11-14 06:05 UTC',
+          reporterName: 'Tariq Ramadan',
+          reporterRef: 'USR-1420',
+          reporterOrg: 'Cairo Food Bank Intake Compliance Rep',
+          providerName: 'Al-Amal Micro-Bakery Cooperative',
+          providerStation: 'Shubra El-Kheima Distribution Dock',
+          category: 'Perishable Foodstock Requisition',
+          quantity: '800 kg capacity request',
+          currentState: 'open',
+          heuristicSignal: 'Facility cold-chain compliance certificate unverified against municipal registry',
+          cascadeResourceLabel: 'Cascade: Cancel requisition #REQ-FOO-1029 immediately',
+          cascadeUserLabel: 'Cascade: Restrict cooperative entity to ambient shelf-stable categories only',
+          suggestedResolution: 'Requisition #REQ-FOO-1029 cancelled via PUT /api/requests/:id/status (action: cancel). Organization directed to re-submit certified energy audit before requesting refrigerated surplus.',
+          imgEvidence1: 'placeholder',
+          imgEvidence2: 'placeholder'
+        },
+        {
+          id: 'REP-RES-7715',
+          targetType: 'resource',
+          targetId: 'RES-CLO-7721',
+          targetTitle: '60x Winter Jackets Lot #RES-CLO-7721',
+          reason: 'other',
+          description: 'Intake manifest indicated 60 thermal winter parkas, but physical pallet count showed 42 parkas and 18 lightweight shirts. Requesting manual ledger adjustment before dispatch.',
+          status: 'resolved',
+          timeAgo: '2d ago',
+          timestamp: '2024-11-12 11:15 UTC',
+          reporterName: 'Mariam Soliman',
+          reporterRef: 'USR-7820',
+          reporterOrg: 'Giza Civic Redistribution Warehouse',
+          providerName: 'Delta Garments Surplus Ltd',
+          providerStation: 'El-Mahalla Industrial Zone Hub',
+          category: 'Textile & Apparel Surplus',
+          quantity: 'Corrected to 42 parkas + 18 shirts',
+          currentState: 'claimed',
+          heuristicSignal: 'Resolved without penalty: vendor clerical typo confirmed via Bill of Lading',
+          cascadeResourceLabel: 'Cascade: Re-index manifest count to 42 units',
+          cascadeUserLabel: 'Cascade: Flag vendor account for double-counter verification',
+          suggestedResolution: 'Inventory reconciled via physical recount ticket #REC-449. Lot updated with split barcode manifests. Resolved amicably.',
+          imgEvidence1: 'placeholder',
+          imgEvidence2: 'placeholder'
+        },
+        {
+          id: 'REP-REQ-6630',
+          targetType: 'request',
+          targetId: 'REQ-OFF-2195',
+          targetTitle: '15x Refurbished Thin-Clients (#REQ-OFF-2195)',
+          reason: 'spam',
+          description: 'Automated civic matching engine flagged identical text submitted across 6 simultaneous request tickets within 90 seconds by user script.',
+          status: 'resolved',
+          timeAgo: '3d ago',
+          timestamp: '2024-11-11 16:30 UTC',
+          reporterName: 'Dawwarha Bot-Heuristic Sentry',
+          reporterRef: 'SYS-HEUR-01',
+          reporterOrg: 'Automated Integrity Daemon Cairo-01',
+          providerName: 'Youth Learning Hub Mansoura',
+          providerStation: 'Mansoura Digital Center',
+          category: 'Educational IT Hardware',
+          quantity: '15 Refurbished Workstations',
+          currentState: 'cancelled',
+          heuristicSignal: 'High-frequency burst submission triggered automated spam trap',
+          cascadeResourceLabel: 'Cascade: Drop duplicates 2 through 6',
+          cascadeUserLabel: 'Cascade: Enforce 10-minute rate limit on client session',
+          suggestedResolution: 'Duplicate tickets purged. Primary request maintained. Applicant trained on queue throttling protocol.',
+          imgEvidence1: 'placeholder',
+          imgEvidence2: 'placeholder'
+        }
+      ],
+      selectedReportIndex: 0
+    };
+
+    function switchPreset(index) {
+      window.dawwarhaWorkspace.activePreset = index;
+      const zeroStateEl = document.getElementById('zero-state-container');
+      const workspaceEl = document.getElementById('split-workspace-container');
+      const dialogModal = document.getElementById('resolution-modal');
+
+      if (index === 5) {
+        // Zero state
+        zeroStateEl.classList.remove('hidden');
+        workspaceEl.classList.add('hidden');
+        dialogModal.classList.add('hidden');
+      } else {
+        zeroStateEl.classList.add('hidden');
+        workspaceEl.classList.remove('hidden');
+
+        if (index === 4) {
+          // Open Resolution Dialog Mode
+          openResolutionModal();
+        } else {
+          dialogModal.classList.add('hidden');
+          selectReport(index - 1);
+        }
+      }
+      updatePresetPills(index);
+    }
+
+    function toggleRtlLanguage() {
+      const main = document.getElementById('moderation-root');
+      window.dawwarhaWorkspace.isRTL = !window.dawwarhaWorkspace.isRTL;
+      if (window.dawwarhaWorkspace.isRTL) {
+        main.setAttribute('dir', 'rtl');
+        document.getElementById('lang-toggle-btn').innerText = 'English (LTR)';
+        document.getElementById('header-breadcrumb').innerText = 'إدارة المنظومة > الثقة والرقابة > ورشة عمل الإشراف والتحكيم';
+      } else {
+        main.setAttribute('dir', 'ltr');
+        document.getElementById('lang-toggle-btn').innerText = 'العربية (RTL)';
+        document.getElementById('header-breadcrumb').innerText = 'System Administration > Trust & Moderation > Moderation Workspace';
+      }
+    }
+
+    function selectReport(index) {
+      window.dawwarhaWorkspace.selectedReportIndex = index;
+      const report = window.dawwarhaWorkspace.reports[index];
+      if (!report) return;
+
+      // Update Dossier View
+      document.getElementById('dossier-report-id').innerText = '#' + report.id;
+      document.getElementById('dossier-target-badge').innerText = report.targetType.toUpperCase();
+      document.getElementById('dossier-timestamp').innerText = report.timestamp + ' (' + report.timeAgo + ')';
+
+      const statusBadge = document.getElementById('dossier-status-badge');
+      statusBadge.innerText = report.status.toUpperCase();
+      if (report.status === 'open') {
+        statusBadge.className = 'px-2 py-0.5 rounded-full font-label-sm text-label-sm uppercase font-semibold bg-tertiary-fixed text-on-tertiary-fixed';
+      } else if (report.status === 'reviewed') {
+        statusBadge.className = 'px-2 py-0.5 rounded-full font-label-sm text-label-sm uppercase font-semibold bg-secondary-container text-on-secondary-container';
+      } else {
+        statusBadge.className = 'px-2 py-0.5 rounded-full font-label-sm text-label-sm uppercase font-semibold bg-surface-container-highest text-on-surface-variant';
+      }
+
+      document.getElementById('dossier-reporter-name').innerText = report.reporterName;
+      document.getElementById('dossier-reporter-ref').innerText = '#' + report.reporterRef;
+      document.getElementById('dossier-reporter-org').innerText = report.reporterOrg;
+      document.getElementById('dossier-reason-text').innerText = report.reason.toUpperCase();
+      document.getElementById('dossier-description').innerText = report.description;
+
+      document.getElementById('dossier-target-title').innerText = report.targetTitle;
+      document.getElementById('dossier-provider-name').innerText = report.providerName;
+      document.getElementById('dossier-provider-station').innerText = report.providerStation;
+      document.getElementById('dossier-category').innerText = report.category;
+      document.getElementById('dossier-quantity').innerText = report.quantity;
+      document.getElementById('dossier-current-state').innerText = report.currentState;
+      document.getElementById('dossier-heuristic-signal').innerText = report.heuristicSignal;
+
+      document.getElementById('cascade-chk-1-label').innerText = report.cascadeResourceLabel;
+      document.getElementById('cascade-chk-2-label').innerText = report.cascadeUserLabel;
+      document.getElementById('resolution-textarea').value = report.suggestedResolution;
+
+      // Re-highlight list
+      const items = document.querySelectorAll('.queue-item-card');
+      items.forEach((item, idx) => {
+        if (idx === index) {
+          item.classList.add('bg-surface-container-low', 'shadow-sm');
+          item.classList.remove('bg-surface-container-lowest');
+        } else {
+          item.classList.remove('bg-surface-container-low', 'shadow-sm');
+          item.classList.add('bg-surface-container-lowest');
+        }
+      });
+    }
+
+    function openResolutionModal() {
+      const modal = document.getElementById('resolution-modal');
+      modal.classList.remove('hidden');
+    }
+
+    function closeResolutionModal() {
+      const modal = document.getElementById('resolution-modal');
+      modal.classList.add('hidden');
+    }
+
+    function enforceResolution(instant) {
+      const repIdx = window.dawwarhaWorkspace.selectedReportIndex;
+      const r = window.dawwarhaWorkspace.reports[repIdx];
+      r.status = 'resolved';
+      const toast = document.getElementById('toast-notification');
+      toast.innerText = `Statutory Action Executed: Report #${r.id} successfully marked RESOLVED. Cascaded mutations dispatched to Mongo collections [reports, ${r.targetType}s].`;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+        toast.classList.remove('opacity-100');
+      }, 4500);
+      closeResolutionModal();
+      selectReport(repIdx);
+    }
+
+    function updatePresetPills(activeNum) {
+      for (let i = 1; i <= 6; i++) {
+        const p = document.getElementById(`preset-pill-${i}`);
+        if (p) {
+          if (i === activeNum) {
+            p.className = 'px-3 py-1 text-label-sm font-label-sm rounded-lg bg-primary text-on-primary font-semibold shadow-sm transition-all';
+          } else {
+            p.className = 'px-3 py-1 text-label-sm font-label-sm rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-all';
+          }
+        }
+      }
+    }
+  </script>
+<!-- Notification Toast -->
+<div class="fixed top-20 right-8 z-50 px-5 py-3 rounded-lg shadow-xl bg-primary text-on-primary font-label-md text-label-md flex items-center gap-3 transition-all duration-300 opacity-0 pointer-events-none max-w-lg" id="toast-notification">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span id="toast-message">Statutory ledger entry recorded.</span>
+</div>
+<!-- Resolution Confirmation Modal (Simulating PUT /api/reports/:id/resolve) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/60 backdrop-blur-sm p-4" id="resolution-modal">
+<div class="bg-surface-container-lowest rounded-xl max-w-xl w-full p-space-lg shadow-2xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-3 bg-surface-container-low px-4 py-3 rounded-lg">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">gavel</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface leading-tight">Authorize Resolution Statement</h3>
+<p class="font-code-sm text-code-sm text-outline">Statutory Requirement: Executive Decree 149/2019 §18</p>
+</div>
+</div>
+<button class="p-1 rounded hover:bg-surface-variant text-outline hover:text-on-surface" onclick="closeResolutionModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-space-sm">
+<label class="font-label-sm text-label-sm uppercase font-semibold text-outline">Audit Resolution Log Statement <span class="text-error">*</span></label>
+<textarea class="w-full p-3 font-body-sm text-body-sm bg-surface rounded-lg text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 placeholder:text-outline" id="modal-resolution-statement" placeholder="Enter formal legal resolution statement recorded in the immutable civic ledger..." rows="4">Consignment lot #RES-MED-6610 placed under immediate statutory quarantine (status: unavailable) under Decree 149/2019 Art. 18. Consignment physical seal confiscated at Maadi Hub pending biomedical incinerator dispatch.</textarea>
+<p class="font-code-sm text-code-sm text-outline">This string will be sealed permanently as `reports.resolution` alongside auditor ID `#ADM-REHAM-04`.</p>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-2">
+<span class="font-label-sm text-label-sm font-semibold uppercase text-on-surface-variant">Active Cascaded Mutations</span>
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Target Collection Mutation: <code class="font-code-sm bg-surface-container px-1 py-0.5 rounded text-primary">PUT /api/resources/RES-MED-6610/status</code> { action: 'markUnavailable' }</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Provider User Suspension: <code class="font-code-sm bg-surface-container px-1 py-0.5 rounded text-error">PUT /api/admin/users/USR-5521/suspend</code></span>
+</label>
+</div>
+<div class="flex items-center justify-end gap-3 pt-2">
+<button class="px-4 py-2 font-label-md text-label-md rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface-variant transition-colors" onclick="closeResolutionModal()">Abort</button>
+<button class="px-5 py-2 font-label-md text-label-md font-semibold rounded-lg bg-primary hover:bg-primary-container text-on-primary shadow-sm flex items-center gap-2 transition-all" onclick="enforceResolution(true)">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Commit Signed Resolution</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Outer Workspace Wrapper with RTL/LTR Hook -->
+<div class="flex flex-col w-full gap-space-lg" id="moderation-root">
+<!-- 1. Prototype Simulator Toolbar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-sm shadow-sm flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container rounded-lg">
+<span class="material-symbols-outlined text-primary text-[18px]">science</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase text-on-surface-variant">Sim Engine:</span>
+</div>
+<div class="flex flex-wrap items-center gap-1">
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-lg bg-primary text-on-primary font-semibold shadow-sm transition-all" id="preset-pill-1" onclick="switchPreset(1)">1. Safety Lot #6610</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-all" id="preset-pill-2" onclick="switchPreset(2)">2. User Fraud #8819</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-all" id="preset-pill-3" onclick="switchPreset(3)">3. Fake Requisition #1029</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-all" id="preset-pill-4" onclick="switchPreset(4)">4. Resolution Dialog Test</button>
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-lg bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container transition-all" id="preset-pill-5" onclick="switchPreset(5)">5. Zero State</button>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1 text-label-sm font-label-sm rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface font-semibold flex items-center gap-1.5 transition-colors" id="lang-toggle-btn" onclick="toggleRtlLanguage()">
+<span class="material-symbols-outlined text-[16px] text-primary">translate</span>
+<span>العربية (RTL)</span>
+</button>
+<span class="font-code-sm text-code-sm text-outline px-2 py-0.5 rounded bg-surface-container">Domain 4: عبد الستار مطاوع</span>
+</div>
+</div>
+<!-- 2. Sub-Header & Context Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<div class="font-code-sm text-code-sm text-outline flex items-center gap-1.5" id="header-breadcrumb">
+<span>System Administration</span>
+<span>&gt;</span>
+<span>Trust &amp; Moderation</span>
+<span>&gt;</span>
+<span class="text-primary font-medium">Moderation Workspace</span>
+</div>
+<div class="flex items-baseline gap-3 mt-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Platform Moderation &amp; Content Governance Queue</h1>
+<span class="font-code-sm text-code-sm text-outline px-2 py-0.5 bg-surface-container-high rounded-md">/admin/moderation</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-4xl mt-1 leading-relaxed">
+          Deliberate evidence-based investigation workspace for reported platform artifacts under Egyptian Circular Economy Decree 149/2019. Reports serve as investigative signals, not automatic proof of wrongdoing. All determinations trigger cascading audit status updates without hard deletes.
+        </p>
+</div>
+<div class="flex items-center gap-2 shrink-0">
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-md text-label-md font-medium shadow-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-outline">file_download</span>
+<span>Export Moderation Log (.CSV)</span>
+</button>
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest hover:bg-surface-container text-primary font-label-md text-label-md font-semibold shadow-sm flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+<span>Statutory Protocol Spec</span>
+</button>
+</div>
+</div>
+<!-- 3. Metrics Operational KPI Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-outline">Open Triage Queue</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-code-sm text-code-sm font-semibold">Priority 1</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">03</span>
+<span class="font-label-md text-label-md text-tertiary font-semibold">cases</span>
+</div>
+<div class="mt-2 pt-2 bg-surface-container-low px-2 py-1.5 rounded-lg flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm">
+<span>SLA Avg: 3.8h</span>
+<span class="text-primary font-medium">Cap: &lt; 24h statutory</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-outline">Under Investigation</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-code-sm text-code-sm font-semibold">In Field</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">04</span>
+<span class="font-label-md text-label-md text-secondary font-semibold">active audits</span>
+</div>
+<div class="mt-2 pt-2 bg-surface-container-low px-2 py-1.5 rounded-lg flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm">
+<span>Cairo Hub &amp; Delta</span>
+<span class="text-outline">Inspector Dispatched</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-outline">Resolved This Month</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-code-sm text-code-sm font-semibold">100% Trail</span>
+</div>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">41</span>
+<span class="font-label-md text-label-md text-on-surface-variant">adjudications</span>
+</div>
+<div class="mt-2 pt-2 bg-surface-container-low px-2 py-1.5 rounded-lg flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm">
+<span>Resolution Ratio</span>
+<span class="text-primary font-semibold">97.4% on SLA</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-outline">Target Breakdown</span>
+<span class="material-symbols-outlined text-outline text-[18px]">pie_chart</span>
+</div>
+<div class="mt-2 flex items-center justify-between gap-1">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">22</span>
+<span class="font-code-sm text-code-sm text-outline">Resources</span>
+</div>
+<span class="text-outline font-code-sm">/</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">14</span>
+<span class="font-code-sm text-code-sm text-outline">Requests</span>
+</div>
+<span class="text-outline font-code-sm">/</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">12</span>
+<span class="font-code-sm text-code-sm text-outline">Users</span>
+</div>
+</div>
+<div class="mt-2 pt-2 bg-surface-container-low px-2 py-1.5 rounded-lg flex items-center justify-between text-on-surface-variant font-code-sm text-code-sm">
+<span>Total Database Reports</span>
+<span class="font-semibold text-on-surface">48 items</span>
+</div>
+</div>
+</div>
+<!-- 4. Filter & Search Toolbar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-sm shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-outline pointer-events-none">search</span>
+<input class="w-full pl-9 pr-3 py-2 text-body-sm font-body-sm bg-surface rounded-lg text-on-surface placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary transition-all" placeholder="Search by report ID (#REP-...), target ref, reporter, or reason..." type="text"/>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<!-- Filter: Target Type -->
+<select class="px-3 py-2 font-label-sm text-label-sm rounded-lg bg-surface text-on-surface font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option value="all">Target: All Types</option>
+<option value="resource">Resource Surplus (Collection 4)</option>
+<option value="request">Civic Request (Collection 5)</option>
+<option value="user">User / Entity Profile</option>
+</select>
+<!-- Filter: Status -->
+<select class="px-3 py-2 font-label-sm text-label-sm rounded-lg bg-surface text-on-surface font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option value="all">Status: All (3-State Enum)</option>
+<option value="open">Open (Unassigned/Active)</option>
+<option value="reviewed">Reviewed (In Investigation)</option>
+<option value="resolved">Resolved (Quarantined/Closed)</option>
+</select>
+<!-- Filter: Reason -->
+<select class="px-3 py-2 font-label-sm text-label-sm rounded-lg bg-surface text-on-surface font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option value="all">Reason: All Triggers</option>
+<option value="safety">Safety (Biomedical/Structural)</option>
+<option value="fraud">Fraud (Diversion/No-Show)</option>
+<option value="inappropriate">Inappropriate (Fictitious)</option>
+<option value="spam">Spam (Burst Duplication)</option>
+<option value="other">Other (Manifest Discrepancy)</option>
+</select>
+<!-- Filter: Date Range -->
+<select class="px-3 py-2 font-label-sm text-label-sm rounded-lg bg-surface text-on-surface font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer">
+<option>Window: Last 30 Days</option>
+<option>Window: Last 7 Days</option>
+<option>Window: Quarter to Date</option>
+</select>
+<button class="px-3 py-2 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface-variant font-label-sm text-label-sm font-medium transition-colors">
+          Reset Filters
+        </button>
+</div>
+</div>
+<!-- ZERO STATE CONTAINER (Default Hidden, Triggered by Simulator Preset 5) -->
+<div class="hidden bg-surface-container-lowest rounded-xl p-space-xl text-center flex flex-col items-center justify-center gap-space-md shadow-sm my-6" id="zero-state-container">
+<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[32px]">task_alt</span>
+</div>
+<div class="max-w-md">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">Queue Cleared: Zero Open Moderation Reports</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
+          All statutory circular surplus allegations under Decree 149/2019 have been adjudicated. Heuristic node Cairo-01 continues to monitor bilateral handovers with 28ms verification cycle.
+        </p>
+</div>
+<button class="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold" onclick="switchPreset(1)">
+        Reload Active Investigation Queue
+      </button>
+</div>
+<!-- 5. Dual-Pane Split Investigation Workspace -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start" id="split-workspace-container">
+<!-- LEFT PANE (40% width / 5 Cols on 12-grid): Moderation Queue Table / List -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<!-- List Header -->
+<div class="px-space-md py-3 bg-surface-container-low flex items-center justify-between shrink-0">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">view_list</span>
+<span class="font-label-sm text-label-sm font-bold uppercase text-on-surface-variant tracking-wider">Reports Log Stream</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline">5 of 48 Items</span>
+</div>
+<!-- Scrollable Item Stack -->
+<div class="flex flex-col divide-y divide-surface-container-low max-h-[780px] overflow-y-auto">
+<!-- Item 1: Active Triage Lot 6610 (Selected) -->
+<div class="queue-item-card p-space-md bg-surface-container-low shadow-sm cursor-pointer transition-colors flex flex-col gap-2 relative" onclick="selectReport(0)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REP-MED-9021</span>
+<span class="font-code-sm text-code-sm text-outline">• Resource</span>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-tertiary-fixed text-on-tertiary-fixed">OPEN (3.2h)</span>
+</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface leading-snug">
+              Expired Dialysis Filter Kits (#RES-MED-6610)
+            </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+              Sterilization seal expired Oct 2023 detected during physical intake triage at Maadi Logistics Hub. Immediate quarantine required.
+            </p>
+<div class="flex items-center justify-between pt-1 font-code-sm text-code-sm text-outline">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-semibold">REASON: SAFETY</span>
+<span>Reporter: Dr. H. Kassem</span>
+</div>
+</div>
+<!-- Item 2: User Fraud USR-8819 -->
+<div class="queue-item-card p-space-md bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer flex flex-col gap-2" onclick="selectReport(1)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REP-USR-4409</span>
+<span class="font-code-sm text-code-sm text-outline">• User Account</span>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-secondary-container text-on-secondary-container">REVIEWED (14h)</span>
+</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface leading-snug">
+              Mahmoud S. El-Sayed (#USR-8819)
+            </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+              Reported for chronic no-show pattern and attempted parallel national ID registration across 3 Cairo distribution hubs.
+            </p>
+<div class="flex items-center justify-between pt-1 font-code-sm text-code-sm text-outline">
+<span class="px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed font-semibold">REASON: FRAUD</span>
+<span>Reporter: Al-Bustan (#ORG-CAI)</span>
+</div>
+</div>
+<!-- Item 3: Fake Requisition REQ-1029 -->
+<div class="queue-item-card p-space-md bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer flex flex-col gap-2" onclick="selectReport(2)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-primary">#REP-REQ-8812</span>
+<span class="font-code-sm text-code-sm text-outline">• Requisition</span>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-tertiary-fixed text-on-tertiary-fixed">OPEN (6.5h)</span>
+</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface leading-snug">
+              800kg Fresh Rice &amp; Staples (#REQ-FOO-1029)
+            </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+              Applicant claimed certified cold-storage capacity, physical audit revealed ambient dry-only storefront without refrigeration.
+            </p>
+<div class="flex items-center justify-between pt-1 font-code-sm text-code-sm text-outline">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-semibold">REASON: INAPPROPRIATE</span>
+<span>Reporter: Tariq Ramadan</span>
+</div>
+</div>
+<!-- Item 4: Resolved Discrepancy RES-7715 -->
+<div class="queue-item-card p-space-md bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer flex flex-col gap-2" onclick="selectReport(3)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-outline">#REP-RES-7715</span>
+<span class="font-code-sm text-code-sm text-outline">• Resource</span>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-highest text-on-surface-variant">RESOLVED (2d ago)</span>
+</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface leading-snug">
+              60x Winter Jackets Lot #RES-CLO-7721
+            </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+              Manifest discrepancy: 42 parkas delivered alongside 18 long-sleeve shirts. Reconciled via amended bill of lading.
+            </p>
+<div class="flex items-center justify-between pt-1 font-code-sm text-code-sm text-outline">
+<span class="px-2 py-0.5 rounded bg-surface-container text-outline font-medium">REASON: OTHER</span>
+<span>Auditor: Eng. Reham M.</span>
+</div>
+</div>
+<!-- Item 5: Resolved Spam Burst REQ-6630 -->
+<div class="queue-item-card p-space-md bg-surface-container-lowest hover:bg-surface-container-low transition-colors cursor-pointer flex flex-col gap-2" onclick="selectReport(4)">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="font-code-sm text-code-sm font-semibold text-outline">#REP-REQ-6630</span>
+<span class="font-code-sm text-code-sm text-outline">• Requisition</span>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold bg-surface-container-highest text-on-surface-variant">RESOLVED (3d ago)</span>
+</div>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface leading-snug">
+              15x Refurbished Thin-Clients (#REQ-OFF-2195)
+            </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2 leading-relaxed">
+              Automated throttle caught burst spam generator. Duplicate requests collapsed and user account rate-limited.
+            </p>
+<div class="flex items-center justify-between pt-1 font-code-sm text-code-sm text-outline">
+<span class="px-2 py-0.5 rounded bg-surface-container text-outline font-medium">REASON: SPAM</span>
+<span>Daemon Sentry Cairo-01</span>
+</div>
+</div>
+</div>
+<!-- Pagination Footer -->
+<div class="p-space-sm bg-surface-container-low flex items-center justify-between shrink-0">
+<span class="font-code-sm text-code-sm text-outline">Page 1 of 10 (48 Total)</span>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-outline font-code-sm text-code-sm cursor-not-allowed opacity-60">Prev</button>
+<button class="px-2.5 py-1 rounded bg-primary text-on-primary font-code-sm text-code-sm font-semibold">1</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-code-sm text-code-sm">2</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-code-sm text-code-sm">3</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest hover:bg-surface-container text-on-surface font-code-sm text-code-sm">Next</button>
+</div>
+</div>
+</div>
+<!-- RIGHT PANE (60% width / 7 Cols on 12-grid): Deep Investigation & Action Dossier -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<!-- Dossier Container Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm flex flex-col gap-space-lg">
+<!-- Dossier Top Metadata Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md bg-surface-container-low p-4 rounded-xl gap-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[28px]">policy</span>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface" id="dossier-report-id">#REP-MED-9021</h2>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm uppercase font-semibold bg-tertiary-fixed text-on-tertiary-fixed" id="dossier-status-badge">OPEN</span>
+</div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-outline mt-0.5">
+<span class="uppercase font-medium">Target Type:</span>
+<span class="font-bold text-on-surface" id="dossier-target-badge">RESOURCE</span>
+<span>•</span>
+<span id="dossier-timestamp">2024-11-14 09:20 UTC (3.2 hours ago)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Print Dossier</span>
+</button>
+</div>
+</div>
+<!-- Section A: Allegation & Reporter Context -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]">record_voice_over</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Section A: Allegation &amp; Submitter Context</h3>
+</div>
+<div class="bg-surface rounded-xl p-space-md flex flex-col gap-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div>
+<span class="font-label-sm text-label-sm uppercase text-outline font-semibold">Submitting Citizen / Entity</span>
+<div class="flex items-baseline gap-2 mt-0.5">
+<span class="font-body-md text-body-md font-bold text-on-surface" id="dossier-reporter-name">Dr. Hisham Kassem</span>
+<span class="font-code-sm text-code-sm text-primary font-semibold" id="dossier-reporter-ref">#USR-3382</span>
+</div>
+<p class="font-code-sm text-code-sm text-on-surface-variant mt-0.5" id="dossier-reporter-org">Sayeda Zeinab Community Health Center (MoSS Civic Node #892-CAI)</p>
+</div>
+<div>
+<span class="font-label-sm text-label-sm uppercase text-outline font-semibold">Flagged Category &amp; Severity</span>
+<div class="flex items-center gap-2 mt-1">
+<span class="px-2.5 py-0.5 rounded-full font-label-sm text-label-sm uppercase font-bold bg-error-container text-on-error-container" id="dossier-reason-text">SAFETY VIOLATION</span>
+<span class="font-code-sm text-code-sm text-outline">Statutory Breach §149/19</span>
+</div>
+</div>
+</div>
+<!-- Statement Blockquote -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-outline">Submitter Verbatim Statement</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed italic" id="dossier-description">
+                  "During intake triage at Maadi Logistics Hub, lot #RES-MED-6610 of pediatric dialysis filter packs showed manufacturing date 2021-08 with expired sterilization seal dated Oct 2023. Violates Circular Economy Decree 149/2019 biomedical surplus provisions. Consignment must be quarantined immediately."
+                </p>
+</div>
+<!-- Evidence Photos & Hashes -->
+<div class="flex flex-col gap-2">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-outline">Field Evidence Attachments (SHA-256 Tamper Sealed)</span>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<!-- Evidence 1 -->
+<div class="bg-surface-container-low rounded-lg p-2 flex items-center gap-3">
+<img class="w-16 h-16 rounded object-cover shrink-0" data-alt="High-resolution close-up photo of medical packaging showing an expired sterilization seal date stamp on clinical dialysis filters in a clean clinical logistics facility with cool neutral lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQsBCm2quFICxFCA6SA6i2ZYSqqMsnpJvnKM9l4Pu2f8uouZWDOQ5yU2eyPaLL-3n5HvFaPisPM2-tMbfkikwPfW5VF0g08OnTvYIzshP3bmIEHKcPQT9VdEqj1ez_jBS5FQy6aPFmzQjgXXtzoTaqx8VEfn7V6JgcAGxKvxINb3f_U41ML1JeLwnvIf5OBx2eivPT6yW44aJPGC9whKkudlDiotnRzthhvU7b8i1utGzeIjC8hwFmuQ"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Sterilization_Seal_SealStamp.jpg</span>
+<span class="font-code-sm text-code-sm text-outline truncate">Hash: e3b0c44298fc1c149afb...</span>
+<span class="font-code-sm text-code-sm text-primary">Intake Timestamp: 09:12 Cairo</span>
+</div>
+</div>
+<!-- Evidence 2 -->
+<div class="bg-surface-container-low rounded-lg p-2 flex items-center gap-3">
+<img class="w-16 h-16 rounded object-cover shrink-0" data-alt="Detailed view of carton label showing lot number and manufacture year on boxed pediatric medical surplus supplies in a warehouse triage bay." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXUPoxkMNYkhtfsbzxkKS7fAl4P4OtUnpsM7KLMqIizYOxz7hYCnDU8o7IwT4Kfmqj4x1zW-eCvzRZ3kKlvLUCqA05s_hrUdOG6B56UjZGMPrgIcphxaWq50_UmKK1aiB1awuzhIC3KeAwwv-2dyIYgsS8DtpZQ33kIeZ8CNLTilHLsbsje0lORfJuuToDMkfG580xEYx0cyDAZBlF6uQ0DXpci8frv5KwG7G4b-fJVa7qgjwbxAkN-A"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface truncate">Lot_Barcode_Inspection.jpg</span>
+<span class="font-code-sm text-code-sm text-outline truncate">Hash: 84a6c8e3a24147043812...</span>
+<span class="font-code-sm text-code-sm text-primary">GPS: 30.0131° N, 31.2089° E</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section B: Target Polymorphic Inspection (Real DB Collection Specs) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]">inventory</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Section B: Polymorphic Artifact Deep Inspection</h3>
+</div>
+<a class="font-label-sm text-label-sm text-primary hover:underline font-semibold flex items-center gap-1" href="#">
+<span>View Full Record In Oversight</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<div class="bg-surface rounded-xl p-space-md flex flex-col gap-3">
+<div class="flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm uppercase font-semibold text-outline">Target Item Reference</span>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface mt-0.5" id="dossier-target-title">
+                    Dialysis Filter Kits Lot #RES-MED-6610
+                  </div>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm uppercase font-semibold text-outline">Current Status</span>
+<div class="font-code-sm text-code-sm font-bold text-tertiary" id="dossier-current-state">available (Held)</div>
+</div>
+</div>
+<!-- Key Value Metrics Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-surface-container-low p-3 rounded-lg font-code-sm text-code-sm">
+<div>
+<span class="text-outline uppercase font-semibold text-[11px] block">Provider Entity:</span>
+<span class="font-bold text-on-surface" id="dossier-provider-name">Delta Warehouse #09</span>
+</div>
+<div>
+<span class="text-outline uppercase font-semibold text-[11px] block">Logistics Node:</span>
+<span class="font-medium text-on-surface" id="dossier-provider-station">Tanta Logistics Station</span>
+</div>
+<div>
+<span class="text-outline uppercase font-semibold text-[11px] block">Category Taxonomy:</span>
+<span class="font-medium text-on-surface" id="dossier-category">Biomedical Surplus</span>
+</div>
+<div>
+<span class="text-outline uppercase font-semibold text-[11px] block">Surplus Consignment Volume:</span>
+<span class="font-bold text-primary" id="dossier-quantity">40 sealed units (8 boxes)</span>
+</div>
+<div class="sm:col-span-2">
+<span class="text-outline uppercase font-semibold text-[11px] block">System Heuristic Warning:</span>
+<span class="font-semibold text-error" id="dossier-heuristic-signal">2nd safety flag on provider Delta Warehouse #09 within 60 days</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Section C: Administrative Resolution Gateway (`PUT /api/reports/:id/resolve`) -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">security_update_good</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Section C: Statutory Resolution &amp; Cascaded Enforcement</h3>
+</div>
+<div class="bg-surface rounded-xl p-space-md flex flex-col gap-space-md">
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Resolving a report requires an authoritative resolution statement for the statutory audit trail. Selecting target cascades applies status-based archival (<code class="font-code-sm text-primary">markUnavailable</code> or <code class="font-code-sm text-error">suspended</code>) with zero destructive hard deletes.
+              </p>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm uppercase font-bold text-on-surface">
+                  Mandatory Statutory Resolution Statement <span class="text-error">*</span>
+</label>
+<textarea class="w-full p-3 font-body-sm text-body-sm bg-surface-container-lowest rounded-lg text-on-surface focus:outline-none focus:ring-1 focus:ring-primary shadow-sm" id="resolution-textarea" placeholder="Draft regulatory determination..." rows="3">Consignment lot #RES-MED-6610 placed under immediate statutory quarantine (status: unavailable) under Decree 149/2019 Art. 18. Consignment physical seal confiscated at Maadi Hub pending biomedical incinerator dispatch.</textarea>
+</div>
+<!-- Cascaded Action Checkboxes -->
+<div class="flex flex-col gap-2 bg-surface-container-low p-3 rounded-lg">
+<span class="font-label-sm text-label-sm font-bold uppercase text-on-surface-variant">Automated Cascading Mutations</span>
+<label class="flex items-center gap-2.5 cursor-pointer">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" id="chk-cascade-resource" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium" id="cascade-chk-1-label">Cascade: Update Resource status to "unavailable" (Statutory Quarantine)</span>
+</label>
+<label class="flex items-center gap-2.5 cursor-pointer">
+<input class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" id="chk-cascade-user" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface font-medium" id="cascade-chk-2-label">Cascade: Suspend Provider Ibrahim Fawzi (#USR-5521) under Decree 149 §14</span>
+</label>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+<div class="flex items-center gap-2">
+<button class="px-5 py-2.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-semibold shadow-sm flex items-center gap-2 transition-all" onclick="enforceResolution(false)">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Enforce Resolution &amp; Quarantine Target</span>
+</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container hover:bg-surface-variant text-on-surface font-label-md text-label-md font-medium transition-colors" onclick="openResolutionModal()">
+                    Mark Reviewed (Assign Field Inspection)
+                  </button>
+</div>
+<button class="px-3 py-2 rounded-lg text-error hover:bg-error-container/20 font-label-md text-label-md font-semibold transition-colors" onclick="enforceResolution(false)">
+                  Dismiss Allegation (Unsubstantiated)
+                </button>
+</div>
+</div>
+</div>
+<!-- Section D: Immutable Statutory Audit Trail -->
+<div class="flex flex-col gap-space-sm pt-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[20px]">history</span>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Section D: Merkle-Backed Audit Trail</h3>
+</div>
+<span class="font-code-sm text-code-sm text-primary font-semibold">Ledger Node: Cairo-01</span>
+</div>
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-3 font-code-sm text-code-sm">
+<div class="flex items-start gap-3">
+<span class="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0"></span>
+<div class="flex-1 flex items-baseline justify-between">
+<span class="text-on-surface font-medium">Report initialized via public mobile field intake by Dr. Hisham Kassem</span>
+<span class="text-outline">2024-11-14 09:20:11 UTC</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0"></span>
+<div class="flex-1 flex items-baseline justify-between">
+<span class="text-on-surface font-medium">Bilateral match engine auto-paused downstream allocation #MTCH-9941</span>
+<span class="text-outline">2024-11-14 09:20:14 UTC</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="w-2 h-2 rounded-full bg-tertiary mt-1.5 shrink-0"></span>
+<div class="flex-1 flex items-baseline justify-between">
+<span class="text-on-surface font-medium">Dossier claimed into triage by Super Admin Eng. Reham M.</span>
+<span class="text-outline">2024-11-14 11:45:00 UTC</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></div></main><footer class="w-full bg-surface-container-lowest border-t border-outline-variant/20 py-space-sm px-gutter"><div class="flex flex-col md:flex-row items-center justify-between gap-2 text-on-surface-variant font-code-sm text-code-sm"><div><span>Dawwarha Civic Operations OS • National Extended Producer Responsibility (EPR) Circular Platform</span></div><div class="flex items-center gap-space-md text-outline"><span>Statutory Compliance: Executive Decree 149/2019</span><span>•</span><span>Node Latency: 28ms</span><span>•</span><span class="text-primary font-medium">Audit State: Tamper-Evident Immutable</span></div></div></footer></div></body></html>

@@ -1,0 +1,451 @@
+{
+  "info": {
+    "name": "DAWWARHA — Trust & Impact API Collection",
+    "description": "Authoritative Postman Collection for Engineer 4 (Trust, Impact & Admin Domain) in DAWWARHA. Covers Handover / Transaction Confirmation, Moderation Reports, User Impact & Contributions, Platform Admin Analytics, and Notifications according to Section 14 and Section 23 of the Backend Implementation Plan.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:5000", "type": "string" },
+    { "key": "provider_token", "value": "", "type": "string" },
+    { "key": "seeker_token", "value": "", "type": "string" },
+    { "key": "admin_token", "value": "", "type": "string" },
+    { "key": "match_id", "value": "", "type": "string" },
+    { "key": "report_id", "value": "", "type": "string" },
+    { "key": "notification_id", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "1. Transaction Confirmation (Handover Cascade)",
+      "item": [
+        {
+          "name": "Confirm Transaction - Provider (POST /api/transactions/:matchId/confirm)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Handover returned with providerConfirmed=true', function () {",
+                  "  pm.expect(json.success).to.be.true;",
+                  "  pm.expect(json.data.providerConfirmed).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/transactions/{{match_id}}/confirm", "host": ["{{base_url}}"], "path": ["api", "transactions", "{{match_id}}", "confirm"] },
+            "description": "Donor / Provider confirms the physical handover. Handover status remains in_progress until both parties confirm."
+          }
+        },
+        {
+          "name": "Confirm Transaction - Seeker (POST /api/transactions/:matchId/confirm)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Handover completed and lifecycle cascade executed', function () {",
+                  "  pm.expect(json.success).to.be.true;",
+                  "  pm.expect(json.data.status).to.equal('completed');",
+                  "  pm.expect(json.data.seekerConfirmed).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{seeker_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/transactions/{{match_id}}/confirm", "host": ["{{base_url}}"], "path": ["api", "transactions", "{{match_id}}", "confirm"] },
+            "description": "Seeker confirms receipt. Triggers atomic cascade: Handover -> completed, Resource -> impact_recorded, Request -> fulfilled, Contribution -> recorded."
+          }
+        },
+        {
+          "name": "Confirm Transaction - Non-Party Forbidden - 403",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 403 Forbidden', function () { pm.response.to.have.status(403); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/transactions/{{match_id}}/confirm", "host": ["{{base_url}}"], "path": ["api", "transactions", "{{match_id}}", "confirm"] },
+            "description": "Negative case: User who is neither provider nor seeker cannot confirm."
+          }
+        },
+        {
+          "name": "Confirm Transaction - Already Completed - 409",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 409 Conflict', function () { pm.response.to.have.status(409); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/transactions/{{match_id}}/confirm", "host": ["{{base_url}}"], "path": ["api", "transactions", "{{match_id}}", "confirm"] },
+            "description": "Negative case: Confirming an already completed handover returns 409 INVALID_STATUS."
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Moderation Reports",
+      "item": [
+        {
+          "name": "Create Report (POST /api/reports)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () { pm.response.to.have.status(201); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Report created with status pending', function () {",
+                  "  pm.expect(json.data.status).to.equal('pending');",
+                  "});",
+                  "if (json.data && json.data._id) {",
+                  "  pm.collectionVariables.set('report_id', json.data._id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{seeker_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetType\": \"resource\",\n  \"targetId\": \"660000000000000000000010\",\n  \"reason\": \"Item quality differs significantly from description\",\n  \"description\": \"Listing claimed brand new condition but physical inspection showed severe wear.\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/reports", "host": ["{{base_url}}"], "path": ["api", "reports"] },
+            "description": "Submit a polymorphic report against a user, resource, request, or organization."
+          }
+        },
+        {
+          "name": "List Reports (GET /api/reports - Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Returns reports list and pagination', function () {",
+                  "  pm.expect(json.data.reports).to.be.an('array');",
+                  "  pm.expect(json.data.pagination).to.be.an('object');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/reports?page=1&limit=20&status=pending",
+              "host": ["{{base_url}}"],
+              "path": ["api", "reports"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "status", "value": "pending" }
+              ]
+            },
+            "description": "Admin endpoint to list submitted moderation reports with status filtering."
+          }
+        },
+        {
+          "name": "Resolve Report (PUT /api/reports/:id/resolve - Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Report status updated to resolved', function () {",
+                  "  pm.expect(json.data.status).to.equal('resolved');",
+                  "  pm.expect(json.data.resolutionNotes).to.be.a('string');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resolution\": \"Listing inspected and updated. Warning sent to provider.\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/reports/{{report_id}}/resolve", "host": ["{{base_url}}"], "path": ["api", "reports", "{{report_id}}", "resolve"] },
+            "description": "Admin resolves a report with required resolution notes."
+          }
+        },
+        {
+          "name": "Resolve Report - Missing Resolution - 400",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 400', function () { pm.response.to.have.status(400); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" },
+              { "key": "Content-Type", "value": "application/json", "type": "text" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resolution\": \"\"\n}"
+            },
+            "url": { "raw": "{{base_url}}/api/reports/{{report_id}}/resolve", "host": ["{{base_url}}"], "path": ["api", "reports", "{{report_id}}", "resolve"] },
+            "description": "Negative case: Resolving without resolution string returns 400 validation error."
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Contributions & Impact",
+      "item": [
+        {
+          "name": "Get My Contributions (GET /api/users/me/contributions)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Contributions array returned', function () {",
+                  "  pm.expect(json.data.contributions).to.be.an('array');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/users/me/contributions", "host": ["{{base_url}}"], "path": ["api", "users", "me", "contributions"] },
+            "description": "Fetch the authenticated user's contribution history and environmental impact metrics."
+          }
+        },
+        {
+          "name": "Get Contributions - Unauthenticated 401",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 401', function () { pm.response.to.have.status(401); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/users/me/contributions", "host": ["{{base_url}}"], "path": ["api", "users", "me", "contributions"] },
+            "description": "Negative case: Accessing contributions without token rejected with 401."
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Admin Analytics",
+      "item": [
+        {
+          "name": "Get Platform Analytics (GET /api/admin/analytics)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Platform KPIs present', function () {",
+                  "  pm.expect(json.data).to.have.property('activeResources');",
+                  "  pm.expect(json.data).to.have.property('openRequests');",
+                  "  pm.expect(json.data).to.have.property('completedHandovers');",
+                  "  pm.expect(json.data).to.have.property('totalImpact');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{admin_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/admin/analytics", "host": ["{{base_url}}"], "path": ["api", "admin", "analytics"] },
+            "description": "Platform KPI dashboard and aggregated impact metrics. Admin only, read only."
+          }
+        },
+        {
+          "name": "Get Analytics - Non-Admin 403 Forbidden",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 403', function () { pm.response.to.have.status(403); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{provider_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/admin/analytics", "host": ["{{base_url}}"], "path": ["api", "admin", "analytics"] },
+            "description": "Negative case: Regular user attempting to access admin analytics receives 403."
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Notifications",
+      "item": [
+        {
+          "name": "List User Notifications (GET /api/notifications)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Notifications array returned', function () {",
+                  "  pm.expect(json.data.notifications).to.be.an('array');",
+                  "  pm.expect(json.data.pagination).to.be.an('object');",
+                  "});",
+                  "if (json.data.notifications.length > 0) {",
+                  "  pm.collectionVariables.set('notification_id', json.data.notifications[0]._id);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{seeker_token}}", "type": "text" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/notifications?page=1&limit=20&unreadOnly=false",
+              "host": ["{{base_url}}"],
+              "path": ["api", "notifications"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "20" },
+                { "key": "unreadOnly", "value": "false" }
+              ]
+            },
+            "description": "List in-app notifications for authenticated user with unread filter and pagination."
+          }
+        },
+        {
+          "name": "Mark Notification as Read (PATCH /api/notifications/:id/read)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
+                  "const json = pm.response.json();",
+                  "pm.test('Notification marked as read', function () {",
+                  "  pm.expect(json.data.read).to.be.true;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{seeker_token}}", "type": "text" }
+            ],
+            "url": { "raw": "{{base_url}}/api/notifications/{{notification_id}}/read", "host": ["{{base_url}}"], "path": ["api", "notifications", "{{notification_id}}", "read"] },
+            "description": "Mark a notification as read. Enforces user isolation (users can only update their own notifications)."
+          }
+        },
+        {
+          "name": "List Notifications - Unauthenticated 401",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 401', function () { pm.response.to.have.status(401); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/api/notifications", "host": ["{{base_url}}"], "path": ["api", "notifications"] },
+            "description": "Negative case: Accessing notifications without token returns 401."
+          }
+        }
+      ]
+    }
+  ]
+}
