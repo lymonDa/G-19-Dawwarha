@@ -566,6 +566,31 @@ describe("ENG-01 — Identity, Organizations & Admin API Route Unit Tests", () =
       assert.equal(json.pagination.total, 2);
     });
 
+    test("GET /api/admin/users — admin filters users by role and search", async () => {
+      let capturedFilter = null;
+      mock.method(User, "find", (filter) => {
+        capturedFilter = filter;
+        return {
+          sort: () => ({
+            skip: () => ({
+              limit: async () => [{ _id: userId, role: "user", name: "Sarah" }],
+            }),
+          }),
+        };
+      });
+      mock.method(User, "countDocuments", async (filter) => 1);
+
+      const res = await fetch(`${baseUrl}/api/admin/users?role=user&search=Sarah`, {
+        headers: { Authorization: `Bearer ${adminToken}` },
+      });
+
+      assert.equal(res.status, 200);
+      const json = await res.json();
+      assert.equal(json.success, true);
+      assert.equal(capturedFilter.role, "user");
+      assert.ok(capturedFilter.$or);
+    });
+
     test("GET /api/admin/users — non-admin receives 403 Forbidden", async () => {
       const res = await fetch(`${baseUrl}/api/admin/users`, {
         headers: { Authorization: `Bearer ${userToken}` },

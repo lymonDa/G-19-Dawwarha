@@ -143,7 +143,7 @@ export class RegisterComponent {
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
-  readonly selectedRole = signal<UserRole>('user');
+  readonly selectedRole = signal<'user' | 'organization'>('user');
 
   registerForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -152,7 +152,7 @@ export class RegisterComponent {
     phone: ['']
   });
 
-  selectRole(role: UserRole): void {
+  selectRole(role: 'user' | 'organization'): void {
     this.selectedRole.set(role);
   }
 

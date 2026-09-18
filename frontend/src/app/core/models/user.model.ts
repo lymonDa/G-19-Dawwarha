@@ -1,5 +1,5 @@
-export type UserRole = 'user' | 'organization' | 'admin';
-export type UserStatus = 'active' | 'suspended' | 'pending';
+export type UserRole = 'user' | 'admin';
+export type UserStatus = 'active' | 'suspended';
 
 export interface UserLocation {
   area: string;

@@ -201,7 +201,6 @@ export class AdminUsersComponent implements OnInit {
   readonly roleOptions: SelectOption[] = [
     { value: '', label: 'All Roles' },
     { value: 'user', label: 'Individuals' },
-    { value: 'organization', label: 'Organizations' },
     { value: 'admin', label: 'Admins' }
   ];
 
@@ -284,15 +283,13 @@ export class AdminUsersComponent implements OnInit {
     });
   }
 
-  getRoleVariant(role: UserRole): 'neutral' | 'sand' | 'danger' {
+  getRoleVariant(role: UserRole): 'neutral' | 'danger' {
     if (role === 'admin') return 'danger';
-    if (role === 'organization') return 'sand';
     return 'neutral';
   }
 
   getRoleText(role: UserRole): string {
     if (role === 'admin') return 'Admin';
-    if (role === 'organization') return 'Organization';
     return 'Individual';
   }
 

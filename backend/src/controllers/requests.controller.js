@@ -12,54 +12,63 @@ const isOwnerOrAdmin = (request, user) => {
 };
 
 // GET /api/requests
-const getRequests = (req, res) => {
-  const page = Math.max(parseInt(req.query.page) || 1, 1);
-  const limit = Math.min(
-    Math.max(parseInt(req.query.limit) || 10, 1),
-    100
-  );
+const getRequests = async (req, res) => {
+  try {
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(
+      Math.max(parseInt(req.query.limit) || 10, 1),
+      100
+    );
 
-  const skip = (page - 1) * limit;
+    const skip = (page - 1) * limit;
 
-  const filter = {};
+    const filter = {};
 
-  if (req.query.status) {
-    filter.status = req.query.status;
-  }
+    if (req.query.status) {
+      filter.status = req.query.status;
+    }
 
-  if (req.query.categoryId) {
-    filter.categoryId = req.query.categoryId;
-  }
+    if (req.query.categoryId) {
+      filter.categoryId = req.query.categoryId;
+    }
 
-  if (req.query.city) {
-    filter["location.city"] = req.query.city;
-  }
+    if (req.query.city) {
+      filter["location.city"] = req.query.city;
+    }
 
-  requestModel
-    .find(filter)
-    .skip(skip)
-    .limit(limit)
-    .sort({ createdAt: -1 })
-    .then((data) => {
-      res.json({
-        success: true,
-        data: data,
-        pagination: {
-          page,
-          limit,
-          count: data.length,
-        },
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        success: false,
-        error: {
-          code: "INTERNAL_ERROR",
-          message: err.message,
-        },
-      });
+    if (req.query.urgency) {
+      filter.urgency = req.query.urgency;
+    }
+
+    const [data, total] = await Promise.all([
+      requestModel
+        .find(filter)
+        .skip(skip)
+        .limit(limit)
+        .sort({ createdAt: -1 }),
+      requestModel.countDocuments(filter),
+    ]);
+
+    res.json({
+      success: true,
+      data: data,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit) || 1,
+        count: data.length,
+      },
     });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: {
+        code: "INTERNAL_ERROR",
+        message: err.message,
+      },
+    });
+  }
 };
 
 // GET /api/requests/:id

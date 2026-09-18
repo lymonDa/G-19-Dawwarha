@@ -132,7 +132,7 @@ export class ProfileComponent implements OnInit {
   getRoleLabel(): string {
     const role = this.authService.userRole();
     if (role === 'admin') return 'System Admin';
-    if (role === 'organization') return 'Organization / NGO';
+    if (this.authService.isOrganization() || this.authService.currentUser()?.organizationId) return 'Organization / NGO';
     return 'Individual User';
   }
 

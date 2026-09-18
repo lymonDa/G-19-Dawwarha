@@ -2,11 +2,7 @@ export type NotificationType =
   | 'match_created'
   | 'match_accepted'
   | 'report_resolved'
-  | 'org_verification_decided'
-  | 'match'
-  | 'handover'
-  | 'system'
-  | 'report';
+  | 'org_verification_decided';
 
 export interface NotificationRelatedEntity {
   type?: string;

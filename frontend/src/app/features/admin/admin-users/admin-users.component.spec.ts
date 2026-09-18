@@ -24,7 +24,7 @@ describe('AdminUsersComponent', () => {
       id: 'u2',
       name: 'Resalat Al-Kheir',
       email: 'resalat@dawwarha.org',
-      role: 'organization',
+      role: 'user',
       status: 'suspended',
       createdAt: '2026-01-15T14:30:00Z'
     }

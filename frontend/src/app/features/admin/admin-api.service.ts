@@ -17,11 +17,62 @@ export interface ListUsersParams {
   search?: string;
 }
 
+export interface AdminAnalyticsSummary {
+  totalUsers: number;
+  activeUsers: number;
+  resourcesPublished: number;
+  completedTransfers: number;
+  requestsCreated: number;
+  openReports: number;
+  registeredOrganizations: number;
+}
+
+export interface AdminAnalyticsResourcesByCategory {
+  categoryId: string;
+  total: number;
+  published: number;
+  fulfilled: number;
+  byStatus: Array<{ status: string; count: number }>;
+}
+
+export interface AdminAnalyticsCategoryImpact {
+  categoryId: string;
+  completedTransfers: number;
+  totalQuantity: number;
+}
+
+export interface AdminAnalyticsMatchAcceptance {
+  total: number;
+  proposed: number;
+  accepted: number;
+  rejected: number;
+  acceptanceRate: number;
+  byStatus: Array<{ status: string; count: number }>;
+}
+
+export interface AdminAnalyticsData {
+  summary: AdminAnalyticsSummary;
+  resourcesByCategory: AdminAnalyticsResourcesByCategory[];
+  categoryImpact: AdminAnalyticsCategoryImpact[];
+  matchAcceptance: AdminAnalyticsMatchAcceptance;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AdminApiService {
   private api = inject(ApiBaseService);
+
+  /**
+   * Retrieves real-time platform analytics aggregated across MongoDB collections.
+   * Endpoint: GET /api/admin/analytics
+   */
+  getAnalytics(): Observable<AdminAnalyticsData> {
+    return this.api.get<{ success: boolean; data: AdminAnalyticsData }>('/admin/analytics').pipe(
+      map(res => res.data),
+      catchError(err => throwError(() => this.formatError(err, 'Failed to fetch platform analytics')))
+    );
+  }
 
   /**
    * Retrieves paginated users list.

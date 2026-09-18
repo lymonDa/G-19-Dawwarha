@@ -4,9 +4,23 @@ import { buildPagination, getPagination } from "../utils/pagination.js";
 export async function listUsers(req, res, next) {
   try {
     const { page, limit, skip } = getPagination(req.query);
+    const filter = {};
+
+    if (req.query.role) {
+      filter.role = req.query.role;
+    }
+
+    if (req.query.search && typeof req.query.search === "string" && req.query.search.trim()) {
+      const sanitized = req.query.search.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      filter.$or = [
+        { name: { $regex: sanitized, $options: "i" } },
+        { email: { $regex: sanitized, $options: "i" } },
+      ];
+    }
+
     const [users, total] = await Promise.all([
-      User.find().sort({ createdAt: -1 }).skip(skip).limit(limit),
-      User.countDocuments(),
+      User.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit),
+      User.countDocuments(filter),
     ]);
     return res.json({ success: true, data: users, pagination: buildPagination({ page, limit, total }) });
   } catch (error) { return next(error); }

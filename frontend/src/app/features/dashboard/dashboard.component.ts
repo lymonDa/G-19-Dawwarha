@@ -18,7 +18,7 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
         <div class="flex flex-col gap-1">
           <div class="flex items-center gap-2">
             <span class="text-xs bg-white/20 text-white px-2.5 py-0.5 rounded-full font-medium">
-              {{ authService.userRole() === 'organization' ? 'Verified Organization Account' : 'User Account' }}
+              {{ (authService.isOrganization() || authService.currentUser()?.organizationId) ? 'Verified Organization Account' : 'User Account' }}
             </span>
             <span class="text-xs text-primary-100">Active Now</span>
           </div>

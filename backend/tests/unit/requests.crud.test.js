@@ -322,6 +322,20 @@ describe("ENGINEER 3 — Request CRUD, Authorization & Validation Tests (Task 3.
       assert.equal(body.data[0].location.city, "Amman");
       assert.equal(body.data[0].status, "published");
     });
+
+    it("filters requests by urgency and returns full pagination", async () => {
+      const res = await fetch(`${baseUrl}/api/requests?urgency=high`, {
+        headers: { Authorization: `Bearer ${ownerToken}` },
+      });
+
+      assert.equal(res.status, 200);
+      const body = await res.json();
+      assert.equal(body.success, true);
+      assert.equal(body.data.length, 1);
+      assert.equal(body.data[0].urgency, "high");
+      assert.equal(body.pagination.total, 1);
+      assert.equal(body.pagination.totalPages, 1);
+    });
   });
 
   describe("PUT & DELETE /api/requests/:id — Authorization & Mutation", () => {

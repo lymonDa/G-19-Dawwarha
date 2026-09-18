@@ -43,7 +43,7 @@ export class AuthService {
   readonly isAuthenticated = computed(() => !!this.tokenSignal() && !!this.currentUserSignal());
   readonly userRole = computed<UserRole | null>(() => this.currentUserSignal()?.role ?? null);
   readonly isAdmin = computed(() => this.currentUserSignal()?.role === 'admin');
-  readonly isOrganization = computed(() => this.currentUserSignal()?.role === 'organization');
+  readonly isOrganization = computed(() => !!this.currentUserSignal()?.organizationId || (this.currentUserSignal() as any)?.role === 'organization');
   readonly authSession = computed<AuthSession | null>(() => {
     const user = this.currentUserSignal();
     const token = this.tokenSignal();
@@ -101,7 +101,7 @@ export class AuthService {
     name: string;
     email: string;
     password: string;
-    role?: UserRole;
+    role?: UserRole | string;
     phone?: string;
   }): Observable<AuthResponse> {
     return this.api.post<AuthResponse>('/auth/register', payload).pipe(

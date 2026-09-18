@@ -166,4 +166,46 @@ export class ReportApiService {
       })
     );
   }
+
+  /**
+   * Resolves a report with admin resolution notes and status transition.
+   * Endpoint: PUT /api/reports/:id/resolve
+   */
+  resolveReport(id: string, payload: { resolution: string; status?: 'reviewed' | 'resolved' }): Observable<Report> {
+    if (!payload.resolution || !payload.resolution.trim()) {
+      return throwError(() => ({
+        statusCode: 400,
+        code: 'VALIDATION_ERROR',
+        message: 'يجب إدخال ملاحظات الحل'
+      }));
+    }
+
+    const body: { resolution: string; status?: 'reviewed' | 'resolved' } = {
+      resolution: payload.resolution.trim()
+    };
+    if (payload.status) {
+      body.status = payload.status;
+    }
+
+    return this.api.put<{ success: boolean; data: Report }>(`/reports/${id}/resolve`, body).pipe(
+      map(res => {
+        const report = res.data;
+        return {
+          ...report,
+          id: report.id || (report as any)._id
+        };
+      }),
+      catchError(err => {
+        const statusCode = err?.status || 500;
+        const errBody = err?.error?.error || err?.error || {};
+        const code = errBody.code || (statusCode === 400 ? 'VALIDATION_ERROR' : statusCode === 403 ? 'FORBIDDEN' : statusCode === 404 ? 'NOT_FOUND' : 'REPORT_ERROR');
+        const message = errBody.message || err?.message || 'تعذر معالجة البلاغ';
+        return throwError(() => ({
+          statusCode,
+          code,
+          message
+        }));
+      })
+    );
+  }
 }

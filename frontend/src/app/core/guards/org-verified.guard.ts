@@ -21,8 +21,8 @@ export const orgVerifiedGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  // Only organization role can access org-protected routes
-  if (user.role !== 'organization') {
+  // Only organization accounts can access org-protected routes
+  if (!user.organizationId && (user as any).role !== 'organization') {
     toast.warning('هذا الإجراء مخصص للمنظمات والجمعيات المعتمدة فقط', 'تنبيه التوثيق');
     return router.createUrlTree(['/dashboard']);
   }

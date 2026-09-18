@@ -11,6 +11,8 @@ export interface Report {
   reason: ReportReason;
   description?: string | null;
   status: ReportStatus;
+  resolution?: string | null;
+  reviewedBy?: string | null;
   resolutionNotes?: string | null;
   resolutionNote?: string | null;
   resolvedBy?: string | null;
