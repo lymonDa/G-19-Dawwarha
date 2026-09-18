@@ -443,8 +443,6 @@ describe("Task 4.B — Reports Service & Endpoints Test Suite", () => {
       assert.equal(json.error.code, "UNAUTHORIZED");
     });
 
-<<<<<<< HEAD
-=======
     test("8b. Authenticated user GET /api/reports/me: returns user-scoped reports and excludes admin notes", async () => {
       let passedFilter = null;
       let passedProjection = null;
@@ -542,8 +540,6 @@ describe("Task 4.B — Reports Service & Endpoints Test Suite", () => {
       assert.equal(String(passedFilter.reporterId), normalUserId);
       assert.notEqual(String(passedFilter.reporterId), secondUserId);
     });
-
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
     test("13. Query injection protection: arbitrary mongo operators cannot be passed in query parameters", async () => {
       let passedFilter = null;
       mock.method(Report, "find", (filter) => {

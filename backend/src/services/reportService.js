@@ -177,8 +177,6 @@ export async function resolveReport(reportId, { status = "resolved", resolution,
   return report;
 }
 
-<<<<<<< HEAD
-=======
 /**
  * Retrieves reports submitted by a specific user (reporter).
  * Strictly filters by reporterId and projects only reporter-safe fields.
@@ -224,15 +222,11 @@ export async function getUserReports(reporterId, { page = 1, limit = 20 } = {}) 
   };
 }
 
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
 const reportService = {
   validateReportTarget,
   createReport,
   listReports,
-<<<<<<< HEAD
-=======
   getUserReports,
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
   resolveReport,
 };
 

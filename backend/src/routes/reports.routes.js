@@ -8,10 +8,7 @@ import {
 } from "../validators/report.validators.js";
 import {
   create,
-<<<<<<< HEAD
-=======
   getMyReports,
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
   list,
   resolve,
 } from "../controllers/reports.controller.js";
@@ -26,16 +23,12 @@ router.post(
   create
 );
 
-<<<<<<< HEAD
-=======
 // GET /api/reports/me - Authenticated user retrieves their own submitted reports
 router.get(
   "/me",
   authenticate,
   getMyReports
 );
-
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
 router.get(
   "/",
   authenticate,
