@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+=======
+const {
+  colors,
+  borderRadius,
+  boxShadow,
+  fontFamily,
+  transitionDuration,
+  transitionTimingFunction,
+  fontSize,
+} = require('./src/design-tokens/tokens.cjs');
+
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -5,6 +18,7 @@ module.exports = {
   ],
   theme: {
     extend: {
+<<<<<<< HEAD
       colors: {
         primary: {
           50: '#F0F8F6',
@@ -53,6 +67,15 @@ module.exports = {
       borderRadius: {
         'card': '14px',
       },
+=======
+      colors,
+      borderRadius,
+      boxShadow,
+      fontFamily,
+      transitionDuration,
+      transitionTimingFunction,
+      fontSize,
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
     },
   },
   plugins: [],

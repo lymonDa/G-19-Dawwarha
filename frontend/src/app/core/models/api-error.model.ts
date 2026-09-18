@@ -1,6 +1,7 @@
 export interface ApiError {
   code: string;
   message: string;
+<<<<<<< HEAD
   details?: any;
 }
 
@@ -15,4 +16,8 @@ export interface ApiResponse<T = any> {
     total?: number;
     count?: number;
   };
+=======
+  fieldErrors?: Record<string, string>;
+  status?: number;
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
 }

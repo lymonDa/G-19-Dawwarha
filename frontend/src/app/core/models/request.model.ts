@@ -1,8 +1,14 @@
+<<<<<<< HEAD
+=======
+import { Category } from './category.model';
+
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
 export type RequestUrgency = 'low' | 'medium' | 'high';
 
 export type RequestStatus =
   | 'draft'
   | 'published'
+<<<<<<< HEAD
   | 'matched'
   | 'accepted'
   | 'fulfilled'
@@ -53,3 +59,28 @@ export interface RequestPayload {
   description?: string;
   requesterOrgId?: string | null;
 }
+=======
+  | 'open'
+  | 'matched'
+  | 'accepted'
+  | 'in_handover'
+  | 'completed'
+  | 'cancelled'
+  | 'expired';
+
+export interface Request {
+  id: string;
+  category: Category;
+  quantity: number;
+  unit?: string;
+  urgency: RequestUrgency;
+  description: string;
+  location: { area: string; city: string };
+  status: RequestStatus;
+  requesterId: string;
+  requesterOrgId?: string;
+  isStanding?: boolean;
+  createdAt: string;
+  updatedAt?: string;
+}
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1

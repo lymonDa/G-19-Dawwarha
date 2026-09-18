@@ -27,6 +27,42 @@ export async function create(req, res, next) {
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * Handles GET /api/reports/me
+ * Retrieves reports submitted by the authenticated user.
+ * Identity is derived strictly from req.user._id (spoofing via query/body is impossible).
+ */
+export async function getMyReports(req, res, next) {
+  try {
+    const reporterId = req.user?._id;
+    if (!reporterId) {
+      return res.status(401).json({
+        success: false,
+        error: { code: "UNAUTHORIZED", message: "Authentication required" },
+      });
+    }
+
+    const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(req.query.limit, 10) || 20));
+
+    const result = await reportService.getUserReports(reporterId, {
+      page,
+      limit,
+    });
+
+    return res.json({
+      success: true,
+      data: result.reports,
+      pagination: result.pagination,
+    });
+  } catch (error) {
+    return next(error);
+  }
+}
+
+/**
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
  * Handles GET /api/reports
  * Admin only endpoint for listing reports with filtering and pagination.
  */

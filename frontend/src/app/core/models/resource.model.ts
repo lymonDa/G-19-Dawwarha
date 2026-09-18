@@ -8,6 +8,7 @@ export type ResourceStatus =
   | 'accepted'
   | 'in_handover'
   | 'completed'
+<<<<<<< HEAD
   | 'cancelled'
   | 'expired';
 
@@ -32,5 +33,26 @@ export interface Resource {
     endDate?: string;
   };
   createdAt?: string;
+=======
+  | 'impact_recorded'
+  | 'unavailable'
+  | 'expired'
+  | 'cancelled';
+
+export interface Resource {
+  id: string;
+  title: string;
+  category: Category;
+  quantity: number;
+  unit?: string;
+  description: string;
+  location: { area: string; city: string };
+  availabilityWindow: { start: string; end: string };
+  status: ResourceStatus;
+  providerId: string;
+  providerOrgId?: string;
+  imageUrl?: string;
+  createdAt: string;
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
   updatedAt?: string;
 }

@@ -1,7 +1,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+<<<<<<< HEAD
     "rootDir": "./src",
+=======
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
     "outDir": "./dist/out-tsc",
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,7 +19,12 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
+<<<<<<< HEAD
     "module": "ES2022"
+=======
+    "module": "ES2022",
+    "typeRoots": ["node_modules/@types"]
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

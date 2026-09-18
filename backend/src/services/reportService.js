@@ -177,10 +177,62 @@ export async function resolveReport(reportId, { status = "resolved", resolution,
   return report;
 }
 
+<<<<<<< HEAD
+=======
+/**
+ * Retrieves reports submitted by a specific user (reporter).
+ * Strictly filters by reporterId and projects only reporter-safe fields.
+ * Omits admin notes, internal resolution details, and internal reviewer metadata per privacy rules.
+ *
+ * @param {string|mongoose.Types.ObjectId} reporterId
+ * @param {Object} [options]
+ * @param {number|string} [options.page=1]
+ * @param {number|string} [options.limit=20]
+ * @returns {Promise<{ reports: Array, pagination: Object }>}
+ */
+export async function getUserReports(reporterId, { page = 1, limit = 20 } = {}) {
+  if (!reporterId || !isValidObjectId(reporterId)) {
+    throw makeError(400, "VALIDATION_ERROR", "Invalid or missing user ID.");
+  }
+
+  const objectId = new mongoose.Types.ObjectId(String(reporterId));
+  const filter = { reporterId: objectId };
+
+  const pageNum = Math.max(1, parseInt(page, 10) || 1);
+  const limitNum = Math.min(100, Math.max(1, parseInt(limit, 10) || 20));
+  const skip = (pageNum - 1) * limitNum;
+
+  // Select only reporter-facing fields. Exclude reviewedBy and resolution per privacy rules.
+  const [reports, total] = await Promise.all([
+    Report.find(filter)
+      .select("_id targetType targetId reason description status createdAt updatedAt")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limitNum)
+      .lean(),
+    Report.countDocuments(filter),
+  ]);
+
+  return {
+    reports,
+    pagination: {
+      total,
+      page: pageNum,
+      limit: limitNum,
+      totalPages: Math.ceil(total / limitNum) || 1,
+    },
+  };
+}
+
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
 const reportService = {
   validateReportTarget,
   createReport,
   listReports,
+<<<<<<< HEAD
+=======
+  getUserReports,
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
   resolveReport,
 };
 

@@ -51,7 +51,19 @@
                   "with": "src/environments/environment.production.ts"
                 }
               ],
+<<<<<<< HEAD
               "outputHashing": "all"
+=======
+              "outputHashing": "all",
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true
+                },
+                "fonts": false
+              }
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
             },
             "development": {
               "optimization": false,
@@ -79,5 +91,11 @@
         }
       }
     }
+<<<<<<< HEAD
+=======
+  },
+  "cli": {
+    "analytics": "284e0558-7f7b-4ba7-88df-fd65fb027dcb"
+>>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
   }
 }
