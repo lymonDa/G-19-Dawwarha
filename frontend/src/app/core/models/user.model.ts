@@ -7,9 +7,13 @@ export interface UserLocation {
 }
 
 export interface UserStats {
-  contributionsCount: number;
-  successfulTransfers: number;
-  rating: number;
+  contributionsCount?: number;
+  successfulTransfers?: number;
+  completedTransfers?: number;
+  reputationScore?: number;
+  rating?: number;
+  requestsCount?: number;
+  matchesCount?: number;
 }
 
 export interface User {

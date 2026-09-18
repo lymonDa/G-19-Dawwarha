@@ -86,12 +86,57 @@ export class ReportApiService {
   }
 
   /**
-   * Retrieves reports submitted by the current user in the active session.
-   * NOTE (CONTRACT GAP): The backend does NOT expose a GET /api/reports/me endpoint.
-   * Regular users calling GET /api/reports receive HTTP 403 because it is protected by requireRole('admin').
+   * Retrieves persistent reports submitted by the authenticated user.
+   * Endpoint: GET /api/reports/me
+   */
+  getMyReports(params?: { page?: number; limit?: number }): Observable<{ reports: Report[]; pagination: Pagination }> {
+    const queryParams: Record<string, any> = {};
+    if (params?.page) queryParams['page'] = params.page;
+    if (params?.limit) queryParams['limit'] = params.limit;
+
+    return this.api.get<{
+      success: boolean;
+      data: Report[];
+      pagination: Pagination;
+    }>('/reports/me', queryParams).pipe(
+      map(res => {
+        const rawReports = res.data || [];
+        const reports: Report[] = rawReports.map(r => ({
+          ...r,
+          id: r.id || (r as any)._id
+        }));
+
+        const pagination: Pagination = res.pagination || {
+          total: reports.length,
+          page: params?.page || 1,
+          limit: params?.limit || 20,
+          totalPages: Math.ceil(reports.length / (params?.limit || 20)) || 1
+        };
+
+        return { reports, pagination };
+      }),
+      catchError(err => {
+        const statusCode = err?.status || 500;
+        const errBody = err?.error?.error || err?.error || {};
+        const code = errBody.code || 'REPORTS_FETCH_ERROR';
+        const message = errBody.message || err?.message || 'تعذر استرجاع سجل البلاغات من الخادم';
+
+        return throwError(() => ({
+          statusCode,
+          code,
+          message
+        }));
+      })
+    );
+  }
+
+  /**
+   * Retrieves reports submitted by the current user from backend source of truth.
    */
   getMyRecentReports(): Observable<Report[]> {
-    return of([...this.userCreatedReports]);
+    return this.getMyReports().pipe(
+      map(res => res.reports)
+    );
   }
 
   /**

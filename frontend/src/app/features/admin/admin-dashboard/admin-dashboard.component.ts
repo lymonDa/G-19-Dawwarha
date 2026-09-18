@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
+import { ImpactCardComponent } from '../../../shared/components/impact-card/impact-card.component';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardComponent, ButtonComponent],
+  imports: [CommonModule, RouterModule, CardComponent, ButtonComponent, ImpactCardComponent],
   template: `
     <div class="flex flex-col gap-6">
       <div>
@@ -15,31 +16,39 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
         <p class="text-xs text-neutral-500 mt-0.5">Real-time performance indicators and resource flow across all 4 aggregation pipelines.</p>
       </div>
 
-      <!-- 4 Real-time KPI Cards -->
+      <!-- 4 Real-time KPI Cards (Aggregate Neutral Treatment per DESIGN.md §4 & §28) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <app-card padding="md" variant="bordered">
-          <span class="text-xs text-neutral-500 font-semibold">Total Registered Resources</span>
-          <p class="text-3xl font-bold text-neutral-900 mt-1">1,480</p>
-          <span class="text-[11px] text-primary font-medium mt-1 block">94% active & ready for distribution</span>
-        </app-card>
+        <app-impact-card
+          [value]="1480"
+          label="Total Registered Resources"
+          description="94% active & ready for distribution"
+          variant="aggregate"
+          icon="📦"
+        ></app-impact-card>
 
-        <app-card padding="md" variant="bordered">
-          <span class="text-xs text-neutral-500 font-semibold">Open Demand Requests</span>
-          <p class="text-3xl font-bold text-neutral-900 mt-1">820</p>
-          <span class="text-[11px] text-warning font-medium mt-1 block">42 marked urgent priority</span>
-        </app-card>
+        <app-impact-card
+          [value]="820"
+          label="Open Demand Requests"
+          description="42 marked urgent priority"
+          variant="aggregate"
+          icon="📋"
+        ></app-impact-card>
 
-        <app-card padding="md" variant="bordered">
-          <span class="text-xs text-neutral-500 font-semibold">Successful Matches Completed</span>
-          <p class="text-3xl font-bold text-success mt-1">1,340</p>
-          <span class="text-[11px] text-success font-medium mt-1 block">Dual-confirmed & logged</span>
-        </app-card>
+        <app-impact-card
+          [value]="1340"
+          label="Successful Matches Completed"
+          description="Dual-confirmed & logged"
+          variant="aggregate"
+          icon="✓"
+        ></app-impact-card>
 
-        <app-card padding="md" variant="bordered">
-          <span class="text-xs text-neutral-500 font-semibold">Verified Organizations</span>
-          <p class="text-3xl font-bold text-primary mt-1">64</p>
-          <span class="text-[11px] text-neutral-500 mt-1 block">3 verification requests pending</span>
-        </app-card>
+        <app-impact-card
+          [value]="64"
+          label="Verified Organizations"
+          description="3 verification requests pending"
+          variant="aggregate"
+          icon="🏢"
+        ></app-impact-card>
       </div>
 
       <!-- Quick Action Admin Shortcuts -->

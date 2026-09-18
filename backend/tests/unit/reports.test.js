@@ -443,6 +443,104 @@ describe("Task 4.B — Reports Service & Endpoints Test Suite", () => {
       assert.equal(json.error.code, "UNAUTHORIZED");
     });
 
+    test("8b. Authenticated user GET /api/reports/me: returns user-scoped reports and excludes admin notes", async () => {
+      let passedFilter = null;
+      let passedProjection = null;
+      const mockReports = [
+        {
+          _id: new mongoose.Types.ObjectId(),
+          targetType: "resource",
+          targetId: new mongoose.Types.ObjectId(),
+          reason: "spam",
+          description: "Spam resource",
+          status: "open",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ];
+
+      mock.method(Report, "find", (filter) => {
+        passedFilter = filter;
+        return {
+          select: (projection) => {
+            passedProjection = projection;
+            return {
+              sort: () => ({
+                skip: () => ({
+                  limit: () => ({
+                    lean: async () => mockReports,
+                  }),
+                }),
+              }),
+            };
+          },
+        };
+      });
+      mock.method(Report, "countDocuments", async () => 1);
+
+      const res = await fetch(`${baseUrl}/api/reports/me?page=1&limit=10`, {
+        headers: {
+          Authorization: `Bearer ${normalUserToken}`,
+        },
+      });
+
+      assert.equal(res.status, 200);
+      const json = await res.json();
+      assert.equal(json.success, true);
+      assert.equal(Array.isArray(json.data), true);
+      assert.equal(json.data.length, 1);
+      assert.equal(json.pagination.total, 1);
+      assert.equal(json.pagination.page, 1);
+
+      // Verify server derived identity strictly from JWT
+      assert.equal(String(passedFilter.reporterId), normalUserId);
+
+      // Verify sensitive fields (resolution, reviewedBy) are excluded in projection
+      assert.ok(passedProjection.includes("_id"));
+      assert.ok(passedProjection.includes("status"));
+      assert.ok(!passedProjection.includes("reviewedBy"));
+      assert.ok(!passedProjection.includes("resolution"));
+    });
+
+    test("8c. Unauthenticated GET /api/reports/me: returns HTTP 401 Unauthorized", async () => {
+      const res = await fetch(`${baseUrl}/api/reports/me`);
+
+      assert.equal(res.status, 401);
+      const json = await res.json();
+      assert.equal(json.success, false);
+      assert.equal(json.error.code, "UNAUTHORIZED");
+    });
+
+    test("8d. GET /api/reports/me: spoofing reporterId in query params is ignored", async () => {
+      let passedFilter = null;
+      mock.method(Report, "find", (filter) => {
+        passedFilter = filter;
+        return {
+          select: () => ({
+            sort: () => ({
+              skip: () => ({
+                limit: () => ({
+                  lean: async () => [],
+                }),
+              }),
+            }),
+          }),
+        };
+      });
+      mock.method(Report, "countDocuments", async () => 0);
+
+      const res = await fetch(`${baseUrl}/api/reports/me?reporterId=${secondUserId}`, {
+        headers: {
+          Authorization: `Bearer ${normalUserToken}`,
+        },
+      });
+
+      assert.equal(res.status, 200);
+      // Filter must strictly use the authenticated JWT user ID (normalUserId), NOT the query param
+      assert.equal(String(passedFilter.reporterId), normalUserId);
+      assert.notEqual(String(passedFilter.reporterId), secondUserId);
+    });
+
     test("13. Query injection protection: arbitrary mongo operators cannot be passed in query parameters", async () => {
       let passedFilter = null;
       mock.method(Report, "find", (filter) => {

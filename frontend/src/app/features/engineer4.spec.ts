@@ -150,6 +150,26 @@ describe('Engineer 4 (Transfer, Trust & Impact) — Comprehensive Test Suite (Ta
 
       assert.strictEqual(card.accessibleLabel, 'أسر مستفيدة: ٤٢');
     });
+
+    it('Personal & Organization Dashboards: Correctly configure ImpactCardComponent variants', () => {
+      // Personal Dashboard KPI integration
+      const personalCard = new ImpactCardComponent();
+      personalCard.variant = 'personal';
+      personalCard.value = 5;
+      personalCard.label = 'Community Impact';
+      assert.strictEqual(personalCard.variant, 'personal');
+      assert.match(personalCard.cardClasses, /bg-sand-50/);
+      assert.match(personalCard.numeralClass, /text-sand-700/);
+
+      // Organization Dashboard KPI integration
+      const orgCard = new ImpactCardComponent();
+      orgCard.variant = 'organization';
+      orgCard.value = 12;
+      orgCard.label = 'Total Verified Transfers';
+      assert.strictEqual(orgCard.variant, 'organization');
+      assert.match(orgCard.cardClasses, /bg-sand-50/);
+      assert.match(orgCard.numeralClass, /text-sand-700/);
+    });
   });
 
   // =========================================================================
@@ -251,6 +271,27 @@ describe('Engineer 4 (Transfer, Trust & Impact) — Comprehensive Test Suite (Ta
 
     beforeEach(() => {
       mockApi = {
+        get: (url: string, params: any) => {
+          if (url === '/reports/me') {
+            return of({
+              success: true,
+              data: [
+                {
+                  _id: 'rep-backend-101',
+                  targetType: 'resource',
+                  targetId: '65f1a2b3c4d5e6f7a8b9c0d1',
+                  reason: 'fraud',
+                  description: 'المورد لا يطابق المواصفات المعلنة',
+                  status: 'open',
+                  createdAt: '2026-09-18T12:00:00Z',
+                  updatedAt: '2026-09-18T12:00:00Z'
+                }
+              ],
+              pagination: { total: 1, page: params?.page || 1, limit: params?.limit || 20, totalPages: 1 }
+            });
+          }
+          return of({ success: true, data: [] });
+        },
         post: (url: string, body: any) => {
           return of({
             success: true,
@@ -305,6 +346,58 @@ describe('Engineer 4 (Transfer, Trust & Impact) — Comprehensive Test Suite (Ta
       assert.strictEqual(report.targetType, 'resource');
       assert.strictEqual(report.reason, 'fraud');
       assert.strictEqual(report.status, 'open');
+    });
+
+    it('Contract: GET /api/reports/me retrieves user-scoped reports from backend source of truth', async () => {
+      let calledUrl = '';
+      let calledParams: any = null;
+      mockApi.get = (url: string, params: any) => {
+        calledUrl = url;
+        calledParams = params;
+        return of({
+          success: true,
+          data: [
+            {
+              _id: 'rep-backend-101',
+              targetType: 'resource',
+              targetId: '65f1a2b3c4d5e6f7a8b9c0d1',
+              reason: 'fraud',
+              description: 'المورد لا يطابق المواصفات المعلنة',
+              status: 'open',
+              createdAt: '2026-09-18T12:00:00Z',
+              updatedAt: '2026-09-18T12:00:00Z'
+            }
+          ],
+          pagination: { total: 1, page: 1, limit: 10, totalPages: 1 }
+        });
+      };
+
+      const result = await new Promise<{ reports: Report[]; pagination: any }>((resolve, reject) => {
+        reportService.getMyReports({ page: 1, limit: 10 }).subscribe({ next: resolve, error: reject });
+      });
+
+      assert.strictEqual(calledUrl, '/reports/me', 'Must call user-scoped /reports/me endpoint');
+      assert.strictEqual(calledParams.page, 1);
+      assert.strictEqual(calledParams.limit, 10);
+      assert.strictEqual(result.reports.length, 1);
+      assert.strictEqual(result.reports[0].id, 'rep-backend-101', 'Must normalize _id to id');
+      assert.strictEqual(result.reports[0].status, 'open');
+      assert.strictEqual(result.pagination.total, 1);
+    });
+
+    it('Empty State: GET /api/reports/me handles empty reports history cleanly', async () => {
+      mockApi.get = () => of({
+        success: true,
+        data: [],
+        pagination: { total: 0, page: 1, limit: 20, totalPages: 0 }
+      });
+
+      const result = await new Promise<{ reports: Report[]; pagination: any }>((resolve, reject) => {
+        reportService.getMyReports().subscribe({ next: resolve, error: reject });
+      });
+
+      assert.strictEqual(result.reports.length, 0);
+      assert.strictEqual(result.pagination.total, 0);
     });
 
     it('Privacy Boundary: ReportStatusComponent displays reassurance copy without internal moderation notes', () => {

@@ -5,11 +5,12 @@ import { AuthService } from '../../core/auth/auth.service';
 import { CardComponent } from '../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../shared/ui/button/button.component';
 import { BadgeComponent } from '../../shared/ui/badge/badge.component';
+import { ImpactCardComponent } from '../../shared/components/impact-card/impact-card.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardComponent, ButtonComponent, BadgeComponent],
+  imports: [CommonModule, RouterModule, CardComponent, ButtonComponent, BadgeComponent, ImpactCardComponent],
   template: `
     <div class="flex flex-col gap-6">
       <!-- Welcome Hero Banner -->
@@ -51,7 +52,7 @@ import { BadgeComponent } from '../../shared/ui/badge/badge.component';
             <span class="w-2 h-2 rounded-full bg-primary"></span>
           </div>
           <p class="text-3xl font-bold text-neutral-900 mt-2">
-            {{ authService.currentUser()?.stats?.contributionsCount || 3 }}
+            {{ authService.currentUser()?.stats?.contributionsCount || 0 }}
           </p>
           <a routerLink="/resources/mine" class="text-xs text-primary font-medium hover:underline mt-2 block">
             Manage Resources →
@@ -63,7 +64,9 @@ import { BadgeComponent } from '../../shared/ui/badge/badge.component';
             <span class="text-xs text-neutral-500 font-medium">Active Requests</span>
             <span class="w-2 h-2 rounded-full bg-info"></span>
           </div>
-          <p class="text-3xl font-bold text-neutral-900 mt-2">2</p>
+          <p class="text-3xl font-bold text-neutral-900 mt-2">
+            {{ authService.currentUser()?.stats?.requestsCount || 0 }}
+          </p>
           <a routerLink="/requests/mine" class="text-xs text-primary font-medium hover:underline mt-2 block">
             Manage Requests →
           </a>
@@ -72,26 +75,28 @@ import { BadgeComponent } from '../../shared/ui/badge/badge.component';
         <app-card padding="md" variant="bordered">
           <div class="flex items-center justify-between">
             <span class="text-xs text-neutral-500 font-medium">Smart Matches</span>
-            <app-badge variant="success" size="sm">New</app-badge>
+            <app-badge variant="success" size="sm">Active</app-badge>
           </div>
-          <p class="text-3xl font-bold text-success mt-2">4</p>
+          <p class="text-3xl font-bold text-success mt-2">
+            {{ authService.currentUser()?.stats?.matchesCount || 0 }}
+          </p>
           <a routerLink="/matches" class="text-xs text-success font-medium hover:underline mt-2 block">
             Review Matches Now →
           </a>
         </app-card>
 
-        <app-card padding="md" variant="sand">
-          <div class="flex items-center justify-between">
-            <span class="text-xs text-sand-700 font-medium">Community Impact</span>
-            <span class="text-xs font-bold text-sand-700">★ 4.9</span>
-          </div>
-          <p class="text-3xl font-bold text-sand-700 mt-2">
-            {{ authService.currentUser()?.stats?.successfulTransfers || 5 }}
-          </p>
-          <a routerLink="/contributions" class="text-xs text-sand-700 font-medium hover:underline mt-2 block">
-            View Contribution Badges →
+        <div class="flex flex-col">
+          <app-impact-card
+            [value]="authService.currentUser()?.stats?.successfulTransfers || 0"
+            label="Community Impact"
+            description="Verified completed transfers"
+            variant="personal"
+            icon="★"
+          ></app-impact-card>
+          <a routerLink="/contributions" class="text-xs text-sand-700 font-medium hover:underline mt-1.5 block text-end px-1">
+            View Contribution History →
           </a>
-        </app-card>
+        </div>
       </div>
 
       <!-- Quick Discovery & Navigation Cards -->

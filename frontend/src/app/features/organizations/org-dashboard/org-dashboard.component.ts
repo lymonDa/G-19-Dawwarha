@@ -7,11 +7,12 @@ import { Organization } from '../../../core/models/organization.model';
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { VerificationBadgeComponent } from '../../../shared/components/verification-badge/verification-badge.component';
+import { ImpactCardComponent } from '../../../shared/components/impact-card/impact-card.component';
 
 @Component({
   selector: 'app-org-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardComponent, ButtonComponent, VerificationBadgeComponent],
+  imports: [CommonModule, RouterModule, CardComponent, ButtonComponent, VerificationBadgeComponent, ImpactCardComponent],
   template: `
     <div class="max-w-5xl mx-auto flex flex-col gap-6 py-4">
       <!-- Organization Header & Verification Status -->
@@ -63,29 +64,31 @@ import { VerificationBadgeComponent } from '../../../shared/components/verificat
         </div>
       }
 
-      <!-- KPI Overview -->
+      <!-- KPI Overview (Warm Sand Organization Impact Cards per DESIGN.md §4 & §13) -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <app-card padding="md" variant="bordered">
-          <span class="text-xs text-neutral-500">Active Organization Requests</span>
-          <p class="text-3xl font-bold text-primary mt-2">
-            {{ org()?.stats?.requestsFulfilled || 0 }}
-          </p>
-          <span class="text-[11px] text-neutral-400 mt-1 block">Covering beneficiary needs</span>
-        </app-card>
+        <app-impact-card
+          [value]="org()?.stats?.requestsFulfilled || 0"
+          label="Active Organization Requests"
+          description="Covering beneficiary needs"
+          variant="organization"
+          icon="📋"
+        ></app-impact-card>
 
-        <app-card padding="md" variant="bordered">
-          <span class="text-xs text-neutral-500">Successfully Received Resources</span>
-          <p class="text-3xl font-bold text-neutral-900 mt-2">
-            {{ org()?.stats?.resourcesShared || 0 }}
-          </p>
-          <span class="text-[11px] text-neutral-400 mt-1 block">Via dual-confirmed handover</span>
-        </app-card>
+        <app-impact-card
+          [value]="org()?.stats?.resourcesShared || 0"
+          label="Successfully Received Resources"
+          description="Via dual-confirmed handover"
+          variant="organization"
+          icon="📦"
+        ></app-impact-card>
 
-        <app-card padding="md" variant="sand">
-          <span class="text-xs text-sand-700">Community Impact Score</span>
-          <p class="text-3xl font-bold text-sand-700 mt-2">100%</p>
-          <span class="text-[11px] text-neutral-600 mt-1 block">Committed to equitable distribution</span>
-        </app-card>
+        <app-impact-card
+          [value]="(org()?.stats?.resourcesShared || 0) + (org()?.stats?.requestsFulfilled || 0)"
+          label="Total Verified Transfers"
+          description="Committed to equitable distribution"
+          variant="organization"
+          icon="★"
+        ></app-impact-card>
       </div>
 
       <!-- Quick Operational Action Grid -->

@@ -8,6 +8,7 @@ import {
 } from "../validators/report.validators.js";
 import {
   create,
+  getMyReports,
   list,
   resolve,
 } from "../controllers/reports.controller.js";
@@ -20,6 +21,13 @@ router.post(
   createReportValidator,
   validate,
   create
+);
+
+// GET /api/reports/me - Authenticated user retrieves their own submitted reports
+router.get(
+  "/me",
+  authenticate,
+  getMyReports
 );
 
 router.get(

@@ -144,6 +144,33 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
             ></app-notification-item>
           }
         </ul>
+
+        <!-- Pagination Controls -->
+        @if (totalPages() > 1) {
+          <nav class="flex items-center justify-between border-t border-neutral-200 pt-4 mt-2" aria-label="تنقل بين صفحات الإشعارات">
+            <app-button
+              variant="outline"
+              size="sm"
+              [disabled]="currentPage() <= 1"
+              (clicked)="changePage(currentPage() - 1)"
+            >
+              الصفحة السابقة
+            </app-button>
+
+            <span class="text-xs text-neutral-500 font-medium font-mono">
+              صفحة {{ currentPage() }} من {{ totalPages() }} (إجمالي {{ totalCount() }})
+            </span>
+
+            <app-button
+              variant="outline"
+              size="sm"
+              [disabled]="currentPage() >= totalPages()"
+              (clicked)="changePage(currentPage() + 1)"
+            >
+              الصفحة التالية
+            </app-button>
+          </nav>
+        }
       }
     </div>
   `
@@ -156,6 +183,9 @@ export class NotificationsListComponent implements OnInit {
   readonly isLoading = signal<boolean>(true);
   readonly errorMessage = signal<string | null>(null);
   readonly unreadOnlyFilter = signal<boolean>(false);
+  readonly currentPage = signal<number>(1);
+  readonly totalPages = signal<number>(1);
+  readonly totalCount = signal<number>(0);
 
   readonly unreadCount = computed(() => {
     return this.notifications().filter(n => n.readAt === null || !n.read).length;
@@ -178,13 +208,17 @@ export class NotificationsListComponent implements OnInit {
     this.errorMessage.set(null);
 
     this.notificationApi.getNotifications({
-      page: 1,
-      limit: 50,
+      page: this.currentPage(),
+      limit: 20,
       unreadOnly: this.unreadOnlyFilter()
     }).subscribe({
       next: (res) => {
         // Reverse chronological order
         this.notifications.set(res.notifications);
+        if (res.pagination) {
+          this.totalPages.set(res.pagination.totalPages || 1);
+          this.totalCount.set(res.pagination.total || res.notifications.length);
+        }
         this.isLoading.set(false);
       },
       error: (err) => {
@@ -196,6 +230,13 @@ export class NotificationsListComponent implements OnInit {
 
   setFilter(unreadOnly: boolean): void {
     this.unreadOnlyFilter.set(unreadOnly);
+    this.currentPage.set(1);
+    this.loadNotifications();
+  }
+
+  changePage(page: number): void {
+    if (page < 1 || page > this.totalPages()) return;
+    this.currentPage.set(page);
     this.loadNotifications();
   }
 
