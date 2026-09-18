@@ -64,12 +64,12 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
         </div>
       } @else {
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          @for (org of filteredOrganizations(); track org.id) {
+          @for (org of filteredOrganizations(); track (org.id || (orgAny(org))._id)) {
             <app-organization-card
               [org]="org"
               variant="admin-review"
-              (verify)="handleVerify(org.id, 'verified')"
-              (reject)="handleVerify(org.id, 'rejected')"
+              (verify)="handleVerify(org.id || (orgAny(org))._id, 'verified')"
+              (reject)="handleVerify(org.id || (orgAny(org))._id, 'rejected')"
             ></app-organization-card>
           }
         </div>
@@ -89,6 +89,10 @@ export class AdminOrganizationsComponent implements OnInit {
     this.loadOrganizations();
   }
 
+  orgAny(org: Organization): any {
+    return org as any;
+  }
+
   setFilter(status: 'all' | 'pending' | 'verified' | 'rejected'): void {
     this.filter.set(status);
   }
@@ -96,14 +100,30 @@ export class AdminOrganizationsComponent implements OnInit {
   filteredOrganizations(): Organization[] {
     const f = this.filter();
     if (f === 'all') return this.organizations();
-    return this.organizations().filter(o => o.verificationStatus === f);
+    return this.organizations().filter(o => {
+      const status: string = o.verificationStatus || (o as any).verification?.status || '';
+      if (f === 'verified') return status === 'verified' || status === 'approved';
+      return status === f;
+    });
   }
 
   loadOrganizations(): void {
     this.isLoading.set(true);
     this.api.get<{ success: boolean; data: Organization[] }>('/organizations').subscribe({
       next: (res) => {
-        this.organizations.set(res.data || []);
+        const raw = res.data || [];
+        const normalized = raw.map((org: any) => ({
+          ...org,
+          id: org._id || org.id,
+          verificationStatus: org.verificationStatus || org.verification?.status || 'pending',
+          contact: org.contact || (org.contactInfo ? {
+            email: org.contactInfo.email,
+            phone: org.contactInfo.phone,
+            address: org.contactInfo.address?.street,
+            city: org.contactInfo.address?.city
+          } : undefined)
+        }));
+        this.organizations.set(normalized);
         this.isLoading.set(false);
       },
       error: () => {
@@ -150,15 +170,14 @@ export class AdminOrganizationsComponent implements OnInit {
   }
 
   handleVerify(orgId: string, status: OrganizationVerificationStatus): void {
-    this.api.post(`/organizations/${orgId}/verify`, { status }).subscribe({
+    const decision = status === 'verified' ? 'approved' : 'rejected';
+    this.api.post(`/organizations/${orgId}/verify`, { decision }).subscribe({
       next: () => {
-        this.toast.success(status === 'verified' ? 'Organization verified and approved successfully' : 'Verification request rejected');
+        this.toast.success(decision === 'approved' ? 'Organization verified and approved successfully' : 'Verification request rejected');
         this.loadOrganizations();
       },
-      error: () => {
-        // Local optimistic update
-        this.organizations.update(list => list.map(o => o.id === orgId ? { ...o, verificationStatus: status } : o));
-        this.toast.success(status === 'verified' ? 'Organization verified' : 'Verification request rejected');
+      error: (err) => {
+        this.toast.error(err?.message || 'Failed to update verification status');
       }
     });
   }

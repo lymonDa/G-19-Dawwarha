@@ -4,18 +4,22 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { ToastService } from '../services/toast.service';
+import { LanguageService } from '../services/language.service';
 import { ApiError } from '../models/api-error.model';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const router = inject(Router);
   const toast = inject(ToastService);
+  const languageService = inject(LanguageService, { optional: true });
+
+  const isAr = languageService ? languageService.currentLanguage() === 'ar' : true;
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       let apiError: ApiError = {
         code: 'INTERNAL_ERROR',
-        message: 'حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.',
+        message: isAr ? 'حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.' : 'An unexpected error occurred. Please try again.',
         status: error.status
       };
 
@@ -34,19 +38,30 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           authService.clearSession();
           const currentUrl = router.url;
           router.navigate(['/login'], { queryParams: { returnUrl: currentUrl } });
-          toast.warning('يرجى تسجيل الدخول للمتابعة', 'تنبيه');
+          toast.warning(
+            isAr ? 'يرجى تسجيل الدخول للمتابعة' : 'Please sign in to continue',
+            isAr ? 'تنبيه' : 'Notice'
+          );
         }
       } else if (error.status === 403) {
         // Forbidden
-        toast.error(apiError.message || 'ليس لديك الصلاحية للقيام بهذا الإجراء', 'غير مصرح');
+        toast.error(
+          apiError.message || (isAr ? 'ليس لديك الصلاحية للقيام بهذا الإجراء' : 'You do not have permission for this action'),
+          isAr ? 'غير مصرح' : 'Forbidden'
+        );
       } else if (error.status === 500) {
         // Internal Server Error
-        toast.error('حدث خطأ في الخادم، يرجى المحاولة لاحقاً', 'خطأ في الخادم');
+        toast.error(
+          isAr ? 'حدث خطأ في الخادم، يرجى المحاولة لاحقاً' : 'Internal server error. Please try again later.',
+          isAr ? 'خطأ في الخادم' : 'Server Error'
+        );
       } else if (error.status === 0) {
         // Network failure
         apiError.code = 'NETWORK_ERROR';
-        apiError.message = 'انقطع الاتصال بالخادم، يرجى التحقق من اتصال الإنترنت.';
-        toast.error(apiError.message, 'خطأ في الاتصال');
+        apiError.message = isAr
+          ? 'انقطع الاتصال بالخادم، يرجى التحقق من اتصال الإنترنت.'
+          : 'Network error. Please check your internet connection.';
+        toast.error(apiError.message, isAr ? 'خطأ في الاتصال' : 'Connection Error');
       }
 
       return throwError(() => apiError);

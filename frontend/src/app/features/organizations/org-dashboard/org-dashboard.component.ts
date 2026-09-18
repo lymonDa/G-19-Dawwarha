@@ -131,19 +131,30 @@ export class OrgDashboardComponent implements OnInit {
   readonly isLoading = signal(true);
 
   ngOnInit(): void {
-    const user = this.authService.currentUser();
-    if (user?.organizationId) {
-      this.api.get<{ success: boolean; data: Organization }>(`/organizations/${user.organizationId}`).subscribe({
-        next: (res) => {
-          this.org.set(res.data);
-          this.isLoading.set(false);
-        },
-        error: () => {
-          this.isLoading.set(false);
+    const endpoint = '/organizations/mine';
+
+    this.api.get<{ success: boolean; data: Organization }>(endpoint).subscribe({
+      next: (res) => {
+        const raw = res.data as any;
+        if (raw) {
+          const mapped: Organization = {
+            ...raw,
+            id: raw.id || raw._id,
+            verificationStatus: raw.verification?.status === 'approved' ? 'verified' : (raw.verification?.status || raw.verificationStatus || 'pending'),
+            contact: raw.contact || {
+              email: raw.contactInfo?.email || '',
+              phone: raw.contactInfo?.phone || '',
+              city: raw.contactInfo?.address?.city || 'Cairo',
+              address: raw.contactInfo?.address?.street || ''
+            }
+          };
+          this.org.set(mapped);
         }
-      });
-    } else {
-      this.isLoading.set(false);
-    }
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.isLoading.set(false);
+      }
+    });
   }
 }

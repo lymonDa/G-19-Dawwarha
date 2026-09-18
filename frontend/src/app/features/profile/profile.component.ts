@@ -122,9 +122,9 @@ export class ProfileComponent implements OnInit {
       this.profileForm.patchValue({
         name: user.name,
         email: user.email,
-        phone: user.phone || '',
-        city: user.location?.city || '',
-        area: user.location?.area || ''
+        phone: user.contactInfo?.phone || user.phone || '',
+        city: user.address?.city || user.location?.city || '',
+        area: user.address?.area || user.location?.area || ''
       });
     }
   }
@@ -156,9 +156,10 @@ export class ProfileComponent implements OnInit {
 
     this.authService.updateProfile({
       name,
-      phone,
-      location: { city, area }
-    }).subscribe({
+      contactInfo: { phone },
+      location: { city, area },
+      address: { city, area }
+    } as any).subscribe({
       next: () => {
         this.isSaving.set(false);
         this.profileForm.markAsPristine();

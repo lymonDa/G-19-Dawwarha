@@ -31,6 +31,25 @@ export async function update(req, res, next) {
     return res.json({ success: true, data: organization });
   } catch (error) { return next(error); }
 }
+export async function getMine(req, res, next) {
+  try {
+    const organization = await Organization.findOne({ ownerUserId: req.user._id });
+    if (!organization) return res.status(404).json({ success: false, error: { code: "NOT_FOUND", message: "Organization not found for current user." } });
+    return res.json({ success: true, data: organization });
+  } catch (error) { return next(error); }
+}
+
+export async function list(req, res, next) {
+  try {
+    const query = {};
+    if (req.query.status) {
+      query["verification.status"] = req.query.status;
+    }
+    const organizations = await Organization.find(query).sort({ createdAt: -1 });
+    return res.json({ success: true, data: organizations });
+  } catch (error) { return next(error); }
+}
+
 export async function verify(req, res, next) {
   try {
     const organization = await transitionVerification(req.params.id, req.body.decision, req.body.rejectionReason, req.user._id);

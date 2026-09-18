@@ -40,7 +40,7 @@ export interface ComboboxOption {
           [attr.aria-controls]="'listbox-' + labelId"
           [attr.aria-activedescendant]="isOpen && focusedIndex >= 0 ? 'option-' + labelId + '-' + focusedIndex : null"
           (click)="toggle()"
-          class="relative w-full flex items-center justify-between px-3 py-2 text-sm bg-white border rounded-md outline-none transition-colors duration-200 text-left disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed"
+          class="relative w-full flex items-center justify-between px-3 py-2 text-sm bg-white border rounded-md outline-none transition-colors duration-200 text-start disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed"
           [ngClass]="{
             'border-neutral-200 focus:border-primary-600 focus:ring-1 focus:ring-primary-600': !error && !isOpen,
             'border-primary-600 ring-1 ring-primary-600': isOpen && !error,
@@ -49,7 +49,7 @@ export interface ComboboxOption {
             'text-neutral-500': !hasSelection()
           }">
           
-          <span class="truncate block pr-6">
+          <span class="truncate block pe-6">
             <ng-container *ngIf="!multiple">
               {{ displayValue || placeholder }}
             </ng-container>
@@ -66,8 +66,8 @@ export interface ComboboxOption {
             </ng-container>
           </span>
           
-          <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-            <lucide-icon *ngIf="error" name="alert-circle" [size]="16" class="text-danger mr-1"></lucide-icon>
+          <span class="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none">
+            <lucide-icon *ngIf="error" name="alert-circle" [size]="16" class="text-danger me-1"></lucide-icon>
             <lucide-icon name="chevron-down" [size]="16" class="text-neutral-500"></lucide-icon>
           </span>
         </button>
@@ -82,11 +82,11 @@ export interface ComboboxOption {
           
           <!-- Search input -->
           <div class="p-2 border-b border-neutral-100 flex-shrink-0 relative">
-            <lucide-icon name="search" [size]="14" class="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400"></lucide-icon>
+            <lucide-icon name="search" [size]="14" class="absolute start-4 top-1/2 -translate-y-1/2 text-neutral-400"></lucide-icon>
             <input 
               #searchInput
               type="text" 
-              class="w-full pl-8 pr-3 py-1.5 text-sm bg-neutral-50 border-none rounded-sm outline-none focus:ring-2 focus:ring-primary-600/20"
+              class="w-full ps-8 pe-3 py-1.5 text-sm bg-neutral-50 border-none rounded-sm outline-none focus:ring-2 focus:ring-primary-600/20"
               placeholder="Search..."
               [(ngModel)]="searchQuery"
               (ngModelChange)="filterOptions()"
@@ -109,7 +109,7 @@ export interface ComboboxOption {
               [attr.aria-disabled]="option.disabled"
               (click)="selectOption(option)"
               (mouseenter)="focusedIndex = i"
-              class="relative cursor-default select-none py-2 pl-3 pr-9 text-sm outline-none transition-colors"
+              class="relative cursor-default select-none py-2 ps-3 pe-9 text-sm outline-none transition-colors"
               [ngClass]="{
                 'text-neutral-900': !option.disabled,
                 'text-neutral-400': option.disabled,
@@ -122,7 +122,7 @@ export interface ComboboxOption {
                 {{ option.label }}
               </span>
               
-              <span *ngIf="isSelected(option)" class="absolute inset-y-0 right-0 flex items-center pr-3 text-primary-600">
+              <span *ngIf="isSelected(option)" class="absolute inset-y-0 end-0 flex items-center pe-3 text-primary-600">
                 <lucide-icon name="check" [size]="16" strokeWidth="3"></lucide-icon>
               </span>
             </li>

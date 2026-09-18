@@ -38,7 +38,7 @@ export class DropdownItemComponent {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="relative inline-block text-left" (keydown)="onKeydown($event)">
+    <div class="relative inline-block text-start" (keydown)="onKeydown($event)">
       <!-- Trigger -->
       <div (click)="toggle()" #trigger>
         <ng-content select="[dropdown-trigger]"></ng-content>
@@ -48,7 +48,7 @@ export class DropdownItemComponent {
       <div 
         *ngIf="isOpen"
         class="absolute z-50 mt-1 w-56 rounded-md bg-white shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none animate-in fade-in zoom-in-95 duration-200"
-        [ngClass]="position === 'right' ? 'right-0 origin-top-right' : 'left-0 origin-top-left'"
+        [ngClass]="(position === 'right' || position === 'end') ? 'end-0 origin-top-right rtl:origin-top-left' : 'start-0 origin-top-left rtl:origin-top-right'"
         role="menu" 
         aria-orientation="vertical" 
         tabindex="-1"
@@ -61,7 +61,7 @@ export class DropdownItemComponent {
   `
 })
 export class DropdownComponent implements AfterContentInit {
-  @Input() position: 'left' | 'right' = 'left';
+  @Input() position: 'left' | 'right' | 'start' | 'end' = 'start';
   @ContentChildren(DropdownItemComponent) items!: QueryList<DropdownItemComponent>;
   
   isOpen = false;

@@ -50,8 +50,8 @@ export interface SelectOption {
           </option>
         </select>
         
-        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-          <lucide-icon *ngIf="error" name="alert-circle" [size]="16" class="text-danger mr-2"></lucide-icon>
+        <div class="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none">
+          <lucide-icon *ngIf="error" name="alert-circle" [size]="16" class="text-danger me-2"></lucide-icon>
           <lucide-icon name="chevron-down" [size]="16" class="text-neutral-500"></lucide-icon>
         </div>
       </div>

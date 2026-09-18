@@ -143,6 +143,7 @@ export class LoginComponent {
   getEmailError(): string | null {
     const control = this.loginForm.get('email');
     if (control?.touched && control.errors) {
+      if (control.errors['serverError']) return control.errors['serverError'];
       if (control.errors['required']) return this.languageService.currentLanguage() === 'ar' ? 'البريد الإلكتروني مطلوب' : 'Email is required';
       if (control.errors['email']) return this.languageService.currentLanguage() === 'ar' ? 'صيغة البريد الإلكتروني غير صحيحة' : 'Invalid email format';
     }
@@ -152,6 +153,7 @@ export class LoginComponent {
   getPasswordError(): string | null {
     const control = this.loginForm.get('password');
     if (control?.touched && control.errors) {
+      if (control.errors['serverError']) return control.errors['serverError'];
       if (control.errors['required']) return this.languageService.currentLanguage() === 'ar' ? 'كلمة المرور مطلوبة' : 'Password is required';
       if (control.errors['minlength']) return this.languageService.currentLanguage() === 'ar' ? 'يجب ألا تقل كلمة المرور عن 8 أحرف' : 'Password must be at least 8 characters';
     }
@@ -185,6 +187,15 @@ export class LoginComponent {
       },
       error: (err) => {
         this.isLoading.set(false);
+        if (err?.fieldErrors && typeof err.fieldErrors === 'object') {
+          for (const [field, msg] of Object.entries(err.fieldErrors)) {
+            const ctrl = this.loginForm.get(field);
+            if (ctrl) {
+              ctrl.setErrors({ serverError: msg });
+              ctrl.markAsTouched();
+            }
+          }
+        }
         this.errorMessage.set(
           err?.message || (this.languageService.currentLanguage() === 'ar' ? 'بيانات الدخول غير صحيحة. يرجى التأكد من البريد وكلمة المرور.' : 'Invalid credentials. Please check your email and password.')
         );

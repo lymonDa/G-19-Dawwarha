@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, ElementRef, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 
@@ -13,6 +13,7 @@ import { ButtonComponent } from '../button/button.component';
         role="dialog"
         aria-modal="true"
         [attr.aria-labelledby]="title ? 'dialog-title' : null"
+        (keydown.tab)="handleTabKey($event)"
       >
         <!-- Backdrop -->
         <div
@@ -22,7 +23,9 @@ import { ButtonComponent } from '../button/button.component';
 
         <!-- Panel -->
         <div
-          class="relative bg-white rounded-xl shadow-lg border border-neutral-200 max-w-lg w-full p-6 transition-all transform duration-200 ease-out scale-100 opacity-100 z-10"
+          #dialogPanel
+          tabindex="-1"
+          class="relative bg-white rounded-xl shadow-lg border border-neutral-200 max-w-lg w-full p-6 transition-all transform duration-200 ease-out scale-100 opacity-100 z-10 outline-none"
         >
           <!-- Header -->
           <div class="flex items-center justify-between pb-3 border-b border-neutral-100 mb-4">
@@ -30,9 +33,10 @@ import { ButtonComponent } from '../button/button.component';
               {{ title }}
             </h3>
             <button
+              #closeButton
               type="button"
               (click)="handleClose()"
-              class="text-neutral-400 hover:text-neutral-700 p-1 rounded-md transition-colors"
+              class="text-neutral-400 hover:text-neutral-700 p-1 rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-primary"
               aria-label="إغلاق"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,7 +73,7 @@ import { ButtonComponent } from '../button/button.component';
     }
   `
 })
-export class DialogComponent {
+export class DialogComponent implements OnChanges {
   @Input() isOpen = false;
   @Input() title = '';
   @Input() confirmText = 'تأكيد';
@@ -81,6 +85,74 @@ export class DialogComponent {
   @Output() close = new EventEmitter<void>();
   @Output() confirm = new EventEmitter<void>();
 
+  @ViewChild('dialogPanel') dialogPanel?: ElementRef<HTMLElement>;
+  @ViewChild('closeButton') closeButton?: ElementRef<HTMLButtonElement>;
+
+  private previouslyFocusedElement: HTMLElement | null = null;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isOpen']) {
+      if (this.isOpen) {
+        if (typeof document !== 'undefined') {
+          this.previouslyFocusedElement = document.activeElement as HTMLElement;
+        }
+        setTimeout(() => {
+          this.setInitialFocus();
+        }, 50);
+      } else {
+        this.restorePreviousFocus();
+      }
+    }
+  }
+
+  private getFocusableElements(): HTMLElement[] {
+    if (!this.dialogPanel?.nativeElement) return [];
+    const selector = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    return Array.from(
+      this.dialogPanel.nativeElement.querySelectorAll<HTMLElement>(selector)
+    ).filter(el => !el.hasAttribute('disabled') && el.getAttribute('aria-hidden') !== 'true');
+  }
+
+  private setInitialFocus(): void {
+    const focusable = this.getFocusableElements();
+    if (focusable.length > 0) {
+      focusable[0].focus();
+    } else if (this.dialogPanel?.nativeElement) {
+      this.dialogPanel.nativeElement.focus();
+    }
+  }
+
+  private restorePreviousFocus(): void {
+    if (this.previouslyFocusedElement && typeof this.previouslyFocusedElement.focus === 'function') {
+      this.previouslyFocusedElement.focus();
+      this.previouslyFocusedElement = null;
+    }
+  }
+
+  handleTabKey(event: Event): void {
+    const kbEvent = event as KeyboardEvent;
+    const focusable = this.getFocusableElements();
+    if (focusable.length === 0) {
+      kbEvent.preventDefault();
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (kbEvent.shiftKey) {
+      if (document.activeElement === first) {
+        kbEvent.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        kbEvent.preventDefault();
+        first.focus();
+      }
+    }
+  }
+
   @HostListener('document:keydown.escape', ['$event'])
   handleEscape(event: KeyboardEvent): void {
     if (this.isOpen && !this.isLoading) {
@@ -89,6 +161,7 @@ export class DialogComponent {
   }
 
   handleClose(): void {
+    this.restorePreviousFocus();
     this.close.emit();
   }
 

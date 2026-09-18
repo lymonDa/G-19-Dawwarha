@@ -11,11 +11,24 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
+import { SearchComponent } from '../../../shared/ui/search/search.component';
+import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.component';
 
 @Component({
   selector: 'app-admin-users',
   standalone: true,
-  imports: [CommonModule, FormsModule, TableComponent, PaginationComponent, BadgeComponent, ButtonComponent, DialogComponent, SkeletonComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TableComponent,
+    PaginationComponent,
+    BadgeComponent,
+    ButtonComponent,
+    DialogComponent,
+    SkeletonComponent,
+    SearchComponent,
+    SelectComponent
+  ],
   template: `
     <div class="flex flex-col gap-6">
       <!-- Header -->
@@ -27,24 +40,22 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
 
         <!-- Filters Bar -->
         <div class="flex items-center gap-2 w-full sm:w-auto">
-          <input
-            type="text"
-            [(ngModel)]="searchQuery"
-            (ngModelChange)="onSearchChange()"
-            placeholder="Search by name or email..."
-            class="px-3 py-1.5 bg-white border border-neutral-200 rounded-md text-xs w-full sm:w-60 focus:outline-none focus:ring-1 focus:ring-primary"
-          />
+          <div class="w-full sm:w-60">
+            <app-search
+              [placeholder]="'Search by name or email...'"
+              [(ngModel)]="searchQuery"
+              (search)="onSearchChange()"
+              (cleared)="onSearchChange()"
+            ></app-search>
+          </div>
 
-          <select
-            [(ngModel)]="roleFilter"
-            (ngModelChange)="loadUsers()"
-            class="px-3 py-1.5 bg-white border border-neutral-200 rounded-md text-xs text-neutral-700 focus:outline-none focus:ring-1 focus:ring-primary"
-          >
-            <option value="">All Roles</option>
-            <option value="user">Individuals</option>
-            <option value="organization">Organizations</option>
-            <option value="admin">Admins</option>
-          </select>
+          <div class="w-full sm:w-44">
+            <app-select
+              [options]="roleOptions"
+              [(ngModel)]="roleFilter"
+              (ngModelChange)="loadUsers()"
+            ></app-select>
+          </div>
         </div>
       </div>
 
@@ -74,7 +85,7 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
               </td>
             </tr>
           } @else {
-            @for (user of users(); track user.id) {
+            @for (user of users(); track (user.id || userAny(user)._id)) {
               <tr class="hover:bg-neutral-50/80 transition-colors">
                 <!-- Name & Email -->
                 <td class="px-4 py-3">
@@ -173,12 +184,23 @@ export class AdminUsersComponent implements OnInit {
   searchQuery = '';
   roleFilter = '';
 
+  readonly roleOptions: SelectOption[] = [
+    { value: '', label: 'All Roles' },
+    { value: 'user', label: 'Individuals' },
+    { value: 'organization', label: 'Organizations' },
+    { value: 'admin', label: 'Admins' }
+  ];
+
   readonly isDialogOpen = signal(false);
   readonly isProcessingAction = signal(false);
   readonly selectedUser = signal<User | null>(null);
 
   ngOnInit(): void {
     this.loadUsers();
+  }
+
+  userAny(user: User): any {
+    return user as any;
   }
 
   loadUsers(): void {
@@ -190,15 +212,22 @@ export class AdminUsersComponent implements OnInit {
     if (this.roleFilter) params['role'] = this.roleFilter;
     if (this.searchQuery) params['search'] = this.searchQuery;
 
-    this.api.get<Paginated<User>>('/admin/users', params).subscribe({
+    this.api.get<any>('/admin/users', params).subscribe({
       next: (res) => {
-        this.users.set(res.data || []);
-        this.total.set(res.total || 0);
-        this.totalPages.set(res.totalPages || 1);
+        const raw = res.data || [];
+        const normalized = raw.map((u: any) => ({
+          ...u,
+          id: u._id || u.id
+        }));
+        const total = res.pagination?.total ?? res.total ?? normalized.length;
+        const totalPages = res.pagination?.totalPages ?? res.totalPages ?? Math.max(1, Math.ceil(total / this.limit));
+        this.users.set(normalized);
+        this.total.set(total);
+        this.totalPages.set(totalPages);
         this.isLoading.set(false);
       },
-      error: () => {
-        // Fallback demo data
+      error: (err) => {
+        // Fallback demo data if backend offline
         this.users.set([
           {
             id: 'u1',
@@ -231,6 +260,9 @@ export class AdminUsersComponent implements OnInit {
         this.total.set(3);
         this.totalPages.set(1);
         this.isLoading.set(false);
+        if (err?.message) {
+          this.toast.error(err.message);
+        }
       }
     });
   }
@@ -255,21 +287,21 @@ export class AdminUsersComponent implements OnInit {
     if (!user) return;
 
     this.isProcessingAction.set(true);
-    const newStatus = user.status === 'active' ? 'suspended' : 'active';
+    const userId = (user as any)._id || user.id;
+    const isSuspending = user.status === 'active';
+    const endpoint = isSuspending ? `/admin/users/${userId}/suspend` : `/admin/users/${userId}/reactivate`;
 
-    this.api.put<{ success: boolean; data: User }>(`/admin/users/${user.id}/suspend`, { status: newStatus }).subscribe({
+    this.api.put<{ success: boolean; data: User }>(endpoint, {}).subscribe({
       next: () => {
         this.isProcessingAction.set(false);
         this.isDialogOpen.set(false);
-        this.toast.success('User status updated successfully');
+        this.toast.success(isSuspending ? 'User suspended successfully' : 'User reactivated successfully');
         this.loadUsers();
       },
-      error: () => {
-        // Optimistic toggle for frontend demo
-        this.users.update(list => list.map(u => u.id === user.id ? { ...u, status: newStatus as UserStatus } : u));
+      error: (err) => {
         this.isProcessingAction.set(false);
         this.isDialogOpen.set(false);
-        this.toast.success(`Account status changed to ${newStatus === 'active' ? 'Active' : 'Suspended'}`);
+        this.toast.error(err?.message || 'Failed to update user status');
       }
     });
   }

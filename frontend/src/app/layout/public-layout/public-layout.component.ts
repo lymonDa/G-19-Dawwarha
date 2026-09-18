@@ -66,7 +66,7 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
                 </app-button>
               </a>
             } @else {
-              <div class="hidden sm:flex items-center gap-2">
+              <div class="flex items-center gap-1.5 sm:gap-2">
                 <a routerLink="/login">
                   <app-button variant="ghost" size="sm">
                     {{ languageService.t().NAV_LOGIN }}

@@ -163,11 +163,13 @@ export class OrgRegisterComponent {
       type: val.type as OrganizationType,
       registrationNumber: val.registrationNumber,
       description: val.description,
-      contact: {
+      contactInfo: {
         email: val.email,
         phone: val.phone,
-        city: val.city,
-        address: val.address
+        address: {
+          city: val.city,
+          street: val.address
+        }
       }
     };
 

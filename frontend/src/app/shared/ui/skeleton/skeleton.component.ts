@@ -12,7 +12,6 @@ export type SkeletonVariant = 'text' | 'circular' | 'rectangular' | 'card';
       [class]="skeletonClasses"
       [style.width]="width"
       [style.height]="height"
-      aria-busy="true"
       aria-hidden="true"
     ></div>
   `

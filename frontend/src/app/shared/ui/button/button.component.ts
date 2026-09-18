@@ -48,7 +48,7 @@ export class ButtonComponent {
 
     // Sizes
     let sizeClass = 'px-4 py-2 text-sm';
-    if (this.size === 'sm') sizeClass = 'px-3 py-1.5 text-xs min-h-[36px]';
+    if (this.size === 'sm') sizeClass = 'px-3 py-1.5 text-xs min-h-[40px] min-w-[40px]';
     if (this.size === 'lg') sizeClass = 'px-6 py-3 text-base min-h-[48px]';
 
     // Variants

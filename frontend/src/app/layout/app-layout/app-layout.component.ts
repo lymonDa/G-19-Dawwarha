@@ -175,7 +175,7 @@ import { LanguageService } from '../../core/services/language.service';
         <header class="sticky top-0 z-20 h-16 bg-white/95 backdrop-blur-md border-b border-neutral-200 flex items-center justify-between px-4 sm:px-6">
           <div class="flex items-center gap-3">
             <span class="text-sm font-semibold text-neutral-800">
-              {{ authService.currentUser()?.name }}
+              {{ authService.currentUser()?.name || '...' }}
             </span>
           </div>
 
@@ -238,7 +238,7 @@ import { LanguageService } from '../../core/services/language.service';
         </header>
 
         <!-- Main Content Slot -->
-        <main class="flex-1 p-4 sm:p-6 max-w-7xl w-full mx-auto">
+        <main class="flex-1 p-4 sm:p-6 max-w-7xl w-full mx-auto pb-24 md:pb-6">
           <router-outlet></router-outlet>
         </main>
       </div>

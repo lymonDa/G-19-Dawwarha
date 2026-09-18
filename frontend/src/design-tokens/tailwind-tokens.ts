@@ -74,9 +74,30 @@ export const boxShadow = {
   sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
   md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
   lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
+  'card-hover': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+  dropdown: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
+  modal: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
 };
 
 export const fontFamily = {
   sans: ['Inter', 'IBM Plex Sans Arabic', '-apple-system', 'Segoe UI', 'sans-serif'],
   arabic: ['IBM Plex Sans Arabic', 'Tahoma', 'sans-serif'],
+};
+
+export const transitionDuration = {
+  fast: '120ms',
+  base: '200ms',
+  slow: '280ms',
+};
+
+export const transitionTimingFunction = {
+  standard: 'cubic-bezier(0.2, 0, 0, 1)',
+  emphasized: 'cubic-bezier(0.3, 0, 0.1, 1)',
+};
+
+export const fontSize = {
+  h1: ['2rem', { lineHeight: '2.5rem', fontWeight: '700' }],
+  h2: ['1.5rem', { lineHeight: '2rem', fontWeight: '700' }],
+  h3: ['1.125rem', { lineHeight: '1.75rem', fontWeight: '600' }],
+  body: ['0.875rem', { lineHeight: '1.25rem', fontWeight: '400' }],
 };

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
+import { orgVerifiedGuard } from './core/guards/org-verified.guard';
 
 export const appRoutes: Routes = [
   // 1. PUBLIC ROUTES (Wrapped in PublicLayout)
@@ -153,6 +154,7 @@ export const appRoutes: Routes = [
       },
       {
         path: 'organizations/dashboard',
+        canActivate: [orgVerifiedGuard],
         loadComponent: () =>
           import('./features/organizations/org-dashboard/org-dashboard.component').then(m => m.OrgDashboardComponent),
         title: 'لوحة تحكم المنظمة — دَوَّرها'

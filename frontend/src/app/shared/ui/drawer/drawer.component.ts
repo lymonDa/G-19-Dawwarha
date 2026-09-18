@@ -10,7 +10,7 @@ import { LucideAngularModule, X } from 'lucide-angular';
     <div 
       *ngIf="isOpen" 
       class="fixed inset-0 z-50 flex"
-      [ngClass]="{'justify-end': position === 'right', 'justify-start': position === 'left'}"
+      [ngClass]="{'justify-end': position === 'end', 'justify-start': position === 'start'}"
       role="dialog" 
       aria-modal="true" 
       [attr.aria-labelledby]="titleId">
@@ -27,8 +27,8 @@ import { LucideAngularModule, X } from 'lucide-angular';
         #panel
         class="relative flex w-full max-w-sm flex-col bg-white shadow-xl transition-transform duration-280 ease-out animate-in"
         [ngClass]="{
-          'slide-in-from-right': position === 'right',
-          'slide-in-from-left': position === 'left'
+          'slide-in-from-right': position === 'end',
+          'slide-in-from-left': position === 'start'
         }"
         tabindex="-1">
         
@@ -65,7 +65,7 @@ import { LucideAngularModule, X } from 'lucide-angular';
 export class DrawerComponent {
   @Input() isOpen = false;
   @Input() title = '';
-  @Input() position: 'left' | 'right' = 'right';
+  @Input() position: 'start' | 'end' = 'end';
   @Input() hasFooter = false;
 
   @Output() closed = new EventEmitter<void>();

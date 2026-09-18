@@ -77,8 +77,9 @@ export class CardComponent {
 
   handleKeydown(event: Event): void {
     if (this.isInteractive) {
-      event.preventDefault();
-      this.clicked.emit(event as any);
+      const kbEvent = event as KeyboardEvent;
+      kbEvent.preventDefault();
+      this.clicked.emit(kbEvent);
     }
   }
 }

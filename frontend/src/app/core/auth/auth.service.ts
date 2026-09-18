@@ -26,6 +26,12 @@ export class AuthService {
   readonly userRole = computed<UserRole | null>(() => this.currentUserSignal()?.role ?? null);
   readonly isAdmin = computed(() => this.currentUserSignal()?.role === 'admin');
   readonly isOrganization = computed(() => this.currentUserSignal()?.role === 'organization');
+  readonly authSession = computed<AuthSession | null>(() => {
+    const user = this.currentUserSignal();
+    const token = this.tokenSignal();
+    if (!user || !token) return null;
+    return { user, token };
+  });
 
   constructor() {
     this.restoreLocalState();
