@@ -73,12 +73,11 @@ export class HandoverApiService {
   }
 
   /**
-   * Retrieves handover state for a matchId.
-   * Attempts server GET first; if not yet exposed by backend, serves cached or mock handover
-   * so the detail page can function seamlessly across all environments.
+   * Retrieves handover state for a matchId from the backend.
+   * GET /api/transactions/:matchId — requires authenticated participant.
    */
-  getHandover(matchId: string, currentUserId?: string): Observable<Handover> {
-    // Check if we have an existing record in our local store
+  getHandover(matchId: string): Observable<Handover> {
+    // Check local cache first for immediate display
     if (this.localHandoverStore.has(matchId)) {
       return of(this.localHandoverStore.get(matchId)!);
     }
@@ -92,17 +91,22 @@ export class HandoverApiService {
         throw new Error('Handover not found');
       }),
       catchError(err => {
-        // If backend returns 404 or connection is refused in local dev, provide initial handover state
-        // using the current user as either provider or seeker
-        const fallback = this.createDefaultHandover(matchId, currentUserId);
-        this.localHandoverStore.set(matchId, fallback);
-        return of(fallback);
+        const statusCode = err?.status || err?.statusCode || 500;
+        const errBody = err?.error?.error || err?.error || {};
+        const code = errBody.code || (statusCode === 403 ? 'FORBIDDEN' : statusCode === 404 ? 'NOT_FOUND' : 'REQUEST_ERROR');
+        const message = errBody.message || err?.message || 'لم يتم العثور على سجل التسليم لهذه المطابقة';
+
+        return throwError(() => ({
+          statusCode,
+          code,
+          message
+        } as HandoverApiError));
       })
     );
   }
 
   /**
-   * Manually update cache state (useful for tests and demos).
+   * Manually update cache state (useful for local UI updates after confirmation).
    */
   setHandoverCache(matchId: string, handover: Handover): void {
     this.localHandoverStore.set(matchId, handover);
@@ -113,23 +117,5 @@ export class HandoverApiService {
    */
   clearCache(): void {
     this.localHandoverStore.clear();
-  }
-
-  private createDefaultHandover(matchId: string, currentUserId?: string): Handover {
-    const defaultProviderId = currentUserId || 'user-provider-001';
-    const defaultSeekerId = currentUserId === 'user-provider-001' ? 'user-seeker-002' : 'user-seeker-002';
-
-    return {
-      id: `handover-${matchId}`,
-      matchId,
-      providerId: defaultProviderId,
-      seekerId: defaultSeekerId,
-      confirmedByProvider: false,
-      confirmedBySeeker: false,
-      status: 'in_progress',
-      completedAt: null,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
   }
 }

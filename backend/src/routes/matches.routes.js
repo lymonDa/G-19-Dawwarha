@@ -9,6 +9,7 @@ import {
 
 import {
   generateResourceMatches,
+  getMatchById,
   getMatches,
   acceptMatch,
   rejectMatch,
@@ -27,6 +28,13 @@ matchRouter.post(
 matchRouter.get(
   "/",
   getMatches
+);
+
+matchRouter.get(
+  "/:id",
+  matchIdValidation,
+  validate,
+  getMatchById
 );
 
 matchRouter.put(

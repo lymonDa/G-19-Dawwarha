@@ -549,9 +549,16 @@ export class HandoverDetailComponent implements OnInit {
     this.isLoading.set(true);
     this.error.set(null);
 
-    this.handoverApi.getHandover(matchId, this.currentUserId()).subscribe({
+    this.handoverApi.getHandover(matchId).subscribe({
       next: (data) => {
-        this.handover.set(data);
+        // Map backend _id to model id for consistent identity checks
+        const mapped = {
+          ...data,
+          id: data.id || (data as any)._id,
+          providerId: data.providerId ? String(data.providerId) : '',
+          seekerId: data.seekerId ? String(data.seekerId) : ''
+        };
+        this.handover.set(mapped);
         this.isLoading.set(false);
       },
       error: (err: HandoverApiError) => {

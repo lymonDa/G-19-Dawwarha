@@ -50,18 +50,11 @@ export class MatchApiService {
   }
 
   /**
-   * Look up a match by ID.
-   * CROSS-ENGINEER CONTRACT GAP:
-   * Backend /api/matches routes only expose GET /, POST /:resourceId/generate,
-   * PUT /:id/accept, and PUT /:id/reject. There is no backend GET /api/matches/:id.
-   * Frontend fetches matches with higher limit as a deterministic fallback.
+   * Look up a match by ID via dedicated backend endpoint.
    */
   getById(id: string): Observable<Match | null> {
-    return this.getAll(undefined, 1, 100, true).pipe(
-      map(res => {
-        const matches = res.data || [];
-        return matches.find((m: Match) => (m._id || m.id) === id) || null;
-      })
+    return this.http.get<ApiResponse<Match>>(`${this.apiUrl}/${id}`).pipe(
+      map(res => res.data || null)
     );
   }
 

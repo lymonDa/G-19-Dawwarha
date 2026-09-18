@@ -75,6 +75,56 @@ const generateResourceMatches = async (req, res) => {
   }
 };
 
+const getMatchById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({
+        success: false,
+        error: { code: "INVALID_ID", message: "Invalid match ID" },
+      });
+    }
+
+    const match = await matchModel
+      .findById(id)
+      .populate("requestId")
+      .populate("resourceId");
+
+    if (!match) {
+      return res.status(404).json({
+        success: false,
+        error: { code: "MATCH_NOT_FOUND", message: "Match not found" },
+      });
+    }
+
+    // Enforce participant or admin access
+    const isAdmin = req.user.role === "admin";
+    const isProvider = String(match.providerId) === String(req.user._id);
+    const isRequester = String(match.requesterId) === String(req.user._id);
+
+    if (!isAdmin && !isProvider && !isRequester) {
+      return res.status(403).json({
+        success: false,
+        error: {
+          code: "FORBIDDEN",
+          message: "You don't have permission to view this match.",
+        },
+      });
+    }
+
+    return res.json({
+      success: true,
+      data: match,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: { code: "INTERNAL_ERROR", message: err.message },
+    });
+  }
+};
+
 const getMatches = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
@@ -173,6 +223,7 @@ const rejectMatch = async (req, res) => {
 
 export {
   generateResourceMatches,
+  getMatchById,
   getMatches,
   acceptMatch,
   rejectMatch,

@@ -47,6 +47,19 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               </svg>
               <span>{{ successMessage }}</span>
             </div>
+            @if (match?.status === 'accepted') {
+              <div class="mt-3 flex items-center gap-3">
+                <a
+                  [routerLink]="['/handovers', matchId]"
+                  class="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 transition-colors"
+                >
+                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                  <span>Proceed to Handover Confirmation</span>
+                </a>
+              </div>
+            }
           </div>
         }
 
@@ -195,6 +208,26 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                 >
                   Accept Match
                 </app-button>
+              </div>
+            }
+
+            @if (match.status === 'accepted') {
+              <div class="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-100 pt-6">
+                <div class="flex items-center gap-2 text-sm text-neutral-600">
+                  <svg class="h-5 w-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Match accepted — handover coordination is in progress.</span>
+                </div>
+                <a
+                  [routerLink]="['/handovers', matchId]"
+                  class="inline-flex items-center gap-1.5 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-primary-700 transition-colors"
+                >
+                  <span>Go to Handover</span>
+                  <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </a>
               </div>
             }
           </div>
