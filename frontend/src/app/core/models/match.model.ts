@@ -1,58 +1,40 @@
+import { Resource } from './resource.model';
+import { Request } from './request.model';
+import { User } from './user.model';
+
 export interface MatchScoreBreakdown {
-<<<<<<< HEAD
-  category: number;
-  location: number;
-  quantity: number;
-  urgency: number;
-  availability: number;
-}
-
-export type MatchStatus =
-  | 'proposed'
-  | 'accepted'
-  | 'rejected'
-  | 'expired';
-
-export interface Match {
-  _id?: string;
-  id?: string;
-
-  resourceId: any;
-  requestId: any;
-
-  score: number;
-
-  scoreBreakdown: MatchScoreBreakdown;
-
-  status: MatchStatus;
-
-  providerId: string;
-  requesterId: string;
-
-  createdAt: string;
-
-  expiresAt?: string;
-}
-=======
-  category: boolean;
-  location: boolean;
-  quantity: boolean;
-  urgency: boolean;
-  availability: boolean;
+  category: number | boolean;
+  location: number | boolean;
+  quantity: number | boolean;
+  urgency: number | boolean;
+  availability: number | boolean;
 }
 
 export type MatchStatus = 'proposed' | 'accepted' | 'rejected' | 'expired';
 
 export interface Match {
   id: string;
-  resourceId: string;
-  requestId: string;
-  score: number; // Integer 0-100 per DESIGN.md Section 16
+  _id?: string;
+
+  resourceId: string | Resource;
+  requestId: string | Request;
+
+  providerId: string | User;
+  requesterId: string | User;
+
+  score: number; // Decimal 0-1 from backend or integer 0-100 per DESIGN.md §16
   scoreBreakdown: MatchScoreBreakdown;
+
   status: MatchStatus;
-  providerId: string;
-  requesterId: string;
+
   createdAt: string;
   updatedAt?: string;
+  expiresAt?: string;
 }
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
+
+export interface MatchFilters {
+  status?: MatchStatus;
+  all?: boolean;
+  page?: number;
+  limit?: number;
+}

@@ -1,34 +1,4 @@
 import { Routes } from '@angular/router';
-<<<<<<< HEAD
-
-export const appRoutes: Routes = [
-  {
-    path: '',
-    loadChildren: () =>
-      import('./features/requests/request.routes')
-        .then(m => m.requestRoutes)
-  },
-
-  {
-    path: '',
-    loadChildren: () =>
-      import('./features/matches/match.routes')
-        .then(m => m.matchRoutes)
-  },
-
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('./login.component')
-        .then(m => m.LoginComponent)
-  },
-
-  {
-    path: '**',
-    redirectTo: 'requests'
-  }
-];
-=======
 import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
 import { orgVerifiedGuard } from './core/guards/org-verified.guard';
@@ -131,7 +101,7 @@ export const appRoutes: Routes = [
       {
         path: 'requests/create',
         loadComponent: () =>
-          import('./features/requests/request-create/request-create.component').then(m => m.RequestCreateComponent),
+          import('./features/requests/request-form/request-form.component').then(m => m.RequestFormComponent),
         title: 'تسجيل طلب احتياج — دَوَّرها'
       },
       {
@@ -139,6 +109,12 @@ export const appRoutes: Routes = [
         loadComponent: () =>
           import('./features/requests/my-requests/my-requests.component').then(m => m.MyRequestsComponent),
         title: 'طلباتي المسجلة — دَوَّرها'
+      },
+      {
+        path: 'requests/:id/edit',
+        loadComponent: () =>
+          import('./features/requests/request-form/request-form.component').then(m => m.RequestFormComponent),
+        title: 'تعديل طلب الاحتياج — دَوَّرها'
       },
       {
         path: 'requests/:id',
@@ -149,8 +125,14 @@ export const appRoutes: Routes = [
       {
         path: 'matches',
         loadComponent: () =>
-          import('./features/matches/matches-list/matches-list.component').then(m => m.MatchesListComponent),
+          import('./features/matches/match-list/match-list.component').then(m => m.MatchListComponent),
         title: 'المطابقات الذكية — دَوَّرها'
+      },
+      {
+        path: 'matches/:id',
+        loadComponent: () =>
+          import('./features/matches/match-detail/match-detail.component').then(m => m.MatchDetailComponent),
+        title: 'تفاصيل المطابقة — دَوَّرها'
       },
       {
         path: 'handovers/:matchId',
@@ -264,4 +246,3 @@ export const appRoutes: Routes = [
     title: 'الصفحة غير موجودة 404 — دَوَّرها'
   }
 ];
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1

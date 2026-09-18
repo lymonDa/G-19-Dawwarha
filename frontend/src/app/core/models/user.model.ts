@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-export interface User {
-  _id?: string;
-  id?: string;
-  name: string;
-  email: string;
-  role: 'individual' | 'organization' | 'admin';
-  organizationId?: string | null;
-  isVerified?: boolean;
-  createdAt?: string;
-=======
 export type UserRole = 'user' | 'organization' | 'admin';
 export type UserStatus = 'active' | 'suspended' | 'pending';
 
@@ -49,6 +38,5 @@ export interface User {
   organizationId?: string;
   stats?: UserStats;
   createdAt: string;
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
   updatedAt?: string;
 }

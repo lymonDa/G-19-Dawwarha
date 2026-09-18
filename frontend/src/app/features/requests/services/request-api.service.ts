@@ -9,7 +9,18 @@ import {
   RequestStatus,
   RequestUrgency
 } from '../../../core/models/request.model';
+import { Category } from '../../../core/models/category.model';
 import { ApiResponse } from '../../../core/models/api-error.model';
+
+export type RequestLifecycleAction =
+  | 'publish'
+  | 'cancel'
+  | 'match'
+  | 'accept'
+  | 'reject'
+  | 'release'
+  | 'complete'
+  | 'expire';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +29,12 @@ export class RequestApiService {
   private http = inject(HttpClient);
   private apiUrl = '/api/requests';
 
+  /**
+   * Fetch paginated list of requests with filters.
+   * NOTE: Backend GET /api/requests filters by status, categoryId, and city.
+   * Urgency filter is passed if provided, but backend controller does not currently
+   * index or filter on urgency (CROSS-ENGINEER CONTRACT GAP).
+   */
   getAll(
     page = 1,
     limit = 20,
@@ -43,51 +60,51 @@ export class RequestApiService {
       params = params.set('urgency', urgency);
     }
 
-    return this.http.get<any>(this.apiUrl, { params }).pipe(
+    return this.http.get<ApiResponse<Request[]>>(this.apiUrl, { params }).pipe(
       map(res => {
-        // Backend returns { success: true, data: [...], pagination: {...} }
         if (res && res.data && Array.isArray(res.data)) {
           return res;
         }
-        if (Array.isArray(res)) {
-          return { success: true, data: res, pagination: { page, limit, count: res.length } };
-        }
-        return { success: true, data: res?.items || res?.requests || [], pagination: res?.pagination };
+        return {
+          success: true,
+          data: Array.isArray(res) ? res : [],
+          pagination: { page, limit, count: Array.isArray(res) ? res.length : 0 }
+        };
       })
     );
   }
 
   getById(id: string): Observable<Request> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`).pipe(
-      map(res => res?.data || res)
+    return this.http.get<ApiResponse<Request>>(`${this.apiUrl}/${id}`).pipe(
+      map(res => res.data)
     );
   }
 
   create(data: RequestPayload): Observable<Request> {
-    return this.http.post<any>(this.apiUrl, data).pipe(
-      map(res => res?.data || res)
+    return this.http.post<ApiResponse<Request>>(this.apiUrl, data).pipe(
+      map(res => res.data)
     );
   }
 
   update(id: string, data: Partial<RequestPayload>): Observable<Request> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, data).pipe(
-      map(res => res?.data || res)
+    return this.http.put<ApiResponse<Request>>(`${this.apiUrl}/${id}`, data).pipe(
+      map(res => res.data)
     );
   }
 
-  changeStatus(id: string, action: 'publish' | 'cancel'): Observable<Request> {
-    return this.http.put<any>(`${this.apiUrl}/${id}/status`, { action }).pipe(
-      map(res => res?.data || res)
+  changeStatus(id: string, action: RequestLifecycleAction): Observable<Request> {
+    return this.http.put<ApiResponse<Request>>(`${this.apiUrl}/${id}/status`, { action }).pipe(
+      map(res => res.data)
     );
   }
 
-  delete(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  delete(id: string): Observable<ApiResponse<Request>> {
+    return this.http.delete<ApiResponse<Request>>(`${this.apiUrl}/${id}`);
   }
 
-  getCategories(): Observable<any> {
-    return this.http.get<any>('/api/categories').pipe(
-      map(res => res?.data || res)
+  getCategories(): Observable<Category[]> {
+    return this.http.get<ApiResponse<Category[]>>('/api/categories').pipe(
+      map(res => res.data || [])
     );
   }
 }

@@ -1,23 +1,22 @@
 export interface ApiError {
   code: string;
   message: string;
-<<<<<<< HEAD
-  details?: any;
+  fieldErrors?: Record<string, string>;
+  status?: number;
 }
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T> {
   success: boolean;
-  data?: T;
-  message?: string;
-  error?: ApiError;
+  data: T;
   pagination?: {
     page: number;
     limit: number;
     total?: number;
     count?: number;
+    totalPages?: number;
   };
-=======
-  fieldErrors?: Record<string, string>;
-  status?: number;
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
+  error?: {
+    code: string;
+    message: string;
+  };
 }

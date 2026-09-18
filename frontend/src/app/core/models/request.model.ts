@@ -1,14 +1,11 @@
-<<<<<<< HEAD
-=======
 import { Category } from './category.model';
+import { User } from './user.model';
 
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
 export type RequestUrgency = 'low' | 'medium' | 'high';
 
 export type RequestStatus =
   | 'draft'
   | 'published'
-<<<<<<< HEAD
   | 'matched'
   | 'accepted'
   | 'fulfilled'
@@ -20,22 +17,14 @@ export interface RequestLocation {
   area?: string;
 }
 
-export interface RequestCategory {
-  _id?: string;
-  id?: string;
-  name: string;
-  slug?: string;
-  isActive?: boolean;
-}
-
 export interface Request {
+  id: string;
   _id?: string;
-  id?: string;
 
-  requesterId: string;
+  requesterId: string | User;
   requesterOrgId?: string | null;
 
-  categoryId: string | RequestCategory;
+  categoryId: string | Category;
 
   quantity: number;
 
@@ -59,28 +48,12 @@ export interface RequestPayload {
   description?: string;
   requesterOrgId?: string | null;
 }
-=======
-  | 'open'
-  | 'matched'
-  | 'accepted'
-  | 'in_handover'
-  | 'completed'
-  | 'cancelled'
-  | 'expired';
 
-export interface Request {
-  id: string;
-  category: Category;
-  quantity: number;
-  unit?: string;
-  urgency: RequestUrgency;
-  description: string;
-  location: { area: string; city: string };
-  status: RequestStatus;
-  requesterId: string;
-  requesterOrgId?: string;
-  isStanding?: boolean;
-  createdAt: string;
-  updatedAt?: string;
+export interface RequestFilters {
+  status?: RequestStatus;
+  categoryId?: string;
+  city?: string;
+  urgency?: RequestUrgency;
+  page?: number;
+  limit?: number;
 }
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1

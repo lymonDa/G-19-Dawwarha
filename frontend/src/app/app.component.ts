@@ -1,24 +1,12 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-=======
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet, Event, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ToastComponent } from './shared/ui/toast/toast.component';
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
 
 @Component({
   selector: 'app-root',
   standalone: true,
-<<<<<<< HEAD
-  imports: [RouterOutlet],
-  template: '<router-outlet></router-outlet>',
-  styles: []
-})
-export class AppComponent {}
-=======
   imports: [CommonModule, RouterOutlet, ToastComponent],
   template: `
     <!-- Top-bar route/chunk navigation progress loader -->
@@ -73,4 +61,3 @@ export class AppComponent implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 }
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1

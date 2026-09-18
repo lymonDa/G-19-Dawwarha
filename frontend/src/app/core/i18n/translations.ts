@@ -107,6 +107,9 @@ export interface TranslationDictionary {
   ADMIN_RETRY: string;
   ADMIN_NO_USERS: string;
   ADMIN_NO_ORGS: string;
+  URGENCY_HIGH: string;
+  URGENCY_MEDIUM: string;
+  URGENCY_LOW: string;
 }
 
 export const translations: Record<'ar' | 'en', TranslationDictionary> = {
@@ -211,7 +214,10 @@ export const translations: Record<'ar' | 'en', TranslationDictionary> = {
     ADMIN_FILTER_VERIFIED: 'موثقة',
     ADMIN_RETRY: 'إعادة المحاولة',
     ADMIN_NO_USERS: 'لم يتم العثور على مستخدمين يطابقون معايير البحث.',
-    ADMIN_NO_ORGS: 'لا توجد منظمات تطابق التصفية الحالية.'
+    ADMIN_NO_ORGS: 'لا توجد منظمات تطابق التصفية الحالية.',
+    URGENCY_HIGH: 'أولوية قصوى',
+    URGENCY_MEDIUM: 'أولوية متوسطة',
+    URGENCY_LOW: 'أولوية عادية'
   },
   en: {
     BRAND_NAME: 'Dawwarha',
@@ -314,6 +320,9 @@ export const translations: Record<'ar' | 'en', TranslationDictionary> = {
     ADMIN_FILTER_VERIFIED: 'Verified',
     ADMIN_RETRY: 'Retry',
     ADMIN_NO_USERS: 'No users found matching your search.',
-    ADMIN_NO_ORGS: 'No organizations match the current filter.'
+    ADMIN_NO_ORGS: 'No organizations match the current filter.',
+    URGENCY_HIGH: 'High urgency',
+    URGENCY_MEDIUM: 'Medium urgency',
+    URGENCY_LOW: 'Low urgency'
   }
 };

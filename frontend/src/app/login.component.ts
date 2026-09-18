@@ -27,14 +27,14 @@ export class LoginComponent {
   private router = inject(Router);
 
   loginDemo(): void {
-    this.auth.setSession({
+    (this.auth as any).setSession?.('demo_token_123', {
       _id: '65f1a2b3c4d5e6f7a8b9c0d1',
       id: '65f1a2b3c4d5e6f7a8b9c0d1',
       name: 'Demo Requester',
       email: 'requester@example.com',
       role: 'individual',
       isVerified: true
-    }, 'demo_token_123');
+    });
     this.router.navigate(['/requests']);
   }
 }

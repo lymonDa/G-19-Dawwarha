@@ -1,18 +1,165 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { Match } from '../../../core/models/match.model';
+import { Request } from '../../../core/models/request.model';
+import { Resource } from '../../../core/models/resource.model';
+import { AuthService } from '../../../core/auth/auth.service';
 import { MatchScoreComponent } from '../match-score/match-score.component';
+import { RequestCardComponent } from '../request-card/request-card.component';
+import { DialogComponent } from '../../ui/dialog/dialog.component';
+import { ButtonComponent } from '../../ui/button/button.component';
 
 @Component({
   selector: 'app-match-card',
   standalone: true,
-  imports: [CommonModule, RouterLink, MatchScoreComponent],
-  templateUrl: './match-card.component.html',
-  styleUrls: ['./match-card.component.css']
+  imports: [
+    CommonModule,
+    RouterLink,
+    MatchScoreComponent,
+    RequestCardComponent,
+    DialogComponent,
+    ButtonComponent
+  ],
+  template: `
+    <div class="relative overflow-hidden rounded-card border border-neutral-200 bg-neutral-0 p-5 shadow-sm transition-shadow hover:shadow-md">
+      <!-- 1. Top MatchScore Component (Flagship - Always Visible) -->
+      <app-match-score
+        [score]="match.score"
+        [breakdown]="match.scoreBreakdown"
+      />
+
+      <!-- 2 & 3. Comparison Section: Compact ResourceCard & Compact RequestCard -->
+      <div class="mt-4 grid gap-4 md:grid-cols-2">
+        <!-- Compact Resource Column -->
+        <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
+          <div class="flex items-center justify-between border-b border-neutral-200/60 pb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">
+              Supplied Resource
+            </span>
+            <span class="rounded-md bg-neutral-200/60 px-2 py-0.5 text-xs font-semibold text-neutral-700">
+              Qty: {{ resourceQuantity }}
+            </span>
+          </div>
+
+          <div class="mt-2.5">
+            <h4 class="font-semibold text-neutral-900">
+              {{ resourceTitle }}
+            </h4>
+            <p class="mt-0.5 text-xs text-neutral-500">
+              Category: <span class="font-medium text-neutral-700">{{ resourceCategory }}</span>
+            </p>
+            <p class="mt-1 flex items-center gap-1 text-xs text-neutral-600">
+              <svg class="h-3.5 w-3.5 shrink-0 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span>{{ resourceLocation }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Compact RequestCard -->
+        <app-request-card
+          variant="compact"
+          [request]="requestObject"
+        />
+      </div>
+
+      <!-- 4. Actions Bar -->
+      <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-100 pt-4">
+        <div>
+          @if (match.status && match.status !== 'proposed') {
+            <span
+              class="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold tracking-wide capitalize"
+              [ngClass]="statusBadgeClass"
+            >
+              Status: {{ match.status }}
+            </span>
+          } @else {
+            <span class="inline-flex items-center gap-1 rounded-full border border-info/20 bg-info-bg px-2.5 py-0.5 text-xs font-medium text-info">
+              Proposed Match
+            </span>
+          }
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          @if (match.status === 'proposed' && isAuthorizedParty) {
+            <app-button
+              variant="primary"
+              size="sm"
+              [isLoading]="loading"
+              (clicked)="triggerAccept()"
+            >
+              Accept Match
+            </app-button>
+
+            <app-button
+              variant="danger"
+              size="sm"
+              [disabled]="loading"
+              (clicked)="triggerReject()"
+            >
+              Reject
+            </app-button>
+          }
+
+          @if (showDetailsLink && matchId) {
+            <a
+              [routerLink]="['/matches', matchId]"
+              class="inline-flex items-center gap-1 rounded-lg border border-neutral-200 bg-neutral-0 px-3 py-1.5 text-xs font-medium text-neutral-700 transition hover:bg-neutral-50 hover:text-neutral-900"
+            >
+              <span>View Details</span>
+              <svg class="h-3.5 w-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          }
+        </div>
+      </div>
+
+      <!-- Confirmation Dialogs via Shared app-dialog -->
+      <app-dialog
+        [isOpen]="showAcceptConfirm"
+        title="Confirm Match Acceptance"
+        confirmText="Confirm & Accept"
+        cancelText="Cancel"
+        confirmVariant="primary"
+        [isLoading]="loading"
+        (close)="cancelAccept()"
+        (confirm)="confirmAccept()"
+      >
+        <p>
+          Accepting this match will initiate the handover coordination workflow between provider and requester. Do you want to proceed?
+        </p>
+      </app-dialog>
+
+      <app-dialog
+        [isOpen]="showRejectConfirm"
+        title="Reject This Match?"
+        confirmText="Confirm Reject"
+        cancelText="Cancel"
+        confirmVariant="danger"
+        [isLoading]="loading"
+        (close)="cancelReject()"
+        (confirm)="confirmReject()"
+      >
+        <p>
+          Are you sure you want to decline this candidate match? The resource will remain available for other matching requests.
+        </p>
+      </app-dialog>
+    </div>
+  `,
+  styles: [`
+    :host {
+      display: block;
+    }
+  `]
 })
 export class MatchCardComponent {
+  private auth = inject(AuthService);
+
   @Input({ required: true }) match!: Match;
   @Input() loading = false;
   @Input() showDetailsLink = true;
@@ -28,45 +175,75 @@ export class MatchCardComponent {
   }
 
   get resourceTitle(): string {
-    return this.match?.resourceId?.title || 'Resource';
+    if (typeof this.match?.resourceId === 'object' && this.match.resourceId) {
+      return this.match.resourceId.title;
+    }
+    return 'Resource';
   }
 
   get resourceCategory(): string {
-    const cat = this.match?.resourceId?.categoryId;
-    return typeof cat === 'object' && cat?.name ? cat.name : 'Category';
+    if (typeof this.match?.resourceId === 'object' && this.match.resourceId) {
+      const res = this.match.resourceId as Resource;
+      if (res.category?.name) return res.category.name;
+      if (res.categoryId) return res.categoryId;
+    }
+    return 'Category';
   }
 
   get resourceQuantity(): number {
-    return this.match?.resourceId?.quantity || 1;
+    if (typeof this.match?.resourceId === 'object' && this.match.resourceId) {
+      return this.match.resourceId.quantity;
+    }
+    return 1;
   }
 
   get resourceLocation(): string {
-    const loc = this.match?.resourceId?.location;
-    if (!loc) return 'Location not specified';
-    return loc.city + (loc.area ? ` · ${loc.area}` : '');
+    if (typeof this.match?.resourceId === 'object' && this.match.resourceId) {
+      const loc = this.match.resourceId.location;
+      if (!loc) return 'Location not specified';
+      return loc.city + (loc.area ? ` · ${loc.area}` : '');
+    }
+    return 'Location not specified';
   }
 
-  get requestCategory(): string {
-    const cat = this.match?.requestId?.categoryId;
-    return typeof cat === 'object' && cat?.name ? cat.name : 'Category';
+  get requestObject(): Request {
+    if (this.match?.requestId && typeof this.match.requestId === 'object') {
+      return this.match.requestId as Request;
+    }
+    return {
+      _id: typeof this.match?.requestId === 'string' ? this.match.requestId : '',
+      id: typeof this.match?.requestId === 'string' ? this.match.requestId : '',
+      requesterId: typeof this.match?.requesterId === 'string' ? this.match.requesterId : (this.match?.requesterId?._id || ''),
+      categoryId: 'Demand Request',
+      quantity: 1,
+      urgency: 'medium',
+      location: { city: 'Location not specified' },
+      status: 'matched'
+    } as Request;
   }
 
-  get requestQuantity(): number {
-    return this.match?.requestId?.quantity || 1;
-  }
+  get isAuthorizedParty(): boolean {
+    const user = this.auth.currentUser();
+    if (!user) return false;
+    if (user.role === 'admin') return true;
 
-  get requestUrgency(): string {
-    return this.match?.requestId?.urgency || 'medium';
-  }
+    const currentUserId = user._id || user.id;
+    if (!currentUserId) return false;
 
-  get requestLocation(): string {
-    const loc = this.match?.requestId?.location;
-    if (!loc) return 'Location not specified';
-    return loc.city + (loc.area ? ` · ${loc.area}` : '');
-  }
+    const provId = typeof this.match?.providerId === 'object'
+      ? (this.match.providerId?._id || this.match.providerId?.id)
+      : this.match?.providerId;
+    const reqId = typeof this.match?.requesterId === 'object'
+      ? (this.match.requesterId?._id || this.match.requesterId?.id)
+      : this.match?.requesterId;
+    const resProvId = typeof this.match?.resourceId === 'object'
+      ? this.match.resourceId?.providerId
+      : undefined;
+    const reqReqId = typeof this.match?.requestId === 'object'
+      ? this.match.requestId?.requesterId
+      : undefined;
 
-  get statusLabel(): string {
-    return (this.match?.status || 'proposed').toUpperCase();
+    return currentUserId === provId || currentUserId === reqId || currentUserId === resProvId || currentUserId === reqReqId;
   }
 
   get statusBadgeClass(): string {

@@ -1,3 +1,4 @@
+import { describe, it, expect, beforeEach } from 'vitest';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatchScoreComponent } from './match-score.component';
 
@@ -34,14 +35,14 @@ describe('MatchScoreComponent (DESIGN.md Section 16)', () => {
   it('should apply success styling for scores >= 85%', () => {
     component.score = 0.88;
     fixture.detectChanges();
-    expect(component.isHighMatch).toBeTrue();
+    expect(component.isHighMatch).toBe(true);
     expect(component.scoreColorClasses).toContain('text-success');
   });
 
   it('should apply info styling for scores between 60% and 84%', () => {
     component.score = 0.72;
     fixture.detectChanges();
-    expect(component.isModerateMatch).toBeTrue();
+    expect(component.isModerateMatch).toBe(true);
     expect(component.scoreColorClasses).toContain('text-info');
   });
 
@@ -71,5 +72,33 @@ describe('MatchScoreComponent (DESIGN.md Section 16)', () => {
       'urgency',
       'availability'
     ]);
+  });
+
+  it('should render the 5 signals, score, factual explanation, and accessibility attributes in DOM', () => {
+    component.score = 0.92;
+    component.breakdown = {
+      category: 1.0,
+      location: 0.85,
+      quantity: 0.9,
+      urgency: 1.0,
+      availability: 0.75
+    };
+    fixture.detectChanges();
+
+    const nativeEl: HTMLElement = fixture.nativeElement;
+    const region = nativeEl.querySelector('[role="region"]');
+    expect(region).toBeTruthy();
+    expect(region?.getAttribute('aria-label')).toBe(component.confidenceText);
+
+    // Score in DOM
+    expect(nativeEl.textContent).toContain('92% Match');
+    expect(nativeEl.textContent).toContain('92% match based on category, location, quantity, urgency, and availability.');
+
+    // 5 signals in DOM
+    expect(nativeEl.textContent).toContain('Category');
+    expect(nativeEl.textContent).toContain('Location');
+    expect(nativeEl.textContent).toContain('Quantity');
+    expect(nativeEl.textContent).toContain('Urgency');
+    expect(nativeEl.textContent).toContain('Availability');
   });
 });

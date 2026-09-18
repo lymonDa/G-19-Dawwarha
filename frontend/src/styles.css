@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-<<<<<<< HEAD
-=======
 
 @layer base {
   html {
@@ -60,4 +58,3 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #8A9792;
 }
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1

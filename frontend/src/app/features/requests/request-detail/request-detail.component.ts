@@ -1,39 +1,222 @@
-<<<<<<< HEAD
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { RequestApiService } from '../services/request-api.service';
 import { Request } from '../../../core/models/request.model';
+import { ToastService } from '../../../core/services/toast.service';
 import { UrgencyBadgeComponent } from '../../../shared/components/urgency-badge/urgency-badge.component';
-=======
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { CardComponent } from '../../../shared/ui/card/card.component';
-import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
+import { LifecycleTimelineComponent, LifecycleStepId } from '../../../shared/components/lifecycle-timeline/lifecycle-timeline.component';
+import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
+import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
 
 @Component({
   selector: 'app-request-detail',
   standalone: true,
-<<<<<<< HEAD
-  imports: [CommonModule, RouterLink, UrgencyBadgeComponent],
-  templateUrl: './request-detail.component.html',
-  styleUrls: ['./request-detail.component.css']
+  imports: [
+    CommonModule,
+    RouterLink,
+    UrgencyBadgeComponent,
+    LifecycleTimelineComponent,
+    DialogComponent,
+    SkeletonComponent,
+    ButtonComponent
+  ],
+  template: `
+    <div class="min-h-screen bg-neutral-50 px-4 py-8 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl">
+        <!-- Breadcrumbs / Back Link -->
+        <a
+          routerLink="/requests"
+          class="inline-flex items-center gap-1.5 text-sm font-medium text-neutral-500 transition hover:text-neutral-900"
+        >
+          <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span>Back to Requests</span>
+        </a>
+
+        <!-- Error Alert -->
+        @if (errorMessage) {
+          <div class="mt-4 rounded-card border border-danger/30 bg-danger-bg p-4 text-sm text-danger" role="alert">
+            <div class="flex items-center gap-2">
+              <svg class="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span>{{ errorMessage }}</span>
+            </div>
+          </div>
+        }
+
+        <!-- Loading Skeleton via Shared app-skeleton -->
+        @if (loading) {
+          <div class="mt-6 space-y-4">
+            <app-skeleton variant="card" height="120px" />
+            <app-skeleton variant="card" height="260px" />
+          </div>
+        } @else if (request) {
+          <!-- Main Content Card -->
+          <div class="mt-6 overflow-hidden rounded-card border border-neutral-200 bg-neutral-0 p-6 shadow-sm sm:p-8">
+            <!-- Header Row -->
+            <div class="flex flex-col gap-4 border-b border-neutral-100 pb-6 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="rounded bg-neutral-100 px-2.5 py-0.5 text-xs font-semibold text-neutral-600">
+                    Demand Request #{{ requestId.slice(-6) }}
+                  </span>
+                  <app-urgency-badge [urgency]="request.urgency" />
+                </div>
+
+                <h1 class="mt-2 text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
+                  {{ categoryName }}
+                </h1>
+                <p class="mt-1 text-sm text-neutral-500">
+                  Posted on {{ request.createdAt | date:'mediumDate' }}
+                </p>
+              </div>
+
+              <!-- Status Badge -->
+              <div>
+                <span
+                  class="inline-flex items-center rounded-full border px-3.5 py-1 text-xs font-semibold uppercase tracking-wider"
+                  [ngClass]="statusBadgeClass"
+                >
+                  Status: {{ request.status }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Integrated Lifecycle Timeline (Product & Backend Contract Aligned) -->
+            <div class="mt-6 border-b border-neutral-100 pb-6">
+              <h2 class="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                Request Lifecycle Progress
+              </h2>
+              <app-lifecycle-timeline
+                [currentStep]="currentLifecycleStep"
+                [terminalState]="timelineTerminalState"
+                [cancelledAtStep]="currentLifecycleStep"
+              />
+            </div>
+
+            <!-- Specifications Grid -->
+            <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
+                <span class="text-xs font-semibold uppercase text-neutral-500">Quantity Needed</span>
+                <p class="mt-1 text-xl font-bold text-neutral-900">{{ request.quantity }} units</p>
+              </div>
+
+              <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
+                <span class="text-xs font-semibold uppercase text-neutral-500">Urgency</span>
+                <p class="mt-1 text-xl font-bold capitalize text-neutral-900">{{ request.urgency }}</p>
+              </div>
+
+              <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
+                <span class="text-xs font-semibold uppercase text-neutral-500">City / Region</span>
+                <p class="mt-1 text-xl font-bold text-neutral-900">{{ request.location.city }}</p>
+              </div>
+
+              <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
+                <span class="text-xs font-semibold uppercase text-neutral-500">Area</span>
+                <p class="mt-1 text-xl font-bold text-neutral-900">{{ request.location.area || 'General Area' }}</p>
+              </div>
+            </div>
+
+            <!-- Description Section -->
+            <div class="mt-6 rounded-xl border border-neutral-100 bg-neutral-50 p-5">
+              <h3 class="text-sm font-semibold text-neutral-900">Request Description</h3>
+              <p class="mt-2 text-sm leading-relaxed text-neutral-700 whitespace-pre-line">
+                {{ request.description || 'No additional description provided by the requester.' }}
+              </p>
+            </div>
+
+            <!-- Lifecycle Actions Bar -->
+            <div class="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-100 pt-6">
+              <div class="flex flex-wrap items-center gap-2">
+                <!-- Edit Button (Available for draft or published) -->
+                @if (request.status === 'draft' || request.status === 'published') {
+                  <a
+                    [routerLink]="['/requests', requestId, 'edit']"
+                    class="rounded-lg border border-neutral-200 bg-neutral-0 px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50"
+                  >
+                    Edit Request
+                  </a>
+                }
+
+                <!-- Publish Button (For draft requests) -->
+                @if (request.status === 'draft') {
+                  <app-button
+                    variant="primary"
+                    [isLoading]="actionProcessing"
+                    (clicked)="publishRequest()"
+                  >
+                    Publish Request
+                  </app-button>
+                }
+
+                <!-- View Matches Link -->
+                @if (request.status === 'published' || request.status === 'matched') {
+                  <a
+                    routerLink="/matches"
+                    class="inline-flex items-center gap-1.5 rounded-lg bg-neutral-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-neutral-800"
+                  >
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span>Check Available Matches</span>
+                  </a>
+                }
+              </div>
+
+              <!-- Cancel Request Button -->
+              @if (request.status === 'published' || request.status === 'matched' || request.status === 'draft') {
+                <app-button
+                  variant="danger"
+                  [disabled]="actionProcessing"
+                  (clicked)="promptCancel()"
+                >
+                  Cancel Request
+                </app-button>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Cancellation Dialog via Shared app-dialog -->
+        <app-dialog
+          [isOpen]="showCancelConfirm"
+          title="Cancel This Request?"
+          confirmText="Confirm Cancellation"
+          cancelText="Keep Active"
+          confirmVariant="danger"
+          [isLoading]="actionProcessing"
+          (close)="dismissCancel()"
+          (confirm)="confirmCancel()"
+        >
+          <p>
+            Cancelling this demand request will remove it from active matching discovery. You can create a new request at any time.
+          </p>
+        </app-dialog>
+      </div>
+    </div>
+  `,
+  styles: [`
+    :host {
+      display: block;
+    }
+  `]
 })
 export class RequestDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private api = inject(RequestApiService);
+  private toast = inject(ToastService);
 
   request: Request | null = null;
   requestId = '';
   loading = true;
   actionProcessing = false;
   errorMessage = '';
-  successMessage = '';
 
   showCancelConfirm = false;
 
@@ -73,6 +256,29 @@ export class RequestDetailComponent implements OnInit {
     return 'Demand Request';
   }
 
+  get currentLifecycleStep(): LifecycleStepId {
+    switch (this.request?.status) {
+      case 'draft':
+        return 'draft';
+      case 'published':
+        return 'published';
+      case 'matched':
+        return 'matched';
+      case 'accepted':
+        return 'accepted';
+      case 'fulfilled':
+        return 'completed';
+      default:
+        return 'draft';
+    }
+  }
+
+  get timelineTerminalState(): 'none' | 'cancelled' | 'failed' {
+    if (this.request?.status === 'cancelled') return 'cancelled';
+    if (this.request?.status === 'expired') return 'failed';
+    return 'none';
+  }
+
   get statusBadgeClass(): string {
     switch (this.request?.status) {
       case 'published':
@@ -98,11 +304,12 @@ export class RequestDetailComponent implements OnInit {
       next: (updated) => {
         this.request = updated;
         this.actionProcessing = false;
-        this.successMessage = 'Request published successfully and is now discoverable for matching.';
+        this.toast.success('Request published successfully and is now discoverable for matching.');
       },
       error: (err) => {
         this.actionProcessing = false;
         this.errorMessage = err?.error?.message || 'Failed to publish request.';
+        this.toast.error(this.errorMessage);
       }
     });
   }
@@ -123,40 +330,13 @@ export class RequestDetailComponent implements OnInit {
       next: (updated) => {
         this.request = updated;
         this.actionProcessing = false;
-        this.successMessage = 'Request has been cancelled.';
+        this.toast.success('Request has been cancelled.');
       },
       error: (err) => {
         this.actionProcessing = false;
         this.errorMessage = err?.error?.message || 'Failed to cancel request.';
+        this.toast.error(this.errorMessage);
       }
     });
   }
 }
-=======
-  imports: [CommonModule, RouterModule, CardComponent, BadgeComponent, ButtonComponent],
-  template: `
-    <div class="max-w-4xl mx-auto py-8 px-4 flex flex-col gap-6">
-      <a routerLink="/requests" class="text-xs text-neutral-500 hover:text-primary">← Back to Requests</a>
-      <app-card padding="lg">
-        <div class="flex items-start justify-between gap-4 mb-4">
-          <div>
-            <span class="text-xs text-primary font-bold bg-primary-50 px-2 py-0.5 rounded">Medical Devices & Equipment</span>
-            <h1 class="text-2xl font-bold text-neutral-900 mt-2">Home Ventilator / Oxygen Cylinder</h1>
-            <p class="text-xs text-neutral-500 mt-1">Dokki, Giza · Verified Request</p>
-          </div>
-          <app-badge variant="danger">Very Urgent</app-badge>
-        </div>
-        <p class="text-sm text-neutral-700 leading-relaxed py-4 border-y border-neutral-100">
-          Required for a patient with acute respiratory insufficiency who needs the device for continuous home use under medical supervision.
-        </p>
-        <div class="flex justify-end pt-4">
-          <a routerLink="/matches">
-            <app-button variant="primary">Find Matching Resources for This Request</app-button>
-          </a>
-        </div>
-      </app-card>
-    </div>
-  `
-})
-export class RequestDetailComponent {}
->>>>>>> 2370b8e25b12033313748db7e74761bfb44f21e1
