@@ -182,6 +182,79 @@ describe("ENG-01 — Identity, Organizations & Admin API Route Unit Tests", () =
       assert.equal(json.error.code, "INVALID_CREDENTIALS");
     });
 
+    test("POST /api/auth/login — short wrong password (< 8 chars) returns 401 not 400", async () => {
+      const hashedPassword = await bcrypt.hash("Password123!", 10);
+      mock.method(User, "findOne", () => ({
+        select: async () => ({
+          _id: userId,
+          email: "user@example.com",
+          passwordHash: hashedPassword,
+          role: "user",
+          status: "active",
+        }),
+      }));
+
+      const res = await fetch(`${baseUrl}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: "user@example.com",
+          password: "wrong",
+        }),
+      });
+
+      assert.equal(res.status, 401);
+      const json = await res.json();
+      assert.equal(json.success, false);
+      assert.equal(json.error.code, "INVALID_CREDENTIALS");
+    });
+
+    test("POST /api/auth/login — unknown user returns 401", async () => {
+      mock.method(User, "findOne", () => ({
+        select: async () => null,
+      }));
+
+      const res = await fetch(`${baseUrl}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: "unknown@example.com",
+          password: "Password123!",
+        }),
+      });
+
+      assert.equal(res.status, 401);
+      const json = await res.json();
+      assert.equal(json.success, false);
+      assert.equal(json.error.code, "INVALID_CREDENTIALS");
+    });
+
+    test("POST /api/auth/login — malformed payload returns 400", async () => {
+      // Missing password
+      const noPass = await fetch(`${baseUrl}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: "user@example.com" }),
+      });
+      assert.equal(noPass.status, 400);
+
+      // Invalid email syntax
+      const badEmail = await fetch(`${baseUrl}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: "not-an-email", password: "Password123!" }),
+      });
+      assert.equal(badEmail.status, 400);
+
+      // Missing email
+      const noEmail = await fetch(`${baseUrl}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: "Password123!" }),
+      });
+      assert.equal(noEmail.status, 400);
+    });
+
     test("POST /api/auth/login — suspended user returns 403", async () => {
       const hashedPassword = await bcrypt.hash("Password123!", 10);
       mock.method(User, "findOne", () => ({

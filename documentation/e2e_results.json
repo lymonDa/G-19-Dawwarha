@@ -1,0 +1,672 @@
+{
+  "timestamp": "2026-09-18T22:53:54.394Z",
+  "verdict": "E2E PASS",
+  "summary": {
+    "total": 91,
+    "passed": 91,
+    "failed": 0,
+    "warned": 0
+  },
+  "users": {
+    "userA": {
+      "id": "6aadc0e440dbb51347729028",
+      "email": "e2e.provider.1789772003780@example.com"
+    },
+    "userB": {
+      "id": "6aadc0e440dbb51347729029",
+      "email": "e2e.seeker.1789772003780@example.com"
+    },
+    "userC": {
+      "id": "6aadc0e540dbb5134772902a",
+      "email": "e2e.unauth.1789772003780@example.com"
+    }
+  },
+  "ids": {
+    "resourceId": "6aadc0e640dbb5134772902b",
+    "requestId": "6aadc0e940dbb5134772902c",
+    "matchId": "6aadc0eb40dbb5134772902e",
+    "handoverId": "6aadc0f040dbb51347729036",
+    "categoryId": "6aa5b4bc2b50f3176b023384"
+  },
+  "results": [
+    {
+      "phase": "P0",
+      "step": "Backend Health",
+      "expected": "200 ok",
+      "actual": "ok",
+      "status": "PASS"
+    },
+    {
+      "phase": "P1",
+      "step": "Register User A",
+      "expected": "201 Created",
+      "actual": "201 id=729028",
+      "status": "PASS"
+    },
+    {
+      "phase": "P1",
+      "step": "Register User B",
+      "expected": "201 Created",
+      "actual": "201 id=729029",
+      "status": "PASS"
+    },
+    {
+      "phase": "P1",
+      "step": "Register User C",
+      "expected": "201 Created",
+      "actual": "201",
+      "status": "PASS"
+    },
+    {
+      "phase": "P1",
+      "step": "Duplicate Registration",
+      "expected": "409/400 Rejected",
+      "actual": "409",
+      "status": "PASS"
+    },
+    {
+      "phase": "P2",
+      "step": "Login User A",
+      "expected": "200 + JWT",
+      "actual": "200 token=YES",
+      "status": "PASS"
+    },
+    {
+      "phase": "P2",
+      "step": "Login User B",
+      "expected": "200 + JWT",
+      "actual": "200 token=YES",
+      "status": "PASS"
+    },
+    {
+      "phase": "P2",
+      "step": "Invalid Password",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "phase": "P2",
+      "step": "Unknown User Login",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "phase": "P2",
+      "step": "Malformed Login (Missing Password)",
+      "expected": "400",
+      "actual": "400",
+      "status": "PASS"
+    },
+    {
+      "phase": "P2",
+      "step": "Malformed Login (Invalid Email)",
+      "expected": "400",
+      "actual": "400",
+      "status": "PASS"
+    },
+    {
+      "phase": "P2",
+      "step": "Unauth Protected Endpoint",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "phase": "SETUP",
+      "step": "Active Category Found",
+      "expected": "ID exists",
+      "actual": "023384",
+      "status": "PASS"
+    },
+    {
+      "phase": "P3",
+      "step": "Create Resource",
+      "expected": "201 status=draft",
+      "actual": "201 status=draft id=72902b",
+      "status": "PASS"
+    },
+    {
+      "phase": "P3",
+      "step": "Missing Title Validation",
+      "expected": "400",
+      "actual": "400",
+      "status": "PASS"
+    },
+    {
+      "phase": "P3",
+      "step": "Unauth Resource Create",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "phase": "P3",
+      "step": "GET Resource by ID",
+      "expected": "200 owner=UserA",
+      "actual": "200 provider=729028",
+      "status": "PASS"
+    },
+    {
+      "phase": "P4",
+      "step": "Publish Resource",
+      "expected": "200 status=published",
+      "actual": "200 status=published",
+      "status": "PASS"
+    },
+    {
+      "phase": "P4",
+      "step": "User B Alter User A Resource",
+      "expected": "403",
+      "actual": "403",
+      "status": "PASS"
+    },
+    {
+      "phase": "P5",
+      "step": "Create Request",
+      "expected": "201 status=draft",
+      "actual": "201 status=draft id=72902c",
+      "status": "PASS"
+    },
+    {
+      "phase": "P5",
+      "step": "Request Owner is User B",
+      "expected": "requesterId=UserB",
+      "actual": "requesterId=729029",
+      "status": "PASS"
+    },
+    {
+      "phase": "P6",
+      "step": "Publish Request",
+      "expected": "200 status=published",
+      "actual": "200 status=published",
+      "status": "PASS"
+    },
+    {
+      "phase": "P6",
+      "step": "User C Alter User B Request",
+      "expected": "403",
+      "actual": "403",
+      "status": "PASS"
+    },
+    {
+      "phase": "P7",
+      "step": "Generate Matches",
+      "expected": "200 + matches",
+      "actual": "200 count=3",
+      "status": "PASS"
+    },
+    {
+      "phase": "P7",
+      "step": "Match Score",
+      "expected": ">= 0.50",
+      "actual": "score=1",
+      "status": "PASS"
+    },
+    {
+      "phase": "P7",
+      "step": "Match Provider",
+      "expected": "UserA (729028)",
+      "actual": "729028",
+      "status": "PASS"
+    },
+    {
+      "phase": "P7",
+      "step": "Match Requester",
+      "expected": "UserB (729029)",
+      "actual": "729029",
+      "status": "PASS"
+    },
+    {
+      "phase": "P7",
+      "step": "Match Status",
+      "expected": "proposed",
+      "actual": "proposed",
+      "status": "PASS"
+    },
+    {
+      "phase": "P7",
+      "step": "Score Breakdown Exists",
+      "expected": "object",
+      "actual": "object",
+      "status": "PASS"
+    },
+    {
+      "phase": "P7",
+      "step": "Duplicate Match Handling",
+      "expected": "200 (graceful)",
+      "actual": "200",
+      "status": "PASS"
+    },
+    {
+      "phase": "P8",
+      "step": "User A Can View Match",
+      "expected": "200",
+      "actual": "200",
+      "status": "PASS"
+    },
+    {
+      "phase": "P8",
+      "step": "User B Can View Match",
+      "expected": "200",
+      "actual": "200",
+      "status": "PASS"
+    },
+    {
+      "phase": "P8",
+      "step": "User C Cannot View Match",
+      "expected": "403",
+      "actual": "403",
+      "status": "PASS"
+    },
+    {
+      "phase": "P8",
+      "step": "User C Cannot Accept Match",
+      "expected": "403",
+      "actual": "403",
+      "status": "PASS"
+    },
+    {
+      "phase": "P9",
+      "step": "Accept Match",
+      "expected": "200 match.status=accepted",
+      "actual": "200 status=accepted handoverId=729036",
+      "status": "PASS"
+    },
+    {
+      "phase": "P9",
+      "step": "Resource Status After Accept",
+      "expected": "accepted",
+      "actual": "accepted",
+      "status": "PASS"
+    },
+    {
+      "phase": "P9",
+      "step": "Request Status After Accept",
+      "expected": "accepted",
+      "actual": "accepted",
+      "status": "PASS"
+    },
+    {
+      "phase": "P10",
+      "step": "GET Handover by matchId",
+      "expected": "200",
+      "actual": "200",
+      "status": "PASS"
+    },
+    {
+      "phase": "P10",
+      "step": "Handover matchId Correct",
+      "expected": "72902e",
+      "actual": "72902e",
+      "status": "PASS"
+    },
+    {
+      "phase": "P10",
+      "step": "Handover Provider=UserA",
+      "expected": "729028",
+      "actual": "729028",
+      "status": "PASS"
+    },
+    {
+      "phase": "P10",
+      "step": "Handover Seeker=UserB",
+      "expected": "729029",
+      "actual": "729029",
+      "status": "PASS"
+    },
+    {
+      "phase": "P10",
+      "step": "Initial confirmedByProvider",
+      "expected": "false",
+      "actual": "false",
+      "status": "PASS"
+    },
+    {
+      "phase": "P10",
+      "step": "Initial confirmedBySeeker",
+      "expected": "false",
+      "actual": "false",
+      "status": "PASS"
+    },
+    {
+      "phase": "P10",
+      "step": "Handover Status",
+      "expected": "in_progress",
+      "actual": "in_progress",
+      "status": "PASS"
+    },
+    {
+      "phase": "P10",
+      "step": "User C Cannot Access Handover",
+      "expected": "403",
+      "actual": "403",
+      "status": "PASS"
+    },
+    {
+      "phase": "P10",
+      "step": "User B Can Access Handover",
+      "expected": "200",
+      "actual": "200",
+      "status": "PASS"
+    },
+    {
+      "phase": "P11",
+      "step": "Provider Confirm",
+      "expected": "200 status=in_progress",
+      "actual": "200 status=in_progress both=false",
+      "status": "PASS"
+    },
+    {
+      "phase": "P11",
+      "step": "confirmedByProvider After",
+      "expected": "true",
+      "actual": "true",
+      "status": "PASS"
+    },
+    {
+      "phase": "P11",
+      "step": "confirmedBySeeker After",
+      "expected": "false",
+      "actual": "false",
+      "status": "PASS"
+    },
+    {
+      "phase": "P11",
+      "step": "Handover Still in_progress",
+      "expected": "in_progress",
+      "actual": "in_progress",
+      "status": "PASS"
+    },
+    {
+      "phase": "P11",
+      "step": "providerConfirmedAt Exists",
+      "expected": "date",
+      "actual": "string",
+      "status": "PASS"
+    },
+    {
+      "phase": "P11",
+      "step": "Duplicate Provider Confirm",
+      "expected": "200 (idempotent)",
+      "actual": "200",
+      "status": "PASS"
+    },
+    {
+      "phase": "P11",
+      "step": "User C Cannot Confirm",
+      "expected": "403",
+      "actual": "403",
+      "status": "PASS"
+    },
+    {
+      "phase": "P12",
+      "step": "Seeker Confirm",
+      "expected": "200 bothConfirmed=true",
+      "actual": "200 status=completed both=true",
+      "status": "PASS"
+    },
+    {
+      "phase": "P12",
+      "step": "Status is completed",
+      "expected": "completed",
+      "actual": "completed",
+      "status": "PASS"
+    },
+    {
+      "phase": "P12",
+      "step": "Final confirmedByProvider",
+      "expected": "true",
+      "actual": "true",
+      "status": "PASS"
+    },
+    {
+      "phase": "P12",
+      "step": "Final confirmedBySeeker",
+      "expected": "true",
+      "actual": "true",
+      "status": "PASS"
+    },
+    {
+      "phase": "P12",
+      "step": "Final Status",
+      "expected": "completed",
+      "actual": "completed",
+      "status": "PASS"
+    },
+    {
+      "phase": "P12",
+      "step": "completedAt Exists",
+      "expected": "date",
+      "actual": "string",
+      "status": "PASS"
+    },
+    {
+      "phase": "P13",
+      "step": "GET User A Contributions",
+      "expected": "200 + data",
+      "actual": "200 count=1",
+      "status": "PASS"
+    },
+    {
+      "phase": "P13",
+      "step": "Contribution for This Handover",
+      "expected": "exists",
+      "actual": "id=729038",
+      "status": "PASS"
+    },
+    {
+      "phase": "P13",
+      "step": "Contribution Type",
+      "expected": "transfer_completed",
+      "actual": "transfer_completed",
+      "status": "PASS"
+    },
+    {
+      "phase": "P13",
+      "step": "Provider in Contribution",
+      "expected": "729028",
+      "actual": "729028",
+      "status": "PASS"
+    },
+    {
+      "phase": "P13",
+      "step": "Seeker in Contribution",
+      "expected": "729029",
+      "actual": "729029",
+      "status": "PASS"
+    },
+    {
+      "phase": "P13",
+      "step": "User B Has Contribution",
+      "expected": "exists",
+      "actual": "YES",
+      "status": "PASS"
+    },
+    {
+      "phase": "P13",
+      "step": "No Duplicate Contribution",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "User B Has Notifications",
+      "expected": "200 + array",
+      "actual": "200 count=2",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "Notification Pagination Exists",
+      "expected": "total >= 1",
+      "actual": "total=2",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "match_created Notification",
+      "expected": "exists",
+      "actual": "type=match_created",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "match_created Recipient",
+      "expected": "729029",
+      "actual": "729029",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "match_accepted Notification",
+      "expected": "exists",
+      "actual": "type=match_accepted",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "match_accepted Recipient",
+      "expected": "729029",
+      "actual": "729029",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "Notification Isolation (User C count)",
+      "expected": "0",
+      "actual": "0",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "User C Cannot Read User B Notif",
+      "expected": "404/403",
+      "actual": "404",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "Mark Notification Read",
+      "expected": "200",
+      "actual": "200",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "readAt Populated After Read",
+      "expected": "date exists",
+      "actual": "string",
+      "status": "PASS"
+    },
+    {
+      "phase": "P14",
+      "step": "Unread Filter Decreased",
+      "expected": "1",
+      "actual": "1",
+      "status": "PASS"
+    },
+    {
+      "phase": "P15",
+      "step": "Resource Final Status",
+      "expected": "impact_recorded",
+      "actual": "impact_recorded",
+      "status": "PASS"
+    },
+    {
+      "phase": "P15",
+      "step": "Request Final Status",
+      "expected": "fulfilled",
+      "actual": "fulfilled",
+      "status": "PASS"
+    },
+    {
+      "phase": "P15",
+      "step": "Match Final Status",
+      "expected": "accepted",
+      "actual": "accepted",
+      "status": "PASS"
+    },
+    {
+      "phase": "P15",
+      "step": "Handover Final Status",
+      "expected": "completed",
+      "actual": "completed",
+      "status": "PASS"
+    },
+    {
+      "phase": "P15",
+      "step": "Match→Resource Relationship",
+      "expected": "72902b",
+      "actual": "72902b",
+      "status": "PASS"
+    },
+    {
+      "phase": "P15",
+      "step": "Match→Request Relationship",
+      "expected": "72902c",
+      "actual": "72902c",
+      "status": "PASS"
+    },
+    {
+      "phase": "P15",
+      "step": "Handover→Match Relationship",
+      "expected": "72902e",
+      "actual": "72902e",
+      "status": "PASS"
+    },
+    {
+      "phase": "P15",
+      "step": "Handover→Resource Relationship",
+      "expected": "72902b",
+      "actual": "72902b",
+      "status": "PASS"
+    },
+    {
+      "phase": "P16",
+      "step": "Illegal: impact_recorded→publish",
+      "expected": "409",
+      "actual": "409",
+      "status": "PASS"
+    },
+    {
+      "phase": "P16",
+      "step": "Illegal: fulfilled→publish",
+      "expected": "409",
+      "actual": "409",
+      "status": "PASS"
+    },
+    {
+      "phase": "P16",
+      "step": "User C Access Handover",
+      "expected": "403",
+      "actual": "403",
+      "status": "PASS"
+    },
+    {
+      "phase": "P16",
+      "step": "User C Confirm Handover",
+      "expected": "403",
+      "actual": "403",
+      "status": "PASS"
+    },
+    {
+      "phase": "P16",
+      "step": "No JWT on Confirm",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    },
+    {
+      "phase": "P16",
+      "step": "Invalid JWT",
+      "expected": "401",
+      "actual": "401",
+      "status": "PASS"
+    }
+  ],
+  "failures": [],
+  "warnings": []
+}

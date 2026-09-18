@@ -57,30 +57,29 @@ describe('MatchApiService', () => {
     req.flush([{ _id: 'm1' }, { _id: 'm2' }]);
   });
 
-  it('should locate match by ID using getById contract fallback', () => {
+  it('should fetch match by ID using direct GET /api/matches/:id endpoint', () => {
     service.getById('m2').subscribe(match => {
       expect(match).toBeTruthy();
       expect(match?._id).toBe('m2');
+      expect(match?.score).toBe(0.95);
     });
 
-    const req = httpMock.expectOne('/api/matches?page=1&limit=100&all=true');
+    const req = httpMock.expectOne('/api/matches/m2');
     expect(req.request.method).toBe('GET');
     req.flush({
       success: true,
-      data: [
-        { _id: 'm1', score: 0.8 },
-        { _id: 'm2', score: 0.95 }
-      ]
+      data: { _id: 'm2', score: 0.95 }
     });
   });
 
-  it('should return null when getById does not find match in list', () => {
+  it('should return null when getById encounters 404', () => {
     service.getById('m999').subscribe(match => {
       expect(match).toBeNull();
     });
 
-    const req = httpMock.expectOne('/api/matches?page=1&limit=100&all=true');
-    req.flush({ success: true, data: [{ _id: 'm1' }] });
+    const req = httpMock.expectOne('/api/matches/m999');
+    expect(req.request.method).toBe('GET');
+    req.flush('Not Found', { status: 404, statusText: 'Not Found' });
   });
 
   it('should send POST /api/matches/:resourceId/generate to run matching engine', () => {

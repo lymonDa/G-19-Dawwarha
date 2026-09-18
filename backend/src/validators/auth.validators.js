@@ -42,6 +42,6 @@ export const loginValidator = [
   body("password")
     .notEmpty()
     .withMessage("Password is required")
-    .isLength({ min: MIN_PASSWORD_LENGTH })
-    .withMessage(`Password must be at least ${MIN_PASSWORD_LENGTH} characters`),
+    .isString()
+    .withMessage("Password must be a string"),
 ];

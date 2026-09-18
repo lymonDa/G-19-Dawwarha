@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { Match, MatchStatus } from '../../../core/models/match.model';
 import { ApiResponse } from '../../../core/models/api-error.model';
@@ -23,7 +23,7 @@ export class MatchApiService {
     page = 1,
     limit = 20,
     all = false
-  ): Observable<ApiResponse<Match[]>> {
+  ): Observable<{ data: Match[]; pagination?: any }> {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('limit', limit.toString());
@@ -35,15 +35,14 @@ export class MatchApiService {
       params = params.set('all', 'true');
     }
 
-    return this.http.get<ApiResponse<Match[]>>(this.apiUrl, { params }).pipe(
+    return this.http.get<ApiResponse<Match[]> | Match[]>(this.apiUrl, { params }).pipe(
       map(res => {
-        if (res && res.data && Array.isArray(res.data)) {
-          return res;
+        if (Array.isArray(res)) {
+          return { data: res, pagination: { count: res.length, total: res.length } };
         }
         return {
-          success: true,
-          data: Array.isArray(res) ? res : [],
-          pagination: { page, limit, count: Array.isArray(res) ? res.length : 0 }
+          data: res.data || [],
+          pagination: res.pagination
         };
       })
     );
@@ -54,7 +53,11 @@ export class MatchApiService {
    */
   getById(id: string): Observable<Match | null> {
     return this.http.get<ApiResponse<Match>>(`${this.apiUrl}/${id}`).pipe(
-      map(res => res.data || null)
+      map(res => res.data || null),
+      catchError(err => {
+        if (err?.status === 404) return of(null);
+        throw err;
+      })
     );
   }
 
