@@ -140,6 +140,12 @@ export const appRoutes: Routes = [
         title: 'التنبيهات والإشعارات — دَوَّرها'
       },
       {
+        path: 'reports',
+        loadComponent: () =>
+          import('./features/reports/reports-list/reports-list.component').then(m => m.ReportsListComponent),
+        title: 'سجل البلاغات — دَوَّرها'
+      },
+      {
         path: 'organizations/register',
         loadComponent: () =>
           import('./features/organizations/org-register/org-register.component').then(m => m.OrgRegisterComponent),
