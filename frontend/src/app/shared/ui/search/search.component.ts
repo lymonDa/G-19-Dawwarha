@@ -16,7 +16,7 @@ import { LucideAngularModule, Search as SearchIcon, X, Loader2 } from 'lucide-an
   ],
   template: `
     <div class="relative w-full flex items-center group">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-500 group-focus-within:text-primary-600 transition-colors">
+      <div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none text-neutral-500 group-focus-within:text-primary-600 transition-colors">
         <lucide-icon name="search" [size]="16"></lucide-icon>
       </div>
       
@@ -29,14 +29,14 @@ import { LucideAngularModule, Search as SearchIcon, X, Loader2 } from 'lucide-an
         [value]="value"
         (input)="onInput($event)"
         (blur)="onTouched()"
-        class="block w-full pl-9 pr-9 py-2 text-sm border border-neutral-200 rounded-md outline-none transition-colors duration-200 bg-white placeholder:text-neutral-500 focus:border-primary-600 focus:ring-1 focus:ring-primary-600 disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed">
+        class="block w-full ps-9 pe-9 py-2 text-sm border border-neutral-200 rounded-md outline-none transition-colors duration-200 bg-white placeholder:text-neutral-500 focus:border-primary-600 focus:ring-1 focus:ring-primary-600 disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed">
         
-      <div class="absolute inset-y-0 right-0 pr-2 flex items-center">
+      <div class="absolute inset-y-0 end-0 pe-2 flex items-center">
         <lucide-icon 
           *ngIf="loading" 
           name="loader-2" 
           [size]="16" 
-          class="animate-spin text-primary-600 mr-1">
+          class="animate-spin text-primary-600 me-1">
         </lucide-icon>
         
         <button

@@ -27,10 +27,12 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
               <div>
                 <div class="flex items-center gap-2">
                   <h1 class="text-2xl font-bold text-neutral-900">{{ org()?.name }}</h1>
-                  <app-verification-badge [status]="org()!.verificationStatus"></app-verification-badge>
+                  @if (isVerified) {
+                    <app-verification-badge status="verified"></app-verification-badge>
+                  }
                 </div>
                 <p class="text-xs text-neutral-500 mt-1">
-                  {{ org()?.contact?.city }} · Registered Civil Organization
+                  {{ contactCity }} · Registered Civil Organization
                 </p>
               </div>
             </div>
@@ -56,15 +58,15 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
           <div class="mt-6 pt-6 border-t border-neutral-100 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-neutral-600">
             <div>
               <span class="text-neutral-400 block mb-0.5">Official Contact Email:</span>
-              <span class="font-medium text-neutral-900">{{ org()?.contact?.email }}</span>
+              <span class="font-medium text-neutral-900">{{ contactEmail || 'Not specified' }}</span>
             </div>
             <div>
               <span class="text-neutral-400 block mb-0.5">Phone Number:</span>
-              <span class="font-medium text-neutral-900">{{ org()?.contact?.phone }}</span>
+              <span class="font-medium text-neutral-900">{{ contactPhone || 'Not specified' }}</span>
             </div>
             <div>
               <span class="text-neutral-400 block mb-0.5">Office Address:</span>
-              <span class="font-medium text-neutral-900">{{ org()?.contact?.address }}</span>
+              <span class="font-medium text-neutral-900">{{ contactAddress || 'Not specified' }}</span>
             </div>
           </div>
         </app-card>
@@ -82,6 +84,32 @@ export class OrgProfileComponent implements OnInit {
 
   readonly org = signal<Organization | null>(null);
   readonly isLoading = signal(true);
+
+  get isVerified(): boolean {
+    const o = this.org() as any;
+    if (!o) return false;
+    return o.verification?.status === 'approved' || o.verificationStatus === 'verified';
+  }
+
+  get contactEmail(): string {
+    const o = this.org() as any;
+    return o?.contactInfo?.email || o?.contact?.email || '';
+  }
+
+  get contactPhone(): string {
+    const o = this.org() as any;
+    return o?.contactInfo?.phone || o?.contact?.phone || '';
+  }
+
+  get contactCity(): string {
+    const o = this.org() as any;
+    return o?.contactInfo?.address?.city || o?.contact?.city || '';
+  }
+
+  get contactAddress(): string {
+    const o = this.org() as any;
+    return o?.contactInfo?.address?.street || o?.contact?.address || '';
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');

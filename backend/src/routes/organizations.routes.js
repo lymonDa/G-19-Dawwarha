@@ -8,6 +8,8 @@ import { createOrganizationValidator, organizationIdValidator, updateOrganizatio
 
 const router = Router();
 router.post("/", authenticate, createOrganizationValidator, validate, controller.create);
+router.get("/mine", authenticate, controller.getMine);
+router.get("/", controller.list);
 router.get("/:id", organizationIdValidator, validate, controller.getById);
 router.put("/:id", authenticate, organizationIdValidator, validate, requireOwnership(async (req) => (await Organization.findById(req.params.id))?.ownerUserId), updateOrganizationValidator, validate, controller.update);
 router.post("/:id/verify", authenticate, requireRole("admin"), organizationIdValidator, validate, verifyOrganizationValidator, validate, controller.verify);

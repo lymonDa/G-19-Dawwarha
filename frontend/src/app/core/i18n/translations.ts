@@ -64,6 +64,18 @@ export interface TranslationDictionary {
   DEMO_ORG: string;
   DEMO_ADMIN: string;
   
+  // Register
+  REGISTER_TITLE: string;
+  REGISTER_SUBTITLE: string;
+  ROLE_INDIVIDUAL: string;
+  ROLE_ORGANIZATION: string;
+  NAME_LABEL_USER: string;
+  NAME_LABEL_ORG: string;
+  PHONE_LABEL: string;
+  SIGN_UP_BTN: string;
+  ALREADY_HAVE_ACCOUNT: string;
+  SIGN_IN_LINK: string;
+  
   // Footer
   FOOTER_DESC: string;
   FOOTER_LINKS_HEADER: string;
@@ -134,6 +146,17 @@ export const translations: Record<'ar' | 'en', TranslationDictionary> = {
     DEMO_ORG: 'جمعية (Org)',
     DEMO_ADMIN: 'مشرف (Admin)',
     
+    REGISTER_TITLE: 'إنشاء حساب في دَوَّرها',
+    REGISTER_SUBTITLE: 'انضم إلى شبكة إعادة توزيع الموارد الحضرية — اعرض فائضاً أو سجّل احتياجات المجتمع.',
+    ROLE_INDIVIDUAL: 'فرد (مانح / مستفيد)',
+    ROLE_ORGANIZATION: 'منظمة مجتمع مدني / جمعية',
+    NAME_LABEL_USER: 'الاسم الكامل',
+    NAME_LABEL_ORG: 'اسم ممثل المنظمة',
+    PHONE_LABEL: 'رقم الهاتف',
+    SIGN_UP_BTN: 'إنشاء الحساب',
+    ALREADY_HAVE_ACCOUNT: 'لديك حساب بالفعل؟',
+    SIGN_IN_LINK: 'تسجيل الدخول',
+    
     FOOTER_DESC: 'منصة رقمية موثوقة لإعادة توجيه وتدوير الموارد الفائضة والأجهزة والمستلزمات إلى الفئات الأكثر احتياجاً والجمعيات الأهلية، بنظام مطابق ذكي وتوثيق تسليم ثنائي.',
     FOOTER_LINKS_HEADER: 'روابط هامة',
     FOOTER_ORGS_HEADER: 'الجمعيات والمنظمات',
@@ -200,6 +223,17 @@ export const translations: Record<'ar' | 'en', TranslationDictionary> = {
     DEMO_PROVIDER: 'Donor (Provider)',
     DEMO_ORG: 'Organization (Seeker)',
     DEMO_ADMIN: 'Admin Operator',
+    
+    REGISTER_TITLE: 'Create a Dawwarha Account',
+    REGISTER_SUBTITLE: 'Join the civic resource redistribution network — offer surplus or register community needs.',
+    ROLE_INDIVIDUAL: 'Individual (Donor / Seeker)',
+    ROLE_ORGANIZATION: 'Civil Organization / NGO',
+    NAME_LABEL_USER: 'Full Name',
+    NAME_LABEL_ORG: 'Organization Representative Name',
+    PHONE_LABEL: 'Phone Number',
+    SIGN_UP_BTN: 'Create Account',
+    ALREADY_HAVE_ACCOUNT: 'Already have an account?',
+    SIGN_IN_LINK: 'Sign In',
     
     FOOTER_DESC: 'Civic infrastructure for urban surplus recovery and community reallocation with transparent rule-based matching and two-sided custody sign-offs.',
     FOOTER_LINKS_HEADER: 'Platform Links',

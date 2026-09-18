@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-pagination',
@@ -15,7 +16,7 @@ import { ButtonComponent } from '../button/button.component';
           [disabled]="page <= 1"
           (clicked)="onPageChange(page - 1)"
         >
-          السابق
+          {{ isArabic ? 'السابق' : 'Previous' }}
         </app-button>
         <app-button
           variant="secondary"
@@ -23,21 +24,33 @@ import { ButtonComponent } from '../button/button.component';
           [disabled]="page >= totalPages"
           (clicked)="onPageChange(page + 1)"
         >
-          التالي
+          {{ isArabic ? 'التالي' : 'Next' }}
         </app-button>
       </div>
 
       <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
         <div>
-          <p class="text-xs text-neutral-600">
-            عرض
-            <span class="font-medium">{{ startIndex }}</span>
-            إلى
-            <span class="font-medium">{{ endIndex }}</span>
-            من إجمالي
-            <span class="font-medium">{{ total }}</span>
-            عنصر
-          </p>
+          @if (isArabic) {
+            <p class="text-xs text-neutral-600">
+              عرض
+              <span class="font-medium">{{ startIndex }}</span>
+              إلى
+              <span class="font-medium">{{ endIndex }}</span>
+              من إجمالي
+              <span class="font-medium">{{ total }}</span>
+              عنصر
+            </p>
+          } @else {
+            <p class="text-xs text-neutral-600">
+              Showing
+              <span class="font-medium">{{ startIndex }}</span>
+              to
+              <span class="font-medium">{{ endIndex }}</span>
+              of
+              <span class="font-medium">{{ total }}</span>
+              results
+            </p>
+          }
         </div>
 
         <div>
@@ -48,8 +61,8 @@ import { ButtonComponent } from '../button/button.component';
               (click)="onPageChange(page - 1)"
               class="relative inline-flex items-center px-2 py-2 rounded-s-md border border-neutral-200 bg-white text-xs font-medium text-neutral-500 hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              <span class="sr-only">السابق</span>
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span class="sr-only">{{ isArabic ? 'السابق' : 'Previous' }}</span>
+              <svg class="h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
@@ -77,8 +90,8 @@ import { ButtonComponent } from '../button/button.component';
               (click)="onPageChange(page + 1)"
               class="relative inline-flex items-center px-2 py-2 rounded-e-md border border-neutral-200 bg-white text-xs font-medium text-neutral-500 hover:bg-neutral-50 disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              <span class="sr-only">التالي</span>
-              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span class="sr-only">{{ isArabic ? 'التالي' : 'Next' }}</span>
+              <svg class="h-4 w-4 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -89,12 +102,18 @@ import { ButtonComponent } from '../button/button.component';
   `
 })
 export class PaginationComponent {
+  private languageService = inject(LanguageService, { optional: true });
+
   @Input() page = 1;
   @Input() limit = 10;
   @Input() total = 0;
   @Input() totalPages = 1;
 
   @Output() pageChange = new EventEmitter<number>();
+
+  get isArabic(): boolean {
+    return this.languageService ? this.languageService.currentLanguage() === 'ar' : true;
+  }
 
   get startIndex(): number {
     return this.total === 0 ? 0 : (this.page - 1) * this.limit + 1;

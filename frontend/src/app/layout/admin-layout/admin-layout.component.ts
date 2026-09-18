@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
@@ -13,21 +13,33 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
     <div class="min-h-screen flex flex-col bg-neutral-100 text-neutral-900">
       <!-- Admin Top Operational Header -->
       <header class="bg-neutral-900 text-white h-14 px-4 sm:px-6 flex items-center justify-between border-b border-neutral-800 z-30 shrink-0">
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3">
+          <!-- Mobile Sidebar Toggle -->
+          <button
+            type="button"
+            (click)="isMobileSidebarOpen.set(!isMobileSidebarOpen())"
+            class="md:hidden p-1.5 rounded-md text-neutral-300 hover:text-white hover:bg-neutral-800 transition-colors"
+            aria-label="Open Admin Menu"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
           <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full bg-primary-500 animate-pulse"></span>
-            <span class="font-bold text-sm tracking-wide">Dawwarha · Operations Console</span>
+            <span class="font-bold text-sm tracking-wide">Dawwarha · Operations</span>
           </div>
-          <span class="text-xs bg-neutral-800 text-primary-100 px-2 py-0.5 rounded border border-neutral-700">
-            Admin Console v1.0
+          <span class="hidden sm:inline text-xs bg-neutral-800 text-primary-100 px-2 py-0.5 rounded border border-neutral-700">
+            Console v1.0
           </span>
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
             (click)="languageService.toggleLanguage()"
-            class="px-2 py-1 rounded text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 transition-colors"
+            class="px-2 py-1 rounded text-xs text-neutral-300 hover:text-white hover:bg-neutral-800 transition-colors cursor-pointer"
           >
             {{ languageService.t().LANG_TOGGLE }}
           </button>
@@ -42,16 +54,16 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
           <button
             type="button"
             (click)="authService.logout()"
-            class="text-xs text-danger-bg hover:text-danger px-2 py-1"
+            class="text-xs text-danger-bg hover:text-danger px-2 py-1 cursor-pointer"
           >
             Sign Out
           </button>
         </div>
       </header>
 
-      <div class="flex-1 flex overflow-hidden">
-        <!-- Admin Sidebar -->
-        <aside class="w-60 bg-white border-e border-neutral-200 flex flex-col z-20 shrink-0">
+      <div class="flex-1 flex overflow-hidden relative">
+        <!-- Desktop Sidebar -->
+        <aside class="hidden md:flex flex-col w-60 bg-white border-e border-neutral-200 z-20 shrink-0">
           <div class="p-3 border-b border-neutral-100">
             <p class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">Control & Monitoring</p>
           </div>
@@ -137,8 +149,89 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
           </nav>
         </aside>
 
+        <!-- Mobile Drawer Sidebar (< 768px) -->
+        @if (isMobileSidebarOpen()) {
+          <div class="fixed inset-0 z-50 md:hidden flex">
+            <!-- Backdrop -->
+            <div
+              class="fixed inset-0 bg-neutral-900/60 backdrop-blur-sm transition-opacity"
+              (click)="isMobileSidebarOpen.set(false)"
+            ></div>
+
+            <!-- Drawer Container -->
+            <aside class="relative w-64 max-w-[80vw] bg-white h-full flex flex-col shadow-2xl z-10">
+              <div class="h-14 flex items-center justify-between px-4 border-b border-neutral-100 bg-neutral-50">
+                <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Admin Navigation</span>
+                <button
+                  type="button"
+                  (click)="isMobileSidebarOpen.set(false)"
+                  class="p-1 rounded text-neutral-400 hover:text-neutral-700"
+                  aria-label="Close menu"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <nav class="flex-1 p-3 space-y-1 overflow-y-auto text-xs font-medium" (click)="isMobileSidebarOpen.set(false)">
+                <a
+                  routerLink="/admin"
+                  routerLinkActive="bg-primary-50 text-primary font-bold"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  class="flex items-center gap-2.5 px-3 py-2.5 rounded-md text-neutral-700 hover:bg-neutral-50"
+                >
+                  Dashboard & Analytics
+                </a>
+                <a
+                  routerLink="/admin/users"
+                  routerLinkActive="bg-primary-50 text-primary font-bold"
+                  class="flex items-center gap-2.5 px-3 py-2.5 rounded-md text-neutral-700 hover:bg-neutral-50"
+                >
+                  Users & Accounts
+                </a>
+                <a
+                  routerLink="/admin/organizations"
+                  routerLinkActive="bg-primary-50 text-primary font-bold"
+                  class="flex items-center gap-2.5 px-3 py-2.5 rounded-md text-neutral-700 hover:bg-neutral-50"
+                >
+                  Organizations & Verification
+                </a>
+                <a
+                  routerLink="/admin/resources"
+                  routerLinkActive="bg-primary-50 text-primary font-bold"
+                  class="flex items-center gap-2.5 px-3 py-2.5 rounded-md text-neutral-700 hover:bg-neutral-50"
+                >
+                  Listed Resources
+                </a>
+                <a
+                  routerLink="/admin/requests"
+                  routerLinkActive="bg-primary-50 text-primary font-bold"
+                  class="flex items-center gap-2.5 px-3 py-2.5 rounded-md text-neutral-700 hover:bg-neutral-50"
+                >
+                  Demand Requests
+                </a>
+                <a
+                  routerLink="/admin/reports"
+                  routerLinkActive="bg-primary-50 text-primary font-bold"
+                  class="flex items-center gap-2.5 px-3 py-2.5 rounded-md text-neutral-700 hover:bg-neutral-50"
+                >
+                  Reports & Moderation
+                </a>
+                <a
+                  routerLink="/admin/categories"
+                  routerLinkActive="bg-primary-50 text-primary font-bold"
+                  class="flex items-center gap-2.5 px-3 py-2.5 rounded-md text-neutral-700 hover:bg-neutral-50"
+                >
+                  Manage Categories
+                </a>
+              </nav>
+            </aside>
+          </div>
+        }
+
         <!-- Admin Content Main Region -->
-        <main class="flex-1 overflow-y-auto p-4 sm:p-6">
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 w-full">
           <router-outlet></router-outlet>
         </main>
       </div>
@@ -148,4 +241,5 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
 export class AdminLayoutComponent {
   authService = inject(AuthService);
   languageService = inject(LanguageService);
+  isMobileSidebarOpen = signal(false);
 }

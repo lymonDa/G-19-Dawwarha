@@ -31,13 +31,13 @@ import { LucideAngularModule, AlertCircle } from 'lucide-angular';
           class="w-full px-3 py-2 text-sm bg-white border rounded-md outline-none transition-colors duration-200 placeholder:text-neutral-500 disabled:bg-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed"
           [ngClass]="{
             'border-neutral-200 focus:border-primary-600 focus:ring-1 focus:ring-primary-600': !error,
-            'border-danger focus:border-danger focus:ring-1 focus:ring-danger text-danger pr-10': error,
+            'border-danger focus:border-danger focus:ring-1 focus:ring-danger text-danger pe-10': error,
             'resize-none overflow-hidden': autoGrow
           }"
           (input)="onInput($event)"
           (blur)="onTouched()"></textarea>
           
-        <div *ngIf="error" class="absolute top-2.5 right-3 text-danger pointer-events-none">
+        <div *ngIf="error" class="absolute top-2.5 end-3 text-danger pointer-events-none">
           <lucide-icon name="alert-circle" [size]="16"></lucide-icon>
         </div>
       </div>
@@ -49,7 +49,7 @@ import { LucideAngularModule, AlertCircle } from 'lucide-angular';
         <span *ngIf="helperText && !error" class="text-xs text-neutral-500" id="helper-text">
           {{ helperText }}
         </span>
-        <span *ngIf="maxLength" class="text-xs text-neutral-500 text-end whitespace-nowrap ml-auto" aria-live="polite">
+        <span *ngIf="maxLength" class="text-xs text-neutral-500 text-end whitespace-nowrap ms-auto" aria-live="polite">
           {{ currentLength }}/{{ maxLength }}
         </span>
       </div>

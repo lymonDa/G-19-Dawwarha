@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { LucideAngularModule, UploadCloud, X, File, FileText, Image as ImageIcon, AlertCircle } from 'lucide-angular';
+import { LucideAngularModule, UploadCloud, X, File as FileIcon, FileText, Image as ImageIcon, AlertCircle } from 'lucide-angular';
 
 export interface FileUploadModel {
   file: File;
@@ -68,7 +68,7 @@ export interface FileUploadModel {
 
       <!-- Error State -->
       <div *ngIf="error" class="flex items-center text-xs text-danger mt-1">
-        <lucide-icon name="alert-circle" [size]="14" class="mr-1.5"></lucide-icon>
+        <lucide-icon name="alert-circle" [size]="14" class="me-1.5"></lucide-icon>
         {{ error }}
       </div>
       <div *ngIf="helperText && !error" class="text-xs text-neutral-500 mt-1">
@@ -80,13 +80,13 @@ export interface FileUploadModel {
         <div *ngFor="let fileModel of files; let i = index" class="flex items-center justify-between p-3 border border-neutral-200 rounded-md bg-white">
           <div class="flex items-center flex-1 min-w-0">
             <!-- Image preview -->
-            <img *ngIf="isImage(fileModel.file) && fileModel.previewUrl" [src]="fileModel.previewUrl" class="w-10 h-10 object-cover rounded mr-3 shrink-0" alt="Preview">
+            <img *ngIf="isImage(fileModel.file) && fileModel.previewUrl" [src]="fileModel.previewUrl" class="w-10 h-10 object-cover rounded me-3 shrink-0" alt="Preview">
             <!-- File icon -->
-            <div *ngIf="!isImage(fileModel.file) || !fileModel.previewUrl" class="w-10 h-10 rounded bg-neutral-100 text-neutral-500 flex items-center justify-center mr-3 shrink-0">
+            <div *ngIf="!isImage(fileModel.file) || !fileModel.previewUrl" class="w-10 h-10 rounded bg-neutral-100 text-neutral-500 flex items-center justify-center me-3 shrink-0">
               <lucide-icon [name]="getFileIcon(fileModel.file)" [size]="20"></lucide-icon>
             </div>
             
-            <div class="flex flex-col min-w-0 pr-4">
+            <div class="flex flex-col min-w-0 pe-4">
               <span class="text-sm font-medium text-neutral-900 truncate">{{ fileModel.file.name }}</span>
               <span class="text-xs text-neutral-500">{{ formatSize(fileModel.file.size) }}</span>
             </div>
@@ -114,7 +114,7 @@ export class FileUploadComponent implements ControlValueAccessor {
   @Input() maxSizeMB = 5;
   @Input() required = false;
   @Input() disabled = false;
-  
+
   @Output() fileChanged = new EventEmitter<File[]>();
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
@@ -125,13 +125,13 @@ export class FileUploadComponent implements ControlValueAccessor {
 
   readonly UploadCloud = UploadCloud;
   readonly X = X;
-  readonly File = File;
+  readonly FileIcon = FileIcon;
   readonly FileText = FileText;
   readonly ImageIcon = ImageIcon;
   readonly AlertCircle = AlertCircle;
 
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  onChange: any = () => { };
+  onTouched: any = () => { };
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -150,9 +150,9 @@ export class FileUploadComponent implements ControlValueAccessor {
     event.preventDefault();
     event.stopPropagation();
     this.isDragging = false;
-    
+
     if (this.disabled || this.maxFilesReached()) return;
-    
+
     const droppedFiles = event.dataTransfer?.files;
     if (droppedFiles && droppedFiles.length > 0) {
       this.handleFiles(Array.from(droppedFiles));
@@ -176,28 +176,28 @@ export class FileUploadComponent implements ControlValueAccessor {
   handleFiles(newFiles: File[]) {
     this.error = undefined;
     this.onTouched();
-    
+
     const validFiles: File[] = [];
-    
+
     for (const file of newFiles) {
       // Check size
       if (file.size > this.maxSizeMB * 1024 * 1024) {
-        this.error = \`File size must be less than \${this.maxSizeMB}MB\`;
+        this.error = `File size must be less than ${this.maxSizeMB}MB`;
         continue;
       }
-      
+
       // We could add more robust accept checking here
       validFiles.push(file);
     }
-    
+
     if (validFiles.length > 0) {
       if (!this.multiple) {
         this.files = [];
       }
-      
+
       validFiles.forEach(file => {
         const model: FileUploadModel = { file };
-        
+
         // Generate preview for images
         if (this.isImage(file)) {
           const reader = new FileReader();
@@ -206,10 +206,10 @@ export class FileUploadComponent implements ControlValueAccessor {
           };
           reader.readAsDataURL(file);
         }
-        
+
         this.files.push(model);
       });
-      
+
       this.emitChange();
     }
   }

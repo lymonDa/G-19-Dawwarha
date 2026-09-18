@@ -1,4 +1,12 @@
-const { colors, borderRadius, boxShadow, fontFamily } = require('./src/design-tokens/tokens.cjs');
+const {
+  colors,
+  borderRadius,
+  boxShadow,
+  fontFamily,
+  transitionDuration,
+  transitionTimingFunction,
+  fontSize,
+} = require('./src/design-tokens/tokens.cjs');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -11,6 +19,9 @@ module.exports = {
       borderRadius,
       boxShadow,
       fontFamily,
+      transitionDuration,
+      transitionTimingFunction,
+      fontSize,
     },
   },
   plugins: [],
