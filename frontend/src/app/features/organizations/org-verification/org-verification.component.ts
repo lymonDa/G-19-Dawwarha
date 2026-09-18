@@ -1,101 +1,240 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ToastService } from '../../../core/services/toast.service';
+import { OrganizationApiService } from '../organization-api.service';
+import { AuthService } from '../../../core/auth/auth.service';
+import { Organization, OrganizationVerificationStatus } from '../../../core/models/organization.model';
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
-import { InputComponent } from '../../../shared/ui/input/input.component';
 import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
+import { VerificationBadgeComponent } from '../../../shared/components/verification-badge/verification-badge.component';
+import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 
 @Component({
   selector: 'app-org-verification',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, CardComponent, ButtonComponent, InputComponent, BadgeComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    CardComponent,
+    ButtonComponent,
+    BadgeComponent,
+    VerificationBadgeComponent,
+    SkeletonComponent
+  ],
   template: `
-    <div class="max-w-3xl mx-auto flex flex-col gap-6 py-4">
-      <div>
-        <h1 class="text-2xl font-bold text-neutral-900">Account Verification & Official Accreditation</h1>
-        <p class="text-xs text-neutral-500 mt-1">
-          Verifying organizations ensures the legitimacy of beneficiary entities and grants the green Verified Badge to the organization.
+    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6" dir="rtl">
+      <!-- Header -->
+      <header>
+        <h1 class="text-2xl font-bold text-neutral-900">توثيق الحساب والاعتماد الرسمي للمنظمة</h1>
+        <p class="text-sm text-neutral-600 mt-1">
+          يمنح التوثيق الرسمي الشارة الخضراء الموثوقة للمنظمة ويعزز ثقة المتبرعين والجهات الشريكة في التوزيع العادل.
         </p>
-      </div>
+      </header>
 
-      <!-- Current Verification Status Card -->
-      <app-card padding="md">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-primary-50 text-primary flex items-center justify-center">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-              </svg>
+      <!-- Loading State -->
+      @if (isLoading()) {
+        <app-card padding="md" variant="bordered">
+          <div class="space-y-3" aria-busy="true">
+            <app-skeleton variant="text" width="220px" height="24px"></app-skeleton>
+            <app-skeleton variant="text" width="100%" height="16px"></app-skeleton>
+          </div>
+        </app-card>
+      } @else {
+        <!-- Current Verification Status Card (DESIGN.md §25) -->
+        <app-card padding="lg" [variant]="statusCardVariant()">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div class="flex items-start sm:items-center gap-3">
+              <div
+                class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-2xs"
+                [ngClass]="statusIconContainerClass()"
+              >
+                @if (verificationStatus() === 'verified') {
+                  <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                } @else if (verificationStatus() === 'pending') {
+                  <svg class="w-6 h-6 text-warning" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                } @else if (verificationStatus() === 'rejected') {
+                  <svg class="w-6 h-6 text-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                } @else {
+                  <svg class="w-6 h-6 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                }
+              </div>
+
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                    حالة الاعتماد الحالية
+                  </span>
+                  @if (verificationStatus() === 'verified') {
+                    <app-verification-badge [status]="'verified'"></app-verification-badge>
+                  }
+                </div>
+                <h3 class="text-base font-bold text-neutral-900 mt-0.5">
+                  {{ statusTitle() }}
+                </h3>
+                <p class="text-xs text-neutral-600 mt-1 leading-relaxed">
+                  {{ statusDescription() }}
+                </p>
+              </div>
             </div>
-            <div>
-              <span class="text-xs text-neutral-500">Current Accreditation Status</span>
-              <p class="text-sm font-bold text-neutral-900 mt-0.5">Verification Request Under Technical Review</p>
+
+            <div class="self-start sm:self-auto">
+              <app-badge [variant]="statusBadgeVariant()">
+                {{ statusBadgeText() }}
+              </app-badge>
             </div>
           </div>
-          <app-badge variant="warning">Under Review</app-badge>
-        </div>
-      </app-card>
 
-      <!-- Document Submission Form -->
-      <app-card padding="lg">
-        <h3 class="text-base font-semibold text-neutral-900 mb-2">Submit Official Documents & Data</h3>
-        <p class="text-xs text-neutral-600 mb-6 leading-relaxed">
-          Please attach the registration certificate issued by the Ministry of Social Solidarity, or proof of official organization registration, along with the representative's information.
-        </p>
+          <!-- Rejection Reason Notice if Rejected -->
+          @if (verificationStatus() === 'rejected' && rejectionReason()) {
+            <div class="mt-4 p-3.5 rounded-xl bg-danger-bg border border-danger/30 text-xs text-danger-900">
+              <span class="font-bold block mb-1">سبب رفض الاعتماد الإداري:</span>
+              <p class="leading-relaxed">{{ rejectionReason() }}</p>
+              <p class="mt-2 text-[11px] opacity-90 font-medium">
+                يمكنك إعادة إرفاق وتصحيح الوثائق المطلوبة أدناه وسيعاد فحص الطلب فوراً.
+              </p>
+            </div>
+          }
+        </app-card>
 
-        <form [formGroup]="verificationForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
-          <app-input
-            label="Official Registration Number"
-            placeholder="e.g. No. 1420 for 2018"
-            formControlName="regNumber"
-            [required]="true"
-          ></app-input>
+        <!-- Document Submission Form (Available when unverified, rejected, or updating) -->
+        @if (verificationStatus() !== 'verified') {
+          <app-card padding="lg" variant="bordered">
+            <h3 class="text-base font-bold text-neutral-900 mb-1">
+              {{ verificationStatus() === 'rejected' ? 'إعادة تقديم الوثائق الرسمية' : 'رفع الوثائق الرسمية للاعتماد' }}
+            </h3>
+            <p class="text-xs text-neutral-600 mb-6 leading-relaxed">
+              يرجى إرفاق رابط إلكتروني مباشر لشهادة الإشهار الصادرة من وزارة التضامن الاجتماعي أو السجل التجاري / وثيقة التسجيل المعتمدة للمنظمة (الحد الأقصى 10 وثائق).
+            </p>
 
-          <app-input
-            label="Document Link (PDF or certified image)"
-            placeholder="https://..."
-            formControlName="docUrl"
-            [required]="true"
-            helperText="Upload the document to a cloud storage link or provide a direct URL."
-          ></app-input>
+            <!-- Success Alert -->
+            @if (successMessage()) {
+              <div class="p-3 mb-4 rounded-xl bg-success-bg border border-success/30 text-success-900 text-xs flex items-center gap-2" role="status">
+                <svg class="w-4 h-4 text-success shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>{{ successMessage() }}</span>
+              </div>
+            }
 
-          <div class="flex flex-col gap-1.5">
-            <label class="text-sm font-medium text-neutral-900">Additional Notes for Admins</label>
-            <textarea
-              formControlName="notes"
-              rows="3"
-              placeholder="Any additional information you'd like to clarify..."
-              class="w-full px-3.5 py-2.5 bg-white text-neutral-900 text-sm rounded-md border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-primary"
-            ></textarea>
-          </div>
+            <!-- Error Alert -->
+            @if (errorMessage()) {
+              <div class="p-3 mb-4 rounded-xl bg-danger-bg border border-danger/30 text-danger-900 text-xs flex items-center gap-2" role="alert">
+                <svg class="w-4 h-4 text-danger shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <span>{{ errorMessage() }}</span>
+              </div>
+            }
 
-          <div class="pt-4 flex justify-end">
-            <app-button
-              type="submit"
-              variant="primary"
-              [isLoading]="isSubmitting()"
-            >
-              Submit Documents for Review
-            </app-button>
-          </div>
-        </form>
-      </app-card>
+            <form [formGroup]="verificationForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+              <!-- Primary Document Link -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-neutral-900">
+                  رابط الوثيقة الأساسية (PDF أو صورة معتمدة) <span class="text-danger">*</span>
+                </label>
+                <input
+                  type="url"
+                  formControlName="docUrl1"
+                  placeholder="https://example.com/registration-cert.pdf"
+                  class="w-full px-3 py-2 bg-white text-neutral-900 text-sm rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <span class="text-[11px] text-neutral-500">
+                  رابط مباشر من سحابة تخزين (Google Drive, Dropbox, Cloudinary) مع إتاحة صلاحية العرض.
+                </span>
+              </div>
+
+              <!-- Secondary Document Link -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-xs font-semibold text-neutral-900">
+                  رابط وثيقة ثانوية / تفويض الممثل القانوني (اختياري)
+                </label>
+                <input
+                  type="url"
+                  formControlName="docUrl2"
+                  placeholder="https://example.com/authorization-letter.pdf"
+                  class="w-full px-3 py-2 bg-white text-neutral-900 text-sm rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+
+              <div class="pt-4 flex justify-end">
+                <app-button
+                  type="submit"
+                  variant="primary"
+                  size="md"
+                  [isLoading]="isSubmitting()"
+                  [disabled]="isSubmitting() || verificationForm.invalid"
+                >
+                  إرسال الوثائق للمراجعة الإدارية
+                </app-button>
+              </div>
+            </form>
+          </app-card>
+        }
+      }
     </div>
   `
 })
-export class OrgVerificationComponent {
+export class OrgVerificationComponent implements OnInit {
   private fb = inject(FormBuilder);
-  private toast = inject(ToastService);
+  private orgApi = inject(OrganizationApiService);
+  private authService = inject(AuthService);
 
-  readonly isSubmitting = signal(false);
+  readonly isLoading = signal<boolean>(true);
+  readonly isSubmitting = signal<boolean>(false);
+  readonly organization = signal<Organization | null>(null);
+  readonly successMessage = signal<string | null>(null);
+  readonly errorMessage = signal<string | null>(null);
 
   verificationForm: FormGroup = this.fb.group({
-    regNumber: ['', Validators.required],
-    docUrl: ['', Validators.required],
-    notes: ['']
+    docUrl1: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
+    docUrl2: ['']
   });
+
+  readonly verificationStatus = computed<OrganizationVerificationStatus>(() => {
+    return this.organization()?.verificationStatus || 'unverified';
+  });
+
+  readonly rejectionReason = computed<string | undefined>(() => {
+    return this.organization()?.verificationNotes;
+  });
+
+  ngOnInit(): void {
+    this.loadOrgData();
+  }
+
+  loadOrgData(): void {
+    this.isLoading.set(true);
+    const orgId = this.authService.currentUser()?.organizationId || 'demo-org-id';
+
+    this.orgApi.getOrganizationById(orgId).subscribe({
+      next: (org) => {
+        this.organization.set(org);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        // Fallback for demo when org ID is not yet created
+        this.organization.set({
+          id: orgId,
+          name: 'جمعية نهر العطاء للتنمية',
+          type: 'ngo',
+          verificationStatus: 'unverified',
+          ownerUserId: this.authService.currentUser()?.id || '',
+          contact: { email: '', phone: '', address: '', city: 'القاهرة' },
+          createdAt: new Date().toISOString()
+        });
+        this.isLoading.set(false);
+      }
+    });
+  }
 
   onSubmit(): void {
     if (this.verificationForm.invalid) {
@@ -103,10 +242,99 @@ export class OrgVerificationComponent {
       return;
     }
 
+    const org = this.organization();
+    if (!org) return;
+
     this.isSubmitting.set(true);
-    setTimeout(() => {
-      this.isSubmitting.set(false);
-      this.toast.success('Verification documents submitted successfully. An admin will review them shortly.', 'Submitted');
-    }, 800);
+    this.errorMessage.set(null);
+    this.successMessage.set(null);
+
+    const docs: string[] = [];
+    if (this.verificationForm.value.docUrl1) docs.push(this.verificationForm.value.docUrl1.trim());
+    if (this.verificationForm.value.docUrl2) docs.push(this.verificationForm.value.docUrl2.trim());
+
+    this.orgApi.submitVerificationDocuments(org.id, docs).subscribe({
+      next: (updatedOrg) => {
+        this.isSubmitting.set(false);
+        this.organization.set({
+          ...updatedOrg,
+          verificationStatus: 'pending'
+        });
+        this.successMessage.set('تم إرسال وثائق التوثيق بنجاح وهي قيد المراجعة الإدارية من قبل فريق العمل.');
+      },
+      error: (err) => {
+        this.isSubmitting.set(false);
+        this.errorMessage.set(err?.message || 'تعذر حفظ وثائق التوثيق.');
+      }
+    });
+  }
+
+  statusCardVariant(): 'bordered' | 'sand' | 'default' {
+    return this.verificationStatus() === 'verified' ? 'sand' : 'bordered';
+  }
+
+  statusIconContainerClass(): string {
+    switch (this.verificationStatus()) {
+      case 'verified':
+        return 'bg-success text-white';
+      case 'pending':
+        return 'bg-warning-bg text-warning border border-warning/30';
+      case 'rejected':
+        return 'bg-danger-bg text-danger border border-danger/30';
+      default:
+        return 'bg-neutral-100 text-neutral-500';
+    }
+  }
+
+  statusBadgeVariant(): 'success' | 'warning' | 'danger' | 'neutral' {
+    switch (this.verificationStatus()) {
+      case 'verified':
+        return 'success';
+      case 'pending':
+        return 'warning';
+      case 'rejected':
+        return 'danger';
+      default:
+        return 'neutral';
+    }
+  }
+
+  statusBadgeText(): string {
+    switch (this.verificationStatus()) {
+      case 'verified':
+        return 'موثقة رسمياً ✓';
+      case 'pending':
+        return 'قيد المراجعة الفنية';
+      case 'rejected':
+        return 'مرفوض';
+      default:
+        return 'غير موثقة';
+    }
+  }
+
+  statusTitle(): string {
+    switch (this.verificationStatus()) {
+      case 'verified':
+        return 'تم اعتماد وتوثيق المنظمة رسمياً';
+      case 'pending':
+        return 'طلب الاعتماد قيد المراجعة الفنية من الإدارة';
+      case 'rejected':
+        return 'تم رفض طلب الاعتماد السابق';
+      default:
+        return 'الحساب غير موثق حالياً';
+    }
+  }
+
+  statusDescription(): string {
+    switch (this.verificationStatus()) {
+      case 'verified':
+        return 'تتمتع منظمتك بشارة التوثيق الخضراء وتظهر في دليل المنظمات المعتمدة أمام جميع المتبرعين.';
+      case 'pending':
+        return 'وفقاً لقواعد الخصوصية (DESIGN.md §25): تظهر حالة "قيد المراجعة" لك فقط داخل لوحة التحكم ولا يتم إشهارها للعامة.';
+      case 'rejected':
+        return 'تم رفض الوثائق المقدمة. يرجى مراجعة سبب الرفض وإعادة تقديم مستندات رسمية سارية المفعول.';
+      default:
+        return 'قم برفع وثائق التسجيل الرسمية للحصول على شارة التوثيق وتوسيع نطاق استلام الموارد.';
+    }
   }
 }
