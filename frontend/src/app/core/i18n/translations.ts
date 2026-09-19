@@ -64,6 +64,31 @@ export interface TranslationDictionary {
   DEMO_ORG: string;
   DEMO_ADMIN: string;
   
+  // Forgot Password
+  FORGOT_TITLE: string;
+  FORGOT_SUBTITLE: string;
+  SEND_RESET_LINK_BTN: string;
+  BACK_TO_LOGIN: string;
+  FORGOT_SUCCESS_TITLE: string;
+  FORGOT_SUCCESS_DESC: string;
+  TRY_ANOTHER_EMAIL: string;
+
+  // Reset Password
+  RESET_TITLE: string;
+  RESET_SUBTITLE: string;
+  NEW_PASSWORD_LABEL: string;
+  CONFIRM_PASSWORD_LABEL: string;
+  RESET_PASSWORD_BTN: string;
+  RESET_SUCCESS_TITLE: string;
+  RESET_SUCCESS_DESC: string;
+  RESET_INVALID_TOKEN: string;
+
+  // Change Password
+  CHANGE_PASSWORD_TITLE: string;
+  CURRENT_PASSWORD_LABEL: string;
+  UPDATE_PASSWORD_BTN: string;
+  PASSWORD_CHANGED_SUCCESS: string;
+  
   // Register
   REGISTER_TITLE: string;
   REGISTER_SUBTITLE: string;
@@ -175,6 +200,31 @@ export const translations: Record<'ar' | 'en', TranslationDictionary> = {
     DEMO_ORG: 'جمعية (Org)',
     DEMO_ADMIN: 'مشرف (Admin)',
     
+    // Forgot Password
+    FORGOT_TITLE: 'نسيت كلمة المرور؟',
+    FORGOT_SUBTITLE: 'أدخل بريدك الإلكتروني المسجل في دَوَّرها وسنرسل لك رابطاً آمناً لتعيين كلمة مرور جديدة.',
+    SEND_RESET_LINK_BTN: 'إرسال رابط الاستعادة',
+    BACK_TO_LOGIN: 'العودة لتسجيل الدخول',
+    FORGOT_SUCCESS_TITLE: 'تم إرسال تعليمات الاستعادة',
+    FORGOT_SUCCESS_DESC: 'إذا كان البريد الإلكتروني مسجلاً لدينا، ستتلقى رابطاً صالحاً لمدة 15 دقيقة لتعيين كلمة المرور.',
+    TRY_ANOTHER_EMAIL: 'تجربة بريد إلكتروني آخر',
+
+    // Reset Password
+    RESET_TITLE: 'تعيين كلمة المرور الجديدة',
+    RESET_SUBTITLE: 'يرجى إدخال وتأكيد كلمة المرور الجديدة لحسابك.',
+    NEW_PASSWORD_LABEL: 'كلمة المرور الجديدة',
+    CONFIRM_PASSWORD_LABEL: 'تأكيد كلمة المرور الجديدة',
+    RESET_PASSWORD_BTN: 'تحديث كلمة المرور',
+    RESET_SUCCESS_TITLE: 'تم تغيير كلمة المرور بنجاح',
+    RESET_SUCCESS_DESC: 'تم تحديث كلمة المرور الخاصة بك. يمكنك الآن تسجيل الدخول باستخدام كلمة المرور الجديدة.',
+    RESET_INVALID_TOKEN: 'رابط استعادة كلمة المرور غير صالح أو منتهي الصلاحية. يرجى طلب رابط جديد.',
+
+    // Change Password
+    CHANGE_PASSWORD_TITLE: 'تغيير كلمة المرور',
+    CURRENT_PASSWORD_LABEL: 'كلمة المرور الحالية',
+    UPDATE_PASSWORD_BTN: 'حفظ كلمة المرور الجديدة',
+    PASSWORD_CHANGED_SUCCESS: 'تم تحديث كلمة المرور بنجاح.',
+    
     REGISTER_TITLE: 'إنشاء حساب في دَوَّرها',
     REGISTER_SUBTITLE: 'انضم إلى شبكة إعادة توزيع الموارد الحضرية — اعرض فائضاً أو سجّل احتياجات المجتمع.',
     ROLE_INDIVIDUAL: 'فرد (مانح / مستفيد)',
@@ -280,6 +330,31 @@ export const translations: Record<'ar' | 'en', TranslationDictionary> = {
     DEMO_PROVIDER: 'Donor (Provider)',
     DEMO_ORG: 'Organization (Seeker)',
     DEMO_ADMIN: 'Admin Operator',
+    
+    // Forgot Password
+    FORGOT_TITLE: 'Forgot your password?',
+    FORGOT_SUBTITLE: "Enter the email associated with your Dawwarha account and we'll help you get back in.",
+    SEND_RESET_LINK_BTN: 'Send Reset Link',
+    BACK_TO_LOGIN: 'Back to Sign In',
+    FORGOT_SUCCESS_TITLE: 'Reset Instructions Sent',
+    FORGOT_SUCCESS_DESC: 'If an active account matches that email, instructions to reset access are on the way (valid for 15 minutes).',
+    TRY_ANOTHER_EMAIL: 'Try another email address',
+
+    // Reset Password
+    RESET_TITLE: 'Set New Password',
+    RESET_SUBTITLE: 'Please enter and confirm your new secure password.',
+    NEW_PASSWORD_LABEL: 'New Password',
+    CONFIRM_PASSWORD_LABEL: 'Confirm New Password',
+    RESET_PASSWORD_BTN: 'Update Password',
+    RESET_SUCCESS_TITLE: 'Password Reset Successfully',
+    RESET_SUCCESS_DESC: 'Your password has been updated. You can now sign in with your new credentials.',
+    RESET_INVALID_TOKEN: 'The password reset link is invalid or has expired. Please request a new one.',
+
+    // Change Password
+    CHANGE_PASSWORD_TITLE: 'Change Password',
+    CURRENT_PASSWORD_LABEL: 'Current Password',
+    UPDATE_PASSWORD_BTN: 'Update Password',
+    PASSWORD_CHANGED_SUCCESS: 'Password updated successfully.',
     
     REGISTER_TITLE: 'Create a Dawwarha Account',
     REGISTER_SUBTITLE: 'Join the civic resource redistribution network — offer surplus or register community needs.',

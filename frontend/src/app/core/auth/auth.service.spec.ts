@@ -113,5 +113,30 @@ describe('AuthService', () => {
     expect(service.currentUser()?.contactInfo?.phone).toBe('01012345678');
     expect(mockToast.success).toHaveBeenCalled();
   });
+
+  it('should call /auth/forgot-password with email', () => {
+    mockApi.post.mockReturnValue(of({ success: true, message: 'Sent' }));
+    service.forgotPassword('user@example.com').subscribe(res => {
+      expect(res.success).toBe(true);
+    });
+    expect(mockApi.post).toHaveBeenCalledWith('/auth/forgot-password', { email: 'user@example.com' });
+  });
+
+  it('should call /auth/reset-password with token and password', () => {
+    mockApi.post.mockReturnValue(of({ success: true, message: 'Reset' }));
+    service.resetPassword('tok_123', 'newPass123!').subscribe(res => {
+      expect(res.success).toBe(true);
+    });
+    expect(mockApi.post).toHaveBeenCalledWith('/auth/reset-password', { token: 'tok_123', password: 'newPass123!' });
+  });
+
+  it('should call /users/me/change-password and show success toast', () => {
+    mockApi.post.mockReturnValue(of({ success: true, message: 'Changed' }));
+    service.changePassword('oldPass123!', 'newPass123!').subscribe(res => {
+      expect(res.success).toBe(true);
+    });
+    expect(mockApi.post).toHaveBeenCalledWith('/users/me/change-password', { currentPassword: 'oldPass123!', newPassword: 'newPass123!' });
+    expect(mockToast.success).toHaveBeenCalled();
+  });
 });
 

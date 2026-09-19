@@ -45,3 +45,27 @@ export const loginValidator = [
     .isString()
     .withMessage("Password must be a string"),
 ];
+
+export const forgotPasswordValidator = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Email must be a valid email"),
+];
+
+export const resetPasswordValidator = [
+  body("token")
+    .trim()
+    .notEmpty()
+    .withMessage("Reset token is required"),
+
+  body("password")
+    .notEmpty()
+    .withMessage("Password is required")
+    .isString()
+    .withMessage("Password must be a string")
+    .isLength({ min: MIN_PASSWORD_LENGTH })
+    .withMessage(`Password must be at least ${MIN_PASSWORD_LENGTH} characters`),
+];

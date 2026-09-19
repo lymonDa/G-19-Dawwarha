@@ -10,6 +10,20 @@ export async function login(req, res, next) {
     return res.json({ success: true, data: await authService.login(req.body.email, req.body.password) });
   } catch (error) { return next(error); }
 }
+export async function forgotPassword(req, res, next) {
+  try {
+    const result = await authService.forgotPassword(req.body.email);
+    return res.json({ success: true, ...result });
+  } catch (error) { return next(error); }
+}
+
+export async function resetPassword(req, res, next) {
+  try {
+    const result = await authService.resetPassword(req.body.token, req.body.password);
+    return res.json({ success: true, ...result });
+  } catch (error) { return next(error); }
+}
+
 export function logout(req, res) {
   return res.json({ success: true, message: "Logged out. Authentication is stateless; discard the token on the client." });
 }

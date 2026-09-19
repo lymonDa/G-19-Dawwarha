@@ -105,6 +105,18 @@ import { ButtonComponent } from '../../ui/button/button.component';
             </app-button>
           }
 
+          @if (match.status === 'accepted' && matchId) {
+            <a
+              [routerLink]="['/handovers', matchId]"
+              class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-emerald-700 shadow-xs"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Confirm Handover</span>
+            </a>
+          }
+
           @if (showDetailsLink && matchId) {
             <a
               [routerLink]="['/matches', matchId]"

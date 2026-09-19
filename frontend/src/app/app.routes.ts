@@ -47,6 +47,24 @@ export const appRoutes: Routes = [
         data: { seo: { noindex: true } },
       },
       {
+        path: "forgot-password",
+        loadComponent: () =>
+          import("./features/auth/forgot-password/forgot-password.component").then(
+            (m) => m.ForgotPasswordComponent,
+          ),
+        title: "استعادة كلمة المرور — دَوَّرها",
+        data: { seo: { noindex: true } },
+      },
+      {
+        path: "reset-password",
+        loadComponent: () =>
+          import("./features/auth/reset-password/reset-password.component").then(
+            (m) => m.ResetPasswordComponent,
+          ),
+        title: "تعيين كلمة المرور — دَوَّرها",
+        data: { seo: { noindex: true } },
+      },
+      {
         path: "register",
         loadComponent: () =>
           import("./features/auth/register/register.component").then(

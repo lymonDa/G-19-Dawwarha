@@ -17,7 +17,7 @@ import { BadgeComponent } from '../../shared/ui/badge/badge.component';
       <div class="flex items-center justify-between">
         <div>
           <h1 class="text-2xl font-bold text-neutral-900">My Profile</h1>
-          <p class="text-xs text-neutral-500 mt-0.5">Manage your account information and contact details.</p>
+          <p class="text-xs text-neutral-500 mt-0.5">Manage your account information and security settings.</p>
         </div>
         <app-badge [variant]="authService.isAdmin() ? 'danger' : (authService.isOrganization() ? 'sand' : 'neutral')">
           {{ getRoleLabel() }}
@@ -29,7 +29,7 @@ import { BadgeComponent } from '../../shared/ui/badge/badge.component';
         <app-card padding="md" variant="bordered">
           <span class="text-xs text-neutral-500">Total Contributions</span>
           <p class="text-2xl font-bold text-primary mt-1">
-            {{ authService.currentUser()?.stats?.contributionsCount || 0 }}
+            {{ authService.currentUser()?.stats?.contributionsCount || authService.currentUser()?.stats?.completedTransfers || 0 }}
           </p>
         </app-card>
 
@@ -43,13 +43,14 @@ import { BadgeComponent } from '../../shared/ui/badge/badge.component';
         <app-card padding="md" variant="bordered">
           <span class="text-xs text-neutral-500">Reliability Rating</span>
           <p class="text-2xl font-bold text-success mt-1">
-            {{ authService.currentUser()?.stats?.rating || 5.0 }} / 5
+            {{ authService.currentUser()?.stats?.reputationScore ? (authService.currentUser()?.stats?.reputationScore! / 20).toFixed(1) : '5.0' }} / 5
           </p>
         </app-card>
       </div>
 
       <!-- Profile Edit Form -->
       <app-card padding="lg">
+        <h2 class="text-base font-bold text-neutral-900 mb-4 pb-2 border-b border-neutral-100">Personal Information</h2>
         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-5">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <app-input
@@ -99,6 +100,74 @@ import { BadgeComponent } from '../../shared/ui/badge/badge.component';
           </div>
         </form>
       </app-card>
+
+      <!-- Security: Change Password Card -->
+      <app-card padding="lg">
+        <h2 class="text-base font-bold text-neutral-900 mb-1">Security &amp; Password</h2>
+        <p class="text-xs text-neutral-500 mb-4 pb-2 border-b border-neutral-100">
+          Update your account password. Must be at least 8 characters long.
+        </p>
+
+        @if (passwordError()) {
+          <div class="p-3 mb-4 rounded-md bg-danger-bg text-danger border border-danger/20 text-xs flex items-center gap-2">
+            <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+            </svg>
+            <span>{{ passwordError() }}</span>
+          </div>
+        }
+
+        @if (passwordSuccess()) {
+          <div class="p-3 mb-4 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs flex items-center gap-2">
+            <svg class="w-4 h-4 shrink-0 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>{{ passwordSuccess() }}</span>
+          </div>
+        }
+
+        <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="flex flex-col gap-4">
+          <app-input
+            label="Current Password"
+            type="password"
+            placeholder="••••••••"
+            formControlName="currentPassword"
+            [required]="true"
+            [error]="getCurrentPasswordError()"
+          ></app-input>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <app-input
+              label="New Password"
+              type="password"
+              placeholder="••••••••"
+              formControlName="newPassword"
+              [required]="true"
+              [error]="getNewPasswordError()"
+            ></app-input>
+
+            <app-input
+              label="Confirm New Password"
+              type="password"
+              placeholder="••••••••"
+              formControlName="confirmPassword"
+              [required]="true"
+              [error]="getConfirmPasswordError()"
+            ></app-input>
+          </div>
+
+          <div class="flex justify-end pt-3 border-t border-neutral-100">
+            <app-button
+              type="submit"
+              variant="secondary"
+              [isLoading]="isChangingPassword()"
+              [disabled]="passwordForm.invalid || !newPasswordsMatch()"
+            >
+              Update Password
+            </app-button>
+          </div>
+        </form>
+      </app-card>
     </div>
   `
 })
@@ -107,6 +176,9 @@ export class ProfileComponent implements OnInit {
   authService = inject(AuthService);
 
   readonly isSaving = signal(false);
+  readonly isChangingPassword = signal(false);
+  readonly passwordError = signal<string | null>(null);
+  readonly passwordSuccess = signal<string | null>(null);
 
   profileForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -114,6 +186,12 @@ export class ProfileComponent implements OnInit {
     phone: [''],
     city: [''],
     area: ['']
+  });
+
+  passwordForm: FormGroup = this.fb.group({
+    currentPassword: ['', [Validators.required]],
+    newPassword: ['', [Validators.required, Validators.minLength(8)]],
+    confirmPassword: ['', [Validators.required]]
   });
 
   ngOnInit(): void {
@@ -145,6 +223,40 @@ export class ProfileComponent implements OnInit {
     return null;
   }
 
+  getCurrentPasswordError(): string | null {
+    const control = this.passwordForm.get('currentPassword');
+    if (control?.touched && control?.errors?.['required']) {
+      return 'Current password is required';
+    }
+    return null;
+  }
+
+  getNewPasswordError(): string | null {
+    const control = this.passwordForm.get('newPassword');
+    if (control?.touched && control.errors) {
+      if (control.errors['required']) return 'New password is required';
+      if (control.errors['minlength']) return 'Password must be at least 8 characters';
+    }
+    return null;
+  }
+
+  getConfirmPasswordError(): string | null {
+    const control = this.passwordForm.get('confirmPassword');
+    if (control?.touched) {
+      if (control?.errors?.['required']) return 'Please confirm your new password';
+      if (!this.newPasswordsMatch() && this.passwordForm.get('newPassword')?.value) {
+        return 'Passwords do not match';
+      }
+    }
+    return null;
+  }
+
+  newPasswordsMatch(): boolean {
+    const newPass = this.passwordForm.get('newPassword')?.value;
+    const confirm = this.passwordForm.get('confirmPassword')?.value;
+    return Boolean(newPass && confirm && newPass === confirm);
+  }
+
   onSubmit(): void {
     if (this.profileForm.invalid) {
       this.profileForm.markAllAsTouched();
@@ -166,6 +278,31 @@ export class ProfileComponent implements OnInit {
       },
       error: () => {
         this.isSaving.set(false);
+      }
+    });
+  }
+
+  onChangePassword(): void {
+    if (this.passwordForm.invalid || !this.newPasswordsMatch()) {
+      this.passwordForm.markAllAsTouched();
+      return;
+    }
+
+    this.isChangingPassword.set(true);
+    this.passwordError.set(null);
+    this.passwordSuccess.set(null);
+
+    const { currentPassword, newPassword } = this.passwordForm.value;
+
+    this.authService.changePassword(currentPassword, newPassword).subscribe({
+      next: () => {
+        this.isChangingPassword.set(false);
+        this.passwordSuccess.set('Password has been changed successfully.');
+        this.passwordForm.reset();
+      },
+      error: (err) => {
+        this.isChangingPassword.set(false);
+        this.passwordError.set(err?.error?.error?.message || err?.error?.message || 'Failed to change password. Please check your current password.');
       }
     });
   }

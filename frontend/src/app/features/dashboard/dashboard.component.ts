@@ -1,7 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { forkJoin, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+
 import { AuthService } from '../../core/auth/auth.service';
+import { ResourceApiService } from '../resources/resource-api.service';
+import { RequestApiService } from '../requests/services/request-api.service';
+import { MatchApiService } from '../matches/services/match-api.service';
+import { ContributionApiService } from '../contributions/contribution-api.service';
+
 import { CardComponent } from '../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../shared/ui/button/button.component';
 import { BadgeComponent } from '../../shared/ui/badge/badge.component';
@@ -44,7 +52,7 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
         </div>
       </div>
 
-      <!-- KPI Metrics Row -->
+      <!-- KPI Metrics Row (Live Counts) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <app-card padding="md" variant="bordered">
           <div class="flex items-center justify-between">
@@ -52,7 +60,11 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
             <span class="w-2 h-2 rounded-full bg-primary"></span>
           </div>
           <p class="text-3xl font-bold text-neutral-900 mt-2">
-            {{ authService.currentUser()?.stats?.contributionsCount || 0 }}
+            @if (isLoadingStats()) {
+              <span class="text-neutral-300 animate-pulse text-2xl font-normal">--</span>
+            } @else {
+              {{ resourcesCount() }}
+            }
           </p>
           <a routerLink="/resources/mine" class="text-xs text-primary font-medium hover:underline mt-2 inline-flex items-center gap-1">
             <span>Manage Resources</span>
@@ -66,7 +78,11 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
             <span class="w-2 h-2 rounded-full bg-info"></span>
           </div>
           <p class="text-3xl font-bold text-neutral-900 mt-2">
-            {{ authService.currentUser()?.stats?.requestsCount || 0 }}
+            @if (isLoadingStats()) {
+              <span class="text-neutral-300 animate-pulse text-2xl font-normal">--</span>
+            } @else {
+              {{ requestsCount() }}
+            }
           </p>
           <a routerLink="/requests/mine" class="text-xs text-primary font-medium hover:underline mt-2 inline-flex items-center gap-1">
             <span>Manage Requests</span>
@@ -80,7 +96,11 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
             <app-badge variant="success" size="sm">Active</app-badge>
           </div>
           <p class="text-3xl font-bold text-success mt-2">
-            {{ authService.currentUser()?.stats?.matchesCount || 0 }}
+            @if (isLoadingStats()) {
+              <span class="text-neutral-300 animate-pulse text-2xl font-normal">--</span>
+            } @else {
+              {{ matchesCount() }}
+            }
           </p>
           <a routerLink="/matches" class="text-xs text-success font-medium hover:underline mt-2 inline-flex items-center gap-1">
             <span>Review Matches Now</span>
@@ -90,7 +110,7 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
 
         <div class="flex flex-col">
           <app-impact-card
-            [value]="authService.currentUser()?.stats?.successfulTransfers || 0"
+            [value]="impactCount()"
             label="Community Impact"
             description="Verified completed transfers"
             variant="personal"
@@ -138,6 +158,63 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
     </div>
   `
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   authService = inject(AuthService);
+  private resourceApi = inject(ResourceApiService);
+  private requestApi = inject(RequestApiService);
+  private matchApi = inject(MatchApiService);
+  private contributionApi = inject(ContributionApiService);
+
+  readonly resourcesCount = signal<number>(0);
+  readonly requestsCount = signal<number>(0);
+  readonly matchesCount = signal<number>(0);
+  readonly impactCount = signal<number>(0);
+  readonly isLoadingStats = signal<boolean>(true);
+
+  ngOnInit(): void {
+    this.loadStats();
+  }
+
+  private loadStats(): void {
+    const user = this.authService.currentUser();
+    const userId = user?.id || user?._id;
+
+    if (user?.stats) {
+      this.impactCount.set(user.stats.successfulTransfers || user.stats.completedTransfers || 0);
+    }
+
+    forkJoin({
+      resources: this.resourceApi.listMine(userId || '').pipe(catchError(() => of([]))),
+      requests: this.requestApi.getAll(1, 100).pipe(
+        map(res => {
+          const list = res.data || [];
+          if (!userId) return list;
+          return list.filter((r: any) => {
+            const reqId = typeof r.requesterId === 'object' ? r.requesterId?._id || r.requesterId?.id : r.requesterId;
+            return String(reqId) === String(userId);
+          });
+        }),
+        catchError(() => of([]))
+      ),
+      matches: this.matchApi.getAll(undefined, 1, 100).pipe(
+        map(res => res.data || []),
+        catchError(() => of([]))
+      ),
+      contributions: this.contributionApi.getMyContributions({ limit: 1 }).pipe(
+        map(res => res.pagination?.total ?? res.contributions?.length ?? 0),
+        catchError(() => of(user?.stats?.successfulTransfers || 0))
+      )
+    }).subscribe({
+      next: ({ resources, requests, matches, contributions }) => {
+        this.resourcesCount.set(resources.length);
+        this.requestsCount.set(requests.length);
+        this.matchesCount.set(matches.length);
+        this.impactCount.set(contributions || user?.stats?.successfulTransfers || 0);
+        this.isLoadingStats.set(false);
+      },
+      error: () => {
+        this.isLoadingStats.set(false);
+      }
+    });
+  }
 }

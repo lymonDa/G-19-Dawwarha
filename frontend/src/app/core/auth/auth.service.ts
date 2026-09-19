@@ -128,6 +128,22 @@ export class AuthService {
     this.toast.info('تم تسجيل الخروج بنجاح', 'وداعاً');
   }
 
+  forgotPassword(email: string): Observable<{ success: boolean; message: string; resetToken?: string }> {
+    return this.api.post<{ success: boolean; message: string; resetToken?: string }>('/auth/forgot-password', { email });
+  }
+
+  resetPassword(token: string, password: string): Observable<{ success: boolean; message: string }> {
+    return this.api.post<{ success: boolean; message: string }>('/auth/reset-password', { token, password });
+  }
+
+  changePassword(currentPassword: string, newPassword: string): Observable<{ success: boolean; message: string }> {
+    return this.api.post<{ success: boolean; message: string }>('/users/me/change-password', { currentPassword, newPassword }).pipe(
+      tap(() => {
+        this.toast.success('تم تحديث كلمة المرور بنجاح', 'نجاح');
+      })
+    );
+  }
+
   restoreSession(): void {
     const token = this.tokenSignal();
     if (!token) return;

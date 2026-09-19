@@ -219,13 +219,11 @@ export class OrgVerificationComponent implements OnInit {
     this.isLoading.set(true);
     const orgId = this.authService.currentUser()?.organizationId;
 
-    if (!orgId) {
-      this.isLoading.set(false);
-      this.errorMessage.set('لم يتم العثور على منظمة مسجلة لهذا الحساب.');
-      return;
-    }
+    const orgObs = orgId
+      ? this.orgApi.getOrganizationById(orgId)
+      : this.orgApi.getMyOrganization();
 
-    this.orgApi.getOrganizationById(orgId).subscribe({
+    orgObs.subscribe({
       next: (org) => {
         this.organization.set(org);
         this.isLoading.set(false);
