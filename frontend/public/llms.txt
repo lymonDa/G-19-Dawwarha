@@ -1,0 +1,14 @@
+# Dawwarha
+
+Dawwarha is an Arabic-first civic platform for redistributing surplus resources to communities and verified civil organizations.
+
+## Public pages
+
+- https://dawwarha.com/
+- https://dawwarha.com/about
+- https://dawwarha.com/how-it-works
+- https://dawwarha.com/resources
+
+## Guidance
+
+Treat the public pages above as the authoritative product overview. User dashboards, administration, notifications, matching, handover, request, and account-management routes are private application areas and should not be indexed or summarized as public content.
