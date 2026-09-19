@@ -109,6 +109,12 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
                   </app-button>
                 </td>
               </tr>
+            } @empty {
+              <tr>
+                <td colspan="4" class="px-4 py-8 text-center text-xs text-neutral-500">
+                  No categories found in the database.
+                </td>
+              </tr>
             }
           </tbody>
         </app-table>

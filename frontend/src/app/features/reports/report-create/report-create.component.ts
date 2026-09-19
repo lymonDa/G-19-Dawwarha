@@ -12,7 +12,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, CardComponent, ButtonComponent],
   template: `
-    <div class="w-full max-w-lg mx-auto" dir="rtl">
+    <div class="w-full max-w-lg mx-auto">
       @if (submittedReport()) {
         <!-- Success State -->
         <app-card padding="lg" variant="bordered">
@@ -74,10 +74,11 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
           <form [formGroup]="reportForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
             <!-- Reason Dropdown -->
             <div class="flex flex-col gap-1.5">
-              <label class="text-xs font-semibold text-neutral-900">
+              <label for="report-reason" class="text-xs font-semibold text-neutral-900">
                 سبب البلاغ <span class="text-danger">*</span>
               </label>
               <select
+                id="report-reason"
                 formControlName="reason"
                 class="w-full px-3 py-2 bg-white text-neutral-900 text-sm rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
                 [attr.aria-invalid]="reportForm.get('reason')?.invalid && reportForm.get('reason')?.touched"
@@ -97,7 +98,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
             <!-- Description Textarea -->
             <div class="flex flex-col gap-1.5">
               <div class="flex justify-between items-center">
-                <label class="text-xs font-semibold text-neutral-900">
+                <label for="report-description" class="text-xs font-semibold text-neutral-900">
                   تفاصيل إضافية (اختياري)
                 </label>
                 <span class="text-[10px] text-neutral-400">
@@ -105,6 +106,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
                 </span>
               </div>
               <textarea
+                id="report-description"
                 formControlName="description"
                 rows="4"
                 maxlength="500"

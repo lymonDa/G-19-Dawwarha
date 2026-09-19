@@ -6,15 +6,48 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { Organization } from '../../../core/models/organization.model';
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
+import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { VerificationBadgeComponent } from '../../../shared/components/verification-badge/verification-badge.component';
 import { ImpactCardComponent } from '../../../shared/components/impact-card/impact-card.component';
 
 @Component({
   selector: 'app-org-dashboard',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardComponent, ButtonComponent, VerificationBadgeComponent, ImpactCardComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    CardComponent,
+    ButtonComponent,
+    SkeletonComponent,
+    VerificationBadgeComponent,
+    ImpactCardComponent
+  ],
   template: `
     <div class="max-w-5xl mx-auto flex flex-col gap-6 py-4">
+      @if (isLoading()) {
+        <div class="space-y-4">
+          <app-skeleton variant="card" height="100px"></app-skeleton>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <app-skeleton variant="card" height="110px"></app-skeleton>
+            <app-skeleton variant="card" height="110px"></app-skeleton>
+            <app-skeleton variant="card" height="110px"></app-skeleton>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <app-skeleton variant="card" height="140px"></app-skeleton>
+            <app-skeleton variant="card" height="140px"></app-skeleton>
+          </div>
+        </div>
+      } @else if (errorMessage()) {
+        <div class="p-4 rounded-xl bg-danger-bg border border-danger/30 text-danger-900 flex items-center justify-between" role="alert">
+          <div class="flex items-center gap-2 text-sm">
+            <svg class="w-5 h-5 text-danger shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <span>{{ errorMessage() }}</span>
+          </div>
+          <app-button variant="secondary" size="sm" (clicked)="loadOrg()">Retry</app-button>
+        </div>
+      } @else {
       <!-- Organization Header & Verification Status -->
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-6 rounded-card border border-neutral-200 shadow-sm">
         <div class="flex items-center gap-4">
@@ -123,6 +156,7 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
           </a>
         </app-card>
       </div>
+      }
     </div>
   `
 })
@@ -132,8 +166,16 @@ export class OrgDashboardComponent implements OnInit {
 
   readonly org = signal<Organization | null>(null);
   readonly isLoading = signal(true);
+  readonly errorMessage = signal<string | null>(null);
 
   ngOnInit(): void {
+    this.loadOrg();
+  }
+
+  loadOrg(): void {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
     const orgId = this.authService.currentUser()?.organizationId;
     const request$ = orgId ? this.orgApi.getOrganizationById(orgId) : this.orgApi.getMyOrganization();
 
@@ -142,8 +184,9 @@ export class OrgDashboardComponent implements OnInit {
         this.org.set(organization);
         this.isLoading.set(false);
       },
-      error: () => {
+      error: (err) => {
         this.isLoading.set(false);
+        this.errorMessage.set(err?.error?.error?.message || err?.error?.message || 'Failed to load organization data.');
       }
     });
   }

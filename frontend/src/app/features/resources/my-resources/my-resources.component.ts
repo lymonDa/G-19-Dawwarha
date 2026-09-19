@@ -117,7 +117,7 @@ interface StatusTab {
               title="No resources found"
               description="You have no surplus listings in this status. Register your first item to begin offering civic resources."
               actionLabel="+ List New Resource"
-              (action)="navigateCreate()"
+              (actionClicked)="navigateCreate()"
             ></app-empty-state>
           </div>
         } @else {

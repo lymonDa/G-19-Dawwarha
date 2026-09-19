@@ -24,7 +24,7 @@ export type ContributionFilter = 'all' | 'given' | 'received';
     ButtonComponent
   ],
   template: `
-    <div class="max-w-5xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6" dir="rtl">
+    <div class="max-w-5xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6">
       <!-- Page Header -->
       <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

@@ -27,7 +27,7 @@ import { AuthService } from '../../../core/auth/auth.service';
     LifecycleTimelineComponent
   ],
   template: `
-    <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6" dir="rtl">
+    <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6">
       <!-- Loading Skeleton View -->
       @if (isLoading()) {
         <div class="flex flex-col gap-6" aria-busy="true" aria-label="جاري تحميل بيانات التسليم...">

@@ -44,4 +44,5 @@ export class EmptyStateComponent {
   @Input() actionVariant: 'primary' | 'secondary' | 'ghost' = 'primary';
 
   @Output() actionClicked = new EventEmitter<void>();
+  @Output() action = this.actionClicked;
 }

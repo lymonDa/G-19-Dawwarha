@@ -43,7 +43,7 @@ export class AuthService {
   readonly isAuthenticated = computed(() => !!this.tokenSignal() && !!this.currentUserSignal());
   readonly userRole = computed<UserRole | null>(() => this.currentUserSignal()?.role ?? null);
   readonly isAdmin = computed(() => this.currentUserSignal()?.role === 'admin');
-  readonly isOrganization = computed(() => !!this.currentUserSignal()?.organizationId || (this.currentUserSignal() as any)?.role === 'organization');
+  readonly isOrganization = computed(() => !!this.currentUserSignal()?.organizationId);
   readonly authSession = computed<AuthSession | null>(() => {
     const user = this.currentUserSignal();
     const token = this.tokenSignal();

@@ -1,11 +1,12 @@
-import { Component, Input, forwardRef, signal } from '@angular/core';
+import { Component, Input, forwardRef, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -52,7 +53,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
             type="button"
             (click)="togglePasswordVisibility()"
             class="absolute inset-y-0 end-0 flex items-center pe-3 text-neutral-500 hover:text-neutral-700 focus:outline-none"
-            [attr.aria-label]="isPasswordVisible() ? 'Hide password' : 'Show password'"
+            [attr.aria-label]="getPasswordToggleAriaLabel()"
           >
             @if (isPasswordVisible()) {
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -84,6 +85,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
   `
 })
 export class InputComponent implements ControlValueAccessor {
+  lang?: LanguageService | null = null;
+
+  constructor() {
+    try {
+      this.lang = inject(LanguageService, { optional: true });
+    } catch {
+      this.lang = null;
+    }
+  }
+
   @Input() label = '';
   @Input() type: 'text' | 'email' | 'password' | 'number' | 'tel' = 'text';
   @Input() placeholder = '';
@@ -96,6 +107,14 @@ export class InputComponent implements ControlValueAccessor {
 
   readonly value = signal<string>('');
   readonly isPasswordVisible = signal<boolean>(false);
+
+  getPasswordToggleAriaLabel(): string {
+    const isAr = this.lang ? this.lang.currentLanguage() === 'ar' : false;
+    if (this.isPasswordVisible()) {
+      return isAr ? 'إخفاء كلمة المرور' : 'Hide password';
+    }
+    return isAr ? 'إظهار كلمة المرور' : 'Show password';
+  }
 
   onChange: (val: string) => void = () => {};
   onTouched: () => void = () => {};

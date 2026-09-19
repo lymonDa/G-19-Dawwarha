@@ -22,7 +22,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
     BadgeComponent
   ],
   template: `
-    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6" dir="rtl">
+    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6">
       <!-- Header -->
       <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

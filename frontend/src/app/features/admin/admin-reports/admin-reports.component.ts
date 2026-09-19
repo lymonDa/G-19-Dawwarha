@@ -6,6 +6,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
 import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.component';
+import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { ReportApiService } from '../../reports/report-api.service';
 import { Report, ReportStatus } from '../../../core/models/report.model';
 import { ToastService } from '../../../core/services/toast.service';
@@ -20,7 +21,8 @@ import { ToastService } from '../../../core/services/toast.service';
     BadgeComponent,
     ButtonComponent,
     DialogComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    SkeletonComponent
   ],
   template: `
     <div class="flex flex-col gap-6">
@@ -82,8 +84,10 @@ import { ToastService } from '../../../core/services/toast.service';
 
       <!-- Loading State -->
       @if (isLoading()) {
-        <div class="py-12 text-center text-xs text-neutral-500">
-          Loading reports from server...
+        <div class="space-y-2">
+          <app-skeleton variant="rectangular" height="40px"></app-skeleton>
+          <app-skeleton variant="rectangular" height="40px"></app-skeleton>
+          <app-skeleton variant="rectangular" height="40px"></app-skeleton>
         </div>
       } @else if (reports().length === 0) {
         <app-empty-state

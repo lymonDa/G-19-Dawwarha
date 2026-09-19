@@ -45,4 +45,20 @@ describe('InputComponent', () => {
     component.setDisabledState(true);
     expect(component.disabled).toBe(true);
   });
+
+  it('should return appropriate password toggle aria-label based on language and visibility state', () => {
+    const component = new InputComponent();
+    // Default without language service: isAr = false
+    expect(component.getPasswordToggleAriaLabel()).toBe('Show password');
+    component.togglePasswordVisibility();
+    expect(component.getPasswordToggleAriaLabel()).toBe('Hide password');
+
+    // With Arabic language service
+    const mockLangAr = { currentLanguage: () => 'ar' } as any;
+    const arComponent = new InputComponent();
+    arComponent.lang = mockLangAr;
+    expect(arComponent.getPasswordToggleAriaLabel()).toBe('إظهار كلمة المرور');
+    arComponent.togglePasswordVisibility();
+    expect(arComponent.getPasswordToggleAriaLabel()).toBe('إخفاء كلمة المرور');
+  });
 });

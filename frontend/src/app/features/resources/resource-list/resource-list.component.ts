@@ -169,7 +169,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               title="No resources found"
               description="No surplus listings match your current filter criteria. Try adjusting your search query or clear filters to see more results."
               actionLabel="Clear Filters"
-              (action)="resetFilters()"
+              (actionClicked)="resetFilters()"
             ></app-empty-state>
           </div>
         } @else {

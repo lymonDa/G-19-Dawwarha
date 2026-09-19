@@ -30,7 +30,7 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
           </p>
         </div>
 
-        <div class="flex items-center gap-2.5 shrink-0">
+        <div class="flex flex-wrap items-center gap-2.5 shrink-0">
           <a routerLink="/resources/create">
             <app-button variant="secondary" size="sm">
               + List a Resource
@@ -54,8 +54,9 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
           <p class="text-3xl font-bold text-neutral-900 mt-2">
             {{ authService.currentUser()?.stats?.contributionsCount || 0 }}
           </p>
-          <a routerLink="/resources/mine" class="text-xs text-primary font-medium hover:underline mt-2 block">
-            Manage Resources →
+          <a routerLink="/resources/mine" class="text-xs text-primary font-medium hover:underline mt-2 inline-flex items-center gap-1">
+            <span>Manage Resources</span>
+            <svg class="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </a>
         </app-card>
 
@@ -67,8 +68,9 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
           <p class="text-3xl font-bold text-neutral-900 mt-2">
             {{ authService.currentUser()?.stats?.requestsCount || 0 }}
           </p>
-          <a routerLink="/requests/mine" class="text-xs text-primary font-medium hover:underline mt-2 block">
-            Manage Requests →
+          <a routerLink="/requests/mine" class="text-xs text-primary font-medium hover:underline mt-2 inline-flex items-center gap-1">
+            <span>Manage Requests</span>
+            <svg class="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </a>
         </app-card>
 
@@ -80,8 +82,9 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
           <p class="text-3xl font-bold text-success mt-2">
             {{ authService.currentUser()?.stats?.matchesCount || 0 }}
           </p>
-          <a routerLink="/matches" class="text-xs text-success font-medium hover:underline mt-2 block">
-            Review Matches Now →
+          <a routerLink="/matches" class="text-xs text-success font-medium hover:underline mt-2 inline-flex items-center gap-1">
+            <span>Review Matches Now</span>
+            <svg class="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </a>
         </app-card>
 
@@ -93,8 +96,9 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
             variant="personal"
             icon="★"
           ></app-impact-card>
-          <a routerLink="/contributions" class="text-xs text-sand-700 font-medium hover:underline mt-1.5 block text-end px-1">
-            View Contribution History →
+          <a routerLink="/contributions" class="text-xs text-sand-700 font-medium hover:underline mt-1.5 inline-flex items-center gap-1 self-end px-1">
+            <span>View Contribution History</span>
+            <svg class="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </a>
         </div>
       </div>

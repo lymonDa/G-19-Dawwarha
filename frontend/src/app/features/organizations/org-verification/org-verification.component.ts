@@ -24,7 +24,7 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
     SkeletonComponent
   ],
   template: `
-    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6" dir="rtl">
+    <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6">
       <!-- Header -->
       <header>
         <h1 class="text-2xl font-bold text-neutral-900">توثيق الحساب والاعتماد الرسمي للمنظمة</h1>
@@ -139,10 +139,11 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
             <form [formGroup]="verificationForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
               <!-- Primary Document Link -->
               <div class="flex flex-col gap-1.5">
-                <label class="text-xs font-semibold text-neutral-900">
+                <label for="org-doc-url1" class="text-xs font-semibold text-neutral-900">
                   رابط الوثيقة الأساسية (PDF أو صورة معتمدة) <span class="text-danger">*</span>
                 </label>
                 <input
+                  id="org-doc-url1"
                   type="url"
                   formControlName="docUrl1"
                   placeholder="https://example.com/registration-cert.pdf"
@@ -155,10 +156,11 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
 
               <!-- Secondary Document Link -->
               <div class="flex flex-col gap-1.5">
-                <label class="text-xs font-semibold text-neutral-900">
+                <label for="org-doc-url2" class="text-xs font-semibold text-neutral-900">
                   رابط وثيقة ثانوية / تفويض الممثل القانوني (اختياري)
                 </label>
                 <input
+                  id="org-doc-url2"
                   type="url"
                   formControlName="docUrl2"
                   placeholder="https://example.com/authorization-letter.pdf"

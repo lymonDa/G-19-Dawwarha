@@ -22,14 +22,16 @@ export interface SelectOption {
   ],
   template: `
     <div class="w-full flex flex-col gap-1.5">
-      <label *ngIf="label" class="block text-sm font-semibold text-neutral-900">
+      <label *ngIf="label" [for]="selectId" class="block text-sm font-semibold text-neutral-900">
         {{ label }} <span *ngIf="required" class="text-danger">*</span>
       </label>
 
       <div class="relative w-full group">
         <select
+          [id]="selectId"
           [disabled]="disabled"
           [attr.aria-invalid]="error ? 'true' : null"
+          [attr.aria-describedby]="error ? (selectId + '-error') : (helperText ? (selectId + '-helper') : null)"
           [ngModel]="value"
           (ngModelChange)="onSelect($event)"
           (blur)="onTouched()"
@@ -57,10 +59,10 @@ export interface SelectOption {
       </div>
 
       <div class="flex justify-between items-start gap-4">
-        <span *ngIf="error" class="text-xs text-danger" id="error-message">
+        <span *ngIf="error" class="text-xs text-danger" [id]="selectId + '-error'">
           {{ error }}
         </span>
-        <span *ngIf="helperText && !error" class="text-xs text-neutral-500" id="helper-text">
+        <span *ngIf="helperText && !error" class="text-xs text-neutral-500" [id]="selectId + '-helper'">
           {{ helperText }}
         </span>
       </div>
@@ -68,6 +70,7 @@ export interface SelectOption {
   `
 })
 export class SelectComponent implements ControlValueAccessor {
+  @Input() selectId = 'select-' + Math.random().toString(36).substring(2, 9);
   @Input() label?: string;
   @Input() placeholder?: string;
   @Input() helperText?: string;
