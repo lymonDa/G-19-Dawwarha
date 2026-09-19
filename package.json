@@ -10,6 +10,7 @@
     "dev": "nodemon backend/server.js",
     "install-backend": "cd backend && npm install",
     "install-frontend": "cd frontend && npm install",
-    "preview": "npm --prefix frontend run preview"
+    "preview": "npm --prefix frontend run preview",
+    "seed:test-users": "npm --prefix backend run seed:test-users"
   }
 }
