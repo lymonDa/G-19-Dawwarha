@@ -4,7 +4,53 @@ import { roleGuard } from './core/guards/role.guard';
 import { orgVerifiedGuard } from './core/guards/org-verified.guard';
 
 export const appRoutes: Routes = [
-  // 1. AUTHENTICATED APP ROUTES (Wrapped in AppLayout, Guarded per child)
+  // 1. PUBLIC STATIC & CATALOG ROUTES (Wrapped in PublicLayout)
+  {
+    path: '',
+    loadComponent: () =>
+      import('./layout/public-layout/public-layout.component').then(m => m.PublicLayoutComponent),
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./features/landing/landing.component').then(m => m.LandingComponent),
+        title: 'دَوَّرها — منصة تدوير وتوزيع الموارد الحضرية'
+      },
+      {
+        path: 'about',
+        loadComponent: () =>
+          import('./features/static/about/about.component').then(m => m.AboutComponent),
+        title: 'عن دوّرها — معايير الأمان والشفافية'
+      },
+      {
+        path: 'how-it-works',
+        loadComponent: () =>
+          import('./features/static/how-it-works/how-it-works.component').then(m => m.HowItWorksComponent),
+        title: 'كيف تعمل المنصة — دورة التدوير الموثقة'
+      },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./features/auth/login/login.component').then(m => m.LoginComponent),
+        title: 'تسجيل الدخول — دَوَّرها'
+      },
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./features/auth/register/register.component').then(m => m.RegisterComponent),
+        title: 'إنشاء حساب جديد — دَوَّرها'
+      },
+      {
+        path: 'resources',
+        loadComponent: () =>
+          import('./features/resources/resource-list/resource-list.component').then(m => m.ResourceListComponent),
+        title: 'تصفح الموارد المتاحة — دَوَّرها'
+      }
+    ]
+  },
+
+  // 2. AUTHENTICATED APP ROUTES (Wrapped in AppLayout, Guarded per child)
   {
     path: '',
     loadComponent: () =>
@@ -129,48 +175,12 @@ export const appRoutes: Routes = [
     ]
   },
 
-  // 2. PUBLIC ROUTES (Wrapped in PublicLayout)
+  // 3. PUBLIC DETAIL ROUTES (Wrapped in PublicLayout, evaluated after specific authenticated routes)
   {
     path: '',
     loadComponent: () =>
       import('./layout/public-layout/public-layout.component').then(m => m.PublicLayoutComponent),
     children: [
-      {
-        path: '',
-        loadComponent: () =>
-          import('./features/landing/landing.component').then(m => m.LandingComponent),
-        title: 'دَوَّرها — منصة تدوير وتوزيع الموارد الحضرية'
-      },
-      {
-        path: 'about',
-        loadComponent: () =>
-          import('./features/static/about/about.component').then(m => m.AboutComponent),
-        title: 'عن دوّرها — معايير الأمان والشفافية'
-      },
-      {
-        path: 'how-it-works',
-        loadComponent: () =>
-          import('./features/static/how-it-works/how-it-works.component').then(m => m.HowItWorksComponent),
-        title: 'كيف تعمل المنصة — دورة التدوير الموثقة'
-      },
-      {
-        path: 'login',
-        loadComponent: () =>
-          import('./features/auth/login/login.component').then(m => m.LoginComponent),
-        title: 'تسجيل الدخول — دَوَّرها'
-      },
-      {
-        path: 'register',
-        loadComponent: () =>
-          import('./features/auth/register/register.component').then(m => m.RegisterComponent),
-        title: 'إنشاء حساب جديد — دَوَّرها'
-      },
-      {
-        path: 'resources',
-        loadComponent: () =>
-          import('./features/resources/resource-list/resource-list.component').then(m => m.ResourceListComponent),
-        title: 'تصفح الموارد المتاحة — دَوَّرها'
-      },
       {
         path: 'resources/:id',
         loadComponent: () =>
@@ -186,7 +196,7 @@ export const appRoutes: Routes = [
     ]
   },
 
-  // 3. ADMIN OPERATIONAL ROUTES (Wrapped in AdminLayout, Role Guarded)
+  // 4. ADMIN OPERATIONAL ROUTES (Wrapped in AdminLayout, Role Guarded)
   {
     path: 'admin',
     loadComponent: () =>
@@ -244,7 +254,7 @@ export const appRoutes: Routes = [
     ]
   },
 
-  // 4. WILDCARD NOT FOUND
+  // 5. WILDCARD NOT FOUND
   {
     path: '**',
     loadComponent: () =>

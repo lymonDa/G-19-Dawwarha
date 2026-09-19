@@ -51,9 +51,9 @@
   {
     "phase": "PHASE 2",
     "name": "Registration Submission & Redirect",
-    "expected": "Redirects to /dashboard or stores token",
-    "actual": "URL: http://localhost:4200/register, Token: false",
-    "status": "FAIL"
+    "expected": "Redirects to /dashboard with token",
+    "actual": "URL: http://localhost:4200/dashboard, Token: true",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 3",
@@ -66,21 +66,21 @@
     "phase": "PHASE 3",
     "name": "Valid Login & Redirect",
     "expected": "Redirects to /dashboard with JWT",
-    "actual": "URL: http://localhost:4200/login, JWT: false",
-    "status": "FAIL"
+    "actual": "URL: http://localhost:4200/dashboard, JWT: true",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 4",
     "name": "Normal User Blocked from /admin/users",
     "expected": "Redirects or blocks",
-    "actual": "URL: http://localhost:4200/login?returnUrl=%2Fadmin%2Fusers",
+    "actual": "URL: http://localhost:4200/dashboard",
     "status": "PASS"
   },
   {
     "phase": "PHASE 4",
     "name": "Normal User Blocked from /admin/categories",
     "expected": "Redirects or blocks",
-    "actual": "URL: http://localhost:4200/login?returnUrl=%2Fadmin%2Fcategories",
+    "actual": "URL: http://localhost:4200/dashboard",
     "status": "PASS"
   },
   {
@@ -108,15 +108,57 @@
     "phase": "PHASE 5",
     "name": "Resource Listed in My Resources",
     "expected": "Shows created resource",
-    "actual": "Count > 0: false",
-    "status": "FAIL"
+    "actual": "Count > 0: true",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 5",
     "name": "Request Listed in My Requests",
     "expected": "Shows created request",
-    "actual": "Count > 0: false",
-    "status": "FAIL"
+    "actual": "Count > 0: true",
+    "status": "PASS"
+  },
+  {
+    "phase": "PHASE 5",
+    "name": "Handover Detail Screen Opened",
+    "expected": "Shows /handovers/:matchId",
+    "actual": "http://localhost:4200/handovers/6aaddbfc075dee5150c1e572",
+    "status": "PASS"
+  },
+  {
+    "phase": "PHASE 5",
+    "name": "Two Independent Indicator Cards",
+    "expected": "Rendered independently",
+    "actual": "Rendered",
+    "status": "PASS"
+  },
+  {
+    "phase": "PHASE 5",
+    "name": "Seeker Confirmation Recorded in UI",
+    "expected": "Seeker indicator turns confirmed",
+    "actual": "Confirmed",
+    "status": "PASS"
+  },
+  {
+    "phase": "PHASE 5",
+    "name": "Two-Sided Completion Celebration Banner",
+    "expected": "Banner displayed on both confirmed",
+    "actual": "Celebration Banner Rendered",
+    "status": "PASS"
+  },
+  {
+    "phase": "PHASE 5",
+    "name": "Contributions History Recorded",
+    "expected": "Shows completed contribution card",
+    "actual": "Cards: true",
+    "status": "PASS"
+  },
+  {
+    "phase": "PHASE 5",
+    "name": "Notifications List Screen",
+    "expected": "Loads notification items",
+    "actual": "Items found: 1",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 6",
@@ -129,8 +171,8 @@
     "phase": "PHASE 6",
     "name": "iPhone SE (320px) Mobile Hamburger Button",
     "expected": "Visible on small viewports",
-    "actual": "Hidden",
-    "status": "FAIL"
+    "actual": "Visible",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 6",
@@ -143,8 +185,8 @@
     "phase": "PHASE 6",
     "name": "Android Small (360px) Mobile Hamburger Button",
     "expected": "Visible on small viewports",
-    "actual": "Hidden",
-    "status": "FAIL"
+    "actual": "Visible",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 6",
@@ -157,8 +199,8 @@
     "phase": "PHASE 6",
     "name": "iPhone 14 (390px) Mobile Hamburger Button",
     "expected": "Visible on small viewports",
-    "actual": "Hidden",
-    "status": "FAIL"
+    "actual": "Visible",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 6",
@@ -171,43 +213,43 @@
     "phase": "PHASE 6",
     "name": "iPhone Pro Max (430px) Mobile Hamburger Button",
     "expected": "Visible on small viewports",
-    "actual": "Hidden",
-    "status": "FAIL"
+    "actual": "Visible",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 6",
     "name": "Mobile Drawer Open & Links",
     "expected": "Opens with all app links",
-    "actual": "Links found: false",
-    "status": "FAIL"
+    "actual": "Links found: true",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 7",
     "name": "Tablet Landscape (1024px) Desktop Sidebar Display",
     "expected": "Sidebar visible",
-    "actual": "Hidden",
-    "status": "FAIL"
+    "actual": "Visible",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 7",
     "name": "HD Desktop (1280px) Desktop Sidebar Display",
     "expected": "Sidebar visible",
-    "actual": "Hidden",
-    "status": "FAIL"
+    "actual": "Visible",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 7",
     "name": "MacBook Desktop (1440px) Desktop Sidebar Display",
     "expected": "Sidebar visible",
-    "actual": "Hidden",
-    "status": "FAIL"
+    "actual": "Visible",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 7",
     "name": "Full HD Desktop (1920px) Desktop Sidebar Display",
     "expected": "Sidebar visible",
-    "actual": "Hidden",
-    "status": "FAIL"
+    "actual": "Visible",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 8",
@@ -234,14 +276,14 @@
     "phase": "PHASE 10",
     "name": "Keyboard Focusability on Forms",
     "expected": "INPUT focused",
-    "actual": "BUTTON",
-    "status": "FAIL"
+    "actual": "INPUT",
+    "status": "PASS"
   },
   {
     "phase": "PHASE 10",
     "name": "Browser Console Zero Critical Errors",
     "expected": "0 critical console errors",
-    "actual": "14 errors",
-    "status": "FAIL"
+    "actual": "0 errors",
+    "status": "PASS"
   }
 ]
