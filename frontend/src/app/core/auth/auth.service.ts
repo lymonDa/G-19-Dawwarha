@@ -53,7 +53,11 @@ export class AuthService {
 
   constructor() {
     this.restoreLocalState();
-    this.restoreSession();
+    if (typeof window !== 'undefined') {
+      queueMicrotask(() => {
+        this.restoreSession();
+      });
+    }
   }
 
   private normalizeUser(data: any): User {
