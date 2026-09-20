@@ -8,6 +8,7 @@ import { TableComponent } from '../../../shared/ui/table/table.component';
 import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-admin-requests',
@@ -21,17 +22,21 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
     SkeletonComponent
   ],
   template: `
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-6" [dir]="isRtl ? 'rtl' : 'ltr'">
       <!-- Header Row -->
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-xl font-bold text-neutral-900">Demand Requests Management</h1>
+          <h1 class="text-xl font-bold text-neutral-900">
+            {{ isRtl ? 'إدارة طلبات الاحتياج المجتمعية' : 'Demand Requests Management' }}
+          </h1>
           <p class="text-xs text-neutral-500 mt-0.5">
-            Monitor requests registered by organizations and individuals, and track fulfilment rates and distribution.
+            {{ isRtl
+              ? 'متابعة طلبات الاحتياج المسجلة من الجمعيات والأفراد ومراقبة معدلات التلبية والتوزيع.'
+              : 'Monitor requests registered by organizations and individuals, and track fulfilment rates and distribution.' }}
           </p>
         </div>
         <app-button variant="outline" size="sm" (clicked)="fetchRequests()">
-          Refresh
+          {{ isRtl ? 'تحديث' : 'Refresh' }}
         </app-button>
       </div>
 
@@ -39,7 +44,9 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
       @if (errorMessage()) {
         <div class="p-3 rounded-md bg-danger-bg border border-danger/20 text-xs text-danger flex items-center justify-between" role="alert">
           <span>{{ errorMessage() }}</span>
-          <app-button variant="outline" size="sm" (clicked)="fetchRequests()">Retry</app-button>
+          <app-button variant="outline" size="sm" (clicked)="fetchRequests()">
+            {{ isRtl ? 'إعادة المحاولة' : 'Retry' }}
+          </app-button>
         </div>
       }
 
@@ -55,12 +62,12 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
         <app-table>
           <thead class="bg-neutral-50 border-b border-neutral-200 text-neutral-600">
             <tr>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Request</th>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Category</th>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Urgency</th>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Location</th>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Status</th>
-              <th class="px-4 py-3 text-end text-xs font-semibold">Actions</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'طلب الاحتياج' : 'Request' }}</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'التصنيف' : 'Category' }}</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'درجة الأهمية' : 'Urgency' }}</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'الموقع' : 'Location' }}</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'الحالة' : 'Status' }}</th>
+              <th class="px-4 py-3 text-end text-xs font-semibold">{{ isRtl ? 'الإجراءات' : 'Actions' }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-neutral-100 text-xs">
@@ -72,25 +79,27 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
                 <td class="px-4 py-3 text-neutral-600">{{ getCategoryName(req) }}</td>
                 <td class="px-4 py-3">
                   <app-badge [variant]="getUrgencyVariant(req.urgency)" size="sm">
-                    {{ req.urgency }}
+                    {{ getUrgencyLabel(req.urgency) }}
                   </app-badge>
                 </td>
-                <td class="px-4 py-3 text-neutral-500">{{ req.location.city || 'Cairo' }}</td>
+                <td class="px-4 py-3 text-neutral-500">{{ req.location.city || (isRtl ? 'القاهرة' : 'Cairo') }}</td>
                 <td class="px-4 py-3">
                   <app-badge [variant]="getStatusVariant(req.status)" size="sm">
-                    {{ req.status }}
+                    {{ getStatusLabel(req.status) }}
                   </app-badge>
                 </td>
                 <td class="px-4 py-3 text-end">
                   <a [routerLink]="['/requests', req.id || req._id]">
-                    <app-button variant="ghost" size="sm">Inspect</app-button>
+                    <app-button variant="ghost" size="sm">
+                      {{ isRtl ? 'معاينة' : 'Inspect' }}
+                    </app-button>
                   </a>
                 </td>
               </tr>
             } @empty {
               <tr>
                 <td colspan="6" class="px-4 py-8 text-center text-xs text-neutral-500">
-                  No demand requests currently registered in the database.
+                  {{ isRtl ? 'لا توجد طلبات احتياج مسجلة حالياً في قاعدة البيانات.' : 'No demand requests currently registered in the database.' }}
                 </td>
               </tr>
             }
@@ -101,11 +110,16 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
   `
 })
 export class AdminRequestsComponent implements OnInit {
+  protected languageService = injectLanguageService();
   private requestApi = inject(RequestApiService);
 
   readonly requests = signal<Request[]>([]);
   readonly isLoading = signal<boolean>(true);
   readonly errorMessage = signal<string | null>(null);
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
 
   ngOnInit(): void {
     this.fetchRequests();
@@ -122,7 +136,9 @@ export class AdminRequestsComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading.set(false);
-        this.errorMessage.set(err?.error?.error?.message || err?.error?.message || 'Failed to load requests.');
+        this.errorMessage.set(
+          err?.error?.error?.message || err?.error?.message || (this.isRtl ? 'تعذر جلب طلبات الاحتياج.' : 'Failed to load requests.')
+        );
       }
     });
   }
@@ -131,7 +147,21 @@ export class AdminRequestsComponent implements OnInit {
     if (typeof req.categoryId === 'object' && req.categoryId && 'name' in req.categoryId) {
       return (req.categoryId as any).name;
     }
-    return 'General Request';
+    return this.isRtl ? 'طلب عام' : 'General Request';
+  }
+
+  getUrgencyLabel(urgency?: string): string {
+    if (this.languageService) {
+      return this.languageService.getUrgencyLabel(urgency);
+    }
+    return urgency || '';
+  }
+
+  getStatusLabel(status: string): string {
+    if (this.languageService) {
+      return this.languageService.getStatusLabel(status);
+    }
+    return status;
   }
 
   getUrgencyVariant(urgency?: string): 'danger' | 'warning' | 'info' | 'neutral' {

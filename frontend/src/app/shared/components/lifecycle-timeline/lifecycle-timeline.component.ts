@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 
 export type LifecycleStepId =
   | 'draft'
@@ -103,7 +104,7 @@ export const LIFECYCLE_STEPS: LifecycleStepDef[] = [
                   class="text-xs transition-colors"
                   [ngClass]="getLabelClass(step.id)"
                 >
-                  {{ step.label }}
+                  {{ getStepLabel(step) }}
                 </span>
               </div>
 
@@ -114,7 +115,7 @@ export const LIFECYCLE_STEPS: LifecycleStepDef[] = [
                   class="mt-3 w-full max-w-[200px] flex flex-col gap-1.5 p-2 rounded-md bg-neutral-50 border border-neutral-200 text-start text-xs shadow-xs"
                 >
                   <div class="font-medium text-neutral-500 text-[10px] uppercase tracking-wider mb-0.5">
-                    Two-Sided Status
+                    {{ isArabic ? 'حالة التأكيد الثنائي' : 'Two-Sided Status' }}
                   </div>
                   
                   <!-- Indicator 1: Provider / Donor -->
@@ -170,9 +171,9 @@ export const LIFECYCLE_STEPS: LifecycleStepDef[] = [
               class="text-xs text-primary font-medium hover:underline flex items-center gap-1"
               [attr.aria-expanded]="!isCompletedCollapsed"
             >
-              <span>{{ isCompletedCollapsed ? 'Show previous ' + completedCount + ' completed steps' : 'Hide completed steps' }}</span>
+              <span>{{ isCompletedCollapsed ? (isArabic ? 'عرض الخطوات المكتملة السابقة (' + completedCount + ')' : 'Show previous ' + completedCount + ' completed steps') : (isArabic ? 'إخفاء الخطوات المكتملة' : 'Hide completed steps') }}</span>
               <svg
-                class="w-3.5 h-3.5 transition-transform"
+                class="w-3.5 h-3.5 transition-transform rtl:rotate-180"
                 [class.rotate-180]="!isCompletedCollapsed"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -212,27 +213,27 @@ export const LIFECYCLE_STEPS: LifecycleStepDef[] = [
                       <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                       </svg>
-                      <span class="sr-only">(Completed)</span>
+                      <span class="sr-only">({{ isArabic ? 'مكتمل' : 'Completed' }})</span>
                     }
                     @case ('active') {
                       <span class="w-2.5 h-2.5 rounded-full bg-white" aria-hidden="true"></span>
-                      <span class="sr-only">(Current)</span>
+                      <span class="sr-only">({{ isArabic ? 'الحالي' : 'Current' }})</span>
                     }
                     @case ('cancelled') {
                       <svg class="w-4 h-4 text-neutral-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
                       </svg>
-                      <span class="sr-only">(Cancelled)</span>
+                      <span class="sr-only">({{ isArabic ? 'ملغي' : 'Cancelled' }})</span>
                     }
                     @case ('failed') {
                       <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                       </svg>
-                      <span class="sr-only">(Failed)</span>
+                      <span class="sr-only">({{ isArabic ? 'فشل' : 'Failed' }})</span>
                     }
                     @default {
                       <span class="w-2 h-2 rounded-full bg-neutral-300" aria-hidden="true"></span>
-                      <span class="sr-only">(Upcoming)</span>
+                      <span class="sr-only">({{ isArabic ? 'قادم' : 'Upcoming' }})</span>
                     }
                   }
                 </div>
@@ -244,11 +245,11 @@ export const LIFECYCLE_STEPS: LifecycleStepDef[] = [
                       class="text-sm transition-colors"
                       [ngClass]="getLabelClass(step.id)"
                     >
-                      {{ step.label }}
+                      {{ getStepLabel(step) }}
                     </span>
                     @if (getStepState(step.id) === 'active') {
                       <span class="px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-full bg-primary-100 text-primary">
-                        Current
+                        {{ isArabic ? 'الحالي' : 'Current' }}
                       </span>
                     }
                   </div>
@@ -260,7 +261,7 @@ export const LIFECYCLE_STEPS: LifecycleStepDef[] = [
                       class="mt-2.5 w-full flex flex-col gap-2 p-3 rounded-lg bg-neutral-50 border border-neutral-200 text-xs shadow-2xs"
                     >
                       <div class="font-semibold text-neutral-600 text-[11px] uppercase tracking-wider mb-0.5">
-                        Two-Sided Confirmation Status
+                        {{ isArabic ? 'حالة التأكيد الثنائي' : 'Two-Sided Confirmation Status' }}
                       </div>
 
                       <!-- Indicator 1: Provider / Donor -->
@@ -310,6 +311,8 @@ export const LIFECYCLE_STEPS: LifecycleStepDef[] = [
   `
 })
 export class LifecycleTimelineComponent implements OnInit, AfterViewInit {
+  private languageService = injectLanguageService();
+
   @Input() currentStep: LifecycleStepId = 'in_handover';
   @Input() terminalState: 'none' | 'cancelled' | 'failed' = 'none';
   @Input() cancelledAtStep?: LifecycleStepId = 'in_handover';
@@ -319,6 +322,25 @@ export class LifecycleTimelineComponent implements OnInit, AfterViewInit {
 
   readonly steps = LIFECYCLE_STEPS;
   isCompletedCollapsed = true;
+
+  get isArabic(): boolean {
+    return this.languageService ? this.languageService.currentLanguage() === 'ar' : false;
+  }
+
+  getStepLabel(step: LifecycleStepDef): string {
+    if (!this.isArabic) return step.label;
+    switch (step.id) {
+      case 'draft': return 'مسودة';
+      case 'published': return 'منشور';
+      case 'available': return 'متاح';
+      case 'matched': return 'تم التوافق';
+      case 'accepted': return 'مقبول';
+      case 'in_handover': return 'قيد التسليم';
+      case 'completed': return 'مكتمل';
+      case 'impact': return 'الأثر';
+      default: return step.label;
+    }
+  }
 
   ngOnInit(): void {
     // Keep initialized
@@ -441,30 +463,42 @@ export class LifecycleTimelineComponent implements OnInit, AfterViewInit {
   }
 
   getProviderIndicatorLabel(): string {
-    if (!this.handoverConfirmation) return 'Provider confirmation';
+    if (!this.handoverConfirmation) {
+      return this.isArabic ? 'تأكيد المتبرع' : 'Provider confirmation';
+    }
     if (this.handoverConfirmation.providerLabel) {
       return this.handoverConfirmation.providerLabel;
     }
 
     const isViewer = this.handoverConfirmation.isViewerProvider === true;
     if (this.handoverConfirmation.confirmedByProvider) {
-      return isViewer ? 'You confirmed (Donor)' : 'Donor confirmed';
+      return isViewer
+        ? (this.isArabic ? 'أنت أكدت (المتبرع)' : 'You confirmed (Donor)')
+        : (this.isArabic ? 'أكد المتبرع' : 'Donor confirmed');
     } else {
-      return isViewer ? 'Pending your confirmation (Donor)' : 'Waiting on donor confirmation';
+      return isViewer
+        ? (this.isArabic ? 'بانتظار تأكيدك (المتبرع)' : 'Pending your confirmation (Donor)')
+        : (this.isArabic ? 'بانتظار تأكيد المتبرع' : 'Waiting on donor confirmation');
     }
   }
 
   getSeekerIndicatorLabel(): string {
-    if (!this.handoverConfirmation) return 'Seeker confirmation';
+    if (!this.handoverConfirmation) {
+      return this.isArabic ? 'تأكيد المستفيد' : 'Seeker confirmation';
+    }
     if (this.handoverConfirmation.seekerLabel) {
       return this.handoverConfirmation.seekerLabel;
     }
 
     const isViewer = this.handoverConfirmation.isViewerProvider === false;
     if (this.handoverConfirmation.confirmedBySeeker) {
-      return isViewer ? 'You confirmed (Recipient)' : 'Recipient confirmed';
+      return isViewer
+        ? (this.isArabic ? 'أنت أكدت (المستفيد)' : 'You confirmed (Recipient)')
+        : (this.isArabic ? 'أكد المستفيد' : 'Recipient confirmed');
     } else {
-      return isViewer ? 'Pending your confirmation (Recipient)' : 'Waiting on recipient confirmation';
+      return isViewer
+        ? (this.isArabic ? 'بانتظار تأكيدك (المستفيد)' : 'Pending your confirmation (Recipient)')
+        : (this.isArabic ? 'بانتظار تأكيد المستفيد' : 'Waiting on recipient confirmation');
     }
   }
 }

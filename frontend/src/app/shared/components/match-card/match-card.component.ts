@@ -6,6 +6,7 @@ import { Match } from '../../../core/models/match.model';
 import { Request } from '../../../core/models/request.model';
 import { Resource } from '../../../core/models/resource.model';
 import { AuthService } from '../../../core/auth/auth.service';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 import { MatchScoreComponent } from '../match-score/match-score.component';
 import { RequestCardComponent } from '../request-card/request-card.component';
 import { DialogComponent } from '../../ui/dialog/dialog.component';
@@ -36,10 +37,10 @@ import { ButtonComponent } from '../../ui/button/button.component';
         <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
           <div class="flex items-center justify-between border-b border-neutral-200/60 pb-2">
             <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">
-              Supplied Resource
+              {{ isArabic ? 'مورد معروض' : 'Supplied Resource' }}
             </span>
             <span class="rounded-md bg-neutral-200/60 px-2 py-0.5 text-xs font-semibold text-neutral-700">
-              Qty: {{ resourceQuantity }}
+              {{ isArabic ? 'الكمية' : 'Qty' }}: {{ resourceQuantity }}
             </span>
           </div>
 
@@ -48,7 +49,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
               {{ resourceTitle }}
             </h4>
             <p class="mt-0.5 text-xs text-neutral-500">
-              Category: <span class="font-medium text-neutral-700">{{ resourceCategory }}</span>
+              {{ isArabic ? 'التصنيف' : 'Category' }}: <span class="font-medium text-neutral-700">{{ resourceCategory }}</span>
             </p>
             <p class="mt-1 flex items-center gap-1 text-xs text-neutral-600">
               <svg class="h-3.5 w-3.5 shrink-0 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -75,11 +76,11 @@ import { ButtonComponent } from '../../ui/button/button.component';
               class="inline-flex items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold tracking-wide capitalize"
               [ngClass]="statusBadgeClass"
             >
-              Status: {{ match.status }}
+              {{ isArabic ? 'الحالة' : 'Status' }}: {{ statusLabel }}
             </span>
           } @else {
             <span class="inline-flex items-center gap-1 rounded-full border border-info/20 bg-info-bg px-2.5 py-0.5 text-xs font-medium text-info">
-              Proposed Match
+              {{ isArabic ? 'مطابقة مقترحة' : 'Proposed Match' }}
             </span>
           }
         </div>
@@ -92,7 +93,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
               [isLoading]="loading"
               (clicked)="triggerAccept()"
             >
-              Accept Match
+              {{ isArabic ? 'قبول المطابقة' : 'Accept Match' }}
             </app-button>
 
             <app-button
@@ -101,7 +102,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
               [disabled]="loading"
               (clicked)="triggerReject()"
             >
-              Reject
+              {{ isArabic ? 'رفض' : 'Reject' }}
             </app-button>
           }
 
@@ -113,7 +114,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
               <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>Confirm Handover</span>
+              <span>{{ isArabic ? 'تأكيد التسليم' : 'Confirm Handover' }}</span>
             </a>
           }
 
@@ -122,7 +123,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
               [routerLink]="['/matches', matchId]"
               class="inline-flex items-center gap-1 rounded-lg border border-neutral-200 bg-neutral-0 px-3 py-1.5 text-xs font-medium text-neutral-700 transition hover:bg-neutral-50 hover:text-neutral-900"
             >
-              <span>View Details</span>
+              <span>{{ isArabic ? 'عرض التفاصيل' : 'View Details' }}</span>
               <svg class="h-3.5 w-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
               </svg>
@@ -134,31 +135,31 @@ import { ButtonComponent } from '../../ui/button/button.component';
       <!-- Confirmation Dialogs via Shared app-dialog -->
       <app-dialog
         [isOpen]="showAcceptConfirm"
-        title="Confirm Match Acceptance"
-        confirmText="Confirm & Accept"
-        cancelText="Cancel"
+        [title]="isArabic ? 'تأكيد قبول المطابقة' : 'Confirm Match Acceptance'"
+        [confirmText]="isArabic ? 'تأكيد وقبول' : 'Confirm & Accept'"
+        [cancelText]="isArabic ? 'إلغاء' : 'Cancel'"
         confirmVariant="primary"
         [isLoading]="loading"
         (close)="cancelAccept()"
         (confirm)="confirmAccept()"
       >
         <p>
-          Accepting this match will initiate the handover coordination workflow between provider and requester. Do you want to proceed?
+          {{ isArabic ? 'قبول هذه المطابقة سيبدأ إجراءات تسليم المورد وتنسيق التواصل بين الطرفين. هل تريد المتابعة؟' : 'Accepting this match will initiate the handover coordination workflow between provider and requester. Do you want to proceed?' }}
         </p>
       </app-dialog>
 
       <app-dialog
         [isOpen]="showRejectConfirm"
-        title="Reject This Match?"
-        confirmText="Confirm Reject"
-        cancelText="Cancel"
+        [title]="isArabic ? 'رفض هذه المطابقة؟' : 'Reject This Match?'"
+        [confirmText]="isArabic ? 'تأكيد الرفض' : 'Confirm Reject'"
+        [cancelText]="isArabic ? 'إلغاء' : 'Cancel'"
         confirmVariant="danger"
         [isLoading]="loading"
         (close)="cancelReject()"
         (confirm)="confirmReject()"
       >
         <p>
-          Are you sure you want to decline this candidate match? The resource will remain available for other matching requests.
+          {{ isArabic ? 'هل أنت متأكد من رغبتك في رفض هذه المطابقة؟ سيظل المورد متاحاً لطلبات ومطابقات أخرى.' : 'Are you sure you want to decline this candidate match? The resource will remain available for other matching requests.' }}
         </p>
       </app-dialog>
     </div>
@@ -171,6 +172,15 @@ import { ButtonComponent } from '../../ui/button/button.component';
 })
 export class MatchCardComponent {
   private auth = inject(AuthService);
+  languageService = injectLanguageService();
+
+  get isArabic(): boolean {
+    return this.languageService?.currentLanguage() === 'ar';
+  }
+
+  get statusLabel(): string {
+    return this.languageService?.getStatusLabel(this.match?.status) || this.match?.status || '';
+  }
 
   @Input({ required: true }) match!: Match;
   @Input() loading = false;
@@ -194,12 +204,18 @@ export class MatchCardComponent {
   }
 
   get resourceCategory(): string {
+    if (this.languageService && typeof this.match?.resourceId === 'object' && this.match.resourceId) {
+      const res = this.match.resourceId as Resource;
+      const cat = res.category || res.categoryId;
+      const label = this.languageService.getCategoryLabel(cat);
+      if (label && label !== '[object Object]') return label;
+    }
     if (typeof this.match?.resourceId === 'object' && this.match.resourceId) {
       const res = this.match.resourceId as Resource;
       if (res.category?.name) return res.category.name;
       if (res.categoryId) return res.categoryId;
     }
-    return 'Category';
+    return this.isArabic ? 'التصنيف' : 'Category';
   }
 
   get resourceQuantity(): number {
@@ -212,10 +228,10 @@ export class MatchCardComponent {
   get resourceLocation(): string {
     if (typeof this.match?.resourceId === 'object' && this.match.resourceId) {
       const loc = this.match.resourceId.location;
-      if (!loc) return 'Location not specified';
+      if (!loc) return this.isArabic ? 'الموقع غير محدد' : 'Location not specified';
       return loc.city + (loc.area ? ` · ${loc.area}` : '');
     }
-    return 'Location not specified';
+    return this.isArabic ? 'الموقع غير محدد' : 'Location not specified';
   }
 
   get requestObject(): Request {

@@ -54,7 +54,7 @@ import { LanguageService } from '../../../core/services/language.service';
         </div>
 
         <div>
-          <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+          <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" [attr.aria-label]="isArabic ? 'صفحات التنقل' : 'Pagination'">
             <button
               type="button"
               [disabled]="page <= 1"

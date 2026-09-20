@@ -6,6 +6,7 @@ import { ReportTargetType, ReportReason, Report } from '../../../core/models/rep
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-report-create',
@@ -22,25 +23,27 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 class="text-lg font-bold text-neutral-900">تم استلام بلاغك بنجاح</h3>
+            <h3 class="text-lg font-bold text-neutral-900">
+              {{ isRtl ? 'تم استلام بلاغك بنجاح' : 'Report Received Successfully' }}
+            </h3>
             <p class="text-xs text-neutral-600 mt-1 max-w-xs leading-relaxed">
-              شكراً لحرصك على أمان وموثوقية مجتمع دَوَّرها. سيقوم فريق الإشراف بمراجعة البلاغ واتخاذ الإجراء المناسب.
+              {{ isRtl ? 'شكراً لحرصك على أمان وموثوقية مجتمع دَوَّرها. سيقوم فريق الإشراف بمراجعة البلاغ واتخاذ الإجراء المناسب.' : 'Thank you for protecting Dawwarha community trust. Our moderation team will review this report promptly.' }}
             </p>
 
             <div class="mt-4 p-3 bg-neutral-50 rounded-lg border border-neutral-200 text-start w-full text-xs">
               <div class="flex justify-between">
-                <span class="text-neutral-500">رقم البلاغ:</span>
+                <span class="text-neutral-500">{{ isRtl ? 'رقم البلاغ:' : 'Report ID:' }}</span>
                 <span class="font-mono font-semibold">{{ submittedReport()?.id }}</span>
               </div>
               <div class="flex justify-between mt-1">
-                <span class="text-neutral-500">الحالة الأولية:</span>
-                <span class="text-warning font-semibold">مفتوح للمراجعة (Open)</span>
+                <span class="text-neutral-500">{{ isRtl ? 'الحالة الأولية:' : 'Initial Status:' }}</span>
+                <span class="text-warning font-semibold">{{ isRtl ? 'مفتوح للمراجعة (Open)' : 'Open for Review' }}</span>
               </div>
             </div>
 
             <div class="mt-5 flex gap-2">
               <app-button variant="secondary" size="sm" (clicked)="onClose()">
-                إغلاق
+                {{ isRtl ? 'إغلاق' : 'Close' }}
               </app-button>
             </div>
           </div>
@@ -50,9 +53,11 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
         <app-card padding="lg" variant="bordered">
           <div class="flex items-center justify-between border-b border-neutral-100 pb-3 mb-4">
             <div>
-              <h2 class="text-base font-bold text-neutral-900">إرسال بلاغ عن مخالفة</h2>
+              <h2 class="text-base font-bold text-neutral-900">
+                {{ isRtl ? 'إرسال بلاغ عن مخالفة' : 'Submit a Violation Report' }}
+              </h2>
               <p class="text-xs text-neutral-500 mt-0.5">
-                الهدف المبلغ عنه: {{ targetTypeLabel }}
+                {{ isRtl ? ('الهدف المبلغ عنه: ' + targetTypeLabel) : ('Reported Entity: ' + targetTypeLabel) }}
               </p>
             </div>
             <span class="text-xs font-mono text-neutral-400">#{{ targetId.slice(-6) }}</span>
@@ -65,7 +70,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
               </svg>
               <div>
-                <p class="font-semibold">تعذر إرسال البلاغ</p>
+                <p class="font-semibold">{{ isRtl ? 'تعذر إرسال البلاغ' : 'Failed to Submit Report' }}</p>
                 <p class="mt-0.5 opacity-90">{{ errorMessage() }}</p>
               </div>
             </div>
@@ -75,7 +80,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
             <!-- Reason Dropdown -->
             <div class="flex flex-col gap-1.5">
               <label for="report-reason" class="text-xs font-semibold text-neutral-900">
-                سبب البلاغ <span class="text-danger">*</span>
+                {{ isRtl ? 'سبب البلاغ' : 'Report Reason' }} <span class="text-danger">*</span>
               </label>
               <select
                 id="report-reason"
@@ -83,15 +88,15 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
                 class="w-full px-3 py-2 bg-white text-neutral-900 text-sm rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
                 [attr.aria-invalid]="reportForm.get('reason')?.invalid && reportForm.get('reason')?.touched"
               >
-                <option value="" disabled selected>اختر سبب المخالفة...</option>
-                <option value="spam">محتوى متكرر أو دعاية مزعجة (Spam)</option>
-                <option value="fraud">احتيال أو تضليل في الوصف (Fraud)</option>
-                <option value="inappropriate">محتوى غير لائق أو مخالف للآداب (Inappropriate)</option>
-                <option value="safety">مخاطر سلامة أو أدوية/مواد محظورة (Safety)</option>
-                <option value="other">أسباب أخرى (Other)</option>
+                <option value="" disabled selected>{{ isRtl ? 'اختر سبب المخالفة...' : 'Select report reason...' }}</option>
+                <option value="spam">{{ isRtl ? 'محتوى متكرر أو دعاية مزعجة (Spam)' : 'Spam or unsolicited advertising' }}</option>
+                <option value="fraud">{{ isRtl ? 'احتيال أو تضليل في الوصف (Fraud)' : 'Fraud or deceptive description' }}</option>
+                <option value="inappropriate">{{ isRtl ? 'محتوى غير لائق أو مخالف للآداب (Inappropriate)' : 'Inappropriate or offensive content' }}</option>
+                <option value="safety">{{ isRtl ? 'مخاطر سلامة أو أدوية/مواد محظورة (Safety)' : 'Safety hazard or prohibited items' }}</option>
+                <option value="other">{{ isRtl ? 'أسباب أخرى (Other)' : 'Other reasons' }}</option>
               </select>
               @if (reportForm.get('reason')?.touched && reportForm.get('reason')?.invalid) {
-                <span class="text-[11px] text-danger">يرجى تحديد سبب البلاغ.</span>
+                <span class="text-[11px] text-danger">{{ isRtl ? 'يرجى تحديد سبب البلاغ.' : 'Please select a report reason.' }}</span>
               }
             </div>
 
@@ -99,7 +104,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
             <div class="flex flex-col gap-1.5">
               <div class="flex justify-between items-center">
                 <label for="report-description" class="text-xs font-semibold text-neutral-900">
-                  تفاصيل إضافية (اختياري)
+                  {{ isRtl ? 'تفاصيل إضافية (اختياري)' : 'Additional details (Optional)' }}
                 </label>
                 <span class="text-[10px] text-neutral-400">
                   {{ reportForm.get('description')?.value?.length || 0 }} / 500
@@ -110,11 +115,11 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
                 formControlName="description"
                 rows="4"
                 maxlength="500"
-                placeholder="وضح المشكلة بدقة لمساعدة فريق الإشراف في التحقق..."
+                [placeholder]="isRtl ? 'وضح المشكلة بدقة لمساعدة فريق الإشراف في التحقق...' : 'Clarify the issue clearly to assist the moderation team...'"
                 class="w-full px-3 py-2 bg-white text-neutral-900 text-sm rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
               ></textarea>
               @if (reportForm.get('description')?.touched && reportForm.get('description')?.invalid) {
-                <span class="text-[11px] text-danger">لا يمكن أن تتجاوز التفاصيل 500 حرف.</span>
+                <span class="text-[11px] text-danger">{{ isRtl ? 'لا يمكن أن تتجاوز التفاصيل 500 حرف.' : 'Details cannot exceed 500 characters.' }}</span>
               }
             </div>
 
@@ -126,7 +131,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
                 size="sm"
                 (clicked)="onClose()"
               >
-                إلغاء
+                {{ isRtl ? 'إلغاء' : 'Cancel' }}
               </app-button>
 
               <app-button
@@ -136,7 +141,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
                 [isLoading]="isSubmitting()"
                 [disabled]="isSubmitting() || reportForm.invalid"
               >
-                إرسال البلاغ للإدارة
+                {{ isRtl ? 'إرسال البلاغ للإدارة' : 'Submit Report to Moderation' }}
               </app-button>
             </div>
           </form>
@@ -146,6 +151,12 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
   `
 })
 export class ReportCreateComponent {
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
+
   private fb = inject(FormBuilder);
   private reportApi = inject(ReportApiService);
 
@@ -166,13 +177,13 @@ export class ReportCreateComponent {
   get targetTypeLabel(): string {
     switch (this.targetType) {
       case 'resource':
-        return 'مورد منشور';
+        return this.isRtl ? 'مورد منشور' : 'Published Resource';
       case 'request':
-        return 'طلب احتياج';
+        return this.isRtl ? 'طلب احتياج' : 'Demand Request';
       case 'user':
-        return 'عضو / مستخدم';
+        return this.isRtl ? 'عضو / مستخدم' : 'User Account';
       default:
-        return 'عنصر';
+        return this.isRtl ? 'عنصر' : 'Item';
     }
   }
 
@@ -183,7 +194,7 @@ export class ReportCreateComponent {
     }
 
     if (!this.targetId) {
-      this.errorMessage.set('معرف الكيان المبلغ عنه مفقود.');
+      this.errorMessage.set(this.isRtl ? 'معرف الكيان المبلغ عنه مفقود.' : 'Report target ID is missing.');
       return;
     }
 
@@ -205,7 +216,7 @@ export class ReportCreateComponent {
       },
       error: (err) => {
         this.isSubmitting.set(false);
-        this.errorMessage.set(err?.message || 'تعذر تسجيل البلاغ. يرجى مراجعة البيانات.');
+        this.errorMessage.set(err?.message || (this.isRtl ? 'تعذر تسجيل البلاغ. يرجى مراجعة البيانات.' : 'Failed to submit report. Please check details.'));
       }
     });
   }

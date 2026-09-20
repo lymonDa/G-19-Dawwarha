@@ -10,7 +10,7 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
   standalone: true,
   imports: [CommonModule, RouterModule, ButtonComponent],
   template: `
-    <div class="min-h-screen flex flex-col bg-surface text-neutral-900">
+    <div class="min-h-screen flex flex-col bg-surface text-neutral-900" [dir]="languageService.direction()">
       <!-- Top Navigation -->
       <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
@@ -85,7 +85,7 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
               type="button"
               (click)="isMobileMenuOpen.set(!isMobileMenuOpen())"
               class="md:hidden p-2 rounded-md text-neutral-600 hover:bg-neutral-100"
-              aria-label="Menu"
+              [attr.aria-label]="languageService.isRtl() ? 'القائمة' : 'Menu'"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -136,7 +136,7 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
             <div class="md:col-span-2 flex flex-col gap-3">
               <div class="flex items-center gap-2">
                 <span class="text-lg font-bold text-white">{{ languageService.t().BRAND_NAME }} · {{ languageService.t().BRAND_NAME_AR }}</span>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-primary-900 text-primary-100 border border-primary-700">Civic Infrastructure</span>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-primary-900 text-primary-100 border border-primary-700">{{ languageService.isRtl() ? 'بنية تحتية مدنية' : 'Civic Infrastructure' }}</span>
               </div>
               <p class="text-sm text-neutral-400 max-w-md leading-relaxed">
                 {{ languageService.t().FOOTER_DESC }}
@@ -156,7 +156,7 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
             <div>
               <h4 class="text-sm font-semibold text-white mb-3">{{ languageService.t().FOOTER_ORGS_HEADER }}</h4>
               <ul class="space-y-2 text-xs text-neutral-400">
-                <li><a routerLink="/organizations/register" class="hover:text-white transition-colors">Register an Organization</a></li>
+                <li><a routerLink="/organizations/register" class="hover:text-white transition-colors">{{ languageService.isRtl() ? 'تسجيل منظمة' : 'Register an Organization' }}</a></li>
                 <li><a routerLink="/login" class="hover:text-white transition-colors">{{ languageService.t().NAV_LOGIN }}</a></li>
                 <li><a routerLink="/about" class="hover:text-white transition-colors">{{ languageService.t().NAV_ABOUT }}</a></li>
               </ul>
@@ -165,7 +165,7 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
 
           <div class="pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-400 gap-4">
             <p>{{ languageService.t().FOOTER_COPYRIGHT }}</p>
-            <p>NTI Civic Resource Coordination Platform</p>
+            <p>{{ languageService.isRtl() ? 'منصة التنسيق التشاركي للموارد - معهد تكنولوجيا المعلومات NTI' : 'NTI Civic Resource Coordination Platform' }}</p>
           </div>
         </div>
       </footer>

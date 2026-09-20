@@ -1,6 +1,7 @@
-import { Component, Input, computed } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatchScoreBreakdown } from '../../../core/models/match.model';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 
 export interface MatchSignalDisplay {
   id: 'category' | 'location' | 'quantity' | 'urgency' | 'availability';
@@ -26,7 +27,7 @@ export interface MatchSignalDisplay {
             class="flex items-center justify-center rounded-lg px-3 py-1.5 text-lg font-bold transition-colors md:text-xl"
             [ngClass]="scoreColorClasses"
           >
-            <span>{{ percentage }}% Match</span>
+            <span>{{ scoreTitle }}</span>
           </div>
 
           <p class="text-xs text-neutral-500 md:text-sm">
@@ -38,20 +39,16 @@ export interface MatchSignalDisplay {
           <svg class="h-3.5 w-3.5 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
-          <span>Rule-based Verification</span>
+          <span>{{ isArabic ? 'مطابقة خوارزمية موثقة' : 'Rule-based Verification' }}</span>
         </div>
       </div>
 
       <div class="mt-3">
-        <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-neutral-500">
-          Signals Breakdown (Fixed Order)
-        </p>
-
         <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5">
           @for (signal of signals; track signal.id) {
             <div
               class="flex items-center justify-between rounded-lg border border-neutral-100 bg-neutral-50 px-2.5 py-2 text-xs transition-colors hover:bg-neutral-100"
-              [attr.aria-label]="signal.label + ': ' + (signal.isSatisfied ? 'Matched' : 'Partial/Unmatched') + ' (' + signal.percentage + '%)'"
+              [attr.aria-label]="signal.label + ': ' + (signal.isSatisfied ? (isArabic ? 'متوافق' : 'Matched') : (isArabic ? 'جزئي' : 'Partial/Unmatched')) + ' (' + signal.percentage + '%)'"
             >
               <div class="flex items-center gap-1.5">
                 @if (signal.isSatisfied) {
@@ -87,8 +84,18 @@ export interface MatchSignalDisplay {
   `]
 })
 export class MatchScoreComponent {
+  private languageService = injectLanguageService();
+
   @Input() score: number = 0;
   @Input() breakdown?: MatchScoreBreakdown;
+
+  get isArabic(): boolean {
+    return this.languageService?.currentLanguage() === 'ar';
+  }
+
+  get scoreTitle(): string {
+    return this.isArabic ? `${this.percentage}% توافق` : `${this.percentage}% Match`;
+  }
 
   /**
    * Normalized whole-integer match percentage (no deceptive decimals, e.g. 92% instead of 91.73%)
@@ -129,6 +136,9 @@ export class MatchScoreComponent {
    * Factual confidence statement explaining the score (strict rule: NO "AI thinks...")
    */
   get confidenceText(): string {
+    if (this.isArabic) {
+      return `${this.percentage}% نسبة توافق مبنية على: التصنيف، الموقع، الكمية، الإلحاح، ونافذة الإتاحة.`;
+    }
     return `${this.percentage}% match based on category, location, quantity, urgency, and availability.`;
   }
 
@@ -165,30 +175,31 @@ export class MatchScoreComponent {
       };
     };
 
+    const isAr = this.isArabic;
     return [
       {
         id: 'category',
-        label: 'Category',
+        label: isAr ? 'التصنيف' : 'Category',
         ...normalize(b.category)
       },
       {
         id: 'location',
-        label: 'Location',
+        label: isAr ? 'الموقع' : 'Location',
         ...normalize(b.location)
       },
       {
         id: 'quantity',
-        label: 'Quantity',
+        label: isAr ? 'الكمية' : 'Quantity',
         ...normalize(b.quantity)
       },
       {
         id: 'urgency',
-        label: 'Urgency',
+        label: isAr ? 'الإلحاح' : 'Urgency',
         ...normalize(b.urgency)
       },
       {
         id: 'availability',
-        label: 'Availability',
+        label: isAr ? 'الإتاحة' : 'Availability',
         ...normalize(b.availability)
       }
     ];

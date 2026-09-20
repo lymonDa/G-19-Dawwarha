@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, forwardRef, ViewChild, ElementRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { LucideAngularModule, Search as SearchIcon, X, Loader2 } from 'lucide-angular';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-search',
@@ -24,7 +25,7 @@ import { LucideAngularModule, Search as SearchIcon, X, Loader2 } from 'lucide-an
         #inputEl
         type="text"
         role="searchbox"
-        [placeholder]="placeholder"
+        [placeholder]="resolvedPlaceholder"
         [disabled]="disabled"
         [value]="value"
         (input)="onInput($event)"
@@ -43,8 +44,8 @@ import { LucideAngularModule, Search as SearchIcon, X, Loader2 } from 'lucide-an
           *ngIf="value && !loading && !disabled"
           type="button"
           (click)="clear()"
-          class="p-1 rounded-md text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:text-neutral-700 transition-colors"
-          aria-label="Clear search">
+          class="p-1 rounded-md text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 focus:outline-none focus:text-neutral-700 transition-colors cursor-pointer"
+          [attr.aria-label]="clearAriaLabel">
           <lucide-icon name="x" [size]="16"></lucide-icon>
         </button>
       </div>
@@ -52,9 +53,20 @@ import { LucideAngularModule, Search as SearchIcon, X, Loader2 } from 'lucide-an
   `
 })
 export class SearchComponent implements ControlValueAccessor {
-  @Input() placeholder = 'Search...';
+  private languageService = inject(LanguageService, { optional: true });
+
+  @Input() placeholder?: string;
   @Input() disabled = false;
   @Input() loading = false;
+
+  get resolvedPlaceholder(): string {
+    if (this.placeholder) return this.placeholder;
+    return this.languageService?.currentLanguage() === 'ar' ? 'بحث...' : 'Search...';
+  }
+
+  get clearAriaLabel(): string {
+    return this.languageService?.currentLanguage() === 'ar' ? 'مسح البحث' : 'Clear search';
+  }
   
   @Output() search = new EventEmitter<string>();
   @Output() cleared = new EventEmitter<void>();

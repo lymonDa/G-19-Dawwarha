@@ -13,6 +13,7 @@ import {
 import { HandoverApiService, HandoverApiError } from '../handover-api.service';
 import { Handover, HandoverStatus } from '../../../core/models/handover.model';
 import { AuthService } from '../../../core/auth/auth.service';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-handover-detail',
@@ -30,7 +31,7 @@ import { AuthService } from '../../../core/auth/auth.service';
     <div class="max-w-4xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6">
       <!-- Loading Skeleton View -->
       @if (isLoading()) {
-        <div class="flex flex-col gap-6" aria-busy="true" aria-label="جاري تحميل بيانات التسليم...">
+        <div class="flex flex-col gap-6" aria-busy="true" [attr.aria-label]="isRtl ? 'جاري تحميل بيانات التسليم...' : 'Loading handover details...'">
           <!-- Header Skeleton -->
           <div class="flex items-center justify-between">
             <div class="space-y-2">
@@ -71,11 +72,13 @@ import { AuthService } from '../../../core/auth/auth.service';
         <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <h1 class="text-2xl font-bold text-neutral-900">بروتوكول تسليم واستلام المورد</h1>
+              <h1 class="text-2xl font-bold text-neutral-900">
+                {{ isRtl ? 'بروتوكول تسليم واستلام المورد' : 'Resource Handover Protocol' }}
+              </h1>
               <span class="text-xs font-mono text-neutral-400">#{{ matchId() }}</span>
             </div>
             <p class="text-sm text-neutral-600 mt-1">
-              الضمانة الأساسية للمنصة: لا تكتمل أي عملية تدوير إلا بعد تأكيد كلا الطرفين بصورة مستقلة وموثقة.
+              {{ isRtl ? 'الضمانة الأساسية للمنصة: لا تكتمل أي عملية تدوير إلا بعد تأكيد كلا الطرفين بصورة مستقلة وموثقة.' : 'Core platform guarantee: no exchange is complete until both parties confirm independently.' }}
             </p>
           </div>
 
@@ -110,13 +113,13 @@ import { AuthService } from '../../../core/auth/auth.service';
             <div class="flex-1 text-sm">
               <p class="font-semibold">
                 @if (err.statusCode === 403) {
-                  غير مصرح بتأكيد هذه العملية
+                  {{ isRtl ? 'غير مصرح بتأكيد هذه العملية' : 'Unauthorized to confirm this handover' }}
                 } @else if (err.statusCode === 409) {
-                  العملية غير نشطة حالياً
+                  {{ isRtl ? 'العملية غير نشطة حالياً' : 'Handover is no longer active' }}
                 } @else if (err.statusCode === 404) {
-                  لم يتم العثور على سجل التسليم
+                  {{ isRtl ? 'لم يتم العثور على سجل التسليم' : 'Handover record not found' }}
                 } @else {
-                  تعذر استكمال الطلب
+                  {{ isRtl ? 'تعذر استكمال الطلب' : 'Failed to complete request' }}
                 }
               </p>
               <p class="mt-1 text-xs opacity-90">{{ err.message }}</p>
@@ -131,9 +134,11 @@ import { AuthService } from '../../../core/auth/auth.service';
               <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
               </svg>
-              مسار دورة حياة المورد (Resource Lifecycle)
+              {{ isRtl ? 'مسار دورة حياة المورد (Resource Lifecycle)' : 'Resource Lifecycle Timeline' }}
             </h2>
-            <span class="text-xs text-neutral-500">مرحلة 6 من 8: مرحلة التسليم الميداني</span>
+            <span class="text-xs text-neutral-500">
+              {{ isRtl ? 'مرحلة 6 من 8: مرحلة التسليم الميداني' : 'Step 6 of 8: Field Handover Stage' }}
+            </span>
           </div>
 
           <app-lifecycle-timeline
@@ -149,10 +154,10 @@ import { AuthService } from '../../../core/auth/auth.service';
           <div class="flex flex-col gap-6">
             <div class="text-center sm:text-start">
               <h2 class="text-lg font-bold text-neutral-900">
-                حالة التأكيد الثنائي المستقل (Two-Sided Independent Status)
+                {{ isRtl ? 'حالة التأكيد الثنائي المستقل (Two-Sided Independent Status)' : 'Two-Sided Independent Confirmation Status' }}
               </h2>
               <p class="text-xs text-neutral-500 mt-1">
-                وفقاً لـ DESIGN.md §26: يتم تمثيل التأكيد بنقطتين مستقلتين لكل طرف، دون دمجها في شريط تقدم أحادي قد يعطي انطباعاً خادعاً باكتمال جزئي.
+                {{ isRtl ? 'وفقاً لـ DESIGN.md §26: يتم تمثيل التأكيد بنقطتين مستقلتين لكل طرف، دون دمجها في شريط تقدم أحادي قد يعطي انطباعاً خادعاً باكتمال جزئي.' : 'Per DESIGN.md §26: Confirmation is represented by two independent indicators, never merged into a single progress bar.' }}
               </p>
             </div>
 
@@ -161,7 +166,7 @@ import { AuthService } from '../../../core/auth/auth.service';
               id="handover-two-indicators-container"
               class="grid grid-cols-1 md:grid-cols-2 gap-4"
               role="region"
-              aria-label="مؤشرات التأكيد المستقلة للطرفين"
+              [attr.aria-label]="isRtl ? 'مؤشرات التأكيد المستقلة للطرفين' : 'Two-sided independent confirmation indicators'"
             >
               <!-- Indicator 1: Provider / Donor -->
               <div
@@ -195,11 +200,11 @@ import { AuthService } from '../../../core/auth/auth.service';
                 <div class="flex-1">
                   <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                      الطرف الأول: الجهة المانحة (Provider)
+                      {{ isRtl ? 'الطرف الأول: الجهة المانحة (Provider)' : 'First Party: Donor / Provider' }}
                     </span>
                     @if (isProvider()) {
                       <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-primary-100 text-primary">
-                        أنت
+                        {{ isRtl ? 'أنت' : 'You' }}
                       </span>
                     }
                   </div>
@@ -210,12 +215,12 @@ import { AuthService } from '../../../core/auth/auth.service';
                   <div class="mt-2 flex items-center gap-1.5 text-xs font-medium" [ngClass]="providerConfirmed() ? 'text-success' : 'text-neutral-600'">
                     @if (providerConfirmed()) {
                       <span class="text-success font-semibold flex items-center gap-1">
-                        <span>تم تأكيد تسليم المورد بنجاح</span>
+                        <span>{{ isRtl ? 'تم تأكيد تسليم المورد بنجاح' : 'Resource handover confirmed successfully' }}</span>
                         <span aria-hidden="true">✓</span>
                       </span>
                     } @else {
                       <span class="text-neutral-600 flex items-center gap-1">
-                        <span>{{ isProvider() ? 'بانتظار قيامك بتأكيد التسليم' : 'بانتظار تأكيد التسليم من المانح' }}</span>
+                        <span>{{ isProvider() ? (isRtl ? 'بانتظار قيامك بتأكيد التسليم' : 'Waiting for your confirmation') : (isRtl ? 'بانتظار تأكيد التسليم من المانح' : 'Waiting for donor confirmation') }}</span>
                         <span class="inline-block w-1.5 h-1.5 rounded-full bg-warning"></span>
                       </span>
                     }
@@ -223,7 +228,7 @@ import { AuthService } from '../../../core/auth/auth.service';
                   
                   @if (handover()?.providerConfirmedAt) {
                     <p class="text-[11px] text-neutral-400 mt-1">
-                      تاريخ التأكيد: {{ handover()?.providerConfirmedAt | date:'short' }}
+                      {{ isRtl ? 'تاريخ التأكيد:' : 'Confirmed at:' }} {{ formatDate(handover()?.providerConfirmedAt) }}
                     </p>
                   }
                 </div>
@@ -261,11 +266,11 @@ import { AuthService } from '../../../core/auth/auth.service';
                 <div class="flex-1">
                   <div class="flex items-center justify-between">
                     <span class="text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                      الطرف الثاني: المستفيد / المستلم (Seeker)
+                      {{ isRtl ? 'الطرف الثاني: المستفيد / المستلم (Seeker)' : 'Second Party: Beneficiary / Seeker' }}
                     </span>
                     @if (isSeeker()) {
                       <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-primary-100 text-primary">
-                        أنت
+                        {{ isRtl ? 'أنت' : 'You' }}
                       </span>
                     }
                   </div>
@@ -276,12 +281,12 @@ import { AuthService } from '../../../core/auth/auth.service';
                   <div class="mt-2 flex items-center gap-1.5 text-xs font-medium" [ngClass]="seekerConfirmed() ? 'text-success' : 'text-neutral-600'">
                     @if (seekerConfirmed()) {
                       <span class="text-success font-semibold flex items-center gap-1">
-                        <span>تم تأكيد استلام المورد ومعاينته بنجاح</span>
+                        <span>{{ isRtl ? 'تم تأكيد استلام المورد ومعاينته بنجاح' : 'Resource receipt inspected and confirmed' }}</span>
                         <span aria-hidden="true">✓</span>
                       </span>
                     } @else {
                       <span class="text-neutral-600 flex items-center gap-1">
-                        <span>{{ isSeeker() ? 'بانتظار قيامك بتأكيد الاستلام' : 'بانتظار تأكيد الاستلام من المستفيد' }}</span>
+                        <span>{{ isSeeker() ? (isRtl ? 'بانتظار قيامك بتأكيد الاستلام' : 'Waiting for your receipt confirmation') : (isRtl ? 'بانتظار تأكيد الاستلام من المستفيد' : 'Waiting for recipient confirmation') }}</span>
                         <span class="inline-block w-1.5 h-1.5 rounded-full bg-warning"></span>
                       </span>
                     }
@@ -289,7 +294,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 
                   @if (handover()?.seekerConfirmedAt) {
                     <p class="text-[11px] text-neutral-400 mt-1">
-                      تاريخ التأكيد: {{ handover()?.seekerConfirmedAt | date:'short' }}
+                      {{ isRtl ? 'تاريخ التأكيد:' : 'Confirmed at:' }} {{ formatDate(handover()?.seekerConfirmedAt) }}
                     </p>
                   }
                 </div>
@@ -315,11 +320,11 @@ import { AuthService } from '../../../core/auth/auth.service';
                           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                          <span>تأكيد التسليم ({{ isProvider() ? 'تأكيد التسليم كجهة مانحة' : 'تأكيد الاستلام كمستفيد' }})</span>
+                          <span>{{ isRtl ? 'تأكيد التسليم' : 'Confirm Handover' }} ({{ isProvider() ? (isRtl ? 'تأكيد التسليم كجهة مانحة' : 'Confirm as Donor') : (isRtl ? 'تأكيد الاستلام كمستفيد' : 'Confirm as Recipient') }})</span>
                         </span>
                       </app-button>
                       <p class="text-[11px] text-neutral-500">
-                        بالضغط على التأكيد، تقر بإتمام التسليم الفعلي الميداني للمورد بحالته المتفق عليها.
+                        {{ isRtl ? 'بالضغط على التأكيد، تقر بإتمام التسليم الفعلي الميداني للمورد بحالته المتفق عليها.' : 'By confirming, you certify that physical handover has taken place in the agreed condition.' }}
                       </p>
                     </div>
                   } @else {
@@ -329,10 +334,10 @@ import { AuthService } from '../../../core/auth/auth.service';
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
-                        <span>تم تسجيل تأكيدك بنجاح</span>
+                        <span>{{ isRtl ? 'تم تسجيل تأكيدك بنجاح' : 'Your confirmation has been recorded' }}</span>
                       </div>
                       <p class="text-xs text-neutral-600 mt-1">
-                        نحن بانتظار تأكيد الطرف الآخر ({{ isProvider() ? 'المستلم' : 'المانح' }}) لإتمام الصفقة وتحديث سجل الأثر البيئي.
+                        {{ isRtl ? ('نحن بانتظار تأكيد الطرف الآخر (' + (isProvider() ? 'المستلم' : 'المانح') + ') لإتمام العملية وتحديث سجل الأثر البيئي.') : ('Waiting on counterpart confirmation (' + (isProvider() ? 'recipient' : 'donor') + ') to complete exchange.') }}
                       </p>
                     </div>
                   }
@@ -340,7 +345,7 @@ import { AuthService } from '../../../core/auth/auth.service';
                   <!-- Observer / Non-party view (UX check, server enforces 403) -->
                   <div class="p-4 rounded-xl bg-neutral-100 border border-neutral-200 text-center max-w-md">
                     <p class="text-xs text-neutral-600 font-medium">
-                      أنت تشاهد هذه العملية بصفة مراقب. يقتصر حق تأكيد التسليم على أطراف المطابقة المحددين فقط.
+                      {{ isRtl ? 'أنت تشاهد هذه العملية بصفة مراقب. يقتصر حق تأكيد التسليم على أطراف المطابقة المحددين فقط.' : 'You are viewing this handover as an observer. Confirmation is restricted to match participants.' }}
                     </p>
                   </div>
                 }
@@ -351,12 +356,12 @@ import { AuthService } from '../../../core/auth/auth.service';
                     type="button"
                     (click)="onSimulateCounterpart()"
                     class="text-xs text-neutral-500 hover:text-primary transition-colors flex items-center gap-1.5"
-                    title="مخصص للاختبار والعرض التجريبي لمحاكاة تأكيد الطرف الآخر"
+                    [title]="isRtl ? 'مخصص للاختبار والعرض التجريبي لمحاكاة تأكيد الطرف الآخر' : 'For demo and testing: simulate counterpart confirmation'"
                   >
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
-                    <span>محاكاة تأكيد الطرف الآخر (عرض تجريبي)</span>
+                    <span>{{ isRtl ? 'محاكاة تأكيد الطرف الآخر (عرض تجريبي)' : 'Simulate counterpart confirmation (Demo)' }}</span>
                   </button>
                 </div>
               </div>
@@ -379,10 +384,10 @@ import { AuthService } from '../../../core/auth/auth.service';
 
                 <div class="space-y-1.5 max-w-lg">
                   <h3 class="text-xl font-bold text-neutral-900">
-                    اكتملت العملية بنجاح وتم توثيق الأثر المجتمعي والبيئي!
+                    {{ isRtl ? 'اكتملت العملية بنجاح وتم توثيق الأثر المجتمعي والبيئي!' : 'Handover Completed & Impact Successfully Documented!' }}
                   </h3>
                   <p class="text-sm text-neutral-700 leading-relaxed">
-                    شكراً لمساهمتك الفعالة في استدامة الموارد الحضرية. تم تسجيل كلا التأكيدين بنجاح، وترقية حالة المورد والطلب، وتحديث سجل الأثر التراكمي في منصة دَوَّرها.
+                    {{ isRtl ? 'شكراً لمساهمتك الفعالة في استدامة الموارد الحضرية. تم تسجيل كلا التأكيدين بنجاح، وترقية حالة المورد والطلب، وتحديث سجل الأثر التراكمي في منصة دَوَّرها.' : 'Thank you for actively advancing urban resource sustainability. Both confirmations are recorded, statuses upgraded, and the cumulative impact ledger updated on Dawwarha.' }}
                   </p>
                 </div>
 
@@ -391,7 +396,7 @@ import { AuthService } from '../../../core/auth/auth.service';
                     <svg class="w-3.5 h-3.5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>اكتملت في: {{ handover()?.completedAt | date:'medium' }}</span>
+                    <span>{{ isRtl ? 'اكتملت في:' : 'Completed at:' }} {{ formatDate(handover()?.completedAt) }}</span>
                   </span>
                 }
 
@@ -399,15 +404,15 @@ import { AuthService } from '../../../core/auth/auth.service';
                   <a routerLink="/contributions">
                     <app-button variant="primary" size="md">
                       <span class="flex items-center gap-1.5">
-                        <span>عرض سجل المساهمات والأثر الموثق</span>
-                        <span aria-hidden="true">←</span>
+                        <span>{{ isRtl ? 'عرض سجل المساهمات والأثر الموثق' : 'View Contributions & Documented Impact' }}</span>
+                        <span aria-hidden="true" class="rtl:rotate-180">→</span>
                       </span>
                     </app-button>
                   </a>
 
                   <a routerLink="/resources">
                     <app-button variant="secondary" size="md">
-                      <span>تصفح موارد أخرى</span>
+                      <span>{{ isRtl ? 'تصفح موارد أخرى' : 'Browse Other Resources' }}</span>
                     </app-button>
                   </a>
                 </div>
@@ -437,16 +442,16 @@ import { AuthService } from '../../../core/auth/auth.service';
                 </div>
 
                 <h3 class="text-base font-bold text-neutral-900">
-                  {{ handover()?.status === 'cancelled' ? 'تم إلغاء عملية التسليم باتفاق الطرفين' : 'تعذر استكمال عملية التسليم (عدم حضور)' }}
+                  {{ handover()?.status === 'cancelled' ? (isRtl ? 'تم إلغاء عملية التسليم باتفاق الطرفين' : 'Handover Cancelled by Mutual Agreement') : (isRtl ? 'تعذر استكمال عملية التسليم (عدم حضور)' : 'Handover Failed (No-Show)') }}
                 </h3>
                 <p class="text-xs text-neutral-600 max-w-md">
-                  وفقاً لقواعد دورة حياة الموارد (Product Brief §11): عند إلغاء التسليم أو تعذره، يعود المورد تلقائياً إلى الحالة "متاح" (Available) ليصبح قابلاً للمطابقة مرة أخرى.
+                  {{ isRtl ? 'وفقاً لقواعد دورة حياة الموارد (Product Brief §11): عند إلغاء التسليم أو تعذره، يعود المورد تلقائياً إلى الحالة "متاح" (Available) ليصبح قابلاً للمطابقة مرة أخرى.' : 'Per resource lifecycle rules: upon cancellation or failure, the resource automatically returns to "available" status.' }}
                 </p>
 
                 <div class="pt-2">
                   <a routerLink="/resources">
                     <app-button variant="secondary" size="sm">
-                      العودة لقائمة الموارد المتاحة
+                      {{ isRtl ? 'العودة لقائمة الموارد المتاحة' : 'Back to Available Resources' }}
                     </app-button>
                   </a>
                 </div>
@@ -459,6 +464,19 @@ import { AuthService } from '../../../core/auth/auth.service';
   `
 })
 export class HandoverDetailComponent implements OnInit {
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
+
+  formatDate(dateVal: any): string {
+    if (!dateVal) return '';
+    const date = new Date(dateVal);
+    const locale = this.isRtl ? 'ar-EG' : 'en-US';
+    return date.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+
   private route = inject(ActivatedRoute);
   private handoverApi = inject(HandoverApiService);
   private authService = inject(AuthService);
@@ -638,30 +656,38 @@ export class HandoverDetailComponent implements OnInit {
 
   providerDisplayName(): string {
     if (this.isProvider()) {
-      return this.authService.currentUser()?.name || 'الجهة المانحة (أنت)';
+      return this.authService.currentUser()?.name || (this.isRtl ? 'الجهة المانحة (أنت)' : 'Provider (You)');
     }
-    return 'الجهة المانحة للمورد';
+    return this.isRtl ? 'الجهة المانحة للمورد' : 'Supplying Donor';
   }
 
   seekerDisplayName(): string {
     if (this.isSeeker()) {
-      return this.authService.currentUser()?.name || 'الجهة المستفيدة (أنت)';
+      return this.authService.currentUser()?.name || (this.isRtl ? 'الجهة المستفيدة (أنت)' : 'Beneficiary (You)');
     }
-    return 'الجهة المستفيدة المستلمة';
+    return this.isRtl ? 'الجهة المستفيدة المستلمة' : 'Receiving Beneficiary';
   }
 
   private getProviderLabelText(): string {
     if (this.providerConfirmed()) {
-      return this.isProvider() ? 'أنت أكدت التسليم ✓' : 'تم تأكيد تسليم المانح ✓';
+      return this.isProvider()
+        ? (this.isRtl ? 'أنت أكدت التسليم ✓' : 'You confirmed delivery ✓')
+        : (this.isRtl ? 'تم تأكيد تسليم المانح ✓' : 'Donor confirmed handover ✓');
     }
-    return this.isProvider() ? 'بانتظار تأكيدك (مانح)' : 'بانتظار تأكيد المانح';
+    return this.isProvider()
+      ? (this.isRtl ? 'بانتظار تأكيدك (مانح)' : 'Waiting for your confirmation (Donor)')
+      : (this.isRtl ? 'بانتظار تأكيد المانح' : 'Waiting on donor confirmation');
   }
 
   private getSeekerLabelText(): string {
     if (this.seekerConfirmed()) {
-      return this.isSeeker() ? 'أنت أكدت الاستلام ✓' : 'تم تأكيد استلام المستفيد ✓';
+      return this.isSeeker()
+        ? (this.isRtl ? 'أنت أكدت الاستلام ✓' : 'You confirmed receipt ✓')
+        : (this.isRtl ? 'تم تأكيد استلام المستفيد ✓' : 'Recipient confirmed receipt ✓');
     }
-    return this.isSeeker() ? 'بانتظار تأكيدك (مستفيد)' : 'بانتظار تأكيد المستفيد';
+    return this.isSeeker()
+      ? (this.isRtl ? 'بانتظار تأكيدك (مستفيد)' : 'Waiting for your confirmation (Recipient)')
+      : (this.isRtl ? 'بانتظار تأكيد المستفيد' : 'Waiting on recipient confirmation');
   }
 
   headerBadgeVariant(): 'success' | 'warning' | 'danger' | 'info' | 'neutral' {
@@ -674,9 +700,9 @@ export class HandoverDetailComponent implements OnInit {
 
   headerBadgeText(): string {
     const s = this.handover()?.status;
-    if (this.isCompleted()) return 'مكتمل وموثق في سجل الأثر';
-    if (s === 'cancelled') return 'تم الإلغاء';
-    if (s === 'no_show') return 'تعذر التسليم (عدم حضور)';
-    return 'بانتظار التأكيد الثنائي';
+    if (this.isCompleted()) return this.isRtl ? 'مكتمل وموثق في سجل الأثر' : 'Completed & Documented in Ledger';
+    if (s === 'cancelled') return this.isRtl ? 'تم الإلغاء' : 'Cancelled';
+    if (s === 'no_show') return this.isRtl ? 'تعذر التسليم (عدم حضور)' : 'Handover Failed (No-Show)';
+    return this.isRtl ? 'بانتظار التأكيد الثنائي' : 'Awaiting Two-Sided Confirmation';
   }
 }

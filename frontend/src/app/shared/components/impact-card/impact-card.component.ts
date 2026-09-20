@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SkeletonComponent } from '../../ui/skeleton/skeleton.component';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 
 export type ImpactCardVariant = 'personal' | 'organization' | 'aggregate';
 
@@ -24,12 +25,12 @@ export type ImpactCardVariant = 'personal' | 'organization' | 'aggregate';
           <svg class="w-5 h-5 mb-1 text-danger" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
-          <span>{{ errorMessage || 'تعذر تحميل مؤشر الأثر' }}</span>
+          <span>{{ resolvedErrorMessage }}</span>
         </div>
       } @else if (isEmpty || value === 0) {
         <div class="flex flex-col items-center justify-center p-5 text-center text-xs text-neutral-400">
           <span class="text-xl font-bold font-mono text-neutral-300">0</span>
-          <span class="mt-1">{{ emptyMessage || 'لا توجد مساهمات مكتملة بعد' }}</span>
+          <span class="mt-1">{{ resolvedEmptyMessage }}</span>
           <span class="text-[10px] text-neutral-400 mt-0.5">{{ label }}</span>
         </div>
       } @else {
@@ -68,6 +69,8 @@ export type ImpactCardVariant = 'personal' | 'organization' | 'aggregate';
   `
 })
 export class ImpactCardComponent {
+  private languageService = injectLanguageService();
+
   @Input() value: number | string = 0;
   @Input() label: string = 'مساهمة مجتمعية';
   @Input() description?: string;
@@ -80,9 +83,21 @@ export class ImpactCardComponent {
   @Input() isEmpty = false;
   @Input() emptyMessage?: string;
 
+  get isEnglish(): boolean {
+    return this.languageService?.currentLanguage() === 'en';
+  }
+
+  get resolvedErrorMessage(): string {
+    return this.errorMessage || (this.isEnglish ? 'Failed to load impact metric' : 'تعذر تحميل مؤشر الأثر');
+  }
+
+  get resolvedEmptyMessage(): string {
+    return this.emptyMessage || (this.isEnglish ? 'No completed contributions yet' : 'لا توجد مساهمات مكتملة بعد');
+  }
+
   get formattedValue(): string {
     if (typeof this.value === 'number') {
-      return this.value.toLocaleString('ar-EG');
+      return this.value.toLocaleString(this.isEnglish ? 'en-US' : 'ar-EG');
     }
     return String(this.value);
   }

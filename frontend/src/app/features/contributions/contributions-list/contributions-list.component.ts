@@ -9,6 +9,7 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 export type ContributionFilter = 'all' | 'given' | 'received';
 
@@ -28,29 +29,31 @@ export type ContributionFilter = 'all' | 'given' | 'received';
       <!-- Page Header -->
       <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-2xl font-bold text-neutral-900">سجل الأثر والمساهمات المجتمعية</h1>
+          <h1 class="text-2xl font-bold text-neutral-900">
+            {{ isRtl ? 'سجل الأثر والمساهمات المجتمعية' : 'Impact & Community Contributions Ledger' }}
+          </h1>
           <p class="text-sm text-neutral-600 mt-1">
-            سجل غير مالي توثيقي لعمليات التدوير المكتملة والموارد الحضرية المستعادة بنجاح.
+            {{ isRtl ? 'سجل غير مالي توثيقي لعمليات التدوير المكتملة والموارد الحضرية المستعادة بنجاح.' : 'Documentary non-financial ledger of completed exchanges and rescued urban resources.' }}
           </p>
         </div>
 
         <div class="flex items-center gap-2 self-start sm:self-auto">
           <a routerLink="/resources">
             <app-button variant="primary" size="sm">
-              + تبرع بمورد جديد
+              {{ isRtl ? '+ تبرع بمورد جديد' : '+ Donate New Resource' }}
             </app-button>
           </a>
         </div>
       </header>
 
       <!-- 1. Impact Summary (Warm Sand Accent per DESIGN.md §4 & §13) -->
-      <section aria-label="ملخص مؤشرات الأثر الشخصي">
+      <section [attr.aria-label]="isRtl ? 'ملخص مؤشرات الأثر الشخصي' : 'Personal impact indicators summary'">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <!-- Metric 1: Total Completed Handovers -->
           <app-impact-card
             [value]="totalCompletedCount()"
-            label="إجمالي المعاملات المكتملة"
-            description="عمليات تسليم ثنائية موثقة"
+            [label]="isRtl ? 'إجمالي المعاملات المكتملة' : 'Total Completed Exchanges'"
+            [description]="isRtl ? 'عمليات تسليم ثنائية موثقة' : 'Verified two-sided handovers'"
             variant="personal"
             icon="★"
             [isLoading]="isLoading()"
@@ -59,8 +62,8 @@ export type ContributionFilter = 'all' | 'given' | 'received';
           <!-- Metric 2: Resources Rescued / Given -->
           <app-impact-card
             [value]="givenCount()"
-            label="موارد تم التبرع بها (Given)"
-            description="أصول تم إنقاذها وإعادة استخدامها"
+            [label]="isRtl ? 'موارد تم التبرع بها (Given)' : 'Resources Rescued (Given)'"
+            [description]="isRtl ? 'أصول تم إنقاذها وإعادة استخدامها' : 'Assets rescued and reused'"
             variant="personal"
             icon="↑"
             [isLoading]="isLoading()"
@@ -69,8 +72,8 @@ export type ContributionFilter = 'all' | 'given' | 'received';
           <!-- Metric 3: Requests Fulfilled / Received -->
           <app-impact-card
             [value]="receivedCount()"
-            label="احتياجات تمت تلبيتها (Received)"
-            description="مستلزمات وصلت لمستحقيها"
+            [label]="isRtl ? 'احتياجات تمت تلبيتها (Received)' : 'Needs Fulfilled (Received)'"
+            [description]="isRtl ? 'مستلزمات وصلت لمستحقيها' : 'Goods delivered to recipients'"
             variant="personal"
             icon="↓"
             [isLoading]="isLoading()"
@@ -80,7 +83,7 @@ export type ContributionFilter = 'all' | 'given' | 'received';
 
       <!-- 2. Controls & Filter Bar -->
       <div class="flex items-center justify-between gap-4 border-b border-neutral-200 pb-3">
-        <div class="flex items-center gap-2" role="tablist" aria-label="تصفية المساهمات">
+        <div class="flex items-center gap-2" role="tablist" [attr.aria-label]="isRtl ? 'تصفية المساهمات' : 'Filter contributions'">
           <button
             type="button"
             role="tab"
@@ -89,7 +92,7 @@ export type ContributionFilter = 'all' | 'given' | 'received';
             class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all"
             [ngClass]="activeFilter() === 'all' ? 'bg-primary text-white shadow-xs' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'"
           >
-            الكل ({{ contributions().length }})
+            {{ isRtl ? 'الكل' : 'All' }} ({{ contributions().length }})
           </button>
 
           <button
@@ -100,7 +103,7 @@ export type ContributionFilter = 'all' | 'given' | 'received';
             class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all"
             [ngClass]="activeFilter() === 'given' ? 'bg-primary text-white shadow-xs' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'"
           >
-            الموارد الممنوحة ({{ givenCount() }})
+            {{ isRtl ? 'الموارد الممنوحة' : 'Given' }} ({{ givenCount() }})
           </button>
 
           <button
@@ -111,12 +114,12 @@ export type ContributionFilter = 'all' | 'given' | 'received';
             class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all"
             [ngClass]="activeFilter() === 'received' ? 'bg-primary text-white shadow-xs' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'"
           >
-            الاحتياجات المستلمة ({{ receivedCount() }})
+            {{ isRtl ? 'الاحتياجات المستلمة' : 'Received' }} ({{ receivedCount() }})
           </button>
         </div>
 
         <span class="text-xs text-neutral-400 hidden sm:inline font-mono">
-          الترتيب: الأحدث أولاً (Reverse Chronological)
+          {{ isRtl ? 'الترتيب: الأحدث أولاً (Reverse Chronological)' : 'Order: Newest First (Reverse Chronological)' }}
         </span>
       </div>
 
@@ -134,14 +137,14 @@ export type ContributionFilter = 'all' | 'given' | 'received';
             (click)="loadContributions()"
             class="text-xs font-semibold text-danger hover:underline"
           >
-            إعادة المحاولة
+            {{ isRtl ? 'إعادة المحاولة' : 'Retry' }}
           </button>
         </div>
       }
 
       <!-- 4. Loading Skeletons -->
       @if (isLoading()) {
-        <ul class="flex flex-col gap-3" aria-busy="true" aria-label="جاري تحميل السجل...">
+        <ul class="flex flex-col gap-3" aria-busy="true" [attr.aria-label]="isRtl ? 'جاري تحميل السجل...' : 'Loading contribution ledger...'">
           @for (i of [1, 2, 3, 4]; track i) {
             <app-contribution-card [isLoading]="true"></app-contribution-card>
           }
@@ -153,19 +156,21 @@ export type ContributionFilter = 'all' | 'given' | 'received';
             <div class="w-14 h-14 rounded-full bg-sand-100 text-sand-700 flex items-center justify-center text-2xl mb-3 shadow-xs">
               ★
             </div>
-            <h3 class="text-base font-bold text-neutral-900">لا توجد مساهمات مسجلة في هذا القسم بعد</h3>
+            <h3 class="text-base font-bold text-neutral-900">
+              {{ isRtl ? 'لا توجد مساهمات مسجلة في هذا القسم بعد' : 'No contributions recorded in this section yet' }}
+            </h3>
             <p class="text-xs text-neutral-500 max-w-sm mt-1 mb-5 leading-relaxed">
-              عند إتمام أي عملية تسليم واستلام عبر بروتوكول التأكيد الثنائي، يتم توثيق المساهمة فوراً وإضافتها إلى هذا السجل الدائم.
+              {{ isRtl ? 'عند إتمام أي عملية تسليم واستلام عبر بروتوكول التأكيد الثنائي، يتم توثيق المساهمة فوراً وإضافتها إلى هذا السجل الدائم.' : 'Once an exchange completes via the two-sided confirmation protocol, it is immediately documented and added to this permanent ledger.' }}
             </p>
             <div class="flex items-center gap-3">
               <a routerLink="/resources">
                 <app-button variant="primary" size="sm">
-                  تصفح الموارد المتاحة
+                  {{ isRtl ? 'تصفح الموارد المتاحة' : 'Browse Available Resources' }}
                 </app-button>
               </a>
               <a routerLink="/requests">
                 <app-button variant="secondary" size="sm">
-                  استعراض طلبات الاحتياج
+                  {{ isRtl ? 'استعراض طلبات الاحتياج' : 'Explore Demand Requests' }}
                 </app-button>
               </a>
             </div>
@@ -173,7 +178,7 @@ export type ContributionFilter = 'all' | 'given' | 'received';
         </app-card>
       } @else {
         <!-- 6. Populated Reverse-Chronological List -->
-        <ul class="flex flex-col gap-3" aria-label="قائمة المساهمات المكتملة">
+        <ul class="flex flex-col gap-3" [attr.aria-label]="isRtl ? 'قائمة المساهمات المكتملة' : 'List of completed contributions'">
           @for (contribution of filteredContributions(); track contribution.id) {
             <app-contribution-card
               [contribution]="contribution"
@@ -186,6 +191,12 @@ export type ContributionFilter = 'all' | 'given' | 'received';
   `
 })
 export class ContributionsListComponent implements OnInit {
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
+
   private contributionApi = inject(ContributionApiService);
   private authService = inject(AuthService);
 
@@ -234,7 +245,7 @@ export class ContributionsListComponent implements OnInit {
         this.isLoading.set(false);
       },
       error: (err) => {
-        this.errorMessage.set(err?.message || 'تعذر تحميل سجل المساهمات');
+        this.errorMessage.set(err?.message || (this.isRtl ? 'تعذر تحميل سجل المساهمات' : 'Failed to load contributions ledger'));
         this.isLoading.set(false);
       }
     });

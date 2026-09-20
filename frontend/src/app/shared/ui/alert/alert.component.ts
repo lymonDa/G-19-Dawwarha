@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, computed } from '@angular/core';
+import { Component, Input, Output, EventEmitter, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, AlertCircle, CheckCircle2, Info, AlertTriangle, X } from 'lucide-angular';
+import { LanguageService } from '../../../core/services/language.service';
 
 export type AlertVariant = 'success' | 'warning' | 'danger' | 'info';
 
@@ -43,9 +44,9 @@ export type AlertVariant = 'success' | 'warning' | 'danger' | 'info';
         <button 
           type="button" 
           (click)="dismiss()"
-          class="inline-flex p-1.5 rounded-md hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors"
+          class="inline-flex p-1.5 rounded-md hover:bg-black/5 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors cursor-pointer"
           [class]="textClasses()"
-          aria-label="Dismiss">
+          [attr.aria-label]="dismissAriaLabel">
           <lucide-icon name="x" [size]="16"></lucide-icon>
         </button>
       </div>
@@ -53,11 +54,17 @@ export type AlertVariant = 'success' | 'warning' | 'danger' | 'info';
   `
 })
 export class AlertComponent {
+  private languageService = inject(LanguageService, { optional: true });
+
   @Input() variant: AlertVariant = 'info';
   @Input() title?: string;
   @Input() message?: string;
   @Input() dismissible = false;
   @Input() actionLabel?: string;
+
+  get dismissAriaLabel(): string {
+    return this.languageService?.currentLanguage() === 'ar' ? 'إغلاق التنبيه' : 'Dismiss';
+  }
   
   @Output() dismissed = new EventEmitter<void>();
   @Output() action = new EventEmitter<void>();

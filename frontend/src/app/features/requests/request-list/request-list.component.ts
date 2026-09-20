@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 import { RequestApiService } from '../services/request-api.service';
+import { LanguageService } from '../../../core/services/language.service';
 import { RequestCardComponent } from '../../../shared/components/request-card/request-card.component';
 import { Request, RequestStatus, RequestUrgency } from '../../../core/models/request.model';
 import { Category } from '../../../core/models/category.model';
@@ -28,10 +29,10 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 class="text-3xl font-bold tracking-tight text-neutral-900">
-              Discover Demand Requests
+              {{ languageService.t().REQ_BROWSE_TITLE }}
             </h1>
             <p class="mt-1 text-sm text-neutral-500">
-              Explore urgent community needs and supplies requested across regions.
+              {{ languageService.t().REQ_BROWSE_SUBTITLE }}
             </p>
           </div>
 
@@ -40,7 +41,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
               routerLink="/requests/mine"
               class="rounded-lg border border-neutral-200 bg-neutral-0 px-4 py-2.5 text-sm font-semibold text-neutral-700 shadow-sm transition hover:bg-neutral-50"
             >
-              My Requests
+              {{ languageService.t().NAV_MY_REQUESTS }}
             </a>
             <a
               routerLink="/requests/create"
@@ -49,7 +50,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              <span>Create Request</span>
+              <span>+ {{ languageService.t().REQ_REGISTER_NEED_BTN }}</span>
             </a>
           </div>
         </div>
@@ -63,8 +64,9 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
                 type="text"
                 [(ngModel)]="searchTerm"
                 (ngModelChange)="onSearchChange()"
-                placeholder="Search by keyword, city, or category..."
+                [placeholder]="languageService.isRtl() ? 'ابحث بالكلمة المفتاحية، المدينة، أو التصنيف...' : 'Search by keyword, city, or category...'"
                 class="w-full rounded-lg border border-neutral-200 bg-neutral-50 py-2.5 ps-9 pe-3 text-sm text-neutral-900 placeholder-neutral-400 transition focus:border-primary-600 focus:bg-neutral-0 focus:outline-none focus:ring-1 focus:ring-primary-600"
+                [attr.aria-label]="languageService.t().COMMON_SEARCH"
               />
               <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-neutral-400">
                 <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -76,15 +78,15 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
             <!-- Category Filter -->
             <div>
               <select
-                title="Filter by category"
-                aria-label="Filter by category"
+                [title]="languageService.t().COMMON_CATEGORY"
+                [attr.aria-label]="languageService.t().COMMON_CATEGORY"
                 [(ngModel)]="selectedCategory"
                 (change)="onFilterChange()"
                 class="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2.5 text-sm text-neutral-900 transition focus:border-primary-600 focus:bg-neutral-0 focus:outline-none focus:ring-1 focus:ring-primary-600"
               >
-                <option value="">All Categories</option>
+                <option value="">{{ languageService.t().COMMON_ALL_CATEGORIES }}</option>
                 @for (cat of categories; track cat._id || cat.id) {
-                  <option [value]="cat._id || cat.id">{{ cat.name }}</option>
+                  <option [value]="cat._id || cat.id">{{ languageService.getCategoryLabel(cat) }}</option>
                 }
               </select>
             </div>
@@ -92,35 +94,35 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
             <!-- Urgency Filter -->
             <div>
               <select
-                title="Filter by urgency"
-                aria-label="Filter by urgency"
+                [title]="languageService.t().COMMON_URGENCY"
+                [attr.aria-label]="languageService.t().COMMON_URGENCY"
                 [(ngModel)]="selectedUrgency"
                 (change)="onFilterChange()"
                 class="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2.5 text-sm text-neutral-900 transition focus:border-primary-600 focus:bg-neutral-0 focus:outline-none focus:ring-1 focus:ring-primary-600"
               >
-                <option value="">All Urgencies</option>
-                <option value="high">High Urgency</option>
-                <option value="medium">Medium Urgency</option>
-                <option value="low">Low Urgency</option>
+                <option value="">{{ languageService.isRtl() ? 'جميع درجات الإلحاح' : 'All Urgencies' }}</option>
+                <option value="high">{{ languageService.getUrgencyLabel('high') }}</option>
+                <option value="medium">{{ languageService.getUrgencyLabel('medium') }}</option>
+                <option value="low">{{ languageService.getUrgencyLabel('low') }}</option>
               </select>
             </div>
 
             <!-- Status Filter -->
             <div>
               <select
-                title="Filter by status"
-                aria-label="Filter by status"
+                [title]="languageService.t().COMMON_STATUS"
+                [attr.aria-label]="languageService.t().COMMON_STATUS"
                 [(ngModel)]="selectedStatus"
                 (change)="onFilterChange()"
                 class="w-full rounded-lg border border-neutral-200 bg-neutral-50 px-3 py-2.5 text-sm text-neutral-900 transition focus:border-primary-600 focus:bg-neutral-0 focus:outline-none focus:ring-1 focus:ring-primary-600"
               >
-                <option value="">All Statuses</option>
-                <option value="published">Published</option>
-                <option value="matched">Matched</option>
-                <option value="accepted">Accepted</option>
-                <option value="fulfilled">Fulfilled</option>
-                <option value="draft">Draft</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="">{{ languageService.isRtl() ? 'جميع الحالات' : 'All Statuses' }}</option>
+                <option value="published">{{ languageService.getStatusLabel('published') }}</option>
+                <option value="matched">{{ languageService.getStatusLabel('matched') }}</option>
+                <option value="accepted">{{ languageService.getStatusLabel('accepted') }}</option>
+                <option value="fulfilled">{{ languageService.getStatusLabel('fulfilled') }}</option>
+                <option value="draft">{{ languageService.getStatusLabel('draft') }}</option>
+                <option value="cancelled">{{ languageService.getStatusLabel('cancelled') }}</option>
               </select>
             </div>
           </div>
@@ -128,13 +130,13 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
           <!-- Active filters indicator and reset button -->
           @if (searchTerm || selectedCategory || selectedUrgency || selectedStatus || selectedCity) {
             <div class="mt-3 flex items-center justify-between border-t border-neutral-100 pt-3 text-xs text-neutral-500">
-              <span>Active filters applied</span>
+              <span>{{ languageService.isRtl() ? 'عوامل التصفية النشطة مطبقة' : 'Active filters applied' }}</span>
               <button
                 type="button"
                 (click)="resetFilters()"
                 class="font-medium text-primary-600 hover:text-primary-800"
               >
-                Clear all filters
+                {{ languageService.t().COMMON_CLEAR_FILTERS }}
               </button>
             </div>
           }
@@ -154,7 +156,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
                 (click)="loadRequests(true)"
                 class="rounded bg-danger px-3 py-1 text-xs font-semibold text-white hover:bg-danger/90"
               >
-                Retry
+                {{ languageService.t().COMMON_RETRY }}
               </button>
             </div>
           </div>
@@ -170,9 +172,9 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
             </div>
           } @else if (filteredRequests.length === 0) {
             <app-empty-state
-              title="No requests found"
-              [description]="searchTerm || selectedCategory || selectedUrgency || selectedStatus ? 'No results match your active filters. Try resetting or adjusting your search criteria.' : 'There are currently no active demand requests on the platform.'"
-              [actionLabel]="searchTerm || selectedCategory || selectedUrgency || selectedStatus ? 'Reset Filters' : 'Post a Request'"
+              [title]="languageService.t().REQ_EMPTY_TITLE"
+              [description]="searchTerm || selectedCategory || selectedUrgency || selectedStatus ? languageService.t().REQ_EMPTY_DESC : (languageService.isRtl() ? 'لا توجد طلبات احتياج نشطة حالياً في المنصة.' : 'There are currently no active demand requests on the platform.')"
+              [actionLabel]="searchTerm || selectedCategory || selectedUrgency || selectedStatus ? languageService.t().COMMON_RESET_FILTERS : languageService.t().REQ_REGISTER_NEED_BTN"
               (actionClicked)="searchTerm || selectedCategory || selectedUrgency || selectedStatus ? resetFilters() : navigateToCreate()"
             />
           } @else {
@@ -193,6 +195,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
   `]
 })
 export class RequestListComponent implements OnInit {
+  languageService = inject(LanguageService);
   private api = inject(RequestApiService);
   private router = inject(Router);
 

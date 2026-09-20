@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, forwardRef, inject, OnInit, signal } from '@angular/core';
+import { Component, forwardRef, inject, OnInit, signal, Input } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CategoryApiService } from '../../../features/categories/category-api.service';
 import { ComboboxComponent, ComboboxOption } from '../../ui/combobox/combobox.component';
 import { ButtonComponent } from '../../ui/button/button.component';
 import { SkeletonComponent } from '../../ui/skeleton/skeleton.component';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-category-selector',
@@ -21,13 +22,15 @@ import { SkeletonComponent } from '../../ui/skeleton/skeleton.component';
         <app-skeleton variant="rectangular" height="42px" customClass="!h-[42px]"></app-skeleton>
       } @else if (hasError()) {
         <div class="flex items-center justify-between gap-3 rounded-md border border-danger/30 bg-danger/5 px-3 py-2 text-sm text-danger" role="alert">
-          <span>Couldn't load categories</span>
-          <app-button variant="outline" size="sm" [isLoading]="isLoading()" (clicked)="retry()">Retry</app-button>
+          <span>{{ isArabic ? 'تعذر تحميل التصنيفات' : "Couldn't load categories" }}</span>
+          <app-button variant="outline" size="sm" [isLoading]="isLoading()" (clicked)="retry()">
+            {{ isArabic ? 'إعادة المحاولة' : 'Retry' }}
+          </app-button>
         </div>
       } @else {
         <app-combobox
-          [label]="label"
-          [placeholder]="placeholder"
+          [label]="resolvedLabel"
+          [placeholder]="resolvedPlaceholder"
           [options]="options()"
           [required]="required"
           [disabled]="disabled"
@@ -41,12 +44,28 @@ import { SkeletonComponent } from '../../ui/skeleton/skeleton.component';
 })
 export class CategorySelectorComponent implements ControlValueAccessor, OnInit {
   private readonly categoryApi = inject(CategoryApiService);
+  private readonly languageService = injectLanguageService();
 
-  label = 'Category';
-  placeholder = 'Select a category';
-  required = false;
-  disabled = false;
-  error?: string;
+  @Input() label?: string;
+  @Input() placeholder?: string;
+  @Input() required = false;
+  @Input() disabled = false;
+  @Input() error?: string;
+
+  get isArabic(): boolean {
+    return this.languageService?.currentLanguage() === 'ar';
+  }
+
+  get resolvedLabel(): string {
+    if (this.label) return this.label;
+    return this.isArabic ? 'التصنيف' : 'Category';
+  }
+
+  get resolvedPlaceholder(): string {
+    if (this.placeholder) return this.placeholder;
+    return this.isArabic ? 'اختر تصنيفاً' : 'Select a category';
+  }
+
   value: string | null = null;
   readonly hasLoaded = signal(false);
   readonly hasError = signal(false);
@@ -92,7 +111,10 @@ export class CategorySelectorComponent implements ControlValueAccessor, OnInit {
       next: categories => {
         this.options.set(categories
           .filter(category => category.isActive)
-          .map(category => ({ value: category.id, label: category.name })));
+          .map(category => ({
+            value: category.id,
+            label: (this.isArabic && (category as any).nameAr) ? (category as any).nameAr : category.name
+          })));
         this.hasLoaded.set(true);
       },
       error: () => this.hasError.set(true)

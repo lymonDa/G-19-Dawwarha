@@ -1,6 +1,7 @@
-import { Component, Input, computed } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RequestUrgency } from '../../../core/models/request.model';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-urgency-badge',
@@ -30,6 +31,8 @@ import { RequestUrgency } from '../../../core/models/request.model';
   `
 })
 export class UrgencyBadgeComponent {
+  private languageService = injectLanguageService();
+
   @Input() urgency: RequestUrgency | string = 'medium';
 
   get normalizedUrgency(): RequestUrgency {
@@ -40,14 +43,13 @@ export class UrgencyBadgeComponent {
   }
 
   get label(): string {
+    if (this.languageService) {
+      return this.languageService.getUrgencyLabel(this.normalizedUrgency);
+    }
     switch (this.normalizedUrgency) {
-      case 'high':
-        return 'High urgency';
-      case 'low':
-        return 'Low urgency';
-      case 'medium':
-      default:
-        return 'Medium urgency';
+      case 'high': return 'High urgency';
+      case 'low': return 'Low urgency';
+      default: return 'Medium urgency';
     }
   }
 

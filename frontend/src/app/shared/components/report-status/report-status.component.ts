@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReportStatus } from '../../../core/models/report.model';
 import { BadgeComponent } from '../../ui/badge/badge.component';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-report-status',
@@ -51,10 +52,16 @@ import { BadgeComponent } from '../../ui/badge/badge.component';
   `
 })
 export class ReportStatusComponent {
+  private languageService = injectLanguageService();
+
   @Input() status: ReportStatus = 'open';
   @Input() timestamp?: string | Date;
   @Input() size: 'sm' | 'md' = 'sm';
   @Input() isReporterFacing = false;
+
+  get isEnglish(): boolean {
+    return this.languageService?.currentLanguage() === 'en';
+  }
 
   get badgeVariant(): 'warning' | 'info' | 'success' | 'neutral' {
     switch (this.status) {
@@ -69,6 +76,13 @@ export class ReportStatusComponent {
   }
 
   get statusLabel(): string {
+    if (this.isEnglish) {
+      switch (this.status) {
+        case 'resolved': return 'Resolved';
+        case 'reviewed': return 'Under Review';
+        case 'open': default: return 'Open for Review';
+      }
+    }
     switch (this.status) {
       case 'resolved':
         return 'تمت المعالجة';
@@ -81,6 +95,17 @@ export class ReportStatusComponent {
   }
 
   get reassuranceText(): string {
+    if (this.isEnglish) {
+      switch (this.status) {
+        case 'resolved':
+          return 'The report has been resolved and necessary action taken.';
+        case 'reviewed':
+          return 'The moderation team is currently reviewing the report details.';
+        case 'open':
+        default:
+          return 'Your report has been received and is queued for administrative review.';
+      }
+    }
     switch (this.status) {
       case 'resolved':
         return 'تمت معالجة البلاغ واتخاذ الإجراءات اللازمة لضمان سلامة المنصة.';
@@ -93,6 +118,6 @@ export class ReportStatusComponent {
   }
 
   get accessibleLabel(): string {
-    return `حالة البلاغ: ${this.statusLabel}`;
+    return this.isEnglish ? `Report status: ${this.statusLabel}` : `حالة البلاغ: ${this.statusLabel}`;
   }
 }

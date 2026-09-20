@@ -13,6 +13,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ResourceApiService, CreateResourcePayload, UpdateResourcePayload } from '../resource-api.service';
 import { AuthService } from '../../../core/auth/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
+import { LanguageService } from '../../../core/services/language.service';
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { InputComponent } from '../../../shared/ui/input/input.component';
@@ -58,18 +59,18 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
         <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        <span>{{ isEdit ? 'Back to Resource Details' : 'Back to Resources' }}</span>
+        <span>{{ isEdit ? (languageService.isRtl() ? 'العودة لتفاصيل المورد' : 'Back to Resource Details') : (languageService.isRtl() ? 'العودة إلى الموارد' : 'Back to Resources') }}</span>
       </a>
 
       <!-- Page Heading -->
       <div>
         <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
-          {{ isEdit ? 'Edit Surplus Resource' : 'List a Surplus Resource' }}
+          {{ isEdit ? languageService.t().RES_EDIT_TITLE : languageService.t().RES_CREATE_TITLE }}
         </h1>
         <p class="text-sm text-neutral-500 mt-1">
           {{ isEdit
-            ? 'Update the resource specifications, quantity, or pickup window for this listing.'
-            : 'Specify the resource details, quantity, and location to begin matching with organizations and recipients.' }}
+            ? (languageService.isRtl() ? 'تحديث مواصفات المورد الفائض أو الكمية أو نافذة الاستلام والتسليم.' : 'Update the resource specifications, quantity, or pickup window for this listing.')
+            : languageService.t().RES_CREATE_SUBTITLE }}
         </p>
       </div>
 
@@ -87,13 +88,13 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
             <div>
-              <h3 class="font-bold text-base text-neutral-900">Editing Locked</h3>
+              <h3 class="font-bold text-base text-neutral-900">{{ languageService.isRtl() ? 'التعديل مغلق' : 'Editing Locked' }}</h3>
               <p class="mt-1 text-neutral-600">
-                This listing is in status <span class="font-bold uppercase tracking-wider text-xs px-2 py-0.5 rounded bg-neutral-200/80">{{ currentStatus }}</span> and can no longer be edited.
+                {{ languageService.isRtl() ? 'هذا المورد في حالة ' : 'This listing is in status ' }}<span class="font-bold uppercase tracking-wider text-xs px-2 py-0.5 rounded bg-neutral-200/80">{{ languageService.getStatusLabel(currentStatus) }}</span>{{ languageService.isRtl() ? ' ولا يمكن تعديل بياناته.' : ' and can no longer be edited.' }}
               </p>
               <div class="mt-4">
                 <a [routerLink]="['/resources', resourceId]">
-                  <app-button variant="outline" size="sm">View Resource</app-button>
+                  <app-button variant="outline" size="sm">{{ languageService.t().COMMON_VIEW_DETAILS }}</app-button>
                 </a>
               </div>
             </div>
@@ -116,13 +117,13 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
             <!-- 1. Resource Identity -->
             <div class="space-y-4">
               <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-100 pb-2">
-                1. Resource Details
+                {{ languageService.isRtl() ? '1. تفاصيل ومواصفات المورد' : '1. Resource Details' }}
               </h3>
 
               <div>
                 <app-input
-                  label="Resource Title"
-                  placeholder="e.g. 5 study desks in good condition"
+                  [label]="languageService.t().RES_FIELD_TITLE"
+                  [placeholder]="languageService.t().RES_FIELD_TITLE_PLACEHOLDER"
                   [required]="true"
                   formControlName="title"
                   [error]="isFieldTouched('title') ? titleError : null"
@@ -141,7 +142,7 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <app-input
-                  label="Available Quantity"
+                  [label]="languageService.t().RES_FIELD_QUANTITY"
                   type="number"
                   placeholder="1"
                   [required]="true"
@@ -150,14 +151,14 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
                 ></app-input>
 
                 <div class="flex flex-col justify-end">
-                  <span class="text-xs text-neutral-400 mb-2">Must be at least 1 unit</span>
+                  <span class="text-xs text-neutral-400 mb-2">{{ languageService.isRtl() ? 'يجب ألا تقل الكمية عن وحدة واحدة' : 'Must be at least 1 unit' }}</span>
                 </div>
               </div>
 
               <div>
                 <app-textarea
-                  label="Description & Specifications"
-                  placeholder="Describe the resource specs, condition, and any important details for recipients..."
+                  [label]="languageService.t().COMMON_DESCRIPTION"
+                  [placeholder]="languageService.isRtl() ? 'صف مواصفات المورد، وحالته التشغيلية، وأي تفاصيل مهمة للمستفيدين...' : 'Describe the resource specs, condition, and any important details for recipients...'"
                   [required]="true"
                   [rows]="4"
                   formControlName="description"
@@ -169,21 +170,21 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
             <!-- 2. Location Section -->
             <div class="space-y-4">
               <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-100 pb-2">
-                2. Pickup Location
+                {{ languageService.isRtl() ? '2. موقع الاستلام والتسليم' : '2. Pickup Location' }}
               </h3>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <app-input
-                  label="City"
-                  placeholder="e.g. Cairo"
+                  [label]="languageService.isRtl() ? 'المحافظة / المدينة' : 'City'"
+                  [placeholder]="languageService.isRtl() ? 'مثال: القاهرة' : 'e.g. Cairo'"
                   [required]="true"
                   formControlName="city"
                   [error]="isFieldTouched('city') ? cityError : null"
                 ></app-input>
 
                 <app-input
-                  label="Neighborhood / Area"
-                  placeholder="e.g. Maadi"
+                  [label]="languageService.isRtl() ? 'المنطقة / الحي' : 'Neighborhood / Area'"
+                  [placeholder]="languageService.isRtl() ? 'مثال: المعادي' : 'e.g. Maadi'"
                   formControlName="area"
                 ></app-input>
               </div>
@@ -192,16 +193,16 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
             <!-- 3. Availability Window (Backend Mandated) -->
             <div class="space-y-4">
               <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-100 pb-2">
-                3. Availability Window
+                {{ languageService.isRtl() ? '3. نافذة الإتاحة للاستلام' : '3. Availability Window' }}
               </h3>
               <p class="text-xs text-neutral-500">
-                Specify the timeframe during which this resource is ready for collection.
+                {{ languageService.isRtl() ? 'حدد الفترة الزمنية التي يكون فيها المورد جاهزاً للاستلام والتسليم.' : 'Specify the timeframe during which this resource is ready for collection.' }}
               </p>
 
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="flex flex-col gap-1.5">
                   <label class="text-sm font-medium text-neutral-900">
-                    Available From <span class="text-danger">*</span>
+                    {{ languageService.isRtl() ? 'متاح من تاريخ' : 'Available From' }} <span class="text-danger">*</span>
                   </label>
                   <input
                     type="date"
@@ -215,7 +216,7 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
 
                 <div class="flex flex-col gap-1.5">
                   <label class="text-sm font-medium text-neutral-900">
-                    Available Until <span class="text-danger">*</span>
+                    {{ languageService.isRtl() ? 'متاح حتى تاريخ' : 'Available Until' }} <span class="text-danger">*</span>
                   </label>
                   <input
                     type="date"
@@ -230,7 +231,7 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
 
               @if (form.errors?.['invalidDateRange'] && (form.get('endDate')?.touched || form.get('startDate')?.touched)) {
                 <div class="text-xs text-danger font-medium mt-1">
-                  Availability end date must be strictly after the start date.
+                  {{ languageService.isRtl() ? 'يجب أن يكون تاريخ انتهاء الإتاحة بعد تاريخ البدء.' : 'Availability end date must be strictly after the start date.' }}
                 </div>
               }
             </div>
@@ -238,12 +239,12 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
             <!-- 4. Safety & Compliance Disclosure -->
             <div class="space-y-4">
               <h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500 border-b border-neutral-100 pb-2">
-                4. Safety & Condition Disclosure (Optional)
+                {{ languageService.isRtl() ? '4. إفصاح السلامة والحالة (اختياري)' : '4. Safety & Condition Disclosure (Optional)' }}
               </h3>
 
               <app-textarea
-                label="Safety Notes"
-                placeholder="Disclose any storage requirements, expiration notices, or sanitized handling details..."
+                [label]="languageService.isRtl() ? 'ملاحظات السلامة والتخزين' : 'Safety Notes'"
+                [placeholder]="languageService.isRtl() ? 'وضّح أي متطلبات تخزين خاصة، أو شروط نقل، أو تعليمات سلامة...' : 'Disclose any storage requirements, expiration notices, or sanitized handling details...'"
                 [rows]="2"
                 formControlName="safetyDisclosure"
               ></app-textarea>
@@ -252,7 +253,7 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
             <!-- Form Submission Action -->
             <div class="pt-4 border-t border-neutral-100 flex items-center justify-end gap-3">
               <a [routerLink]="isEdit ? ['/resources', resourceId] : ['/resources']">
-                <app-button variant="outline" type="button">Cancel</app-button>
+                <app-button variant="outline" type="button">{{ languageService.t().COMMON_CANCEL }}</app-button>
               </a>
 
               <app-button
@@ -261,7 +262,7 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
                 [isLoading]="isSubmitting"
                 [disabled]="isSubmitting"
               >
-                {{ isEdit ? 'Save Changes' : 'Publish Resource' }}
+                {{ isEdit ? languageService.t().COMMON_SAVE : languageService.t().RES_SUBMIT_CREATE }}
               </app-button>
             </div>
           </form>
@@ -271,6 +272,7 @@ function dateRangeValidator(group: AbstractControl): ValidationErrors | null {
   `
 })
 export class ResourceCreateComponent implements OnInit {
+  languageService = inject(LanguageService);
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
@@ -317,60 +319,67 @@ export class ResourceCreateComponent implements OnInit {
 
   get titleError(): string | null {
     const ctrl = this.form.get('title');
+    const isAr = this.languageService.isRtl();
     if (ctrl?.errors) {
-      if (ctrl.errors['required']) return 'Title is required';
-      if (ctrl.errors['minlength']) return 'Title must be at least 3 characters';
-      if (ctrl.errors['maxlength']) return 'Title must be at most 100 characters';
+      if (ctrl.errors['required']) return isAr ? 'عنوان المورد مطلوب' : 'Title is required';
+      if (ctrl.errors['minlength']) return isAr ? 'يجب ألا يقل العنوان عن 3 أحرف' : 'Title must be at least 3 characters';
+      if (ctrl.errors['maxlength']) return isAr ? 'يجب ألا يتجاوز العنوان 100 حرف' : 'Title must be at most 100 characters';
     }
     return null;
   }
 
   get categoryError(): string | null {
     const ctrl = this.form.get('categoryId');
+    const isAr = this.languageService.isRtl();
     if (ctrl?.errors?.['required']) {
-      return 'Category is required';
+      return isAr ? 'يرجى اختيار التصنيف' : 'Category is required';
     }
     return null;
   }
 
   get quantityError(): string | null {
     const ctrl = this.form.get('quantity');
+    const isAr = this.languageService.isRtl();
     if (ctrl?.errors) {
-      if (ctrl.errors['required']) return 'Quantity is required';
-      if (ctrl.errors['min']) return 'Quantity must be greater than 0';
+      if (ctrl.errors['required']) return isAr ? 'الكمية مطلوبة' : 'Quantity is required';
+      if (ctrl.errors['min']) return isAr ? 'يجب أن تكون الكمية 1 على الأقل' : 'Quantity must be greater than 0';
     }
     return null;
   }
 
   get descriptionError(): string | null {
     const ctrl = this.form.get('description');
+    const isAr = this.languageService.isRtl();
     if (ctrl?.errors) {
-      if (ctrl.errors['required']) return 'Description is required';
-      if (ctrl.errors['maxlength']) return 'Description must be at most 1000 characters';
+      if (ctrl.errors['required']) return isAr ? 'الوصف مطلوب' : 'Description is required';
+      if (ctrl.errors['maxlength']) return isAr ? 'يجب ألا يتجاوز الوصف 1000 حرف' : 'Description must be at most 1000 characters';
     }
     return null;
   }
 
   get cityError(): string | null {
     const ctrl = this.form.get('city');
+    const isAr = this.languageService.isRtl();
     if (ctrl?.errors?.['required']) {
-      return 'City is required';
+      return isAr ? 'المدينة / المحافظة مطلوبة' : 'City is required';
     }
     return null;
   }
 
   get startDateError(): string | null {
     const ctrl = this.form.get('startDate');
+    const isAr = this.languageService.isRtl();
     if (ctrl?.errors?.['required']) {
-      return 'Start date is required';
+      return isAr ? 'تاريخ بدء الإتاحة مطلوب' : 'Start date is required';
     }
     return null;
   }
 
   get endDateError(): string | null {
     const ctrl = this.form.get('endDate');
+    const isAr = this.languageService.isRtl();
     if (ctrl?.errors?.['required']) {
-      return 'End date is required';
+      return isAr ? 'تاريخ انتهاء الإتاحة مطلوب' : 'End date is required';
     }
     return null;
   }
@@ -469,12 +478,12 @@ export class ResourceCreateComponent implements OnInit {
       this.resourceApi.update(this.resourceId, payload).subscribe({
         next: (updated) => {
           this.isSubmitting = false;
-          this.toast.success('Resource updated successfully');
+          this.toast.success(this.languageService.isRtl() ? 'تم تحديث بيانات المورد بنجاح' : 'Resource updated successfully');
           this.router.navigate(['/resources', updated.id]);
         },
         error: (err) => {
           this.isSubmitting = false;
-          this.errorMessage = err?.error?.error?.message || err?.error?.message || 'Failed to update resource.';
+          this.errorMessage = err?.error?.error?.message || err?.error?.message || (this.languageService.isRtl() ? 'فشل تحديث المورد.' : 'Failed to update resource.');
         }
       });
     } else {
@@ -497,12 +506,12 @@ export class ResourceCreateComponent implements OnInit {
       this.resourceApi.create(payload).subscribe({
         next: (created) => {
           this.isSubmitting = false;
-          this.toast.success('Resource listed successfully');
+          this.toast.success(this.languageService.isRtl() ? 'تم نشر المورد الفائض بنجاح' : 'Resource listed successfully');
           this.router.navigate(['/resources', created.id]);
         },
         error: (err) => {
           this.isSubmitting = false;
-          this.errorMessage = err?.error?.error?.message || err?.error?.message || 'Failed to list resource.';
+          this.errorMessage = err?.error?.error?.message || err?.error?.message || (this.languageService.isRtl() ? 'فشل نشر المورد.' : 'Failed to list resource.');
         }
       });
     }

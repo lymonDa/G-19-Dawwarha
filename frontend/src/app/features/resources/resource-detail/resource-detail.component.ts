@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ResourceApiService } from '../resource-api.service';
 import { AuthService } from '../../../core/auth/auth.service';
 import { ToastService } from '../../../core/services/toast.service';
+import { LanguageService } from '../../../core/services/language.service';
 import { Resource, ResourceLifecycleAction, ResourceStatus } from '../../../core/models/resource.model';
 import { LifecycleTimelineComponent, LifecycleStepId } from '../../../shared/components/lifecycle-timeline/lifecycle-timeline.component';
 import { CardComponent } from '../../../shared/ui/card/card.component';
@@ -35,7 +36,7 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
           <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          <span>Back to Resources</span>
+          <span>{{ languageService.isRtl() ? 'العودة إلى الموارد' : 'Back to Resources' }}</span>
         </a>
 
         <!-- Loading Skeleton -->
@@ -54,7 +55,7 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
               <span>{{ errorMessage() }}</span>
             </div>
             <a routerLink="/resources">
-              <app-button variant="outline" size="sm">Return to Resources</app-button>
+              <app-button variant="outline" size="sm">{{ languageService.isRtl() ? 'العودة إلى الموارد' : 'Return to Resources' }}</app-button>
             </a>
           </div>
         } @else if (resource()) {
@@ -70,7 +71,7 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
                   {{ resource()!.title }}
                 </h1>
                 <p class="text-xs text-neutral-500 mt-1">
-                  {{ locationText }} · Listed {{ formattedCreatedDate }}
+                  {{ locationText }} · {{ languageService.isRtl() ? 'أُدرج في ' : 'Listed ' }}{{ formattedCreatedDate }}
                 </p>
               </div>
 
@@ -87,7 +88,7 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
             <!-- Lifecycle Timeline Progress -->
             <div class="my-6 p-4 rounded-xl bg-neutral-50/80 border border-neutral-200/60">
               <h2 class="text-xs font-bold uppercase tracking-wider text-neutral-500 mb-4">
-                Redistribution Lifecycle Stage
+                {{ languageService.isRtl() ? 'مراحل إعادة التوزيع والمطابقة' : 'Redistribution Lifecycle Stage' }}
               </h2>
               <app-lifecycle-timeline
                 [currentStep]="timelineStep()"
@@ -104,28 +105,28 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
             <!-- Detailed Specifications Grid -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs text-neutral-600 mb-6">
               <div>
-                <span class="text-neutral-400 block font-medium">Available Quantity</span>
+                <span class="text-neutral-400 block font-medium">{{ languageService.t().RES_FIELD_QUANTITY }}</span>
                 <span class="font-bold text-neutral-900 text-sm mt-0.5 block">
-                  {{ resource()!.quantity }} items
+                  {{ resource()!.quantity }} {{ languageService.isRtl() ? 'عنصر' : 'items' }}
                 </span>
               </div>
 
               <div>
-                <span class="text-neutral-400 block font-medium">Collection Window</span>
+                <span class="text-neutral-400 block font-medium">{{ languageService.t().RES_FIELD_WINDOW }}</span>
                 <span class="font-bold text-neutral-900 text-sm mt-0.5 block">
                   {{ availabilityWindowText }}
                 </span>
               </div>
 
               <div>
-                <span class="text-neutral-400 block font-medium">City & Area</span>
+                <span class="text-neutral-400 block font-medium">{{ languageService.t().RES_FIELD_LOCATION }}</span>
                 <span class="font-bold text-neutral-900 text-sm mt-0.5 block">
                   {{ locationText }}
                 </span>
               </div>
 
               <div>
-                <span class="text-neutral-400 block font-medium">Lifecycle Action</span>
+                <span class="text-neutral-400 block font-medium">{{ languageService.isRtl() ? 'الحالة الحالية' : 'Lifecycle Action' }}</span>
                 <span class="font-bold text-sm mt-0.5 block" [ngClass]="statusLabelColor">
                   {{ statusLabel }}
                 </span>
@@ -135,7 +136,7 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
             <!-- Safety Disclosure Section (if available) -->
             @if (resource()!.safetyDisclosure) {
               <div class="mb-6 p-4 rounded-lg bg-info-bg border border-info/20 text-xs text-info leading-relaxed">
-                <span class="font-bold block mb-1">Safety & Handling Disclosure:</span>
+                <span class="font-bold block mb-1">{{ languageService.isRtl() ? 'إفصاح السلامة والتعامل:' : 'Safety & Handling Disclosure:' }}</span>
                 {{ resource()!.safetyDisclosure }}
               </div>
             }
@@ -145,9 +146,9 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
               <!-- Left side: Information note -->
               <div class="text-xs text-neutral-500">
                 @if (canManage()) {
-                  <span class="font-medium text-neutral-700">You manage this resource listing.</span>
+                  <span class="font-medium text-neutral-700">{{ languageService.isRtl() ? 'أنت تدير هذا المورد الفائض.' : 'You manage this resource listing.' }}</span>
                 } @else {
-                  <span>Civic surplus listing verified by Dawwarha platform standards.</span>
+                  <span>{{ languageService.isRtl() ? 'مورد مدني خاضع لمعايير منصة دوّرها.' : 'Civic surplus listing verified by Dawwarha platform standards.' }}</span>
                 }
               </div>
 
@@ -162,7 +163,7 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
                       [isLoading]="isActionLoading()"
                       (clicked)="transitionStatus('publish')"
                     >
-                      Publish Listing
+                      {{ languageService.isRtl() ? 'نشر المورد' : 'Publish Listing' }}
                     </app-button>
                   }
 
@@ -174,7 +175,7 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
                       [isLoading]="isActionLoading()"
                       (clicked)="transitionStatus('markUnavailable')"
                     >
-                      Mark Unavailable
+                      {{ languageService.isRtl() ? 'تعيين كغير متاح' : 'Mark Unavailable' }}
                     </app-button>
                   }
 
@@ -186,14 +187,14 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
                       [isLoading]="isActionLoading()"
                       (clicked)="transitionStatus('reopen')"
                     >
-                      Reopen Listing
+                      {{ languageService.isRtl() ? 'إعادة فتح المورد' : 'Reopen Listing' }}
                     </app-button>
                   }
 
                   <!-- Edit Action -->
                   <a [routerLink]="['/resources', resource()!.id, 'edit']">
                     <app-button variant="ghost" size="sm">
-                      Edit
+                      {{ languageService.t().COMMON_EDIT }}
                     </app-button>
                   </a>
 
@@ -204,14 +205,14 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
                     [isLoading]="isActionLoading()"
                     (clicked)="openCancelDialog()"
                   >
-                    Cancel Listing
+                    {{ languageService.isRtl() ? 'إلغاء المورد' : 'Cancel Listing' }}
                   </app-button>
                 }
 
                 @if (!canManage()) {
                   <a routerLink="/matches">
                     <app-button variant="primary" size="sm">
-                      View Matching Demands
+                      {{ languageService.isRtl() ? 'عرض طلبات الاحتياج المطابقة' : 'View Matching Demands' }}
                     </app-button>
                   </a>
                 }
@@ -223,15 +224,18 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
         <!-- Cancellation Confirmation Modal -->
         <app-dialog
           [isOpen]="showCancelDialog()"
-          title="Cancel Resource Listing"
-          confirmText="Yes, Cancel Resource"
-          cancelText="Keep Listing"
+          [title]="languageService.isRtl() ? 'إلغاء عرض المورد' : 'Cancel Resource Listing'"
+          [confirmText]="languageService.isRtl() ? 'نعم، إلغاء المورد' : 'Yes, Cancel Resource'"
+          [cancelText]="languageService.isRtl() ? 'الإبقاء على المورد' : 'Keep Listing'"
           confirmVariant="danger"
           (confirm)="confirmCancel()"
           (close)="showCancelDialog.set(false)"
         >
           <p class="text-sm text-neutral-600">
-            Are you sure you want to cancel listing <strong>"{{ resource()?.title }}"</strong>? This action will mark the resource as cancelled and discontinue matching. This cannot be undone.
+            {{ languageService.isRtl()
+              ? 'هل أنت متأكد من رغبتك في إلغاء عرض المورد "' + resource()?.title + '"؟ سيتم إيقاف مطابقته نهائياً ولا يمكن التراجع عن هذا الإجراء.'
+              : 'Are you sure you want to cancel listing "' + resource()?.title + '"? This action will mark the resource as cancelled and discontinue matching. This cannot be undone.'
+            }}
           </p>
         </app-dialog>
       </div>
@@ -239,6 +243,7 @@ import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
   `
 })
 export class ResourceDetailComponent implements OnInit {
+  languageService = inject(LanguageService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private resourceApi = inject(ResourceApiService);
@@ -329,47 +334,48 @@ export class ResourceDetailComponent implements OnInit {
 
   get categoryName(): string {
     const res = this.resource();
+    const cat = res?.category || res?.categoryId;
+    const label = this.languageService.getCategoryLabel(cat);
+    if (label && label !== '[object Object]') return label;
     if (res?.category?.name) return res.category.name;
-    const cat = res?.categoryId;
     if (typeof cat === 'object' && cat && (cat as any).name) return (cat as any).name;
-    return 'Supply Category';
+    return this.languageService.isRtl() ? 'تصنيف المورد' : 'Supply Category';
   }
 
   get locationText(): string {
     const loc = this.resource()?.location;
-    if (!loc || !loc.city) return 'Location not specified';
+    if (!loc || !loc.city) return this.languageService.isRtl() ? 'الموقع غير محدد' : 'Location not specified';
     return loc.city + (loc.area ? ` · ${loc.area}` : '');
   }
 
   get availabilityWindowText(): string {
     const win = this.resource()?.availabilityWindow;
-    if (!win || !win.start || !win.end) return 'Flexible Window';
+    if (!win || !win.start || !win.end) return this.languageService.isRtl() ? 'نافذة استلام مرنة' : 'Flexible Window';
     try {
-      const s = new Date(win.start).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-      const e = new Date(win.end).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+      const locale = this.languageService.isRtl() ? 'ar-EG' : 'en-US';
+      const s = new Date(win.start).toLocaleDateString(locale, { month: 'short', day: 'numeric' });
+      const e = new Date(win.end).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' });
       return `${s} – ${e}`;
     } catch {
-      return 'Scheduled Window';
+      return this.languageService.isRtl() ? 'نافذة مجدولة' : 'Scheduled Window';
     }
   }
 
   get formattedCreatedDate(): string {
     const d = this.resource()?.createdAt;
-    if (!d) return 'Recently';
+    if (!d) return this.languageService.isRtl() ? 'مؤخراً' : 'Recently';
     try {
-      return new Date(d).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+      const locale = this.languageService.isRtl() ? 'ar-EG' : 'en-US';
+      return new Date(d).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' });
     } catch {
-      return 'Recently';
+      return this.languageService.isRtl() ? 'مؤخراً' : 'Recently';
     }
   }
 
   get statusLabel(): string {
     const s = this.resource()?.status;
-    switch (s) {
-      case 'in_handover': return 'In Handover';
-      case 'impact_recorded': return 'Impact Logged';
-      default: return s ? s.replace('_', ' ') : 'Draft';
-    }
+    if (!s) return this.languageService.getStatusLabel('draft');
+    return this.languageService.getStatusLabel(s);
   }
 
   get statusLabelColor(): string {
@@ -426,11 +432,11 @@ export class ResourceDetailComponent implements OnInit {
       next: (updated) => {
         this.isActionLoading.set(false);
         this.resource.set(updated);
-        this.toast.success(`Resource status transitioned to '${updated.status}'`);
+        this.toast.success(this.languageService.isRtl() ? 'تم تحديث حالة المورد بنجاح' : `Resource status transitioned to '${updated.status}'`);
       },
       error: (err) => {
         this.isActionLoading.set(false);
-        const msg = err?.error?.error?.message || err?.error?.message || 'Failed to transition status.';
+        const msg = err?.error?.error?.message || err?.error?.message || (this.languageService.isRtl() ? 'فشل تحديث حالة المورد.' : 'Failed to transition status.');
         this.toast.error(msg);
       }
     });
@@ -451,11 +457,11 @@ export class ResourceDetailComponent implements OnInit {
       next: (cancelled) => {
         this.isActionLoading.set(false);
         this.resource.set(cancelled);
-        this.toast.success('Resource cancelled successfully');
+        this.toast.success(this.languageService.isRtl() ? 'تم إلغاء عرض المورد بنجاح' : 'Resource cancelled successfully');
       },
       error: (err) => {
         this.isActionLoading.set(false);
-        const msg = err?.error?.error?.message || err?.error?.message || 'Failed to cancel resource.';
+        const msg = err?.error?.error?.message || err?.error?.message || (this.languageService.isRtl() ? 'فشل إلغاء المورد.' : 'Failed to cancel resource.');
         this.toast.error(msg);
       }
     });

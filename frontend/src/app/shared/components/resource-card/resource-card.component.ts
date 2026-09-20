@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 import { Resource, ResourceStatus } from '../../../core/models/resource.model';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-resource-card',
@@ -12,14 +13,14 @@ import { Resource, ResourceStatus } from '../../../core/models/resource.model';
     @if (variant === 'compact') {
       <div
         class="rounded-xl border border-neutral-100 bg-neutral-50 p-4 transition-all"
-        [attr.aria-label]="categoryName + ' resource: ' + (resource.title || 'Untitled') + ', quantity ' + (resource.quantity || 1) + ', location ' + locationText"
+        [attr.aria-label]="categoryName + ': ' + (resource.title || '') + ', ' + quantityLabel + ' ' + (resource.quantity || 1) + ', ' + locationText"
       >
         <div class="flex items-center justify-between border-b border-neutral-200/60 pb-2">
           <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">
-            Supplied Resource
+            {{ isArabic ? 'مورد معروض' : 'Supplied Resource' }}
           </span>
           <span class="rounded-md bg-neutral-200/60 px-2 py-0.5 text-xs font-semibold text-neutral-700">
-            Qty: {{ resource.quantity || 1 }}
+            {{ quantityLabel }}: {{ resource.quantity || 1 }}
           </span>
         </div>
 
@@ -63,7 +64,7 @@ import { Resource, ResourceStatus } from '../../../core/models/resource.model';
       <a
         [routerLink]="['/resources', resourceId]"
         class="group block rounded-card border border-neutral-200 bg-neutral-0 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/40"
-        [attr.aria-label]="categoryName + ' resource: ' + resource.title + ', quantity ' + resource.quantity + ', location ' + locationText"
+        [attr.aria-label]="categoryName + (isArabic ? ' مورد: ' : ' resource: ') + resource.title + (isArabic ? '، الكمية ' : ', quantity ') + resource.quantity + ', ' + locationText"
       >
         <!-- Header: Category & Status -->
         <div class="flex flex-wrap items-start justify-between gap-2">
@@ -104,7 +105,7 @@ import { Resource, ResourceStatus } from '../../../core/models/resource.model';
         <!-- Meta specs: Quantity & Availability Window -->
         <div class="mt-3 flex flex-wrap items-center gap-3 text-xs text-neutral-500">
           <span class="rounded bg-neutral-100 px-2 py-0.5 font-semibold text-neutral-700">
-            Qty: {{ resource.quantity }}
+            {{ quantityLabel }}: {{ resource.quantity }}
           </span>
 
           @if (availabilityText) {
@@ -128,7 +129,7 @@ import { Resource, ResourceStatus } from '../../../core/models/resource.model';
           </span>
 
           <span class="inline-flex items-center gap-1 font-medium text-primary-600 group-hover:underline">
-            View Details
+            {{ languageService?.t()?.COMMON_VIEW_DETAILS || 'View Details' }}
             <svg class="h-3 w-3 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -144,14 +145,29 @@ import { Resource, ResourceStatus } from '../../../core/models/resource.model';
   `]
 })
 export class ResourceCardComponent {
+  languageService = injectLanguageService();
+
   @Input({ required: true }) resource!: Resource;
   @Input() variant: 'default' | 'compact' = 'default';
+
+  get isArabic(): boolean {
+    return this.languageService?.currentLanguage() === 'ar';
+  }
+
+  get quantityLabel(): string {
+    return this.isArabic ? 'الكمية' : 'Qty';
+  }
 
   get resourceId(): string {
     return this.resource?._id || this.resource?.id || '';
   }
 
   get categoryName(): string {
+    if (this.languageService) {
+      const cat = this.resource?.category || this.resource?.categoryId;
+      const label = this.languageService.getCategoryLabel(cat);
+      if (label && label !== '[object Object]') return label;
+    }
     if (this.resource?.category?.name) {
       return this.resource.category.name;
     }
@@ -159,15 +175,12 @@ export class ResourceCardComponent {
     if (typeof cat === 'object' && cat && (cat as any).name) {
       return (cat as any).name;
     }
-    if (typeof cat === 'string' && cat.length > 0) {
-      return 'Category';
-    }
-    return 'General Resource';
+    return this.isArabic ? 'مورد عام' : 'General Resource';
   }
 
   get locationText(): string {
     const loc = this.resource?.location;
-    if (!loc || !loc.city) return 'Location not specified';
+    if (!loc || !loc.city) return this.isArabic ? 'الموقع غير محدد' : 'Location not specified';
     return loc.city + (loc.area ? ` · ${loc.area}` : '');
   }
 
@@ -185,7 +198,10 @@ export class ResourceCardComponent {
 
   get statusLabel(): string {
     const s = this.resource?.status;
-    if (!s) return 'Draft';
+    if (!s) return this.isArabic ? 'مسودة' : 'Draft';
+    if (this.languageService) {
+      return this.languageService.getStatusLabel(s);
+    }
     switch (s) {
       case 'in_handover':
         return 'In Handover';

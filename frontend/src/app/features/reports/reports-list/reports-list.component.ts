@@ -8,6 +8,7 @@ import { ReportCreateComponent } from '../report-create/report-create.component'
 import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-reports-list',
@@ -26,15 +27,17 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
       <!-- Header -->
       <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 class="text-2xl font-bold text-neutral-900">سجل البلاغات والشفافية</h1>
+          <h1 class="text-2xl font-bold text-neutral-900">
+            {{ isRtl ? 'سجل البلاغات والشفافية' : 'Reports & Transparency Ledger' }}
+          </h1>
           <p class="text-sm text-neutral-600 mt-1">
-            متابعة حالة البلاغات التي أرسلتها لمراجعة سلامة الموارد وموثوقية المعاملات.
+            {{ isRtl ? 'متابعة حالة البلاغات التي أرسلتها لمراجعة سلامة الموارد وموثوقية المعاملات.' : 'Track the status of reports submitted regarding resource safety and exchange integrity.' }}
           </p>
         </div>
 
         <div class="flex items-center gap-2 self-start sm:self-auto">
           <app-button variant="danger" size="sm" (clicked)="toggleCreateModal(true)">
-            + تقديم بلاغ جديد
+            {{ isRtl ? '+ تقديم بلاغ جديد' : '+ Submit New Report' }}
           </app-button>
         </div>
       </header>
@@ -45,9 +48,13 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div class="space-y-1">
-          <p class="font-semibold text-neutral-800">حماية الخصوصية وحدود الاطلاع (Privacy Boundary)</p>
+          <p class="font-semibold text-neutral-800">
+            {{ isRtl ? 'حماية الخصوصية وحدود الاطلاع (Privacy Boundary)' : 'Privacy Protection & Moderation Boundary' }}
+          </p>
           <p class="leading-relaxed">
-            وفقاً لقواعد الثقة في دَوَّرها (DESIGN.md §25): يحق للمُبلّغ معرفة حالة البلاغ العام فقط (مفتوح / قيد الفحص / تمت المعالجة) دون الاطلاع على أية مذكرات إشرافية داخلية أو تفاصيل حسابات الأطراف الأخرى لضمان سرية التحقيق.
+            {{ isRtl
+              ? 'وفقاً لقواعد الثقة في دَوَّرها (DESIGN.md §25): يحق للمُبلّغ معرفة حالة البلاغ العام فقط (مفتوح / قيد الفحص / تمت المعالجة) دون الاطلاع على أية مذكرات إشرافية داخلية أو تفاصيل حسابات الأطراف الأخرى لضمان سرية التحقيق.'
+              : 'Per Dawwarha trust guidelines (DESIGN.md §25): Reporters can view high-level status (Open / In Review / Resolved) without exposure to internal moderator notes.' }}
           </p>
         </div>
       </div>
@@ -78,14 +85,14 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
             (click)="loadReports()"
             class="text-xs font-semibold text-danger hover:underline"
           >
-            إعادة المحاولة
+            {{ isRtl ? 'إعادة المحاولة' : 'Retry' }}
           </button>
         </div>
       }
 
       <!-- Loading State -->
       @if (isLoading()) {
-        <div class="flex flex-col gap-3" aria-busy="true" aria-label="جاري تحميل سجل البلاغات...">
+        <div class="flex flex-col gap-3" aria-busy="true" [attr.aria-label]="isRtl ? 'جاري تحميل سجل البلاغات...' : 'Loading reports...'">
           @for (i of [1, 2, 3]; track i) {
             <div class="p-4 rounded-xl border border-neutral-200 bg-white flex items-center justify-between gap-3">
               <div class="space-y-2 flex-1">
@@ -105,29 +112,31 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
             </div>
-            <h3 class="text-base font-bold text-neutral-900">لا توجد بلاغات مسجلة بحسابك حتى الآن</h3>
+            <h3 class="text-base font-bold text-neutral-900">
+              {{ isRtl ? 'لا توجد بلاغات مسجلة بحسابك حتى الآن' : 'No reports recorded on your account yet' }}
+            </h3>
             <p class="text-xs text-neutral-500 max-w-md mt-1 mb-5 leading-relaxed">
-              جميع البلاغات التي ترسلها لمراجعة سلامة الموارد أو المعاملات يتم تسجيلها وحفظها هنا مع تحديثات الإشراف الفورية.
+              {{ isRtl ? 'جميع البلاغات التي ترسلها لمراجعة سلامة الموارد أو المعاملات يتم تسجيلها وحفظها هنا مع تحديثات الإشراف الفورية.' : 'All reports you submit for review are safely recorded here with real-time moderation status updates.' }}
             </p>
             <app-button variant="secondary" size="sm" (clicked)="toggleCreateModal(true)">
-              تقديم بلاغ تجريبي
+              {{ isRtl ? 'تقديم بلاغ تجريبي' : 'Submit a Demo Report' }}
             </app-button>
           </div>
         </app-card>
       } @else {
         <!-- Reports List -->
-        <ul class="flex flex-col gap-3 list-none p-0" aria-label="قائمة بلاغاتي">
+        <ul class="flex flex-col gap-3 list-none p-0" [attr.aria-label]="isRtl ? 'قائمة بلاغاتي' : 'My reports list'">
           @for (report of reports(); track report.id) {
             <li class="p-4 rounded-xl border border-neutral-200 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div class="space-y-1">
                 <div class="flex items-center gap-2">
                   <span class="text-xs font-bold text-neutral-900">
-                    بلاغ عن {{ report.targetType === 'resource' ? 'مورد' : report.targetType === 'request' ? 'طلب' : 'مستخدم' }}
+                    {{ isRtl ? ('بلاغ عن ' + (report.targetType === 'resource' ? 'مورد' : report.targetType === 'request' ? 'طلب' : 'مستخدم')) : ('Report for ' + (report.targetType === 'resource' ? 'Resource' : report.targetType === 'request' ? 'Request' : 'User')) }}
                   </span>
                   <span class="text-[11px] font-mono text-neutral-400">#{{ report.id }}</span>
                 </div>
                 <p class="text-xs text-neutral-600">
-                  السبب: <span class="font-semibold">{{ report.reason }}</span>
+                  {{ isRtl ? 'السبب:' : 'Reason:' }} <span class="font-semibold">{{ report.reason }}</span>
                   @if (report.description) {
                     — <span class="italic text-neutral-500">"{{ report.description }}"</span>
                   }
@@ -149,6 +158,12 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
   `
 })
 export class ReportsListComponent implements OnInit {
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
+
   private reportApi = inject(ReportApiService);
 
   readonly reports = signal<Report[]>([]);
@@ -173,7 +188,7 @@ export class ReportsListComponent implements OnInit {
         this.isLoading.set(false);
       },
       error: (err) => {
-        this.errorMessage.set(err?.message || 'تعذر تحميل سجل البلاغات من الخادم');
+        this.errorMessage.set(err?.message || (this.isRtl ? 'تعذر تحميل سجل البلاغات من الخادم' : 'Failed to load reports from server'));
         this.isLoading.set(false);
       }
     });

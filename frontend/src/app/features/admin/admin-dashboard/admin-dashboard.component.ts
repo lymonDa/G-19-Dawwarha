@@ -6,6 +6,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { ImpactCardComponent } from '../../../shared/components/impact-card/impact-card.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { AdminApiService, AdminAnalyticsData } from '../admin-api.service';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,11 +16,17 @@ import { AdminApiService, AdminAnalyticsData } from '../admin-api.service';
     <div class="flex flex-col gap-6">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-2xl font-bold text-neutral-900">Live Monitoring & Analytics</h1>
-          <p class="text-xs text-neutral-500 mt-0.5">Real-time performance indicators and resource flow across all 4 aggregation pipelines.</p>
+          <h1 class="text-2xl font-bold text-neutral-900">
+            {{ isRtl ? 'المراقبة المباشرة والمؤشرات التحليلية' : 'Live Monitoring & Analytics' }}
+          </h1>
+          <p class="text-xs text-neutral-500 mt-0.5">
+            {{ isRtl
+              ? 'مؤشرات الأداء المباشرة وتدفق الموارد عبر مسارات التوزيع والوساطة المجتمعية.'
+              : 'Real-time performance indicators and resource flow across all aggregation pipelines.' }}
+          </p>
         </div>
         <app-button variant="secondary" size="sm" (click)="loadAnalytics()" [disabled]="isLoading()">
-          تحديث المؤشرات
+          {{ isRtl ? 'تحديث المؤشرات' : 'Refresh Metrics' }}
         </app-button>
       </div>
 
@@ -27,7 +34,9 @@ import { AdminApiService, AdminAnalyticsData } from '../admin-api.service';
       @if (error()) {
         <div class="p-4 rounded-xl border border-danger/30 bg-danger-bg text-danger-900 flex items-center justify-between" role="alert">
           <p class="text-xs">{{ error() }}</p>
-          <app-button variant="secondary" size="sm" (click)="loadAnalytics()">إعادة المحاولة</app-button>
+          <app-button variant="secondary" size="sm" (click)="loadAnalytics()">
+            {{ isRtl ? 'إعادة المحاولة' : 'Retry' }}
+          </app-button>
         </div>
       }
 
@@ -48,32 +57,32 @@ import { AdminApiService, AdminAnalyticsData } from '../admin-api.service';
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <app-impact-card
             [value]="analytics()?.summary?.resourcesPublished ?? 0"
-            label="Total Registered Resources"
-            description="Active & ready for circular distribution"
+            [label]="isRtl ? 'إجمالي الموارد المسجلة' : 'Total Registered Resources'"
+            [description]="isRtl ? 'موارد فائضة نشطة وجاهزة للتوزيع' : 'Active & ready for circular distribution'"
             variant="aggregate"
             icon="📦"
           ></app-impact-card>
 
           <app-impact-card
             [value]="analytics()?.summary?.requestsCreated ?? 0"
-            label="Open Demand Requests"
-            description="Active seeker requests in pipeline"
+            [label]="isRtl ? 'طلبات الاحتياج المفتوحة' : 'Open Demand Requests'"
+            [description]="isRtl ? 'طلبات مستفيدين نشطة قيد المطابقة' : 'Active seeker requests in pipeline'"
             variant="aggregate"
             icon="📋"
           ></app-impact-card>
 
           <app-impact-card
             [value]="analytics()?.summary?.completedTransfers ?? 0"
-            label="Successful Matches Completed"
-            description="Dual-confirmed & logged transfers"
+            [label]="isRtl ? 'عمليات التسليم المكتملة' : 'Successful Matches Completed'"
+            [description]="isRtl ? 'تسليمات موثقة بتأكيد ثنائي الأطراف' : 'Dual-confirmed & logged transfers'"
             variant="aggregate"
             icon="✓"
           ></app-impact-card>
 
           <app-impact-card
             [value]="analytics()?.summary?.registeredOrganizations ?? 0"
-            label="Verified Organizations"
-            description="Registered and verified partner entities"
+            [label]="isRtl ? 'المنظمات المعتمدة' : 'Verified Organizations'"
+            [description]="isRtl ? 'جمعيات ومؤسسات شريكة موثقة' : 'Registered and verified partner entities'"
             variant="aggregate"
             icon="🏢"
           ></app-impact-card>
@@ -83,31 +92,49 @@ import { AdminApiService, AdminAnalyticsData } from '../admin-api.service';
       <!-- Quick Action Admin Shortcuts -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <app-card padding="md">
-          <h3 class="font-bold text-neutral-900 text-sm mb-1">Organization Verification Queue</h3>
-          <p class="text-xs text-neutral-500 mb-3">Review registration documents and ministry licenses to grant verification badges.</p>
+          <h3 class="font-bold text-neutral-900 text-sm mb-1">
+            {{ isRtl ? 'طابور اعتماد المنظمات' : 'Organization Verification Queue' }}
+          </h3>
+          <p class="text-xs text-neutral-500 mb-3">
+            {{ isRtl
+              ? 'مراجعة وثائق الإشهار وتراخيص وزارة التضامن لمنح شارات التوثيق الرسمية.'
+              : 'Review registration documents and ministry licenses to grant verification badges.' }}
+          </p>
           <a routerLink="/admin/organizations">
             <app-button variant="primary" size="sm" [fullWidth]="true">
-              Review Organizations
+              {{ isRtl ? 'فحص المنظمات والوثائق' : 'Review Organizations' }}
             </app-button>
           </a>
         </app-card>
 
         <app-card padding="md">
-          <h3 class="font-bold text-neutral-900 text-sm mb-1">User & Account Management</h3>
-          <p class="text-xs text-neutral-500 mb-3">Manage roles and monitor suspended or flagged accounts for policy violations.</p>
+          <h3 class="font-bold text-neutral-900 text-sm mb-1">
+            {{ isRtl ? 'إدارة المستخدمين والحسابات' : 'User & Account Management' }}
+          </h3>
+          <p class="text-xs text-neutral-500 mb-3">
+            {{ isRtl
+              ? 'إدارة صلاحيات الأدوار ومراقبة الحسابات المعلقة بسبب مخالفة سياسات المنصة.'
+              : 'Manage roles and monitor suspended or flagged accounts for policy violations.' }}
+          </p>
           <a routerLink="/admin/users">
             <app-button variant="secondary" size="sm" [fullWidth]="true">
-              Open Users Table
+              {{ isRtl ? 'فتح جدول المستخدمين' : 'Open Users Table' }}
             </app-button>
           </a>
         </app-card>
 
         <app-card padding="md">
-          <h3 class="font-bold text-neutral-900 text-sm mb-1">Categories & Moderation</h3>
-          <p class="text-xs text-neutral-500 mb-3">Manage the resource taxonomy tree and resolve flagged disputes and complaints.</p>
+          <h3 class="font-bold text-neutral-900 text-sm mb-1">
+            {{ isRtl ? 'التصنيفات وإدارة النزاعات' : 'Categories & Moderation' }}
+          </h3>
+          <p class="text-xs text-neutral-500 mb-3">
+            {{ isRtl
+              ? 'إدارة شجرة تصنيفات الموارد ومعالجة بلاغات عدم الحضور والمخالفات.'
+              : 'Manage the resource taxonomy tree and resolve flagged disputes and complaints.' }}
+          </p>
           <a routerLink="/admin/categories">
             <app-button variant="secondary" size="sm" [fullWidth]="true">
-              Edit Categories
+              {{ isRtl ? 'تعديل التصنيفات' : 'Edit Categories' }}
             </app-button>
           </a>
         </app-card>
@@ -116,11 +143,16 @@ import { AdminApiService, AdminAnalyticsData } from '../admin-api.service';
   `
 })
 export class AdminDashboardComponent implements OnInit {
+  protected languageService = injectLanguageService();
   private adminApi = inject(AdminApiService);
 
   readonly analytics = signal<AdminAnalyticsData | null>(null);
   readonly isLoading = signal<boolean>(true);
   readonly error = signal<string | null>(null);
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
 
   ngOnInit(): void {
     this.loadAnalytics();
@@ -135,9 +167,10 @@ export class AdminDashboardComponent implements OnInit {
         this.isLoading.set(false);
       },
       error: (err) => {
-        this.error.set(err?.message || 'تعذر تحميل مؤشرات المنصة المباشرة');
+        this.error.set(err?.message || (this.isRtl ? 'تعذر تحميل مؤشرات المنصة المباشرة' : 'Failed to load live metrics'));
         this.isLoading.set(false);
       }
     });
   }
 }
+

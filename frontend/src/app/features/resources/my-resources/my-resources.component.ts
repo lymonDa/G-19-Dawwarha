@@ -1,9 +1,10 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 import { ResourceApiService } from '../resource-api.service';
 import { AuthService } from '../../../core/auth/auth.service';
+import { LanguageService } from '../../../core/services/language.service';
 import { Resource, ResourceStatus } from '../../../core/models/resource.model';
 import { ResourceCardComponent } from '../../../shared/components/resource-card/resource-card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
@@ -34,10 +35,10 @@ interface StatusTab {
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
-              My Listed Resources
+              {{ languageService.t().RES_MY_TITLE }}
             </h1>
             <p class="text-sm text-neutral-500 mt-1">
-              Manage your surplus listings, monitor lifecycle updates, and track matched demands.
+              {{ languageService.t().RES_MY_SUBTITLE }}
             </p>
           </div>
 
@@ -46,7 +47,7 @@ interface StatusTab {
               routerLink="/resources"
               class="rounded-lg border border-neutral-200 bg-neutral-0 px-4 py-2.5 text-sm font-semibold text-neutral-700 shadow-xs transition hover:bg-neutral-50"
             >
-              Browse Public Feed
+              {{ languageService.t().NAV_RESOURCES }}
             </a>
             <a
               routerLink="/resources/create"
@@ -55,14 +56,14 @@ interface StatusTab {
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              <span>+ List New Resource</span>
+              <span>+ {{ languageService.t().RES_OFFER_SURPLUS_BTN }}</span>
             </a>
           </div>
         </div>
 
         <!-- Filter Tabs -->
         <div class="border-b border-neutral-200">
-          <nav class="-mb-px flex gap-2 overflow-x-auto pb-1" aria-label="Resource Status Tabs" role="tablist">
+          <nav class="-mb-px flex gap-2 overflow-x-auto pb-1" [attr.aria-label]="languageService.isRtl() ? 'تبويبات حالة الموارد' : 'Resource Status Tabs'" role="tablist">
             @for (tab of tabs; track tab.id) {
               <button
                 type="button"
@@ -74,7 +75,7 @@ interface StatusTab {
                   ? 'border-primary text-primary'
                   : 'border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700'"
               >
-                {{ tab.label }}
+                {{ getTabLabel(tab.id) }}
                 <span
                   class="ms-1.5 rounded-full px-2 py-0.5 text-[11px] font-semibold"
                   [ngClass]="selectedTab() === tab.id ? 'bg-primary-50 text-primary' : 'bg-neutral-100 text-neutral-600'"
@@ -95,7 +96,7 @@ interface StatusTab {
               </svg>
               <span>{{ errorMessage() }}</span>
             </div>
-            <app-button variant="outline" size="sm" (clicked)="fetchMyResources()">Retry</app-button>
+            <app-button variant="outline" size="sm" (clicked)="fetchMyResources()">{{ languageService.t().COMMON_RETRY }}</app-button>
           </div>
         }
 
@@ -114,9 +115,9 @@ interface StatusTab {
           <!-- Empty State -->
           <div class="rounded-card border border-neutral-200 bg-neutral-0 p-12 text-center">
             <app-empty-state
-              title="No resources found"
-              description="You have no surplus listings in this status. Register your first item to begin offering civic resources."
-              actionLabel="+ List New Resource"
+              [title]="languageService.t().RES_EMPTY_TITLE"
+              [description]="languageService.t().RES_NO_MINE"
+              [actionLabel]="'+ ' + languageService.t().RES_OFFER_SURPLUS_BTN"
               (actionClicked)="navigateCreate()"
             ></app-empty-state>
           </div>
@@ -135,8 +136,10 @@ interface StatusTab {
   `
 })
 export class MyResourcesComponent implements OnInit {
+  languageService = inject(LanguageService);
   private resourceApi = inject(ResourceApiService);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   readonly resources = signal<Resource[]>([]);
   readonly isLoading = signal<boolean>(true);
@@ -197,7 +200,19 @@ export class MyResourcesComponent implements OnInit {
     return list.filter(r => tab.statuses!.includes(r.status)).length;
   }
 
+  getTabLabel(tabId: string): string {
+    const isAr = this.languageService.isRtl();
+    switch (tabId) {
+      case 'all': return isAr ? 'جميع الموارد' : 'All Listings';
+      case 'available': return isAr ? 'المتاح' : 'Available';
+      case 'progress': return isAr ? 'قيد التنفيذ' : 'In Progress';
+      case 'completed': return isAr ? 'المكتمل' : 'Completed';
+      case 'inactive': return isAr ? 'غير نشط / مسودة' : 'Inactive / Draft';
+      default: return tabId;
+    }
+  }
+
   navigateCreate(): void {
-    // Navigation is handled via template link
+    this.router.navigate(['/resources/create']);
   }
 }

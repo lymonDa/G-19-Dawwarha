@@ -8,6 +8,7 @@ import { Request, RequestStatus } from '../../../core/models/request.model';
 import { RequestCardComponent } from '../../../shared/components/request-card/request-card.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-my-requests',
@@ -26,10 +27,10 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 class="text-3xl font-bold tracking-tight text-neutral-900">
-              My Requests
+              {{ isRtl ? 'طلبات الاحتياج الخاصة بي' : 'My Demand Requests' }}
             </h1>
             <p class="mt-1 text-sm text-neutral-500">
-              Manage, track status, and view active matches for your demand requests.
+              {{ isRtl ? 'متابعة حالة الطلبات المسجلة من قبلك ونسب المطابقة والاحتياجات المتوفرة.' : 'Manage, track status, and view active matches for your demand requests.' }}
             </p>
           </div>
 
@@ -38,7 +39,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
               routerLink="/requests"
               class="rounded-lg border border-neutral-200 bg-neutral-0 px-4 py-2.5 text-sm font-semibold text-neutral-700 shadow-sm transition hover:bg-neutral-50"
             >
-              Browse All Requests
+              {{ isRtl ? 'تصفح جميع الطلبات' : 'Browse All Requests' }}
             </a>
             <a
               routerLink="/requests/create"
@@ -47,7 +48,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              <span>New Request</span>
+              <span>{{ isRtl ? 'تسجيل طلب احتياج' : 'New Request' }}</span>
             </a>
           </div>
         </div>
@@ -67,7 +68,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
                   ? 'border-primary-600 text-primary-700'
                   : 'border-transparent text-neutral-500 hover:border-neutral-300 hover:text-neutral-700'"
               >
-                <span>{{ tab.label }}</span>
+                <span>{{ getTabLabel(tab.key) }}</span>
                 <span
                   class="rounded-full px-2 py-0.5 text-xs font-semibold"
                   [ngClass]="activeTab === tab.key
@@ -96,7 +97,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
                 (click)="loadMyRequests()"
                 class="rounded bg-danger px-3 py-1 text-xs font-semibold text-white hover:bg-danger/90"
               >
-                Retry
+                {{ isRtl ? 'إعادة المحاولة' : 'Retry' }}
               </button>
             </div>
           </div>
@@ -112,9 +113,9 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
             </div>
           } @else if (filteredRequests.length === 0) {
             <app-empty-state
-              title="No requests in this category"
-              [description]="activeTab === 'all' ? 'You haven\\'t posted any demand requests yet.' : 'You have no requests currently with status &quot;' + activeTab + '&quot;.'"
-              actionLabel="Create Your First Request"
+              [title]="isRtl ? 'لا توجد طلبات في هذا التصنيف' : 'No requests in this category'"
+              [description]="emptyDescription"
+              [actionLabel]="isRtl ? 'تسجيل طلبك الأول' : 'Create Your First Request'"
               (actionClicked)="navigateToCreate()"
             />
           } @else {
@@ -135,9 +136,22 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
   `]
 })
 export class MyRequestsComponent implements OnInit {
-  private api = inject(RequestApiService);
-  private auth = inject(AuthService);
-  private router = inject(Router);
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
+
+  get emptyDescription(): string {
+    if (this.activeTab === 'all') {
+      return this.isRtl
+        ? 'لم تقم بتسجيل أي طلبات احتياج حتى الآن.'
+        : "You haven't posted any demand requests yet.";
+    }
+    return this.isRtl
+      ? `لا توجد لديك طلبات حالياً بالحالة "${this.getTabLabel(this.activeTab)}".`
+      : `You have no requests currently with status "${this.getTabLabel(this.activeTab)}".`;
+  }
 
   allRequests: Request[] = [];
   filteredRequests: Request[] = [];
@@ -146,15 +160,26 @@ export class MyRequestsComponent implements OnInit {
   loading = true;
   errorMessage = '';
 
-  readonly tabs: { key: 'all' | RequestStatus; label: string }[] = [
-    { key: 'all', label: 'All Requests' },
-    { key: 'published', label: 'Published' },
-    { key: 'matched', label: 'Matched' },
-    { key: 'draft', label: 'Drafts' },
-    { key: 'accepted', label: 'Accepted' },
-    { key: 'fulfilled', label: 'Fulfilled' },
-    { key: 'cancelled', label: 'Cancelled' }
+  readonly tabs: { key: 'all' | RequestStatus }[] = [
+    { key: 'all' },
+    { key: 'published' },
+    { key: 'matched' },
+    { key: 'draft' },
+    { key: 'accepted' },
+    { key: 'fulfilled' },
+    { key: 'cancelled' }
   ];
+
+  private api = inject(RequestApiService);
+  private auth = inject(AuthService);
+  private router = inject(Router);
+
+  getTabLabel(key: 'all' | RequestStatus): string {
+    if (key === 'all') {
+      return this.isRtl ? 'جميع الطلبات' : 'All Requests';
+    }
+    return this.languageService?.getStatusLabel(key) || key;
+  }
 
   ngOnInit(): void {
     this.loadMyRequests();
@@ -187,7 +212,7 @@ export class MyRequestsComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err?.error?.message || 'Failed to load your requests.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل تحميل طلباتك.' : 'Failed to load your requests.');
       }
     });
   }

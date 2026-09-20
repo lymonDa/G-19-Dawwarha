@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AdminApiService } from '../admin-api.service';
@@ -51,7 +51,7 @@ import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.
 
           <div class="w-full sm:w-44">
             <app-select
-              [options]="roleOptions"
+              [options]="roleOptions()"
               [(ngModel)]="roleFilter"
               (ngModelChange)="onRoleFilterChange()"
             ></app-select>
@@ -63,12 +63,12 @@ import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.
       <app-table>
         <thead class="bg-neutral-50 border-b border-neutral-200 text-neutral-600">
           <tr>
-            <th class="px-4 py-3 text-start text-xs font-semibold">User</th>
-            <th class="px-4 py-3 text-start text-xs font-semibold">Role</th>
-            <th class="px-4 py-3 text-start text-xs font-semibold">Status</th>
-            <th class="px-4 py-3 text-start text-xs font-semibold">Contributions</th>
-            <th class="px-4 py-3 text-start text-xs font-semibold">Joined</th>
-            <th class="px-4 py-3 text-end text-xs font-semibold">Actions</th>
+            <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'المستخدم' : 'User' }}</th>
+            <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'الدور' : 'Role' }}</th>
+            <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'الحالة' : 'Status' }}</th>
+            <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'المساهمات' : 'Contributions' }}</th>
+            <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'تاريخ الانضمام' : 'Joined' }}</th>
+            <th class="px-4 py-3 text-end text-xs font-semibold">{{ isRtl ? 'الإجراءات' : 'Actions' }}</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-neutral-100">
@@ -122,7 +122,7 @@ import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.
                 <!-- Status -->
                 <td class="px-4 py-3">
                   <app-badge [variant]="user.status === 'active' ? 'success' : 'danger'" size="sm" [dot]="true">
-                    {{ user.status === 'active' ? 'Active' : 'Suspended' }}
+                    {{ user.status === 'active' ? (isRtl ? 'نشط' : 'Active') : (isRtl ? 'موقوف' : 'Suspended') }}
                   </app-badge>
                 </td>
 
@@ -144,7 +144,9 @@ import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.
                       size="sm"
                       (clicked)="confirmStatusToggle(user)"
                     >
-                      {{ user.status === 'active' ? 'Suspend Account' : 'Reactivate' }}
+                      {{ user.status === 'active'
+                        ? (isRtl ? 'إيقاف الحساب' : 'Suspend Account')
+                        : (isRtl ? 'إعادة التنشيط' : 'Reactivate') }}
                     </app-button>
                   }
                 </td>
@@ -166,17 +168,22 @@ import { SelectComponent, SelectOption } from '../../../shared/ui/select/select.
       <!-- Confirmation Dialog -->
       <app-dialog
         [isOpen]="isDialogOpen()"
-        [title]="selectedUser()?.status === 'active' ? 'Confirm Account Suspension' : 'Confirm Account Reactivation'"
-        [confirmText]="selectedUser()?.status === 'active' ? 'Yes, Suspend Account' : 'Yes, Reactivate Account'"
+        [title]="selectedUser()?.status === 'active'
+          ? (isRtl ? 'تأكيد إيقاف الحساب' : 'Confirm Account Suspension')
+          : (isRtl ? 'تأكيد إعادة تنشيط الحساب' : 'Confirm Account Reactivation')"
+        [confirmText]="selectedUser()?.status === 'active'
+          ? (isRtl ? 'نعم، أوقف الحساب' : 'Yes, Suspend Account')
+          : (isRtl ? 'نعم، أعد التنشيط' : 'Yes, Reactivate Account')"
+        [cancelText]="isRtl ? 'إلغاء' : 'Cancel'"
         [confirmVariant]="selectedUser()?.status === 'active' ? 'danger' : 'primary'"
         [isLoading]="isProcessingAction()"
         (close)="isDialogOpen.set(false)"
         (confirm)="executeStatusToggle()"
       >
         <p>
-          Are you sure you want to change the status for
+          {{ isRtl ? 'هل أنت متأكد من تغيير حالة حساب' : 'Are you sure you want to change the status for' }}
           <span class="font-bold text-neutral-900">{{ selectedUser()?.name }}</span>
-          ({{ selectedUser()?.email }})?
+          ({{ selectedUser()?.email }})؟
         </p>
       </app-dialog>
     </div>
@@ -198,11 +205,18 @@ export class AdminUsersComponent implements OnInit {
   searchQuery = '';
   roleFilter = '';
 
-  readonly roleOptions: SelectOption[] = [
-    { value: '', label: 'All Roles' },
-    { value: 'user', label: 'Individuals' },
-    { value: 'admin', label: 'Admins' }
-  ];
+  get isRtl(): boolean {
+    return this.lang.isRtl();
+  }
+
+  readonly roleOptions = computed<SelectOption[]>(() => {
+    const rtl = this.isRtl;
+    return [
+      { value: '', label: rtl ? 'جميع الأدوار' : 'All Roles' },
+      { value: 'user', label: rtl ? 'أفراد' : 'Individuals' },
+      { value: 'admin', label: rtl ? 'مشرفون' : 'Admins' }
+    ];
+  });
 
   readonly isDialogOpen = signal(false);
   readonly isProcessingAction = signal(false);
@@ -238,7 +252,7 @@ export class AdminUsersComponent implements OnInit {
         this.total.set(0);
         this.totalPages.set(1);
         this.isLoading.set(false);
-        this.errorMessage.set(err?.message || 'Failed to fetch users list');
+        this.errorMessage.set(err?.message || (this.isRtl ? 'تعذر جلب قائمة المستخدمين' : 'Failed to fetch users list'));
       }
     });
   }
@@ -272,13 +286,17 @@ export class AdminUsersComponent implements OnInit {
       next: () => {
         this.isProcessingAction.set(false);
         this.isDialogOpen.set(false);
-        this.toast.success(isSuspending ? 'User suspended successfully' : 'User reactivated successfully');
+        this.toast.success(
+          isSuspending
+            ? (this.isRtl ? 'تم إيقاف الحساب بنجاح' : 'User suspended successfully')
+            : (this.isRtl ? 'تمت إعادة تنشيط الحساب بنجاح' : 'User reactivated successfully')
+        );
         this.loadUsers();
       },
       error: (err) => {
         this.isProcessingAction.set(false);
         this.isDialogOpen.set(false);
-        this.toast.error(err?.message || 'Failed to update user status');
+        this.toast.error(err?.message || (this.isRtl ? 'تعذر تحديث حالة المستخدم' : 'Failed to update user status'));
       }
     });
   }
@@ -289,15 +307,16 @@ export class AdminUsersComponent implements OnInit {
   }
 
   getRoleText(role: UserRole): string {
-    if (role === 'admin') return 'Admin';
-    return 'Individual';
+    if (role === 'admin') return this.isRtl ? 'مشرف' : 'Admin';
+    return this.isRtl ? 'فرد' : 'Individual';
   }
 
   formatDate(isoDate: string): string {
     try {
-      return new Date(isoDate).toLocaleDateString('en-US');
+      return new Date(isoDate).toLocaleDateString(this.isRtl ? 'ar-EG' : 'en-US');
     } catch {
       return isoDate;
     }
   }
 }
+

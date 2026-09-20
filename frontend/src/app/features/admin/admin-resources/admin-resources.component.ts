@@ -8,6 +8,7 @@ import { TableComponent } from '../../../shared/ui/table/table.component';
 import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-admin-resources',
@@ -21,17 +22,21 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
     SkeletonComponent
   ],
   template: `
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-6" [dir]="isRtl ? 'rtl' : 'ltr'">
       <!-- Header Row -->
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-xl font-bold text-neutral-900">Resource Management & Monitoring</h1>
+          <h1 class="text-xl font-bold text-neutral-900">
+            {{ isRtl ? 'إدارة ومراقبة الموارد المتاحة' : 'Resource Management & Monitoring' }}
+          </h1>
           <p class="text-xs text-neutral-500 mt-0.5">
-            Monitor all resources registered on the platform and verify compliance with safety policies.
+            {{ isRtl
+              ? 'مراقبة جميع الموارد المسجلة على المنصة والتحقق من سلامتها ومطابقتها للمعايير.'
+              : 'Monitor all resources registered on the platform and verify compliance with safety policies.' }}
           </p>
         </div>
         <app-button variant="outline" size="sm" (clicked)="fetchResources()">
-          Refresh
+          {{ isRtl ? 'تحديث' : 'Refresh' }}
         </app-button>
       </div>
 
@@ -39,7 +44,9 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
       @if (errorMessage()) {
         <div class="p-3 rounded-md bg-danger-bg border border-danger/20 text-xs text-danger flex items-center justify-between">
           <span>{{ errorMessage() }}</span>
-          <app-button variant="outline" size="sm" (clicked)="fetchResources()">Retry</app-button>
+          <app-button variant="outline" size="sm" (clicked)="fetchResources()">
+            {{ isRtl ? 'إعادة المحاولة' : 'Retry' }}
+          </app-button>
         </div>
       }
 
@@ -55,12 +62,12 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
         <app-table>
           <thead class="bg-neutral-50 border-b border-neutral-200 text-neutral-600">
             <tr>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Resource</th>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Category</th>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Quantity</th>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Location</th>
-              <th class="px-4 py-3 text-start text-xs font-semibold">Status</th>
-              <th class="px-4 py-3 text-end text-xs font-semibold">Actions</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'المورد' : 'Resource' }}</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'التصنيف' : 'Category' }}</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'الكمية' : 'Quantity' }}</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'الموقع' : 'Location' }}</th>
+              <th class="px-4 py-3 text-start text-xs font-semibold">{{ isRtl ? 'الحالة' : 'Status' }}</th>
+              <th class="px-4 py-3 text-end text-xs font-semibold">{{ isRtl ? 'الإجراءات' : 'Actions' }}</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-neutral-100 text-xs">
@@ -68,23 +75,25 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
               <tr class="hover:bg-neutral-50/80 transition-colors">
                 <td class="px-4 py-3 font-semibold text-neutral-900">{{ res.title }}</td>
                 <td class="px-4 py-3 text-neutral-600">{{ getCategoryName(res) }}</td>
-                <td class="px-4 py-3 font-mono font-medium">{{ res.quantity }} units</td>
+                <td class="px-4 py-3 font-mono font-medium">{{ res.quantity }} {{ isRtl ? 'وحدة' : 'units' }}</td>
                 <td class="px-4 py-3 text-neutral-500">{{ res.location.city }}</td>
                 <td class="px-4 py-3">
                   <app-badge [variant]="getStatusVariant(res.status)" size="sm">
-                    {{ res.status }}
+                    {{ getStatusLabel(res.status) }}
                   </app-badge>
                 </td>
                 <td class="px-4 py-3 text-end">
                   <a [routerLink]="['/resources', res.id]">
-                    <app-button variant="ghost" size="sm">Inspect</app-button>
+                    <app-button variant="ghost" size="sm">
+                      {{ isRtl ? 'معاينة' : 'Inspect' }}
+                    </app-button>
                   </a>
                 </td>
               </tr>
             } @empty {
               <tr>
                 <td colspan="6" class="px-4 py-8 text-center text-xs text-neutral-500">
-                  No resources currently registered in the database.
+                  {{ isRtl ? 'لا توجد موارد مسجلة حالياً في قاعدة البيانات.' : 'No resources currently registered in the database.' }}
                 </td>
               </tr>
             }
@@ -95,11 +104,16 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
   `
 })
 export class AdminResourcesComponent implements OnInit {
+  protected languageService = injectLanguageService();
   private resourceApi = inject(ResourceApiService);
 
   readonly resources = signal<Resource[]>([]);
   readonly isLoading = signal<boolean>(true);
   readonly errorMessage = signal<string | null>(null);
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
 
   ngOnInit(): void {
     this.fetchResources();
@@ -116,7 +130,9 @@ export class AdminResourcesComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading.set(false);
-        this.errorMessage.set(err?.error?.error?.message || err?.error?.message || 'Failed to load resources.');
+        this.errorMessage.set(
+          err?.error?.error?.message || err?.error?.message || (this.isRtl ? 'تعذر جلب قائمة الموارد.' : 'Failed to load resources.')
+        );
       }
     });
   }
@@ -126,7 +142,14 @@ export class AdminResourcesComponent implements OnInit {
     if (typeof res.categoryId === 'object' && res.categoryId && (res.categoryId as any).name) {
       return (res.categoryId as any).name;
     }
-    return 'General Resource';
+    return this.isRtl ? 'مورد عام' : 'General Resource';
+  }
+
+  getStatusLabel(status: string): string {
+    if (this.languageService) {
+      return this.languageService.getStatusLabel(status);
+    }
+    return status;
   }
 
   getStatusVariant(status: string): 'success' | 'warning' | 'info' | 'danger' | 'neutral' {
@@ -149,3 +172,4 @@ export class AdminResourcesComponent implements OnInit {
     }
   }
 }
+

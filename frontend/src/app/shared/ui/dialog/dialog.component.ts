@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, HostListener, ElementRef, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, ElementRef, ViewChild, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-dialog',
@@ -36,8 +37,8 @@ import { ButtonComponent } from '../button/button.component';
               #closeButton
               type="button"
               (click)="handleClose()"
-              class="text-neutral-400 hover:text-neutral-700 p-1 rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-primary"
-              aria-label="إغلاق"
+              class="text-neutral-400 hover:text-neutral-700 p-1 rounded-md transition-colors focus-visible:outline-2 focus-visible:outline-primary cursor-pointer"
+              [attr.aria-label]="closeAriaLabel"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -47,6 +48,9 @@ import { ButtonComponent } from '../button/button.component';
 
           <!-- Body -->
           <div class="text-sm text-neutral-700 leading-relaxed mb-6">
+            @if (description) {
+              <p>{{ description }}</p>
+            }
             <ng-content></ng-content>
           </div>
 
@@ -57,7 +61,7 @@ import { ButtonComponent } from '../button/button.component';
                 variant="ghost"
                 (clicked)="handleClose()"
               >
-                {{ cancelText }}
+                {{ resolvedCancelText }}
               </app-button>
             }
             <app-button
@@ -66,7 +70,7 @@ import { ButtonComponent } from '../button/button.component';
               [disabled]="confirmDisabled"
               (clicked)="handleConfirm()"
             >
-              {{ confirmText }}
+              {{ resolvedConfirmText }}
             </app-button>
           </div>
         </div>
@@ -75,16 +79,34 @@ import { ButtonComponent } from '../button/button.component';
   `
 })
 export class DialogComponent implements OnChanges {
+  private languageService = inject(LanguageService, { optional: true });
+
   @Input() isOpen = false;
   @Input() title = '';
-  @Input() confirmText = 'تأكيد';
-  @Input() cancelText = 'إلغاء';
+  @Input() description?: string;
+  @Input() confirmText?: string;
+  @Input() cancelText?: string;
   @Input() confirmVariant: 'primary' | 'danger' = 'primary';
   @Input() confirmDisabled = false;
   @Input() showCancel = true;
   @Input() isLoading = false;
 
+  get resolvedConfirmText(): string {
+    if (this.confirmText) return this.confirmText;
+    return this.languageService?.currentLanguage() === 'en' ? 'Confirm' : 'تأكيد';
+  }
+
+  get resolvedCancelText(): string {
+    if (this.cancelText) return this.cancelText;
+    return this.languageService?.currentLanguage() === 'en' ? 'Cancel' : 'إلغاء';
+  }
+
+  get closeAriaLabel(): string {
+    return this.languageService?.currentLanguage() === 'en' ? 'Close dialog' : 'إغلاق النافذة';
+  }
+
   @Output() close = new EventEmitter<void>();
+  @Output() cancel = new EventEmitter<void>();
   @Output() confirm = new EventEmitter<void>();
 
   @ViewChild('dialogPanel') dialogPanel?: ElementRef<HTMLElement>;
@@ -165,6 +187,7 @@ export class DialogComponent implements OnChanges {
   handleClose(): void {
     this.restorePreviousFocus();
     this.close.emit();
+    this.cancel.emit();
   }
 
   handleConfirm(): void {

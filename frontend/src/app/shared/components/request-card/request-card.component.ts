@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 
 import { Request } from '../../../core/models/request.model';
 import { UrgencyBadgeComponent } from '../urgency-badge/urgency-badge.component';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-request-card',
@@ -13,14 +14,14 @@ import { UrgencyBadgeComponent } from '../urgency-badge/urgency-badge.component'
     @if (variant === 'compact') {
       <div
         class="rounded-xl border border-neutral-100 bg-neutral-50 p-4 transition-all"
-        [attr.aria-label]="categoryName + ' request, quantity ' + (request.quantity || 1) + ', location ' + locationText"
+        [attr.aria-label]="categoryName + ' - ' + quantityLabel + ' ' + (request.quantity || 1) + ', ' + locationText"
       >
         <div class="flex items-center justify-between border-b border-neutral-200/60 pb-2">
           <span class="text-xs font-bold uppercase tracking-wider text-neutral-500">
-            Target Request
+            {{ isArabic ? 'طلب احتياج' : 'Target Request' }}
           </span>
           <span class="rounded-md bg-neutral-200/60 px-2 py-0.5 text-xs font-semibold text-neutral-700">
-            Qty: {{ request.quantity || 1 }}
+            {{ quantityLabel }}: {{ request.quantity || 1 }}
           </span>
         </div>
 
@@ -45,7 +46,7 @@ import { UrgencyBadgeComponent } from '../urgency-badge/urgency-badge.component'
       <a
         [routerLink]="['/requests', requestId]"
         class="group block rounded-card border border-neutral-200 bg-neutral-0 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-md"
-        [attr.aria-label]="categoryName + ' request, quantity ' + request.quantity + ', location ' + locationText"
+        [attr.aria-label]="categoryName + ' - ' + quantityLabel + ' ' + request.quantity + ', ' + locationText"
       >
         <!-- Header: Category & Status / Urgency -->
         <div class="flex flex-wrap items-start justify-between gap-2">
@@ -61,7 +62,7 @@ import { UrgencyBadgeComponent } from '../urgency-badge/urgency-badge.component'
                 {{ categoryName }}
               </h3>
               <span class="inline-block rounded bg-neutral-100 px-2 py-0.5 text-xs font-semibold text-neutral-700">
-                Requested: {{ request.quantity }} items
+                {{ isArabic ? 'الكمية المطلوبة' : 'Requested' }}: {{ request.quantity }} {{ isArabic ? 'عنصر' : 'items' }}
               </span>
             </div>
           </div>
@@ -73,7 +74,7 @@ import { UrgencyBadgeComponent } from '../urgency-badge/urgency-badge.component'
               class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-medium capitalize"
               [ngClass]="statusBadgeClass"
             >
-              {{ request.status }}
+              {{ statusLabel }}
             </span>
           </div>
         </div>
@@ -94,7 +95,7 @@ import { UrgencyBadgeComponent } from '../urgency-badge/urgency-badge.component'
           </span>
 
           <span class="inline-flex items-center gap-1 font-medium text-primary-600 group-hover:underline">
-            View Request
+            {{ languageService?.t()?.COMMON_VIEW_DETAILS || 'View Details' }}
             <svg class="h-3 w-3 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -110,14 +111,29 @@ import { UrgencyBadgeComponent } from '../urgency-badge/urgency-badge.component'
   `]
 })
 export class RequestCardComponent {
+  languageService = injectLanguageService();
+
   @Input({ required: true }) request!: Request;
   @Input() variant: 'default' | 'compact' = 'default';
+
+  get isArabic(): boolean {
+    return this.languageService?.currentLanguage() === 'ar';
+  }
+
+  get quantityLabel(): string {
+    return this.isArabic ? 'الكمية' : 'Qty';
+  }
 
   get requestId(): string {
     return this.request?._id || this.request?.id || '';
   }
 
   get categoryName(): string {
+    if (this.languageService) {
+      const cat = this.request?.categoryId;
+      const label = this.languageService.getCategoryLabel(cat);
+      if (label && label !== '[object Object]') return label;
+    }
     const cat = this.request?.categoryId;
     if (typeof cat === 'object' && cat?.name) {
       return cat.name;
@@ -125,13 +141,22 @@ export class RequestCardComponent {
     if (typeof cat === 'string') {
       return cat;
     }
-    return 'Demand Request';
+    return this.isArabic ? 'طلب احتياج' : 'Demand Request';
   }
 
   get locationText(): string {
     const loc = this.request?.location;
-    if (!loc) return 'Location not specified';
+    if (!loc) return this.isArabic ? 'الموقع غير محدد' : 'Location not specified';
     return loc.city + (loc.area ? ` · ${loc.area}` : '');
+  }
+
+  get statusLabel(): string {
+    const s = this.request?.status;
+    if (!s) return '';
+    if (this.languageService) {
+      return this.languageService.getStatusLabel(s);
+    }
+    return s;
   }
 
   get statusBadgeClass(): string {

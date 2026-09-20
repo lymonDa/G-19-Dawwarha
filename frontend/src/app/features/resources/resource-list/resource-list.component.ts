@@ -7,6 +7,7 @@ import { ResourceApiService } from '../resource-api.service';
 import { CategoryApiService } from '../../categories/category-api.service';
 import { Resource } from '../../../core/models/resource.model';
 import { Category } from '../../../core/models/category.model';
+import { LanguageService } from '../../../core/services/language.service';
 import { ResourceCardComponent } from '../../../shared/components/resource-card/resource-card.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.component';
@@ -31,10 +32,10 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900">
-              Browse Available Resources
+              {{ languageService.t().RES_BROWSE_TITLE }}
             </h1>
             <p class="text-sm text-neutral-500 mt-1">
-              Explore surplus equipment, materials, and supplies ready for civic redistribution and matching.
+              {{ languageService.t().RES_BROWSE_SUBTITLE }}
             </p>
           </div>
 
@@ -43,7 +44,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               routerLink="/resources/mine"
               class="rounded-lg border border-neutral-200 bg-neutral-0 px-4 py-2.5 text-sm font-semibold text-neutral-700 shadow-xs transition hover:bg-neutral-50"
             >
-              My Listings
+              {{ languageService.t().NAV_MY_RESOURCES }}
             </a>
             <a
               routerLink="/resources/create"
@@ -52,7 +53,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              <span>+ List a Resource</span>
+              <span>+ {{ languageService.t().RES_OFFER_SURPLUS_BTN }}</span>
             </a>
           </div>
         </div>
@@ -64,18 +65,18 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
             <div class="relative">
               <input
                 type="text"
-                placeholder="Search resources by title or description..."
+                [placeholder]="languageService.t().COMMON_SEARCH_PLACEHOLDER"
                 [(ngModel)]="searchQuery"
                 (ngModelChange)="onSearchChange()"
                 class="w-full rounded-md border border-neutral-200 bg-neutral-50 px-3.5 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-primary focus:bg-white focus:outline-none focus:ring-1 focus:ring-primary"
-                aria-label="Search resources"
+                [attr.aria-label]="languageService.t().COMMON_SEARCH"
               />
               @if (searchQuery) {
                 <button
                   type="button"
                   (click)="clearSearch()"
                   class="absolute inset-y-0 end-2 flex items-center text-xs text-neutral-400 hover:text-neutral-600"
-                  aria-label="Clear search"
+                  [attr.aria-label]="languageService.t().COMMON_CLEAR_SEARCH"
                 >
                   ✕
                 </button>
@@ -86,11 +87,11 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
             <div>
               <input
                 type="text"
-                placeholder="Filter by city (e.g. Cairo, Giza)..."
+                [placeholder]="languageService.t().COMMON_FILTER_BY_CITY_PLACEHOLDER"
                 [(ngModel)]="cityFilter"
                 (ngModelChange)="onFilterChange()"
                 class="w-full rounded-md border border-neutral-200 bg-neutral-50 px-3.5 py-2 text-sm text-neutral-900 placeholder:text-neutral-400 focus:border-primary focus:bg-white focus:outline-none focus:ring-1 focus:ring-primary"
-                aria-label="Filter by city"
+                [attr.aria-label]="languageService.t().COMMON_FILTER_BY_CITY"
               />
             </div>
 
@@ -102,7 +103,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   (click)="resetFilters()"
                   class="text-xs text-primary font-medium hover:underline flex items-center gap-1"
                 >
-                  Reset all filters
+                  {{ languageService.t().COMMON_RESET_FILTERS }}
                 </button>
               </div>
             }
@@ -110,7 +111,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
 
           <!-- Dynamic Category Chips -->
           <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-neutral-100">
-            <span class="text-xs font-semibold text-neutral-500 me-1">Category:</span>
+            <span class="text-xs font-semibold text-neutral-500 me-1">{{ languageService.t().COMMON_CATEGORY }}:</span>
 
             <button
               type="button"
@@ -118,7 +119,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               class="rounded-full px-3 py-1 text-xs font-medium transition-colors"
               [ngClass]="selectedCategoryId === null ? 'bg-primary text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'"
             >
-              All Categories
+              {{ languageService.t().COMMON_ALL_CATEGORIES }}
             </button>
 
             @for (cat of categories(); track (cat.id || cat._id)) {
@@ -128,7 +129,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                 class="rounded-full px-3 py-1 text-xs font-medium transition-colors"
                 [ngClass]="selectedCategoryId === (cat.id || cat._id) ? 'bg-primary text-white' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'"
               >
-                {{ cat.name }}
+                {{ languageService.getCategoryLabel(cat) }}
               </button>
             }
           </div>
@@ -143,7 +144,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               </svg>
               <span>{{ errorMessage }}</span>
             </div>
-            <app-button variant="outline" size="sm" (clicked)="fetchResources()">Retry</app-button>
+            <app-button variant="outline" size="sm" (clicked)="fetchResources()">{{ languageService.t().COMMON_RETRY }}</app-button>
           </div>
         }
 
@@ -166,9 +167,9 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
           <!-- Empty State -->
           <div class="rounded-card border border-neutral-200 bg-neutral-0 p-12 text-center">
             <app-empty-state
-              title="No resources found"
-              description="No surplus listings match your current filter criteria. Try adjusting your search query or clear filters to see more results."
-              actionLabel="Clear Filters"
+              [title]="languageService.t().RES_EMPTY_TITLE"
+              [description]="languageService.t().RES_EMPTY_DESC"
+              [actionLabel]="languageService.t().COMMON_CLEAR_FILTERS"
               (actionClicked)="resetFilters()"
             ></app-empty-state>
           </div>
@@ -183,7 +184,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
           <!-- Pagination Bar -->
           @if (totalPages > 1) {
             <div class="flex items-center justify-between border-t border-neutral-200 pt-4 px-2 text-xs text-neutral-600">
-              <span>Showing page {{ currentPage }} of {{ totalPages }} ({{ totalCount }} total resources)</span>
+              <span>{{ languageService.isRtl() ? ('عرض الصفحة ' + currentPage + ' من ' + totalPages + ' (' + totalCount + ' إجمالي الموارد)') : ('Showing page ' + currentPage + ' of ' + totalPages + ' (' + totalCount + ' total resources)') }}</span>
               <div class="flex items-center gap-2">
                 <button
                   type="button"
@@ -191,7 +192,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   (click)="goToPage(currentPage - 1)"
                   class="rounded border border-neutral-300 px-3 py-1.5 font-medium hover:bg-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Previous
+                  {{ languageService.t().COMMON_PREVIOUS }}
                 </button>
                 <button
                   type="button"
@@ -199,7 +200,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   (click)="goToPage(currentPage + 1)"
                   class="rounded border border-neutral-300 px-3 py-1.5 font-medium hover:bg-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Next
+                  {{ languageService.t().COMMON_NEXT }}
                 </button>
               </div>
             </div>
@@ -210,6 +211,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
   `
 })
 export class ResourceListComponent implements OnInit {
+  languageService = inject(LanguageService);
   private resourceApi = inject(ResourceApiService);
   private categoryApi = inject(CategoryApiService);
 

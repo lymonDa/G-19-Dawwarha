@@ -10,6 +10,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
 import { VerificationBadgeComponent } from '../../../shared/components/verification-badge/verification-badge.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-org-verification',
@@ -27,9 +28,13 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
     <div class="max-w-3xl mx-auto py-8 px-4 sm:px-6 flex flex-col gap-6">
       <!-- Header -->
       <header>
-        <h1 class="text-2xl font-bold text-neutral-900">توثيق الحساب والاعتماد الرسمي للمنظمة</h1>
+        <h1 class="text-2xl font-bold text-neutral-900">
+          {{ isRtl ? 'توثيق الحساب والاعتماد الرسمي للمنظمة' : 'Account Verification & Accreditation' }}
+        </h1>
         <p class="text-sm text-neutral-600 mt-1">
-          يمنح التوثيق الرسمي الشارة الخضراء الموثوقة للمنظمة ويعزز ثقة المتبرعين والجهات الشريكة في التوزيع العادل.
+          {{ isRtl
+            ? 'يمنح التوثيق الرسمي الشارة الخضراء الموثوقة للمنظمة ويعزز ثقة المتبرعين والجهات الشريكة في التوزيع العادل.'
+            : 'Official accreditation grants your organization a trusted green badge and builds donor confidence for fair surplus distribution.' }}
         </p>
       </header>
 
@@ -72,7 +77,7 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
               <div>
                 <div class="flex items-center gap-2">
                   <span class="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
-                    حالة الاعتماد الحالية
+                    {{ isRtl ? 'حالة الاعتماد الحالية' : 'Current Verification Status' }}
                   </span>
                   @if (verificationStatus() === 'verified') {
                     <app-verification-badge [status]="'verified'"></app-verification-badge>
@@ -97,10 +102,14 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
           <!-- Rejection Reason Notice if Rejected -->
           @if (verificationStatus() === 'rejected' && rejectionReason()) {
             <div class="mt-4 p-3.5 rounded-xl bg-danger-bg border border-danger/30 text-xs text-danger-900">
-              <span class="font-bold block mb-1">سبب رفض الاعتماد الإداري:</span>
+              <span class="font-bold block mb-1">
+                {{ isRtl ? 'سبب رفض الاعتماد الإداري:' : 'Administrative Rejection Reason:' }}
+              </span>
               <p class="leading-relaxed">{{ rejectionReason() }}</p>
               <p class="mt-2 text-[11px] opacity-90 font-medium">
-                يمكنك إعادة إرفاق وتصحيح الوثائق المطلوبة أدناه وسيعاد فحص الطلب فوراً.
+                {{ isRtl
+                  ? 'يمكنك إعادة إرفاق وتصحيح الوثائق المطلوبة أدناه وسيعاد فحص الطلب فوراً.'
+                  : 'You can update and correct the required documents below and your application will be reviewed again.' }}
               </p>
             </div>
           }
@@ -110,10 +119,14 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
         @if (verificationStatus() !== 'verified') {
           <app-card padding="lg" variant="bordered">
             <h3 class="text-base font-bold text-neutral-900 mb-1">
-              {{ verificationStatus() === 'rejected' ? 'إعادة تقديم الوثائق الرسمية' : 'رفع الوثائق الرسمية للاعتماد' }}
+              {{ isRtl
+                ? (verificationStatus() === 'rejected' ? 'إعادة تقديم الوثائق الرسمية' : 'رفع الوثائق الرسمية للاعتماد')
+                : (verificationStatus() === 'rejected' ? 'Resubmit Official Documents' : 'Upload Verification Documents') }}
             </h3>
             <p class="text-xs text-neutral-600 mb-6 leading-relaxed">
-              يرجى إرفاق رابط إلكتروني مباشر لشهادة الإشهار الصادرة من وزارة التضامن الاجتماعي أو السجل التجاري / وثيقة التسجيل المعتمدة للمنظمة (الحد الأقصى 10 وثائق).
+              {{ isRtl
+                ? 'يرجى إرفاق رابط إلكتروني مباشر لشهادة الإشهار الصادرة من وزارة التضامن الاجتماعي أو السجل التجاري / وثيقة التسجيل المعتمدة للمنظمة (الحد الأقصى 10 وثائق).'
+                : 'Please provide a direct URL to your registration certificate from the Ministry of Social Solidarity, commercial registry, or official mandate (up to 10 documents).' }}
             </p>
 
             <!-- Success Alert -->
@@ -140,7 +153,8 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
               <!-- Primary Document Link -->
               <div class="flex flex-col gap-1.5">
                 <label for="org-doc-url1" class="text-xs font-semibold text-neutral-900">
-                  رابط الوثيقة الأساسية (PDF أو صورة معتمدة) <span class="text-danger">*</span>
+                  {{ isRtl ? 'رابط الوثيقة الأساسية (PDF أو صورة معتمدة)' : 'Primary Document Link (PDF or image)' }}
+                  <span class="text-danger">*</span>
                 </label>
                 <input
                   id="org-doc-url1"
@@ -150,14 +164,16 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
                   class="w-full px-3 py-2 bg-white text-neutral-900 text-sm rounded-md border border-neutral-300 focus:outline-none focus:ring-2 focus:ring-primary"
                 />
                 <span class="text-[11px] text-neutral-500">
-                  رابط مباشر من سحابة تخزين (Google Drive, Dropbox, Cloudinary) مع إتاحة صلاحية العرض.
+                  {{ isRtl
+                    ? 'رابط مباشر من سحابة تخزين (Google Drive, Dropbox, Cloudinary) مع إتاحة صلاحية العرض.'
+                    : 'Direct link from cloud storage (Google Drive, Dropbox, Cloudinary) with view access enabled.' }}
                 </span>
               </div>
 
               <!-- Secondary Document Link -->
               <div class="flex flex-col gap-1.5">
                 <label for="org-doc-url2" class="text-xs font-semibold text-neutral-900">
-                  رابط وثيقة ثانوية / تفويض الممثل القانوني (اختياري)
+                  {{ isRtl ? 'رابط وثيقة ثانوية / تفويض الممثل القانوني (اختياري)' : 'Secondary Document / Authorization (Optional)' }}
                 </label>
                 <input
                   id="org-doc-url2"
@@ -176,7 +192,7 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
                   [isLoading]="isSubmitting()"
                   [disabled]="isSubmitting() || verificationForm.invalid"
                 >
-                  إرسال الوثائق للمراجعة الإدارية
+                  {{ isRtl ? 'إرسال الوثائق للمراجعة الإدارية' : 'Submit Documents for Administrative Review' }}
                 </app-button>
               </div>
             </form>
@@ -187,6 +203,7 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
   `
 })
 export class OrgVerificationComponent implements OnInit {
+  protected languageService = injectLanguageService();
   private fb = inject(FormBuilder);
   private orgApi = inject(OrganizationApiService);
   private toast = inject(ToastService);
@@ -197,6 +214,10 @@ export class OrgVerificationComponent implements OnInit {
   readonly organization = signal<Organization | null>(null);
   readonly successMessage = signal<string | null>(null);
   readonly errorMessage = signal<string | null>(null);
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
 
   verificationForm: FormGroup = this.fb.group({
     docUrl1: ['', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]],
@@ -230,7 +251,7 @@ export class OrgVerificationComponent implements OnInit {
       },
       error: (err) => {
         this.isLoading.set(false);
-        this.errorMessage.set(err?.message || 'تعذر جلب بيانات المنظمة.');
+        this.errorMessage.set(err?.message || (this.isRtl ? 'تعذر جلب بيانات المنظمة.' : 'Failed to load organization data.'));
       }
     });
   }
@@ -259,15 +280,17 @@ export class OrgVerificationComponent implements OnInit {
           ...updatedOrg,
           verificationStatus: 'pending'
         });
-        const msg = 'تم إرسال وثائق التوثيق بنجاح وهي قيد المراجعة الإدارية من قبل فريق العمل.';
+        const msg = this.isRtl
+          ? 'تم إرسال وثائق التوثيق بنجاح وهي قيد المراجعة الإدارية من قبل فريق العمل.'
+          : 'Verification documents submitted successfully and are now pending administrative review.';
         this.successMessage.set(msg);
-        this.toast.success(msg, 'تم التقديم بنجاح');
+        this.toast.success(msg, this.isRtl ? 'تم التقديم بنجاح' : 'Submitted');
       },
       error: (err) => {
         this.isSubmitting.set(false);
-        const errMsg = err?.message || 'تعذر حفظ وثائق التوثيق.';
+        const errMsg = err?.message || (this.isRtl ? 'تعذر حفظ وثائق التوثيق.' : 'Failed to submit verification documents.');
         this.errorMessage.set(errMsg);
-        this.toast.error(errMsg, 'خطأ');
+        this.toast.error(errMsg, this.isRtl ? 'خطأ' : 'Error');
       }
     });
   }
@@ -305,39 +328,48 @@ export class OrgVerificationComponent implements OnInit {
   statusBadgeText(): string {
     switch (this.verificationStatus()) {
       case 'verified':
-        return 'موثقة رسمياً ✓';
+        return this.isRtl ? 'موثقة رسمياً ✓' : 'Verified ✓';
       case 'pending':
-        return 'قيد المراجعة الفنية';
+        return this.isRtl ? 'قيد المراجعة الفنية' : 'Under Review';
       case 'rejected':
-        return 'مرفوض';
+        return this.isRtl ? 'مرفوض' : 'Rejected';
       default:
-        return 'غير موثقة';
+        return this.isRtl ? 'غير موثقة' : 'Unverified';
     }
   }
 
   statusTitle(): string {
     switch (this.verificationStatus()) {
       case 'verified':
-        return 'تم اعتماد وتوثيق المنظمة رسمياً';
+        return this.isRtl ? 'تم اعتماد وتوثيق المنظمة رسمياً' : 'Organization is Officially Verified';
       case 'pending':
-        return 'طلب الاعتماد قيد المراجعة الفنية من الإدارة';
+        return this.isRtl ? 'طلب الاعتماد قيد المراجعة الفنية من الإدارة' : 'Accreditation Request Under Review';
       case 'rejected':
-        return 'تم رفض طلب الاعتماد السابق';
+        return this.isRtl ? 'تم رفض طلب الاعتماد السابق' : 'Previous Verification Request Was Rejected';
       default:
-        return 'الحساب غير موثق حالياً';
+        return this.isRtl ? 'الحساب غير موثق حالياً' : 'Organization Currently Unverified';
     }
   }
 
   statusDescription(): string {
     switch (this.verificationStatus()) {
       case 'verified':
-        return 'تتمتع منظمتك بشارة التوثيق الخضراء وتظهر في دليل المنظمات المعتمدة أمام جميع المتبرعين.';
+        return this.isRtl
+          ? 'تتمتع منظمتك بشارة التوثيق الخضراء وتظهر في دليل المنظمات المعتمدة أمام جميع المتبرعين.'
+          : 'Your organization holds the verified green badge and appears in the directory of accredited organizations.';
       case 'pending':
-        return 'وفقاً لقواعد الخصوصية (DESIGN.md §25): تظهر حالة "قيد المراجعة" لك فقط داخل لوحة التحكم ولا يتم إشهارها للعامة.';
+        return this.isRtl
+          ? 'وفقاً لقواعد الخصوصية (DESIGN.md §25): تظهر حالة "قيد المراجعة" لك فقط داخل لوحة التحكم ولا يتم إشهارها للعامة.'
+          : 'Under privacy rules (DESIGN.md §25): "Under Review" status is visible only inside your dashboard and is never displayed publicly.';
       case 'rejected':
-        return 'تم رفض الوثائق المقدمة. يرجى مراجعة سبب الرفض وإعادة تقديم مستندات رسمية سارية المفعول.';
+        return this.isRtl
+          ? 'تم رفض الوثائق المقدمة. يرجى مراجعة سبب الرفض وإعادة تقديم مستندات رسمية سارية المفعول.'
+          : 'The submitted documents were rejected. Please check the feedback and resubmit valid documentation.';
       default:
-        return 'قم برفع وثائق التسجيل الرسمية للحصول على شارة التوثيق وتوسيع نطاق استلام الموارد.';
+        return this.isRtl
+          ? 'قم برفع وثائق التسجيل الرسمية للحصول على شارة التوثيق وتوسيع نطاق استلام الموارد.'
+          : 'Upload official registration documents to obtain verification and expand your community reach.';
     }
   }
 }
+

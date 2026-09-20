@@ -8,6 +8,7 @@ import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-notifications-list',
@@ -27,22 +28,24 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
       <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-2xl font-bold text-neutral-900">التنبيهات والإشعارات</h1>
+            <h1 class="text-2xl font-bold text-neutral-900">
+              {{ isRtl ? 'التنبيهات والإشعارات' : 'Notifications & Alerts' }}
+            </h1>
             @if (unreadCount() > 0) {
               <app-badge variant="info" size="sm">
-                {{ unreadCount() }} جديد
+                {{ unreadCount() }} {{ isRtl ? 'جديد' : 'new' }}
               </app-badge>
             }
           </div>
           <p class="text-sm text-neutral-600 mt-1">
-            تابع مستجدات المطابقات الذكية، تأكيدات التسليم، وحالة البلاغات والتوثيق.
+            {{ isRtl ? 'تابع مستجدات المطابقات الذكية، تأكيدات التسليم، وحالة البلاغات والتوثيق.' : 'Track smart matches, handover confirmations, report updates, and impact records.' }}
           </p>
         </div>
 
         <div class="flex items-center gap-2 self-start sm:self-auto">
           @if (unreadCount() > 0) {
             <app-button variant="secondary" size="sm" (clicked)="markAllVisibleAsRead()">
-              تحديد الكل كمقروء
+              {{ isRtl ? 'تحديد الكل كمقروء' : 'Mark All as Read' }}
             </app-button>
           }
         </div>
@@ -50,7 +53,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
 
       <!-- Filter Controls -->
       <div class="flex items-center justify-between gap-4 border-b border-neutral-200 pb-3">
-        <div class="flex items-center gap-2" role="tablist" aria-label="تصفية الإشعارات">
+        <div class="flex items-center gap-2" role="tablist" [attr.aria-label]="isRtl ? 'تصفية الإشعارات' : 'Filter notifications'">
           <button
             type="button"
             role="tab"
@@ -59,7 +62,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
             class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all"
             [ngClass]="!unreadOnlyFilter() ? 'bg-primary text-white shadow-xs' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'"
           >
-            جميع الإشعارات ({{ notifications().length }})
+            {{ isRtl ? 'جميع الإشعارات' : 'All Notifications' }} ({{ notifications().length }})
           </button>
 
           <button
@@ -70,12 +73,12 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
             class="px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all"
             [ngClass]="unreadOnlyFilter() ? 'bg-primary text-white shadow-xs' : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'"
           >
-            غير المقروءة فقط ({{ unreadCount() }})
+            {{ isRtl ? 'غير المقروءة فقط' : 'Unread Only' }} ({{ unreadCount() }})
           </button>
         </div>
 
         <span class="text-xs text-neutral-400 hidden sm:inline font-mono">
-          الأحدث أولاً (Reverse Chronological)
+          {{ isRtl ? 'الأحدث أولاً (Reverse Chronological)' : 'Newest First (Reverse Chronological)' }}
         </span>
       </div>
 
@@ -93,14 +96,14 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
             (click)="loadNotifications()"
             class="text-xs font-semibold text-danger hover:underline"
           >
-            إعادة المحاولة
+            {{ isRtl ? 'إعادة المحاولة' : 'Retry' }}
           </button>
         </div>
       }
 
       <!-- Loading Skeletons -->
       @if (isLoading()) {
-        <div class="flex flex-col gap-3" aria-busy="true" aria-label="جاري تحميل الإشعارات...">
+        <div class="flex flex-col gap-3" aria-busy="true" [attr.aria-label]="isRtl ? 'جاري تحميل الإشعارات...' : 'Loading notifications...'">
           @for (i of [1, 2, 3, 4]; track i) {
             <app-card padding="md" variant="bordered">
               <div class="flex items-start gap-3">
@@ -122,20 +125,22 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
               </svg>
             </div>
-            <h3 class="text-base font-bold text-neutral-900">لا توجد إشعارات حالياً</h3>
+            <h3 class="text-base font-bold text-neutral-900">
+              {{ isRtl ? 'لا توجد إشعارات حالياً' : 'No notifications currently' }}
+            </h3>
             <p class="text-xs text-neutral-500 max-w-sm mt-1 mb-4 leading-relaxed">
-              {{ unreadOnlyFilter() ? 'لقد قرأت جميع التنبيهات. لا توجد إشعارات جديدة غير مقروءة.' : 'ستصلك هنا إشعارات فورية عند العثور على مطابقات ذكية أو تأكيد تسليم الموارد.' }}
+              {{ unreadOnlyFilter() ? (isRtl ? 'لقد قرأت جميع التنبيهات. لا توجد إشعارات جديدة غير مقروءة.' : 'You have read all notifications. No new unread items.') : (isRtl ? 'ستصلك هنا إشعارات فورية عند العثور على مطابقات ذكية أو تأكيد تسليم الموارد.' : 'You will receive notifications here when smart matches or handover updates are generated.') }}
             </p>
             @if (unreadOnlyFilter()) {
               <app-button variant="secondary" size="sm" (clicked)="setFilter(false)">
-                عرض جميع الإشعارات السابقة
+                {{ isRtl ? 'عرض جميع الإشعارات السابقة' : 'View all past notifications' }}
               </app-button>
             }
           </div>
         </app-card>
       } @else {
         <!-- Notification Items List -->
-        <ul class="flex flex-col gap-3" aria-label="قائمة الإشعارات">
+        <ul class="flex flex-col gap-3" [attr.aria-label]="isRtl ? 'قائمة الإشعارات' : 'Notifications list'">
           @for (notification of displayedNotifications(); track notification.id) {
             <app-notification-item
               [notification]="notification"
@@ -147,18 +152,18 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
 
         <!-- Pagination Controls -->
         @if (totalPages() > 1) {
-          <nav class="flex items-center justify-between border-t border-neutral-200 pt-4 mt-2" aria-label="تنقل بين صفحات الإشعارات">
+          <nav class="flex items-center justify-between border-t border-neutral-200 pt-4 mt-2" [attr.aria-label]="isRtl ? 'تنقل بين صفحات الإشعارات' : 'Notification pagination'">
             <app-button
               variant="outline"
               size="sm"
               [disabled]="currentPage() <= 1"
               (clicked)="changePage(currentPage() - 1)"
             >
-              الصفحة السابقة
+              {{ isRtl ? 'الصفحة السابقة' : 'Previous' }}
             </app-button>
 
             <span class="text-xs text-neutral-500 font-medium font-mono">
-              صفحة {{ currentPage() }} من {{ totalPages() }} (إجمالي {{ totalCount() }})
+              {{ isRtl ? ('صفحة ' + currentPage() + ' من ' + totalPages() + ' (إجمالي ' + totalCount() + ')') : ('Page ' + currentPage() + ' of ' + totalPages() + ' (Total ' + totalCount() + ')') }}
             </span>
 
             <app-button
@@ -167,7 +172,7 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
               [disabled]="currentPage() >= totalPages()"
               (clicked)="changePage(currentPage() + 1)"
             >
-              الصفحة التالية
+              {{ isRtl ? 'الصفحة التالية' : 'Next' }}
             </app-button>
           </nav>
         }
@@ -176,6 +181,12 @@ import { BadgeComponent } from '../../../shared/ui/badge/badge.component';
   `
 })
 export class NotificationsListComponent implements OnInit {
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
+
   private notificationApi = inject(NotificationApiService);
   private router = inject(Router);
 
@@ -222,7 +233,7 @@ export class NotificationsListComponent implements OnInit {
         this.isLoading.set(false);
       },
       error: (err) => {
-        this.errorMessage.set(err?.message || 'تعذر تحميل الإشعارات من الخادم');
+        this.errorMessage.set(err?.message || (this.isRtl ? 'تعذر تحميل الإشعارات من الخادم' : 'Failed to load notifications from server'));
         this.isLoading.set(false);
       }
     });

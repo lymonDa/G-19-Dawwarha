@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToastService, ToastMessage } from '../../../core/services/toast.service';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-toast-container',
@@ -62,8 +63,8 @@ import { ToastService, ToastMessage } from '../../../core/services/toast.service
           <button
             type="button"
             (click)="dismiss(toast.id)"
-            class="text-neutral-400 hover:text-neutral-700 transition-colors p-1"
-            aria-label="إغلاق التنبيه"
+            class="text-neutral-400 hover:text-neutral-700 transition-colors p-1 cursor-pointer"
+            [attr.aria-label]="dismissAriaLabel"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -76,6 +77,11 @@ import { ToastService, ToastMessage } from '../../../core/services/toast.service
 })
 export class ToastComponent {
   toastService = inject(ToastService);
+  private languageService = inject(LanguageService, { optional: true });
+
+  get dismissAriaLabel(): string {
+    return this.languageService?.currentLanguage() === 'en' ? 'Close notification' : 'إغلاق التنبيه';
+  }
 
   dismiss(id: string): void {
     this.toastService.dismiss(id);

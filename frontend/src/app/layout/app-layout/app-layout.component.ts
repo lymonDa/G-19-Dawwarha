@@ -35,8 +35,8 @@ import { LanguageService } from '../../core/services/language.service';
             (click)="isCollapsed.set(!isCollapsed())"
             class="p-1 rounded text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100 cursor-pointer transition-transform duration-200"
             [class.rotate-180]="languageService.isRtl() ? !isCollapsed() : isCollapsed()"
-            [attr.aria-label]="isCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
-            [title]="isCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
+            [attr.aria-label]="isCollapsed() ? (languageService.isRtl() ? 'توسيع الشريط الجانبي' : 'Expand sidebar') : (languageService.isRtl() ? 'طي الشريط الجانبي' : 'Collapse sidebar')"
+            [title]="isCollapsed() ? (languageService.isRtl() ? 'توسيع الشريط الجانبي' : 'Expand sidebar') : (languageService.isRtl() ? 'طي الشريط الجانبي' : 'Collapse sidebar')"
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
@@ -181,7 +181,7 @@ import { LanguageService } from '../../core/services/language.service';
               type="button"
               (click)="isMobileDrawerOpen.set(true)"
               class="md:hidden p-1.5 -ms-1 rounded-md text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100"
-              aria-label="Open navigation menu"
+              [attr.aria-label]="languageService.isRtl() ? 'فتح قائمة التنقل' : 'Open navigation menu'"
             >
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -206,7 +206,8 @@ import { LanguageService } from '../../core/services/language.service';
             <a
               routerLink="/notifications"
               class="p-2 rounded-full text-neutral-600 hover:bg-neutral-100 relative"
-              title="Notifications"
+              [title]="languageService.t().NAV_NOTIFICATIONS"
+              [attr.aria-label]="languageService.t().NAV_NOTIFICATIONS"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
@@ -219,6 +220,7 @@ import { LanguageService } from '../../core/services/language.service';
                 type="button"
                 (click)="isUserMenuOpen.set(!isUserMenuOpen())"
                 class="flex items-center gap-2 p-1.5 rounded-full hover:bg-neutral-100 focus:outline-none cursor-pointer"
+                [attr.aria-label]="languageService.isRtl() ? 'قائمة المستخدم' : 'User menu'"
               >
                 <div class="w-8 h-8 rounded-full bg-primary text-white font-semibold flex items-center justify-center text-xs">
                   {{ authService.currentUser()?.name?.charAt(0) || 'U' }}
@@ -281,7 +283,7 @@ import { LanguageService } from '../../core/services/language.service';
                 type="button"
                 (click)="isMobileDrawerOpen.set(false)"
                 class="p-1.5 rounded-md text-neutral-400 hover:text-neutral-700 hover:bg-neutral-100"
-                aria-label="Close navigation menu"
+                [attr.aria-label]="languageService.isRtl() ? 'إغلاق قائمة التنقل' : 'Close navigation menu'"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

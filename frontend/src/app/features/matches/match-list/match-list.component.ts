@@ -11,6 +11,7 @@ import { Resource } from '../../../core/models/resource.model';
 import { MatchCardComponent } from '../../../shared/components/match-card/match-card.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-match-list',
@@ -29,10 +30,10 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 class="text-3xl font-bold tracking-tight text-neutral-900">
-              Matches & Recommendations
+              {{ isRtl ? 'المطابقات الذكية والتوصيات' : 'Matches & Recommendations' }}
             </h1>
             <p class="mt-1 text-sm text-neutral-500">
-              Rule-based matches pairing available resources with urgent community demands.
+              {{ isRtl ? 'خوارزمية توافق موثوقة تربط الموارد المتوفرة باحتياجات المجتمع الملحة بدقة وشفافية.' : 'Rule-based matches pairing available resources with urgent community demands.' }}
             </p>
           </div>
 
@@ -40,15 +41,15 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
             <select
               [(ngModel)]="selectedStatus"
               (change)="loadMatches()"
-              title="Filter by status"
-              aria-label="Filter by status"
+              [title]="isRtl ? 'تصفية حسب الحالة' : 'Filter by status'"
+              [attr.aria-label]="isRtl ? 'تصفية حسب الحالة' : 'Filter by status'"
               class="rounded-lg border border-neutral-200 bg-neutral-0 px-3 py-2 text-sm text-neutral-900 shadow-sm transition focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600"
             >
-              <option value="">All Statuses</option>
-              <option value="proposed">Proposed</option>
-              <option value="accepted">Accepted</option>
-              <option value="rejected">Rejected</option>
-              <option value="expired">Expired</option>
+              <option value="">{{ isRtl ? 'جميع الحالات' : 'All Statuses' }}</option>
+              <option value="proposed">{{ getStatusLabel('proposed') }}</option>
+              <option value="accepted">{{ getStatusLabel('accepted') }}</option>
+              <option value="rejected">{{ getStatusLabel('rejected') }}</option>
+              <option value="expired">{{ getStatusLabel('expired') }}</option>
             </select>
           </div>
         </div>
@@ -63,25 +64,29 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
                 </svg>
               </div>
               <div>
-                <h3 class="text-sm font-semibold text-neutral-900">Generate Matches for a Resource</h3>
-                <p class="text-xs text-neutral-500">Select an available resource to run the 5-signal matching algorithm.</p>
+                <h3 class="text-sm font-semibold text-neutral-900">
+                  {{ isRtl ? 'إنشاء مطابقات لمورد معين' : 'Generate Matches for a Resource' }}
+                </h3>
+                <p class="text-xs text-neutral-500">
+                  {{ isRtl ? 'اختر أحد الموارد المتاحة لتشغيل خوارزمية المطابقة ذات المعايير الخمسة.' : 'Select an available resource to run the 5-signal matching algorithm.' }}
+                </p>
               </div>
             </div>
 
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
               <select
                 [(ngModel)]="generateResourceId"
-                title="Select Available Resource"
-                aria-label="Select Available Resource"
+                [title]="isRtl ? 'اختر مورداً متاحاً' : 'Select Available Resource'"
+                [attr.aria-label]="isRtl ? 'اختر مورداً متاحاً' : 'Select Available Resource'"
                 class="rounded-lg border border-neutral-200 bg-neutral-0 px-3 py-2 text-xs text-neutral-900 focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600 sm:w-64"
               >
-                <option value="">-- Choose an Available Resource --</option>
+                <option value="">{{ isRtl ? '-- اختر مورداً متاحاً --' : '-- Choose an Available Resource --' }}</option>
                 @if (generateResourceId && !isResourceInList(generateResourceId)) {
-                  <option [value]="generateResourceId">Selected Resource (ID: {{ generateResourceId }})</option>
+                  <option [value]="generateResourceId">{{ isRtl ? 'المورد المختار (المعرف: ' + generateResourceId + ')' : ('Selected Resource (ID: ' + generateResourceId + ')') }}</option>
                 }
                 @for (res of availableResources; track res.id || res._id) {
                   <option [value]="res.id || res._id">
-                    {{ res.title }} (Qty: {{ res.quantity }})
+                    {{ res.title }} ({{ isRtl ? 'الكمية:' : 'Qty:' }} {{ res.quantity }})
                   </option>
                 }
               </select>
@@ -97,9 +102,9 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                     <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                   </svg>
-                  <span>Generating...</span>
+                  <span>{{ isRtl ? 'جاري التحليل...' : 'Generating...' }}</span>
                 } @else {
-                  <span>Run Matching</span>
+                  <span>{{ isRtl ? 'تشغيل المطابقة' : 'Run Matching' }}</span>
                 }
               </button>
             </div>
@@ -132,7 +137,7 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
                 (click)="loadMatches()"
                 class="rounded bg-danger px-2.5 py-1 text-xs font-semibold text-white hover:bg-danger/90"
               >
-                Retry
+                {{ isRtl ? 'إعادة المحاولة' : 'Retry' }}
               </button>
             </div>
           </div>
@@ -146,9 +151,9 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
             }
           } @else if (matches.length === 0) {
             <app-empty-state
-              title="No matches found"
-              [description]="selectedStatus ? 'There are no matches currently with status &quot;' + selectedStatus + '&quot;.' : 'No matches generated yet. Post a demand request or publish a resource to generate transparent matches.'"
-              actionLabel="Post a Demand Request"
+              [title]="isRtl ? 'لا توجد مطابقات مطابقة' : 'No matches found'"
+              [description]="emptyDescription"
+              [actionLabel]="isRtl ? 'تسجيل طلب احتياج' : 'Post a Demand Request'"
               (actionClicked)="navigateToCreateRequest()"
             />
           } @else {
@@ -172,11 +177,22 @@ import { EmptyStateComponent } from '../../../shared/ui/empty-state/empty-state.
   `]
 })
 export class MatchListComponent implements OnInit {
-  private api = inject(MatchApiService);
-  private resourceApi = inject(ResourceApiService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
-  private toast = inject(ToastService);
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
+
+  get emptyDescription(): string {
+    if (this.selectedStatus) {
+      return this.isRtl
+        ? `لا توجد مطابقات حالياً بالحالة "${this.getStatusLabel(this.selectedStatus)}".`
+        : `There are no matches currently with status "${this.selectedStatus}".`;
+    }
+    return this.isRtl
+      ? 'لم يتم إنشاء مطابقات بعد. يمكنك نشر طلب احتياج أو عرض مورد لتوليد مطابقات فورية.'
+      : 'No matches generated yet. Post a demand request or publish a resource to generate transparent matches.';
+  }
 
   matches: Match[] = [];
   availableResources: Resource[] = [];
@@ -190,6 +206,16 @@ export class MatchListComponent implements OnInit {
   errorMessage = '';
 
   generateResourceId = '';
+
+  private api = inject(MatchApiService);
+  private resourceApi = inject(ResourceApiService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private toast = inject(ToastService);
+
+  getStatusLabel(status: string): string {
+    return this.languageService?.getStatusLabel(status) || status;
+  }
 
   ngOnInit(): void {
     const paramResId = this.route.snapshot.queryParamMap.get('resourceId');
@@ -229,7 +255,7 @@ export class MatchListComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err?.error?.message || 'Failed to load candidate matches.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل تحميل المطابقات المقترحة.' : 'Failed to load candidate matches.');
       }
     });
   }
@@ -246,16 +272,18 @@ export class MatchListComponent implements OnInit {
       next: (res) => {
         this.generatingMatches = false;
         const count = Array.isArray(res) ? res.length : 0;
-        this.successMessage = `Matching engine completed! Generated ${count} candidate match(es).`;
+        this.successMessage = this.isRtl
+          ? `اكتمل تشغيل محرك المطابقة! تم توليد ${count} مطابقة مرشحة.`
+          : `Matching engine completed! Generated ${count} candidate match(es).`;
         this.toast.show({
           variant: 'success',
-          message: `Matching engine completed! Generated ${count} candidate match(es).`
+          message: this.successMessage
         });
         this.loadMatches();
       },
       error: (err) => {
         this.generatingMatches = false;
-        this.errorMessage = err?.error?.message || 'Failed to generate matches for resource.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل توليد مطابقات لهذا المورد.' : 'Failed to generate matches for resource.');
         this.toast.show({
           variant: 'error',
           message: this.errorMessage
@@ -275,7 +303,9 @@ export class MatchListComponent implements OnInit {
     this.api.accept(id).subscribe({
       next: () => {
         this.processingId = '';
-        this.successMessage = 'Match accepted! Handover coordination has been initiated.';
+        this.successMessage = this.isRtl
+          ? 'تم قبول المطابقة بنجاح! بدأت مرحلة تنسيق التسليم والتسلم.'
+          : 'Match accepted! Handover coordination has been initiated.';
         this.toast.show({
           variant: 'success',
           message: this.successMessage
@@ -285,11 +315,15 @@ export class MatchListComponent implements OnInit {
       error: (err) => {
         this.processingId = '';
         if (err.status === 409) {
-          this.errorMessage = 'Conflict: this match or associated resource is no longer available.';
+          this.errorMessage = this.isRtl
+            ? 'تعارض: هذه المطابقة أو المورد المرتبط بها لم يعد متاحاً.'
+            : 'Conflict: this match or associated resource is no longer available.';
         } else if (err.status === 403) {
-          this.errorMessage = 'You are not authorized to accept this match.';
+          this.errorMessage = this.isRtl
+            ? 'ليس لديك الصلاحية لقبول هذه المطابقة.'
+            : 'You are not authorized to accept this match.';
         } else {
-          this.errorMessage = err?.error?.message || 'Failed to accept match.';
+          this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل قبول المطابقة.' : 'Failed to accept match.');
         }
         this.toast.show({
           variant: 'error',
@@ -310,7 +344,9 @@ export class MatchListComponent implements OnInit {
     this.api.reject(id).subscribe({
       next: () => {
         this.processingId = '';
-        this.successMessage = 'Match rejected. The resource is now available for other matches.';
+        this.successMessage = this.isRtl
+          ? 'تم رفض المطابقة. أصبح المورد متاحاً للمطابقات الأخرى.'
+          : 'Match rejected. The resource is now available for other matches.';
         this.toast.show({
           variant: 'info',
           message: this.successMessage
@@ -319,7 +355,7 @@ export class MatchListComponent implements OnInit {
       },
       error: (err) => {
         this.processingId = '';
-        this.errorMessage = err?.error?.message || 'Failed to reject match.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل رفض المطابقة.' : 'Failed to reject match.');
         this.toast.show({
           variant: 'error',
           message: this.errorMessage

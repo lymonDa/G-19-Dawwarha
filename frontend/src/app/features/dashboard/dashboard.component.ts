@@ -14,6 +14,7 @@ import { CardComponent } from '../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../shared/ui/button/button.component';
 import { BadgeComponent } from '../../shared/ui/badge/badge.component';
 import { ImpactCardComponent } from '../../shared/components/impact-card/impact-card.component';
+import { injectLanguageService } from '../../core/services/language.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,27 +27,33 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
         <div class="flex flex-col gap-1">
           <div class="flex items-center gap-2">
             <span class="text-xs bg-white/20 text-white px-2.5 py-0.5 rounded-full font-medium">
-              {{ (authService.isOrganization() || authService.currentUser()?.organizationId) ? 'Verified Organization Account' : 'User Account' }}
+              {{ (authService.isOrganization() || authService.currentUser()?.organizationId)
+                ? (isRtl ? 'حساب منظمة معتمدة' : 'Verified Organization Account')
+                : (isRtl ? 'حساب مستخدم' : 'User Account') }}
             </span>
-            <span class="text-xs text-primary-100">Active Now</span>
+            <span class="text-xs text-primary-100">{{ isRtl ? 'نشط الآن' : 'Active Now' }}</span>
           </div>
           <h1 class="text-2xl font-bold tracking-tight">
-            Welcome back, {{ authService.currentUser()?.name }}!
+            {{ isRtl
+              ? ('مرحباً بك، ' + (authService.currentUser()?.name || ''))
+              : ('Welcome back, ' + (authService.currentUser()?.name || '') + '!') }}
           </h1>
           <p class="text-xs text-primary-100 max-w-xl leading-relaxed">
-            From your dashboard you can manage surplus resources, review smart match suggestions, and confirm handovers with your partners.
+            {{ isRtl
+              ? 'من لوحة التحكم يمكنك إدارة الموارد الفائضة، ومتابعة اقتراحات المطابقة الذكية، وتأكيد عمليات التسليم مع الشركاء.'
+              : 'From your dashboard you can manage surplus resources, review smart match suggestions, and confirm handovers with your partners.' }}
           </p>
         </div>
 
         <div class="flex flex-wrap items-center gap-2.5 shrink-0">
           <a routerLink="/resources/create">
             <app-button variant="secondary" size="sm">
-              + List a Resource
+              {{ isRtl ? '+ إضافة مورد فائض' : '+ List a Resource' }}
             </app-button>
           </a>
           <a routerLink="/requests/create">
             <app-button variant="primary" size="sm">
-              + Post a Request
+              {{ isRtl ? '+ تسجيل طلب احتياج' : '+ Post a Request' }}
             </app-button>
           </a>
         </div>
@@ -56,7 +63,7 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <app-card padding="md" variant="bordered">
           <div class="flex items-center justify-between">
-            <span class="text-xs text-neutral-500 font-medium">Listed Resources</span>
+            <span class="text-xs text-neutral-500 font-medium">{{ isRtl ? 'الموارد المسجلة' : 'Listed Resources' }}</span>
             <span class="w-2 h-2 rounded-full bg-primary"></span>
           </div>
           <p class="text-3xl font-bold text-neutral-900 mt-2">
@@ -67,14 +74,14 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
             }
           </p>
           <a routerLink="/resources/mine" class="text-xs text-primary font-medium hover:underline mt-2 inline-flex items-center gap-1">
-            <span>Manage Resources</span>
+            <span>{{ isRtl ? 'إدارة الموارد' : 'Manage Resources' }}</span>
             <svg class="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </a>
         </app-card>
 
         <app-card padding="md" variant="bordered">
           <div class="flex items-center justify-between">
-            <span class="text-xs text-neutral-500 font-medium">Active Requests</span>
+            <span class="text-xs text-neutral-500 font-medium">{{ isRtl ? 'طلبات الاحتياج النشطة' : 'Active Requests' }}</span>
             <span class="w-2 h-2 rounded-full bg-info"></span>
           </div>
           <p class="text-3xl font-bold text-neutral-900 mt-2">
@@ -85,15 +92,15 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
             }
           </p>
           <a routerLink="/requests/mine" class="text-xs text-primary font-medium hover:underline mt-2 inline-flex items-center gap-1">
-            <span>Manage Requests</span>
+            <span>{{ isRtl ? 'إدارة الطلبات' : 'Manage Requests' }}</span>
             <svg class="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </a>
         </app-card>
 
         <app-card padding="md" variant="bordered">
           <div class="flex items-center justify-between">
-            <span class="text-xs text-neutral-500 font-medium">Smart Matches</span>
-            <app-badge variant="success" size="sm">Active</app-badge>
+            <span class="text-xs text-neutral-500 font-medium">{{ isRtl ? 'المطابقات الذكية' : 'Smart Matches' }}</span>
+            <app-badge variant="success" size="sm">{{ isRtl ? 'نشطة' : 'Active' }}</app-badge>
           </div>
           <p class="text-3xl font-bold text-success mt-2">
             @if (isLoadingStats()) {
@@ -103,7 +110,7 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
             }
           </p>
           <a routerLink="/matches" class="text-xs text-success font-medium hover:underline mt-2 inline-flex items-center gap-1">
-            <span>Review Matches Now</span>
+            <span>{{ isRtl ? 'مراجعة المطابقات الآن' : 'Review Matches Now' }}</span>
             <svg class="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </a>
         </app-card>
@@ -111,13 +118,13 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
         <div class="flex flex-col">
           <app-impact-card
             [value]="impactCount()"
-            label="Community Impact"
-            description="Verified completed transfers"
+            [label]="isRtl ? 'الأثر المجتمعي' : 'Community Impact'"
+            [description]="isRtl ? 'تسليمات مكتملة وموثقة' : 'Verified completed transfers'"
             variant="personal"
             icon="★"
           ></app-impact-card>
           <a routerLink="/contributions" class="text-xs text-sand-700 font-medium hover:underline mt-1.5 inline-flex items-center gap-1 self-end px-1">
-            <span>View Contribution History</span>
+            <span>{{ isRtl ? 'سجل المساهمات والأثر' : 'View Contribution History' }}</span>
             <svg class="w-3.5 h-3.5 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
           </a>
         </div>
@@ -127,30 +134,42 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <app-card padding="lg">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="font-bold text-neutral-900 text-base">Resources Near Your Area</h3>
-            <a routerLink="/resources" class="text-xs text-primary hover:underline font-medium">Browse Directory</a>
+            <h3 class="font-bold text-neutral-900 text-base">
+              {{ isRtl ? 'الموارد القريبة من منطقتك' : 'Resources Near Your Area' }}
+            </h3>
+            <a routerLink="/resources" class="text-xs text-primary hover:underline font-medium">
+              {{ isRtl ? 'تصفح الدليل' : 'Browse Directory' }}
+            </a>
           </div>
           <p class="text-xs text-neutral-600 mb-5 leading-relaxed">
-            Explore the latest devices, supplies, and food items currently listed by nearby donors and organizations.
+            {{ isRtl
+              ? 'استكشف أحدث الأجهزة والمستلزمات والمواد الفائضة المتاحة حالياً من المتبرعين والجهات القريبة منك.'
+              : 'Explore the latest devices, supplies, and food items currently listed by nearby donors and organizations.' }}
           </p>
           <a routerLink="/resources">
             <app-button variant="outline" size="sm" [fullWidth]="true">
-              Explore All Available Resources
+              {{ isRtl ? 'استكشاف جميع الموارد المتاحة' : 'Explore All Available Resources' }}
             </app-button>
           </a>
         </app-card>
 
         <app-card padding="lg">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="font-bold text-neutral-900 text-base">Urgent Community Needs</h3>
-            <a routerLink="/requests" class="text-xs text-primary hover:underline font-medium">Browse Requests</a>
+            <h3 class="font-bold text-neutral-900 text-base">
+              {{ isRtl ? 'احتياجات مجتمعية عاجلة' : 'Urgent Community Needs' }}
+            </h3>
+            <a routerLink="/requests" class="text-xs text-primary hover:underline font-medium">
+              {{ isRtl ? 'تصفح الطلبات' : 'Browse Requests' }}
+            </a>
           </div>
           <p class="text-xs text-neutral-600 mb-5 leading-relaxed">
-            View requests from charities and initiatives supporting priority families and communities.
+            {{ isRtl
+              ? 'اطلع على طلبات الدعم المقدمة من الجمعيات والمبادرات الخيرية للأسر والمستفيدين ذوي الأولوية.'
+              : 'View requests from charities and initiatives supporting priority families and communities.' }}
           </p>
           <a routerLink="/requests">
             <app-button variant="secondary" size="sm" [fullWidth]="true">
-              Browse Demand Requests
+              {{ isRtl ? 'تصفح طلبات الاحتياج' : 'Browse Demand Requests' }}
             </app-button>
           </a>
         </app-card>
@@ -159,6 +178,7 @@ import { ImpactCardComponent } from '../../shared/components/impact-card/impact-
   `
 })
 export class DashboardComponent implements OnInit {
+  protected languageService = injectLanguageService();
   authService = inject(AuthService);
   private resourceApi = inject(ResourceApiService);
   private requestApi = inject(RequestApiService);
@@ -170,6 +190,10 @@ export class DashboardComponent implements OnInit {
   readonly matchesCount = signal<number>(0);
   readonly impactCount = signal<number>(0);
   readonly isLoadingStats = signal<boolean>(true);
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
 
   ngOnInit(): void {
     this.loadStats();
@@ -218,3 +242,4 @@ export class DashboardComponent implements OnInit {
     });
   }
 }
+

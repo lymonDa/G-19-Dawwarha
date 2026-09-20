@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
+import { LanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-empty-state',
@@ -17,7 +18,7 @@ import { ButtonComponent } from '../button/button.component';
       </div>
 
       <h3 class="text-base font-semibold text-neutral-900 mb-1">
-        {{ title }}
+        {{ resolvedTitle }}
       </h3>
 
       <p class="text-sm text-neutral-600 max-w-sm mb-4 leading-relaxed">
@@ -38,10 +39,17 @@ import { ButtonComponent } from '../button/button.component';
   `
 })
 export class EmptyStateComponent {
-  @Input() title = 'لا توجد بيانات متاحة';
+  private languageService = inject(LanguageService, { optional: true });
+
+  @Input() title?: string;
   @Input() description = '';
   @Input() actionLabel?: string;
   @Input() actionVariant: 'primary' | 'secondary' | 'ghost' = 'primary';
+
+  get resolvedTitle(): string {
+    if (this.title) return this.title;
+    return this.languageService?.currentLanguage() === 'en' ? 'No data available' : 'لا توجد بيانات متاحة';
+  }
 
   @Output() actionClicked = new EventEmitter<void>();
   @Output() action = this.actionClicked;

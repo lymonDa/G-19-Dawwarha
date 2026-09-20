@@ -12,6 +12,7 @@ import { MatchScoreComponent } from '../../../shared/components/match-score/matc
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-match-detail',
@@ -35,7 +36,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
           <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          <span>Back to Matches</span>
+          <span>{{ isRtl ? 'العودة إلى المطابقات' : 'Back to Matches' }}</span>
         </a>
 
         <!-- Alerts -->
@@ -53,10 +54,10 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   [routerLink]="['/handovers', matchId]"
                   class="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-700 transition-colors"
                 >
-                  <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
-                  <span>Proceed to Handover Confirmation</span>
+                  <span>{{ isRtl ? 'الانتقال إلى تأكيد التسليم والاستلام' : 'Proceed to Handover Confirmation' }}</span>
                 </a>
               </div>
             }
@@ -86,13 +87,13 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
             <div class="flex flex-col gap-4 border-b border-neutral-100 pb-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <span class="rounded bg-neutral-100 px-2.5 py-0.5 text-xs font-semibold text-neutral-600">
-                  Match #{{ matchId.slice(-6) }}
+                  {{ isRtl ? 'مطابقة #' : 'Match #' }}{{ matchId.slice(-6) }}
                 </span>
                 <h1 class="mt-2 text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
-                  Match Comparison & Evaluation
+                  {{ isRtl ? 'مقارنة وتقييم المطابقة الذكية' : 'Match Comparison & Evaluation' }}
                 </h1>
                 <p class="mt-1 text-sm text-neutral-500">
-                  Generated on {{ match.createdAt | date:'mediumDate' }}
+                  {{ isRtl ? 'تاريخ التوليد:' : 'Generated on' }} {{ formatDate(match.createdAt) }}
                 </p>
               </div>
 
@@ -101,7 +102,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   class="inline-flex items-center rounded-full border px-3.5 py-1 text-xs font-bold uppercase tracking-wider"
                   [ngClass]="match.status === 'accepted' ? 'bg-primary-100 text-primary-800 border-primary-500/30' : (match.status === 'rejected' ? 'bg-danger-bg text-danger border-danger/30' : 'bg-info-bg text-info border-info/30')"
                 >
-                  Status: {{ match.status }}
+                  {{ isRtl ? 'الحالة:' : 'Status:' }} {{ getStatusLabel(match.status) }}
                 </span>
               </div>
             </div>
@@ -120,32 +121,32 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               <div class="rounded-xl border border-neutral-200/80 bg-neutral-50/70 p-5">
                 <div class="flex items-center justify-between border-b border-neutral-200 pb-3">
                   <span class="text-xs font-bold uppercase tracking-wider text-primary-700">
-                    Supplied Resource
+                    {{ isRtl ? 'المورد المتاح (المعروض)' : 'Supplied Resource' }}
                   </span>
                   <span class="rounded bg-primary-100 px-2 py-0.5 text-xs font-semibold text-primary-800">
-                    Qty: {{ resourceQuantity }}
+                    {{ isRtl ? 'الكمية:' : 'Qty:' }} {{ resourceQuantity }}
                   </span>
                 </div>
 
                 <div class="mt-4 space-y-3">
                   <div>
-                    <span class="text-xs text-neutral-500">Resource Title</span>
+                    <span class="text-xs text-neutral-500">{{ isRtl ? 'عنوان المورد' : 'Resource Title' }}</span>
                     <p class="font-bold text-neutral-900 text-lg">{{ resourceTitle }}</p>
                   </div>
 
                   <div>
-                    <span class="text-xs text-neutral-500">Category</span>
+                    <span class="text-xs text-neutral-500">{{ isRtl ? 'التصنيف' : 'Category' }}</span>
                     <p class="font-medium text-neutral-800">{{ resourceCategory }}</p>
                   </div>
 
                   <div>
-                    <span class="text-xs text-neutral-500">Location</span>
+                    <span class="text-xs text-neutral-500">{{ isRtl ? 'الموقع الجغرافي' : 'Location' }}</span>
                     <p class="font-medium text-neutral-800">{{ resourceLocation }}</p>
                   </div>
 
                   @if (resource?.description) {
                     <div>
-                      <span class="text-xs text-neutral-500">Description</span>
+                      <span class="text-xs text-neutral-500">{{ isRtl ? 'الوصف والتفاصيل' : 'Description' }}</span>
                       <p class="text-xs text-neutral-700">{{ resource?.description }}</p>
                     </div>
                   }
@@ -156,32 +157,32 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               <div class="rounded-xl border border-neutral-200/80 bg-neutral-50/70 p-5">
                 <div class="flex items-center justify-between border-b border-neutral-200 pb-3">
                   <span class="text-xs font-bold uppercase tracking-wider text-primary-700">
-                    Target Request
+                    {{ isRtl ? 'الطلب المستهدف (الاحتياج)' : 'Target Request' }}
                   </span>
                   <span class="rounded bg-primary-100 px-2 py-0.5 text-xs font-semibold text-primary-800">
-                    Qty: {{ requestQuantity }}
+                    {{ isRtl ? 'الكمية:' : 'Qty:' }} {{ requestQuantity }}
                   </span>
                 </div>
 
                 <div class="mt-4 space-y-3">
                   <div>
-                    <span class="text-xs text-neutral-500">Requested Category</span>
+                    <span class="text-xs text-neutral-500">{{ isRtl ? 'التصنيف المطلوب' : 'Requested Category' }}</span>
                     <p class="font-bold text-neutral-900 text-lg">{{ requestCategory }}</p>
                   </div>
 
                   <div>
-                    <span class="text-xs text-neutral-500">Urgency Level</span>
-                    <p class="font-medium capitalize text-neutral-800">{{ requestUrgency }}</p>
+                    <span class="text-xs text-neutral-500">{{ isRtl ? 'درجة الإلحاح' : 'Urgency Level' }}</span>
+                    <p class="font-medium capitalize text-neutral-800">{{ getUrgencyLabel(requestUrgency) }}</p>
                   </div>
 
                   <div>
-                    <span class="text-xs text-neutral-500">Requested Location</span>
+                    <span class="text-xs text-neutral-500">{{ isRtl ? 'الموقع المطلوب' : 'Requested Location' }}</span>
                     <p class="font-medium text-neutral-800">{{ requestLocation }}</p>
                   </div>
 
                   @if (request?.description) {
                     <div>
-                      <span class="text-xs text-neutral-500">Description</span>
+                      <span class="text-xs text-neutral-500">{{ isRtl ? 'الوصف والتفاصيل' : 'Description' }}</span>
                       <p class="text-xs text-neutral-700">{{ request?.description }}</p>
                     </div>
                   }
@@ -197,7 +198,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   (clicked)="promptReject()"
                   [disabled]="processing"
                 >
-                  Reject Match
+                  {{ isRtl ? 'رفض المطابقة' : 'Reject Match' }}
                 </app-button>
 
                 <app-button
@@ -206,7 +207,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   [isLoading]="processing"
                   [disabled]="processing"
                 >
-                  Accept Match
+                  {{ isRtl ? 'قبول المطابقة' : 'Accept Match' }}
                 </app-button>
               </div>
             }
@@ -217,13 +218,13 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   <svg class="h-5 w-5 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <span>Match accepted — handover coordination is in progress.</span>
+                  <span>{{ isRtl ? 'تم قبول المطابقة — جاري التنسيق للتسليم.' : 'Match accepted — handover coordination is in progress.' }}</span>
                 </div>
                 <a
                   [routerLink]="['/handovers', matchId]"
                   class="inline-flex items-center gap-1.5 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-primary-700 transition-colors"
                 >
-                  <span>Go to Handover</span>
+                  <span>{{ isRtl ? 'الانتقال إلى التسليم' : 'Go to Handover' }}</span>
                   <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -238,10 +239,10 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
     <!-- Confirmation Dialogs using shared App Dialog -->
     <app-dialog
       [isOpen]="showAcceptConfirm"
-      title="Accept Candidate Match?"
-      description="Accepting will lock this match and initiate downstream handover coordination."
-      confirmText="Confirm & Accept"
-      cancelText="Cancel"
+      [title]="isRtl ? 'قبول المطابقة المقترحة؟' : 'Accept Candidate Match?'"
+      [description]="isRtl ? 'الموافقة ستثبت هذه المطابقة وتبدأ إجراءات التنسيق للتسليم والاستلام بين الطرفين.' : 'Accepting will lock this match and initiate downstream handover coordination.'"
+      [confirmText]="isRtl ? 'تأكيد وقبول' : 'Confirm & Accept'"
+      [cancelText]="isRtl ? 'إلغاء' : 'Cancel'"
       confirmVariant="primary"
       (confirm)="confirmAccept()"
       (cancel)="showAcceptConfirm = false"
@@ -249,10 +250,10 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
 
     <app-dialog
       [isOpen]="showRejectConfirm"
-      title="Reject This Match?"
-      description="Are you sure you want to decline this match? The resource will remain open for other potential requests."
-      confirmText="Confirm Reject"
-      cancelText="Cancel"
+      [title]="isRtl ? 'رفض هذه المطابقة؟' : 'Reject This Match?'"
+      [description]="isRtl ? 'هل أنت متأكد من رفض هذه المطابقة؟ سيبقى المورد متاحاً لاحتياجات ومطابقات أخرى.' : 'Are you sure you want to decline this match? The resource will remain open for other potential requests.'"
+      [confirmText]="isRtl ? 'تأكيد الرفض' : 'Confirm Reject'"
+      [cancelText]="isRtl ? 'إلغاء' : 'Cancel'"
       confirmVariant="danger"
       (confirm)="confirmReject()"
       (cancel)="showRejectConfirm = false"
@@ -265,10 +266,11 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
   `]
 })
 export class MatchDetailComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private api = inject(MatchApiService);
-  private auth = inject(AuthService);
-  private toast = inject(ToastService);
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
 
   match: Match | null = null;
   matchId = '';
@@ -281,12 +283,34 @@ export class MatchDetailComponent implements OnInit {
   showAcceptConfirm = false;
   showRejectConfirm = false;
 
+  private route = inject(ActivatedRoute);
+  private api = inject(MatchApiService);
+  private auth = inject(AuthService);
+  private toast = inject(ToastService);
+
+  getStatusLabel(status?: string): string {
+    if (!status) return '';
+    return this.languageService?.getStatusLabel(status) || status;
+  }
+
+  getUrgencyLabel(urgency?: string): string {
+    if (!urgency) return '';
+    return this.languageService?.getUrgencyLabel(urgency) || urgency;
+  }
+
+  formatDate(dateVal: any): string {
+    if (!dateVal) return '';
+    const date = new Date(dateVal);
+    const locale = this.isRtl ? 'ar-EG' : 'en-US';
+    return date.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
   ngOnInit(): void {
     this.matchId = this.route.snapshot.paramMap.get('id') || '';
     if (this.matchId) {
       this.loadMatch();
     } else {
-      this.errorMessage = 'No Match ID provided.';
+      this.errorMessage = this.isRtl ? 'معرف المطابقة غير متوفر.' : 'No Match ID provided.';
       this.loading = false;
     }
   }
@@ -300,12 +324,12 @@ export class MatchDetailComponent implements OnInit {
         this.match = data;
         this.loading = false;
         if (!data) {
-          this.errorMessage = 'Match not found or expired.';
+          this.errorMessage = this.isRtl ? 'لم يتم العثور على المطابقة أو انتهت صلاحيتها.' : 'Match not found or expired.';
         }
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err?.error?.message || 'Failed to load match details.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل تحميل تفاصيل المطابقة.' : 'Failed to load match details.');
       }
     });
   }
@@ -351,7 +375,9 @@ export class MatchDetailComponent implements OnInit {
         if (this.match) {
           this.match = { ...this.match, status: 'accepted' };
         }
-        this.successMessage = 'Match accepted! Handover coordination has been successfully generated.';
+        this.successMessage = this.isRtl
+          ? 'تم قبول المطابقة بنجاح! تم إنشاء تنسيق التسليم والاستلام.'
+          : 'Match accepted! Handover coordination has been successfully generated.';
         this.toast.show({
           variant: 'success',
           message: this.successMessage
@@ -360,11 +386,15 @@ export class MatchDetailComponent implements OnInit {
       error: (err: any) => {
         this.processing = false;
         if (err?.status === 409) {
-          this.errorMessage = 'Conflict: this match or associated resource is no longer available.';
+          this.errorMessage = this.isRtl
+            ? 'تعارض: هذه المطابقة أو المورد المرتبط بها لم يعد متاحاً.'
+            : 'Conflict: this match or associated resource is no longer available.';
         } else if (err?.status === 403) {
-          this.errorMessage = 'You do not have permission to accept this match.';
+          this.errorMessage = this.isRtl
+            ? 'ليس لديك الصلاحية لقبول هذه المطابقة.'
+            : 'You do not have permission to accept this match.';
         } else {
-          this.errorMessage = err?.error?.message || 'Failed to accept match.';
+          this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل قبول المطابقة.' : 'Failed to accept match.');
         }
         this.toast.show({
           variant: 'error',
@@ -390,7 +420,9 @@ export class MatchDetailComponent implements OnInit {
         if (this.match) {
           this.match = { ...this.match, status: 'rejected' };
         }
-        this.successMessage = 'Match rejected. The resource has been returned to available status.';
+        this.successMessage = this.isRtl
+          ? 'تم رفض المطابقة. تمت إعادة المورد إلى الحالة المتاحة.'
+          : 'Match rejected. The resource has been returned to available status.';
         this.toast.show({
           variant: 'info',
           message: this.successMessage
@@ -398,7 +430,7 @@ export class MatchDetailComponent implements OnInit {
       },
       error: (err: any) => {
         this.processing = false;
-        this.errorMessage = err?.error?.message || 'Failed to reject match.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل رفض المطابقة.' : 'Failed to reject match.');
         this.toast.show({
           variant: 'error',
           message: this.errorMessage
@@ -418,12 +450,12 @@ export class MatchDetailComponent implements OnInit {
   }
 
   get resourceTitle(): string {
-    return this.resource?.title || 'Resource';
+    return this.resource?.title || (this.isRtl ? 'مورد' : 'Resource');
   }
 
   get resourceCategory(): string {
     const cat = this.resource?.category || (this.resource as any)?.categoryId;
-    return typeof cat === 'object' && cat?.name ? cat.name : 'Category';
+    return typeof cat === 'object' && cat?.name ? cat.name : (this.isRtl ? 'تصنيف' : 'Category');
   }
 
   get resourceQuantity(): number {
@@ -432,13 +464,13 @@ export class MatchDetailComponent implements OnInit {
 
   get resourceLocation(): string {
     const loc = this.resource?.location;
-    if (!loc) return 'Location not specified';
+    if (!loc) return this.isRtl ? 'الموقع غير محدد' : 'Location not specified';
     return loc.city + (loc.area ? ` · ${loc.area}` : '');
   }
 
   get requestCategory(): string {
     const cat = (this.request as any)?.category || this.request?.categoryId;
-    return typeof cat === 'object' && cat?.name ? cat.name : 'Category';
+    return typeof cat === 'object' && cat?.name ? cat.name : (this.isRtl ? 'تصنيف' : 'Category');
   }
 
   get requestQuantity(): number {
@@ -451,7 +483,7 @@ export class MatchDetailComponent implements OnInit {
 
   get requestLocation(): string {
     const loc = this.request?.location;
-    if (!loc) return 'Location not specified';
+    if (!loc) return this.isRtl ? 'الموقع غير محدد' : 'Location not specified';
     return loc.city + (loc.area ? ` · ${loc.area}` : '');
   }
 }

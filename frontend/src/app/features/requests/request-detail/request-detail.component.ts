@@ -10,6 +10,7 @@ import { LifecycleTimelineComponent, LifecycleStepId } from '../../../shared/com
 import { DialogComponent } from '../../../shared/ui/dialog/dialog.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-request-detail',
@@ -34,7 +35,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
           <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          <span>Back to Requests</span>
+          <span>{{ isRtl ? 'العودة إلى الطلبات' : 'Back to Requests' }}</span>
         </a>
 
         <!-- Error Alert -->
@@ -63,7 +64,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               <div>
                 <div class="flex items-center gap-2">
                   <span class="rounded bg-neutral-100 px-2.5 py-0.5 text-xs font-semibold text-neutral-600">
-                    Demand Request #{{ requestId.slice(-6) }}
+                    {{ isRtl ? 'طلب احتياج #' : 'Demand Request #' }}{{ requestId.slice(-6) }}
                   </span>
                   <app-urgency-badge [urgency]="request.urgency" />
                 </div>
@@ -72,7 +73,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   {{ categoryName }}
                 </h1>
                 <p class="mt-1 text-sm text-neutral-500">
-                  Posted on {{ request.createdAt | date:'mediumDate' }}
+                  {{ isRtl ? 'تاريخ النشر:' : 'Posted on' }} {{ formatDate(request.createdAt) }}
                 </p>
               </div>
 
@@ -82,7 +83,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   class="inline-flex items-center rounded-full border px-3.5 py-1 text-xs font-semibold uppercase tracking-wider"
                   [ngClass]="statusBadgeClass"
                 >
-                  Status: {{ request.status }}
+                  {{ isRtl ? 'الحالة:' : 'Status:' }} {{ getStatusLabel(request.status) }}
                 </span>
               </div>
             </div>
@@ -90,7 +91,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
             <!-- Integrated Lifecycle Timeline (Product & Backend Contract Aligned) -->
             <div class="mt-6 border-b border-neutral-100 pb-6">
               <h2 class="mb-3 text-xs font-semibold uppercase tracking-wider text-neutral-500">
-                Request Lifecycle Progress
+                {{ isRtl ? 'مسار ومراحل دورة حياة الطلب' : 'Request Lifecycle Progress' }}
               </h2>
               <app-lifecycle-timeline
                 [currentStep]="currentLifecycleStep"
@@ -102,31 +103,31 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
             <!-- Specifications Grid -->
             <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
-                <span class="text-xs font-semibold uppercase text-neutral-500">Quantity Needed</span>
-                <p class="mt-1 text-xl font-bold text-neutral-900">{{ request.quantity }} units</p>
+                <span class="text-xs font-semibold uppercase text-neutral-500">{{ isRtl ? 'الكمية المطلوبة' : 'Quantity Needed' }}</span>
+                <p class="mt-1 text-xl font-bold text-neutral-900">{{ request.quantity }} {{ isRtl ? 'وحدة' : 'units' }}</p>
               </div>
 
               <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
-                <span class="text-xs font-semibold uppercase text-neutral-500">Urgency</span>
-                <p class="mt-1 text-xl font-bold capitalize text-neutral-900">{{ request.urgency }}</p>
+                <span class="text-xs font-semibold uppercase text-neutral-500">{{ isRtl ? 'درجة الإلحاح' : 'Urgency' }}</span>
+                <p class="mt-1 text-xl font-bold capitalize text-neutral-900">{{ getUrgencyLabel(request.urgency) }}</p>
               </div>
 
               <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
-                <span class="text-xs font-semibold uppercase text-neutral-500">City / Region</span>
+                <span class="text-xs font-semibold uppercase text-neutral-500">{{ isRtl ? 'المدينة / المحافظة' : 'City / Region' }}</span>
                 <p class="mt-1 text-xl font-bold text-neutral-900">{{ request.location.city }}</p>
               </div>
 
               <div class="rounded-xl border border-neutral-100 bg-neutral-50 p-4">
-                <span class="text-xs font-semibold uppercase text-neutral-500">Area</span>
-                <p class="mt-1 text-xl font-bold text-neutral-900">{{ request.location.area || 'General Area' }}</p>
+                <span class="text-xs font-semibold uppercase text-neutral-500">{{ isRtl ? 'المنطقة / الحي' : 'Area' }}</span>
+                <p class="mt-1 text-xl font-bold text-neutral-900">{{ request.location.area || (isRtl ? 'المنطقة العامة' : 'General Area') }}</p>
               </div>
             </div>
 
             <!-- Description Section -->
             <div class="mt-6 rounded-xl border border-neutral-100 bg-neutral-50 p-5">
-              <h3 class="text-sm font-semibold text-neutral-900">Request Description</h3>
+              <h3 class="text-sm font-semibold text-neutral-900">{{ isRtl ? 'تفاصيل ووصف الاحتياج' : 'Request Description' }}</h3>
               <p class="mt-2 text-sm leading-relaxed text-neutral-700 whitespace-pre-line">
-                {{ request.description || 'No additional description provided by the requester.' }}
+                {{ request.description || (isRtl ? 'لم يقم صاحب الطلب بإضافة تفاصيل إضافية.' : 'No additional description provided by the requester.') }}
               </p>
             </div>
 
@@ -139,7 +140,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                     [routerLink]="['/requests', requestId, 'edit']"
                     class="rounded-lg border border-neutral-200 bg-neutral-0 px-4 py-2 text-sm font-semibold text-neutral-700 transition hover:bg-neutral-50"
                   >
-                    Edit Request
+                    {{ isRtl ? 'تعديل الطلب' : 'Edit Request' }}
                   </a>
                 }
 
@@ -150,7 +151,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                     [isLoading]="actionProcessing"
                     (clicked)="publishRequest()"
                   >
-                    Publish Request
+                    {{ isRtl ? 'نشر الطلب' : 'Publish Request' }}
                   </app-button>
                 }
 
@@ -163,7 +164,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
-                    <span>Check Available Matches</span>
+                    <span>{{ isRtl ? 'استعراض المطابقات المتاحة' : 'Check Available Matches' }}</span>
                   </a>
                 }
               </div>
@@ -175,7 +176,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   [disabled]="actionProcessing"
                   (clicked)="promptCancel()"
                 >
-                  Cancel Request
+                  {{ isRtl ? 'إلغاء الطلب' : 'Cancel Request' }}
                 </app-button>
               }
             </div>
@@ -185,16 +186,18 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
         <!-- Cancellation Dialog via Shared app-dialog -->
         <app-dialog
           [isOpen]="showCancelConfirm"
-          title="Cancel This Request?"
-          confirmText="Confirm Cancellation"
-          cancelText="Keep Active"
+          [title]="isRtl ? 'هل أنت متأكد من إلغاء هذا الطلب؟' : 'Cancel This Request?'"
+          [confirmText]="isRtl ? 'تأكيد الإلغاء' : 'Confirm Cancellation'"
+          [cancelText]="isRtl ? 'إبقاء الطلب نشطاً' : 'Keep Active'"
           confirmVariant="danger"
           [isLoading]="actionProcessing"
           (close)="dismissCancel()"
           (confirm)="confirmCancel()"
         >
           <p>
-            Cancelling this demand request will remove it from active matching discovery. You can create a new request at any time.
+            {{ isRtl
+              ? 'سيؤدي إلغاء هذا الطلب إلى إزالته من نظام المطابقة التلقائية. يمكنك دائماً تسجيل طلب جديد في أي وقت.'
+              : 'Cancelling this demand request will remove it from active matching discovery. You can create a new request at any time.' }}
           </p>
         </app-dialog>
       </div>
@@ -207,10 +210,11 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
   `]
 })
 export class RequestDetailComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
-  private api = inject(RequestApiService);
-  private toast = inject(ToastService);
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
 
   request: Request | null = null;
   requestId = '';
@@ -220,14 +224,36 @@ export class RequestDetailComponent implements OnInit {
 
   showCancelConfirm = false;
 
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private api = inject(RequestApiService);
+  private toast = inject(ToastService);
+
   ngOnInit(): void {
     this.requestId = this.route.snapshot.paramMap.get('id') || '';
     if (this.requestId) {
       this.loadRequest();
     } else {
-      this.errorMessage = 'No request ID provided.';
+      this.errorMessage = this.isRtl ? 'معرف الطلب غير متوفر.' : 'No request ID provided.';
       this.loading = false;
     }
+  }
+
+  formatDate(dateVal: any): string {
+    if (!dateVal) return '';
+    const date = new Date(dateVal);
+    const locale = this.isRtl ? 'ar-EG' : 'en-US';
+    return date.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  getStatusLabel(status?: string): string {
+    if (!status) return '';
+    return this.languageService?.getStatusLabel(status) || status;
+  }
+
+  getUrgencyLabel(urgency?: string): string {
+    if (!urgency) return '';
+    return this.languageService?.getUrgencyLabel(urgency) || urgency;
   }
 
   loadRequest(): void {
@@ -240,7 +266,7 @@ export class RequestDetailComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err?.error?.message || 'Failed to load request details.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل تحميل تفاصيل الطلب.' : 'Failed to load request details.');
       }
     });
   }
@@ -253,7 +279,7 @@ export class RequestDetailComponent implements OnInit {
     if (typeof cat === 'string') {
       return cat;
     }
-    return 'Demand Request';
+    return this.isRtl ? 'طلب احتياج' : 'Demand Request';
   }
 
   get currentLifecycleStep(): LifecycleStepId {
@@ -304,11 +330,15 @@ export class RequestDetailComponent implements OnInit {
       next: (updated) => {
         this.request = updated;
         this.actionProcessing = false;
-        this.toast.success('Request published successfully and is now discoverable for matching.');
+        this.toast.success(
+          this.isRtl
+            ? 'تم نشر الطلب بنجاح وهو الآن متاح للمطابقة الذكية.'
+            : 'Request published successfully and is now discoverable for matching.'
+        );
       },
       error: (err) => {
         this.actionProcessing = false;
-        this.errorMessage = err?.error?.message || 'Failed to publish request.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل نشر الطلب.' : 'Failed to publish request.');
         this.toast.error(this.errorMessage);
       }
     });
@@ -330,11 +360,11 @@ export class RequestDetailComponent implements OnInit {
       next: (updated) => {
         this.request = updated;
         this.actionProcessing = false;
-        this.toast.success('Request has been cancelled.');
+        this.toast.success(this.isRtl ? 'تم إلغاء الطلب بنجاح.' : 'Request has been cancelled.');
       },
       error: (err) => {
         this.actionProcessing = false;
-        this.errorMessage = err?.error?.message || 'Failed to cancel request.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل إلغاء الطلب.' : 'Failed to cancel request.');
         this.toast.error(this.errorMessage);
       }
     });

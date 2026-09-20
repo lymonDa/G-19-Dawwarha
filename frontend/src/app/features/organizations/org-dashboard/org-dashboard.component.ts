@@ -9,6 +9,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
 import { VerificationBadgeComponent } from '../../../shared/components/verification-badge/verification-badge.component';
 import { ImpactCardComponent } from '../../../shared/components/impact-card/impact-card.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-org-dashboard',
@@ -45,7 +46,9 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
             </svg>
             <span>{{ errorMessage() }}</span>
           </div>
-          <app-button variant="secondary" size="sm" (clicked)="loadOrg()">Retry</app-button>
+          <app-button variant="secondary" size="sm" (clicked)="loadOrg()">
+            {{ isRtl ? 'إعادة المحاولة' : 'Retry' }}
+          </app-button>
         </div>
       } @else {
       <!-- Organization Header & Verification Status -->
@@ -56,11 +59,13 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h1 class="text-xl font-bold text-neutral-900">{{ org()?.name || 'Organization Dashboard' }}</h1>
+              <h1 class="text-xl font-bold text-neutral-900">
+                {{ org()?.name || (isRtl ? 'لوحة تحكم المنظمة' : 'Organization Dashboard') }}
+              </h1>
               <app-verification-badge [status]="org()?.verificationStatus || 'pending'"></app-verification-badge>
             </div>
             <p class="text-xs text-neutral-500 mt-0.5">
-              {{ org()?.contact?.city || 'Cairo' }} · Main Office
+              {{ org()?.contact?.city || (isRtl ? 'القاهرة' : 'Cairo') }} · {{ isRtl ? 'المقر الرئيسي' : 'Main Office' }}
             </p>
           </div>
         </div>
@@ -68,12 +73,12 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
         <div class="flex items-center gap-2">
           <a routerLink="/organizations/verification">
             <app-button variant="secondary" size="sm">
-              Manage Verification Documents
+              {{ isRtl ? 'إدارة وثائق التحقق' : 'Manage Verification Documents' }}
             </app-button>
           </a>
           <a routerLink="/requests/create">
             <app-button variant="primary" size="sm">
-              + New Demand Request
+              {{ isRtl ? '+ تسجيل طلب احتياج' : '+ New Demand Request' }}
             </app-button>
           </a>
         </div>
@@ -86,13 +91,17 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
           <div class="flex-1 text-xs text-neutral-800 leading-relaxed">
-            <p class="font-bold text-neutral-900 mb-0.5">Organization account is pending verification</p>
+            <p class="font-bold text-neutral-900 mb-0.5">
+              {{ isRtl ? 'حساب المنظمة بانتظار استكمال وتدقيق التحقق' : 'Organization account is pending verification' }}
+            </p>
             <p>
-              You can browse resources and requests, but publishing permanent requests and accessing priority matches requires official document approval by the platform admins.
+              {{ isRtl
+                ? 'يمكنك تصفح الموارد والطلبات، لكن نشر الاحتياجات الدائمة والحصول على أولوية المطابقة يتطلب اعتماد وثائق التسجيل الرسمية من إدارة المنصة.'
+                : 'You can browse resources and requests, but publishing permanent requests and accessing priority matches requires official document approval by the platform admins.' }}
             </p>
           </div>
           <a routerLink="/organizations/verification" class="text-xs font-bold text-warning hover:underline whitespace-nowrap">
-            Complete Verification →
+            {{ isRtl ? 'استكمال التحقق ←' : 'Complete Verification →' }}
           </a>
         </div>
       }
@@ -101,24 +110,24 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <app-impact-card
           [value]="org()?.stats?.requestsFulfilled || 0"
-          label="Active Organization Requests"
-          description="Covering beneficiary needs"
+          [label]="isRtl ? 'طلبات الاحتياج النشطة' : 'Active Organization Requests'"
+          [description]="isRtl ? 'تغطي احتياجات المستفيدين' : 'Covering beneficiary needs'"
           variant="organization"
           icon="📋"
         ></app-impact-card>
 
         <app-impact-card
           [value]="org()?.stats?.resourcesShared || 0"
-          label="Successfully Received Resources"
-          description="Via dual-confirmed handover"
+          [label]="isRtl ? 'الموارد المستلمة بنجاح' : 'Successfully Received Resources'"
+          [description]="isRtl ? 'عبر بروتوكول التأكيد الثنائي' : 'Via dual-confirmed handover'"
           variant="organization"
           icon="📦"
         ></app-impact-card>
 
         <app-impact-card
           [value]="(org()?.stats?.resourcesShared || 0) + (org()?.stats?.requestsFulfilled || 0)"
-          label="Total Verified Transfers"
-          description="Committed to equitable distribution"
+          [label]="isRtl ? 'إجمالي التحويلات الموثقة' : 'Total Verified Transfers'"
+          [description]="isRtl ? 'التزام بالتوزيع العادل والمستدام' : 'Committed to equitable distribution'"
           variant="organization"
           icon="★"
         ></app-impact-card>
@@ -128,30 +137,38 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <app-card padding="md">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="font-semibold text-neutral-900 text-sm">Recent Organization Requests</h3>
-            <a routerLink="/requests/mine" class="text-xs text-primary hover:underline">View All</a>
+            <h3 class="font-semibold text-neutral-900 text-sm">
+              {{ isRtl ? 'طلبات المنظمة الحديثة' : 'Recent Organization Requests' }}
+            </h3>
+            <a routerLink="/requests/mine" class="text-xs text-primary hover:underline">
+              {{ isRtl ? 'عرض الكل' : 'View All' }}
+            </a>
           </div>
           <p class="text-xs text-neutral-500 mb-4">
-            Track the lifecycle of requests created under your organization and their available matches.
+            {{ isRtl ? 'متابعة دورة حياة الطلبات المسجلة باسم منظمتك ونسب المطابقة الجغرافية المتوفرة.' : 'Track the lifecycle of requests created under your organization and their available matches.' }}
           </p>
           <a routerLink="/requests/create">
             <app-button variant="secondary" size="sm" [fullWidth]="true">
-              + Add Urgent Demand Request
+              {{ isRtl ? '+ إضافة طلب احتياج عاجل' : '+ Add Urgent Demand Request' }}
             </app-button>
           </a>
         </app-card>
 
         <app-card padding="md">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="font-semibold text-neutral-900 text-sm">Matches & Handover Operations</h3>
-            <a routerLink="/matches" class="text-xs text-primary hover:underline">View Matches</a>
+            <h3 class="font-semibold text-neutral-900 text-sm">
+              {{ isRtl ? 'عمليات المطابقة والتسليم' : 'Matches & Handover Operations' }}
+            </h3>
+            <a routerLink="/matches" class="text-xs text-primary hover:underline">
+              {{ isRtl ? 'عرض المطابقات' : 'View Matches' }}
+            </a>
           </div>
           <p class="text-xs text-neutral-500 mb-4">
-            Confirm resource deliveries to your organization's office via the Two-Sided Handover protocol.
+            {{ isRtl ? 'تأكيد استلام الموارد إلى مقر المنظمة عبر بروتوكول التسليم الثنائي المستقل.' : 'Confirm resource deliveries to your organization\'s office via the Two-Sided Handover protocol.' }}
           </p>
           <a routerLink="/matches">
             <app-button variant="outline" size="sm" [fullWidth]="true">
-              Review Geographic Matches
+              {{ isRtl ? 'مراجعة المطابقات الجغرافية' : 'Review Geographic Matches' }}
             </app-button>
           </a>
         </app-card>
@@ -161,6 +178,12 @@ import { ImpactCardComponent } from '../../../shared/components/impact-card/impa
   `
 })
 export class OrgDashboardComponent implements OnInit {
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
+
   private orgApi = inject(OrganizationApiService);
   authService = inject(AuthService);
 
@@ -180,13 +203,13 @@ export class OrgDashboardComponent implements OnInit {
     const request$ = orgId ? this.orgApi.getOrganizationById(orgId) : this.orgApi.getMyOrganization();
 
     request$.subscribe({
-      next: (organization) => {
-        this.org.set(organization);
+      next: (res) => {
+        this.org.set(res);
         this.isLoading.set(false);
       },
       error: (err) => {
+        this.errorMessage.set(err?.error?.error?.message || err?.error?.message || err?.message || (this.isRtl ? 'تعذر تحميل بيانات المنظمة' : 'Failed to load organization data'));
         this.isLoading.set(false);
-        this.errorMessage.set(err?.error?.error?.message || err?.error?.message || 'Failed to load organization data.');
       }
     });
   }

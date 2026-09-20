@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Notification, NotificationType } from '../../../core/models/notification.model';
+import { LanguageService, injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-notification-item',
@@ -102,9 +103,9 @@ import { Notification, NotificationType } from '../../../core/models/notificatio
               <button
                 type="button"
                 (click)="onMarkAsRead($event)"
-                class="text-[11px] text-primary hover:underline font-medium"
+                class="text-[11px] text-primary hover:underline font-medium cursor-pointer"
               >
-                تحديد كمقروء
+                {{ isEnglish ? 'Mark as read' : 'تحديد كمقروء' }}
               </button>
             }
           </div>
@@ -114,9 +115,15 @@ import { Notification, NotificationType } from '../../../core/models/notificatio
   `
 })
 export class NotificationItemComponent {
+  private languageService = injectLanguageService();
+
   @Input() notification?: Notification;
   @Output() selected = new EventEmitter<Notification>();
   @Output() markRead = new EventEmitter<Notification>();
+
+  get isEnglish(): boolean {
+    return this.languageService?.currentLanguage() === 'en';
+  }
 
   get isUnread(): boolean {
     if (!this.notification) return false;
@@ -127,8 +134,10 @@ export class NotificationItemComponent {
   }
 
   get accessibleAriaLabel(): string {
-    if (!this.notification) return 'إشعار';
-    const prefix = this.isUnread ? 'إشعار غير مقروء: ' : 'إشعار مقروء: ';
+    if (!this.notification) return this.isEnglish ? 'Notification' : 'إشعار';
+    const prefix = this.isEnglish
+      ? (this.isUnread ? 'Unread notification: ' : 'Read notification: ')
+      : (this.isUnread ? 'إشعار غير مقروء: ' : 'إشعار مقروء: ');
     return `${prefix}${this.notification.title}. ${this.notification.message}`;
   }
 

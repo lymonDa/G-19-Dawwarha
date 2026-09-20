@@ -13,6 +13,7 @@ import { CategorySelectorComponent } from '../../../shared/components/category-s
 import { RequestPayload } from '../../../core/models/request.model';
 import { ToastService } from '../../../core/services/toast.service';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-request-form',
@@ -35,16 +36,16 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
           <svg class="h-4 w-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
-          <span>Back to Requests</span>
+          <span>{{ isRtl ? 'العودة إلى الطلبات' : 'Back to Requests' }}</span>
         </a>
 
         <!-- Page Title -->
         <div class="mt-4">
           <h1 class="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl">
-            {{ isEdit ? 'Edit Demand Request' : 'Create New Demand Request' }}
+            {{ isEdit ? (isRtl ? 'تعديل طلب الاحتياج' : 'Edit Demand Request') : (isRtl ? 'تسجيل طلب احتياج جديد' : 'Create New Demand Request') }}
           </h1>
           <p class="mt-1 text-sm text-neutral-500">
-            Specify what materials or equipment your community or organization needs.
+            {{ isRtl ? 'حدد المواد أو المستلزمات التي يحتاجها مجتمعك أو منظمتك لتيسير مطابقتها.' : 'Specify what materials or equipment your community or organization needs.' }}
           </p>
         </div>
 
@@ -68,14 +69,18 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
         >
           <!-- Section 1: Item & Demand Specifications -->
           <div>
-            <h2 class="text-base font-semibold text-neutral-900">1. Demand Specifications</h2>
-            <p class="mt-0.5 text-xs text-neutral-500">Tell providers what kind of item you are requesting.</p>
+            <h2 class="text-base font-semibold text-neutral-900">
+              {{ isRtl ? '1. مواصفات الاحتياج' : '1. Demand Specifications' }}
+            </h2>
+            <p class="mt-0.5 text-xs text-neutral-500">
+              {{ isRtl ? 'وضّح للجهات المانحة نوع المورد أو الاحتياج المطلوب بدقة.' : 'Tell providers what kind of item you are requesting.' }}
+            </p>
 
             <div class="mt-4 space-y-4">
               <!-- Category Selection -->
               <div>
                 <label for="category-selector" class="block text-sm font-semibold text-neutral-900">
-                  Category <span class="text-danger" aria-hidden="true">*</span>
+                  {{ isRtl ? 'التصنيف' : 'Category' }} <span class="text-danger" aria-hidden="true">*</span>
                 </label>
                 <div class="mt-1">
                   <app-category-selector
@@ -83,14 +88,16 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                   />
                 </div>
                 @if (isFieldInvalid('categoryId')) {
-                  <p class="mt-1 text-xs text-danger" role="alert">Category is required.</p>
+                  <p class="mt-1 text-xs text-danger" role="alert">
+                    {{ isRtl ? 'التصنيف مطلوب.' : 'Category is required.' }}
+                  </p>
                 }
               </div>
 
               <!-- Quantity Input -->
               <div>
                 <label for="quantity" class="block text-sm font-semibold text-neutral-900">
-                  Quantity Needed <span class="text-danger" aria-hidden="true">*</span>
+                  {{ isRtl ? 'الكمية المطلوبة' : 'Quantity Needed' }} <span class="text-danger" aria-hidden="true">*</span>
                 </label>
                 <div class="mt-1">
                   <input
@@ -98,22 +105,26 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                     type="number"
                     min="1"
                     formControlName="quantity"
-                    placeholder="e.g. 5"
+                    [placeholder]="isRtl ? 'مثال: 5' : 'e.g. 5'"
                     class="w-full rounded-lg border border-neutral-200 bg-neutral-0 px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 transition focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600"
                     [ngClass]="{ 'border-danger focus:border-danger focus:ring-danger': isFieldInvalid('quantity') }"
                   />
                 </div>
                 @if (isFieldInvalid('quantity')) {
-                  <p class="mt-1 text-xs text-danger" role="alert">Quantity must be at least 1.</p>
+                  <p class="mt-1 text-xs text-danger" role="alert">
+                    {{ isRtl ? 'الكمية يجب أن تكون 1 على الأقل.' : 'Quantity must be at least 1.' }}
+                  </p>
                 }
               </div>
 
               <!-- Urgency Level: Mobile Responsive Grid (320px-390px safe) -->
               <div>
                 <label class="block text-sm font-semibold text-neutral-900">
-                  Urgency Level <span class="text-danger" aria-hidden="true">*</span>
+                  {{ isRtl ? 'درجة الإلحاح والأولوية' : 'Urgency Level' }} <span class="text-danger" aria-hidden="true">*</span>
                 </label>
-                <p class="mt-0.5 text-xs text-neutral-500">Urgency helps matching rank higher priority needs first.</p>
+                <p class="mt-0.5 text-xs text-neutral-500">
+                  {{ isRtl ? 'تساعد درجة الإلحاح نظام المطابقة على تقديم الاحتياجات الأكثر ضرورة أولاً.' : 'Urgency helps matching rank higher priority needs first.' }}
+                </p>
                 <div class="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <label
                     class="flex cursor-pointer flex-col items-center rounded-lg border p-3 text-center transition"
@@ -122,8 +133,8 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                       : 'border-neutral-200 bg-neutral-50 text-neutral-700 hover:bg-neutral-100'"
                   >
                     <input type="radio" formControlName="urgency" value="low" class="sr-only" />
-                    <span class="text-sm">Low</span>
-                    <span class="mt-1 text-[11px] text-neutral-500">Flexible timeline</span>
+                    <span class="text-sm">{{ isRtl ? 'منخفض' : 'Low' }}</span>
+                    <span class="mt-1 text-[11px] text-neutral-500">{{ isRtl ? 'وقت مرن' : 'Flexible timeline' }}</span>
                   </label>
 
                   <label
@@ -133,8 +144,8 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                       : 'border-neutral-200 bg-neutral-50 text-neutral-700 hover:bg-neutral-100'"
                   >
                     <input type="radio" formControlName="urgency" value="medium" class="sr-only" />
-                    <span class="text-sm">Medium</span>
-                    <span class="mt-1 text-[11px] text-neutral-500">Within 1–2 weeks</span>
+                    <span class="text-sm">{{ isRtl ? 'متوسط' : 'Medium' }}</span>
+                    <span class="mt-1 text-[11px] text-neutral-500">{{ isRtl ? 'خلال أسبوع إلى أسبوعين' : 'Within 1–2 weeks' }}</span>
                   </label>
 
                   <label
@@ -144,8 +155,8 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                       : 'border-neutral-200 bg-neutral-50 text-neutral-700 hover:bg-neutral-100'"
                   >
                     <input type="radio" formControlName="urgency" value="high" class="sr-only" />
-                    <span class="text-sm">High</span>
-                    <span class="mt-1 text-[11px] text-neutral-500">Immediate need</span>
+                    <span class="text-sm">{{ isRtl ? 'عالي' : 'High' }}</span>
+                    <span class="mt-1 text-[11px] text-neutral-500">{{ isRtl ? 'حاجة عاجلة وفورية' : 'Immediate need' }}</span>
                   </label>
                 </div>
               </div>
@@ -156,42 +167,48 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
 
           <!-- Section 2: Location & Description -->
           <div>
-            <h2 class="text-base font-semibold text-neutral-900">2. Location & Context</h2>
-            <p class="mt-0.5 text-xs text-neutral-500">Where should the resource be delivered or picked up?</p>
+            <h2 class="text-base font-semibold text-neutral-900">
+              {{ isRtl ? '2. الموقع والتفاصيل' : '2. Location & Context' }}
+            </h2>
+            <p class="mt-0.5 text-xs text-neutral-500">
+              {{ isRtl ? 'أين ينبغي تسليم المورد أو استلامه؟' : 'Where should the resource be delivered or picked up?' }}
+            </p>
 
             <div class="mt-4 space-y-4">
               <div formGroupName="location" class="grid gap-3 sm:grid-cols-2">
                 <!-- City -->
                 <div>
                   <label for="city" class="block text-sm font-semibold text-neutral-900">
-                    City <span class="text-danger" aria-hidden="true">*</span>
+                    {{ isRtl ? 'المدينة / المحافظة' : 'City' }} <span class="text-danger" aria-hidden="true">*</span>
                   </label>
                   <div class="mt-1">
                     <input
                       id="city"
                       type="text"
                       formControlName="city"
-                      placeholder="e.g. Cairo"
+                      [placeholder]="isRtl ? 'مثال: القاهرة' : 'e.g. Cairo'"
                       class="w-full rounded-lg border border-neutral-200 bg-neutral-0 px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 transition focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600"
                       [ngClass]="{ 'border-danger focus:border-danger focus:ring-danger': isLocationFieldInvalid('city') }"
                     />
                   </div>
                   @if (isLocationFieldInvalid('city')) {
-                    <p class="mt-1 text-xs text-danger" role="alert">City is required.</p>
+                    <p class="mt-1 text-xs text-danger" role="alert">
+                      {{ isRtl ? 'المدينة مطلوبة.' : 'City is required.' }}
+                    </p>
                   }
                 </div>
 
                 <!-- Area -->
                 <div>
                   <label for="area" class="block text-sm font-semibold text-neutral-900">
-                    Area / Neighborhood
+                    {{ isRtl ? 'المنطقة / الحي' : 'Area / Neighborhood' }}
                   </label>
                   <div class="mt-1">
                     <input
                       id="area"
                       type="text"
                       formControlName="area"
-                      placeholder="e.g. Maadi"
+                      [placeholder]="isRtl ? 'مثال: المعادي' : 'e.g. Maadi'"
                       class="w-full rounded-lg border border-neutral-200 bg-neutral-0 px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 transition focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600"
                     />
                   </div>
@@ -202,7 +219,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               <div>
                 <div class="flex items-center justify-between">
                   <label for="description" class="block text-sm font-semibold text-neutral-900">
-                    Detailed Description
+                    {{ isRtl ? 'وصف تفصيلي للاحتياج' : 'Detailed Description' }}
                   </label>
                   <span class="text-xs text-neutral-400">
                     {{ form.get('description')?.value?.length || 0 }}/500
@@ -214,7 +231,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
                     rows="4"
                     maxlength="500"
                     formControlName="description"
-                    placeholder="Provide any additional specifications, condition preferences, or context..."
+                    [placeholder]="isRtl ? 'اذكر أي مواصفات إضافية، تفضيلات الحالة، أو سياق التوزيع...' : 'Provide any additional specifications, condition preferences, or context...'"
                     class="w-full rounded-lg border border-neutral-200 bg-neutral-0 px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-400 transition focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600"
                   ></textarea>
                 </div>
@@ -228,7 +245,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               routerLink="/requests"
               class="rounded-lg border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50"
             >
-              Cancel
+              {{ isRtl ? 'إلغاء' : 'Cancel' }}
             </a>
 
             <app-button
@@ -237,7 +254,7 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
               [isLoading]="saving"
               [disabled]="form.disabled || saving"
             >
-              {{ isEdit ? 'Update Request' : 'Submit Request' }}
+              {{ isEdit ? (isRtl ? 'حفظ التعديلات' : 'Update Request') : (isRtl ? 'نشر الطلب' : 'Submit Request') }}
             </app-button>
           </div>
         </form>
@@ -251,11 +268,11 @@ import { ButtonComponent } from '../../../shared/ui/button/button.component';
   `]
 })
 export class RequestFormComponent implements OnInit {
-  private fb = inject(FormBuilder);
-  private api = inject(RequestApiService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
-  private toast = inject(ToastService);
+  protected languageService = injectLanguageService();
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
 
   isEdit = false;
   requestId = '';
@@ -263,16 +280,26 @@ export class RequestFormComponent implements OnInit {
   saving = false;
   errorMessage = '';
 
-  form: FormGroup = this.fb.group({
-    categoryId: ['', [Validators.required]],
-    quantity: [1, [Validators.required, Validators.min(1)]],
-    urgency: ['medium', [Validators.required]],
-    location: this.fb.group({
-      city: ['', [Validators.required]],
-      area: ['']
-    }),
-    description: ['', [Validators.maxLength(500)]]
-  });
+  form: FormGroup;
+
+  private fb = inject(FormBuilder);
+  private api = inject(RequestApiService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private toast = inject(ToastService);
+
+  constructor() {
+    this.form = this.fb.group({
+      categoryId: ['', [Validators.required]],
+      quantity: [1, [Validators.required, Validators.min(1)]],
+      urgency: ['medium', [Validators.required]],
+      location: this.fb.group({
+        city: ['', [Validators.required]],
+        area: ['']
+      }),
+      description: ['', [Validators.maxLength(500)]]
+    });
+  }
 
   ngOnInit(): void {
     this.requestId = this.route.snapshot.paramMap.get('id') || '';
@@ -295,7 +322,10 @@ export class RequestFormComponent implements OnInit {
           req.status === 'expired';
 
         if (isTerminal) {
-          this.errorMessage = `This request is ${req.status} and can no longer be edited.`;
+          const statusLabel = this.languageService?.getStatusLabel(req.status) || req.status;
+          this.errorMessage = this.isRtl
+            ? `هذا الطلب بحالة ${statusLabel} ولا يمكن تعديله.`
+            : `This request is ${req.status} and can no longer be edited.`;
           this.form.disable();
           this.loading = false;
           return;
@@ -319,7 +349,7 @@ export class RequestFormComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err?.error?.message || 'Failed to load request for editing.';
+        this.errorMessage = err?.error?.message || (this.isRtl ? 'فشل تحميل بيانات الطلب للتعديل.' : 'Failed to load request for editing.');
       }
     });
   }
@@ -362,7 +392,11 @@ export class RequestFormComponent implements OnInit {
     action$.subscribe({
       next: (createdOrUpdated) => {
         this.saving = false;
-        this.toast.success(this.isEdit ? 'Request updated successfully.' : 'Request created successfully.');
+        this.toast.success(
+          this.isEdit
+            ? (this.isRtl ? 'تم تحديث الطلب بنجاح.' : 'Request updated successfully.')
+            : (this.isRtl ? 'تم تسجيل الطلب بنجاح.' : 'Request created successfully.')
+        );
         const targetId = createdOrUpdated?._id || createdOrUpdated?.id || this.requestId;
         if (targetId) {
           this.router.navigate(['/requests', targetId]);
@@ -373,11 +407,15 @@ export class RequestFormComponent implements OnInit {
       error: (err) => {
         this.saving = false;
         if (err.status === 409) {
-          this.errorMessage = 'A conflicting request already exists or cannot be modified in its current state.';
+          this.errorMessage = this.isRtl
+            ? 'يوجد طلب متعارض بالفعل أو لا يمكن تعديل الطلب في حالته الراهنة.'
+            : 'A conflicting request already exists or cannot be modified in its current state.';
         } else if (err.status === 403) {
-          this.errorMessage = 'You do not have permission to perform this action.';
+          this.errorMessage = this.isRtl
+            ? 'ليس لديك الصلاحية لتنفيذ هذا الإجراء.'
+            : 'You do not have permission to perform this action.';
         } else {
-          this.errorMessage = err?.error?.error?.message || err?.error?.message || 'An error occurred while saving the request.';
+          this.errorMessage = err?.error?.error?.message || err?.error?.message || (this.isRtl ? 'حدث خطأ أثناء حفظ الطلب.' : 'An error occurred while saving the request.');
         }
         this.toast.error(this.errorMessage);
       }

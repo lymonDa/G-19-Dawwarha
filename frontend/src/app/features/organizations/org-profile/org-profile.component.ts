@@ -7,6 +7,7 @@ import { CardComponent } from '../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../shared/ui/button/button.component';
 import { VerificationBadgeComponent } from '../../../shared/components/verification-badge/verification-badge.component';
 import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.component';
+import { injectLanguageService } from '../../../core/services/language.service';
 
 @Component({
   selector: 'app-org-profile',
@@ -32,14 +33,14 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
                   }
                 </div>
                 <p class="text-xs text-neutral-500 mt-1">
-                  {{ contactCity }} · Registered Civil Organization
+                  {{ contactCity }} · {{ isRtl ? 'منظمة أهلية مسجلة' : 'Registered Civil Organization' }}
                 </p>
               </div>
             </div>
 
             <a routerLink="/requests">
               <app-button variant="outline" size="sm">
-                Browse This Organization's Requests
+                {{ isRtl ? 'تصفح طلبات هذه المنظمة' : "Browse This Organization's Requests" }}
               </app-button>
             </a>
           </div>
@@ -47,7 +48,9 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
           <!-- Description -->
           @if (org()?.description) {
             <div class="mt-6 pt-6 border-t border-neutral-100">
-              <h3 class="text-sm font-semibold text-neutral-900 mb-2">About the Organization</h3>
+              <h3 class="text-sm font-semibold text-neutral-900 mb-2">
+                {{ isRtl ? 'نبذة عن أنشطة المنظمة' : 'About the Organization' }}
+              </h3>
               <p class="text-xs text-neutral-700 leading-relaxed max-w-3xl">
                 {{ org()?.description }}
               </p>
@@ -57,33 +60,50 @@ import { SkeletonComponent } from '../../../shared/ui/skeleton/skeleton.componen
           <!-- Contact Details -->
           <div class="mt-6 pt-6 border-t border-neutral-100 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-neutral-600">
             <div>
-              <span class="text-neutral-400 block mb-0.5">Official Contact Email:</span>
-              <span class="font-medium text-neutral-900">{{ contactEmail || 'Not specified' }}</span>
+              <span class="text-neutral-400 block mb-0.5">
+                {{ isRtl ? 'البريد الإلكتروني الرسمي:' : 'Official Contact Email:' }}
+              </span>
+              <span class="font-medium text-neutral-900">{{ contactEmail || notSpecifiedText }}</span>
             </div>
             <div>
-              <span class="text-neutral-400 block mb-0.5">Phone Number:</span>
-              <span class="font-medium text-neutral-900">{{ contactPhone || 'Not specified' }}</span>
+              <span class="text-neutral-400 block mb-0.5">
+                {{ isRtl ? 'رقم الهاتف:' : 'Phone Number:' }}
+              </span>
+              <span class="font-medium text-neutral-900">{{ contactPhone || notSpecifiedText }}</span>
             </div>
             <div>
-              <span class="text-neutral-400 block mb-0.5">Office Address:</span>
-              <span class="font-medium text-neutral-900">{{ contactAddress || 'Not specified' }}</span>
+              <span class="text-neutral-400 block mb-0.5">
+                {{ isRtl ? 'عنوان المقر:' : 'Office Address:' }}
+              </span>
+              <span class="font-medium text-neutral-900">{{ contactAddress || notSpecifiedText }}</span>
             </div>
           </div>
         </app-card>
       } @else {
         <app-card padding="lg">
-          <p class="text-center text-sm text-neutral-500 py-8">Organization data not found.</p>
+          <p class="text-center text-sm text-neutral-500 py-8">
+            {{ isRtl ? 'لم يتم العثور على بيانات المنظمة.' : 'Organization data not found.' }}
+          </p>
         </app-card>
       }
     </div>
   `
 })
 export class OrgProfileComponent implements OnInit {
+  protected languageService = injectLanguageService();
   private route = inject(ActivatedRoute);
   private orgApi = inject(OrganizationApiService);
 
   readonly org = signal<Organization | null>(null);
   readonly isLoading = signal(true);
+
+  get isRtl(): boolean {
+    return this.languageService?.isRtl() ?? true;
+  }
+
+  get notSpecifiedText(): string {
+    return this.isRtl ? 'غير محدد' : 'Not specified';
+  }
 
   get isVerified(): boolean {
     return this.org()?.verificationStatus === 'verified';
@@ -122,3 +142,4 @@ export class OrgProfileComponent implements OnInit {
     }
   }
 }
+
