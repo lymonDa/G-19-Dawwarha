@@ -17,7 +17,7 @@ export interface NotificationListResponse {
 export class NotificationApiService {
   private api = inject(ApiBaseService);
   private http = inject(HttpClient);
-  private readonly baseUrl = environment.apiUrl || 'http://localhost:5000/api';
+  private readonly baseUrl = environment.apiUrl || '/api';
 
   /**
    * Retrieves paginated notifications for the authenticated user.

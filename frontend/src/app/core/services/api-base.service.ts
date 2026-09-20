@@ -10,7 +10,7 @@ export type QueryParamValue = string | number | boolean | readonly (string | num
 })
 export class ApiBaseService {
   protected http = inject(HttpClient);
-  protected readonly baseUrl = environment.apiUrl || 'http://localhost:5000/api';
+  protected readonly baseUrl = environment.apiUrl || '/api';
 
   get<T>(path: string, params?: Record<string, QueryParamValue>): Observable<T> {
     const httpParams = this.buildParams(params);

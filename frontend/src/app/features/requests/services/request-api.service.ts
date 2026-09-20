@@ -11,6 +11,7 @@ import {
 } from '../../../core/models/request.model';
 import { Category } from '../../../core/models/category.model';
 import { ApiResponse } from '../../../core/models/api-error.model';
+import { environment } from '../../../../environments/environment';
 
 export type RequestLifecycleAction =
   | 'publish'
@@ -27,7 +28,8 @@ export type RequestLifecycleAction =
 })
 export class RequestApiService {
   private http = inject(HttpClient);
-  private apiUrl = '/api/requests';
+  private baseUrl = environment.apiUrl || '/api';
+  private apiUrl = `${this.baseUrl}/requests`;
 
   /**
    * Fetch paginated list of requests with filters.
@@ -103,7 +105,7 @@ export class RequestApiService {
   }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<ApiResponse<Category[]>>('/api/categories').pipe(
+    return this.http.get<ApiResponse<Category[]>>(`${this.baseUrl}/categories`).pipe(
       map(res => res.data || [])
     );
   }

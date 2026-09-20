@@ -1,6 +1,54 @@
+# Dependencies
 node_modules/
+*/node_modules/
+
+# Environment Variables & Secrets (NEVER commit real credentials)
 .env
 .env.*
 !.env.example
+*/.env
+*/.env.*
+!*/.env.example
 
+# Compiled Build Outputs
+dist/
+*/dist/
+out-tsc/
+tmp/
+
+# Angular Cache & Build Artifacts
+.angular/
+*/.angular/
+
+# Logs
+*.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor & IDE Directories
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+.history/
+*/.history/
+*.sublime-project
+*.sublime-workspace
+brain/
+
+# OS-generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Test Coverage
+coverage/
+*.lcov

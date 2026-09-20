@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 
 import { Match, MatchStatus } from '../../../core/models/match.model';
 import { ApiResponse } from '../../../core/models/api-error.model';
+import { environment } from '../../../../environments/environment';
 
 export interface AcceptMatchResponse {
   match: Match;
@@ -16,7 +17,8 @@ export interface AcceptMatchResponse {
 })
 export class MatchApiService {
   private http = inject(HttpClient);
-  private apiUrl = '/api/matches';
+  private baseUrl = environment.apiUrl || '/api';
+  private apiUrl = `${this.baseUrl}/matches`;
 
   getAll(
     status?: MatchStatus | string,

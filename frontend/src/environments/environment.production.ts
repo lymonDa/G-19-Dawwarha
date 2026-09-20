@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: '/api', // Safe placeholder - production API URL to be supplied upon deployment
+  apiUrl: '/api', // Default relative path for same-domain / reverse-proxy deployment. Change to absolute URL (e.g. 'https://api.yourdomain.com/api') if backend is on a separate domain.
   apiBaseUrl: ''
 };
