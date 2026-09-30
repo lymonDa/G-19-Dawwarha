@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
 import dotenv from "dotenv";
+import express from "express";
 import mongoose from "mongoose";
 import app from "./src/app.js";
 import connectDB from "./src/config/database.js";
@@ -17,6 +18,30 @@ if (fs.existsSync(localEnvPath)) {
   dotenv.config({ path: rootEnvPath });
 } else {
   dotenv.config();
+}
+
+// ─── Serve Angular frontend static files (Hostinger unified deployment) ───
+// Look for frontend build in: ./public, ../public, or ../frontend
+const publicCandidates = [
+  path.resolve(__dirname, "public"),
+  path.resolve(__dirname, "..", "public"),
+  path.resolve(__dirname, "..", "frontend"),
+];
+const publicDir = publicCandidates.find((p) => fs.existsSync(path.join(p, "index.html")));
+
+if (publicDir) {
+  console.log(`Serving static frontend from: ${publicDir}`);
+  app.use(express.static(publicDir));
+
+  // SPA fallback: any route that is NOT /api/* and NOT /health → return index.html
+  app.use((req, res, next) => {
+    if (req.path.startsWith("/api") || req.path === "/health") {
+      return next();
+    }
+    res.sendFile(path.join(publicDir, "index.html"));
+  });
+} else {
+  console.log("No frontend build found. Running API-only mode.");
 }
 
 const port = process.env.PORT || 5000;

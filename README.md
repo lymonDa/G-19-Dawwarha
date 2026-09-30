@@ -1,4 +1,4 @@
-# DAWWARHA (دَوَّرها)
+# DAWWARHA (دَوَّرها)
 
 > **Urban Resource Redistribution & Circular Economy Platform**  
 > Connects resource providers, community seekers, verified organizations, and administrators to match surplus items with verified community needs.
@@ -8,7 +8,8 @@
 [![Express](https://img.shields.io/badge/Express-5.2-000000?logo=express)](https://expressjs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb)](https://www.mongodb.com/atlas)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
-[![Production Ready](https://img.shields.io/badge/Hostinger-Production%20Ready-673AB7)](DEPLOYMENT.md)
+[![Live](https://img.shields.io/badge/Live-dawarha.site-2ea44f)](https://dawarha.site)
+[![Hostinger](https://img.shields.io/badge/Hostinger-Node.js%20Hosting-673AB7)](DEPLOYMENT.md)
 
 ---
 
@@ -20,8 +21,7 @@
 - [Prerequisites](#prerequisites)
 - [Local Development Setup](#local-development-setup)
 - [Testing & Quality Assurance](#testing--quality-assurance)
-- [Production Build](#production-build)
-- [Hostinger Deployment](#hostinger-deployment)
+- [Production Build & Deployment](#production-build--deployment)
 - [Environment Configuration Matrix](#environment-configuration-matrix)
 - [Related Documentation](#related-documentation)
 
@@ -47,7 +47,6 @@
 - **Icons:** [Lucide Angular](https://lucide.dev/)
 - **State & Reactive:** RxJS 7.8, Angular Signals
 - **Testing:** [Vitest 5.0](https://vitest.dev/) + Node.js Test Runner
-- **SPA Web Server:** Apache / LiteSpeed with `.htaccess` (Gzip, caching, SPA rewrites)
 
 ### Backend
 - **Runtime:** [Node.js 20+ LTS](https://nodejs.org/) (ES Modules, `"type": "module"`)
@@ -56,6 +55,11 @@
 - **Authentication:** JWT (JSON Web Tokens) with HTTP Bearer authorization
 - **Security:** `bcrypt` hashing, `express-validator`, environment-scoped CORS, error shielding
 - **Testing:** Node.js native test runner (`node --test`), in-memory MongoDB server
+
+### Production Hosting
+- **Platform:** [Hostinger](https://www.hostinger.com/) Node.js Hosting (hPanel)
+- **Architecture:** Unified deployment — Node.js serves both API routes and Angular static files
+- **Domain:** [dawarha.site](https://dawarha.site)
 
 ---
 
@@ -71,35 +75,33 @@ G-19-Dawarhaa/
 │   │   ├── models/           # Mongoose schemas & data models
 │   │   ├── routes/           # Express API route declarations
 │   │   ├── services/         # Core business logic (matching, handovers)
-│   │   └── utils/            # Shared utilities and helpers
+│   │   ├── utils/            # Shared utilities and helpers
+│   │   └── validators/       # Request validation schemas
 │   ├── tests/                # Unit and integration test suites
 │   │   ├── unit/             # Fast isolated unit tests (339 tests)
 │   │   └── integration/      # MongoDB Atlas contract & lifecycle tests
 │   ├── .env.example          # Backend environment template
 │   ├── package.json          # Backend dependencies & npm scripts
-│   └── server.js             # Production entry point with graceful shutdown
+│   └── server.js             # Entry point (serves API + static frontend)
 ├── frontend/                 # Angular 19 client application
 │   ├── src/                  # Angular source code
 │   │   ├── app/              # Core, feature, and shared components
-│   │   ├── environments/     # Development & production environment configurations
+│   │   ├── environments/     # Development & production environment configs
 │   │   └── index.html        # HTML5 entrypoint with SEO & font preconnects
 │   ├── public/               # Static assets & web configuration
 │   │   ├── .htaccess         # Apache/LiteSpeed SPA rewrite & caching rules
 │   │   └── assets/           # Logos, branding identity, and icons
 │   ├── angular.json          # Angular CLI workspace configuration
 │   ├── package.json          # Frontend dependencies & npm scripts
-│   ├── proxy.conf.json       # Dev proxy routing /api -> http://localhost:5000
+│   ├── proxy.conf.json       # Dev proxy routing /api → http://localhost:5000
 │   └── tailwind.config.js    # Tailwind theme configuration
-├── release/                  # Production release package for Hostinger
-│   ├── frontend/             # Compiled browser bundle with .htaccess
-│   ├── backend/              # Clean backend files (no node_modules, no .env)
-│   └── DEPLOYMENT.md         # Deployment manual copy
 ├── docs/                     # Additional project specifications
 ├── DEPLOYMENT.md             # Complete Hostinger production deployment manual
 ├── RELEASE_BUILD_REPORT.md   # Production readiness & build validation report
 ├── package.json              # Root-level helper scripts
-├── .gitignore                # Git exclusions (dependencies, env, build outputs)
-└── README.md                 # Project documentation
+├── .env.example              # Root environment template
+├── .gitignore                # Git exclusions
+└── README.md                 # This file
 ```
 
 ---
@@ -141,11 +143,6 @@ JWT_SECRET=your_jwt_secret_key_minimum_32_characters_long
 JWT_EXPIRES_IN=7d
 CLIENT_URL=http://localhost:4200
 NODE_ENV=development
-```
-
-*(Optional) Create local frontend environment reference:*
-```bash
-cp frontend/.env.example frontend/.env
 ```
 
 ### 3. Seed Demo Data (Optional)
@@ -208,38 +205,47 @@ npm test
 
 ---
 
-## Production Build
+## Production Build & Deployment
 
-### Compiling the Angular Frontend
+### Building the Angular Frontend
 ```bash
 cd frontend
 npm run build
 ```
 - **Output Directory:** `frontend/dist/dawwarha-frontend/browser`
-- **Verification:** Verified that **0 references to `localhost` or `127.0.0.1`** exist in the compiled bundle.
-- **Includes:** Optimized scripts, minified CSS, assets, and `.htaccess` for Apache/LiteSpeed web servers.
+- **Verification:** `0` references to `localhost` or `127.0.0.1` in the compiled bundle.
 
-### Pre-Packaged Release Artifacts
-A clean, production-ready release package is pre-assembled in the `release/` directory:
-- `release/frontend/`: Ready for direct upload to Hostinger `public_html/`.
-- `release/backend/`: Clean backend production files (excluding `node_modules/` and local `.env`).
+### Unified Deployment (Hostinger Node.js Hosting)
 
----
+The production `server.js` serves **both** the API and the Angular frontend from a single Node.js process:
 
-## Hostinger Deployment
+```
+https://dawarha.site/api/*     → Express API routes (backend)
+https://dawarha.site/health    → Health check endpoint
+https://dawarha.site/*         → Angular SPA (frontend static files)
+```
 
-The platform is designed and optimized for production deployment on **Hostinger** (both hPanel Web/Cloud Hosting and Hostinger VPS).
+#### Deploy Steps:
 
-For detailed, step-by-step deployment instructions, refer to:
-👉 **[DEPLOYMENT.md](DEPLOYMENT.md)**
+1. **Build frontend** → `npm run build` in `frontend/`
+2. **Prepare deploy package:**
+   ```bash
+   # The deploy package structure:
+   hostinger-deploy/
+   ├── .env              # Production environment variables
+   ├── server.js         # Entry point
+   ├── package.json      # Dependencies
+   ├── package-lock.json
+   ├── src/              # Backend source code
+   └── public/           # Angular build output (from dist/browser/)
+   ```
+3. **Upload** `hostinger-deploy.zip` to Hostinger File Manager
+4. **Extract** and set **Entry Point** = `server.js` in hPanel → Node.js
+5. **Set environment variables** in hPanel (see table below)
+6. **Run NPM Install** then **Restart** the application
+7. **Verify** → `https://dawarha.site/health` should return `{"success":true,"data":{"status":"ok"}}`
 
-### Quick Deployment Summary:
-1. **Frontend:** Upload all files from `release/frontend/` directly into Hostinger's `public_html/`. Ensure `.htaccess` is uploaded for SPA client-side routing.
-2. **Backend:** Deploy `release/backend/` using Hostinger's **hPanel Node.js Application Manager** (or PM2 on a VPS). Set entry point to `server.js`.
-3. **Environment Variables:** Set `NODE_ENV=production`, `MONGODB_URI`, `JWT_SECRET`, `PORT`, and `CLIENT_URL` in Hostinger hPanel.
-4. **Database:** Whitelist Hostinger's IP address (or `0.0.0.0/0`) in your MongoDB Atlas Network Access.
-
-For audit status, test results, and bundle metrics, see **[RELEASE_BUILD_REPORT.md](RELEASE_BUILD_REPORT.md)**.
+For detailed instructions, see **[DEPLOYMENT.md](DEPLOYMENT.md)**.
 
 ---
 
@@ -247,13 +253,13 @@ For audit status, test results, and bundle metrics, see **[RELEASE_BUILD_REPORT.
 
 | Variable | Scope | Description | Default / Example |
 | :--- | :--- | :--- | :--- |
-| `PORT` | Backend | HTTP port Express listens on | `5000` |
+| `PORT` | Backend | HTTP port Express listens on (auto-set by Hostinger) | `5000` |
 | `NODE_ENV` | Backend | Runtime environment (`development` \| `production`) | `production` |
 | `MONGODB_URI` | Backend | MongoDB Atlas connection string | `mongodb+srv://user:pass@cluster.mongodb.net/dawwarha` |
 | `JWT_SECRET` | Backend | Secret key used to sign JWTs (min 32 characters) | `64_character_cryptographic_secret` |
 | `JWT_EXPIRES_IN` | Backend | Expiration duration for user sessions | `7d` |
 | `CLIENT_URL` | Backend | Allowed CORS origin(s), comma-separated | `https://dawarha.site,https://www.dawarha.site` |
-| `apiUrl` | Frontend | Base path for API requests (in `environment.production.ts`) | `https://dawarha.site/api` |
+| `apiUrl` | Frontend | Base path for API requests (in `environment.production.ts`) | `/api` |
 
 ---
 
