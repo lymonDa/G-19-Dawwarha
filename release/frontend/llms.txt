@@ -4,10 +4,10 @@ Dawwarha is an Arabic-first civic platform for redistributing surplus resources 
 
 ## Public pages
 
-- https://dawwarha.com/
-- https://dawwarha.com/about
-- https://dawwarha.com/how-it-works
-- https://dawwarha.com/resources
+- https://dawarha.site/
+- https://dawarha.site/about
+- https://dawarha.site/how-it-works
+- https://dawarha.site/resources
 
 ## Guidance
 

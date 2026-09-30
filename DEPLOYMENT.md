@@ -11,7 +11,7 @@ Before starting the deployment, verify you have the following:
 - **Hostinger Account** with one of the following setups:
   - **Option A (Web / Cloud Hosting with Node.js support):** Hostinger Business Web Hosting or Cloud Hosting plan with the hPanel **Node.js** application manager.
   - **Option B (Hostinger VPS):** Ubuntu 22.04/24.04 LTS VPS with root SSH access.
-- **Domain Name:** E.g., `dawwarha.com` pointed to your Hostinger nameservers / IP address.
+- **Domain Name:** E.g., `dawarha.site` pointed to your Hostinger nameservers / IP address.
 - **Node.js Environment:** Node.js v20.x or v22.x LTS (compatible with Express 5 and Mongoose 9).
 - **MongoDB Atlas Account & Cluster:**
   - Cluster tier: M0 (Free) or M10+ (Production).
@@ -81,7 +81,7 @@ Configure the following environment variables on Hostinger (via hPanel Node.js s
 | `MONGODB_URI` | Yes | `mongodb+srv://user:pass@cluster.mongodb.net/dawwarha?retryWrites=true&w=majority` | MongoDB Atlas connection string |
 | `JWT_SECRET` | Yes | `64_character_cryptographically_secure_random_string` | Secret for signing & verifying auth tokens |
 | `JWT_EXPIRES_IN` | Yes | `7d` | Lifetime of authentication tokens |
-| `CLIENT_URL` | Yes | `https://dawwarha.com,https://www.dawwarha.com` | Allowed CORS origins for browser requests |
+| `CLIENT_URL` | Yes | `https://dawarha.site,https://www.dawarha.site` | Allowed CORS origins for browser requests |
 
 > [!CAUTION]
 > Never commit `.env` containing real credentials to version control. The repository `.gitignore` automatically excludes `.env` and `.env.*`.
@@ -113,7 +113,7 @@ Configure the following environment variables on Hostinger (via hPanel Node.js s
 ## 6. CORS Configuration
 
 The backend CORS middleware automatically reads `CLIENT_URL` or `ALLOWED_ORIGINS`:
-- If incoming requests originate from `https://dawwarha.com` or `https://www.dawwarha.com`, the backend reflects that origin with `Vary: Origin`.
+- If incoming requests originate from `https://dawarha.site` or `https://www.dawarha.site`, the backend reflects that origin with `Vary: Origin`.
 - Non-browser requests (such as server-to-server health checks) are allowed.
 - Preflight `OPTIONS` requests respond with `204 No Content`.
 
@@ -124,7 +124,7 @@ The backend CORS middleware automatically reads `CLIENT_URL` or `ALLOWED_ORIGINS
 ### Target Directory
 Upload all contents of `release/frontend/` (or `frontend/dist/dawwarha-frontend/browser/`) directly into your Hostinger website root:
 ```text
-/home/u123456789/domains/dawwarha.com/public_html/
+/home/u123456789/domains/dawarha.site/public_html/
 ```
 
 ### Steps via Hostinger File Manager:
@@ -144,7 +144,7 @@ Upload all contents of `release/frontend/` (or `frontend/dist/dawwarha-frontend/
 1. **Upload Backend Files:**
    - In File Manager, create a folder outside `public_html` to protect source code:
      ```text
-     /home/u123456789/domains/dawwarha.com/backend/
+     /home/u123456789/domains/dawarha.site/backend/
      ```
    - Upload the contents of `release/backend/`.
 
@@ -154,9 +154,9 @@ Upload all contents of `release/frontend/` (or `frontend/dist/dawwarha-frontend/
    - Fill in:
      - **Node.js Version:** `20.x` or `22.x`
      - **Application Mode:** `Production`
-     - **Application Root:** `domains/dawwarha.com/backend`
+     - **Application Root:** `domains/dawarha.site/backend`
      - **Application Startup File:** `server.js`
-     - **Application URL:** Select your domain or subdomain (e.g., `api.dawwarha.com`).
+     - **Application URL:** Select your domain or subdomain (e.g., `api.dawarha.site`).
    - Click **Create**.
 
 3. **Install Dependencies:**
@@ -168,7 +168,7 @@ Upload all contents of `release/frontend/` (or `frontend/dist/dawwarha-frontend/
      - `MONGODB_URI` = `<your_atlas_connection_string>`
      - `JWT_SECRET` = `<your_jwt_secret>`
      - `JWT_EXPIRES_IN` = `7d`
-     - `CLIENT_URL` = `https://dawwarha.com,https://www.dawwarha.com`
+     - `CLIENT_URL` = `https://dawarha.site,https://www.dawarha.site`
    - Click **Restart Application**.
 
 ---
@@ -212,13 +212,13 @@ Upload all contents of `release/frontend/` (or `frontend/dist/dawwarha-frontend/
    ```nginx
    server {
        listen 80;
-       server_name dawwarha.com www.dawwarha.com;
+       server_name dawarha.site www.dawarha.site;
        return 301 https://$host$request_uri;
    }
 
    server {
        listen 443 ssl http2;
-       server_name dawwarha.com www.dawwarha.com;
+       server_name dawarha.site www.dawarha.site;
 
        root /var/www/dawwarha-frontend;
        index index.html;
@@ -258,12 +258,12 @@ Upload all contents of `release/frontend/` (or `frontend/dist/dawwarha-frontend/
 
 ## 9. Domain Configuration
 
-- **Apex Domain:** `dawwarha.com` -> Points to Hostinger web root (`public_html/`).
+- **Apex Domain:** `dawarha.site` -> Points to Hostinger web root (`public_html/`).
 - **Subdomain Option (if API hosted separately):**
-  - Create `api.dawwarha.com` in Hostinger DNS pointing to the backend Node.js application.
-  - Update `environment.production.ts`: `apiUrl: 'https://api.dawwarha.com/api'`.
+  - Create `api.dawarha.site` in Hostinger DNS pointing to the backend Node.js application.
+  - Update `environment.production.ts`: `apiUrl: 'https://api.dawarha.site/api'`.
 - **Same-Domain Option (recommended for shared hosting):**
-  - Both frontend and backend share `dawwarha.com`.
+  - Both frontend and backend share `dawarha.site`.
   - Frontend `environment.production.ts` uses `apiUrl: '/api'`.
 
 ---
@@ -272,7 +272,7 @@ Upload all contents of `release/frontend/` (or `frontend/dist/dawwarha-frontend/
 
 Hostinger provides free Let's Encrypt SSL certificates:
 1. In hPanel, go to **Security** -> **SSL**.
-2. Select your domain (`dawwarha.com` and `*.dawwarha.com`).
+2. Select your domain (`dawarha.site` and `*.dawarha.site`).
 3. Click **Install SSL**.
 4. Enable **Force HTTPS** toggle in hPanel.
 
@@ -295,7 +295,7 @@ The included `.htaccess` file handles this automatically:
 ```
 
 **Verification:**
-Open `https://dawwarha.com/login` and press `Ctrl+F5` (hard refresh). The login page must reload correctly with HTTP 200 without showing an Apache 404 error page.
+Open `https://dawarha.site/login` and press `Ctrl+F5` (hard refresh). The login page must reload correctly with HTTP 200 without showing an Apache 404 error page.
 
 ---
 
@@ -315,13 +315,13 @@ curl -i https://<your-backend-domain>/api/categories
 
 # 3. CORS Preflight
 curl -i -X OPTIONS https://<your-backend-domain>/api/requests \
-  -H "Origin: https://dawwarha.com" \
+  -H "Origin: https://dawarha.site" \
   -H "Access-Control-Request-Method: GET"
 # Expected: HTTP 204 No Content with Access-Control-Allow-Origin header
 ```
 
 ### Frontend Tests
-1. **Initial Load:** Navigate to `https://dawwarha.com`. Check browser DevTools console (F12) for any 404s or uncaught errors.
+1. **Initial Load:** Navigate to `https://dawarha.site`. Check browser DevTools console (F12) for any 404s or uncaught errors.
 2. **Authentication Flow:**
    - Navigate to `/register` -> Create a test user.
    - Verify redirect to `/dashboard` upon successful registration.

@@ -15,6 +15,11 @@ Options -Indexes
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
+  # Pass through API and health endpoints to backend / proxy without rewriting to index.html
+  RewriteCond %{REQUEST_URI} ^/api(/.*)?$ [NC,OR]
+  RewriteCond %{REQUEST_URI} ^/health$ [NC]
+  RewriteRule ^ - [L]
+
   # Route all other URLs to Angular index.html entrypoint
   RewriteRule ^ index.html [L]
 </IfModule>

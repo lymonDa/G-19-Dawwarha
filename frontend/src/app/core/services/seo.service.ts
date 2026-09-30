@@ -37,7 +37,7 @@ export class SeoService {
 
   private readonly SITE_NAME = "دَوَّرها";
   private readonly SITE_NAME_EN = "Dawwarha";
-  private readonly BASE_URL = "https://dawwarha.com";
+  private readonly BASE_URL = "https://dawarha.site";
   private readonly DEFAULT_DESCRIPTION =
     "منصة دَوَّرها الرقمية لتدوير الموارد الفائضة وتوزيعها على المجتمعات المحتاجة. اعرض مواردك أو قدّم طلب احتياج الآن.";
   private readonly DEFAULT_LOCALE = "ar_SA";

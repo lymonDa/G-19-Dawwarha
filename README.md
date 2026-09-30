@@ -252,8 +252,8 @@ For audit status, test results, and bundle metrics, see **[RELEASE_BUILD_REPORT.
 | `MONGODB_URI` | Backend | MongoDB Atlas connection string | `mongodb+srv://user:pass@cluster.mongodb.net/dawwarha` |
 | `JWT_SECRET` | Backend | Secret key used to sign JWTs (min 32 characters) | `64_character_cryptographic_secret` |
 | `JWT_EXPIRES_IN` | Backend | Expiration duration for user sessions | `7d` |
-| `CLIENT_URL` | Backend | Allowed CORS origin(s), comma-separated | `https://dawwarha.com,https://www.dawwarha.com` |
-| `apiUrl` | Frontend | Base path for API requests (in `environment.production.ts`) | `/api` (or `https://api.dawwarha.com/api`) |
+| `CLIENT_URL` | Backend | Allowed CORS origin(s), comma-separated | `https://dawarha.site,https://www.dawarha.site` |
+| `apiUrl` | Frontend | Base path for API requests (in `environment.production.ts`) | `https://dawarha.site/api` |
 
 ---
 

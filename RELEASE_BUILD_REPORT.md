@@ -27,7 +27,7 @@ The application has successfully completed all phases of the production release 
 | **TypeScript Check** | **SUCCESS** (Exit Code: 0) | `npx tsc --noEmit` passed with 0 errors |
 | **Frontend Tests** | **259 Passed / 0 Failed** | Vitest (232 tests) + Node Spec runner (27 tests) |
 | **Localhost References** | **0 Found** | `localhost` and `127.0.0.1` completely eliminated from production dist |
-| **API Configuration** | `environment.apiUrl \|\| '/api'` | Standardized across all services (`ApiBaseService`, `NotificationApiService`, `RequestApiService`, `MatchApiService`) |
+| **API Configuration** | `environment.apiUrl` (`https://dawarha.site/api`) | Explicit production backend URI configured across all services |
 | **SPA Fallback Configuration** | `.htaccess` included in root | Full Apache / LiteSpeed rewrite, caching, and security header rules |
 
 ---
@@ -89,7 +89,7 @@ The application has successfully completed all phases of the production release 
    - `MONGODB_URI`: Your MongoDB Atlas connection string (`mongodb+srv://...`).
    - `JWT_SECRET`: A 64-character random cryptographic string.
    - `JWT_EXPIRES_IN`: `7d`.
-   - `CLIENT_URL`: `https://dawwarha.com,https://www.dawwarha.com` (your actual deployed domain names).
+   - `CLIENT_URL`: `https://dawarha.site,https://www.dawarha.site` (your actual deployed domain names).
 2. **MongoDB Atlas Network Access:**
    - Add your Hostinger IP address (or `0.0.0.0/0`) in MongoDB Atlas **Network Access**.
 3. **Hostinger SSL:**

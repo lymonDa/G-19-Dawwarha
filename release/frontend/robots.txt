@@ -13,4 +13,4 @@ Disallow: /resources/mine
 Disallow: /organizations/dashboard
 Disallow: /organizations/verification
 Disallow: /organizations/register
-Sitemap: https://dawwarha.com/sitemap.xml
+Sitemap: https://dawarha.site/sitemap.xml
